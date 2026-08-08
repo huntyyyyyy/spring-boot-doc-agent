@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Deprecated shim — prefer ``doc-engine quality-gates``."""
+"""Deprecated shim — prefer ``doc-engine quality-gates``.
+
+Run with:
+    python3 scripts/ci/run_quality_gates.py
+    # preferred:
+    doc-engine quality-gates
+"""
 
 from __future__ import annotations
 

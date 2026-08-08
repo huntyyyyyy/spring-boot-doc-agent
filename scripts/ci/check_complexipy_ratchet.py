@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Deprecated shim — prefer ``doc-engine complexipy-ratchet``."""
+"""Deprecated shim — prefer ``doc-engine complexipy-ratchet``.
+
+Run with:
+    python3 scripts/ci/check_complexipy_ratchet.py
+    # preferred:
+    doc-engine complexipy-ratchet
+"""
 
 from __future__ import annotations
 

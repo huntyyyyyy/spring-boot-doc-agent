@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Deprecated shim — prefer ``doc-engine coverage-gap-average``."""
+"""Deprecated shim — prefer ``doc-engine coverage-gap-average``.
+
+Run with:
+    python3 scripts/ci/coverage_gap_average.py --coverage-xml coverage.xml
+    # preferred:
+    doc-engine coverage-gap-average --coverage-xml coverage.xml
+"""
 
 from __future__ import annotations
 
