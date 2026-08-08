@@ -195,7 +195,21 @@ The `sonarcloud` job still uploads analysis for the dashboard but is
 **non-blocking**. Free-plan Quality Gates are not the source of truth for the
 thresholds above — `quality-gates` is. Keep `SONAR_TOKEN` if you want the
 dashboard; turn Automatic Analysis **OFF** if you run CI analysis (dual-method
-error otherwise). `sonar.qualitygate.wait` is off in CI on purpose.
+error otherwise). `sonar.qualitygate.wait` is off in CI on purpose, and the
+job uses `continue-on-error` so a Free QG miss does not fail the Actions check.
+
+That is distinct from the **SonarQubeCloud GitHub App** check named
+`SonarCloud Code Analysis`. With AA off, CI analysis still decorates the PR;
+the App posts that check from the Quality Gate result. A red X there (for
+example Security/Reliability Rating on New Code below A) can leave the PR
+`UNSTABLE` even while `SonarCloud (non-blocking; …)` is green. Fixing that
+check means clearing the Free QG findings (or dropping decoration / not
+requiring the check) — toggling AA again does not remove it.
+
+Verify AA is off: project **Administration → Analysis Method → Automatic
+Analysis = OFF**. Proof CI is the only method: the `sonarcloud` job log shows
+`ANALYSIS SUCCESSFUL` / `EXECUTION SUCCESS` with no
+“CI analysis while Automatic Analysis is enabled” error.
 
 In-repo Sonar parameters remain in `sonar-project.properties`
 (`sonar.python.coverage.reportPaths`, coverage exclusions for `adapters/**` /
