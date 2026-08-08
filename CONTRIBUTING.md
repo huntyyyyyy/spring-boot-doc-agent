@@ -211,6 +211,30 @@ doc-engine quality-gates --compare-ref origin/main
 | Bus factor | **Deferred** — blame/ownership analysis ([2401.03303](https://arxiv.org/abs/2401.03303)), not CI |
 | Sonar custom Quality Gate | **Deferred on Free** — cannot set 98.7% / 3% / complexity in UI |
 
+## Mutation-scope taxonomies
+
+This repo has **three** deliberate-defect mechanisms. They share vocabulary
+(“mutant”, “kill”, “survivor”) but **different oracles** and must not be
+conflated with each other or with PIT-class Java SUT mutation (ROR / bytecode
+operator taxonomies). Do not build a PIT clone here.
+
+| Taxonomy | Where | Oracle | Not |
+| --- | --- | --- | --- |
+| **Gate mutators** | `scripts/ratchets/mutate.py` + `gate_mutators.py` / `mutator_registry.py`; baseline `mutation_baseline.json` | Named suite fails after an artifact-aware defect in a sandbox | Not PIT; not Type-1 formatting edits |
+| **Formatting perturbations** | `scripts/ratchets/java_perturbations.py` | Meaning-preserving Type-1 edits measure drift FP / metamorphic Arm 1 | Not PIT operators; not gate mutators |
+| **Assertion-engine mutants** | `tests/spring_signals/mutation_driver.py` | Kill mutants in `check-assertions` | Not the gate harness; not Java SUT mutation |
+
+### Incident-seeded gate mutators only
+
+New **gate** mutators must name a real near-miss / incident class this repo
+actually had or narrowly avoided (check F / Grep regain, rule-form loss,
+derived-count drift, size ratchet, network deny, prompt-contract drift, …).
+Each catalog entry’s `why` is that incident seed. Refuse “add ROR because PIT
+has it,” refuse operator-pack growth for coverage theater, and refuse folding
+formatting perturbations or assertion-engine mutants into the gate registry.
+Extend the catalog via `gate_mutators.definitions` (OCP); leave `mutate.py` as
+the sandboxed kill/score harness.
+
 ## Package layout: named concepts, not ``utils/``
 
 Do **not** add `src/doc_engine/utils/`, `util.py`, or a grab-bag `helpers.py`.

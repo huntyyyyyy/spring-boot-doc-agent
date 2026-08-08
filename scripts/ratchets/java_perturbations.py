@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """
-java_perturbations.py — source edits that provably do or do not change a Java
-file's meaning, for measuring spring_drift_check's false-positive rate.
+java_perturbations.py — **formatting perturbations** (Type-1 / meaning-preserving).
+
+Taxonomy note: this is *not* the gate-mutator catalog (`mutate.py` /
+`gate_mutators.py`) and *not* assertion-engine mutants
+(`tests/spring_signals/mutation_driver.py`). These edits measure drift FP /
+metamorphic Arm 1. They are not PIT operators. See CONTRIBUTING.md
+“Mutation-scope taxonomies.”
 
 Library-only: imported by test_drift_normalization.py, never run, so it carries
 no Usage: block by design (CONTRIBUTING.md's docstring contract exempts modules

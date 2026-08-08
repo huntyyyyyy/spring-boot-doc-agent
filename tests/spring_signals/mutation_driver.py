@@ -1,4 +1,9 @@
-"""One-shot mutation driver for spring-signals/harness/check-assertions.py.
+"""Assertion-engine mutants for spring-signals/harness/check-assertions.py.
+
+Taxonomy note: this is *not* the gate-mutator harness
+(`scripts/ratchets/mutate.py`) and *not* formatting perturbations
+(`java_perturbations.py`). Oracle = kill mutants in check-assertions. Not
+PIT-class Java SUT mutation. See CONTRIBUTING.md “Mutation-scope taxonomies.”
 
 Applies each named mutant to the engine in place, runs the test suite,
 verifies the mutant is killed, and restores the pristine source. Run from the

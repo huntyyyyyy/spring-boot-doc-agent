@@ -29,6 +29,63 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
 import mutate  # noqa: E402
+import mutator_registry  # noqa: E402
+
+
+# Names that must remain registered after the OCP catalog split (baseline contract).
+_KNOWN_GATE_MUTATOR_NAMES = frozenset({
+    "secret-heuristic-stops-unquoting",
+    "build-file-guard-loosened",
+    "relation-permits-everything",
+    "query-limit-ceiling-removed",
+    "context-packet-budget-trim-disabled",
+    "freshness-mismatch-always-fresh",
+    "agent-regains-grep",
+    "rule-loses-its-args-form",
+    "derived-count-edited",
+    "prompt-contract-drifts",
+})
+
+
+class RegistryLoadTest(unittest.TestCase):
+    """OCP registry loads the catalog; harness does not own the operator list."""
+
+    def tearDown(self) -> None:
+        mutator_registry.clear_sources()
+
+    def test_load_registry_returns_all_known_mutators(self) -> None:
+        loaded = mutator_registry.load_registry()
+        names = {m.name for m in loaded}
+        self.assertTrue(
+            _KNOWN_GATE_MUTATOR_NAMES.issubset(names),
+            f"missing from registry: {_KNOWN_GATE_MUTATOR_NAMES - names}",
+        )
+        self.assertEqual(names, mutator_registry.known_names())
+
+    def test_mutate_mutators_alias_matches_registry(self) -> None:
+        self.assertEqual(
+            [m.name for m in mutate.MUTATORS],
+            [m.name for m in mutator_registry.all_mutators()],
+        )
+
+    def test_register_source_extends_catalog(self) -> None:
+        extra = mutate.Mutator(
+            "incident-seeded-extra", "scripts/ratchets/set_delta.py", "",
+            "THE RESIDUE IS THE FINDING", "THE RESIDUE IS THE FINDING!",
+            "test_set_delta.py",
+            "registry OCP extension must accept an incident-seeded mutator",
+        )
+        mutator_registry.register_source(lambda: (extra,))
+        self.assertIn("incident-seeded-extra", mutator_registry.known_names())
+
+    def test_short_why_is_rejected(self) -> None:
+        bad = mutate.Mutator(
+            "too-vague", "scripts/ratchets/set_delta.py", "",
+            "x", "y", "test_set_delta.py", "short",
+        )
+        mutator_registry.register_source(lambda: (bad,))
+        with self.assertRaises(ValueError):
+            mutator_registry.load_registry()
 
 
 class RegistryAnchorsTest(unittest.TestCase):
