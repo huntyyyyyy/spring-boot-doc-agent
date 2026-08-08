@@ -160,10 +160,11 @@ class RatchetTest(unittest.TestCase):
 
     def test_a_function_growing_more_complex_is_advisory_not_hard(self):
         with tempfile.TemporaryDirectory() as tmp:
-            scripts = self._tree(tmp, self.SIMPLE)
+            scripts = self._tree(tmp, "def f(a):\n    return a\n")
             baseline = checker.measure_tree(scripts)
+            # BoolOp raises complexity without adding statements.
             (scripts / "mod.py").write_text(
-                "def f(a):\n    if a:\n        return 1\n    if a > 1:\n        return 3\n    return 2\n",
+                "def f(a):\n    return a and a and a and a\n",
                 encoding="utf-8")
             current = checker.measure_tree(scripts)
             self.assertEqual(checker.compare(baseline, current), [])
@@ -171,7 +172,7 @@ class RatchetTest(unittest.TestCase):
             self.assertTrue(any("complexity" in i for i in advisories), advisories)
             self.assertEqual(checker.exit_code(checker.compare(baseline, current)), 0)
 
-    def test_a_function_doing_more_is_advisory_not_hard(self):
+    def test_a_function_doing_more_fails_on_statement_growth(self):
         with tempfile.TemporaryDirectory() as tmp:
             scripts = self._tree(tmp, self.SIMPLE)
             baseline = checker.measure_tree(scripts)
@@ -179,10 +180,9 @@ class RatchetTest(unittest.TestCase):
             (scripts / "mod.py").write_text(
                 f"def f(a):\n{body}\n    if a:\n        return 1\n    return 2\n", encoding="utf-8")
             current = checker.measure_tree(scripts)
-            self.assertEqual(checker.compare(baseline, current), [])
-            advisories = checker.size_advisories(baseline, current)
-            self.assertTrue(any("statements" in i for i in advisories), advisories)
-            self.assertEqual(checker.exit_code([]), 0)
+            issues = checker.compare(baseline, current)
+            self.assertTrue(any("statements" in i for i in issues), issues)
+            self.assertEqual(checker.exit_code(issues), 1)
 
     def test_adding_comments_is_not_a_regression(self):
         """The metric is statements, not line span, precisely so that
@@ -227,7 +227,20 @@ class RatchetTest(unittest.TestCase):
             (scripts / "mod.py").write_text("def f(a):\n    return 2\n", encoding="utf-8")
             self.assertEqual(checker.compare(baseline, checker.measure_tree(scripts)), [])
 
-    def test_a_new_function_worse_than_anything_is_advisory_not_hard(self):
+    def test_a_new_function_worse_than_hard_ceiling_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            scripts = self._tree(tmp, self.SIMPLE)
+            baseline = checker.measure_tree(scripts)
+            body = "\n".join(f"    x{i} = {i}" for i in range(55))
+            (scripts / "mod.py").write_text(
+                self.SIMPLE + f"def g():\n{body}\n    return 0\n",
+                encoding="utf-8")
+            current = checker.measure_tree(scripts)
+            issues = checker.compare(baseline, current)
+            self.assertTrue(any("new function" in i and "statements" in i for i in issues), issues)
+            self.assertEqual(checker.exit_code(issues), 1)
+
+    def test_a_new_function_above_prior_complexity_is_advisory(self):
         with tempfile.TemporaryDirectory() as tmp:
             scripts = self._tree(tmp, self.SIMPLE)
             baseline = checker.measure_tree(scripts)

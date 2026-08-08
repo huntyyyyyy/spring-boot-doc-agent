@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-check_code_quality.py — hard gates on annotation coverage and docstring
-orientation; advisory reporting on function size/complexity/depth.
+check_code_quality.py — hard gates on annotation coverage, docstring
+orientation, and function *statement* growth; advisory reporting on
+cyclomatic complexity/depth (cognitive complexity is owned by complexipy).
 
 WHY THIS EXISTS
 Every other quality property in this repo is enforced by something: tags by
@@ -10,21 +11,27 @@ check_llms_coverage.py, scan freshness by spring_drift_check.py. The code
 itself was enforced by nothing, and it shows in a way that is measurable
 rather than aesthetic.
 
-Schema v4 (2026-07-29) demotes per-function statements/complexity/depth from
-*blocking* CI to *advisory* output. A monotonic size ratchet taught
-extract-or `--update` theater (e.g. wiring Check G into collect_all) without
-catching the defects kitchen-sink found in build_groups. What stays hard:
+Schema v5 (2026-08-08) re-hardens *statement* size: growth of an existing
+function's statement count, or a new function above HARD_STATEMENTS (50),
+fails CI. Absolute file LOC / package-root function ceilings also live in
+``doc-engine size-ratchet`` (wired into quality-gates). Complexity/depth in
+this checker stay advisory — complexipy ≤5 is the cognitive SoR.
 
+Schema v4 (2026-07-29) had demoted per-function statements/complexity/depth
+to advisory after a monotonic size ratchet taught extract-or `--update`
+theater. v5 keeps complexity/depth advisory but makes statements bite again,
+paired with absolute hard ceilings in the size ratchet so growth past a
+one-screen function cannot hide behind a raised "prior worst."
+
+What stays hard here:
   - production type-annotation coverage must not fall
   - runnable modules must orient the reader (Usage/Run with) near the top
-
-Size metrics are still measured and printed when they grow, so hotspots stay
-visible without forcing merge rituals.
+  - function statement count must not grow; new functions ≤ HARD_STATEMENTS
 
 WHAT THIS DOES NOT DO
 It does not lint, format, or sort imports — that is ruff's job (.ruff.toml).
 The complexity number below is this repo's own definition; it is NOT
-comparable to ruff's C901 or radon.
+comparable to ruff's C901 or radon. File LOC ceilings are in size_ratchet.
 
 Run with:
     python3 scripts/ci/check_code_quality.py
@@ -53,7 +60,11 @@ DEFAULT_ROOTS = (SCRIPTS_DIR, REPO_ROOT / "src" / "doc_engine")
 # 2: "lines" (raw span) replaced by "statements".
 # 3: adds "docstring_violations".
 # 4: size/complexity/depth become advisory; measure scripts/ + src/doc_engine/.
-SCHEMA_VERSION = 4
+# 5: statement growth + new functions above HARD_STATEMENTS are hard again;
+#    complexity/depth remain advisory (complexipy owns cognitive ≤5).
+SCHEMA_VERSION = 5
+HARD_STATEMENTS = 50
+SOFT_STATEMENTS = 20
 
 USAGE_RE = re.compile(r"^\s*(usage|run with|run)\s*:", re.IGNORECASE)
 USAGE_WITHIN_LINES = 20
@@ -333,7 +344,7 @@ def annotation_ratio(measured: Dict[str, object]) -> float:
 
 
 def size_advisories(baseline: Dict[str, object], current: Dict[str, object]) -> List[str]:
-    """Non-blocking notes when size/complexity/depth grow."""
+    """Non-blocking notes when complexity/depth grow (statements are hard)."""
     notes: List[str] = []
     base_functions: Dict[str, Dict[str, int]] = baseline.get("functions", {})  # type: ignore[assignment]
     cur_functions: Dict[str, Dict[str, int]] = current.get("functions", {})  # type: ignore[assignment]
@@ -343,14 +354,21 @@ def size_advisories(baseline: Dict[str, object], current: Dict[str, object]) -> 
         cur = cur_functions[key]
         base = base_functions.get(key)
         if base is None:
-            for metric, limit in sorted(limits.items()):
+            for metric in ("complexity", "depth"):
+                limit = limits.get(metric, 0)
                 if cur.get(metric, 0) > limit:
                     notes.append(
                         f"[advisory] new function {key} has {metric}={cur[metric]}, "
                         f"above prior worst ({limit})"
                     )
+            stmts = cur.get("statements", 0)
+            if SOFT_STATEMENTS < stmts <= HARD_STATEMENTS:
+                notes.append(
+                    f"[advisory] new function {key} has statements={stmts} "
+                    f"(soft>{SOFT_STATEMENTS}, hard<={HARD_STATEMENTS})"
+                )
             continue
-        for metric in ("statements", "complexity", "depth"):
+        for metric in ("complexity", "depth"):
             if cur.get(metric, 0) > base.get(metric, 0):
                 notes.append(
                     f"[advisory] {key} grew: {metric} "
@@ -359,9 +377,33 @@ def size_advisories(baseline: Dict[str, object], current: Dict[str, object]) -> 
     return notes
 
 
+def statement_issues(baseline: Dict[str, object], current: Dict[str, object]) -> List[str]:
+    """Hard failures when statement counts grow or new functions exceed HARD."""
+    issues: List[str] = []
+    base_functions: Dict[str, Dict[str, int]] = baseline.get("functions", {})  # type: ignore[assignment]
+    cur_functions: Dict[str, Dict[str, int]] = current.get("functions", {})  # type: ignore[assignment]
+
+    for key in sorted(cur_functions):
+        cur = cur_functions[key]
+        stmts = cur.get("statements", 0)
+        base = base_functions.get(key)
+        if base is None:
+            if stmts > HARD_STATEMENTS:
+                issues.append(
+                    f"new function {key} has statements={stmts}, "
+                    f"above hard ceiling ({HARD_STATEMENTS})"
+                )
+            continue
+        prior = base.get("statements", 0)
+        if stmts > prior:
+            issues.append(
+                f"{key} grew: statements {prior} -> {stmts}"
+            )
+    return issues
+
+
 def compare(baseline: Dict[str, object], current: Dict[str, object]) -> List[str]:
-    """Hard failures only: annotation coverage, new docstring violations,
-    unparseable modules. Size metrics are advisory (see size_advisories)."""
+    """Hard failures: annotation coverage, docstring, unparseable, statements."""
     issues: List[str] = []
 
     base_ratio = annotation_ratio(baseline)
@@ -381,6 +423,7 @@ def compare(baseline: Dict[str, object], current: Dict[str, object]) -> List[str
     for entry in current.get("unparseable", []):  # type: ignore[union-attr]
         issues.append(f"could not parse {entry}")
 
+    issues.extend(statement_issues(baseline, current))
     return issues
 
 
@@ -437,13 +480,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         write_baseline(baseline_path, current)
         print(f"baseline written: {baseline_path}")
         print(f"  {len(current['functions'])} functions measured "  # type: ignore[arg-type]
-              f"(size/complexity/depth advisory; tests included)")
+              f"(statements hard; complexity/depth advisory; tests included)")
         print(f"  {current['production_functions_annotated']} of "
               f"{current['production_functions']} production functions annotated "
               f"({annotation_ratio(current):.1%})")
         limits = current["limits_for_new_functions"]  # type: ignore[index]
-        print(f"  advisory ceiling for new functions: statements={limits['statements']}, "
+        print(f"  measured worst: statements={limits['statements']}, "
               f"complexity={limits['complexity']}, depth={limits['depth']}")
+        print(f"  hard ceiling for new functions: statements<={HARD_STATEMENTS}")
         return 0
 
     baseline = load_baseline(baseline_path)
@@ -463,7 +507,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"code quality check failed ({len(issues)} issue(s)):", file=sys.stderr)
         for issue in issues:
             print(f"  - {issue}", file=sys.stderr)
-        print("\nHard failures are annotation coverage and docstring orientation.",
+        print("\nHard failures are annotation coverage, docstring orientation, "
+              "and function statement growth.",
               file=sys.stderr)
     else:
         print(f"OK: {len(current['functions'])} functions measured. "  # type: ignore[arg-type]
@@ -471,7 +516,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
               f"across {current['production_functions']} production functions.")
 
     if advisories:
-        print(f"size/complexity advisories ({len(advisories)}):")
+        print(f"complexity/depth advisories ({len(advisories)}):")
         for note in advisories:
             print(f"  {note}")
 

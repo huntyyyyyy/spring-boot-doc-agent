@@ -171,6 +171,7 @@ review concerns ([2310.03673](https://arxiv.org/abs/2310.03673),
 | New-code coverage ≥ **98.7%** | [diff-cover](https://github.com/Bachmann1234/diff_cover) `~=10.5.0` (+ pytest-cov XML) | 843 | **v10.5.0** (2026-08-08) | 2026-08-08 | Diff line coverage vs compare ref | **hard fail** |
 | Duplication ≤ **3%** | [jscpd](https://github.com/kucherenko/jscpd) `@5.0.14` via local `npm ci` | 5980 | **v5.0.14** (2026-07-27) | 2026-08-07 | Token clone % on **changed** `src/doc_engine` + `src/stf` `.py` | **hard fail** |
 | Complexity ≤ **5** / function | [complexipy](https://github.com/rohaquinlop/complexipy) `~=6.2.0` | 748 | **6.2.0** (2026-07-23) | 2026-08-04 | Cognitive complexity (Campbell/Sonar-inspired; not affiliated with Sonar) | **hard fail** on offender-count ratchet (`scripts/ratchets/complexipy_baseline.json`) until count reaches 0 |
+| File / function size | in-repo `doc-engine size-ratchet` (+ `check_code_quality.py` statement growth) | — | — | — | File LOC hard **>1000**; function statements hard **>50** (soft advisory **>500** LOC / **>20** stmts). Prefer files ~200–500 LOC and one-screen functions | **hard fail** via `scripts/ratchets/size_baseline.json` (offender maps must not rise/grow); statement *growth* also hard in `check_code_quality.py` |
 | Import cycles / coupling | [tach](https://github.com/tach-org/tach) `~=0.35.0` | 2785 | **v0.35.0** (2026-05-12) | 2026-06-11 | `forbid_circular_dependencies` (`tach.toml`) | **hard fail** |
 | Soft McCabe backup | [ruff](https://github.com/astral-sh/ruff) C901 (already pinned `~=0.16.0`) | 49k+ | 2026 releases | 2026-08-08 | Cyclomatic (McCabe) — **not** cognitive | optional / not selected in `.ruff.toml` |
 | Security signal | Semgrep + CodeQL (existing CI jobs) | — | — | — | SAST | unchanged hard jobs |
@@ -179,6 +180,8 @@ review concerns ([2310.03673](https://arxiv.org/abs/2310.03673),
 **import-linter** also 2026-PASS (PyPI 2.13 uploaded 2026-07-03; push 2026-08-07) but is not wired — tach alone owns the cycle gate.
 
 **Complexity remediation.** Policy target is ≤5 cognitive complexity per function on all of `src/doc_engine` + `src/stf`. While legacy offenders remain, CI hard-fails when the offender *count* rises vs `scripts/ratchets/complexipy_baseline.json` (ratchet downward after each remediation batch; never raise it). Prefer named helpers and early returns over micro-fragmentation; do not weaken the ≤5 threshold.
+
+**Size remediation.** Prefer files roughly 200–500 LOC and functions that fit one screen (~20–50 statements). Soft advisories print above 500 LOC / 20 statements; hard ceilings are file LOC >1000 and function statements >50 under package roots (`doc-engine size-ratchet`, baseline `scripts/ratchets/size_baseline.json` — never raise offender maps). Separately, `scripts/ci/check_code_quality.py` hard-fails when an existing function's statement count grows or a new function exceeds 50 statements (complexity/depth there remain advisory). Split by SRP before raising a ceiling.
 
 ### Quality gates (all OS)
 

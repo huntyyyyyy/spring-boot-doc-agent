@@ -3,7 +3,7 @@
 import argparse
 import json
 import sys
-from typing import Any, Dict
+from typing import Any, Dict  # Any used by parser-builder helpers
 
 from doc_engine import Engine
 from doc_engine.config import Config, load_repo_config, merge_config, sanitize_repo_settings, trust_from_flag
@@ -173,6 +173,18 @@ def cmd_complexipy_ratchet(args: argparse.Namespace) -> int:
     return ratchet_main(argv)
 
 
+def cmd_size_ratchet(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine size-ratchet``."""
+    from doc_engine.ci.size_ratchet import main as size_main
+
+    argv: list[str] = []
+    if args.baseline is not None:
+        argv.extend(["--baseline", str(args.baseline)])
+    if args.update:
+        argv.append("--update")
+    return size_main(argv)
+
+
 def _without_argparse_separator(argv: list[str]) -> list[str]:
     """Drop a leading ``--`` left over from argparse ``REMAINDER``."""
     parts = iter(argv)
@@ -184,10 +196,7 @@ def _without_argparse_separator(argv: list[str]) -> list[str]:
     return [first, *parts]
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(prog="doc-engine", description=__doc__)
-    sub = ap.add_subparsers(dest="command", required=True)
-
+def _add_scan_parser(sub: Any) -> None:
     scan_ap = sub.add_parser("scan", help="Scan a repository and produce signals")
     scan_ap.add_argument("repo")
     scan_ap.add_argument(
@@ -224,6 +233,8 @@ def main() -> int:
     )
     scan_ap.set_defaults(func=cmd_scan)
 
+
+def _add_docs_site_parsers(sub: Any) -> None:
     docs_ap = sub.add_parser(
         "docs",
         help="Placeholder docs bundle from signals (prefer: doc-engine pipeline run)",
@@ -239,6 +250,8 @@ def main() -> int:
     site_ap.add_argument("--site-name", default="Documentation")
     site_ap.set_defaults(func=cmd_site)
 
+
+def _add_pipeline_parsers(sub: Any) -> None:
     pipeline_ap = sub.add_parser(
         "pipeline",
         help="Run the document-spring-repo pipeline (deterministic + optional gates)",
@@ -274,6 +287,8 @@ def main() -> int:
     gates_ap.add_argument("--no-write-check", action="store_true")
     gates_ap.set_defaults(func=cmd_pipeline_gates)
 
+
+def _add_cert_query_parsers(sub: Any) -> None:
     cert_ap = sub.add_parser(
         "certification",
         help="Certification gate utilities",
@@ -310,11 +325,13 @@ def main() -> int:
     )
     query_ap.set_defaults(func=cmd_query)
 
+
+def _add_quality_gate_parsers(sub: Any) -> None:
     qg_ap = sub.add_parser(
         "quality-gates",
         help=(
-            "Hard in-repo gates: new-code coverage, jscpd, complexipy <=5, tach "
-            "(same on Mac/Windows/Linux)"
+            "Hard in-repo gates: new-code coverage, jscpd, complexipy <=5, "
+            "size ratchet, tach (same on Mac/Windows/Linux)"
         ),
     )
     qg_ap.add_argument(
@@ -358,7 +375,29 @@ def main() -> int:
     ratchet_ap.add_argument("--update", action="store_true")
     ratchet_ap.set_defaults(func=cmd_complexipy_ratchet)
 
-    args = ap.parse_args()
+    size_ap = sub.add_parser(
+        "size-ratchet",
+        help="Ratchet file LOC / function statement hard ceilings vs baseline",
+    )
+    size_ap.add_argument("--baseline", default=None)
+    size_ap.add_argument("--update", action="store_true")
+    size_ap.set_defaults(func=cmd_size_ratchet)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Build the top-level ``doc-engine`` argparse tree."""
+    ap = argparse.ArgumentParser(prog="doc-engine", description=__doc__)
+    sub = ap.add_subparsers(dest="command", required=True)
+    _add_scan_parser(sub)
+    _add_docs_site_parsers(sub)
+    _add_pipeline_parsers(sub)
+    _add_cert_query_parsers(sub)
+    _add_quality_gate_parsers(sub)
+    return ap
+
+
+def main() -> int:
+    args = build_parser().parse_args()
     return args.func(args)
 
 

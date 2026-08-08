@@ -4692,3 +4692,10 @@ Assumptions affected:
 - Jakarta.qll relocated list as EE-complete vs JDK-retained complement â€” [New info â€” javax.transaction.xa was false-positive pending via bare `transaction` slot; split like security.auth; javax.cache added from mappings.adoc]
 - mutation_driver as verified gate â€” [Resolved â€” wired non-blocking in ci.yml with ENFORCE=False matching mutate.py]
 Files touched: spring-signals/codeql/packs/spring-signals/Jakarta.qll, JakartaMigrationSanity.{ql,expected}, spring-signals/harness/fixture-repo/fetch-deps.sh, tests/spring_signals/mutation_driver.py, .github/workflows/ci.yml, claude/session-log.md
+
+## 2026-08-08 — Size ratchet: statement growth hard + file/function ceilings
+Commit: uncommitted
+Tests: pytest tests/ci/test_check_code_quality.py + test_size_ratchet.py + test_run_quality_gates.py 65/65 (earlier full) / 18/18 focused; complexipy =5 on touched modules; check_repo_claims OK; size-ratchet 0/0 hard offenders
+Assumptions affected:
+- `claude/steering-prompts/13-code-quality-research-prompt.md` — "size/complexity/depth are advisory (schema v4)" — [Resolved — schema v5 hardens statement growth; `doc-engine size-ratchet` hard-fails file LOC >1000 and function statements >50 via `scripts/ratchets/size_baseline.json` in quality-gates; complexity/depth remain advisory here (complexipy owns =5)]
+Files touched: src/doc_engine/ci/size_ratchet.py, quality_gates.py, cli.py, spring_drift_{check,common,tier2}.py, scripts/ci/check_code_quality.py, scripts/ratchets/{code_quality_baseline,size_baseline}.json, CONTRIBUTING.md, CONSTRAINTS.md, tests/ci/*, .github/workflows/ci.yml, claude/steering-prompts/13-*.md, claude/session-log.md

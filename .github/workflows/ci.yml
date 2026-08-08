@@ -157,7 +157,7 @@ jobs:
       - name: check_no_client_identifiers.py (tracked-tree denylist)
         run: python3 scripts/ci/check_no_client_identifiers.py --tracked-tree
 
-      - name: check_code_quality.py (annotation + docstring hard; size advisory)
+      - name: check_code_quality.py (annotation + docstring + statement size hard; complexity advisory)
         run: python3 scripts/ci/check_code_quality.py
 
       # Reads this repo's claims about itself back: every steering prompt's

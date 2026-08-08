@@ -1,4 +1,4 @@
-"""Hard in-repo quality gates (coverage / duplication / complexity / cycles).
+"""Hard in-repo quality gates (coverage / duplication / complexity / size / cycles).
 
 Usage:
     doc-engine quality-gates --compare-ref origin/main
@@ -14,6 +14,7 @@ Efficiency (aligned with SoR-vs-derived + fail-fast):
     are merge-base scoped; whole-repo complexipy ``--failed`` is the complexity
     SoR. When the committed ratchet baseline is already 0, the second complexipy
     scan (offender-count ratchet) is skipped as a redundant derived check.
+    Size ratchet (file LOC / function statements) is a cheap AST walk.
 
 Exit codes:
     0  all hard gates passed
@@ -195,6 +196,14 @@ def gate_import_cycles() -> int:
     )
 
 
+def gate_size_ratchet() -> int:
+    """Fail when file LOC / function statement hard offenders rise or grow."""
+    return _run(
+        python_module_command("doc_engine.ci.size_ratchet"),
+        label="size ratchet (file LOC / function statements; must not rise)",
+    )
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Parse CLI arguments for the quality-gate runner."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -244,15 +253,11 @@ def _report_gap_average(coverage_xml: Path) -> None:
     )
 
 
-def main(argv: list[str] | None = None) -> int:
-    """Run hard gates cheapest→dearest; fail-fast unless --no-fail-fast."""
-    args = parse_args(argv)
-    compare_ref = resolve_compare_ref(args.compare_ref)
-
-    # Order: cheap / often-skipped scoped gates first; whole-repo complexipy last
-    # among static checks; diff-cover is cheap given coverage.xml already built.
+def _plan_gates(args: argparse.Namespace, compare_ref: str) -> list[tuple[str, object]]:
+    """Cheapest → dearest; coverage optional for local debug."""
     planned: list[tuple[str, object]] = [
         ("import-cycles", gate_import_cycles),
+        ("size-ratchet", gate_size_ratchet),
         ("duplication", lambda: gate_duplication(compare_ref)),
     ]
     if not args.skip_coverage:
@@ -264,38 +269,63 @@ def main(argv: list[str] | None = None) -> int:
         )
     planned.append(("cognitive-complexity", gate_cognitive_complexity))
     planned.append(("complexity-ratchet", gate_complexity_ratchet))
+    return planned
 
+
+def _run_planned(
+    planned: list[tuple[str, object]], *, fail_fast: bool
+) -> list[tuple[str, int]]:
     results: list[tuple[str, int]] = []
     for name, runner in planned:
         code = int(runner())  # type: ignore[operator]
         results.append((name, code))
-        if code != 0 and not args.no_fail_fast:
+        if code != 0 and fail_fast:
             print(
                 f"\nfail-fast: stopping after {name} (exit {code}); "
                 f"pass --no-fail-fast to run remaining gates.",
                 flush=True,
             )
             break
+    return results
 
+
+def _gate_status_line(
+    name: str, ran: set[str], results: list[tuple[str, int]]
+) -> str:
+    if name not in ran:
+        return f"- {name}: SKIPPED (fail-fast)"
+    code = next(c for n, c in results if n == name)
+    status = "PASS" if code == 0 else f"FAIL (exit {code})"
+    return f"- {name}: {status}"
+
+
+def _print_summary(
+    planned: list[tuple[str, object]], results: list[tuple[str, int]]
+) -> None:
     print("\n=== quality-gates summary ===", flush=True)
     ran = {name for name, _ in results}
     for name, _ in planned:
-        if name not in ran:
-            print(f"- {name}: SKIPPED (fail-fast)", flush=True)
-            continue
-        code = next(c for n, c in results if n == name)
-        status = "PASS" if code == 0 else f"FAIL (exit {code})"
-        print(f"- {name}: {status}", flush=True)
+        print(_gate_status_line(name, ran, results), flush=True)
 
-    if not args.skip_coverage:
-        _report_gap_average(args.coverage_xml)
 
-    # Prefer exit 1 for gate failure; preserve 2 for missing prerequisites.
+def _exit_from_results(results: list[tuple[str, int]]) -> int:
     if any(code == 2 for _, code in results):
         return 2
     if any(code != 0 for _, code in results):
         return 1
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Run hard gates cheapest→dearest; fail-fast unless --no-fail-fast."""
+    args = parse_args(argv)
+    compare_ref = resolve_compare_ref(args.compare_ref)
+    planned = _plan_gates(args, compare_ref)
+    results = _run_planned(planned, fail_fast=not args.no_fail_fast)
+    _print_summary(planned, results)
+    if not args.skip_coverage:
+        _report_gap_average(args.coverage_xml)
+    return _exit_from_results(results)
 
 
 if __name__ == "__main__":  # pragma: no cover - CLI entry glue

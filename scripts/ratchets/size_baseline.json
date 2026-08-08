@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package_roots": [
+    "src/doc_engine",
+    "src/stf"
+  ],
+  "file_loc_hard": 1000,
+  "file_loc_soft": 500,
+  "fn_stmts_hard": 50,
+  "fn_stmts_soft": 20,
+  "file_offender_count": 0,
+  "fn_offender_count": 0,
+  "files": {},
+  "functions": {},
+  "note": "Hard ceilings: file LOC > 1000, function statements > 50. Soft advisories print above 500 LOC / 20 statements. Ratchet offender maps downward only \u2014 never raise. Remeasure with: doc-engine size-ratchet --update"
+}
