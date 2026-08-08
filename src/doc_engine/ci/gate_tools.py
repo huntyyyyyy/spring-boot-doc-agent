@@ -81,7 +81,7 @@ def checked_path_under_repo(path: Path) -> Path:
             f"error: path escapes repository root {root}: {resolved}",
             file=sys.stderr,
         )
-        raise SystemExit(2)
+        raise SystemExit(2) from None
     return resolved
 
 
