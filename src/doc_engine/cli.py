@@ -6,7 +6,7 @@ import sys
 from typing import Any, Dict
 
 from doc_engine import Engine
-from doc_engine.config import Config, load_repo_config, merge_config
+from doc_engine.config import Config, load_repo_config, merge_config, sanitize_repo_settings, trust_from_flag
 from doc_engine.pipeline.local_run import add_run_arguments, run_pipeline
 
 
@@ -21,7 +21,8 @@ def _save_json(path: str, data: Dict[str, Any]) -> None:
 
 
 def _scan_config(repo: str, args: argparse.Namespace) -> Config:
-    base = load_repo_config(repo) or Config()
+    trust = trust_from_flag(bool(getattr(args, "trust_repo_config", False)))
+    base = sanitize_repo_settings(load_repo_config(repo) or Config(), trust) or Config()
     overrides: Dict[str, Any] = {}
     if args.scanners:
         overrides["scanners"] = [s.strip() for s in args.scanners.split(",") if s.strip()]
@@ -39,7 +40,18 @@ def _scan_config(repo: str, args: argparse.Namespace) -> Config:
 def cmd_scan(args: argparse.Namespace) -> int:
     config = _scan_config(args.repo, args)
     engine = Engine(config)
-    signals = engine.scan(args.repo)
+    try:
+        signals = engine.scan(
+            args.repo,
+            allow_codeql_build=bool(getattr(args, "allow_codeql_build", False)),
+        )
+    except Exception as exc:
+        from doc_engine.scanning.spring import CodeQLScannerError
+
+        if isinstance(exc, CodeQLScannerError):
+            print(f"error: {exc}", file=sys.stderr)
+            return 1
+        raise
     _save_json(args.out, signals)
     print(f"Wrote signals to {args.out}")
     return 0
@@ -96,6 +108,25 @@ def cmd_certification_verify(args: argparse.Namespace) -> int:
     return cert_main(argv)
 
 
+def cmd_query(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine query <kind> …`` → tools.query_artifacts."""
+    from doc_engine.tools.query_artifacts import main as query_main
+
+    argv = list(getattr(args, "query_argv", None) or [])
+    return query_main(_without_argparse_separator(argv))
+
+
+def _without_argparse_separator(argv: list[str]) -> list[str]:
+    """Drop a leading ``--`` left over from argparse ``REMAINDER``."""
+    parts = iter(argv)
+    first = next(parts, None)
+    if first is None:
+        return []
+    if first == "--":
+        return list(parts)
+    return [first, *parts]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(prog="doc-engine", description=__doc__)
     sub = ap.add_subparsers(dest="command", required=True)
@@ -116,6 +147,24 @@ def main() -> int:
     scan_ap.add_argument("--respect-gitignore", action="store_true")
     scan_ap.add_argument("--build-command", default=None)
     scan_ap.add_argument("--db-path", default=None)
+    scan_ap.add_argument(
+        "--trust-repo-config",
+        action="store_true",
+        help=(
+            "honor security-sensitive keys from the target repo's "
+            ".doc-engine.yml (build_command, db_path, scanners, weakened "
+            "compliance_profile). Default: treat that file as untrusted."
+        ),
+    )
+    scan_ap.add_argument(
+        "--allow-codeql-build",
+        action="store_true",
+        help=(
+            "permit CodeQL database create --command against this tree. "
+            "Required when --scanners includes codeql; only use for first-party "
+            "repos or a sandboxed host."
+        ),
+    )
     scan_ap.set_defaults(func=cmd_scan)
 
     docs_ap = sub.add_parser(
@@ -189,6 +238,20 @@ def main() -> int:
         help="accept generative_executor none/mock (default: require live)",
     )
     verify_ap.set_defaults(func=cmd_certification_verify)
+
+    query_ap = sub.add_parser(
+        "query",
+        help=(
+            "Typed read views over Stage-0 artifacts "
+            "(evidence|routes|facts|entity|dependents|route-trace)"
+        ),
+    )
+    query_ap.add_argument(
+        "query_argv",
+        nargs=argparse.REMAINDER,
+        help="kind and flags — see: python -m doc_engine.tools.query_artifacts -h",
+    )
+    query_ap.set_defaults(func=cmd_query)
 
     args = ap.parse_args()
     return args.func(args)

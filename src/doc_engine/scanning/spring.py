@@ -30,16 +30,19 @@ class AstGrepNotFoundError(AstGrepError):
 
 
 def detect_build_command(repo_path: str) -> Optional[str]:
-    """Return a reasonable default build command for a Java project."""
+    """Return a reasonable default build command for a Java project.
+
+    Prefers native wrappers (``gradlew.bat`` / ``gradlew`` / ``mvnw``) over a
+    Git-Bash prefix so validation stays exact-basename. A Bash-wrapped
+    ``gradlew`` is only emitted when the Unix wrapper exists and native
+    execution is unavailable on Windows.
+    """
     repo_path = os.path.abspath(repo_path)
     if os.path.exists(os.path.join(repo_path, "gradlew.bat")):
         gradlew = os.path.join(repo_path, "gradlew.bat")
         return f'"{gradlew}" --no-daemon clean compileJava compileTestJava'
     if os.path.exists(os.path.join(repo_path, "gradlew")):
         gradlew = os.path.join(repo_path, "gradlew")
-        git_bash = r"C:\Program Files\Git\bin\bash.exe"
-        if os.path.exists(git_bash):
-            return f'"{git_bash}" "{gradlew}" --no-daemon clean compileJava compileTestJava'
         return f'"{gradlew}" --no-daemon clean compileJava compileTestJava'
     if os.path.exists(os.path.join(repo_path, "build.gradle")) or \
        os.path.exists(os.path.join(repo_path, "build.gradle.kts")):
@@ -81,10 +84,25 @@ def scan(
     db_path: Optional[str] = None,
     scanners: Optional[List[str]] = None,
     scan_context: Optional[ScanContext] = None,
+    allow_codeql_build: bool = False,
 ) -> Dict[str, Any]:
-    """Scan a Spring Boot repository and return a canonical spring_signals.json dict."""
+    """Scan a Spring Boot repository and return a canonical spring_signals.json dict.
+
+    CodeQL build mode is refused unless ``allow_codeql_build`` is True — the
+    build runs inside the target tree and cannot be made safe by basename
+    allowlisting alone.
+    """
+    from doc_engine.config.repo_trust import (
+        codeql_build_policy_from_flag,
+        require_codeql_build_allowed,
+    )
+
     repo_path = os.path.abspath(repo_path)
     scanner_names = resolve_scanner_names(scanners)
+    require_codeql_build_allowed(
+        scanner_names,
+        codeql_build_policy_from_flag(allow_codeql_build),
+    )
     scanner_instances: List[Scanner] = [get_scanner(name) for name in scanner_names]
 
     if "codeql" in scanner_names and build_command is None:
@@ -122,3 +140,5 @@ def scan(
         raise CodeQLScannerError(str(exc)) from exc
     except CoveringProofError:
         raise
+    except PermissionError as exc:
+        raise CodeQLScannerError(str(exc)) from exc

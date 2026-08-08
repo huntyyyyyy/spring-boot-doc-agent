@@ -11,13 +11,14 @@ from __future__ import annotations
 
 import re
 
+from doc_engine.pipeline.artifacts.signals import VALID_SPRING_ROLES
+from doc_engine.pipeline.artifacts.vocab import (
+    ResearchTiers,
+    ResearchVerdict,
+    ReviewLens,
+    ReviewSeverity,
+)
 from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
-
-# agents/file-summarizer.md step 4's exact enumerated list.
-VALID_SPRING_ROLES = frozenset({
-    "controller", "service", "repository", "entity", "config", "security",
-    "messaging-producer", "messaging-consumer", "test", "other",
-})
 
 FILE_SUMMARY_REQUIRED_KEYS = frozenset({
     "file", "cluster", "summary", "relationships",
@@ -27,10 +28,11 @@ FILE_SUMMARY_REQUIRED_KEYS = frozenset({
 GAP_EVIDENCE_CITATION_RE = re.compile(r"[\w][\w./-]*\.[A-Za-z0-9]+(?::\d+)?")
 ELIDED_PATH_RE = re.compile(r"/\.\.\.(?:/|\b)")
 
-VALID_REVIEW_LENSES = frozenset({"ddia", "testing"})
-VALID_REVIEW_SEVERITIES = frozenset({"informational", "worth-flagging"})
-VALID_RESEARCH_TIERS = frozenset({"A", "B", "C"})
-VALID_RESEARCH_VERDICTS = frozenset({"CONFIRMED", "PLAUSIBLE", "REFUTED", "UNRESOLVED"})
+# Single SoT: StrEnums on artifacts.vocab (encoding contract / DRY).
+VALID_REVIEW_LENSES = frozenset(ReviewLens)
+VALID_REVIEW_SEVERITIES = frozenset(ReviewSeverity)
+VALID_RESEARCH_TIERS = frozenset(ResearchTiers)
+VALID_RESEARCH_VERDICTS = frozenset(ResearchVerdict)
 
 NODE_LABEL_PATTERN = re.compile(r'\[["\']?([^\]"\']+)["\']?\]')
 
@@ -38,37 +40,53 @@ NODE_LABEL_PATTERN = re.compile(r'\[["\']?([^\]"\']+)["\']?\]')
 def validate_file_summarizer_entries(entries):
     """agents/file-summarizer.md output shape. Returns (index, reason) problems."""
     problems = []
-    for i, entry in enumerate(entries):
+    for index, entry in enumerate(entries):
         missing = FILE_SUMMARY_REQUIRED_KEYS - entry.keys()
         if missing:
-            problems.append((i, f"missing keys: {sorted(missing)}"))
+            problems.append((index, f"missing keys: {sorted(missing)}"))
             continue
         if entry["spring_role"] not in VALID_SPRING_ROLES:
-            problems.append((i, f"spring_role {entry['spring_role']!r} not in {sorted(VALID_SPRING_ROLES)}"))
+            problems.append(
+                (index, f"spring_role {entry['spring_role']!r} not in {sorted(VALID_SPRING_ROLES)}"),
+            )
         for list_field in ("cluster", "relationships", "cross_group_relationships", "evidence"):
             if not isinstance(entry[list_field], list):
-                problems.append((i, f"{list_field} must be a list, got {type(entry[list_field]).__name__}"))
+                problems.append(
+                    (
+                        index,
+                        f"{list_field} must be a list, got {type(entry[list_field]).__name__}",
+                    ),
+                )
         if isinstance(entry.get("evidence"), list):
-            problems.extend((i, r) for r in _evidence_problems(entry["evidence"]))
+            problems.extend(
+                (index, reason) for reason in _evidence_problems(entry["evidence"])
+            )
     return problems
 
 
 def _evidence_problems(evidence):
     reasons = []
-    for j, item in enumerate(evidence):
+    for evidence_index, item in enumerate(evidence):
         if not isinstance(item, dict):
-            reasons.append(f"evidence[{j}] must be an object, got {type(item).__name__}")
+            reasons.append(
+                f"evidence[{evidence_index}] must be an object, got {type(item).__name__}",
+            )
             continue
         missing = {"line", "what"} - item.keys()
         if missing:
-            reasons.append(f"evidence[{j}] missing keys: {sorted(missing)}")
+            reasons.append(f"evidence[{evidence_index}] missing keys: {sorted(missing)}")
             continue
         if not isinstance(item["line"], int) or isinstance(item["line"], bool):
-            reasons.append(f"evidence[{j}].line must be an int, got {type(item['line']).__name__}")
+            reasons.append(
+                f"evidence[{evidence_index}].line must be an int, "
+                f"got {type(item['line']).__name__}",
+            )
         elif item["line"] < 1:
-            reasons.append(f"evidence[{j}].line must be >= 1, got {item['line']}")
+            reasons.append(
+                f"evidence[{evidence_index}].line must be >= 1, got {item['line']}",
+            )
         if not isinstance(item["what"], str) or not item["what"].strip():
-            reasons.append(f"evidence[{j}].what must be a non-empty string")
+            reasons.append(f"evidence[{evidence_index}].what must be a non-empty string")
     return reasons
 
 
@@ -88,21 +106,30 @@ def validate_gap_analyzer_questions(questions, max_questions=40):
     problems = []
     required_keys = {"blocks_file", "topic", "question", "evidence"}
     seen_files_order = []
-    for i, q in enumerate(questions):
-        missing = required_keys - q.keys()
+    for index, question in enumerate(questions):
+        missing = required_keys - question.keys()
         if missing:
-            problems.append((i, f"missing keys: {sorted(missing)}"))
+            problems.append((index, f"missing keys: {sorted(missing)}"))
             continue
-        for reason in _gap_evidence_problems(q["evidence"]):
-            problems.append((i, reason))
-        if q["blocks_file"] not in VALID_DOC_FILES:
-            problems.append((i, f"blocks_file {q['blocks_file']!r} not one of the fourteen output files"))
-        if not seen_files_order or seen_files_order[-1] != q["blocks_file"]:
-            if q["blocks_file"] in seen_files_order:
+        for reason in _gap_evidence_problems(question["evidence"]):
+            problems.append((index, reason))
+        if question["blocks_file"] not in VALID_DOC_FILES:
+            problems.append(
+                (
+                    index,
+                    f"blocks_file {question['blocks_file']!r} not one of the fourteen output files",
+                ),
+            )
+        if not seen_files_order or seen_files_order[-1] != question["blocks_file"]:
+            if question["blocks_file"] in seen_files_order:
                 problems.append(
-                    (i, f"blocks_file {q['blocks_file']!r} reappears non-contiguously — output must be grouped by file"),
+                    (
+                        index,
+                        f"blocks_file {question['blocks_file']!r} reappears non-contiguously — "
+                        "output must be grouped by file",
+                    ),
                 )
-            seen_files_order.append(q["blocks_file"])
+            seen_files_order.append(question["blocks_file"])
     if len(questions) > max_questions:
         problems.append(
             (None, f"{len(questions)} questions exceeds sanity ceiling of {max_questions} — "
@@ -111,45 +138,71 @@ def validate_gap_analyzer_questions(questions, max_questions=40):
     return problems
 
 
+def _validate_review_evidence(index: int, evidence) -> list:
+    """Return problems for one finding's evidence array."""
+    problems = []
+    if not isinstance(evidence, list) or not evidence:
+        problems.append(
+            (index, "evidence must be a non-empty array — a claim with no anchor is unfalsifiable"),
+        )
+        return problems
+    for anchor in evidence:
+        if not isinstance(anchor, dict) or "line" not in anchor or "what" not in anchor:
+            problems.append((index, f"evidence entry missing line/what: {anchor!r}"))
+    return problems
+
+
+def _validate_external_research(index: int, external: dict) -> list:
+    """Return problems for one finding's optional external_research block."""
+    problems = []
+    verdict = external.get("verdict")
+    if verdict not in VALID_RESEARCH_VERDICTS:
+        problems.append(
+            (index, f"external_research verdict {verdict!r} not one of {sorted(VALID_RESEARCH_VERDICTS)}"),
+        )
+    sources = external.get("sources", [])
+    only_tier_c = bool(sources) and all(
+        source.get("tier") == ResearchTiers.C for source in sources
+    )
+    if only_tier_c:
+        problems.append(
+            (index, "external_research rests entirely on Tier C sources — Tier C is orientation-only "
+             "and may never be the sole ground for a claim"),
+        )
+    for source in sources:
+        if source.get("tier") not in VALID_RESEARCH_TIERS:
+            problems.append(
+                (index, f"external_research source tier {source.get('tier')!r} "
+                 f"not one of {sorted(VALID_RESEARCH_TIERS)}"),
+            )
+    return problems
+
+
+def _validate_review_finding(index: int, finding: dict) -> list:
+    """Return problems for a single architecture/testing review finding."""
+    required_keys = {"lens", "concept", "claim", "evidence", "severity"}
+    missing = required_keys - finding.keys()
+    if missing:
+        return [(index, f"missing keys: {sorted(missing)}")]
+
+    problems = []
+    if finding["lens"] not in VALID_REVIEW_LENSES:
+        problems.append((index, f"lens {finding['lens']!r} not one of {sorted(VALID_REVIEW_LENSES)}"))
+    if finding["severity"] not in VALID_REVIEW_SEVERITIES:
+        problems.append(
+            (index, f"severity {finding['severity']!r} not one of {sorted(VALID_REVIEW_SEVERITIES)}"),
+        )
+    problems.extend(_validate_review_evidence(index, finding["evidence"]))
+    external = finding.get("external_research")
+    if external:
+        problems.extend(_validate_external_research(index, external))
+    return problems
+
+
 def validate_architecture_testing_review_findings(findings, max_findings=60):
     problems = []
-    required_keys = {"lens", "concept", "claim", "evidence", "severity"}
-    for i, f in enumerate(findings):
-        missing = required_keys - f.keys()
-        if missing:
-            problems.append((i, f"missing keys: {sorted(missing)}"))
-            continue
-        if f["lens"] not in VALID_REVIEW_LENSES:
-            problems.append((i, f"lens {f['lens']!r} not one of {sorted(VALID_REVIEW_LENSES)}"))
-        if f["severity"] not in VALID_REVIEW_SEVERITIES:
-            problems.append((i, f"severity {f['severity']!r} not one of {sorted(VALID_REVIEW_SEVERITIES)}"))
-        evidence = f["evidence"]
-        if not isinstance(evidence, list) or not evidence:
-            problems.append((i, "evidence must be a non-empty array — a claim with no anchor is unfalsifiable"))
-        else:
-            for anchor in evidence:
-                if not isinstance(anchor, dict) or "line" not in anchor or "what" not in anchor:
-                    problems.append((i, f"evidence entry missing line/what: {anchor!r}"))
-        external = f.get("external_research")
-        if external:
-            verdict = external.get("verdict")
-            if verdict not in VALID_RESEARCH_VERDICTS:
-                problems.append(
-                    (i, f"external_research verdict {verdict!r} not one of {sorted(VALID_RESEARCH_VERDICTS)}"),
-                )
-            sources = external.get("sources", [])
-            only_tier_c = bool(sources) and all(s.get("tier") == "C" for s in sources)
-            if only_tier_c:
-                problems.append(
-                    (i, "external_research rests entirely on Tier C sources — Tier C is orientation-only "
-                     "and may never be the sole ground for a claim"),
-                )
-            for source in sources:
-                if source.get("tier") not in VALID_RESEARCH_TIERS:
-                    problems.append(
-                        (i, f"external_research source tier {source.get('tier')!r} "
-                         f"not one of {sorted(VALID_RESEARCH_TIERS)}"),
-                    )
+    for index, finding in enumerate(findings):
+        problems.extend(_validate_review_finding(index, finding))
     if len(findings) > max_findings:
         problems.append(
             (None, f"{len(findings)} findings exceeds sanity ceiling of {max_findings} — "

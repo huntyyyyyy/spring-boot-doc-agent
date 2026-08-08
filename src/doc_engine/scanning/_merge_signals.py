@@ -5,11 +5,13 @@ The merge is deterministic and rule-based: no LLM involvement. Downstream
 stages read the merged output exactly as they read a single-scanner output.
 """
 
-import sys
+import logging
 from typing import Any, Dict, List, Optional
 
 from doc_engine.core.protocols import Merger
 from doc_engine.scanning.java_extract import to_snake_case
+
+_LOG = logging.getLogger(__name__)
 
 
 def _default_dict() -> Dict[str, Any]:
@@ -109,12 +111,13 @@ def _finalize_entity_table_map(entity_candidates: Dict[str, List[Dict[str, Any]]
                 if c.get("package") is not None:
                     cand["package"] = c["package"]
                 winner["candidates"].append(cand)
-            print(
-                f"warning: entity_table_map key '{class_name}' is contested — "
-                f"{len(ordered)} @Entity classes share this simple name across packages; "
-                f"JPQL lineage for this name will be unavailable rather than guessed. "
-                f"Files: {', '.join(c['file'] for c in ordered)}",
-                file=sys.stderr,
+            _LOG.warning(
+                "entity_table_map key %r is contested — %d @Entity classes share "
+                "this simple name across packages; JPQL lineage for this name will "
+                "be unavailable rather than guessed. Files: %s",
+                class_name,
+                len(ordered),
+                ", ".join(c["file"] for c in ordered),
             )
         entity_table_map[class_name] = winner
     return entity_table_map
@@ -162,13 +165,23 @@ def _merge_config_key_sets(partials: List[Dict[str, Any]]) -> Dict[str, List[str
 
 
 def _merge_file_signatures(partials: List[Dict[str, Any]]) -> Dict[str, str]:
-    """Merge file_signatures. All backends must agree on the hash for a file."""
+    """Merge Path A ``file_signatures`` maps (first-wins on conflict).
+
+    The Stage-0 covering proof is built from the walk SoR
+    (``ScanContext.file_signatures``), not this merged dict. Conflicts here are
+    therefore Path A / drift telemetry issues — log and keep the first hash.
+    """
     merged: Dict[str, str] = {}
     for partial in partials:
         for file_path, sig in partial.get("file_signatures", {}).items():
             if file_path in merged and merged[file_path] != sig:
-                # Same file, different hash across backends is a serious inconsistency.
-                # Keep the first and warn; callers should not get here for a normal repo.
+                _LOG.warning(
+                    "file_signatures conflict for %s: keeping %s, ignoring %s "
+                    "(covering proof uses walk SoR, not this Path A map)",
+                    file_path,
+                    merged[file_path],
+                    sig,
+                )
                 continue
             merged[file_path] = sig
     return merged
@@ -216,32 +229,23 @@ def merge(
     result["scanner_version"] = scanner_version
     result["scanners"] = list(scanner_names) if scanner_names else []
 
-    # Finalize any candidate maps before merging, then merge explicit maps.
-    entity_maps = []
+    # Evidence first — entity_table_map derivation reads the merged bag.
+    result["evidence"] = _sort_evidence(_merge_evidence(partials))
+
+    entity_maps: List[Dict[str, Any]] = []
     for partial in partials:
         if "entity_table_map_candidates" in partial:
-            entity_maps.append(_finalize_entity_table_map(partial["entity_table_map_candidates"]))
+            entity_maps.append(
+                _finalize_entity_table_map(partial["entity_table_map_candidates"])
+            )
         if "entity_table_map" in partial:
             entity_maps.append(partial["entity_table_map"])
-    merged_map = {}
-    for em in entity_maps:
-        for class_name, entry in em.items():
-            if class_name not in merged_map:
-                merged_map[class_name] = dict(entry)
-                continue
-            existing = merged_map[class_name]
-            if existing.get("table") != entry.get("table") or existing.get("file") != entry.get("file"):
-                existing["status"] = "contested"
-                candidates = existing.setdefault("candidates", [dict(existing)])
-                candidate_copy = dict(entry)
-                if candidate_copy not in candidates:
-                    candidates.append(candidate_copy)
-
-    # If no backend provided an entity map, derive one from merged evidence.
+    merged_map = _merge_entity_table_map(
+        [{"entity_table_map": em} for em in entity_maps]
+    )
     if not merged_map:
         merged_map = _build_entity_table_map_from_evidence(result)
 
-    result["evidence"] = _sort_evidence(_merge_evidence(partials))
     result["entity_table_map"] = dict(sorted(merged_map.items()))
     result["redaction_zones"] = _merge_redaction_zones(partials)
     result["config_key_sets"] = _merge_config_key_sets(partials)
