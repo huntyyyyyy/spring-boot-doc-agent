@@ -257,12 +257,15 @@ def test_require_on_path_sibling_scripts(
 def test_require_on_path_non_nt_name_list(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Hit the non-Windows name list branch without switching pathlib OS."""
-    from pathlib import WindowsPath
+    """Find tool next to sys.executable when which() misses.
 
+    Does not monkeypatch ``os.name`` or ``pathlib.Path``: on modern Python,
+    ``Path.__new__`` consults ``os.name``, so forcing ``posix`` on Windows
+    (or ``WindowsPath`` on Linux) raises UnsupportedOperation / NotImplementedError.
+    The bare-name candidate is always tried first, so this hits the sibling-dir
+    lookup on both POSIX CI and Windows.
+    """
     monkeypatch.setattr(gate_tools.shutil, "which", lambda _n: None)
-    monkeypatch.setattr(gate_tools, "Path", WindowsPath)
-    monkeypatch.setattr(gate_tools.os, "name", "posix")
     tool = tmp_path / "mytool"
     tool.write_text("", encoding="utf-8")
     monkeypatch.setattr(sys, "executable", str(tmp_path / "python"))
