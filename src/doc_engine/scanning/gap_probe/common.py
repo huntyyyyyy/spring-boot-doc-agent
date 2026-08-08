@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from doc_engine._compat import StrEnum
+from doc_engine.core.jsonio import load_json as _load_json
 
 
 class CoveringPreconditionError(RuntimeError):
@@ -67,10 +68,6 @@ def _rate(numerator: int, denominator: int) -> Optional[float]:
     if denominator <= 0:
         return None
     return numerator / denominator
-
-
-def _load_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _load_facts_jsonl(path: Path) -> List[Dict[str, Any]]:

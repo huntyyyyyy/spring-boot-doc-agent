@@ -32,7 +32,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from doc_engine.core.timeouts import codeql_database_timeout_seconds, tool_timeout_seconds
-from doc_engine.paths import PathValidationError, join_under
+from doc_engine.paths import PathValidationError, codeql_pack_dir, join_under
 from doc_engine.scanning.build_command import BuildCommandError, validate_build_command
 
 # Directories whose contents do not affect the Java build/CodeQL extraction and
@@ -42,9 +42,7 @@ _HASH_EXCLUDED_DIRS = {
     "__pycache__", ".pytest_cache", ".mypy_cache",
 }
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-REPO_ROOT = Path(__file__).resolve().parents[4]
-DEFAULT_PACK_DIR = REPO_ROOT / "codeql" / "spring-signals"
+DEFAULT_PACK_DIR = codeql_pack_dir()
 
 
 class CodeQLError(RuntimeError):

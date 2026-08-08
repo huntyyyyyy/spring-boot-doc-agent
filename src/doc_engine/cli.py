@@ -1,23 +1,13 @@
 """CLI entry point for the doc-engine package."""
 
 import argparse
-import json
 import sys
 from typing import Any, Dict  # Any used by parser-builder helpers
 
 from doc_engine import Engine
 from doc_engine.config import Config, load_repo_config, merge_config, sanitize_repo_settings, trust_from_flag
+from doc_engine.core.jsonio import dump_json, load_json
 from doc_engine.pipeline.local_run import add_run_arguments, run_pipeline
-
-
-def _load_json(path: str) -> Dict[str, Any]:
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
-
-
-def _save_json(path: str, data: Dict[str, Any]) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
 
 
 def _split_scanner_names(raw: str) -> list[str]:
@@ -65,23 +55,23 @@ def cmd_scan(args: argparse.Namespace) -> int:
             print(f"error: {exc}", file=sys.stderr)
             return 1
         raise
-    _save_json(args.out, signals)
+    dump_json(args.out, signals)
     print(f"Wrote signals to {args.out}")
     return 0
 
 
 def cmd_docs(args: argparse.Namespace) -> int:
-    signals = _load_json(args.signals)
-    interview = _load_json(args.interview) if args.interview else {}
+    signals = load_json(args.signals)
+    interview = load_json(args.interview) if args.interview else {}
     engine = Engine()
     bundle = engine.generate_docs(signals, interview_answers=interview)
-    _save_json(args.out, bundle)
+    dump_json(args.out, bundle)
     print(f"Wrote docs bundle to {args.out}")
     return 0
 
 
 def cmd_site(args: argparse.Namespace) -> int:
-    bundle = _load_json(args.docs)
+    bundle = load_json(args.docs)
     engine = Engine()
     site_path = engine.build_site(bundle, out_dir=args.out_dir, site_name=args.site_name)
     print(f"Built site at {site_path}")

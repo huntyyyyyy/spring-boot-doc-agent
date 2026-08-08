@@ -211,6 +211,20 @@ doc-engine quality-gates --compare-ref origin/main
 | Bus factor | **Deferred** — blame/ownership analysis ([2401.03303](https://arxiv.org/abs/2401.03303)), not CI |
 | Sonar custom Quality Gate | **Deferred on Free** — cannot set 98.7% / 3% / complexity in UI |
 
+## Package layout: named concepts, not ``utils/``
+
+Do **not** add `src/doc_engine/utils/`, `util.py`, or a grab-bag `helpers.py`.
+Shared primitives live in concept-named modules:
+
+- `doc_engine.core` — walk/indexing, timeouts, excludes, JSON file I/O (`jsonio`)
+- `doc_engine.paths` — path validation and repo/scripts layout resolution
+- `doc_engine.ci` — quality-gate tooling and checkout-bound path helpers
+
+If a helper is domain-specific (evidence tags, semantic eval, gap rates), put
+it next to that domain (`tools/doc_tag_utils.py`, `scanning/gap_probe/`, …).
+A new shared module must answer “what belongs here / what does not?” in its
+module docstring; unexplained dumps fail review.
+
 ## SonarCloud (soft signal only)
 
 The `sonarcloud` job still uploads analysis for the dashboard but is

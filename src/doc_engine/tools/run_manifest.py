@@ -85,6 +85,7 @@ import tempfile
 import time
 from datetime import datetime, timezone
 
+from doc_engine.core.jsonio import load_json as _read_json
 from doc_engine.tools import (
     doc_tag_utils,  # noqa: E402
     spring_signal_scan,  # noqa: E402
@@ -154,11 +155,6 @@ def _write_json_atomic(path, data):
         except OSError:
             pass
         raise
-
-
-def _read_json(path):
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
 
 
 def _run_git(repo_path, args, label):

@@ -8,6 +8,7 @@ from typing import Any
 
 from pydantic import BaseModel, ValidationError
 
+from doc_engine.core.jsonio import load_json
 from doc_engine.pipeline.artifacts import (
     ARTIFACT_FILENAMES,
     ARTIFACT_MODELS,
@@ -23,11 +24,6 @@ class ArtifactValidationError(Exception):
         self.path = path
         self.error = error
         super().__init__(f"{artifact} validation failed for {path}: {error}")
-
-
-def load_json(path: Path) -> Any:
-    with path.open(encoding="utf-8") as fh:
-        return json.load(fh)
 
 
 def load_jsonl_objects(path: Path, *, artifact: str = "facts") -> list[Any]:

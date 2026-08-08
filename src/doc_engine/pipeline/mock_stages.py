@@ -7,6 +7,7 @@ import os
 import re
 
 from doc_engine.core.excludes import DEFAULT_EXCLUDED_DIRS
+from doc_engine.core.jsonio import dump_json, load_json
 from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
 
 # The em dash the tag grammar requires, spelled as an escape rather than a
@@ -830,8 +831,8 @@ def mock_docs(docs_dir, pool, todos, answers, today, existing_readme, log):
 # --------------------------------------------------------------------------
 
 def _write_json(path, obj):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=1)
+    # Mock fixtures historically used indent=1; keep wire bytes stable for diffs.
+    dump_json(path, obj, indent=1)
 
 
 def _write_text(path, text):
@@ -840,8 +841,7 @@ def _write_text(path, text):
 
 
 def _read_json(path):
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+    return load_json(path)
 
 
 def find_existing_readme(repo_path):
