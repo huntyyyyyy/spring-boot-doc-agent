@@ -226,6 +226,12 @@ import os
 import sys
 from collections import Counter
 
+from doc_engine.paths import (
+    PathValidationError,
+    checked_output_path,
+    checked_path,
+    join_under,
+)
 from doc_engine.scanning.support._build_signal_extract import extract_build_signals  # noqa: E402
 from doc_engine.scanning.support._config_keys import extract_config_keys  # noqa: E402
 from doc_engine.tools import spring_signal_scan  # noqa: E402
@@ -351,6 +357,7 @@ def load_manifest(path):
     that's checked directly — if the path still exists and a fresh dfs_walk
     of it also finds zero files, the empty map is accepted as a real
     (if unusual) empty-repo baseline rather than rejected."""
+    path = str(checked_path(path, want="file"))
     with open(path) as handle:
         data = json.load(handle)
     _validate_manifest_baseline(path, data)
@@ -772,7 +779,19 @@ def _recheck_build_signals(repo_path, file_rel, group):
     compares by structured identity (plugin_id, coordinate, module,
     toolchain, catalog key) rather than by raw match text, since the same
     line can match multiple rules and the match text is not distinctive."""
-    full_path = os.path.join(repo_path, file_rel)
+    try:
+        full_path = join_under(repo_path, file_rel)
+    except PathValidationError as exc:
+        return [
+            drift_result(
+                source,
+                citation,
+                STATUS_DRIFTED,
+                2,
+                f"could not read build file for re-verification: {exc}",
+            )
+            for source, citation in group
+        ]
     try:
         with open(full_path, encoding="utf-8-sig", errors="replace") as handle:
             text = handle.read()
@@ -1078,10 +1097,11 @@ def check_drift(repo_path, signals, manifest=None):
 
 
 def _require_path(path: str, *, expect_dir: bool) -> None:
-    ok = os.path.isdir(path) if expect_dir else os.path.isfile(path)
-    kind = "directory" if expect_dir else "file"
-    if not ok:
-        print(f"error: not a {kind}: {path}", file=sys.stderr)
+    want = "dir" if expect_dir else "file"
+    try:
+        checked_path(path, want=want)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -1127,9 +1147,14 @@ def main():
         print(exc, file=sys.stderr)
         sys.exit(1)
 
-    with open(args.out, "w") as handle:
+    try:
+        out_path = checked_output_path(args.out)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(1)
+    with open(out_path, "w") as handle:
         json.dump(report, handle, indent=2)
-    _print_drift_summary(args.out, report)
+    _print_drift_summary(str(out_path), report)
 
 
 if __name__ == "__main__":

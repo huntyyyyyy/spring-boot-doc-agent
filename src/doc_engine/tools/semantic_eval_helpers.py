@@ -61,6 +61,14 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
+
+from doc_engine.paths import (
+    PathValidationError,
+    checked_output_path,
+    checked_path,
+    join_under,
+)
 
 CONFIRMED_TAG_RE = re.compile(r"\[Confirmed — interview, ([^\]]+)\]")
 
@@ -276,23 +284,35 @@ def _load_interview_answers(artifacts_dir):
 
 
 def _markdown_names(docs_dir: str):
-    return [name for name in sorted(os.listdir(docs_dir)) if name.endswith(".md")]
+    names = []
+    for name in sorted(os.listdir(docs_dir)):
+        if not name.endswith(".md"):
+            continue
+        if Path(name).name != name:
+            continue
+        try:
+            join_under(docs_dir, name)
+        except PathValidationError:
+            continue
+        names.append(name)
+    return names
 
 
 def _confirmed_findings_for_doc(docs_dir, name, interview_answers, overlap_threshold):
-    with open(os.path.join(docs_dir, name), encoding="utf-8") as handle:
+    path = join_under(docs_dir, name)
+    with open(path, encoding="utf-8") as handle:
         text = handle.read()
     return find_unmatched_confirmed_tags(text, interview_answers, overlap_threshold)
 
 
 def _scan_confirmed_docs(artifacts_dir, interview_answers, overlap_threshold):
     confirmed_findings = {}
-    docs_dir = os.path.join(artifacts_dir, "docs")
-    if not os.path.isdir(docs_dir):
+    docs_dir = join_under(artifacts_dir, "docs")
+    if not docs_dir.is_dir():
         return confirmed_findings
-    for name in _markdown_names(docs_dir):
+    for name in _markdown_names(str(docs_dir)):
         findings = _confirmed_findings_for_doc(
-            docs_dir, name, interview_answers, overlap_threshold
+            str(docs_dir), name, interview_answers, overlap_threshold
         )
         if findings:
             confirmed_findings[name] = findings
@@ -300,12 +320,13 @@ def _scan_confirmed_docs(artifacts_dir, interview_answers, overlap_threshold):
 
 
 def _resolve_architecture_path(artifacts_dir: str) -> str | None:
-    arch_path = os.path.join(artifacts_dir, "docs", "architecture.md")
-    if os.path.isfile(arch_path):
-        return arch_path
-    arch_path = os.path.join(artifacts_dir, "architecture.md")
-    if os.path.isfile(arch_path):
-        return arch_path
+    for parts in (("docs", "architecture.md"), ("architecture.md",)):
+        try:
+            candidate = join_under(artifacts_dir, *parts)
+        except PathValidationError:
+            continue
+        if candidate.is_file():
+            return str(candidate)
     return None
 
 
@@ -322,6 +343,7 @@ def _scan_mermaid(artifacts_dir: str):
 
 
 def run(artifacts_dir, overlap_threshold=DEFAULT_OVERLAP_THRESHOLD):
+    artifacts_dir = str(checked_path(artifacts_dir, want="dir"))
     interview_answers = _load_interview_answers(artifacts_dir)
     return {
         "artifacts_dir": os.path.abspath(artifacts_dir),
@@ -342,14 +364,19 @@ def main():
     ap.add_argument("--out", default=None, help="Optional path to write findings as JSON")
     args = ap.parse_args()
 
-    if not os.path.isdir(args.artifacts_dir):
-        print(f"error: not a directory: {args.artifacts_dir}", file=sys.stderr)
+    try:
+        report = run(args.artifacts_dir, args.overlap_threshold)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    report = run(args.artifacts_dir, args.overlap_threshold)
-
     if args.out:
-        with open(args.out, "w", encoding="utf-8") as f:
+        try:
+            out_path = checked_output_path(args.out)
+        except PathValidationError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            sys.exit(1)
+        with open(out_path, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
 
     total_confirmed = sum(len(v) for v in report["unmatched_confirmed_tags_by_file"].values())

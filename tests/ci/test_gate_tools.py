@@ -108,6 +108,29 @@ class GateToolsTest(unittest.TestCase):
     def test_validate_git_rev_accepts_origin_main(self) -> None:
         self.assertEqual(gate_tools.validate_git_rev("origin/main"), "origin/main")
 
+    def test_checked_path_under_repo_rejects_escape(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            outside = root.parent / "outside.json"
+            with (
+                mock.patch.object(gate_tools, "REPO_ROOT", root),
+                self.assertRaises(SystemExit) as ctx,
+            ):
+                gate_tools.checked_path_under_repo(outside)
+            self.assertEqual(ctx.exception.code, 2)
+
+    def test_checked_path_under_repo_accepts_inside(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            inside = root / "scripts" / "baseline.json"
+            inside.parent.mkdir(parents=True)
+            inside.write_text("{}", encoding="utf-8")
+            with mock.patch.object(gate_tools, "REPO_ROOT", root):
+                self.assertEqual(
+                    gate_tools.checked_path_under_repo(inside),
+                    inside.resolve(),
+                )
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

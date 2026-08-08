@@ -338,13 +338,23 @@ def _index_pool_by_file(pool):
     return by_file
 
 
+def _arc_list(group_edges, key):
+    """Return a list value for *key*, or an empty list when missing/wrong type."""
+    if not isinstance(group_edges, dict):
+        return []
+    value = group_edges.get(key)
+    return value if isinstance(value, list) else []
+
+
 def _cross_group_arc_snippets(group_edges):
     """Serialize a few outbound / same-package arcs for mock summary entries."""
     snippets = []
-    for arc in (group_edges.get("outbound") or [])[:5]:
-        snippets.append(json.dumps(arc, sort_keys=True)[:200])
-    for block in (group_edges.get("same_package_outside") or [])[:5]:
-        snippets.append(json.dumps(block, sort_keys=True)[:200])
+    outbound = _arc_list(group_edges, "outbound")
+    same = _arc_list(group_edges, "same_package_outside")
+    for index in range(min(5, len(outbound))):
+        snippets.append(json.dumps(outbound[index], sort_keys=True)[:200])
+    for index in range(min(5, len(same))):
+        snippets.append(json.dumps(same[index], sort_keys=True)[:200])
     return snippets
 
 

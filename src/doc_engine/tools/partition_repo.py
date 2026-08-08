@@ -59,6 +59,7 @@ import os
 import sys
 
 from doc_engine.core.excludes import DEFAULT_EXCLUDED_DIRS, load_gitignore_spec
+from doc_engine.paths import PathValidationError, checked_output_path, checked_path
 
 DEFAULT_EXCLUDED_EXTS = {
     ".png", ".jpg", ".jpeg", ".gif", ".ico", ".svg", ".webp", ".bmp",
@@ -616,9 +617,11 @@ def main():
                          "pathspec library)")
     args = ap.parse_args()
 
-    repo_path = os.path.abspath(args.repo_path)
-    if not os.path.isdir(repo_path):
-        print(f"error: not a directory: {repo_path}", file=sys.stderr)
+    try:
+        repo_path = str(checked_path(args.repo_path, want="dir"))
+        out_path = checked_output_path(args.out)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
 
     excluded_dirs = DEFAULT_EXCLUDED_DIRS | set(args.exclude_dir)
@@ -636,11 +639,11 @@ def main():
         repo_path, args.max_tokens, args.overlap, file_tokens, skipped, groups_raw
     )
 
-    with open(args.out, "w") as handle:
+    with open(out_path, "w") as handle:
         json.dump(output, handle, indent=2)
 
     print(
-        f"Wrote {args.out}: {output['num_groups']} groups, "
+        f"Wrote {out_path}: {output['num_groups']} groups, "
         f"{output['total_files_considered']} files considered, "
         f"{output['total_files_skipped']} skipped."
     )

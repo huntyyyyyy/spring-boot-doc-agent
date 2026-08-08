@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import re
 
+from doc_engine.paths import PathValidationError, checked_path, join_under
 from doc_engine.pipeline.artifacts.signals import VALID_SPRING_ROLES
 from doc_engine.pipeline.artifacts.vocab import (
     ResearchTiers,
@@ -268,7 +269,8 @@ def _failures_from_json_list(path, label, validate_fn):
     """Load a JSON array artifact and map validator problems to failure strings."""
     import json
 
-    with open(path, encoding="utf-8") as fh:
+    validated = checked_path(path, want="file")
+    with open(validated, encoding="utf-8") as fh:
         entries = json.load(fh)
     return [f"{label} entry {idx}: {reason}" for idx, reason in validate_fn(entries)]
 
@@ -276,7 +278,8 @@ def _failures_from_json_list(path, label, validate_fn):
 def _failures_from_review_json(path):
     import json
 
-    with open(path, encoding="utf-8") as fh:
+    validated = checked_path(path, want="file")
+    with open(validated, encoding="utf-8") as fh:
         findings = json.load(fh)
     if not isinstance(findings, list):
         return [
@@ -295,19 +298,22 @@ def run_stage5_gate(artifacts_dir, target_repo):
 
     Returns a list of human-readable failure strings (empty if all pass).
     """
-    import os
-
     failures: list[str] = []
-    summaries_path = os.path.join(artifacts_dir, "summaries.json")
-    if os.path.isfile(summaries_path):
+    try:
+        base = checked_path(artifacts_dir, want="dir")
+    except PathValidationError as exc:
+        return [str(exc)]
+
+    summaries_path = join_under(base, "summaries.json")
+    if summaries_path.is_file():
         failures.extend(
             _failures_from_json_list(
                 summaries_path, "summaries.json", validate_file_summarizer_entries,
             )
         )
 
-    gap_path = os.path.join(artifacts_dir, "gap_questions.json")
-    if os.path.isfile(gap_path):
+    gap_path = join_under(base, "gap_questions.json")
+    if gap_path.is_file():
         failures.extend(
             _failures_from_json_list(
                 gap_path, "gap_questions.json", validate_gap_analyzer_questions,
@@ -315,8 +321,8 @@ def run_stage5_gate(artifacts_dir, target_repo):
         )
 
     # B4 — wire unused DDIA/testing findings validator into the live Stage 5 gate.
-    review_path = os.path.join(artifacts_dir, "architecture_testing_review.json")
-    if os.path.isfile(review_path):
+    review_path = join_under(base, "architecture_testing_review.json")
+    if review_path.is_file():
         failures.extend(_failures_from_review_json(review_path))
 
     return failures

@@ -106,6 +106,7 @@ import json
 import os
 import sys
 
+from doc_engine.paths import PathValidationError, checked_output_path, checked_path
 from doc_engine.tools import (
     build_cross_group_edges,  # noqa: E402
     partition_repo,  # noqa: E402
@@ -722,7 +723,8 @@ def _build_arg_parser():
 
 def _maybe_write_report(path, report):
     if path:
-        with open(path, "w", encoding="utf-8") as f:
+        out = checked_output_path(path)
+        with open(out, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
 
 
@@ -738,7 +740,8 @@ def _print_warnings(report):
 def _load_optional_json(path):
     if not path:
         return None
-    with open(path, encoding="utf-8") as f:
+    validated = checked_path(path, want="file")
+    with open(validated, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -765,7 +768,8 @@ def _print_l2b_summary(report):
 
 def _run_l2b_calibration(args, repo_path):
     """L2b path: measure Stage-4 inputs from on-disk summaries (+ optional extras)."""
-    with open(args.summaries_file, encoding="utf-8") as f:
+    summaries_path = checked_path(args.summaries_file, want="file")
+    with open(summaries_path, encoding="utf-8") as f:
         summaries_data = json.load(f)
     interview_answers = _load_optional_json(args.interview_answers_file)
     signals_data = _load_optional_json(args.signals_file)
@@ -832,15 +836,20 @@ def _run_stage0_preflight(args, repo_path):
 
 def main():
     args = _build_arg_parser().parse_args()
-    repo_path = os.path.abspath(args.repo_path)
-    if not os.path.isdir(repo_path):
-        print(f"error: not a directory: {repo_path}", file=sys.stderr)
+    try:
+        repo_path = str(checked_path(args.repo_path, want="dir"))
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    if args.summaries_file:
-        _run_l2b_calibration(args, repo_path)
-        return
-    _run_stage0_preflight(args, repo_path)
+    try:
+        if args.summaries_file:
+            _run_l2b_calibration(args, repo_path)
+            return
+        _run_stage0_preflight(args, repo_path)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

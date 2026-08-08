@@ -32,6 +32,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from doc_engine.core.timeouts import codeql_database_timeout_seconds, tool_timeout_seconds
+from doc_engine.paths import PathValidationError, join_under
 from doc_engine.scanning.build_command import BuildCommandError, validate_build_command
 
 # Directories whose contents do not affect the Java build/CodeQL extraction and
@@ -213,6 +214,14 @@ def _ensure_regular_file(path: Path) -> None:
         raise CodeQLError(f"refusing non-regular cache file: {path}")
 
 
+def _cache_meta_path(db_path: Path) -> Path:
+    """Resolve cache metadata under *db_path*; refuse path escape."""
+    try:
+        return join_under(db_path, "spring_signal_scan_cache.json")
+    except PathValidationError as exc:
+        raise CodeQLError(str(exc)) from exc
+
+
 def _validate_one_cached_row(i: int, row: Any) -> Dict[str, Any]:
     if not isinstance(row, dict):
         raise CodeQLError(f"cached CodeQL row {i} is not an object")
@@ -354,7 +363,10 @@ def _cache_db_path(
 
 
 def _cache_metadata(db_path: Path) -> Optional[Dict[str, str]]:
-    meta = db_path / "spring_signal_scan_cache.json"
+    try:
+        meta = _cache_meta_path(db_path)
+    except CodeQLError:
+        return None
     if not meta.is_file():
         return None
     try:
@@ -372,7 +384,7 @@ def _write_cache_metadata(
     scan_context: Any = None,
     codeql_cli_version: str = "",
 ) -> None:
-    meta = db_path / "spring_signal_scan_cache.json"
+    meta = _cache_meta_path(db_path)
     meta.write_text(json.dumps({
         "cache_key": _cache_key(
             repo_path, pack_dir, build_command, scan_context=scan_context,

@@ -17,7 +17,7 @@ import sys
 from typing import Any, Dict, List
 
 from doc_engine.core.walk import compute_file_signature, dfs_walk
-from doc_engine.paths import scripts_dir
+from doc_engine.paths import PathValidationError, checked_output_path, checked_path, scripts_dir
 from doc_engine.scanning._orchestrator import CoveringProofError
 from doc_engine.scanning._paths import ast_grep_rules_path
 from doc_engine.scanning._resolve_lineage import extract_sql_lineage, resolve_jpql_to_lineage
@@ -194,8 +194,10 @@ def _print_scan_summary(
 
 def main() -> int:
     args = _build_parser().parse_args()
-    if not os.path.isdir(args.repo_path):
-        print(f"error: not a directory: {args.repo_path}", file=sys.stderr)
+    try:
+        checked_path(args.repo_path, want="dir")
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         return 1
 
     scanners = args.scanners.split(",") if args.scanners else None
@@ -213,13 +215,19 @@ def main() -> int:
         print(exc, file=sys.stderr)
         return 1
 
-    covering_path = _emit_covering_proof(result, args.out)
+    try:
+        out_path = checked_output_path(args.out)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+    covering_path = _emit_covering_proof(result, str(out_path))
     # Facts need internal covering keys; Path A JSON must not carry them.
-    facts_path, emit = _emit_facts(result, args.out)
+    facts_path, emit = _emit_facts(result, str(out_path))
     path_a = _strip_internal_keys(result)
-    with open(args.out, "w", encoding="utf-8") as handle:
+    with open(out_path, "w", encoding="utf-8") as handle:
         json.dump(path_a, handle, indent=2)
-    _print_scan_summary(args.out, covering_path, facts_path, emit, path_a)
+    _print_scan_summary(str(out_path), covering_path, facts_path, emit, path_a)
     return 0
 
 
