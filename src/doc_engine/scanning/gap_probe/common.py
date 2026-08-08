@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from doc_engine._compat import StrEnum
-from doc_engine.core.jsonio import load_json as _load_json
 
 
 class CoveringPreconditionError(RuntimeError):
