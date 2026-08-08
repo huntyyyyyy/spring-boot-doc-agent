@@ -28,7 +28,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      # Fail-fast: one interpreter failure cancels siblings (cheapest→dearest
+      # signal). ABI-sensitive steps still run on every cell that starts; the
+      # expensive hermetic/advisory steps below are pinned to 3.11 only so a
+      # green 3.10/3.12 cell is not 3× Stage-0 / rule-coverage / mutate cost.
+      fail-fast: true
       matrix:
         # Supported interpreters for the install/test surface. Classifiers also
         # list 3.13; that cell is deferred until this matrix is green. CodeQL
@@ -178,7 +182,10 @@ jobs:
       # committed and tiny. The real-corpus ratchet needs a checkout too large
       # to track, so it runs on a dev machine and commits its baseline, the
       # same shape check_code_quality.py uses. This step fails the build.
+      # Hermetic fixture gates are interpreter-stable; run once on the canonical
+      # 3.11 cell (same cell that publishes coverage.xml) rather than 3×.
       - name: rule_coverage.py (rule non-vacuity gate)
+        if: matrix.python-version == '3.11'
         run: python3 scripts/coverage/rule_coverage.py
 
       # semgrep: every rule in scripts/coverage/spring_semgrep_rules.yml must
@@ -188,6 +195,7 @@ jobs:
       # ratchet). Real-corpus recall baseline remains optional/dev-only and is
       # still absent — do not invent a client checkout name.
       - name: semgrep_rule_coverage.py (non-vacuity + FP ratchet)
+        if: matrix.python-version == '3.11'
         run: python3 scripts/coverage/semgrep_rule_coverage.py
 
       # Measurements, not a verdict -- this step cannot fail, and is named so
@@ -198,6 +206,7 @@ jobs:
       # move is how a threshold gets picked that nobody can defend -- the same
       # reasoning recorded on check_code_quality.py's USAGE_WITHIN_LINES.
       - name: claim metrics (reports; never fails)
+        if: matrix.python-version == '3.11'
         run: python3 scripts/ci/check_repo_claims.py --metrics
 
       - name: pytest tests/ (line coverage ratchet on doc_engine + stf)
@@ -213,11 +222,11 @@ jobs:
             --cov-fail-under=${{ env.COV_FAIL_UNDER }}
         env:
           # Keep in lockstep with [tool.coverage.report] fail_under in pyproject.toml.
-          # Floor is the integer of combined statement+branch Cover% on a clean run
-          # (not coverage.xml line-rate, which is statement-only and reads higher).
-          COV_FAIL_UNDER: "82"
+          # Floor is combined statement+branch Cover% on a clean run (same 98.7 as
+          # new-code diff-cover; not coverage.xml line-rate alone).
+          COV_FAIL_UNDER: "98.7"
 
-      - name: Coverage summary
+      - name: Coverage summary + below-floor gap-average
         if: always()
         run: |
           python3 - <<'PY'
@@ -226,23 +235,36 @@ jobs:
           import xml.etree.ElementTree as ET
 
           path = pathlib.Path("coverage.xml")
+          summary = pathlib.Path(os.environ["GITHUB_STEP_SUMMARY"])
           if not path.is_file():
               print("coverage.xml missing — pytest may have failed before writing it")
+              summary.write_text(
+                  "### Line coverage (doc_engine + stf)\n\n"
+                  "coverage.xml missing\n",
+                  encoding="utf-8",
+              )
               raise SystemExit(0)
           root = ET.parse(path).getroot()
           line_rate = float(root.attrib.get("line-rate", "0"))
           pct = 100.0 * line_rate
-          summary = pathlib.Path(os.environ["GITHUB_STEP_SUMMARY"])
           summary.write_text(
               f"### Line coverage (doc_engine + stf)\n\n"
-              f"- Python `{os.environ.get('PYTHON_VERSION', '?')}`: **{pct:.2f}%** "
-              f"(floor {os.environ.get('COV_FAIL_UNDER', '?')}%)\n",
+              f"- Python `{os.environ.get('PYTHON_VERSION', '?')}`: "
+              f"**{pct:.2f}%** XML line-rate "
+              f"(fail_under floor {os.environ.get('COV_FAIL_UNDER', '?')}% "
+              f"is combined stmt+branch Cover% from pytest-cov)\n",
               encoding="utf-8",
           )
-          print(f"line coverage={pct:.2f}%")
+          print(f"xml line-rate={pct:.2f}%")
           PY
+          # Climb inventory: average only files still below the floor (excludes green).
+          python3 scripts/ci/coverage_gap_average.py \
+            --coverage-xml coverage.xml \
+            --floor "${COV_FAIL_UNDER}" \
+            --worst 15 \
+            --append-github-summary
         env:
-          COV_FAIL_UNDER: "82"
+          COV_FAIL_UNDER: "98.7"
           PYTHON_VERSION: ${{ matrix.python-version }}
 
       # Canonical coverage for SonarCloud (sonarcloud job downloads this).
@@ -257,12 +279,15 @@ jobs:
           if-no-files-found: error
 
       - name: validate_artifacts.py (spring_signals fixture schema)
+        if: matrix.python-version == '3.11'
         run: python3 -m doc_engine.tools.validate_artifacts spring_signals scripts/fixtures/spring_signals_fixture_expected.json
 
       # Live deterministic Stage 0 against the committed spring_signals fixture
       # tree, then schema-gate every known artifact the run produced. Requires
       # portable package ports (python -m doc_engine.tools.*) — not scripts/ paths.
+      # Once on 3.11: not an ABI matrix concern; 3× was wall-clock waste.
       - name: portable Stage 0 (deterministic_only + artifact schema gate)
+        if: matrix.python-version == '3.11'
         run: |
           OUT=$(mktemp -d)
           doc-engine pipeline run scripts/fixtures/spring_signals \
@@ -278,6 +303,7 @@ jobs:
       # check_code_quality.py's USAGE_WITHIN_LINES. ENFORCE = False in the
       # script, so check_gate_honesty requires "non-blocking" in this name.
       - name: mutate.py (mutation score; reports, non-blocking)
+        if: matrix.python-version == '3.11'
         run: python3 scripts/ratchets/mutate.py
 
       # Hand-targeted mutants for check-assertions.py (ten load-bearing
@@ -285,6 +311,7 @@ jobs:
       # scans scripts/, but the same honesty rule applies -- name must say
       # non-blocking until a zero-survivor threshold is defended.
       - name: spring-signals mutation_driver.py (assertion mutants; non-blocking)
+        if: matrix.python-version == '3.11'
         run: python3 tests/spring_signals/mutation_driver.py
 
       # REMOVED: the verify_llms_docs.py step. It extracted backtick-fenced
@@ -303,6 +330,7 @@ jobs:
       # exemption heuristic or delete this step; do not reintroduce ENFORCE.
       # Name is quoted: an unquoted colon in a YAML scalar breaks the workflow.
       - name: "check_llms_coverage.py (advisory: merged PRs without claude/llms/pr-N.md)"
+        if: matrix.python-version == '3.11'
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/ci/check_llms_coverage.py

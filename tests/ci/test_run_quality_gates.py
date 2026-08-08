@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 import tempfile
 import unittest
@@ -68,18 +69,77 @@ class RunQualityGatesTest(unittest.TestCase):
         with mock.patch.object(qg, "changed_python_under_packages", return_value=[]):
             self.assertEqual(qg.gate_duplication("HEAD~1"), 0)
 
+    def test_complexity_ratchet_skips_duplicate_scan_when_baseline_zero(self) -> None:
+        with mock.patch.object(qg, "baseline_offender_ceiling", return_value=0):
+            with mock.patch.object(qg, "_run") as run:
+                self.assertEqual(qg.gate_complexity_ratchet(), 0)
+        run.assert_not_called()
+
+    def test_complexity_ratchet_runs_checker_when_baseline_positive(self) -> None:
+        captured: list[list[str]] = []
+
+        def fake_run(command: list[str], *, label: str) -> int:
+            captured.append(command)
+            return 0
+
+        with (
+            mock.patch.object(qg, "baseline_offender_ceiling", return_value=3),
+            mock.patch.object(qg, "_run", side_effect=fake_run),
+        ):
+            self.assertEqual(qg.gate_complexity_ratchet(), 0)
+        self.assertIn("check_complexipy_ratchet.py", captured[0][-1])
+
+    def test_baseline_offender_ceiling_reads_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "baseline.json"
+            path.write_text(
+                json.dumps({"schema_version": 1, "offender_count": 0}),
+                encoding="utf-8",
+            )
+            self.assertEqual(qg.baseline_offender_ceiling(path), 0)
+
     def test_main_skip_coverage_omits_diff_cover(self) -> None:
         with (
             mock.patch.object(qg, "gate_duplication", return_value=0),
             mock.patch.object(qg, "gate_cognitive_complexity", return_value=0),
+            mock.patch.object(qg, "gate_complexity_ratchet", return_value=0),
             mock.patch.object(qg, "gate_import_cycles", return_value=0),
             mock.patch.object(qg, "gate_new_code_coverage") as cov,
         ):
-            code = qg.main(
-                ["--compare-ref", "HEAD~1", "--skip-coverage"]
-            )
+            code = qg.main(["--compare-ref", "HEAD~1", "--skip-coverage"])
         self.assertEqual(code, 0)
         cov.assert_not_called()
+
+    def test_main_fail_fast_skips_later_gates(self) -> None:
+        with (
+            mock.patch.object(qg, "gate_import_cycles", return_value=1) as cycles,
+            mock.patch.object(qg, "gate_duplication") as dup,
+            mock.patch.object(qg, "gate_cognitive_complexity") as cx,
+            mock.patch.object(qg, "gate_complexity_ratchet") as ratchet,
+            mock.patch.object(qg, "gate_new_code_coverage") as cov,
+        ):
+            code = qg.main(["--compare-ref", "HEAD~1", "--skip-coverage"])
+        self.assertEqual(code, 1)
+        cycles.assert_called_once()
+        dup.assert_not_called()
+        cx.assert_not_called()
+        ratchet.assert_not_called()
+        cov.assert_not_called()
+
+    def test_main_no_fail_fast_runs_all(self) -> None:
+        with (
+            mock.patch.object(qg, "gate_import_cycles", return_value=1),
+            mock.patch.object(qg, "gate_duplication", return_value=0) as dup,
+            mock.patch.object(qg, "gate_cognitive_complexity", return_value=0) as cx,
+            mock.patch.object(qg, "gate_complexity_ratchet", return_value=0) as ratchet,
+        ):
+            code = qg.main(
+                ["--compare-ref", "HEAD~1", "--skip-coverage", "--no-fail-fast"]
+            )
+        self.assertEqual(code, 1)
+        dup.assert_called_once()
+        cx.assert_called_once()
+        ratchet.assert_called_once()
 
 
 if __name__ == "__main__":

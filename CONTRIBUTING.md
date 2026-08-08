@@ -129,7 +129,24 @@ pytest tests/ -q --cov=doc_engine --cov=stf --cov-branch --cov-report=term-missi
 
 CI also uploads `coverage.xml` from the Python 3.11 matrix cell. The hard
 **Coverage on New Code** gate is `diff-cover` in the `quality-gates` job (below),
-not SonarCloud. The overall `fail_under` floor (82) stays separate.
+not SonarCloud. The overall `fail_under` floor (**98.7**, same as new-code
+diff-cover) stays separate from Sonar's Free QG.
+
+### Whole-repo floor vs below-floor gap-average
+
+| Metric | What it includes | Role |
+| --- | --- | --- |
+| Whole-repo `fail_under` (**98.7**) | Every measured `doc_engine` + `stf` file | **Hard fail** via pytest-cov / `pyproject.toml` |
+| New-code diff-cover (**98.7**) | Changed lines vs compare ref | **Hard fail** in `quality-gates` |
+| Below-floor gap-average | Only files with Cover% **&lt; 98.7** | **Report** for climb inventory — green files excluded so the average is not diluted |
+
+```bash
+python3 scripts/ci/coverage_gap_average.py --coverage-xml coverage.xml --worst 15
+```
+
+`below_floor_cover` is the weighted statement+branch Cover% over the below-floor
+set only; `below_floor_mean_file` is the unweighted mean of those file percents.
+Drive coverage-climb tests at the worst below-floor files first.
 
 ## In-repo quality gates
 
