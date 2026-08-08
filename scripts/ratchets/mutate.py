@@ -148,8 +148,8 @@ MUTATORS: List[Mutator] = [
     Mutator(
         "context-packet-budget-trim-disabled",
         "src/doc_engine/query/rank.py", "python",
-        "tokens_used + cost > budget",
-        "False",
+        "tokens_used + cost <= budget",
+        "True",
         "test_context_packet.py",
         "context_packet budgetTokens must trim primaryContext; disabling "
         "the guard dumps unbounded packets"),
