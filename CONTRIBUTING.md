@@ -141,7 +141,7 @@ diff-cover) stays separate from Sonar's Free QG.
 | Below-floor gap-average | Only files with Cover% **&lt; 98.7** | **Report** for climb inventory — green files excluded so the average is not diluted |
 
 ```bash
-python3 scripts/ci/coverage_gap_average.py --coverage-xml coverage.xml --worst 15
+doc-engine coverage-gap-average --coverage-xml coverage.xml --worst 15
 ```
 
 `below_floor_cover` is the weighted statement+branch Cover% over the below-floor
@@ -152,8 +152,9 @@ Drive coverage-climb tests at the worst below-floor files first.
 
 SonarCloud **Free** cannot customize Quality Gate thresholds. Policy is enforced
 in GitHub Actions by the `quality-gates` job in `.github/workflows/ci.yml`, which
-runs `scripts/ci/run_quality_gates.py` after the `test` job publishes
-`coverage-xml`.
+runs `doc-engine quality-gates` after the `test` job publishes `coverage-xml`.
+Logic lives in `src/doc_engine/ci/` (installed console CLI); `scripts/ci/` keeps
+thin deprecated shims only.
 
 ### Evidence table (2026-qualified tools only)
 
@@ -187,9 +188,10 @@ One portable entry point — same on Mac, Windows, and Linux (and in CI):
 pip install -r requirements-dev.txt && pip install -e .
 npm ci
 # produce coverage.xml once (pytest --cov=doc_engine --cov=stf --cov-branch --cov-report=xml)
-python3 scripts/ci/run_quality_gates.py --compare-ref origin/main
+doc-engine quality-gates --compare-ref origin/main
 ```
 
+- SoT is the installed package (`doc_engine.ci` + `doc-engine` console script from `pip install -e .`), not freestanding `scripts/ci` Python. Avoid adding new OS wrappers or parallel runner scripts.
 - Python tools (`diff-cover`, `tach`, `complexipy`) come from `requirements-dev.txt` and are invoked via `sys.executable -m …` or the venv console script next to that interpreter — no OS-specific wrappers.
 - `jscpd` is pinned in `package.json` / `package-lock.json`. After `npm ci`, the runner prefers the platform native binary under `node_modules/jscpd-*/bin/`, else `node node_modules/jscpd/run-jscpd.js`. Do **not** use ad-hoc `npx` or throwaway `.ps1`/`.sh` gate wrappers.
 - Skip coverage locally with `--skip-coverage` only for debugging other gates.

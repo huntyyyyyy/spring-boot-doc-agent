@@ -129,6 +129,50 @@ def cmd_query(args: argparse.Namespace) -> int:
     return query_main(_without_argparse_separator(argv))
 
 
+def cmd_quality_gates(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine quality-gates`` → ci.quality_gates."""
+    from doc_engine.ci.quality_gates import main as quality_gates_main
+
+    argv = ["--compare-ref", args.compare_ref]
+    if args.coverage_xml is not None:
+        argv.extend(["--coverage-xml", str(args.coverage_xml)])
+    if args.skip_coverage:
+        argv.append("--skip-coverage")
+    if args.no_fail_fast:
+        argv.append("--no-fail-fast")
+    return quality_gates_main(argv)
+
+
+def cmd_coverage_gap_average(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine coverage-gap-average``."""
+    from doc_engine.ci.coverage_gap_average import main as gap_main
+
+    argv: list[str] = []
+    if args.coverage_xml is not None:
+        argv.extend(["--coverage-xml", str(args.coverage_xml)])
+    if args.floor is not None:
+        argv.extend(["--floor", str(args.floor)])
+    if args.worst is not None:
+        argv.extend(["--worst", str(args.worst)])
+    if args.markdown:
+        argv.append("--markdown")
+    if args.append_github_summary:
+        argv.append("--append-github-summary")
+    return gap_main(argv)
+
+
+def cmd_complexipy_ratchet(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine complexipy-ratchet``."""
+    from doc_engine.ci.complexipy_ratchet import main as ratchet_main
+
+    argv: list[str] = []
+    if args.baseline is not None:
+        argv.extend(["--baseline", str(args.baseline)])
+    if args.update:
+        argv.append("--update")
+    return ratchet_main(argv)
+
+
 def _without_argparse_separator(argv: list[str]) -> list[str]:
     """Drop a leading ``--`` left over from argparse ``REMAINDER``."""
     parts = iter(argv)
@@ -265,6 +309,54 @@ def main() -> int:
         help="kind and flags — see: python -m doc_engine.tools.query_artifacts -h",
     )
     query_ap.set_defaults(func=cmd_query)
+
+    qg_ap = sub.add_parser(
+        "quality-gates",
+        help=(
+            "Hard in-repo gates: new-code coverage, jscpd, complexipy <=5, tach "
+            "(same on Mac/Windows/Linux)"
+        ),
+    )
+    qg_ap.add_argument(
+        "--compare-ref",
+        required=True,
+        help="Git ref for new-code baseline (PR base SHA, origin/main, HEAD~1)",
+    )
+    qg_ap.add_argument(
+        "--coverage-xml",
+        default=None,
+        help="Cobertura XML from pytest-cov (default: ./coverage.xml)",
+    )
+    qg_ap.add_argument(
+        "--skip-coverage",
+        action="store_true",
+        help="Skip diff-cover (local debug only)",
+    )
+    qg_ap.add_argument(
+        "--no-fail-fast",
+        action="store_true",
+        help="Run every gate even after a failure",
+    )
+    qg_ap.set_defaults(func=cmd_quality_gates)
+
+    gap_ap = sub.add_parser(
+        "coverage-gap-average",
+        help="Report Cover% averaged only over files still below the floor",
+    )
+    gap_ap.add_argument("--coverage-xml", default=None)
+    gap_ap.add_argument("--floor", type=float, default=None)
+    gap_ap.add_argument("--worst", type=int, default=None)
+    gap_ap.add_argument("--markdown", action="store_true")
+    gap_ap.add_argument("--append-github-summary", action="store_true")
+    gap_ap.set_defaults(func=cmd_coverage_gap_average)
+
+    ratchet_ap = sub.add_parser(
+        "complexipy-ratchet",
+        help="Ratchet complexipy offender count vs scripts/ratchets baseline",
+    )
+    ratchet_ap.add_argument("--baseline", default=None)
+    ratchet_ap.add_argument("--update", action="store_true")
+    ratchet_ap.set_defaults(func=cmd_complexipy_ratchet)
 
     args = ap.parse_args()
     return args.func(args)

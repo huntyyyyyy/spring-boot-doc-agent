@@ -1,4 +1,4 @@
-"""Tests for scripts/ci/gate_tools.py — portable quality-gate CLI resolution."""
+"""Tests for doc_engine.ci.gate_tools — portable quality-gate CLI resolution."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-import gate_tools
+from doc_engine.ci import gate_tools
 
 
 class GateToolsTest(unittest.TestCase):
@@ -85,6 +85,28 @@ class GateToolsTest(unittest.TestCase):
         ):
             resolved = gate_tools.require_on_path("diff-cover")
         self.assertEqual(resolved, str(fake))
+
+    def test_checkout_root_falls_back_to_pyproject_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+            (root / "src" / "doc_engine").mkdir(parents=True)
+            nested = root / "subdir"
+            nested.mkdir()
+            with mock.patch.object(
+                gate_tools.subprocess,
+                "run",
+                return_value=mock.Mock(returncode=1, stdout=""),
+            ):
+                self.assertEqual(gate_tools.checkout_root(nested), root)
+
+    def test_validate_git_rev_rejects_option_like(self) -> None:
+        with self.assertRaises(SystemExit) as ctx:
+            gate_tools.validate_git_rev("--all")
+        self.assertEqual(ctx.exception.code, 2)
+
+    def test_validate_git_rev_accepts_origin_main(self) -> None:
+        self.assertEqual(gate_tools.validate_git_rev("origin/main"), "origin/main")
 
 
 if __name__ == "__main__":

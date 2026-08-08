@@ -1,4 +1,4 @@
-"""Tests for scripts/ci/run_quality_gates.py — portable hard-gate runner."""
+"""Tests for doc_engine.ci.quality_gates — portable hard-gate runner."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-import run_quality_gates as qg
+from doc_engine.ci import quality_gates as qg
 
 
 class RunQualityGatesTest(unittest.TestCase):
@@ -75,7 +75,7 @@ class RunQualityGatesTest(unittest.TestCase):
                 self.assertEqual(qg.gate_complexity_ratchet(), 0)
         run.assert_not_called()
 
-    def test_complexity_ratchet_runs_checker_when_baseline_positive(self) -> None:
+    def test_complexity_ratchet_runs_module_when_baseline_positive(self) -> None:
         captured: list[list[str]] = []
 
         def fake_run(command: list[str], *, label: str) -> int:
@@ -87,7 +87,10 @@ class RunQualityGatesTest(unittest.TestCase):
             mock.patch.object(qg, "_run", side_effect=fake_run),
         ):
             self.assertEqual(qg.gate_complexity_ratchet(), 0)
-        self.assertIn("check_complexipy_ratchet.py", captured[0][-1])
+        self.assertEqual(
+            captured[0][:3],
+            [sys.executable, "-m", "doc_engine.ci.complexipy_ratchet"],
+        )
 
     def test_baseline_offender_ceiling_reads_json(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -97,6 +100,11 @@ class RunQualityGatesTest(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assertEqual(qg.baseline_offender_ceiling(path), 0)
+
+    def test_resolve_compare_ref_validates(self) -> None:
+        with mock.patch.object(qg, "validate_git_rev", return_value="origin/main") as v:
+            self.assertEqual(qg.resolve_compare_ref("origin/main"), "origin/main")
+        v.assert_called_once_with("origin/main")
 
     def test_main_skip_coverage_omits_diff_cover(self) -> None:
         with (

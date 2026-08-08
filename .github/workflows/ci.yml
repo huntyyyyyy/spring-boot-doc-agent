@@ -258,7 +258,7 @@ jobs:
           print(f"xml line-rate={pct:.2f}%")
           PY
           # Climb inventory: average only files still below the floor (excludes green).
-          python3 scripts/ci/coverage_gap_average.py \
+          doc-engine coverage-gap-average \
             --coverage-xml coverage.xml \
             --floor "${COV_FAIL_UNDER}" \
             --worst 15 \
@@ -509,11 +509,11 @@ jobs:
           echo "ref=$REF" >> "$GITHUB_OUTPUT"
           echo "compare_ref=$REF"
 
-      - name: run_quality_gates.py (coverage / duplication / complexity / cycles)
+      - name: doc-engine quality-gates (coverage / duplication / complexity / cycles)
         env:
           COMPARE_REF: ${{ steps.compare.outputs.ref }}
         run: |
-          python3 scripts/ci/run_quality_gates.py \
+          doc-engine quality-gates \
             --compare-ref "$COMPARE_REF" \
             --coverage-xml coverage.xml
 

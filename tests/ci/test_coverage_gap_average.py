@@ -1,4 +1,4 @@
-"""Tests for scripts/ci/coverage_gap_average.py — below-floor climb inventory."""
+"""Tests for doc_engine.ci.coverage_gap_average — below-floor climb inventory."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-import coverage_gap_average as cga
+from doc_engine.ci import coverage_gap_average as cga
 
 
 SAMPLE_XML = """\
@@ -57,10 +57,8 @@ class CoverageGapAverageTest(unittest.TestCase):
         self.assertEqual(len(report.below_floor), 2)
         below_paths = {f.path for f in report.below_floor}
         self.assertEqual(below_paths, {"src/demo/mid.py", "src/demo/low.py"})
-        # Green file must not dilute: below_floor_cover uses only mid+low.
         self.assertLess(report.below_floor_cover_pct, report.whole_repo_cover_pct)
         self.assertLess(report.below_floor_cover_pct, 98.7)
-        # low.py is 0%; mid has some coverage — mean is between them.
         self.assertGreater(report.below_floor_mean_file_pct, 0.0)
         self.assertLess(report.below_floor_mean_file_pct, 98.7)
 
@@ -76,9 +74,9 @@ class CoverageGapAverageTest(unittest.TestCase):
 
     def test_worst_orders_lowest_cover_first(self) -> None:
         files = [
-            cga.FileCoverage("mid.py", 10, 2, 0, 0),  # 80%
-            cga.FileCoverage("low.py", 10, 8, 0, 0),  # 20%
-            cga.FileCoverage("ok.py", 10, 0, 0, 0),  # 100%
+            cga.FileCoverage("mid.py", 10, 2, 0, 0),
+            cga.FileCoverage("low.py", 10, 8, 0, 0),
+            cga.FileCoverage("ok.py", 10, 0, 0, 0),
         ]
         report = cga.build_report(files, floor=98.7)
         worst = report.worst(2)
