@@ -8,6 +8,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from doc_engine._compat import StrEnum
+from doc_engine.core.jsonio import load_json
+
+
+def _load_json(path: Path) -> Any:
+    """Load a UTF-8 JSON file (gap_probe callers import this name)."""
+    return load_json(path)
 
 
 class CoveringPreconditionError(RuntimeError):
