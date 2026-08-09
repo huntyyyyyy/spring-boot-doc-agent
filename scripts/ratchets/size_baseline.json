@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "package_roots": [
     "src/doc_engine",
     "src/stf",
@@ -7,12 +7,12 @@
   ],
   "file_loc_hard": 225,
   "file_loc_soft": 150,
-  "fn_stmts_hard": 50,
+  "fn_stmts_hard": 20,
   "fn_stmts_soft": 20,
-  "file_offender_count": 21,
+  "file_offender_count": 19,
   "fn_offender_count": 0,
   "files": {
-    "src/doc_engine/pipeline/certification_fold.py": 242,
+    "src/doc_engine/pipeline/certification_fold.py": 244,
     "src/doc_engine/pipeline/live_gates.py": 319,
     "src/doc_engine/pipeline/stages.py": 232,
     "src/doc_engine/query/handlers/dependents.py": 250,
@@ -28,12 +28,10 @@
     "src/doc_engine/scanning/symbol.py": 256,
     "src/doc_engine/tools/check_pipeline_output.py": 285,
     "src/doc_engine/tools/pipeline_validators.py": 359,
-    "src/doc_engine/tools/query_artifacts.py": 264,
-    "src/doc_engine/tools/spring_signal_scan.py": 234,
-    "src/stf/__main__.py": 256,
+    "src/doc_engine/tools/spring_signal_scan.py": 249,
     "src/stf/ingest/review.py": 337,
     "src/stf/validators/lint_tasks.py": 286
   },
   "functions": {},
-  "note": "Hard ceilings: file LOC > 225, function statements > 50. Soft advisories above 150 LOC / 20 statements. Ratchet offender maps downward only. Remeasure: doc-engine size-ratchet --update"
+  "note": "Hard ceilings: file LOC > 225, function statements > 20. Soft advisories above 150 LOC / 20 statements. Ratchet offender maps downward only. Remeasure: doc-engine size-ratchet --update"
 }

@@ -91,8 +91,13 @@ def run_pipeline_stages_real_suite(
         log("        PIPELINE_ARTIFACTS_DIR. With --docs-in-target-repo the docs are")
         log("        elsewhere, so its docs subtest will skip; summaries and gap")
         log("        questions are still validated.")
+    # Prefer façade REPO_ROOT so climb tests can monkeypatch full_finish.REPO_ROOT.
+    from doc_engine.pipeline.local_runner_phases import full_finish as _ff
+
     split_suite = sorted(
-        (Path(REPO_ROOT) / "tests" / "doc_engine").glob("test_pipeline_stages_*.py")
+        (Path(_ff.REPO_ROOT) / "tests" / "doc_engine").glob(
+            "test_pipeline_stages_*.py"
+        )
     )
     if not split_suite:
         raise RuntimeError(

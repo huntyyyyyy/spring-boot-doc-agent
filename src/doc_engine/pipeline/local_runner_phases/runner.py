@@ -6,8 +6,8 @@ import time
 
 from doc_engine.pipeline.local_runner_phases.runner_spawn import (
     echo_process_output,
+    handle_spawn_exception,
     record_step_outcome,
-    spawn_step_process,
 )
 from doc_engine.pipeline.local_runner_phases.stage_recording import (
     _RUNNER_FAIL_STATUSES,
@@ -71,6 +71,71 @@ class Runner:
         self.log(f"--- {label}")
         self.log(f"  $ {printable}")
 
+    def _handle_spawn_exception(
+        self,
+        label: str,
+        *,
+        started: float,
+        timeout: float,
+        exc: BaseException,
+        gate: bool,
+        gate_id: str | None,
+        critical: bool,
+    ) -> None:
+        """Climb-compatible wrapper around runner_spawn.handle_spawn_exception."""
+        handle_spawn_exception(
+            self,
+            label,
+            started,
+            timeout,
+            exc,
+            gate=gate,
+            gate_id=gate_id,
+            critical=critical,
+        )
+
+    def _spawn_step_process(
+        self,
+        label: str,
+        argv: list[str],
+        *,
+        cwd,
+        env,
+        started: float,
+        gate: bool,
+        gate_id: str | None,
+        critical: bool,
+    ):
+        """Spawn via support.subprocess so climb can monkeypatch the façade."""
+        from doc_engine.pipeline.local_runner_phases import support as phase_support
+
+        timeout = phase_support.tool_timeout_seconds()
+        try:
+            return phase_support.subprocess.run(
+                argv,
+                cwd=cwd,
+                env=env,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=timeout,
+            )
+        except (
+            FileNotFoundError,
+            phase_support.subprocess.TimeoutExpired,
+        ) as exc:
+            self._handle_spawn_exception(
+                label,
+                started=started,
+                timeout=timeout,
+                exc=exc,
+                gate=gate,
+                gate_id=gate_id,
+                critical=critical,
+            )
+            return None
+
     def run(
         self,
         label,
@@ -98,8 +163,7 @@ class Runner:
 
         self._log_step_header(label, argv, quiet=quiet)
         started = time.time()
-        proc = spawn_step_process(
-            self,
+        proc = self._spawn_step_process(
             label,
             argv,
             cwd=cwd,

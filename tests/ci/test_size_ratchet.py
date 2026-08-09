@@ -17,7 +17,7 @@ pytestmark = pytest.mark.domain_ci_meta
 class SizeRatchetCompareTest(unittest.TestCase):
     def test_unchanged_offenders_pass(self) -> None:
         baseline = {
-            "schema_version": 2,
+            "schema_version": 3,
             "files": {"src/doc_engine/big.py": 300},
             "functions": {"src/doc_engine/big.py::f": 60},
             "file_offender_count": 1,
@@ -32,7 +32,7 @@ class SizeRatchetCompareTest(unittest.TestCase):
 
     def test_new_file_over_hard_fails(self) -> None:
         baseline = {
-            "schema_version": 2,
+            "schema_version": 3,
             "files": {},
             "functions": {},
             "file_offender_count": 0,
@@ -47,7 +47,7 @@ class SizeRatchetCompareTest(unittest.TestCase):
 
     def test_growth_of_baselined_file_fails(self) -> None:
         baseline = {
-            "schema_version": 2,
+            "schema_version": 3,
             "files": {"src/doc_engine/big.py": 300},
             "functions": {},
             "file_offender_count": 1,
@@ -62,7 +62,7 @@ class SizeRatchetCompareTest(unittest.TestCase):
 
     def test_improvement_without_update_passes(self) -> None:
         baseline = {
-            "schema_version": 2,
+            "schema_version": 3,
             "files": {"src/doc_engine/big.py": 300},
             "functions": {"src/doc_engine/big.py::f": 60},
             "file_offender_count": 1,
@@ -75,19 +75,19 @@ class SizeRatchetCompareTest(unittest.TestCase):
         mid_loc = (sr.FILE_LOC_SOFT + sr.FILE_LOC_HARD) // 2
         notes = sr.soft_advisories(
             {"src/doc_engine/mid.py": mid_loc},
-            {"src/doc_engine/mid.py::f": 30},
+            {"src/doc_engine/mid.py::f": sr.FN_STMTS_HARD},
         )
         self.assertEqual(len(notes), 2)
         issues = sr.compare(
             {
-                "schema_version": 2,
+                "schema_version": 3,
                 "files": {},
                 "functions": {},
                 "file_offender_count": 0,
                 "fn_offender_count": 0,
             },
             {"src/doc_engine/mid.py": mid_loc},
-            {"src/doc_engine/mid.py::f": 30},
+            {"src/doc_engine/mid.py::f": sr.FN_STMTS_HARD},
         )
         self.assertEqual(issues, [])
 
@@ -118,7 +118,7 @@ class SizeRatchetMainTest(unittest.TestCase):
                 code = sr.main(["--baseline", str(path), "--update"])
             self.assertEqual(code, 0)
             data = json.loads(path.read_text(encoding="utf-8"))
-            self.assertEqual(data["schema_version"], 2)
+            self.assertEqual(data["schema_version"], 3)
             self.assertEqual(data["file_loc_hard"], 225)
             self.assertEqual(data["file_loc_soft"], 150)
             self.assertEqual(data["file_offender_count"], 0)

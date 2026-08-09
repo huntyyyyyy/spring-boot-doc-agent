@@ -29,8 +29,9 @@ def _test_absence_rate_block_and_measure_prelude():
     assert recall is not None
     assert recall['evidentiary'] == 1
     assert recall['structural'] == 1
+    return facts
 
-def _test_absence_rate_block_and_measure_core():
+def _test_absence_rate_block_and_measure_core(facts):
     planted = absence._planted_recall_failures(facts)
     assert any((r['stratum'] == 'untrusted_planted' for r in planted))
     assert absence._trusted_codeql_oracle_arm({'receipts': [{'scanner': 'codeql', 'status': 'complete', 'expected_subset_root': 'a', 'acked_subset_root': 'a'}]})
@@ -88,8 +89,8 @@ def test_spring_signal_scan_main_paths(tmp_path: Path, monkeypatch: pytest.Monke
     assert sss.main() == 1
 
 def test_absence_rate_block_and_measure() -> None:
-    _test_absence_rate_block_and_measure_prelude()
-    _test_absence_rate_block_and_measure_core()
+    facts = _test_absence_rate_block_and_measure_prelude()
+    _test_absence_rate_block_and_measure_core(facts)
 
 def test_receipt_complete_helpers() -> None:
     assert absence._receipt_complete_for_scanner('x', 'filesystem') is False

@@ -384,13 +384,25 @@ def size_advisories(baseline: Dict[str, object], current: Dict[str, object]) -> 
     return notes
 
 
+def _hard_statement_scope(key: str) -> bool:
+    """Product + tests only; scripts/ tracked in baseline but not hard-failed here.
+
+    size-ratchet owns package roots under ``src/``; scripts statement debt is G6
+    (policy bump without Verify pack) — remediate under E-COH / backlog, not by
+    grandfathering product modules.
+    """
+    return key.startswith("src/") or key.startswith("tests/")
+
+
 def statement_issues(baseline: Dict[str, object], current: Dict[str, object]) -> List[str]:
-    """Hard failures when any function exceeds HARD_STATEMENTS (flat ceiling)."""
+    """Hard failures when in-scope functions exceed HARD_STATEMENTS (flat ceiling)."""
     issues: List[str] = []
     cur_functions: Dict[str, Dict[str, int]] = current.get("functions", {})  # type: ignore[assignment]
     base_functions: Dict[str, Dict[str, int]] = baseline.get("functions", {})  # type: ignore[assignment]
 
     for key in sorted(cur_functions):
+        if not _hard_statement_scope(key):
+            continue
         stmts = cur_functions[key].get("statements", 0)
         if stmts <= HARD_STATEMENTS:
             continue

@@ -242,9 +242,20 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Approved** (2026-08-09) | research 19 `spec_gate: APPROVED E-STK0` |
-| P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | Deferred (ready; pick as Active) | context resets; claims green; LOC/complexipy |
+| P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | Deferred (ready; pick as Active) | context resets; claims green; LOC/complexipy; **first sensors G1–G6** (below) |
 
-Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md) §5.1. **Embody** sensors+ledger+react-doctor pattern; **Spike** headroom/loopx/gh-aw proposer; **Defer** claude-mem; **Refuse** agentmemory dep, context-mode (ELv2), alternate hosts. GH inventory still ≥1k★+14-day push for research SoR.
+**E-STK1 acceptance sensors** (from incident ledger [`findings/2026-08-09-statement-split-cascade.md`](findings/2026-08-09-statement-split-cascade.md); Spec delta only until Active):
+
+| ID | Kind | Detect |
+| --- | --- | --- |
+| G1 | `ratchet_schema_skew` | code `SCHEMA_VERSION` vs committed ratchet JSON |
+| G2 | `split_scope_break` | prelude/core siblings with unpassed Names |
+| G3 | `facade_api_regress` | consumers load `module._attr` missing from façade |
+| G4 | `collect_or_syntax` | touched-path compile + collect on 3.10 and 3.12 |
+| G5 | `process_parallel_tip` | backlog Active vs second tip writer |
+| G6 | `policy_verify_incomplete` | schema bump without baseline `--update` + ABI smoke |
+
+Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md) §5.1 / §8 addendum. **Embody** sensors+ledger+react-doctor pattern; **Spike** headroom/loopx/gh-aw proposer; **Defer** claude-mem; **Refuse** agentmemory dep, context-mode (ELv2), alternate hosts. GH inventory still ≥1k★+14-day push for research SoR.
 
 ---
 

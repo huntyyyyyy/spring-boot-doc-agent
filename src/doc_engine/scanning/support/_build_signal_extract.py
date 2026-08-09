@@ -11,7 +11,7 @@ coordinate.
 
 Concept modules: ``_build_signal_text``, ``_build_signal_gradle``,
 ``_build_signal_maven``, ``_build_signal_catalog``. This façade keeps the
-stable ``extract_build_signals`` import path.
+stable ``extract_build_signals`` import path (including climb-poked ``_`` aliases).
 
 Supported files:
   - build.gradle / settings.gradle / *.gradle (Groovy DSL)
@@ -28,6 +28,9 @@ from __future__ import annotations
 from typing import Dict, List
 
 from doc_engine.scanning.support._build_signal_catalog import (
+    catalog_library_row as _catalog_library_row,
+)
+from doc_engine.scanning.support._build_signal_catalog import (
     extract_version_catalog as _extract_version_catalog,
 )
 from doc_engine.scanning.support._build_signal_gradle import (
@@ -35,6 +38,15 @@ from doc_engine.scanning.support._build_signal_gradle import (
 )
 from doc_engine.scanning.support._build_signal_maven import (
     extract_maven as _extract_maven,
+)
+from doc_engine.scanning.support._build_signal_text import (
+    line_number as _line_number,
+)
+from doc_engine.scanning.support._build_signal_text import (
+    read_text_compat as _read_text_compat,
+)
+from doc_engine.scanning.support._build_signal_text import (
+    safe_match as _safe_match,
 )
 from doc_engine.scanning.support._build_signal_text import (
     strip_comments as _strip_comments,
@@ -61,3 +73,16 @@ def extract_build_signals(rel: str, text: str) -> List[Dict[str, object]]:
         comment_free = _strip_comments(text)
         return _extract_gradle(rel, text, comment_free)
     return []
+
+
+__all__ = [
+    "extract_build_signals",
+    "_catalog_library_row",
+    "_extract_gradle",
+    "_extract_maven",
+    "_extract_version_catalog",
+    "_line_number",
+    "_read_text_compat",
+    "_safe_match",
+    "_strip_comments",
+]

@@ -32,8 +32,9 @@ def _test_covering_build_receipt_extra_and_verify_edges_prelude():
     assert 'unknown covering receipt scope' in (cov._receipt_scope_root({'scope': 'weird'}, sigs)[1] or '')
     bad = dict(receipt)
     bad['expected_subset_root'] = 'wrong'
+    return bad, receipt, root, sigs
 
-def _test_covering_build_receipt_extra_and_verify_edges_core():
+def _test_covering_build_receipt_extra_and_verify_edges_core(bad, receipt, root, sigs):
     assert cov._receipt_root_mismatch(bad, recomputed=root)
     bad2 = dict(receipt)
     bad2['acked_subset_root'] = 'wrong'
@@ -43,8 +44,8 @@ def _test_covering_build_receipt_extra_and_verify_edges_core():
     assert cov.subset_root(sigs, ['missing.java', 'a.java']) != root
 
 def test_covering_build_receipt_extra_and_verify_edges() -> None:
-    _test_covering_build_receipt_extra_and_verify_edges_prelude()
-    _test_covering_build_receipt_extra_and_verify_edges_core()
+    bad, receipt, root, sigs = _test_covering_build_receipt_extra_and_verify_edges_prelude()
+    _test_covering_build_receipt_extra_and_verify_edges_core(bad, receipt, root, sigs)
 
 def test_covering_write_and_pop(tmp_path: Path) -> None:
     path = tmp_path / 'nested' / 'covering_proof.json'

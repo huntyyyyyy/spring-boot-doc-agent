@@ -30,8 +30,9 @@ def _test_build_docs_site_helpers_prelude(tmp_path: Path, monkeypatch: pytest.Mo
     assert (work / 'docs' / 'index.md').is_file()
     work2 = tmp_path / 'work2'
     work2.mkdir()
+    return work, work2
 
-def _test_build_docs_site_helpers_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+def _test_build_docs_site_helpers_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, work, work2):
     docs2 = tmp_path / 'docs2'
     docs2.mkdir()
     (docs2 / 'architecture.md').write_text('# A\n', encoding='utf-8')
@@ -82,8 +83,8 @@ def test_require_gap_probe_missing_report(tmp_path: Path) -> None:
         val_mod.require_gap_probe_artifact(tmp_path)
 
 def test_build_docs_site_helpers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _test_build_docs_site_helpers_prelude(tmp_path, monkeypatch)
-    _test_build_docs_site_helpers_core(tmp_path, monkeypatch)
+    work, work2 = _test_build_docs_site_helpers_prelude(tmp_path, monkeypatch)
+    _test_build_docs_site_helpers_core(tmp_path, monkeypatch, work, work2)
 
 def test_build_docs_site_main_missing_docs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
     monkeypatch.setattr('sys.argv', ['build_docs_site', '--docs-dir', str(tmp_path / 'missing'), '--out-dir', str(tmp_path / 'out')])

@@ -1,7 +1,7 @@
 {
-  "schema_version": 5,
-  "production_functions": 1882,
-  "production_functions_annotated": 1613,
+  "schema_version": 6,
+  "production_functions": 1938,
+  "production_functions_annotated": 1664,
   "limits_for_new_functions": {
     "statements": 82,
     "complexity": 42,
@@ -9,13 +9,12 @@
   },
   "unparseable": [],
   "docstring_violations": {
-    "scripts/ci/check_code_quality.py": "scripts/ci/check_code_quality.py: 'how to run it' is at docstring line 34; the contract is within 20. Move the Usage block above the rationale.",
+    "scripts/ci/check_code_quality.py": "scripts/ci/check_code_quality.py: 'how to run it' is at docstring line 31; the contract is within 20. Move the Usage block above the rationale.",
     "scripts/ci/check_llms_coverage.py": "scripts/ci/check_llms_coverage.py: 'how to run it' is at docstring line 36; the contract is within 20. Move the Usage block above the rationale.",
     "src/doc_engine/cli.py": "src/doc_engine/cli.py: runnable module, but its 1-line docstring never says how to run it",
     "src/doc_engine/pipeline/live_gates.py": "src/doc_engine/pipeline/live_gates.py: runnable module, but its 12-line docstring never says how to run it",
     "src/doc_engine/pipeline/local_runner.py": "src/doc_engine/pipeline/local_runner.py: 'how to run it' is at docstring line 52; the contract is within 20. Move the Usage block above the rationale.",
     "src/doc_engine/scanning/support/_codeql_runner.py": "src/doc_engine/scanning/support/_codeql_runner.py: runnable module, but its 12-line docstring never says how to run it",
-    "src/doc_engine/tools/semantic_eval_helpers.py": "src/doc_engine/tools/semantic_eval_helpers.py: 'how to run it' is at docstring line 44; the contract is within 20. Move the Usage block above the rationale.",
     "src/stf/__main__.py": "src/stf/__main__.py: runnable module, but its 1-line docstring never says how to run it",
     "tests/adapters/test_adapter_layout.py": "tests/adapters/test_adapter_layout.py: runnable module, but its 6-line docstring never says how to run it",
     "tests/ci/test_check_workflow_yaml.py": "tests/ci/test_check_workflow_yaml.py: runnable module, but its 1-line docstring never says how to run it",
@@ -44,6 +43,11 @@
       "statements": 14,
       "complexity": 2,
       "depth": 1
+    },
+    "scripts/ci/check_code_quality.py::_hard_statement_scope": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
     },
     "scripts/ci/check_code_quality.py::_is_production_module": {
       "statements": 5,
@@ -136,9 +140,9 @@
       "depth": 2
     },
     "scripts/ci/check_code_quality.py::statement_issues": {
-      "statements": 15,
+      "statements": 13,
       "complexity": 5,
-      "depth": 3
+      "depth": 2
     },
     "scripts/ci/check_code_quality.py::write_baseline": {
       "statements": 3,
@@ -382,6 +386,11 @@
     },
     "scripts/ci/check_repo_claims.py::_test_suite_paths": {
       "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "scripts/ci/check_repo_claims.py::_write_mirror_payload": {
+      "statements": 2,
       "complexity": 1,
       "depth": 0
     },
@@ -1595,6 +1604,16 @@
       "complexity": 2,
       "depth": 1
     },
+    "src/doc_engine/ci/complexipy_ratchet.py::_parse_args": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/ci/complexipy_ratchet.py::_run_ratchet_check": {
+      "statements": 12,
+      "complexity": 4,
+      "depth": 1
+    },
     "src/doc_engine/ci/complexipy_ratchet.py::count_offenders": {
       "statements": 8,
       "complexity": 6,
@@ -1606,8 +1625,8 @@
       "depth": 1
     },
     "src/doc_engine/ci/complexipy_ratchet.py::main": {
-      "statements": 21,
-      "complexity": 5,
+      "statements": 7,
+      "complexity": 2,
       "depth": 1
     },
     "src/doc_engine/ci/complexipy_ratchet.py::write_baseline": {
@@ -2310,6 +2329,11 @@
       "complexity": 3,
       "depth": 1
     },
+    "src/doc_engine/ci/size_ratchet.py::_parse_args": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
     "src/doc_engine/ci/size_ratchet.py::_print_issues": {
       "statements": 3,
       "complexity": 2,
@@ -2318,6 +2342,11 @@
     "src/doc_engine/ci/size_ratchet.py::_print_soft_advisories": {
       "statements": 7,
       "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/ci/size_ratchet.py::_run_ratchet_check": {
+      "statements": 13,
+      "complexity": 5,
       "depth": 1
     },
     "src/doc_engine/ci/size_ratchet.py::build_baseline_payload": {
@@ -2351,8 +2380,8 @@
       "depth": 1
     },
     "src/doc_engine/ci/size_ratchet.py::main": {
-      "statements": 25,
-      "complexity": 6,
+      "statements": 9,
+      "complexity": 2,
       "depth": 1
     },
     "src/doc_engine/ci/size_ratchet.py::soft_advisories": {
@@ -2930,13 +2959,28 @@
       "complexity": 1,
       "depth": 0
     },
+    "src/doc_engine/cli_gate_parsers.py::_add_gap_average_parser": {
+      "statements": 7,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/cli_gate_parsers.py::_add_quality_gates_parser": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/cli_gate_parsers.py::_add_ratchet_parsers": {
+      "statements": 8,
+      "complexity": 1,
+      "depth": 0
+    },
     "src/doc_engine/cli_gate_parsers.py::_configure_coverage_measure_parser": {
       "statements": 8,
       "complexity": 1,
       "depth": 0
     },
     "src/doc_engine/cli_gate_parsers.py::add_quality_gate_parsers": {
-      "statements": 23,
+      "statements": 5,
       "complexity": 1,
       "depth": 0
     },
@@ -3370,97 +3414,97 @@
       "complexity": 4,
       "depth": 1
     },
-    "src/doc_engine/pipeline/compliance.py::_generative_stage_executor": {
-      "statements": 3,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::_normalize_kept_prior_stage": {
-      "statements": 7,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/pipeline/compliance.py::_scan_only_specs": {
-      "statements": 2,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/compliance.py::_should_drop_prior_stage": {
-      "statements": 7,
-      "complexity": 6,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::_skipped_stage_executor": {
-      "statements": 3,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::_specs_for_profile": {
-      "statements": 5,
-      "complexity": 5,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::_stage_executor_from_runner": {
-      "statements": 7,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::_stage_status_from_runner": {
+    "src/doc_engine/pipeline/compliance_models.py::gates_required_for_profile": {
       "statements": 5,
       "complexity": 3,
       "depth": 1
     },
-    "src/doc_engine/pipeline/compliance.py::_truncate_until_stage": {
-      "statements": 6,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::citations_are_strict": {
+    "src/doc_engine/pipeline/compliance_profile.py::citations_are_strict": {
       "statements": 1,
       "complexity": 2,
       "depth": 0
     },
-    "src/doc_engine/pipeline/compliance.py::deterministic_stage_names": {
+    "src/doc_engine/pipeline/compliance_profile.py::deterministic_stage_names": {
       "statements": 2,
       "complexity": 3,
       "depth": 0
     },
-    "src/doc_engine/pipeline/compliance.py::gates_required_for_profile": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/compliance.py::generative_stage_names": {
+    "src/doc_engine/pipeline/compliance_profile.py::generative_stage_names": {
       "statements": 2,
       "complexity": 3,
       "depth": 0
     },
-    "src/doc_engine/pipeline/compliance.py::required_stage_names_for_profile": {
+    "src/doc_engine/pipeline/compliance_profile.py::required_stage_names_for_profile": {
       "statements": 2,
       "complexity": 2,
       "depth": 0
     },
-    "src/doc_engine/pipeline/compliance.py::resolve_compliance_profile": {
+    "src/doc_engine/pipeline/compliance_profile.py::resolve_compliance_profile": {
       "statements": 11,
       "complexity": 5,
       "depth": 2
     },
-    "src/doc_engine/pipeline/compliance.py::stage_records_from_runner_results": {
-      "statements": 7,
+    "src/doc_engine/pipeline/compliance_profile.py::scan_only_specs": {
+      "statements": 2,
       "complexity": 3,
-      "depth": 2
+      "depth": 0
     },
-    "src/doc_engine/pipeline/compliance.py::stages_for_live_certification": {
-      "statements": 11,
-      "complexity": 4,
-      "depth": 2
+    "src/doc_engine/pipeline/compliance_profile.py::specs_for_profile": {
+      "statements": 5,
+      "complexity": 5,
+      "depth": 1
     },
-    "src/doc_engine/pipeline/compliance.py::stages_for_profile": {
+    "src/doc_engine/pipeline/compliance_profile.py::stages_for_profile": {
       "statements": 6,
       "complexity": 5,
       "depth": 1
     },
-    "src/doc_engine/pipeline/compliance.py::write_certification_json": {
+    "src/doc_engine/pipeline/compliance_profile.py::truncate_until_stage": {
+      "statements": 6,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::generative_stage_executor": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::normalize_kept_prior_stage": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::should_drop_prior_stage": {
+      "statements": 7,
+      "complexity": 6,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::skipped_stage_executor": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::stage_executor_from_runner": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::stage_records_from_runner_results": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::stage_status_from_runner": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::stages_for_live_certification": {
+      "statements": 11,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/pipeline/compliance_stages.py::write_certification_json": {
       "statements": 3,
       "complexity": 1,
       "depth": 0
@@ -3610,6 +3654,46 @@
       "complexity": 4,
       "depth": 2
     },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::build_and_write_certification": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::certification_failure_summary": {
+      "statements": 8,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::close_certification_log": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::emit_certification_outcome": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::emit_log_lines": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::failed_required_gate_ids": {
+      "statements": 1,
+      "complexity": 4,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::failed_stage_names": {
+      "statements": 1,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/certification_finish.py::write_certification_and_finish": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 1
+    },
     "src/doc_engine/pipeline/local_runner_phases/context.py::_build_mock_executor": {
       "statements": 1,
       "complexity": 1,
@@ -3671,9 +3755,34 @@
       "depth": 1
     },
     "src/doc_engine/pipeline/local_runner_phases/full_finish.py::phase_full_finish": {
-      "statements": 46,
-      "complexity": 7,
+      "statements": 15,
+      "complexity": 2,
       "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/full_finish_gates.py::run_check_pipeline_output_gate": {
+      "statements": 8,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/full_finish_gates.py::run_citation_and_secrets_gates": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/full_finish_gates.py::run_finalize_manifest": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/full_finish_gates.py::run_pipeline_stages_real_suite": {
+      "statements": 14,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/full_finish_gates.py::run_validate_artifact_gates": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/pipeline/local_runner_phases/generative.py::_note_existing_readme": {
       "statements": 5,
@@ -3682,6 +3791,21 @@
     },
     "src/doc_engine/pipeline/local_runner_phases/generative.py::phase_generative": {
       "statements": 11,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/inventory_drift.py::artifact_inventory": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/pipeline/local_runner_phases/inventory_drift.py::py_mod": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/inventory_drift.py::run_drift_check": {
+      "statements": 9,
       "complexity": 4,
       "depth": 1
     },
@@ -3703,6 +3827,121 @@
     "src/doc_engine/pipeline/local_runner_phases/post_stage0.py::phase_post_stage0": {
       "statements": 6,
       "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner.__init__": {
+      "statements": 5,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._abort_on_critical_spawn_failure": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._handle_spawn_exception": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._log_step_header": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._mark_critical_abort": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._maybe_record_gate": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._record_gate": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner._spawn_step_process": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner.gates_failed": {
+      "statements": 1,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner.mock": {
+      "statements": 20,
+      "complexity": 5,
+      "depth": 2
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner.record": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner.run": {
+      "statements": 15,
+      "complexity": 5,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner.py::Runner.table": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_log.py::Log.__call__": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_log.py::Log.__init__": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_log.py::Log.close": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_log.py::Log.rule": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_log.py::reconfigure_stdio_utf8": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_spawn.py::echo_process_output": {
+      "statements": 3,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_spawn.py::handle_spawn_exception": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_spawn.py::record_spawn_error": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_spawn.py::record_step_outcome": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/pipeline/local_runner_phases/runner_spawn.py::spawn_step_process": {
+      "statements": 6,
+      "complexity": 2,
       "depth": 1
     },
     "src/doc_engine/pipeline/local_runner_phases/setup.py::_log_run_banner": {
@@ -3740,195 +3979,35 @@
       "complexity": 3,
       "depth": 1
     },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Log.__call__": {
-      "statements": 4,
-      "complexity": 1,
-      "depth": 0
+    "src/doc_engine/pipeline/local_runner_phases/stage_recording.py::classify_subprocess_status": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
     },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Log.__init__": {
-      "statements": 3,
-      "complexity": 1,
-      "depth": 0
+    "src/doc_engine/pipeline/local_runner_phases/stage_recording.py::gate_status_from_runner_status": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
     },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Log.close": {
+    "src/doc_engine/pipeline/local_runner_phases/stage_recording.py::quote": {
       "statements": 1,
-      "complexity": 1,
+      "complexity": 2,
       "depth": 0
     },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Log.rule": {
+    "src/doc_engine/pipeline/local_runner_phases/stage_recording.py::record_one_pipeline_stage": {
       "statements": 4,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner.__init__": {
-      "statements": 5,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._abort_on_critical_spawn_failure": {
-      "statements": 2,
       "complexity": 3,
       "depth": 1
     },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._echo_process_output": {
-      "statements": 3,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._handle_spawn_exception": {
-      "statements": 7,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._log_step_header": {
-      "statements": 7,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._mark_critical_abort": {
-      "statements": 5,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._maybe_record_gate": {
+    "src/doc_engine/pipeline/local_runner_phases/stage_recording.py::record_pipeline_stage_results": {
       "statements": 2,
       "complexity": 2,
       "depth": 1
     },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._record_gate": {
-      "statements": 2,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._record_spawn_error": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._record_step_outcome": {
-      "statements": 5,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner._spawn_step_process": {
-      "statements": 6,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner.gates_failed": {
+    "src/doc_engine/pipeline/local_runner_phases/stage_recording.py::stage_result_detail": {
       "statements": 1,
       "complexity": 3,
       "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner.mock": {
-      "statements": 20,
-      "complexity": 5,
-      "depth": 2
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner.record": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner.run": {
-      "statements": 15,
-      "complexity": 5,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::Runner.table": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_artifact_inventory": {
-      "statements": 7,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_build_and_write_certification": {
-      "statements": 3,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_certification_failure_summary": {
-      "statements": 8,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_classify_subprocess_status": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_close_certification_log": {
-      "statements": 3,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_emit_certification_outcome": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_emit_log_lines": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_failed_required_gate_ids": {
-      "statements": 1,
-      "complexity": 4,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_failed_stage_names": {
-      "statements": 1,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_gate_status_from_runner_status": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_py_mod": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_quote": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_reconfigure_stdio_utf8": {
-      "statements": 7,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_record_one_pipeline_stage": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_record_pipeline_stage_results": {
-      "statements": 2,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_run_drift_check": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_stage_result_detail": {
-      "statements": 1,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/pipeline/local_runner_phases/support.py::_write_certification_and_finish": {
-      "statements": 7,
-      "complexity": 3,
-      "depth": 1
     },
     "src/doc_engine/pipeline/mock_architecture_stage.py::_append_cross_group_links": {
       "statements": 4,
@@ -5485,19 +5564,24 @@
       "complexity": 5,
       "depth": 1
     },
-    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._bisect_oversized_chunk": {
-      "statements": 8,
+    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend.__init__": {
+      "statements": 1,
       "complexity": 2,
-      "depth": 1
+      "depth": 0
+    },
+    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._chunk_java_inventory": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._covering_receipt": {
-      "statements": 8,
-      "complexity": 7,
-      "depth": 1
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._empty_java_inventory_result": {
-      "statements": 4,
-      "complexity": 3,
+      "statements": 1,
+      "complexity": 1,
       "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._find_ast_grep": {
@@ -5506,34 +5590,34 @@
       "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._ingest_ast_grep_match": {
-      "statements": 16,
-      "complexity": 5,
-      "depth": 1
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._invoke_ast_grep": {
-      "statements": 10,
-      "complexity": 5,
-      "depth": 2
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._invoke_ast_grep_chunked": {
-      "statements": 11,
-      "complexity": 4,
-      "depth": 1
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._record_bucket_match": {
-      "statements": 10,
-      "complexity": 4,
-      "depth": 2
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._record_entity_match": {
-      "statements": 10,
-      "complexity": 3,
-      "depth": 1
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._require_ast_grep_ready": {
-      "statements": 7,
-      "complexity": 3,
-      "depth": 1
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._run_ast_grep": {
       "statements": 10,
@@ -5545,15 +5629,15 @@
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._scan_java_inventory": {
-      "statements": 6,
-      "complexity": 4,
+    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._scan_one_chunk": {
+      "statements": 1,
+      "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._scan_one_chunk": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 2
+    "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend._version_hash_paths": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend.name": {
       "statements": 1,
@@ -5566,52 +5650,12 @@
       "depth": 1
     },
     "src/doc_engine/scanning/_scanner_astgrep.py::AstGrepBackend.version_hash": {
-      "statements": 10,
+      "statements": 9,
       "complexity": 5,
       "depth": 4
     },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_append_path_within_budget": {
-      "statements": 10,
-      "complexity": 5,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_argv_char_len": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_astgrep_errors": {
-      "statements": 2,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_enrich_query_entry": {
+    "src/doc_engine/scanning/_scanner_astgrep.py::_version_hash_paths": {
       "statements": 5,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_flush_path_chunk": {
-      "statements": 2,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_is_windows_cmdline_too_long": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::_parse_ast_grep_stdout": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::chunk_paths_for_argv": {
-      "statements": 11,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/_scanner_astgrep.py::inventory_root_empty": {
-      "statements": 2,
       "complexity": 1,
       "depth": 0
     },
@@ -5815,6 +5859,111 @@
       "complexity": 3,
       "depth": 2
     },
+    "src/doc_engine/scanning/astgrep/argv.py::_append_path_within_budget": {
+      "statements": 10,
+      "complexity": 5,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/argv.py::_argv_char_len": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/argv.py::_flush_path_chunk": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/argv.py::chunk_paths_for_argv": {
+      "statements": 11,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/argv.py::is_windows_cmdline_too_long": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/covering_scan.py::covering_receipt": {
+      "statements": 7,
+      "complexity": 7,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/covering_scan.py::empty_java_inventory_result": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/covering_scan.py::inventory_root_empty": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/ingest.py::enrich_query_entry": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/ingest.py::ingest_ast_grep_match": {
+      "statements": 17,
+      "complexity": 5,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/ingest.py::record_bucket_match": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/astgrep/ingest.py::record_entity_match": {
+      "statements": 10,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::bisect_oversized_chunk": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::invoke_ast_grep": {
+      "statements": 10,
+      "complexity": 6,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::invoke_ast_grep_chunked": {
+      "statements": 12,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::parse_ast_grep_stdout": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::require_ast_grep_ready": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::scan_base_argv": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/invoke.py::scan_one_chunk": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/astgrep/ports.py::AstGrepRunner.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/astgrep/ports.py::SubprocessAstGrepRunner.run": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
     "src/doc_engine/scanning/build_command.py::_accept_direct_tool": {
       "statements": 4,
       "complexity": 2,
@@ -5955,140 +6104,140 @@
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/facts.py::_append_evidence_hit": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_astgrep_receipt_complete": {
-      "statements": 4,
-      "complexity": 6,
-      "depth": 2
-    },
-    "src/doc_engine/scanning/facts.py::_bump_emit_count": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_bump_maps_to_count": {
-      "statements": 4,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_contested_table_name_source": {
-      "statements": 3,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_covering_state": {
-      "statements": 11,
-      "complexity": 6,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_default_scanner": {
-      "statements": 4,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_evidence_hit_fact": {
-      "statements": 6,
-      "complexity": 8,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_fact": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/facts.py::_facts_from_bucket": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_facts_from_evidence": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_first_oracle_arm": {
-      "statements": 5,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/scanning/facts.py::_is_contested_entry": {
-      "statements": 2,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/facts.py::_maps_to_fact_from_source": {
-      "statements": 2,
-      "complexity": 6,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/facts.py::_maps_to_from_contested_entry": {
-      "statements": 10,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/scanning/facts.py::_maps_to_from_entity_table_map": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_maps_to_from_one_entry": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_maps_to_from_settled_entry": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_recall_facts_from_meta": {
-      "statements": 9,
-      "complexity": 5,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_require_maps_to_type_symbol": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::_sort_key": {
-      "statements": 2,
-      "complexity": 6,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/facts.py::_type_symbol_quals": {
-      "statements": 12,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::covering_writer_facts": {
-      "statements": 8,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/facts.py::fact_emit_counts": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
     "src/doc_engine/scanning/facts.py::facts_from_signals": {
       "statements": 11,
       "complexity": 5,
       "depth": 1
     },
-    "src/doc_engine/scanning/facts.py::facts_path_for_signals_out": {
+    "src/doc_engine/scanning/facts_core.py::default_scanner": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_core.py::fact": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/facts_core.py::facts_path_for_signals_out": {
       "statements": 1,
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/facts.py::write_facts_jsonl": {
+    "src/doc_engine/scanning/facts_core.py::sort_key": {
+      "statements": 2,
+      "complexity": 6,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/facts_core.py::type_symbol_quals": {
+      "statements": 12,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_covering.py::astgrep_receipt_complete": {
+      "statements": 4,
+      "complexity": 6,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/facts_covering.py::covering_state": {
+      "statements": 11,
+      "complexity": 6,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_covering.py::covering_writer_facts": {
+      "statements": 8,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_covering.py::first_oracle_arm": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/facts_covering.py::recall_facts_from_meta": {
+      "statements": 9,
+      "complexity": 5,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_emit.py::bump_emit_count": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_emit.py::bump_maps_to_count": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_emit.py::fact_emit_counts": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_emit.py::require_maps_to_type_symbol": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_emit.py::write_facts_jsonl": {
       "statements": 9,
       "complexity": 3,
       "depth": 2
+    },
+    "src/doc_engine/scanning/facts_evidence.py::append_evidence_hit": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_evidence.py::evidence_hit_fact": {
+      "statements": 6,
+      "complexity": 8,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_evidence.py::facts_from_bucket": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_evidence.py::facts_from_evidence": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::contested_table_name_source": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::is_contested_entry": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::maps_to_fact_from_source": {
+      "statements": 2,
+      "complexity": 6,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::maps_to_from_contested_entry": {
+      "statements": 10,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::maps_to_from_entity_table_map": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::maps_to_from_one_entry": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/facts_maps_to.py::maps_to_from_settled_entry": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
     },
     "src/doc_engine/scanning/gap_probe/absence_recall.py::_absence_rate_block": {
       "statements": 8,
@@ -6445,175 +6594,175 @@
       "complexity": 4,
       "depth": 1
     },
-    "src/doc_engine/scanning/gap_probe/registry.py::_default_harvest": {
-      "statements": 3,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_extra_recall": {
-      "statements": 3,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_fold_uncertainty": {
+    "src/doc_engine/scanning/gap_probe/registry_assembly.py::_fold_uncertainty": {
       "statements": 4,
       "complexity": 2,
       "depth": 1
     },
-    "src/doc_engine/scanning/gap_probe/registry.py::_harvest_lin": {
-      "statements": 1,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_harvest_measure_failures": {
+    "src/doc_engine/scanning/gap_probe/registry_assembly.py::_harvest_measure_failures": {
       "statements": 7,
       "complexity": 5,
       "depth": 1
     },
-    "src/doc_engine/scanning/gap_probe/registry.py::_lineage_core_fields": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_measured_recall_projection": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_omitted_recall_projection": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_project_absence": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_project_code_dep": {
-      "statements": 3,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_project_lin": {
-      "statements": 3,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_project_rate_block": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_project_recall": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_reopen_absence": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_reopen_coll": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_reopen_join": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_reopen_lin": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_reopen_recall": {
-      "statements": 1,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_absence": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_code_dep": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_coll": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_join": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_lin": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_one_measure": {
+    "src/doc_engine/scanning/gap_probe/registry_assembly.py::_run_one_measure": {
       "statements": 4,
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_recall": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_run_sym": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_uncertainty_absence": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_uncertainty_code_dep": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_uncertainty_coll": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_uncertainty_join": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::_uncertainty_lin": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/gap_probe/registry.py::assemble_gap_views": {
+    "src/doc_engine/scanning/gap_probe/registry_assembly.py::assemble_gap_views": {
       "statements": 12,
       "complexity": 4,
       "depth": 2
     },
-    "src/doc_engine/scanning/gap_probe/registry.py::prepare_measure_context": {
+    "src/doc_engine/scanning/gap_probe/registry_assembly.py::prepare_measure_context": {
       "statements": 2,
       "complexity": 3,
       "depth": 0
     },
-    "src/doc_engine/scanning/gap_probe/registry.py::run_rate_registry": {
+    "src/doc_engine/scanning/gap_probe/registry_assembly.py::run_rate_registry": {
       "statements": 4,
       "complexity": 2,
       "depth": 1
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::extra_recall": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::measured_recall_projection": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::omitted_recall_projection": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::project_absence": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::project_recall": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::reopen_absence": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::reopen_recall": {
+      "statements": 1,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::run_absence": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::run_recall": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_absence_recall.py::uncertainty_absence": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::_lineage_core_fields": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::harvest_lin": {
+      "statements": 1,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::project_code_dep": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::project_lin": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::reopen_coll": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::reopen_join": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::reopen_lin": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::run_code_dep": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::run_coll": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::run_join": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::run_lin": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::run_sym": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::uncertainty_code_dep": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::uncertainty_coll": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::uncertainty_join": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_hooks_basic.py::uncertainty_lin": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/gap_probe/registry_types.py::default_harvest": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/gap_probe/registry_types.py::project_rate_block": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/scanning/gap_probe/report.py::_assemble_report_document": {
       "statements": 2,
@@ -6890,105 +7039,105 @@
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_append_bare_gradle_plugins": {
-      "statements": 4,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_append_gradle_apply_plugins": {
-      "statements": 2,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_append_gradle_dependencies": {
-      "statements": 2,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_append_gradle_modules_and_toolchains": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_capture_line": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_catalog_library_row": {
+    "src/doc_engine/scanning/support/_build_signal_catalog.py::catalog_library_row": {
       "statements": 6,
       "complexity": 5,
       "depth": 1
     },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_catalog_version_row": {
+    "src/doc_engine/scanning/support/_build_signal_catalog.py::catalog_version_row": {
       "statements": 2,
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_extract_gradle": {
-      "statements": 8,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_extract_maven": {
-      "statements": 3,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_extract_version_catalog": {
+    "src/doc_engine/scanning/support/_build_signal_catalog.py::extract_version_catalog": {
       "statements": 6,
       "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_gradle_dependency_coordinate": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_gradle_row": {
-      "statements": 4,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_gradle_versioned_plugins": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_line_number": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_maven_dependency_row": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_maven_plugin_row": {
-      "statements": 3,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_read_text_compat": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_safe_match": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/scanning/support/_build_signal_extract.py::_strip_comments": {
-      "statements": 9,
-      "complexity": 5,
       "depth": 2
     },
     "src/doc_engine/scanning/support/_build_signal_extract.py::extract_build_signals": {
       "statements": 11,
       "complexity": 5,
       "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::append_bare_gradle_plugins": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::append_gradle_apply_plugins": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::append_gradle_dependencies": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::append_gradle_modules_and_toolchains": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::extract_gradle": {
+      "statements": 8,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::gradle_dependency_coordinate": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::gradle_row": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_gradle.py::gradle_versioned_plugins": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_maven.py::extract_maven": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_maven.py::maven_dependency_row": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_maven.py::maven_plugin_row": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_text.py::capture_line": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_text.py::line_number": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_text.py::read_text_compat": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_build_signal_text.py::safe_match": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_build_signal_text.py::strip_comments": {
+      "statements": 9,
+      "complexity": 5,
+      "depth": 2
     },
     "src/doc_engine/scanning/support/_codeql_cache.py::_cache_base_dir": {
       "statements": 7,
@@ -7453,106 +7602,6 @@
     "src/doc_engine/scanning/symbol.py::parse": {
       "statements": 12,
       "complexity": 5,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_adjacency_outside_group": {
-      "statements": 3,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_append_cut_edge": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_emit_targets_for_import": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_empty_per_group_buckets": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_index_package_declaration": {
-      "statements": 2,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_ingest_reference_row": {
-      "statements": 11,
-      "complexity": 5,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_maybe_emit_cut_arc": {
-      "statements": 10,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_record_package_group_adjacency": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_record_resolved_import_arcs": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_record_same_package_adjacency": {
-      "statements": 5,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_resolve_type_import": {
-      "statements": 10,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_resolve_wildcard_import": {
-      "statements": 3,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_shipping_stats": {
-      "statements": 4,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::_type_stem_from_path": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::build_membership": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::build_report": {
-      "statements": 11,
-      "complexity": 4,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::is_cut": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::main": {
-      "statements": 17,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::parse_references": {
-      "statements": 6,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/tools/build_cross_group_edges.py::resolve_targets": {
-      "statements": 3,
-      "complexity": 2,
       "depth": 1
     },
     "src/doc_engine/tools/build_docs_site.py::_build_nav": {
@@ -8055,6 +8104,106 @@
       "complexity": 2,
       "depth": 0
     },
+    "src/doc_engine/tools/cross_group_cli.py::main": {
+      "statements": 17,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_emit.py::adjacency_outside_group": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_emit.py::append_cut_edge": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_emit.py::build_report": {
+      "statements": 12,
+      "complexity": 4,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_emit.py::emit_targets_for_import": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_emit.py::empty_per_group_buckets": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_emit.py::maybe_emit_cut_arc": {
+      "statements": 10,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_emit.py::record_package_group_adjacency": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_emit.py::record_resolved_import_arcs": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/tools/cross_group_emit.py::record_same_package_adjacency": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/tools/cross_group_emit.py::shipping_stats": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::build_membership": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::index_package_declaration": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::ingest_reference_row": {
+      "statements": 11,
+      "complexity": 5,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::is_cut": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::parse_references": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::resolve_targets": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::resolve_type_import": {
+      "statements": 10,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::resolve_wildcard_import": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/tools/cross_group_resolve.py::type_stem_from_path": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
     "src/doc_engine/tools/doc_tag_utils.py::_citation_failure": {
       "statements": 10,
       "complexity": 4,
@@ -8105,6 +8254,11 @@
       "complexity": 4,
       "depth": 1
     },
+    "src/doc_engine/tools/partition_repo_cli.py::_build_parser": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
     "src/doc_engine/tools/partition_repo_cli.py::_collect_file_tokens": {
       "statements": 10,
       "complexity": 3,
@@ -8115,10 +8269,20 @@
       "complexity": 4,
       "depth": 0
     },
-    "src/doc_engine/tools/partition_repo_cli.py::main": {
-      "statements": 24,
-      "complexity": 4,
+    "src/doc_engine/tools/partition_repo_cli.py::_partition_and_write": {
+      "statements": 9,
+      "complexity": 3,
       "depth": 1
+    },
+    "src/doc_engine/tools/partition_repo_cli.py::_resolve_paths": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/tools/partition_repo_cli.py::main": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/tools/partition_repo_groups.py::_carry_forward_overlap": {
       "statements": 12,
@@ -8356,7 +8520,7 @@
       "depth": 1
     },
     "src/doc_engine/tools/query_artifacts.py::_build_parser": {
-      "statements": 45,
+      "statements": 1,
       "complexity": 1,
       "depth": 0
     },
@@ -8410,8 +8574,53 @@
       "complexity": 3,
       "depth": 1
     },
+    "src/doc_engine/tools/query_artifacts_parsers.py::add_context_packet": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/query_artifacts_parsers.py::add_dependents_and_route_trace": {
+      "statements": 10,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/query_artifacts_parsers.py::add_evidence_and_routes": {
+      "statements": 11,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/query_artifacts_parsers.py::add_facts_and_entity": {
+      "statements": 11,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/query_artifacts_parsers.py::build_common_parent": {
+      "statements": 5,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/query_artifacts_parsers.py::build_query_artifacts_parser": {
+      "statements": 8,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/run_manifest_cli.py::_add_end_stage": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/run_manifest_cli.py::_add_finalize_and_summary": {
+      "statements": 10,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/run_manifest_cli.py::_add_init_and_start": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
     "src/doc_engine/tools/run_manifest_cli.py::_build_arg_parser": {
-      "statements": 29,
+      "statements": 7,
       "complexity": 1,
       "depth": 0
     },
@@ -8635,115 +8844,135 @@
       "complexity": 2,
       "depth": 0
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_answered_entry_tokens": {
+    "src/doc_engine/tools/semantic_eval_confirmed.py::answered_entry_tokens": {
       "statements": 2,
       "complexity": 5,
       "depth": 0
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_best_overlap": {
+    "src/doc_engine/tools/semantic_eval_confirmed.py::best_overlap": {
       "statements": 8,
       "complexity": 4,
       "depth": 2
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_bracket_balance_findings": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_claim_clause": {
+    "src/doc_engine/tools/semantic_eval_confirmed.py::claim_clause": {
       "statements": 3,
       "complexity": 2,
       "depth": 0
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_confirmed_findings_for_doc": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_empty_clause_finding": {
+    "src/doc_engine/tools/semantic_eval_confirmed.py::empty_clause_finding": {
       "statements": 1,
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_extract_mermaid_block": {
+    "src/doc_engine/tools/semantic_eval_confirmed.py::find_unmatched_confirmed_tags": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/tools/semantic_eval_confirmed.py::finding_for_confirmed_tag": {
+      "statements": 8,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/tools/semantic_eval_confirmed.py::low_overlap_finding": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/tools/semantic_eval_confirmed.py::tokenize": {
+      "statements": 1,
+      "complexity": 4,
+      "depth": 0
+    },
+    "src/doc_engine/tools/semantic_eval_mermaid.py::bracket_balance_findings": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/tools/semantic_eval_mermaid.py::check_mermaid_syntax": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/tools/semantic_eval_mermaid.py::extract_mermaid_block": {
       "statements": 2,
       "complexity": 2,
       "depth": 0
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_finding_for_confirmed_tag": {
-      "statements": 8,
+    "src/doc_engine/tools/semantic_eval_mermaid.py::find_undefined_node_refs": {
+      "statements": 6,
       "complexity": 3,
       "depth": 1
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_is_safe_markdown_basename": {
+    "src/doc_engine/tools/semantic_eval_mermaid.py::subgraph_quote_findings": {
+      "statements": 9,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/tools/semantic_eval_scan.py::_facade": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/semantic_eval_scan.py::_print_summary": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/tools/semantic_eval_scan.py::confirmed_findings_for_doc": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/tools/semantic_eval_scan.py::is_safe_markdown_basename": {
       "statements": 7,
       "complexity": 4,
       "depth": 1
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_load_interview_answers": {
+    "src/doc_engine/tools/semantic_eval_scan.py::load_interview_answers": {
       "statements": 5,
       "complexity": 3,
       "depth": 1
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_low_overlap_finding": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
+    "src/doc_engine/tools/semantic_eval_scan.py::main": {
+      "statements": 20,
+      "complexity": 5,
+      "depth": 2
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_markdown_names": {
+    "src/doc_engine/tools/semantic_eval_scan.py::markdown_names": {
       "statements": 1,
       "complexity": 3,
       "depth": 0
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_resolve_architecture_path": {
+    "src/doc_engine/tools/semantic_eval_scan.py::resolve_architecture_path": {
       "statements": 8,
       "complexity": 4,
       "depth": 2
     },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_scan_confirmed_docs": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_scan_mermaid": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_subgraph_quote_findings": {
-      "statements": 9,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::_tokenize": {
-      "statements": 1,
-      "complexity": 4,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::check_mermaid_syntax": {
-      "statements": 6,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::find_undefined_node_refs": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::find_unmatched_confirmed_tags": {
-      "statements": 7,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::main": {
-      "statements": 21,
-      "complexity": 6,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_helpers.py::run": {
+    "src/doc_engine/tools/semantic_eval_scan.py::run": {
       "statements": 3,
       "complexity": 1,
       "depth": 0
+    },
+    "src/doc_engine/tools/semantic_eval_scan.py::scan_confirmed_docs": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/tools/semantic_eval_scan.py::scan_mermaid": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/tools/spring_drift_cli.py::_build_parser": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/spring_drift_cli.py::_compute_drift_report": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 1
     },
     "src/doc_engine/tools/spring_drift_cli.py::_print_drift_summary": {
       "statements": 2,
@@ -8760,10 +8989,15 @@
       "complexity": 2,
       "depth": 1
     },
-    "src/doc_engine/tools/spring_drift_cli.py::main": {
-      "statements": 23,
-      "complexity": 5,
+    "src/doc_engine/tools/spring_drift_cli.py::_write_drift_report": {
+      "statements": 8,
+      "complexity": 3,
       "depth": 1
+    },
+    "src/doc_engine/tools/spring_drift_cli.py::main": {
+      "statements": 5,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/tools/spring_drift_common.py::drift_result": {
       "statements": 4,
@@ -9055,14 +9289,29 @@
       "complexity": 3,
       "depth": 0
     },
+    "src/doc_engine/tools/spring_signal_scan.py::_run_scan": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 1
+    },
     "src/doc_engine/tools/spring_signal_scan.py::_strip_internal_keys": {
       "statements": 4,
       "complexity": 1,
       "depth": 0
     },
+    "src/doc_engine/tools/spring_signal_scan.py::_validate_repo_path": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/tools/spring_signal_scan.py::_write_scan_outputs": {
+      "statements": 12,
+      "complexity": 3,
+      "depth": 1
+    },
     "src/doc_engine/tools/spring_signal_scan.py::main": {
-      "statements": 24,
-      "complexity": 6,
+      "statements": 8,
+      "complexity": 3,
       "depth": 1
     },
     "src/doc_engine/tools/spring_signal_scan.py::run_ast_grep": {
@@ -9186,7 +9435,7 @@
       "depth": 1
     },
     "src/stf/__main__.py::build_parser": {
-      "statements": 48,
+      "statements": 1,
       "complexity": 1,
       "depth": 0
     },
@@ -9219,6 +9468,36 @@
       "statements": 6,
       "complexity": 2,
       "depth": 1
+    },
+    "src/stf/cli_parser.py::_add_handoff_and_constitution": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/stf/cli_parser.py::_add_implement_and_tokens": {
+      "statements": 12,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/stf/cli_parser.py::_add_ingest_and_validate": {
+      "statements": 10,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/stf/cli_parser.py::_add_mutate_and_verify": {
+      "statements": 8,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/stf/cli_parser.py::_add_plan_and_seed": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/stf/cli_parser.py::build_parser": {
+      "statements": 8,
+      "complexity": 1,
+      "depth": 0
     },
     "src/stf/eval/scoring.py::_c1_score": {
       "statements": 5,
@@ -11065,6 +11344,16 @@
       "complexity": 3,
       "depth": 1
     },
+    "tests/ci/test_code_quality_ratchet.py::RatchetTest.test_existing_oversized_function_fails_without_grandfather": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/ci/test_code_quality_ratchet.py::RatchetTest.test_statement_growth_within_ceiling_passes": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
     "tests/ci/test_code_quality_ratchet.py::RatchetTest.test_unchanged_tree_passes": {
       "statements": 5,
       "complexity": 2,
@@ -11155,6 +11444,16 @@
       "complexity": 1,
       "depth": 0
     },
+    "tests/ci/test_coverage_climb_b3_domains.py::_test_markers_check_unknown_floor_truncation_main_core": {
+      "statements": 6,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b3_domains.py::_test_markers_check_unknown_floor_truncation_main_prelude": {
+      "statements": 17,
+      "complexity": 9,
+      "depth": 1
+    },
     "tests/ci/test_coverage_climb_b3_domains.py::test_catalog_require_and_marker_lines": {
       "statements": 5,
       "complexity": 5,
@@ -11171,14 +11470,34 @@
       "depth": 1
     },
     "tests/ci/test_coverage_climb_b3_domains.py::test_markers_check_unknown_floor_truncation_main": {
-      "statements": 22,
-      "complexity": 14,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/ci/test_coverage_climb_b3_domains.py::test_path_shards_pycache_empty_tests_and_orphan": {
       "statements": 11,
       "complexity": 6,
       "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b3_timing_workflow.py::_test_timing_summary_cascade_and_append_newline_core": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b3_timing_workflow.py::_test_timing_summary_cascade_and_append_newline_prelude": {
+      "statements": 16,
+      "complexity": 9,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b3_timing_workflow.py::_test_workflow_size_yaml_absent_and_job_shapes_core": {
+      "statements": 10,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b3_timing_workflow.py::_test_workflow_size_yaml_absent_and_job_shapes_prelude": {
+      "statements": 16,
+      "complexity": 11,
+      "depth": 1
     },
     "tests/ci/test_coverage_climb_b3_timing_workflow.py::test_duration_slowest_zero_and_junit_edges": {
       "statements": 12,
@@ -11186,14 +11505,24 @@
       "depth": 0
     },
     "tests/ci/test_coverage_climb_b3_timing_workflow.py::test_timing_summary_cascade_and_append_newline": {
-      "statements": 25,
-      "complexity": 12,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/ci/test_coverage_climb_b3_timing_workflow.py::test_workflow_size_yaml_absent_and_job_shapes": {
-      "statements": 26,
-      "complexity": 16,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::_test_github_adequacy_report_and_append_core": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::_test_github_adequacy_report_and_append_prelude": {
+      "statements": 17,
+      "complexity": 4,
+      "depth": 0
     },
     "tests/ci/test_coverage_climb_b6_adequacy.py::test_default_fixtures_dir_none_and_root": {
       "statements": 4,
@@ -11201,8 +11530,8 @@
       "depth": 0
     },
     "tests/ci/test_coverage_climb_b6_adequacy.py::test_github_adequacy_report_and_append": {
-      "statements": 23,
-      "complexity": 7,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/ci/test_coverage_climb_b6_adequacy.py::test_mutator_enforce_and_survivors_errors": {
@@ -12618,6 +12947,31 @@
     "tests/ci/test_repo_claims_references.py::TestVerifyPredicates.test_unknown_predicate_fails_rather_than_passing_silently": {
       "statements": 2,
       "complexity": 1,
+      "depth": 0
+    },
+    "tests/ci/test_research_map_look_first.py::ResearchDomainLayoutTest.test_domain_map_and_folders_exist": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/ci/test_research_map_look_first.py::ResearchMapHooksTest.test_inject_research_map_mentions_readme": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 2
+    },
+    "tests/ci/test_research_map_look_first.py::ResearchMapHooksTest.test_record_then_allow": {
+      "statements": 17,
+      "complexity": 6,
+      "depth": 2
+    },
+    "tests/ci/test_research_map_look_first.py::ResearchMapHooksTest.test_require_denies_without_receipt": {
+      "statements": 12,
+      "complexity": 4,
+      "depth": 2
+    },
+    "tests/ci/test_research_map_look_first.py::_load": {
+      "statements": 7,
+      "complexity": 3,
       "depth": 0
     },
     "tests/ci/test_run_manifest_lifecycle.py::AtomicWriteTest.test_interrupted_write_leaves_prior_file_intact": {
@@ -14985,14 +15339,24 @@
       "complexity": 4,
       "depth": 1
     },
+    "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::_test_join_identity_and_unmatched_edges_core": {
+      "statements": 7,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::_test_join_identity_and_unmatched_edges_prelude": {
+      "statements": 16,
+      "complexity": 12,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_collect_arm_entity_keys_branches": {
       "statements": 4,
       "complexity": 4,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_join_identity_and_unmatched_edges": {
-      "statements": 23,
-      "complexity": 16,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_recall_delta_entity_keys_and_verdicts": {
@@ -16280,10 +16644,30 @@
       "complexity": 2,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::test_cache_metadata_and_results_roundtrip": {
-      "statements": 21,
-      "complexity": 7,
+    "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::_test_cache_metadata_and_results_roundtrip_core": {
+      "statements": 5,
+      "complexity": 4,
       "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::_test_cache_metadata_and_results_roundtrip_prelude": {
+      "statements": 17,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::_test_prepare_scan_and_cleanup_core": {
+      "statements": 10,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::_test_prepare_scan_and_cleanup_prelude": {
+      "statements": 17,
+      "complexity": 6,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::test_cache_metadata_and_results_roundtrip": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::test_ensure_regular_file_and_codeql_version": {
       "statements": 11,
@@ -16306,9 +16690,9 @@
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::test_prepare_scan_and_cleanup": {
-      "statements": 26,
-      "complexity": 12,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_codeql_invoke_cache.py::test_reject_unsafe_and_resolve_exe": {
       "statements": 10,
@@ -16320,12 +16704,17 @@
       "complexity": 2,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_codeql_prepare_scan.py::test_prepare_scan_targets_and_reuse": {
-      "statements": 22,
-      "complexity": 8,
+    "tests/doc_engine/test_coverage_climb_codeql_prepare_scan.py::test_prepare_scan_targets_only": {
+      "statements": 14,
+      "complexity": 6,
       "depth": 1
     },
-    "tests/doc_engine/test_coverage_climb_codeql_prepare_scan.py::test_prepare_scan_targets_and_reuse._create": {
+    "tests/doc_engine/test_coverage_climb_codeql_prepare_scan.py::test_reuse_or_rebuild_cached_db": {
+      "statements": 15,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_codeql_prepare_scan.py::test_reuse_or_rebuild_cached_db._create": {
       "statements": 2,
       "complexity": 1,
       "depth": 0
@@ -16340,6 +16729,21 @@
       "complexity": 2,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_context_code_dep.py::_handler_ctx": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_context_code_dep.py::_patch_mock_handlers": {
+      "statements": 5,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_context_code_dep.py::_patch_mock_handlers.fake_resolve": {
+      "statements": 2,
+      "complexity": 5,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_code_dep_family_coverage_and_measure": {
       "statements": 11,
       "complexity": 10,
@@ -16350,19 +16754,19 @@
       "complexity": 5,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_handlers_and_partition": {
-      "statements": 21,
-      "complexity": 13,
+    "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_handlers_invoke_mock_stages": {
+      "statements": 8,
+      "complexity": 6,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_handlers_and_partition.fake_resolve": {
-      "statements": 2,
-      "complexity": 5,
-      "depth": 0
-    },
-    "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_handlers_and_partition.log": {
+    "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_handlers_invoke_mock_stages.log": {
       "statements": 1,
       "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_partition_and_record_reused_scan": {
+      "statements": 10,
+      "complexity": 4,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_context_code_dep.py::test_phase_build_context_wires_state": {
@@ -16375,9 +16779,19 @@
       "complexity": 4,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_covering_proof.py::_test_covering_build_receipt_extra_and_verify_edges_core": {
+      "statements": 7,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_covering_proof.py::_test_covering_build_receipt_extra_and_verify_edges_prelude": {
+      "statements": 17,
+      "complexity": 17,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_covering_proof.py::test_covering_build_receipt_extra_and_verify_edges": {
-      "statements": 23,
-      "complexity": 23,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_covering_proof.py::test_covering_write_and_pop": {
@@ -16385,9 +16799,29 @@
       "complexity": 5,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::_test_classify_and_citations_helpers_core": {
+      "statements": 10,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::_test_classify_and_citations_helpers_prelude": {
+      "statements": 17,
+      "complexity": 13,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::_test_stage4_pool_helpers_and_compare_core": {
+      "statements": 13,
+      "complexity": 9,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::_test_stage4_pool_helpers_and_compare_prelude": {
+      "statements": 17,
+      "complexity": 12,
+      "depth": 1
+    },
     "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::test_classify_and_citations_helpers": {
-      "statements": 26,
-      "complexity": 18,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::test_empty_signatures_and_manifest_validate": {
@@ -16401,14 +16835,24 @@
       "depth": 1
     },
     "tests/doc_engine/test_coverage_climb_drift_capacity_pools.py::test_stage4_pool_helpers_and_compare": {
-      "statements": 29,
-      "complexity": 20,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_drift_check_load.py::_signals_with_cite": {
       "statements": 1,
       "complexity": 1,
       "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_drift_check_load.py::_test_cli_validate_and_main_errors_core": {
+      "statements": 6,
+      "complexity": 5,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_drift_check_load.py::_test_cli_validate_and_main_errors_prelude": {
+      "statements": 17,
+      "complexity": 4,
+      "depth": 1
     },
     "tests/doc_engine/test_coverage_climb_drift_check_load.py::test_check_drift_fast_path_and_full": {
       "statements": 13,
@@ -16416,9 +16860,9 @@
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_drift_check_load.py::test_cli_validate_and_main_errors": {
-      "statements": 22,
-      "complexity": 8,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_drift_check_load.py::test_load_signals_and_manifest_ok": {
       "statements": 8,
@@ -16580,29 +17024,24 @@
       "complexity": 1,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::_test_reuse_signals_sibling_error_and_deterministic_banner_core": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::_test_reuse_signals_sibling_error_and_deterministic_banner_prelude": {
+      "statements": 17,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_phase_deterministic_only_early_exit": {
+      "statements": 8,
+      "complexity": 2,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_phase_deterministic_only_runs_and_until_note": {
-      "statements": 24,
-      "complexity": 14,
-      "depth": 0
-    },
-    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_phase_deterministic_only_runs_and_until_note.FakeLog.__call__": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_phase_deterministic_only_runs_and_until_note.FakeLog.rule": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_phase_deterministic_only_runs_and_until_note.FakeRunner.run": {
-      "statements": 2,
-      "complexity": 1,
-      "depth": 0
-    },
-    "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_phase_deterministic_only_runs_and_until_note.fake_finish": {
-      "statements": 3,
-      "complexity": 1,
+      "statements": 17,
+      "complexity": 8,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_require_repo_dir_and_phase_setup_errors": {
@@ -16611,8 +17050,8 @@
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_reuse_signals_sibling_error_and_deterministic_banner": {
-      "statements": 22,
-      "complexity": 9,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_local_runner_setup_det.py::test_reuse_signals_success_copies_and_logs": {
@@ -16685,6 +17124,11 @@
       "complexity": 6,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::_ctrl_pool": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_architecture_link_and_arc_helpers": {
       "statements": 12,
       "complexity": 15,
@@ -16710,9 +17154,29 @@
       "complexity": 11,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_load_citations_pick_and_mock_docs": {
-      "statements": 43,
-      "complexity": 22,
+    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_load_citations_and_pick": {
+      "statements": 4,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_mock_docs_todo_and_empty": {
+      "statements": 16,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_mock_file_summaries_and_architecture": {
+      "statements": 10,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_mock_gap_and_interview_writes": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_node_id_and_group_architecture_fallback": {
+      "statements": 9,
+      "complexity": 5,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_mock_stages_edges.py::test_todo_scan_cap_and_oserror": {
@@ -16820,6 +17284,16 @@
       "complexity": 6,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_query_cli_facades.py::_test_query_artifacts_root_and_dispatch_core": {
+      "statements": 9,
+      "complexity": 8,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_query_cli_facades.py::_test_query_artifacts_root_and_dispatch_prelude": {
+      "statements": 16,
+      "complexity": 10,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_query_cli_facades.py::test_cli_facade_cmds": {
       "statements": 12,
       "complexity": 10,
@@ -16831,9 +17305,9 @@
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_query_cli_facades.py::test_query_artifacts_root_and_dispatch": {
-      "statements": 24,
-      "complexity": 17,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_query_freshness_handlers.py::test_build_freshness_policy_assume_and_drift": {
       "statements": 18,
@@ -16920,29 +17394,54 @@
       "complexity": 3,
       "depth": 1
     },
-    "tests/doc_engine/test_coverage_climb_run_manifest_cli.py::test_cmd_end_finalize_summary": {
-      "statements": 25,
-      "complexity": 9,
+    "tests/doc_engine/test_coverage_climb_run_manifest_cli.py::_test_cmd_end_finalize_summary_core": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_run_manifest_cli.py::_test_cmd_end_finalize_summary_prelude": {
+      "statements": 16,
+      "complexity": 6,
       "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_run_manifest_cli.py::test_cmd_end_finalize_summary": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_run_manifest_cli.py::test_format_summary_and_finalize_roundtrip": {
       "statements": 15,
       "complexity": 11,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_interview_preflight_signatures_and_tags": {
-      "statements": 35,
-      "complexity": 18,
+    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_capacity_preflight_tie_in": {
+      "statements": 7,
+      "complexity": 5,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_interview_preflight_signatures_and_tags.fake_sig": {
+    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_compute_evidence_tag_counts": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_load_file_signatures_sources": {
+      "statements": 10,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_load_file_signatures_sources.fake_sig": {
       "statements": 3,
       "complexity": 2,
       "depth": 1
     },
-    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_interview_preflight_signatures_and_tags.fake_walk": {
+    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_load_file_signatures_sources.fake_walk": {
       "statements": 2,
       "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_parse_interview_file_statuses": {
+      "statements": 12,
+      "complexity": 7,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_run_manifest_core.py::test_stage_end_finalize_infer_and_cancel": {
@@ -17050,9 +17549,19 @@
       "complexity": 5,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_signal_scan_absence.py::_test_absence_rate_block_and_measure_core": {
+      "statements": 5,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_signal_scan_absence.py::_test_absence_rate_block_and_measure_prelude": {
+      "statements": 17,
+      "complexity": 13,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_signal_scan_absence.py::test_absence_rate_block_and_measure": {
-      "statements": 21,
-      "complexity": 18,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_signal_scan_absence.py::test_receipt_complete_helpers": {
@@ -17265,10 +17774,30 @@
       "complexity": 2,
       "depth": 0
     },
-    "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::test_covering_and_recall_and_maps_to_guard": {
-      "statements": 22,
-      "complexity": 16,
+    "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::_test_covering_and_recall_and_maps_to_guard_core": {
+      "statements": 7,
+      "complexity": 3,
       "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::_test_covering_and_recall_and_maps_to_guard_prelude": {
+      "statements": 16,
+      "complexity": 14,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::_test_symbol_parse_member_error_paths_core": {
+      "statements": 13,
+      "complexity": 8,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::_test_symbol_parse_member_error_paths_prelude": {
+      "statements": 17,
+      "complexity": 12,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::test_covering_and_recall_and_maps_to_guard": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::test_facts_maps_to_and_evidence_skips": {
       "statements": 12,
@@ -17276,19 +17805,29 @@
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::test_symbol_parse_member_error_paths": {
-      "statements": 29,
-      "complexity": 19,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_symbol_facts_edges.py::test_symbol_validation_and_package_edges": {
       "statements": 15,
       "complexity": 11,
       "depth": 1
     },
-    "tests/doc_engine/test_coverage_climb_tier3.py::test_build_docs_site_helpers": {
-      "statements": 24,
-      "complexity": 8,
+    "tests/doc_engine/test_coverage_climb_tier3.py::_test_build_docs_site_helpers_core": {
+      "statements": 8,
+      "complexity": 3,
       "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_tier3.py::_test_build_docs_site_helpers_prelude": {
+      "statements": 17,
+      "complexity": 6,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_tier3.py::test_build_docs_site_helpers": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_tier3.py::test_build_docs_site_main_missing_docs": {
       "statements": 3,
@@ -17340,14 +17879,24 @@
       "complexity": 3,
       "depth": 1
     },
+    "tests/doc_engine/test_coverage_climb_tool_validators.py::_test_pipeline_validators_gap_review_and_main_core": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_tool_validators.py::_test_pipeline_validators_gap_review_and_main_prelude": {
+      "statements": 16,
+      "complexity": 13,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_tool_validators.py::test_check_pipeline_output_main_and_ignored": {
       "statements": 17,
       "complexity": 12,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_tool_validators.py::test_pipeline_validators_gap_review_and_main": {
-      "statements": 21,
-      "complexity": 16,
+      "statements": 2,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_tool_validators.py::test_secrets_main_and_skip_paths": {
@@ -17420,26 +17969,6 @@
       "complexity": 4,
       "depth": 0
     },
-    "tests/doc_engine/test_covering_hard_stops_destructive.py::DestructiveFailClosedTest.test_empty_java_list_with_java_signatures_fails": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 2
-    },
-    "tests/doc_engine/test_covering_hard_stops_destructive.py::DestructiveFailClosedTest.test_load_and_verify_covering_rejects_scanner_version_drift": {
-      "statements": 10,
-      "complexity": 2,
-      "depth": 1
-    },
-    "tests/doc_engine/test_covering_hard_stops_destructive.py::DestructiveFailClosedTest.test_mid_batch_fail_propagates_through_scan": {
-      "statements": 6,
-      "complexity": 4,
-      "depth": 2
-    },
-    "tests/doc_engine/test_covering_hard_stops_destructive.py::DestructiveFailClosedTest.test_winerror_206_solo_path_raises": {
-      "statements": 10,
-      "complexity": 4,
-      "depth": 3
-    },
     "tests/doc_engine/test_covering_hard_stops_destructive.py::FixtureCliCoveringSmokeTest.setUpClass": {
       "statements": 2,
       "complexity": 2,
@@ -17454,6 +17983,26 @@
       "statements": 7,
       "complexity": 1,
       "depth": 0
+    },
+    "tests/doc_engine/test_covering_hard_stops_destructive.py::TestDestructiveFailClosed.test_empty_java_list_with_java_signatures_fails": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_covering_hard_stops_destructive.py::TestDestructiveFailClosed.test_load_and_verify_covering_rejects_scanner_version_drift": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_covering_hard_stops_destructive.py::TestDestructiveFailClosed.test_mid_batch_fail_propagates_through_scan": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_covering_hard_stops_destructive.py::TestDestructiveFailClosed.test_winerror_206_solo_path_raises": {
+      "statements": 10,
+      "complexity": 3,
+      "depth": 1
     },
     "tests/doc_engine/test_covering_hard_stops_gap_cli.py::GapProbeS1S3CliTest.test_gap_probe_cli_exit_3_on_missing_covering": {
       "statements": 10,
@@ -18001,14 +18550,24 @@
       "depth": 1
     },
     "tests/doc_engine/test_gap_probe_ocs_real_world.py::TestOcsLiveScanAet.test_live_scan_then_gap_probe": {
-      "statements": 21,
-      "complexity": 11,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_gap_probe_ocs_real_world.py::_resolve_artifacts_dir": {
       "statements": 1,
       "complexity": 1,
       "depth": 0
+    },
+    "tests/doc_engine/test_gap_probe_ocs_real_world.py::_test_live_scan_then_gap_probe_core": {
+      "statements": 5,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_gap_probe_ocs_real_world.py::_test_live_scan_then_gap_probe_prelude": {
+      "statements": 16,
+      "complexity": 6,
+      "depth": 1
     },
     "tests/doc_engine/test_gap_probe_ocs_real_world.py::ocs_artifacts": {
       "statements": 15,
@@ -18446,9 +19005,9 @@
       "depth": 0
     },
     "tests/doc_engine/test_kitchen_sink_ch10_chain.py::Ch10CommandChainTest.test_run_pipeline_local_driver_runs_end_to_end": {
-      "statements": 21,
-      "complexity": 5,
-      "depth": 2
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
     },
     "tests/doc_engine/test_kitchen_sink_ch10_chain.py::Ch10CommandChainTest.test_signal_scan_stderr_emits_covering_event": {
       "statements": 4,
@@ -18661,8 +19220,8 @@
       "depth": 1
     },
     "tests/doc_engine/test_live_gates_rewrite_cert.py::test_live_gates_passing_writes_live_certified": {
-      "statements": 22,
-      "complexity": 12,
+      "statements": 6,
+      "complexity": 3,
       "depth": 1
     },
     "tests/doc_engine/test_live_gates_rewrite_cert.py::test_live_gates_rewrites_cert_with_executor_live": {
@@ -18686,8 +19245,8 @@
       "depth": 0
     },
     "tests/doc_engine/test_live_gates_rewrite_cert.py::test_live_gates_strips_mock_generative_and_survives_skipped_poison": {
-      "statements": 21,
-      "complexity": 12,
+      "statements": 6,
+      "complexity": 3,
       "depth": 1
     },
     "tests/doc_engine/test_live_gates_verify_executor.py::test_verify_accepts_live_certified": {
@@ -19035,6 +19594,16 @@
       "complexity": 1,
       "depth": 0
     },
+    "tests/doc_engine/test_pipeline_runner_stages.py::_test_pipeline_runner_with_fixture_signals_and_mock_generative_core": {
+      "statements": 8,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_pipeline_runner_stages.py::_test_pipeline_runner_with_fixture_signals_and_mock_generative_prelude": {
+      "statements": 16,
+      "complexity": 14,
+      "depth": 1
+    },
     "tests/doc_engine/test_pipeline_runner_stages.py::pipeline_context": {
       "statements": 6,
       "complexity": 1,
@@ -19061,9 +19630,9 @@
       "depth": 0
     },
     "tests/doc_engine/test_pipeline_runner_stages.py::test_pipeline_runner_with_fixture_signals_and_mock_generative": {
-      "statements": 24,
-      "complexity": 20,
-      "depth": 1
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_pipeline_runner_stages.py::test_subprocess_stage_runner_records_failure": {
       "statements": 3,
@@ -19750,55 +20319,75 @@
       "complexity": 2,
       "depth": 0
     },
-    "tests/doc_engine/test_scan_context_astgrep_basic.py::AstGrepScanContextBasicTest.test_chunking_warns_and_never_mentions_repo_root_fallback": {
+    "tests/doc_engine/test_scan_context_astgrep_basic.py::TestAstGrepScanContextBasic.test_chunking_warns_and_never_mentions_repo_root_fallback": {
       "statements": 14,
-      "complexity": 6,
-      "depth": 4
+      "complexity": 5,
+      "depth": 1
     },
-    "tests/doc_engine/test_scan_context_astgrep_basic.py::AstGrepScanContextBasicTest.test_run_ast_grep_chunks_paths_instead_of_repo_root_fallback": {
+    "tests/doc_engine/test_scan_context_astgrep_basic.py::TestAstGrepScanContextBasic.test_run_ast_grep_chunks_paths_instead_of_repo_root_fallback": {
       "statements": 18,
       "complexity": 9,
       "depth": 3
     },
-    "tests/doc_engine/test_scan_context_astgrep_basic.py::AstGrepScanContextBasicTest.test_run_ast_grep_empty_java_files_skips_subprocess": {
-      "statements": 7,
+    "tests/doc_engine/test_scan_context_astgrep_basic.py::TestAstGrepScanContextBasic.test_run_ast_grep_empty_java_files_skips_subprocess": {
+      "statements": 8,
       "complexity": 3,
-      "depth": 2
+      "depth": 0
     },
-    "tests/doc_engine/test_scan_context_astgrep_basic.py::AstGrepScanContextBasicTest.test_run_ast_grep_uses_java_files_from_context": {
+    "tests/doc_engine/test_scan_context_astgrep_basic.py::TestAstGrepScanContextBasic.test_run_ast_grep_uses_java_files_from_context": {
       "statements": 13,
-      "complexity": 5,
-      "depth": 2
+      "complexity": 7,
+      "depth": 1
     },
-    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::AstGrepScanContextChunkEquivTest.test_chunked_matches_equivalent_to_single_invocation": {
-      "statements": 14,
-      "complexity": 13,
-      "depth": 3
+    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::TestAstGrepScanContextChunkEquiv.test_chunked_matches_equivalent_to_single_invocation": {
+      "statements": 16,
+      "complexity": 12,
+      "depth": 0
     },
-    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::AstGrepScanContextChunkEquivTest.test_chunked_matches_equivalent_to_single_invocation._stdout_for_cmd": {
+    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::TestAstGrepScanContextChunkEquiv.test_chunked_matches_equivalent_to_single_invocation._stdout_for_cmd": {
       "statements": 3,
       "complexity": 4,
       "depth": 0
     },
-    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::AstGrepScanContextChunkEquivTest.test_mid_batch_nonzero_exit_fails_closed": {
-      "statements": 11,
-      "complexity": 7,
-      "depth": 4
+    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::TestAstGrepScanContextChunkEquiv.test_mid_batch_nonzero_exit_fails_closed": {
+      "statements": 10,
+      "complexity": 5,
+      "depth": 1
     },
-    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::AstGrepScanContextChunkEquivTest.test_run_ast_grep_bisects_on_winerror_206": {
-      "statements": 17,
-      "complexity": 8,
-      "depth": 2
+    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::TestAstGrepScanContextChunkEquiv.test_run_ast_grep_bisects_on_winerror_206": {
+      "statements": 18,
+      "complexity": 12,
+      "depth": 1
     },
-    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::AstGrepScanContextChunkEquivTest.test_run_ast_grep_bisects_on_winerror_206._run": {
+    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::TestAstGrepScanContextChunkEquiv.test_run_ast_grep_bisects_on_winerror_206._run": {
       "statements": 4,
       "complexity": 2,
       "depth": 1
     },
-    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::AstGrepScanContextChunkEquivTest.test_run_ast_grep_none_inventory_fails_closed": {
-      "statements": 8,
+    "tests/doc_engine/test_scan_context_astgrep_chunk_equiv.py::TestAstGrepScanContextChunkEquiv.test_run_ast_grep_none_inventory_fails_closed": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_scan_context_astgrep_structure.py::AstGrepStructureTest.test_facade_exports_backend_and_chunk_helper": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_scan_context_astgrep_structure.py::AstGrepStructureTest.test_facade_module_still_defines_astgrep_backend_class": {
+      "statements": 4,
       "complexity": 4,
-      "depth": 3
+      "depth": 0
+    },
+    "tests/doc_engine/test_scan_context_astgrep_structure.py::AstGrepStructureTest.test_poke_surface_attrs_present": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_scan_context_astgrep_structure.py::AstGrepStructureTest.test_version_hash_paths_include_astgrep_package": {
+      "statements": 5,
+      "complexity": 7,
+      "depth": 0
     },
     "tests/doc_engine/test_scan_context_chunk_paths.py::ChunkPathsForArgvTest.test_oversized_solo_path_still_emitted": {
       "statements": 5,
@@ -20546,14 +21135,24 @@
       "depth": 0
     },
     "tests/doc_engine/test_spring_signal_scan_determinism_refs.py::ScanDeterminismTest.test_duplicate_class_name_is_contested_with_lowest_path_identity": {
-      "statements": 30,
-      "complexity": 12,
-      "depth": 2
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/doc_engine/test_spring_signal_scan_determinism_refs.py::ScanDeterminismTest.test_two_scans_of_the_same_tree_serialize_identically": {
       "statements": 3,
       "complexity": 1,
       "depth": 0
+    },
+    "tests/doc_engine/test_spring_signal_scan_determinism_refs.py::_test_duplicate_class_name_is_contested_with_lowest_path_identity_core": {
+      "statements": 14,
+      "complexity": 9,
+      "depth": 0
+    },
+    "tests/doc_engine/test_spring_signal_scan_determinism_refs.py::_test_duplicate_class_name_is_contested_with_lowest_path_identity_prelude": {
+      "statements": 16,
+      "complexity": 4,
+      "depth": 2
     },
     "tests/doc_engine/test_spring_signal_scan_jpql_lineage.py::JpqlLineageResolutionTest.test_association_traversal_out_of_scope": {
       "statements": 3,
@@ -21691,9 +22290,19 @@
       "depth": 1
     },
     "tests/spring_signals/mutation_driver.py::main": {
-      "statements": 22,
-      "complexity": 7,
+      "statements": 6,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/spring_signals/mutation_loop.py::apply_and_collect_survivors": {
+      "statements": 14,
+      "complexity": 5,
       "depth": 3
+    },
+    "tests/spring_signals/mutation_loop.py::exit_for_survivors": {
+      "statements": 8,
+      "complexity": 3,
+      "depth": 2
     },
     "tests/spring_signals/test_assertions_signals_e2e.py::TestEndToEnd.test_subprocess_exit_codes": {
       "statements": 6,
@@ -22265,6 +22874,46 @@
       "complexity": 3,
       "depth": 0
     },
+    "tests/support/coverage_climb/det_phase_fakes.py::FakeLog.__call__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::FakeLog.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::FakeLog.rule": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::FakeRunner.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::FakeRunner.run": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::make_phase_state": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::patch_det_phase_side_effects": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/support/coverage_climb/det_phase_fakes.py::patch_det_phase_side_effects.fake_finish": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
     "tests/support/coverage_climb/tier2_context.py::_ctx": {
       "statements": 5,
       "complexity": 1,
@@ -22345,10 +22994,20 @@
       "complexity": 8,
       "depth": 1
     },
-    "tests/support/drift_normalization/harness.py::setUpModule": {
-      "statements": 24,
-      "complexity": 7,
+    "tests/support/drift_normalization/harness.py::_setUpModule_core": {
+      "statements": 13,
+      "complexity": 4,
       "depth": 3
+    },
+    "tests/support/drift_normalization/harness.py::_setUpModule_prelude": {
+      "statements": 11,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/support/drift_normalization/harness.py::setUpModule": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/support/drift_normalization/harness.py::tearDownModule": {
       "statements": 2,
@@ -22395,25 +23054,75 @@
       "complexity": 1,
       "depth": 0
     },
-    "tests/support/kitchen_sink/chain.py::_run": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
     "tests/support/kitchen_sink/chain.py::run_chain": {
-      "statements": 44,
-      "complexity": 3,
+      "statements": 6,
+      "complexity": 1,
       "depth": 0
     },
-    "tests/support/kitchen_sink/chain.py::run_chain.manifest_cmd": {
+    "tests/support/kitchen_sink/chain_gate_phases.py::run_gate_and_finalize_phases": {
+      "statements": 5,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_gate_phases.py::run_gate_and_finalize_phases.record": {
       "statements": 1,
       "complexity": 1,
       "depth": 0
     },
-    "tests/support/kitchen_sink/chain.py::run_chain.record": {
+    "tests/support/kitchen_sink/chain_phases.py::_manifest_cmd": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::_noop": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::_record_step": {
       "statements": 4,
       "complexity": 3,
       "depth": 2
+    },
+    "tests/support/kitchen_sink/chain_phases.py::_run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_gap_and_docs_phases": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_gap_and_docs_phases.record": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_manifest_and_scan_phases": {
+      "statements": 15,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_manifest_and_scan_phases.record": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_mock_generative_phases": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_summarize_and_architect_phases": {
+      "statements": 8,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/chain_phases.py::run_summarize_and_architect_phases.record": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/support/kitchen_sink/fixtures.py::kitchen": {
       "statements": 8,
@@ -22455,6 +23164,21 @@
       "complexity": 2,
       "depth": 1
     },
+    "tests/support/kitchen_sink/local_runner_assert.py::assert_covering_proof_matches_signals": {
+      "statements": 10,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/support/kitchen_sink/local_runner_assert.py::assert_local_runner_exit_and_banner": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/local_runner_assert.py::assert_mock_certification": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 1
+    },
     "tests/support/kitchen_sink/repo_builder.py::build_enterprise_repo": {
       "statements": 4,
       "complexity": 1,
@@ -22471,9 +23195,29 @@
       "depth": 0
     },
     "tests/support/kitchen_sink/repo_plants_config_noise.py::plant_ledger_legacy_noise": {
-      "statements": 22,
+      "statements": 5,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/repo_plants_legacy_parts.py::plant_build_noise": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/repo_plants_legacy_parts.py::plant_ledger_collision": {
+      "statements": 4,
       "complexity": 2,
       "depth": 1
+    },
+    "tests/support/kitchen_sink/repo_plants_legacy_parts.py::plant_legacy_encoding_hazards": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/kitchen_sink/repo_plants_legacy_parts.py::plant_path_hazards": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
     },
     "tests/support/kitchen_sink/testcase.py::KitchenBoundTestCase._bind_kitchen": {
       "statements": 1,
@@ -22552,6 +23296,36 @@
     },
     "tests/support/live_gates/fixtures.py::_plant_weak_docs": {
       "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/live_gates/rewrite_helpers.py::assert_live_certified_shape": {
+      "statements": 11,
+      "complexity": 10,
+      "depth": 0
+    },
+    "tests/support/live_gates/rewrite_helpers.py::assert_mock_poison_cleared": {
+      "statements": 10,
+      "complexity": 10,
+      "depth": 0
+    },
+    "tests/support/live_gates/rewrite_helpers.py::plant_det_prior_and_summaries": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/live_gates/rewrite_helpers.py::plant_mock_generative_prior_and_summaries": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/live_gates/rewrite_helpers.py::run_live_gates_no_write": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/support/live_gates/rewrite_helpers.py::stub_live_gates_ok": {
+      "statements": 3,
       "complexity": 1,
       "depth": 0
     },
@@ -22655,15 +23429,45 @@
       "complexity": 1,
       "depth": 0
     },
+    "tests/support/repo_claims/tree.py::write_text_creating_parents": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
     "tests/support/run_manifest/harness.py::_fake_completed": {
       "statements": 1,
       "complexity": 1,
       "depth": 0
     },
-    "tests/support/run_manifest/harness.py::validate_manifest_shape": {
-      "statements": 24,
-      "complexity": 9,
+    "tests/support/run_manifest/harness.py::_missing_top_level_keys": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/support/run_manifest/harness.py::_stage_manifest_problems": {
+      "statements": 9,
+      "complexity": 4,
       "depth": 2
+    },
+    "tests/support/run_manifest/harness.py::_status_and_version_problems": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/support/run_manifest/harness.py::_target_repo_key_problems": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 2
+    },
+    "tests/support/run_manifest/harness.py::_top_level_manifest_problems": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/support/run_manifest/harness.py::validate_manifest_shape": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
     },
     "tests/support/spring_drift/scratch.py::_by_source": {
       "statements": 4,

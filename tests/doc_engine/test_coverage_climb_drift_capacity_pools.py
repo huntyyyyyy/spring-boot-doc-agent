@@ -28,8 +28,9 @@ def _test_classify_and_citations_helpers_prelude():
     sigs, prov = drift._baseline_signatures_and_provenance(signals, None)
     assert prov['source'] == 'spring_signals.json'
     assert sigs == {'a.java': '1'}
+    return clf, prov, signals
 
-def _test_classify_and_citations_helpers_core():
+def _test_classify_and_citations_helpers_core(clf, prov, signals):
     man = {'file_signatures': {'x': 'y'}, 'run_id': 'rid', 'target_repo': {'path': '/t', 'commit_hash': 'c', 'dirty': False}}
     _, prov2 = drift._baseline_signatures_and_provenance(signals, man)
     assert prov2['source'] == 'run_manifest.json'
@@ -58,8 +59,9 @@ def _test_stage4_pool_helpers_and_compare_prelude():
     assert measured['signals_omitted'] is True
     with pytest.raises(ValueError):
         cap.measure_stage4_shared_pool_tokens(None)
+    return measured, proxy
 
-def _test_stage4_pool_helpers_and_compare_core():
+def _test_stage4_pool_helpers_and_compare_core(measured, proxy):
     cmp = cap.compare_stage4_proxy_to_measured(proxy, measured)
     assert cmp['measured_over_proxy_ratio'] is not None
     fields = cap._stage4_pool_fields(measured)
@@ -75,8 +77,8 @@ def _test_stage4_pool_helpers_and_compare_core():
     assert 'interview_answers' in omitted
 
 def test_classify_and_citations_helpers() -> None:
-    _test_classify_and_citations_helpers_prelude()
-    _test_classify_and_citations_helpers_core()
+    clf, prov, signals = _test_classify_and_citations_helpers_prelude()
+    _test_classify_and_citations_helpers_core(clf, prov, signals)
 
 def test_load_signals_rejects_old_schema(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     path = tmp_path / 'signals.json'
@@ -102,5 +104,5 @@ def test_empty_signatures_and_manifest_validate(tmp_path: Path, monkeypatch: pyt
     assert drift.tier1_scan('/unused', scan_context=ctx) == {'A.java': 'sig'}
 
 def test_stage4_pool_helpers_and_compare() -> None:
-    _test_stage4_pool_helpers_and_compare_prelude()
-    _test_stage4_pool_helpers_and_compare_core()
+    measured, proxy = _test_stage4_pool_helpers_and_compare_prelude()
+    _test_stage4_pool_helpers_and_compare_core(measured, proxy)

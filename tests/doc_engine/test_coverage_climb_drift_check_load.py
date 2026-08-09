@@ -29,8 +29,9 @@ def _test_cli_validate_and_main_errors_prelude(tmp_path: Path, monkeypatch: pyte
     monkeypatch.setattr(drift, 'check_drift', MagicMock(side_effect=drift.spring_signal_scan.CodeQLScannerError('cq')))
     with pytest.raises(SystemExit) as exc:
         drift.main()
+    return exc
 
-def _test_cli_validate_and_main_errors_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]):
+def _test_cli_validate_and_main_errors_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], exc):
     assert exc.value.code == 1 and 'cq' in capsys.readouterr().err
     monkeypatch.setattr(drift, 'check_drift', lambda *a, **k: dict(_EMPTY_REPORT))
     monkeypatch.setattr(drift, 'checked_output_path', MagicMock(side_effect=drift.PathValidationError('bad out')))
@@ -84,5 +85,5 @@ def test_check_drift_fast_path_and_full(tmp_path: Path, monkeypatch: pytest.Monk
     assert report2['results'][0]['status'] == drift.STATUS_CONFIRMED
 
 def test_cli_validate_and_main_errors(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
-    _test_cli_validate_and_main_errors_prelude(tmp_path, monkeypatch, capsys)
-    _test_cli_validate_and_main_errors_core(tmp_path, monkeypatch, capsys)
+    exc = _test_cli_validate_and_main_errors_prelude(tmp_path, monkeypatch, capsys)
+    _test_cli_validate_and_main_errors_core(tmp_path, monkeypatch, capsys, exc)

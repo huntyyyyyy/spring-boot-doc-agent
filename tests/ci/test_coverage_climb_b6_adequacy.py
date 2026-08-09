@@ -32,8 +32,9 @@ def _test_github_adequacy_report_and_append_prelude(tmp_path: Path):
     assert 'Adequacy sensors' in md
     assert 'Structural coverage' in md
     assert 'Mutator survivors' in md
+    return md
 
-def _test_github_adequacy_report_and_append_core(tmp_path: Path):
+def _test_github_adequacy_report_and_append_core(tmp_path: Path, md):
     assert 'Metamorphic vacuity' in md
     summary = tmp_path / 'summary.md'
     summary.write_text('### prior', encoding='utf-8')
@@ -90,5 +91,5 @@ def test_structural_slice_missing_and_present(tmp_path: Path) -> None:
     assert '95.50%' in present.body_lines[0]
 
 def test_github_adequacy_report_and_append(tmp_path: Path) -> None:
-    _test_github_adequacy_report_and_append_prelude(tmp_path)
-    _test_github_adequacy_report_and_append_core(tmp_path)
+    md = _test_github_adequacy_report_and_append_prelude(tmp_path)
+    _test_github_adequacy_report_and_append_core(tmp_path, md)

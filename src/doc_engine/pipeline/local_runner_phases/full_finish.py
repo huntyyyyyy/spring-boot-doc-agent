@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from doc_engine.paths import repo_root
+from doc_engine.pipeline import gates
 from doc_engine.pipeline.local_runner_phases.full_finish_gates import (
     run_check_pipeline_output_gate,
     run_citation_and_secrets_gates,
@@ -15,6 +17,18 @@ from doc_engine.pipeline.local_runner_phases.support import (
     _run_drift_check,
     _write_certification_and_finish,
 )
+
+# Climb tests monkeypatch these on the façade module.
+REPO_ROOT = str(repo_root())
+
+__all__ = [
+    "REPO_ROOT",
+    "gates",
+    "phase_full_finish",
+    "_artifact_inventory",
+    "_run_drift_check",
+    "_write_certification_and_finish",
+]
 
 
 def phase_full_finish(state: LocalRunState) -> int:

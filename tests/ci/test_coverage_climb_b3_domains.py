@@ -36,8 +36,9 @@ def _test_markers_check_unknown_floor_truncation_main_prelude(tmp_path: Path, mo
     err = capsys.readouterr().err
     assert 'domain_path_matrix produced zero' in err
     assert 'meeting rate' in err
+    return err
 
-def _test_markers_check_unknown_floor_truncation_main_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]):
+def _test_markers_check_unknown_floor_truncation_main_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], err):
     assert 'test_orphan' in err
     flooded = [f'issue-{i}' for i in range(55)]
     monkeypatch.setattr(check_mod, 'evaluate_module', lambda *a, **k: flooded)
@@ -84,8 +85,8 @@ def test_path_shards_pycache_empty_tests_and_orphan(tmp_path: Path) -> None:
     assert any(('tests/fixtures/test_stray.py' in item for item in orphans))
 
 def test_markers_check_unknown_floor_truncation_main(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
-    _test_markers_check_unknown_floor_truncation_main_prelude(tmp_path, monkeypatch, capsys)
-    _test_markers_check_unknown_floor_truncation_main_core(tmp_path, monkeypatch, capsys)
+    err = _test_markers_check_unknown_floor_truncation_main_prelude(tmp_path, monkeypatch, capsys)
+    _test_markers_check_unknown_floor_truncation_main_core(tmp_path, monkeypatch, capsys, err)
 
 def test_emit_abi_matrix_github_output_and_main(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     out = tmp_path / 'gh_out'

@@ -10,7 +10,7 @@ measurement / doc quality. See
 
 Concept modules: ``compliance_models``, ``compliance_profile``,
 ``compliance_stages``, ``certification_fold``. This façade keeps the stable
-``doc_engine.pipeline.compliance`` import path.
+``doc_engine.pipeline.compliance`` import path (including climb-poked ``_`` aliases).
 """
 
 from __future__ import annotations
@@ -39,10 +39,37 @@ from doc_engine.pipeline.compliance_profile import (
     resolve_compliance_profile,
     stages_for_profile,
 )
+from doc_engine.pipeline.compliance_profile import (
+    scan_only_specs as _scan_only_specs,
+)
+from doc_engine.pipeline.compliance_profile import (
+    specs_for_profile as _specs_for_profile,
+)
+from doc_engine.pipeline.compliance_profile import (
+    truncate_until_stage as _truncate_until_stage,
+)
+from doc_engine.pipeline.compliance_stages import (
+    generative_stage_executor as _generative_stage_executor,
+)
+from doc_engine.pipeline.compliance_stages import (
+    normalize_kept_prior_stage as _normalize_kept_prior_stage,
+)
+from doc_engine.pipeline.compliance_stages import (
+    should_drop_prior_stage as _should_drop_prior_stage,
+)
+from doc_engine.pipeline.compliance_stages import (
+    skipped_stage_executor as _skipped_stage_executor,
+)
+from doc_engine.pipeline.compliance_stages import (
+    stage_executor_from_runner as _stage_executor_from_runner,
+)
 from doc_engine.pipeline.compliance_stages import (
     stage_records_from_runner_results,
     stages_for_live_certification,
     write_certification_json,
+)
+from doc_engine.pipeline.compliance_stages import (
+    stage_status_from_runner as _stage_status_from_runner,
 )
 
 __all__ = [
@@ -69,4 +96,13 @@ __all__ = [
     "stages_for_live_certification",
     "stages_for_profile",
     "write_certification_json",
+    "_generative_stage_executor",
+    "_normalize_kept_prior_stage",
+    "_scan_only_specs",
+    "_should_drop_prior_stage",
+    "_skipped_stage_executor",
+    "_specs_for_profile",
+    "_stage_executor_from_runner",
+    "_stage_status_from_runner",
+    "_truncate_until_stage",
 ]

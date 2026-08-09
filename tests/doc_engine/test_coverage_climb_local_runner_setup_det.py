@@ -27,8 +27,9 @@ def _test_reuse_signals_sibling_error_and_deterministic_banner_prelude(tmp_path:
     log_text = Path(state.log.path).read_text(encoding='utf-8')
     assert 'Deterministic stages only' in log_text
     state.log.close()
+    return repo
 
-def _test_reuse_signals_sibling_error_and_deterministic_banner_core(tmp_path: Path, capsys: pytest.CaptureFixture[str]):
+def _test_reuse_signals_sibling_error_and_deterministic_banner_core(tmp_path: Path, capsys: pytest.CaptureFixture[str], repo):
     out3 = tmp_path / 'out3'
     scan = setup_mod.phase_setup(_base_args(repo, out_dir=str(out3), compliance_profile='scan_only'))
     assert isinstance(scan, LocalRunState)
@@ -56,8 +57,8 @@ def test_require_repo_dir_and_phase_setup_errors(tmp_path: Path, capsys: pytest.
     assert 'not found' in capsys.readouterr().err
 
 def test_reuse_signals_sibling_error_and_deterministic_banner(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    _test_reuse_signals_sibling_error_and_deterministic_banner_prelude(tmp_path, capsys)
-    _test_reuse_signals_sibling_error_and_deterministic_banner_core(tmp_path, capsys)
+    repo = _test_reuse_signals_sibling_error_and_deterministic_banner_prelude(tmp_path, capsys)
+    _test_reuse_signals_sibling_error_and_deterministic_banner_core(tmp_path, capsys, repo)
 
 def test_reuse_signals_success_copies_and_logs(tmp_path: Path) -> None:
     repo = tmp_path / 'repo'

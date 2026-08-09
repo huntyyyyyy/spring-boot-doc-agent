@@ -7,6 +7,9 @@ Concept modules: ``runner_log``, ``runner``, ``runner_spawn``, ``stage_recording
 
 from __future__ import annotations
 
+import subprocess
+
+from doc_engine.core.timeouts import tool_timeout_seconds
 from doc_engine.pipeline.local_runner_phases.certification_finish import (
     build_and_write_certification as _build_and_write_certification,
 )
@@ -72,6 +75,8 @@ from doc_engine.pipeline.local_runner_phases.stage_recording import (
 __all__ = [
     "Log",
     "Runner",
+    "subprocess",
+    "tool_timeout_seconds",
     "_RUNNER_FAIL_STATUSES",
     "_artifact_inventory",
     "_build_and_write_certification",

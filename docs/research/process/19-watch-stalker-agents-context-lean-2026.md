@@ -261,9 +261,14 @@ Star count and 14-day push qualify a tree as *research SoR*, not as *merge depen
 | **STK0-5** | Optional Spike: gh-aw **proposer** workflow (discussions/issues only) | Exit: no write to SoT paths; local gates remain |
 | **STK1-1** (after Approve) | Implement ledger writer + rotating focus (in-repo) | Acceptance: STK4 reset; claims green; LOC ≤225 |
 | **STK1-2** | Presenter: findings → backlog stub / research question template | Acceptance: draft only; no auto-merge |
+| **STK1-3** | First Embody sensors **G1–G6** (schema skew, split-scope, façade poke, collect/syntax, parallel tip, policy Verify pack) | Acceptance: each kind emits ledger finding; never rewrites fail_under/baselines |
 | **Invariants** | fail_under 98.7; complexipy ≤5; LOC ≤225; no utils/; E-RUN refuses intact; GH SoR ≥1k★ **and** 14-day push |
 
-**Ordering:** Do **not** start E-STK1 while E-DOC1 or E-CQL1 owns the tip unless this becomes the single Active stream.
+**Ordering:** Do **not** start E-STK1 while another epic owns the tip unless this becomes the single Active stream.
+
+### 8.1 Addendum (2026-08-09) — sensors from statement-split cascade
+
+Incident ledger: [`docs/research/findings/2026-08-09-statement-split-cascade.md`](../findings/2026-08-09-statement-split-cascade.md). E-STK1 was Deferred while mechanical splits ran; CI red was the late detector. **G1–G6** are mandatory first sensors when E-STK1 becomes Active (also listed under backlog P15.1). Spec delta only here — no `stalker-scan` Implement until Active.
 
 ---
 

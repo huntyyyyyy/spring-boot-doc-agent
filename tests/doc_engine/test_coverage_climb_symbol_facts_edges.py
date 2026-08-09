@@ -23,8 +23,9 @@ def _test_symbol_parse_member_error_paths_prelude(monkeypatch: pytest.MonkeyPatc
     with pytest.raises(sym.SymbolError):
         sym._parse_type_names('#', 'sym')
     field = sym.format_field(None, 'User', 'email')
+    return field
 
-def _test_symbol_parse_member_error_paths_core(monkeypatch: pytest.MonkeyPatch):
+def _test_symbol_parse_member_error_paths_core(monkeypatch: pytest.MonkeyPatch, field):
     assert sym.display(field) == 'User.email'
     method = sym.format_method(None, 'User', 'run')
     assert sym.display(method).endswith('()')
@@ -55,8 +56,9 @@ def _test_covering_and_recall_and_maps_to_guard_prelude(tmp_path: Path):
     with pytest.raises(sym.SymbolError):
         facts_mod._require_maps_to_type_symbol({'predicate': 'MAPS_TO', 'subject': 'not-a-symbol'})
     field_subj = sym.format_field('com.acme', 'User', 'email')
+    return field_subj
 
-def _test_covering_and_recall_and_maps_to_guard_core(tmp_path: Path):
+def _test_covering_and_recall_and_maps_to_guard_core(tmp_path: Path, field_subj):
     with pytest.raises(sym.SymbolError, match='type symbol'):
         facts_mod._require_maps_to_type_symbol({'predicate': 'MAPS_TO', 'subject': field_subj})
     facts_mod._require_maps_to_type_symbol({'predicate': 'OTHER', 'subject': 'x'})
@@ -83,8 +85,8 @@ def test_symbol_validation_and_package_edges() -> None:
     assert 'acme' in sym._path_prefix(('com', 'acme'), ('User',))
 
 def test_symbol_parse_member_error_paths(monkeypatch: pytest.MonkeyPatch) -> None:
-    _test_symbol_parse_member_error_paths_prelude(monkeypatch)
-    _test_symbol_parse_member_error_paths_core(monkeypatch)
+    field = _test_symbol_parse_member_error_paths_prelude(monkeypatch)
+    _test_symbol_parse_member_error_paths_core(monkeypatch, field)
 
 def test_facts_maps_to_and_evidence_skips() -> None:
     contested = facts_mod._maps_to_from_contested_entry('User', {'rule_id': 'persistence__entity'}, [{'table': 'u'}, 'skip-me', {'table': 'v', 'table_name_source': 'ann'}], 'ast-grep')
@@ -101,5 +103,5 @@ def test_facts_maps_to_and_evidence_skips() -> None:
     assert len(rows) == 1
 
 def test_covering_and_recall_and_maps_to_guard(tmp_path: Path) -> None:
-    _test_covering_and_recall_and_maps_to_guard_prelude(tmp_path)
-    _test_covering_and_recall_and_maps_to_guard_core(tmp_path)
+    field_subj = _test_covering_and_recall_and_maps_to_guard_prelude(tmp_path)
+    _test_covering_and_recall_and_maps_to_guard_core(tmp_path, field_subj)

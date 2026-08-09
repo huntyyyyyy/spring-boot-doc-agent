@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 
 from tests.support.kitchen_sink.chain_phases import _manifest_cmd, _record_step, _run
+from tests.support.kitchen_sink.constants import PY
 
 
 def run_gate_and_finalize_phases(

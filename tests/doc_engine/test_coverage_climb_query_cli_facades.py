@@ -31,8 +31,9 @@ def _test_query_artifacts_root_and_dispatch_prelude(tmp_path: Path, monkeypatch:
     assert qa._query_entity(SimpleNamespace(signals=str(sig), limit=5, class_name=None, table=None, fqcn=None), tmp_path)['items'] == []
     assert qa._query_dependents(SimpleNamespace(signals=str(sig), edges=None, limit=5, target_file=None, target_type=None, group_id=None), tmp_path)['items'] == []
     assert qa._query_route_trace(SimpleNamespace(signals=str(sig), limit=5, path_contains=None, file_contains=None), tmp_path)['items'] == []
+    return sig
 
-def _test_query_artifacts_root_and_dispatch_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]):
+def _test_query_artifacts_root_and_dispatch_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], sig):
     with pytest.raises(QueryError, match='unknown kind'):
         qa._execute_kind(SimpleNamespace(kind='nope'), tmp_path)
     monkeypatch.setattr(qa, '_execute_kind', lambda *_a, **_k: {'ok': True})
@@ -44,8 +45,8 @@ def _test_query_artifacts_root_and_dispatch_core(tmp_path: Path, monkeypatch: py
     assert qa.main(['evidence', '--signals', str(sig)]) == 2
 
 def test_query_artifacts_root_and_dispatch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
-    _test_query_artifacts_root_and_dispatch_prelude(tmp_path, monkeypatch, capsys)
-    _test_query_artifacts_root_and_dispatch_core(tmp_path, monkeypatch, capsys)
+    sig = _test_query_artifacts_root_and_dispatch_prelude(tmp_path, monkeypatch, capsys)
+    _test_query_artifacts_root_and_dispatch_core(tmp_path, monkeypatch, capsys, sig)
 
 def test_cli_facade_cmds(monkeypatch: pytest.MonkeyPatch) -> None:
     captured: list[list[str]] = []

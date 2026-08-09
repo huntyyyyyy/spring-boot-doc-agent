@@ -24,8 +24,9 @@ def _test_cache_metadata_and_results_roundtrip_prelude(tmp_path: Path, monkeypat
     rows = [{'file': 'A.java', 'line': 1}]
     runner._save_results_cache(repo, pack, './gradlew compileJava', 'sv1', rows, codeql_cli_version='2.0')
     loaded = runner._load_results_cache(repo, pack, './gradlew compileJava', 'sv1', codeql_cli_version='2.0')
+    return loaded, rows
 
-def _test_cache_metadata_and_results_roundtrip_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+def _test_cache_metadata_and_results_roundtrip_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, loaded, rows):
     assert loaded == rows
     with pytest.raises(runner.CodeQLError, match='not a list'):
         runner._validate_cached_evidence_rows({'file': 'x'})
@@ -49,8 +50,9 @@ def _test_prepare_scan_and_cleanup_prelude(tmp_path: Path, monkeypatch: pytest.M
     db2 = tmp_path / 'explicit-db'
     db2.mkdir()
     tmp = tmp_path / 'tmp'
+    return db2, pack, repo, tmp
 
-def _test_prepare_scan_and_cleanup_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+def _test_prepare_scan_and_cleanup_core(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, db2, pack, repo, tmp):
     tmp.mkdir()
     runner._cleanup_scan_temps(db2, str(tmp), keep_database=False)
     assert not db2.exists()
@@ -102,12 +104,12 @@ def test_find_codeql_env_and_missing(monkeypatch: pytest.MonkeyPatch, tmp_path: 
     assert runner.find_codeql() == good
 
 def test_cache_metadata_and_results_roundtrip(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _test_cache_metadata_and_results_roundtrip_prelude(tmp_path, monkeypatch)
-    _test_cache_metadata_and_results_roundtrip_core(tmp_path, monkeypatch)
+    loaded, rows = _test_cache_metadata_and_results_roundtrip_prelude(tmp_path, monkeypatch)
+    _test_cache_metadata_and_results_roundtrip_core(tmp_path, monkeypatch, loaded, rows)
 
 def test_prepare_scan_and_cleanup(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _test_prepare_scan_and_cleanup_prelude(tmp_path, monkeypatch)
-    _test_prepare_scan_and_cleanup_core(tmp_path, monkeypatch)
+    db2, pack, repo, tmp = _test_prepare_scan_and_cleanup_prelude(tmp_path, monkeypatch)
+    _test_prepare_scan_and_cleanup_core(tmp_path, monkeypatch, db2, pack, repo, tmp)
 
 def test_ensure_regular_file_and_codeql_version(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     d = tmp_path / 'dir'
