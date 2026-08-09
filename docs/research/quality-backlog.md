@@ -28,13 +28,13 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 
 ---
 
-## P1 — Design approval (no code)
+## P1 — Design approval (no code) — DONE E-CM0
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P1.1 | Human approve synthesis decisions **1–31** (or explicit subset) | Strategic | Record choice in design memo status |
-| P1.2 | Record climb artifact policy **16**: **(A)** distinct XML path **or** **(B)** refuse writing `coverage.xml` | Adopt | Written product choice — closes `[Unknown]` |
-| P1.3 | Update `docs/design/coverage-measure-modes-design-2026-08-08.md` status to approved + point at synthesis | Archive | Link check |
+| P1.1 | Human approve synthesis decisions **1–31** (or explicit subset) | Strategic | Recorded Approve in design memo |
+| P1.2 | Record climb artifact policy **16**: **(A)** distinct XML path **or** **(B)** refuse writing `coverage.xml` | Adopt | **16-A** locked (`coverage.climb.xml`) |
+| P1.3 | Update `docs/design/coverage-measure-modes-design-2026-08-08.md` status to approved + point at synthesis | Archive | status APPROVED E-CM0 |
 
 ---
 
@@ -87,7 +87,7 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 
 ## Suggested next single stream
 
-**Now:** P1.1–P1.3 (approve + artifact policy + memo status).  
-**Then:** P0 if size fails on the impl branch.  
-**Then:** P2.1–P2.5 dual-mode.  
+**Done (E-CM0):** P1.1–P1.3 — decisions **1–31** Approved; policy **16-A**
+(`coverage.climb.xml`); design memo status APPROVED.  
+**Now:** P2.1–P2.5 dual-mode (E-CM1), with P0 size splits first if ratchet fails.  
 **Never:** dual-mode + LOC campaign + taxonomy docs rewrite in one tip.

@@ -16,16 +16,18 @@ related:
   - docs/design/coverage-measure-modes-design-2026-08-08.md
   - docs/research/quality-backlog.md
 do_not:
-  - implement dual-mode / MeasureMode in this pass
   - weaken fail_under, complexipy ≤5, or size ≤225
+  - reopen policy 16-A or fuzzy/PID green after Spec gate
+spec_gate: APPROVED E-CM0 (2026-08-08) — decisions 1-31 + policy 16-A
 ---
 
 # Principal memo: SE quality synthesis (2026-08-08)
 
 Consolidated Embody / Adopt / Refuse, amended decisions **1–31**, and claim-tiered
 verdicts for **spring-boot-doc-agent**: a Python CLI / agentic Spring-doc product with
-deterministic gates. Not a K8s microservice farm. Dual-mode climb/oracle remains
-**design-only** until human approve of the decision set below.
+deterministic gates. Not a K8s microservice farm. Spec gate **E-CM0** recorded
+**Approve** of **1–31** with policy **16-A** in the design memo; dual-mode lands
+under **E-CM1** only.
 
 **Claim tiers:** `[Evidenced]` primary paper/docs · `[Confirmed]` local seams ·
 `[Unknown]` missing ID, hype transfer, or product choice still open.

@@ -56,7 +56,21 @@ def add_quality_gate_parsers(
 
     measure_ap = sub.add_parser(
         "coverage-measure",
-        help="Clean single-tree coverage measure (pytest-cov + gap report)",
+        help=(
+            "Clean single-tree coverage measure "
+            "(oracle SoT or climb sensor; policy 16-A)"
+        ),
+    )
+    measure_ap.add_argument(
+        "--mode",
+        choices=("oracle", "climb"),
+        default=None,
+        help="oracle=whole-repo SoT (default); climb=scoped sensor",
+    )
+    measure_ap.add_argument(
+        "--scope",
+        default=None,
+        help="Package for climb --cov=<scope> (required with --mode climb)",
     )
     measure_ap.add_argument("--floor", type=float, default=None)
     measure_ap.add_argument("--worst", type=int, default=None)

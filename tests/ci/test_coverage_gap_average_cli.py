@@ -2,17 +2,16 @@
 
 from __future__ import annotations
 
-import json
 import runpy
 import sys
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import MagicMock
+
 import pytest
-from doc_engine.ci import complexipy_ratchet as ratchet
+
 from doc_engine.ci import coverage_gap_average as cga
-from doc_engine.ci import gate_tools
-from doc_engine.ci import quality_gates as qg
+from doc_engine.ci.coverage_report import FileCoverage
+
 SAMPLE_WITH_EDGES = """\
 <?xml version="1.0" ?>
 <coverage line-rate="0.5" branch-rate="0.5" version="7.0" timestamp="1">
@@ -68,6 +67,19 @@ def test_parse_skips_blank_filename_and_empty_lines(tmp_path: Path) -> None:
     assert any(r.branches >= 2 for r in rows)
 
 
+def test_main_refuses_climb_xml_as_inventory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    climb = tmp_path / "coverage.climb.xml"
+    climb.write_text("<coverage/>", encoding="utf-8")
+    monkeypatch.setattr(cga, "REPO_ROOT", tmp_path)
+    rc = cga.main(["--coverage-xml", "coverage.climb.xml"])
+    assert rc == 2
+    err = capsys.readouterr().err
+    assert "refusing climb artifact" in err
+    assert "coverage.xml" in err
+
+
 def test_empty_report_whole_repo_100() -> None:
     report = cga.build_report([], floor=98.7)
     assert report.whole_repo_cover_pct == 100.0
@@ -105,8 +117,8 @@ def test_main_success_markdown_and_summary(
 def test_format_markdown_with_below_floor_rows() -> None:
     report = cga.build_report(
         [
-            cga.FileCoverage("low.py", 10, 8, 2, 2),
-            cga.FileCoverage("mid.py", 10, 3, 0, 0),
+            FileCoverage("low.py", 10, 8, 2, 2),
+            FileCoverage("mid.py", 10, 3, 0, 0),
         ],
         floor=98.7,
     )
@@ -130,19 +142,25 @@ def test_coverage_gap_main_module(
     assert exc.value.code == 0
 
 
-def test_append_summary_noop_without_env(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_print_gap_report_summary_noop_without_env(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.delenv("GITHUB_STEP_SUMMARY", raising=False)
-    cga._append_github_summary("ignored")
+    report = cga.build_report([], floor=98.7)
+    args = SimpleNamespace(worst=5, markdown=False, append_github_summary=True)
+    cga._print_gap_report(report, args)
 
 
-def test_report_gap_average_missing_and_present(
+def test_print_gap_report_appends_summary(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    monkeypatch.setattr(qg, "REPO_ROOT", tmp_path)
-    qg._report_gap_average(tmp_path / "missing.xml")  # no-op
-    xml = tmp_path / "coverage.xml"
-    xml.write_text("<coverage/>", encoding="utf-8")
-    called = []
-    monkeypatch.setattr(qg, "_run", lambda cmd, label: called.append(cmd) or 0)
-    qg._report_gap_average(Path("coverage.xml"))
-    assert called and "doc_engine.ci.coverage_gap_average" in called[0]
+    summary = tmp_path / "summary.md"
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+    report = cga.build_report(
+        [FileCoverage("low.py", 10, 1, 0, 0)],
+        floor=98.7,
+    )
+    args = SimpleNamespace(worst=5, markdown=False, append_github_summary=True)
+    cga._print_gap_report(report, args)
+    assert summary.is_file()
+    assert "low.py" in summary.read_text(encoding="utf-8")

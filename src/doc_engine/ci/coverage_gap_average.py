@@ -21,17 +21,19 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 
+from doc_engine.ci.coverage_artifact_policy import (
+    DEFAULT_FLOOR,
+    refuse_climb_as_gap_inventory,
+)
 from doc_engine.ci.coverage_path_cohesion import PathCohesionError, PathCohesionGuard
 from doc_engine.ci.coverage_report import (
     CoverageReport,
     FileCoverage,
-    _parse_condition_coverage,
     load_cobertura_report,
     parse_cobertura_files,
 )
 from doc_engine.ci.gate_tools import checkout_root
 
-DEFAULT_FLOOR = 98.7
 # Mutable so tests can patch the active checkout (same pattern as gate_tools).
 REPO_ROOT = checkout_root()
 
@@ -193,6 +195,10 @@ def _print_gap_report(report: GapAverageReport, args: argparse.Namespace) -> Non
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     coverage_xml = _resolve_coverage_xml(args)
+    climb_err = refuse_climb_as_gap_inventory(coverage_xml)
+    if climb_err is not None:
+        print(f"error: {climb_err}", file=sys.stderr)
+        return 2
     if not coverage_xml.is_file():
         print(f"error: missing coverage report: {coverage_xml}", file=sys.stderr)
         return 2

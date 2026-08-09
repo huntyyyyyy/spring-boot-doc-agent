@@ -121,10 +121,14 @@ def cmd_coverage_gap_average(args: argparse.Namespace) -> int:
 
 
 def cmd_coverage_measure(args: argparse.Namespace) -> int:
-    """Facade: ``doc-engine coverage-measure`` — clean single-tree measure."""
-    from doc_engine.ci.coverage_measure import main as measure_main
+    """Facade: ``doc-engine coverage-measure`` — oracle SoT or climb sensor."""
+    from doc_engine.ci.coverage_measure_cli import main as measure_main
 
     argv: list[str] = []
+    if getattr(args, "mode", None):
+        argv.extend(["--mode", str(args.mode)])
+    if getattr(args, "scope", None):
+        argv.extend(["--scope", str(args.scope)])
     if args.floor is not None:
         argv.extend(["--floor", str(args.floor)])
     if args.worst is not None:
