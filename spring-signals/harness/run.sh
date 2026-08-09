@@ -10,6 +10,7 @@
 #                 spec, so the Messaging=0 gate is ON by default -- a gate
 #                 that is opt-in is a gate that is silently off. Set to "off"
 #                 for a deliberate report-only run.
+#   EXTRA_PACKS   optional air-gap tree for codeql/java-all (see create-db.sh)
 #
 # Note on `@kind table`: these queries produce raw result tables, not alerts.
 # `codeql database analyze` will NOT interpret them into SARIF -- it needs
@@ -20,13 +21,21 @@
 set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
+CODEQL_ROOT="$(cd "$HERE/../codeql" && pwd)"
 DB="${DB:-$PWD/.codeql/ocs-api-service-db}"
-PACKS="${PACKS:-$(cd "$HERE/../codeql/packs" && pwd)}"
+PACKS="${PACKS:-$CODEQL_ROOT/packs}"
 OUT="${OUT:-$PWD/out}"
 CODEQL="${CODEQL:-codeql}"
 EXPECTATIONS="${EXPECTATIONS:-$HERE/expectations/ocs-api-service.json}"
-# See create-db.sh for EXTRA_PACKS.
-SEARCH_PATH="${PACKS}${EXTRA_PACKS:+:$EXTRA_PACKS}"
+
+# Workspace packs resolve via codeql-workspace.yml (cwd=$CODEQL_ROOT). Only
+# EXTRA_PACKS needs --additional-packs (offline java-all); --no-strict-mode
+# acknowledges intentional local/bundle resolution for locked deps.
+ADDITIONAL_ARGS=()
+if [[ -n "${EXTRA_PACKS:-}" ]]; then
+  ADDITIONAL_ARGS+=(--additional-packs="$EXTRA_PACKS")
+fi
+ADDITIONAL_ARGS+=(--no-strict-mode)
 
 # Wave 1 only. References/Security/Observability/Testing still emit the legacy
 # 3-column schema and are excluded on purpose. Override QUERIES to run a subset.
@@ -44,21 +53,31 @@ mkdir -p "$OUT"
 # a compiled pack that the loop then ignored, recompiling from source on every
 # query -- so the wall-clock term this step exists to remove was still in every
 # CodeQL-vs-ast-grep timing.
-"$CODEQL" pack install "$PACKS/spring-signals" --additional-packs="$SEARCH_PATH" >/dev/null
+(
+  cd "$CODEQL_ROOT"
+  "$CODEQL" pack install "${ADDITIONAL_ARGS[@]}" packs/spring-signals >/dev/null
+)
 export CODEQL_COMPILATION_CACHE="${CODEQL_COMPILATION_CACHE:-$OUT/.compcache}"
 mkdir -p "$CODEQL_COMPILATION_CACHE"
-"$CODEQL" query compile --ram=16384 --additional-packs="$SEARCH_PATH" \
-  --compilation-cache="$CODEQL_COMPILATION_CACHE" \
-  "$PACKS/spring-signals" >/dev/null
+(
+  cd "$CODEQL_ROOT"
+  "$CODEQL" query compile --ram=16384 \
+    "${ADDITIONAL_ARGS[@]}" \
+    --compilation-cache="$CODEQL_COMPILATION_CACHE" \
+    packs/spring-signals >/dev/null
+)
 
 for q in "${WAVE1[@]}"; do
   echo "== $q"
-  "$CODEQL" query run --ram=16384 \
-    --database="$DB" \
-    --additional-packs="$SEARCH_PATH" \
-    --compilation-cache="$CODEQL_COMPILATION_CACHE" \
-    --output="$OUT/$q.bqrs" \
-    "$PACKS/spring-signals/$q.ql" >/dev/null
+  (
+    cd "$CODEQL_ROOT"
+    "$CODEQL" query run --ram=16384 \
+      --database="$DB" \
+      "${ADDITIONAL_ARGS[@]}" \
+      --compilation-cache="$CODEQL_COMPILATION_CACHE" \
+      --output="$OUT/$q.bqrs" \
+      "packs/spring-signals/$q.ql" >/dev/null
+  )
   "$CODEQL" bqrs decode --format=csv --entities=string \
     "$OUT/$q.bqrs" > "$OUT/$q.csv"
   echo "   rows: $(( $(wc -l < "$OUT/$q.csv") - 1 ))"

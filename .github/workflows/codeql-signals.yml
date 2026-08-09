@@ -50,10 +50,13 @@ jobs:
 
       - name: Install pack dependencies
         working-directory: spring-signals/codeql
+        # --no-strict-mode: lock pins match the pinned CodeQL bundle's
+        # qlpacks (resolved from the CLI dist, which strict mode labels as
+        # --additional-packs). Prefer that over re-downloading from ghcr.
         run: |
-          codeql pack install packs/java-signals-lib
-          codeql pack install packs/spring-signals
-          codeql pack install packs/spring-signals/test
+          codeql pack install --no-strict-mode packs/java-signals-lib
+          codeql pack install --no-strict-mode packs/spring-signals
+          codeql pack install --no-strict-mode packs/spring-signals/test
 
       - name: Compile spring-signals queries
         working-directory: spring-signals/codeql
@@ -102,8 +105,8 @@ jobs:
       - name: Install pack dependencies
         working-directory: spring-signals/codeql
         run: |
-          codeql pack install packs/java-signals-lib
-          codeql pack install packs/spring-signals
+          codeql pack install --no-strict-mode packs/java-signals-lib
+          codeql pack install --no-strict-mode packs/spring-signals
 
       - name: Run spring-signals fixture runtime gate
         working-directory: spring-signals/harness

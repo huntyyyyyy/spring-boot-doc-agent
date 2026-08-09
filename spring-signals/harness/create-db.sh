@@ -38,7 +38,8 @@ REPO="${REPO:-$PWD}"
 DB="${DB:-$PWD/.codeql/ocs-api-service-db}"
 CODEQL="${CODEQL:-codeql}"
 SOURCE_DIR="${SOURCE_DIR:-src}"
-PACKS="${PACKS:-$(cd "$(dirname "$0")/../codeql/packs" && pwd)}"
+CODEQL_ROOT="$(cd "$(dirname "$0")/../codeql" && pwd)"
+PACKS="${PACKS:-$CODEQL_ROOT/packs}"
 STRICT_EXTRACTION="${STRICT_EXTRACTION:-1}"
 
 if ! command -v "$CODEQL" >/dev/null 2>&1; then
@@ -47,7 +48,13 @@ if ! command -v "$CODEQL" >/dev/null 2>&1; then
 fi
 # EXTRA_PACKS lets an offline/air-gapped checkout point at a pre-populated
 # codeql/java-all tree instead of resolving it from ghcr.io at run time.
-SEARCH_PATH="${PACKS}${EXTRA_PACKS:+:$EXTRA_PACKS}"
+# Workspace sibling packs resolve via codeql-workspace.yml (cwd=$CODEQL_ROOT);
+# only EXTRA_PACKS uses --additional-packs. --no-strict-mode matches the
+# pinned-bundle lock contract used by codeql-signals.yml.
+ADDITIONAL_ARGS=(--no-strict-mode)
+if [[ -n "${EXTRA_PACKS:-}" ]]; then
+  ADDITIONAL_ARGS+=(--additional-packs="$EXTRA_PACKS")
+fi
 
 DEFAULT_BUILD_COMMAND="./gradlew --no-daemon --no-build-cache --console=plain clean compileJava compileTestJava"
 BUILD_COMMAND="${BUILD_COMMAND:-$DEFAULT_BUILD_COMMAND}"
@@ -106,7 +113,7 @@ EXTRACTED_LIST="$DB.coverage.extracted.txt"
     | sort -u || true ) > "$DISK_LIST"
 "$CODEQL" query run \
   --database="$DB" \
-  --additional-packs="$SEARCH_PATH" \
+  "${ADDITIONAL_ARGS[@]}" \
   --output="$DB.coverage.bqrs" \
   "$PACKS/spring-signals/Coverage.ql" >/dev/null
 "$CODEQL" bqrs decode --format=csv --no-titles "$DB.coverage.bqrs" \

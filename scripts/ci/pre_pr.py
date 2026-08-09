@@ -345,10 +345,18 @@ def _codeql_compile_and_ql_tests() -> int:
         print(f"error: codeql not on PATH. {SETUP_CODEQL_HINT}", file=sys.stderr)
         return 1
     codeql_root = REPO_ROOT / "spring-signals" / "codeql"
+    # --no-strict-mode: locked deps resolve from the pinned CodeQL bundle
+    # qlpacks (same contract as .github/workflows/codeql-signals.yml).
     steps = [
-        [codeql, "pack", "install", "packs/java-signals-lib"],
-        [codeql, "pack", "install", "packs/spring-signals"],
-        [codeql, "pack", "install", "packs/spring-signals/test"],
+        [codeql, "pack", "install", "--no-strict-mode", "packs/java-signals-lib"],
+        [codeql, "pack", "install", "--no-strict-mode", "packs/spring-signals"],
+        [
+            codeql,
+            "pack",
+            "install",
+            "--no-strict-mode",
+            "packs/spring-signals/test",
+        ],
         [
             codeql,
             "query",
