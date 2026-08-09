@@ -209,8 +209,9 @@ Measured mutual edges (naïve BC split would fail): `pipeline`↔`scanning`; `to
 
 ## 8. Exit / next
 
-- **Now:** Keep Embodying cycle gate; continue size/statement splits along BC façades (TACH10).  
-- **Human:** Approve **E-TACH0** (TACH1–TACH10) when ready.  
-- **Later Active:** E-TACH1 Implement — not parallel with E-CQL1 / E-STK1 tip thrash.
+- **Design pass (Active):** **E-COH0** — cohesion bar before more size thrash ([`docs/design/concept-split-cohesion-design-2026-08-09.md`](../../design/concept-split-cohesion-design-2026-08-09.md)).
+- **Human:** Approve **E-TACH0** (TACH1–TACH10) and/or **E-COH0** (COH1–COH12).
+- **Later:** E-COH1 reshape provisional modules → E-TACH1 layers → E-TACH2 depends_on+interfaces.
+- Tip MOD-S1 concept splits are **provisional** (COH9) — not “Done modularity.”
 
 DeepWiki used as **cartography only** for tach internals; merge decisions cite GitHub/docs/arXiv + this repo.
