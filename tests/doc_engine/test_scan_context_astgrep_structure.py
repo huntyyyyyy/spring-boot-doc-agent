@@ -15,7 +15,6 @@ pytestmark = pytest.mark.domain_stage0
 
 REPO = Path(__file__).resolve().parents[2]
 
-
 class AstGrepStructureTest:
     def test_facade_exports_backend_and_chunk_helper(self) -> None:
         assert facade.AstGrepBackend is AstGrepBackend
@@ -43,6 +42,7 @@ class AstGrepStructureTest:
             "_PATH_LIST_CHAR_LIMIT",
             "subprocess",
             "extract_entity",
+            "first_line_match",
             "read_source_lines",
             "RULE_FILE",
         ):

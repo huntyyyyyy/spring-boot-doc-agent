@@ -24,7 +24,11 @@ from doc_engine.scanning.astgrep import invoke as astgrep_invoke
 from doc_engine.scanning.astgrep.errors import AstGrepError, AstGrepNotFoundError
 from doc_engine.scanning.astgrep.ports import DEFAULT_RUNNER, AstGrepRunner
 from doc_engine.scanning.covering import COVERING_RECEIPT_KEY
-from doc_engine.scanning.java_extract import extract_entity, read_source_lines
+from doc_engine.scanning.java_extract import (
+    extract_entity,
+    first_line_match,
+    read_source_lines,
+)
 
 RULE_FILE = ast_grep_rules_path()
 _PATH_LIST_CHAR_LIMIT = astgrep_argv._PATH_LIST_CHAR_LIMIT
@@ -209,5 +213,6 @@ class AstGrepBackend(ScannerBackend):
 __all__ = [
     "AstGrepBackend", "AstGrepError", "AstGrepNotFoundError", "RULE_FILE",
     "_PATH_LIST_CHAR_LIMIT", "chunk_paths_for_argv", "_enrich_query_entry",
-    "extract_entity", "read_source_lines", "subprocess", "os", "shutil",
+    "extract_entity", "first_line_match", "read_source_lines",
+    "subprocess", "os", "shutil",
 ]

@@ -9,7 +9,6 @@ from doc_engine.scanning.astgrep.errors import AstGrepError
 from doc_engine.scanning.java_extract import (
     extract_query_from_astgrep_args,
     extract_repository,
-    first_line_match,
 )
 
 EVIDENCE_BUCKETS = {
@@ -95,6 +94,8 @@ def ingest_ast_grep_match(
     seen: Set,
 ) -> None:
     """Filter, dedupe, and record one ast-grep match into evidence maps."""
+    from doc_engine.scanning import _scanner_astgrep as facade
+
     file_path = match.get("file", "")
     rel = os.path.relpath(file_path, repo_path).replace(os.sep, "/")
     if gitignore_spec is not None and gitignore_spec.match_file(rel):
@@ -102,7 +103,7 @@ def ingest_ast_grep_match(
     line = match.get("range", {}).get("start", {}).get("line", 0) + 1
     text = match.get("text", "")
     rule_id = match.get("ruleId", "")
-    match_str = first_line_match(text)
+    match_str = facade.first_line_match(text)
     dedup_key = (rel, line, rule_id)
     if dedup_key in seen:
         return
