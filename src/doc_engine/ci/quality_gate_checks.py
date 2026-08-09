@@ -1,17 +1,25 @@
 """Quality-gate strategies: coverage, duplication, complexity, size, cycles.
 
-Each ``gate_*`` function is one pluggable strategy (command construction +
-exit mapping). ``quality_gates`` owns scheduling / fail-fast / summary only.
+Each ``gate_*`` is one strategy (argv + exit). ``quality_gates`` schedules only.
 """
 
 from __future__ import annotations
 
-import json
 import os
 import subprocess
 import sys
 from pathlib import Path
 
+from doc_engine.ci.complexity_policy import (
+    COMPLEXITY_MAX,
+    DEFAULT_BASELINE,
+    baseline_offender_ceiling,
+)
+from doc_engine.ci.coverage_artifact_policy import DEFAULT_FLOOR
+from doc_engine.ci.duplication_policy import (
+    DUPLICATION_MAX_PERCENT,
+    DUPLICATION_MIN_LINES,
+)
 from doc_engine.ci.gate_tools import (
     JSCPD_VERSION,
     REPO_ROOT,
@@ -19,20 +27,15 @@ from doc_engine.ci.gate_tools import (
     python_module_command,
     validate_git_rev,
 )
+from doc_engine.ci.package_scope import PACKAGE_ROOTS
 from doc_engine.ci.quality_gate_presenters import begin_grouped_run, end_grouped_run
 
-PACKAGE_ROOTS = ("src/doc_engine", "src/stf")
-NEW_CODE_COVERAGE_FLOOR = 98.7
-COMPLEXITY_MAX = 5
-DUPLICATION_MAX_PERCENT = 3
-COMPLEXITY_BASELINE = REPO_ROOT / "scripts" / "ratchets" / "complexipy_baseline.json"
+COMPLEXITY_BASELINE = DEFAULT_BASELINE
+NEW_CODE_COVERAGE_FLOOR = DEFAULT_FLOOR
 
 
 def _run(command: list[str], *, label: str) -> int:
-    """Run *command* as an argv list (no shell); return the process exit code.
-
-    Under GitHub Actions, wrap output in a collapsible ``::group::`` (E-UX1).
-    """
+    """Run *command* as argv (no shell); group under GitHub Actions (E-UX1)."""
     grouped = begin_grouped_run(label, command)
     completed = subprocess.run(command, cwd=REPO_ROOT, check=False)
     end_grouped_run(grouped)
@@ -115,7 +118,7 @@ def gate_duplication(compare_ref: str) -> int:
     return _run(
         jscpd_command(
             f"--threshold={DUPLICATION_MAX_PERCENT}",
-            "--min-lines=5",
+            f"--min-lines={DUPLICATION_MIN_LINES}",
             "--format=python",
             *changed,
         ),
@@ -140,17 +143,6 @@ def gate_cognitive_complexity() -> int:
         ],
         label=f"complexipy cognitive complexity <= {COMPLEXITY_MAX} (whole-repo)",
     )
-
-
-def baseline_offender_ceiling(path: Path = COMPLEXITY_BASELINE) -> int | None:
-    """Return committed ratchet ceiling, or None if missing/unreadable."""
-    if not path.is_file():
-        return None
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        return int(data["offender_count"])
-    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError):
-        return None
 
 
 def gate_complexity_ratchet() -> int:

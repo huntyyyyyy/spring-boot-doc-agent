@@ -19,16 +19,17 @@ import subprocess
 import sys
 from pathlib import Path
 
+from doc_engine.ci.complexity_policy import (
+    COMPLEXITY_MAX,
+    DEFAULT_BASELINE,
+    SCHEMA_VERSION,
+)
 from doc_engine.ci.gate_tools import (
     REPO_ROOT,
     checked_path_under_repo,
     require_venv_script,
 )
-
-PACKAGE_ROOTS = ("src/doc_engine", "src/stf")
-COMPLEXITY_MAX = 5
-DEFAULT_BASELINE = REPO_ROOT / "scripts" / "ratchets" / "complexipy_baseline.json"
-SCHEMA_VERSION = 1
+from doc_engine.ci.package_scope import PACKAGE_ROOTS
 
 
 def count_offenders() -> int:

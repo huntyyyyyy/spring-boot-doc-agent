@@ -11,7 +11,10 @@ from doc_engine.ci.stalker_sensors.finding_records import KIND_G1, StalkerFindin
 _PAIRS = (
     ("scripts/ci/check_code_quality.py", "scripts/ratchets/code_quality_baseline.json"),
     ("src/doc_engine/ci/size_ratchet.py", "scripts/ratchets/size_baseline.json"),
-    ("src/doc_engine/ci/complexipy_ratchet.py", "scripts/ratchets/complexipy_baseline.json"),
+    (
+        "src/doc_engine/ci/complexity_policy.py",
+        "scripts/ratchets/complexipy_baseline.json",
+    ),
 )
 _SCHEMA_ASSIGN = re.compile(r"^SCHEMA_VERSION\s*=\s*(\d+)\s*$", re.M)
 

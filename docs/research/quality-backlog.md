@@ -230,7 +230,8 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Active:** **E-COH1** reshape — unpaused after E-STK1 G1–G6 sensors; CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Done Spec + Implement:** **E-KNOB0 / E-KNOB1** — one setpoint owner per concern; no `quality_knobs` god file (2026-08-09).  
 **Done Implement:** **E-STK1** — G1–G6 advisory sensors + ledger writer + `pre_pr` wire (2026-08-09).  
 **Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
 **Paused/Defer next:** cycle-focus rotator / LLM ranker (STK3) — not required for G1–G6 Accept.  
@@ -240,7 +241,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Spec draft (demoted — later):** **E-GND0** — tip-grounding MCP; after E-COH1 has a green slice.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1).  
 **Defer:** E-CQL1; E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; `quality_knobs.py` mega-config; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**.
 
 ---
 
@@ -344,6 +345,17 @@ Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-
 | P22.1 | **E-GND1 Implement:** tip tools + receipt hook | **Defer** until after E-STK1 (+ preferably E-COH1 slice) | isolation tests; no write tools |
 
 Research: [`docs/research/process/25-tip-grounding-mcp-2026.md`](process/25-tip-grounding-mcp-2026.md). Design: [`docs/design/tip-grounding-mcp-design-2026-08-09.md`](../design/tip-grounding-mcp-design-2026-08-09.md).
+
+---
+
+## P23 — Quality policy setpoints (central discoverability, no god file)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P23.0 | **E-KNOB0 Spec:** approve **KNOB1–KNOB10** (one owner per concern; design registry; refuse mega-config) | **Approved** (2026-08-09) | research 26 + design `APPROVED E-KNOB0` |
+| P23.1 | **E-KNOB1 Implement:** `complexity_policy` / `duplication_policy` / `package_scope`; wire floor echo | **Done** (2026-08-09) | `tests/ci/test_quality_setpoints.py`; no duplicate SoT literals |
+
+Research: [`docs/research/process/26-quality-policy-setpoints-2026.md`](process/26-quality-policy-setpoints-2026.md). Design: [`docs/design/quality-policy-setpoints-design-2026-08-09.md`](../design/quality-policy-setpoints-design-2026-08-09.md). **Refuse** `quality_knobs.py` / `utils/` dump.
 
 ---
 
