@@ -241,7 +241,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 | P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Draft** (2026-08-09) | research 19 `spec_gate` → APPROVED |
 | P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | After Approve; one stream | context resets; claims green; LOC/complexipy |
 
-Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md). Primaries Jun–Aug 2026: projectmem 2606.12329, icat-agent 2606.25514, CompactionRL 2607.05378, RefactorAssist 2608.00924; gh-aw continuous improvement; Focus 2601.07190.
+Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md). Primaries: **gh-aw** (≥1k★), Mem0/Letta (optional Spike), arXiv icat/Focus/CompactionRL/RefactorAssist. **Refuse** GH SoR &lt;1000★ (`projectmem`, `ai-repo-health-agent`).
 
 ---
 

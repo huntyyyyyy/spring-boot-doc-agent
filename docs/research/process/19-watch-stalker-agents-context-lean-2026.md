@@ -13,8 +13,9 @@ related:
 do_not:
   - replace deterministic oracle / suite sensors with an always-on LLM chat
   - accumulate raw tool logs as research SoT (chat-dump refuse DOC12)
-  - treat commercial “mend” SaaS or low-star one-shots as merge SoR
+  - treat commercial “mend” SaaS or GitHub repos under **1000★** as implement SoR
   - schedule CompactionRL / weight training as a product dependency
+  - adopt `riponcm/projectmem` (≈579★) or `Acquarts/ai-repo-health-agent` (0★) as merge SoR
 spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
 ---
 
@@ -26,8 +27,8 @@ spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
 | --- | --- |
 | Is there a 2026 pattern for agents that *watch* systems, surface bugs / inefficiencies / wrong frameworks / gaps, then drive research + refactor adoption? | **Yes.** Strongest native shape is **sensor findings → compact external memory → research memo / backlog → Spec → implement**, not a forever-growing chat. `[Evidenced]` |
 | What maps to this repo’s “stalker”? | **Suite-stalking sensors (E-RUN)** already Embody the *watch* half for CI plateaus — deterministic junit / cascade clarity; LLM flake triage refused. Broader “framework/gap stalking” is a **separate meta-agent** that must not dilute oracle SoT. `[Confirmed]` |
-| How do mid-2026 systems avoid context bloat? | **(1)** Event-sourced / projected memory outside the window (`projectmem`). **(2)** Event-passed multi-agent scaffolds (`icat-agent`) instead of shared megacontext. **(3)** Active compaction / “context as tool” (`Focus`, CompactionRL, CAT). **(4)** Rotating focus + cache memory (GitHub Agentic Workflows Quality Improver). `[Evidenced]` |
-| Adopt for *this* product now? | **Spec-only (E-STK0).** Implement only after E-DOC1 Archive and without blocking E-CQL1 if that stream is next. Prefer **deterministic sensors + backlog projection** over autonomous PR factories. |
+| How do mid-2026 systems avoid context bloat? | **(1)** External memory with projected retrieval (**Mem0** / **Letta** class, ≥1k★). **(2)** Event-passed multi-agent scaffolds (`icat-agent` arXiv). **(3)** Active compaction / “context as tool” (`Focus`, CompactionRL, CAT — arXiv). **(4)** Rotating focus + cache memory (**github/gh-aw** Quality Improver, ≥1k★). `[Evidenced]` |
+| Adopt for *this* product now? | **Spec-only (E-STK0).** Prefer **deterministic sensors + in-repo backlog projection**. GitHub implement SoR requires **≥1000★** (fetched at research date); weaker trees are orientation-only. |
 
 ---
 
@@ -65,34 +66,36 @@ Category errors to refuse up front:
 
 ## 3. External primaries (prefer Jun–Aug 2026)
 
+**GitHub implement SoR bar (this memo):** stars **≥1000** at research fetch, plus recent push signal. Below that → **Refuse as SoR** (algorithm may still be Evidenced via arXiv alone).
+
 ### 3.1 Watch → findings → adopt (stalker-shaped)
 
 | Source | Date | Claim | Tier | Stars / note |
 | --- | --- | --- | --- | --- |
-| [GitHub Agentic Workflows — Continuous Improvement](https://github.github.com/gh-aw/blog/2026-01-13-meet-the-workflows-continuous-improvement/) | 2026-01-13 | Daily/rotating **Quality Improver** + dependency/type agents; **cache memory** (60% custom / 30% standard / 10% revisit); output = Discussions → Plan → issues → PRs (**ResearchPlanAssignOps**), not infinite chat | Evidenced | Official gh-aw / GitHub Next blog (slightly before Jun window; still the clearest *native* continuous-watch recipe) |
-| [projectmem — arXiv:2606.12329](https://arxiv.org/abs/2606.12329) · [github.com/riponcm/projectmem](https://github.com/riponcm/projectmem) | 2026-06 | Append-only **event log** (issues/attempts/fixes/decisions) → deterministic **projected summaries** via MCP; **pre-action gate** (“you tried this — it failed”) = Memory-as-Governance | Evidenced | **579★** (fetched 2026-08-09); MIT; local-first |
-| [icat-agent — arXiv:2606.25514](https://arxiv.org/abs/2606.25514) | 2026-06 | Decentralized Explorer / Validator / Patch Editor; **event-based message passing** replaces shared context; rubric pivots workflow; cost ↓ vs multi-agent Claude Code baseline on SWE-bench | Evidenced | Strong anti-bloat scaffold for *fix* half |
-| [ai-repo-health-agent](https://github.com/Acquarts/ai-repo-health-agent) | 2026 (active) | On-demand repo health: EOL deps, deprecated APIs, modernization; **one issue per repo**; deterministic auditors + LLM report; verify versions against PyPI/npm/endoflife | Evidenced | **0★** — pattern useful; do **not** treat as mature SoR |
-| [RefactorAssist — arXiv:2608.00924](https://arxiv.org/abs/2608.00924) | 2026-08 | LLM refactor fails often (hallucination / rename / incompleteness…); **static repair first**, then test-guided agentic repair → high cumulative pass | Evidenced | Guides *how* to adopt refactorations safely |
-| [ReProAgent — arXiv:2607.09123](https://arxiv.org/abs/2607.09123) | 2026-07 | Multi-stage localization → root cause → test plan → generation for **reproduction tests** from issues | Evidenced | Useful when findings need executable proof |
-| [ConFL — arXiv:2608.02974](https://arxiv.org/abs/2608.02974) | 2026-08 | Hierarchy-guided concurrent fault localization; structured KB + DSL — focused reasoning without deep call-chain dumps | Evidenced | ISSTA 2026; niche (concurrency) |
+| [github/gh-aw](https://github.com/github/gh-aw) + [Continuous Improvement blog](https://github.github.com/gh-aw/blog/2026-01-13-meet-the-workflows-continuous-improvement/) | 2025–2026 | Markdown agentic workflows in Actions; rotating **Quality Improver** + dependency/type agents; **cache memory** (60/30/10); Discussions → Plan → issues → PRs | Evidenced | **≈4886★** (2026-08-09); official GitHub/Microsoft — primary *native* continuous-watch recipe |
+| [icat-agent — arXiv:2606.25514](https://arxiv.org/abs/2606.25514) | 2026-06 | Decentralized Explorer / Validator / Patch Editor; **event-based message passing** replaces shared context; SWE-bench cost/accuracy gains | Evidenced | Paper SoR; no weak companion GH required |
+| [RefactorAssist — arXiv:2608.00924](https://arxiv.org/abs/2608.00924) | 2026-08 | LLM refactor failure taxonomy; **static repair first**, then test-guided agentic repair | Evidenced | Paper SoR |
+| [ReProAgent — arXiv:2607.09123](https://arxiv.org/abs/2607.09123) | 2026-07 | Multi-stage reproduction-test generation from issues | Evidenced | Paper SoR |
+| [ConFL — arXiv:2608.02974](https://arxiv.org/abs/2608.02974) | 2026-08 | Hierarchy-guided concurrent fault localization; structured KB | Evidenced | ISSTA 2026; niche |
 
-### 3.2 Context non-bloat (algorithms / scaffolds)
+### 3.2 Context non-bloat (algorithms + ≥1k★ memory stacks)
 
-| Source | Date | Claim | Tier |
-| --- | --- | --- | --- |
-| [Focus / Active Context Compression — arXiv:2601.07190](https://arxiv.org/abs/2601.07190) | 2026-01 | Agent-controlled `start_focus` / `complete_focus`; prune raw history into persistent Knowledge block; **sawtooth** context; ~22.7% tokens @ equal accuracy (N=5); aggressive prompting required | Evidenced |
-| [CompactionRL — arXiv:2607.05378](https://arxiv.org/abs/2607.05378) | 2026-07 | Trainable compaction inside RL rollouts; summary + short tail resume; SWE-bench / Terminal-Bench gains on open GLM models | Evidenced |
-| [CAT — Context as a Tool — arXiv:2512.22087](https://arxiv.org/abs/2512.22087) | 2025-12 | Context workspace \(Q, M(t), I^{(k)}(t)\); compression as **callable tool**; SWE-Compressor 57.6% SWE-Bench-Verified (reported) | Evidenced (just outside Jun window; algorithm still current) |
-| ContextPilot (Gao et al., PDF) | 2026 | Explorer/generator split + memory summaries for repo-scale context | Evidenced (secondary PDF; prefer arXiv ID when indexed — mark **Unknown** if ID missing) |
+| Source | Date | Claim | Tier | Stars / note |
+| --- | --- | --- | --- | --- |
+| [mem0ai/mem0](https://github.com/mem0ai/mem0) | ongoing + Apr 2026 algo refresh | External memory API; MCP / Claude Code hooks; PreCompact session summary — **projected** retrieve, not full transcript replay | Evidenced | **≈62k★** (2026-08-09) — ≥1k bar; Spike only (telemetry / cloud MCP caution) |
+| [letta-ai/letta](https://github.com/letta-ai/letta) (MemGPT lineage) | ongoing | Tiered agent-managed memory; stateful agents | Evidenced | **≈24k★** — ≥1k bar; Spike; do not force as kernel dep |
+| [Focus — arXiv:2601.07190](https://arxiv.org/abs/2601.07190) | 2026-01 | Agent-controlled compress/prune; sawtooth context; ~22.7% tokens @ equal accuracy (N=5) | Evidenced | Paper SoR |
+| [CompactionRL — arXiv:2607.05378](https://arxiv.org/abs/2607.05378) | 2026-07 | Trainable compaction in RL rollouts | Evidenced | Paper only — **Refuse** weight training in-tree |
+| [CAT — arXiv:2512.22087](https://arxiv.org/abs/2512.22087) | 2025-12 | Context as callable tool; \(Q, M(t), I^{(k)}(t)\) | Evidenced | Just outside Jun window; algorithm still current |
 
-### 3.3 Orientation / caution
+### 3.3 Orientation / refuse as implement SoR
 
 | Source | Note | Tier |
 | --- | --- | --- |
-| Truemend (truemend.ai) | Marketing “lives in repo / mends debt”; AST claims — useful as **category existence**, not SoR | Unknown (vendor) |
-| Agent Audit — arXiv:2603.22853 | Security scan for *agent apps* (SAST/SARIF) — adjacent, not general stalker | Evidenced |
-| DeepWiki | Cartography only for unfamiliar GH trees | Confirmed process (steering 00) |
+| [riponcm/projectmem](https://github.com/riponcm/projectmem) + [arXiv:2606.12329](https://arxiv.org/abs/2606.12329) | Event-log + MCP projection + pre-action gate is a *useful algorithm*; GH tree **≈579★ &lt; 1k** → **Refuse as SoR**. Prefer arXiv claim + thin in-repo ledger or Mem0/Letta spike | Evidenced (paper) / **Refuse (GH impl)** |
+| [Acquarts/ai-repo-health-agent](https://github.com/Acquarts/ai-repo-health-agent) | EOL/modernize issue reporter — **0★**, immature | **Refuse** |
+| Truemend (truemend.ai) | Vendor “mend debt” marketing | Unknown (vendor) |
+| DeepWiki | Cartography only | Confirmed process (steering 00) |
 
 ---
 
@@ -124,9 +127,9 @@ Category errors to refuse up front:
 | Layer | Mid-2026 recipe | Anti-pattern |
 | --- | --- | --- |
 | **Sense** | Deterministic auditors + CI sensors (E-RUN, CodeQL, claims, size) | LLM re-grades Cover% |
-| **Remember** | Append-only events + *projected* summaries (`projectmem`); rotating cache (gh-aw) | Append-only chat as SoT |
-| **Judge** | Pre-action gate / rubric pivot (`projectmem`, `icat`) | Soft “remember to check backlog” only |
-| **Propose** | Findings → discussion/memo → Plan (ResearchPlanAssignOps) | Silent auto-refactor on main |
+| **Remember** | Projected memory (Mem0/Letta class **or** thin in-repo ledger); rotating cache (gh-aw) | Append-only chat as SoT; sub-1k GH memory toys as deps |
+| **Judge** | Rubric pivot (`icat` arXiv); pre-action warnings from **our** ledger | Soft “remember to check backlog” only |
+| **Propose** | Findings → discussion/memo → Plan (gh-aw ResearchPlanAssignOps) | Silent auto-refactor on main |
 | **Act** | Short-horizon fixer with event messages + compaction (`icat`, Focus, RefactorAssist static-first) | Shared megacontext explorer+fixer forever |
 | **Close loop** | Backlog Archive + session-log only when steering claims move | Raw trajectories committed as research |
 
@@ -137,14 +140,17 @@ Category errors to refuse up front:
 | Choice | Stance | Why here |
 | --- | --- | --- |
 | Sensor-first watch (junit durations, claims, size, CodeQL, façade poke) | **Embody** | Already SoT; matches E-RUN / constitution |
-| Findings ledger outside chat (event log → compact projection → backlog/memo) | **Embody** | `projectmem` Memory-as-Governance + DOC refuse chat dumps |
-| Rotating focus areas + revisit budget (Quality Improver 60/30/10) | **Adopt** | Stops “always scan everything” context/cost blowups |
+| Findings ledger outside chat (compact projection → backlog/memo) | **Embody** | DOC refuse chat dumps; arXiv Memory-as-Governance idea without weak GH |
+| Rotating focus areas + revisit budget (gh-aw Quality Improver 60/30/10) | **Adopt** | Stops “always scan everything”; **≥1k★** official stack |
 | ResearchPlanAssignOps (findings → Spec → tickets → PR) | **Adopt** | Matches principal-SE skill Phase A–C |
-| Separate watch vs fix agents; event messages not shared dump | **Adopt** | `icat-agent` Jun 2026 |
-| Active compaction between watch cycles (Focus / CAT-shaped tools) | **Adopt** (process) | Do **not** train CompactionRL in-tree |
+| Separate watch vs fix agents; event messages not shared dump | **Adopt** | `icat-agent` Jun 2026 (paper) |
+| Active compaction between watch cycles (Focus / CAT-shaped) | **Adopt** (process) | Do **not** train CompactionRL in-tree |
 | Static-first then agentic repair for refactors | **Adopt** | RefactorAssist Aug 2026 |
-| gh-aw continuous auto-PR factory as default | **Refuse** (v1) | Tip thrash / Spec bypass risk; remix later as optional |
-| Vendor mend SaaS / 0★ health agents as SoR | **Refuse** | Pattern ok; maturity Unknown |
+| Mem0 / Letta as optional memory Spike | **Adopt spike** | ≥1k★; must stay optional; prefer local / no mandatory cloud telemetry |
+| Thin in-repo event ledger (no third-party memory product) | **Adopt default** | Fits claims/session-log contracts; LOC ≤225 modules |
+| gh-aw continuous auto-PR factory as default | **Refuse** (v1) | Tip thrash / Spec bypass; remix later |
+| `projectmem` GH (<1k★) / `ai-repo-health-agent` (0★) as SoR | **Refuse** | Star floor; paper ideas may inform design without the trees |
+| Vendor mend SaaS | **Refuse** | Unknown maturity |
 | LLM flake triage / LLM-judge as oracle | **Refuse** | E-RUN D8 Defer; synthesis refuse |
 | CompactionRL / weight training as product dep | **Refuse** | Research only; no model zoo |
 
@@ -161,9 +167,9 @@ Category errors to refuse up front:
 | **STK5** | Prefer **deterministic sensors** for detect; LLM only for *ranking / explaining / drafting research questions* when sensors already fired |
 | **STK6** | Adoption path = **Evidenced research memo → Spec gate → Implement** (principal-SE); watch agent stops at memo/backlog draft unless explicitly Spec’d to open draft PRs |
 | **STK7** | Fixer agents (if any) use **event-passed** handoffs + static-first repair; no shared megacontext with the watcher |
-| **STK8** | Optional MCP memory (`projectmem`-shaped) is **Adopt spike** — local-first, no telemetry; must not replace claims/session-log contracts |
+| **STK8** | Memory default = **thin in-repo ledger** projecting into backlog; optional Spike of Mem0/Letta (≥1k★) only if local-first / no telemetry SoT — **never** depend on sub-1k GH memory repos |
 | **STK9** | Suite-stalking remains **E-RUN sensors**; E-STK does not reopen D3/D8/D9 refuses without a new Spec |
-| **STK10** | Refuse: chat dumps as SoT; LLM as 98.7 proof; forever-grandfather of watch noise without Archive; parallel tip thrash from auto-PRs |
+| **STK10** | Refuse: chat dumps as SoT; LLM as 98.7 proof; GH trees **&lt;1000★** as implement SoR; forever-grandfather of watch noise; parallel tip thrash from auto-PRs |
 
 ---
 
@@ -185,10 +191,10 @@ Category errors to refuse up front:
 | **Epic goal** | Spec a stalker-shaped watch loop that surfaces actionable research/refactor opportunities from sensors + focused LLM judgment **without** context accumulation or oracle dilution |
 | **STK0-1** | Approve **STK1–STK10** in this memo | Acceptance: `spec_gate: APPROVED E-STK0` |
 | **STK0-2** | Spike: map existing sensors (suite_timing, claims, size, CodeQL, poke) → finding schema | Exit: one JSON schema draft ≤1 page |
-| **STK0-3** | Spike: `projectmem` MCP vs thin in-repo event log | Exit: Adopt/Defer with LOC/complexipy impact |
+| **STK0-3** | Spike: thin in-repo ledger vs Mem0/Letta (≥1k★) optional MCP — **exclude** projectmem GH | Exit: Adopt default + optional Spike with LOC/complexipy impact |
 | **STK1-1** (after Approve) | Implement ledger writer + rotating focus CLI/hook | Acceptance: cycle resets context; claims green; LOC ≤225 |
 | **STK1-2** | Presenter: findings → backlog stub / research question template | Acceptance: no auto-merge; draft only |
-| **Invariants** | fail_under 98.7; complexipy ≤5; LOC ≤225; no utils/; E-RUN refuses intact |
+| **Invariants** | fail_under 98.7; complexipy ≤5; LOC ≤225; no utils/; E-RUN refuses intact; GH SoR ≥1k★ |
 
 **Ordering:** Do **not** start E-STK1 while E-DOC1 or E-CQL1 owns the tip unless this becomes the single Active stream.
 
@@ -198,14 +204,16 @@ Category errors to refuse up front:
 
 | Debt | Better earlier |
 | --- | --- |
-| Soft “check tool-quirks / backlog” without a findings projection | Event ledger + pre-action gate (`projectmem`) |
+| Soft “check tool-quirks / backlog” without a findings projection | Thin in-repo ledger + cycle reset (Focus/CAT); optional ≥1k★ memory |
 | Suite stalker research bundled with LLM flake triage | Sensor-only first (E-RUN0 got this right) |
 | Continuous improvement = unbounded agent chat | gh-aw rotating focus + causal chain to Spec |
+| Citing immature GH (&lt;1k★) as “the” memory/health product | arXiv for algorithms; ≥1k★ or in-repo for implement |
 
 ---
 
 ## 10. Sources (quick index)
 
-- arXiv: [2606.12329](https://arxiv.org/abs/2606.12329), [2606.25514](https://arxiv.org/abs/2606.25514), [2607.05378](https://arxiv.org/abs/2607.05378), [2607.09123](https://arxiv.org/abs/2607.09123), [2608.00924](https://arxiv.org/abs/2608.00924), [2608.02974](https://arxiv.org/abs/2608.02974), [2601.07190](https://arxiv.org/abs/2601.07190), [2512.22087](https://arxiv.org/abs/2512.22087)
-- GitHub: [riponcm/projectmem](https://github.com/riponcm/projectmem) (579★), [gh-aw continuous improvement](https://github.github.com/gh-aw/blog/2026-01-13-meet-the-workflows-continuous-improvement/), [Acquarts/ai-repo-health-agent](https://github.com/Acquarts/ai-repo-health-agent) (0★)
-- In-repo: suite-stalking design; research 08; quality-backlog P7; E-DOC1 domain map
+- arXiv: [2606.25514](https://arxiv.org/abs/2606.25514), [2607.05378](https://arxiv.org/abs/2607.05378), [2607.09123](https://arxiv.org/abs/2607.09123), [2608.00924](https://arxiv.org/abs/2608.00924), [2608.02974](https://arxiv.org/abs/2608.02974), [2601.07190](https://arxiv.org/abs/2601.07190), [2512.22087](https://arxiv.org/abs/2512.22087), [2606.12329](https://arxiv.org/abs/2606.12329) (algorithm only)
+- GitHub SoR (≥1k★): [github/gh-aw](https://github.com/github/gh-aw) (≈4886★), [mem0ai/mem0](https://github.com/mem0ai/mem0) (≈62k★), [letta-ai/letta](https://github.com/letta-ai/letta) (≈24k★)
+- GitHub **refused** as SoR (&lt;1k★ / immature): [riponcm/projectmem](https://github.com/riponcm/projectmem) (≈579★), [Acquarts/ai-repo-health-agent](https://github.com/Acquarts/ai-repo-health-agent) (0★)
+- In-repo: suite-stalking design; research 08; quality-backlog P7/P15; E-DOC1 domain map
