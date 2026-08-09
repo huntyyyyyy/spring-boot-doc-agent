@@ -99,6 +99,24 @@ def test_cascade_empty_when_coverage_xml_present(tmp_path: Path) -> None:
     assert cascade_markdown(coverage_xml=coverage) == ""
 
 
+def test_render_from_junit_missing_and_cascade(tmp_path: Path) -> None:
+    missing_junit = tmp_path / "absent.junit.xml"
+    missing_cov = tmp_path / "coverage.xml"
+    text = render_from_junit(missing_junit, coverage_xml=missing_cov, top_n=3)
+    assert "junit xml missing" in text
+    assert "Pre-pytest cascade" in text
+    assert "ruff" in text
+
+
+def test_format_timing_empty_report(tmp_path: Path) -> None:
+    coverage = tmp_path / "coverage.xml"
+    coverage.write_text('<coverage line-rate="0.99"/>', encoding="utf-8")
+    markdown = format_timing_markdown(
+        SuiteTimingReport.from_records([]), top_n=5, coverage_xml=coverage
+    )
+    assert "No junit testcase durations found" in markdown
+
+
 def test_presenter_smoke_no_network(tmp_path: Path) -> None:
     junit = tmp_path / "j.xml"
     _write_junit(

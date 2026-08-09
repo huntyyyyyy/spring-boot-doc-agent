@@ -5,16 +5,14 @@ from __future__ import annotations
 import json
 import os
 import shutil
-import subprocess
-import sys
 import tempfile
 import unittest
-from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
-from doc_engine.scanning._resolve_lineage import _SQLLINEAGE_AVAILABLE
-from doc_engine.scanning.facts import facts_from_signals
-from doc_engine.tools import spring_signal_scan
 
 import pytest
+
+from doc_engine.scanning.facts import facts_from_signals
+from doc_engine.tools import spring_signal_scan
+from tests.conftest import FIXTURE_DIR, SCRIPTS_DIR
 
 pytestmark = pytest.mark.domain_stage0
 

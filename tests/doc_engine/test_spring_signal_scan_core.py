@@ -4,17 +4,12 @@ from __future__ import annotations
 
 import json
 import os
-import shutil
-import subprocess
-import sys
-import tempfile
 import unittest
-from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
-from doc_engine.scanning._resolve_lineage import _SQLLINEAGE_AVAILABLE
-from doc_engine.scanning.facts import facts_from_signals
-from doc_engine.tools import spring_signal_scan
 
 import pytest
+
+from doc_engine.tools import spring_signal_scan
+from tests.conftest import FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH, SCRIPTS_DIR
 
 pytestmark = pytest.mark.domain_stage0
 
@@ -25,7 +20,7 @@ SNAPSHOT_SCANNERS = ["filesystem", "ast-grep"]
 class SpringSignalScanTest(unittest.TestCase):
     @classmethod
     def _load_fixture_snapshot(cls):
-        with open(FIXTURE_SNAPSHOT_PATH, "r", encoding="utf-8") as f:
+        with open(FIXTURE_SNAPSHOT_PATH, encoding="utf-8") as f:
             snapshot = json.load(f)
         current_version = spring_signal_scan._scanner_version(SNAPSHOT_SCANNERS)
         if snapshot.get("scanner_version") != current_version:

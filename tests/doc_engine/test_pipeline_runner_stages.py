@@ -6,7 +6,9 @@ import json
 import shutil
 import sys
 from pathlib import Path
+
 import pytest
+
 from doc_engine.pipeline.context import PipelineContext, StageKind, StageSpec
 from doc_engine.pipeline.executor import MockStageExecutor, SubprocessStageRunner
 from doc_engine.pipeline.runner import PipelineRunner
@@ -22,6 +24,7 @@ from tests.support.pipeline_runner.doc_writers import (
 
 pytestmark = pytest.mark.domain_pipeline
 
+@pytest.fixture
 def pipeline_context(tmp_path):
     repo = FIXTURE_DIR
     out = tmp_path / "run"
