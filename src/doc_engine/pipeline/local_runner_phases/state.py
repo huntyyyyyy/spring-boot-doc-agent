@@ -8,7 +8,8 @@ from typing import Any, List, Optional
 from doc_engine.pipeline.compliance import ComplianceProfile
 from doc_engine.pipeline.context import PipelineContext, StageSpec
 from doc_engine.pipeline.executor import MockStageExecutor
-from doc_engine.pipeline.local_runner_phases.support import Log, Runner
+from doc_engine.pipeline.local_runner_phases.runner import Runner
+from doc_engine.pipeline.local_runner_phases.runner_log import Log
 
 
 @dataclass

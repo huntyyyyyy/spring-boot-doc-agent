@@ -110,6 +110,7 @@ class BuildSuitesTest(unittest.TestCase):
         self.assertIn("in_repo_quality_gates", names)
         self.assertIn("test_domain_markers", names)
         self.assertIn("facade_poke_surface", names)
+        self.assertIn("public_surface", names)
         self.assertNotIn("stage0_portable", names)
         self.assertNotIn("mutate_advisory", names)
 

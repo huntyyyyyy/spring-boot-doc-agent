@@ -98,14 +98,15 @@ def test_note_existing_readme_and_generative_abort(tmp_path: Path, monkeypatch: 
     gen_mod._note_existing_readme(state)
     assert log.call_count >= 1
     from doc_engine.pipeline.compliance import ComplianceProfile
-    from doc_engine.pipeline.local_runner_phases.support import Log, Runner
+    from doc_engine.pipeline.local_runner_phases.runner import Runner
+    from doc_engine.pipeline.local_runner_phases.runner_log import Log
     run_log = Log(tmp_path / 'run.log')
     try:
         runner = Runner(run_log, keep_going=False)
         runner.aborted = True
         full = LocalRunState(args=SimpleNamespace(), repo_path=str(tmp_path), out_dir=str(tmp_path / 'out'), docs_dir=str(tmp_path / 'docs'), today='2026-08-08', profile=ComplianceProfile.CERTIFIED, allow_mock=True, skip_signal_scan=False, strict_citations_effective=False, log=run_log, runner=runner, py='python', manifest=str(tmp_path / 'm.json'), signals_path=str(tmp_path / 's.json'), preflight_path=str(tmp_path / 'p.json'), pipeline_ctx=object(), mock_executor=object(), generative_specs=[])
         monkeypatch.setattr(gen_mod, 'PipelineRunner', lambda **_k: SimpleNamespace(run=lambda _ctx: []))
-        monkeypatch.setattr(gen_mod, '_write_certification_and_finish', lambda *a, **k: 9)
+        monkeypatch.setattr(gen_mod, 'write_certification_and_finish', lambda *a, **k: 9)
         assert gen_mod.phase_generative(full) == 9
     finally:
         run_log.close()

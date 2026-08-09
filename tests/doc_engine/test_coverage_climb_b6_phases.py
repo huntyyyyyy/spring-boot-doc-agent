@@ -88,10 +88,10 @@ def test_post_stage0_scan_only_finish(
         post.gates, "run_gate_via_runner", lambda *a, **k: finish.append("gate")
     )
     monkeypatch.setattr(post.gates, "run_validate_spring_signals", lambda *_a: None)
-    monkeypatch.setattr(post, "_artifact_inventory", lambda *_a: finish.append("inv"))
+    monkeypatch.setattr(post, "artifact_inventory", lambda *_a: finish.append("inv"))
     monkeypatch.setattr(
         post,
-        "_write_certification_and_finish",
+        "write_certification_and_finish",
         lambda *a, **k: finish.append(k.get("success_lines")) or 0,
     )
     scan_state = SimpleNamespace(
@@ -124,13 +124,13 @@ def test_generative_abort_path(
     monkeypatch.setattr(gen, "PipelineRunner", FakeGenRunner)
     monkeypatch.setattr(
         gen,
-        "_record_pipeline_stage_results",
+        "record_pipeline_stage_results",
         lambda runner, results, ok_status="MOCK": recorded.append(ok_status),
     )
     finish_kw: dict = {}
     monkeypatch.setattr(
         gen,
-        "_write_certification_and_finish",
+        "write_certification_and_finish",
         lambda *a, **kwargs: finish_kw.update(kwargs) or 4,
     )
     abort_state = SimpleNamespace(
@@ -160,7 +160,7 @@ def test_generative_readme_note(
 
     monkeypatch.setattr(gen, "PipelineRunner", FakeGenRunner)
     monkeypatch.setattr(
-        gen, "_record_pipeline_stage_results", lambda *a, **k: None
+        gen, "record_pipeline_stage_results", lambda *a, **k: None
     )
     (tmp_path / "README.md").write_text("# hi\n", encoding="utf-8")
     ok_log = _Log()

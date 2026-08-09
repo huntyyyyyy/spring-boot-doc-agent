@@ -13,8 +13,9 @@ from doc_engine.pipeline.compliance import (
     citations_are_strict,
     resolve_compliance_profile,
 )
+from doc_engine.pipeline.local_runner_phases.runner import Runner
+from doc_engine.pipeline.local_runner_phases.runner_log import Log
 from doc_engine.pipeline.local_runner_phases.state import LocalRunState
-from doc_engine.pipeline.local_runner_phases.support import Log, Runner
 
 
 def _require_repo_dir(repo_path: str) -> int | None:

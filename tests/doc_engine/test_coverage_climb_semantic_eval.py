@@ -10,22 +10,29 @@ import pytest
 from doc_engine import paths as paths_mod
 from doc_engine.paths import PathValidationError
 from doc_engine.scanning.gap_probe import absence_recall as absence
-from doc_engine.tools import semantic_eval_helpers as seh
+from doc_engine.tools import semantic_eval as seh
+from doc_engine.tools.semantic_eval_confirmed import claim_clause, tokenize
+from doc_engine.tools.semantic_eval_scan import (
+    markdown_names,
+    resolve_architecture_path,
+    scan_confirmed_docs,
+    scan_mermaid,
+)
 from doc_engine.tools import spring_signal_scan as sss
 
 pytestmark = pytest.mark.domain_climb_sensor
 
 def test_tokenize_and_claim_clause() -> None:
-    toks = seh._tokenize("The Widget Service is ready for use")
+    toks = tokenize("The Widget Service is ready for use")
     assert "widget" in toks
     assert "the" not in toks
     # Use the same em dash as CONFIRMED_TAG_RE (U+2014).
     tag = "[Confirmed \u2014 interview, 2026-01-01]"
-    # No trailing period before the tag — _claim_clause splits on [.!?]\s+.
+    # No trailing period before the tag — claim_clause splits on [.!?]\s+.
     text = f"First sentence. Second claim here {tag}"
     m = seh.CONFIRMED_TAG_RE.search(text)
     assert m is not None
-    clause = seh._claim_clause(text, m.start())
+    clause = claim_clause(text, m.start())
     assert "Second claim" in clause
 
 def test_markdown_names_and_scan_confirmed(tmp_path: Path) -> None:
@@ -36,7 +43,7 @@ def test_markdown_names_and_scan_confirmed(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     (docs / "skip.txt").write_text("x", encoding="utf-8")
-    names = seh._markdown_names(str(docs))
+    names = markdown_names(str(docs))
     assert names == ["readme.md"]
 
     interview = [
@@ -49,11 +56,11 @@ def test_markdown_names_and_scan_confirmed(tmp_path: Path) -> None:
         }
     ]
     # High threshold forces unmatched when overlap is modest.
-    findings = seh._scan_confirmed_docs(str(tmp_path), interview, overlap_threshold=0.99)
+    findings = scan_confirmed_docs(str(tmp_path), interview, overlap_threshold=0.99)
     assert "readme.md" in findings or findings == {}
 
 def test_resolve_architecture_and_mermaid(tmp_path: Path) -> None:
-    assert seh._resolve_architecture_path(str(tmp_path)) is None
+    assert resolve_architecture_path(str(tmp_path)) is None
     docs = tmp_path / "docs"
     docs.mkdir()
     arch = docs / "architecture.md"
@@ -61,8 +68,8 @@ def test_resolve_architecture_and_mermaid(tmp_path: Path) -> None:
         "```mermaid\nflowchart LR\n  A-->B\n```\n",
         encoding="utf-8",
     )
-    assert seh._resolve_architecture_path(str(tmp_path)).endswith("architecture.md")
-    findings = seh._scan_mermaid(str(tmp_path))
+    assert resolve_architecture_path(str(tmp_path)).endswith("architecture.md")
+    findings = scan_mermaid(str(tmp_path))
     assert isinstance(findings, list)
 
 def test_semantic_run_and_main(
@@ -81,7 +88,7 @@ def test_semantic_run_and_main(
     )
     seh.main()
     assert out.is_file()
-    assert "semantic_eval_helpers" in capsys.readouterr().out
+    assert "semantic_eval" in capsys.readouterr().out
 
 def test_semantic_main_bad_artifacts(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
     monkeypatch.setattr("sys.argv", ["seh", "/no/such/artifacts"])

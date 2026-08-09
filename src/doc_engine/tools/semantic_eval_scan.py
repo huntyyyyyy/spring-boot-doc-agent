@@ -25,7 +25,7 @@ from doc_engine.tools.semantic_eval_mermaid import (
 
 def _facade():
     """Lazy façade bind so monkeypatch.setattr(seh, 'join_under', …) still bites."""
-    from doc_engine.tools import semantic_eval_helpers as facade
+    from doc_engine.tools import semantic_eval as facade
 
     return facade
 
@@ -111,7 +111,7 @@ def run(artifacts_dir, overlap_threshold=DEFAULT_OVERLAP_THRESHOLD):
 def _print_summary(report) -> None:
     total_confirmed = sum(len(v) for v in report["unmatched_confirmed_tags_by_file"].values())
     print(
-        f"semantic_eval_helpers: {total_confirmed} unmatched [Confirmed] tag(s) across "
+        f"semantic_eval: {total_confirmed} unmatched [Confirmed] tag(s) across "
         f"{len(report['unmatched_confirmed_tags_by_file'])} file(s); "
         f"{len(report['mermaid_syntax_findings'])} Mermaid syntax finding(s)."
     )

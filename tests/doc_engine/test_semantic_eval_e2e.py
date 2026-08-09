@@ -8,7 +8,7 @@ import sys
 import tempfile
 import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
-from doc_engine.tools import semantic_eval_helpers
+from doc_engine.tools import semantic_eval as semantic_eval_helpers
 
 import pytest
 

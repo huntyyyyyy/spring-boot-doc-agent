@@ -13,7 +13,6 @@ from unittest.mock import MagicMock
 import pytest
 from doc_engine.core import excludes as excludes_mod
 from doc_engine.core import timeouts as timeouts_mod
-from doc_engine.pipeline.local_runner_phases import support as phase_support
 from doc_engine.query import kinds as kinds_mod
 from doc_engine.query.protocols import FreshnessPolicy, PacketProvider
 from doc_engine.scanning import spring as spring_mod

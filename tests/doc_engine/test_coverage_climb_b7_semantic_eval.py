@@ -1,6 +1,6 @@
-"""Coverage climb B7: semantic_eval_helpers overlap / path / main edges.
+"""Coverage climb B7: semantic_eval overlap / path / main edges.
 
-Q2 adequacy witness: mutmut_slice on doc_engine.tools.semantic_eval_helpers —
+Q2 adequacy witness: mutmut_slice on doc_engine.tools.semantic_eval —
 asserts bite empty-token skip, PathValidationError continues, empty mermaid,
 and main() path-validation exits.
 """
@@ -12,13 +12,19 @@ from pathlib import Path
 import pytest
 
 from doc_engine.paths import PathValidationError
-from doc_engine.tools import semantic_eval_helpers as seh
+from doc_engine.tools import semantic_eval as seh
+from doc_engine.tools.semantic_eval_confirmed import best_overlap
+from doc_engine.tools.semantic_eval_scan import (
+    markdown_names,
+    resolve_architecture_path,
+    scan_mermaid,
+)
 
 pytestmark = pytest.mark.domain_climb_sensor
 
 
 def test_best_overlap_skips_empty_tokens() -> None:
-    ratio, entry = seh._best_overlap({"a", "b"}, [([], {"topic": "x"}), ({"a"}, {"topic": "y"})])
+    ratio, entry = best_overlap({"a", "b"}, [([], {"topic": "x"}), ({"a"}, {"topic": "y"})])
     assert entry["topic"] == "y"
     assert ratio > 0
 
@@ -36,7 +42,7 @@ def test_markdown_names_skips_invalid(
         return Path(docs_dir) / name
 
     monkeypatch.setattr(seh, "join_under", fake_join)
-    names = seh._markdown_names(str(tmp_path))
+    names = markdown_names(str(tmp_path))
     assert names == ["ok.md"]
 
 
@@ -50,7 +56,7 @@ def test_resolve_architecture_path_validation_continue(
         raise PathValidationError("nope")
 
     monkeypatch.setattr(seh, "join_under", boom)
-    assert seh._resolve_architecture_path(str(tmp_path)) is None
+    assert resolve_architecture_path(str(tmp_path)) is None
     assert calls["n"] >= 1
 
 
@@ -58,7 +64,7 @@ def test_scan_mermaid_empty_when_no_block(tmp_path: Path) -> None:
     docs = tmp_path / "docs"
     docs.mkdir()
     (docs / "architecture.md").write_text("# no mermaid here\n", encoding="utf-8")
-    assert seh._scan_mermaid(str(tmp_path)) == []
+    assert scan_mermaid(str(tmp_path)) == []
 
 
 def test_main_path_validation_exits(

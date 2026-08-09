@@ -231,6 +231,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Done slice (2026-08-09):** E-COH1 public-surface fitness + delete `support`/`inventory_drift` warehouses; `semantic_eval` public façade.  
 **Done Spec + Implement:** **E-SEL0 / E-SEL1** — fine ABI file paths + path→domain pre_pr pytest select (2026-08-09).  
 **Done Spec + Implement:** **E-TEL0 / E-TEL1** — mutation_driver regression + local telemetry ETL + G7 (2026-08-09).  
 **Done Spec + Implement:** **E-HOOK0 / E-HOOK1** — pre-push install/chain + local quality-gates; optional Sonar advisory (2026-08-09).  
@@ -287,7 +288,7 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P17.0 | **E-COH0 Spec:** approve **COH1–COH12** (pause thrash; concept bar; façade≠private warehouse; seam map before moves) | **Approved** (2026-08-09) | design memo `spec_gate: APPROVED E-COH0` |
-| P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Active** (2026-08-09) | COH2–COH4 on touch; CGQ3 Accept; claims green |
+| P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Active** (2026-08-09); public-surface slice Done | COH2–COH4 on touch; CGQ3 Accept; `check_public_surface` hard |
 | P17.2 | **E-COH2:** align reshape with E-TACH1/2 layers + interfaces | After E-TACH0 Approve | `tach check`; public `expose` only |
 
 Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md). Research: modularity/20. **Refuse** mechanical cut-and-paste that only clears LOC/statement gates.

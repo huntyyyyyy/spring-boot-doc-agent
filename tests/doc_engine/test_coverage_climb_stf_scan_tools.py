@@ -7,7 +7,27 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 import pytest
-from doc_engine.pipeline.local_runner_phases import support as phase_support
+from doc_engine.pipeline.local_runner_phases.artifact_inventory import (
+    artifact_inventory,
+)
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    certification_failure_summary,
+    emit_certification_outcome,
+    write_certification_and_finish,
+)
+from doc_engine.pipeline.local_runner_phases.drift_check_phase import run_drift_check
+from doc_engine.pipeline.local_runner_phases.runner import Runner
+from doc_engine.pipeline.local_runner_phases.runner_argv import py_mod
+from doc_engine.pipeline.local_runner_phases.runner_log import (
+    Log,
+    reconfigure_stdio_utf8,
+)
+from doc_engine.pipeline.local_runner_phases.stage_recording import (
+    classify_subprocess_status,
+    gate_status_from_runner_status,
+    quote,
+    record_pipeline_stage_results,
+)
 from doc_engine.query import kinds as kinds_mod
 from doc_engine.query import load as load_mod
 from doc_engine.query import packet as packet_mod
@@ -64,9 +84,9 @@ def test_gradle_maven_tool_requires_marker_and_binary(
     assert "mvn" in (spring_mod._maven_tool_command(str(tmp_path), "m") or "")
 
 def test_runner_keep_going_and_quiet_paths(tmp_path: Path) -> None:
-    log = phase_support.Log(tmp_path / "run.log")
+    log = Log(tmp_path / "run.log")
     try:
-        runner = phase_support.Runner(log, keep_going=True)
+        runner = Runner(log, keep_going=True)
         runner._mark_critical_abort("stage0")
         assert runner.aborted is False
         runner._log_step_header("q", ["echo", "hi there"], quiet=True)

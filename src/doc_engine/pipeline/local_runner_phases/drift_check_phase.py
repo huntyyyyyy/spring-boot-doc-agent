@@ -1,23 +1,10 @@
-"""Artifact inventory and drift-check helpers for local-runner phases."""
+"""Optional spring_drift_check phase for the local pipeline runner."""
 
 from __future__ import annotations
 
 import os
-import sys
 
-
-def py_mod(module: str, *args: str) -> list[str]:
-    return [sys.executable, "-m", module, *args]
-
-
-def artifact_inventory(log, out_dir):
-    log.rule("ARTIFACT INVENTORY")
-    for root, dirs, files in os.walk(out_dir):
-        dirs.sort()
-        for name in sorted(files):
-            abspath = os.path.join(root, name)
-            rel = os.path.relpath(abspath, out_dir).replace(os.sep, "/")
-            log(f"  {os.path.getsize(abspath):>9,} B  {rel}")
+from doc_engine.pipeline.local_runner_phases.runner_argv import py_mod
 
 
 def run_drift_check(log, runner, repo_path, manifest, out_dir, args, signals_path):

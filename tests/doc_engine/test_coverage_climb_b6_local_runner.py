@@ -76,7 +76,7 @@ def test_phase_stage0_success_and_abort(
     monkeypatch.setattr(stage0_mod, "PipelineRunner", FakeDetRunner)
     monkeypatch.setattr(
         stage0_mod,
-        "_record_pipeline_stage_results",
+        "record_pipeline_stage_results",
         lambda runner, results, ok_status="OK": recorded.append(
             (ok_status, list(results))
         ),
@@ -87,7 +87,7 @@ def test_phase_stage0_success_and_abort(
         finish_calls.append(dict(kwargs))
         return 9
 
-    monkeypatch.setattr(stage0_mod, "_write_certification_and_finish", fake_finish)
+    monkeypatch.setattr(stage0_mod, "write_certification_and_finish", fake_finish)
 
     ok_runner = FakeOuterRunner()
     state_ok = SimpleNamespace(

@@ -47,9 +47,9 @@ def patch_det_phase_side_effects(
         lambda *a, **k: calls.append(k.get("gate_id") or "gate"),
     )
     monkeypatch.setattr(det.gates, "run_validate_all_artifacts", lambda *_a, **_k: None)
-    monkeypatch.setattr(det, "_run_drift_check", lambda *_a, **_k: calls.append("drift"))
-    monkeypatch.setattr(det, "_artifact_inventory", lambda *_a, **_k: calls.append("inv"))
-    monkeypatch.setattr(det, "_write_certification_and_finish", fake_finish)
+    monkeypatch.setattr(det, "run_drift_check", lambda *_a, **_k: calls.append("drift"))
+    monkeypatch.setattr(det, "artifact_inventory", lambda *_a, **_k: calls.append("inv"))
+    monkeypatch.setattr(det, "write_certification_and_finish", fake_finish)
 
 
 def make_phase_state(tmp_path, *, profile, generative_specs, out_name, until_stage, allow_mock, calls):

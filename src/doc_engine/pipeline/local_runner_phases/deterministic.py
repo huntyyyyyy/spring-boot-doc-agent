@@ -6,13 +6,15 @@ from typing import Optional
 
 from doc_engine.pipeline import gates
 from doc_engine.pipeline.compliance import ComplianceProfile
-from doc_engine.pipeline.local_runner_phases.state import LocalRunState
-from doc_engine.pipeline.local_runner_phases.support import (
-    _artifact_inventory,
-    _py_mod,
-    _run_drift_check,
-    _write_certification_and_finish,
+from doc_engine.pipeline.local_runner_phases.artifact_inventory import (
+    artifact_inventory,
 )
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    write_certification_and_finish,
+)
+from doc_engine.pipeline.local_runner_phases.drift_check_phase import run_drift_check
+from doc_engine.pipeline.local_runner_phases.runner_argv import py_mod
+from doc_engine.pipeline.local_runner_phases.state import LocalRunState
 
 
 def phase_deterministic_only(state: LocalRunState) -> Optional[int]:
@@ -35,7 +37,7 @@ def phase_deterministic_only(state: LocalRunState) -> Optional[int]:
     )
 
     log.rule("FINALIZE (real)")
-    fin_argv = _py_mod(
+    fin_argv = py_mod(
         "doc_engine.tools.run_manifest",
         "finalize",
         state.manifest,
@@ -47,10 +49,10 @@ def phase_deterministic_only(state: LocalRunState) -> Optional[int]:
     runner.run("run_manifest finalize", fin_argv)
     runner.run(
         "run_manifest summary",
-        _py_mod("doc_engine.tools.run_manifest", "summary", state.manifest),
+        py_mod("doc_engine.tools.run_manifest", "summary", state.manifest),
     )
 
-    _run_drift_check(
+    run_drift_check(
         log,
         runner,
         state.repo_path,
@@ -59,14 +61,14 @@ def phase_deterministic_only(state: LocalRunState) -> Optional[int]:
         args,
         state.signals_path,
     )
-    _artifact_inventory(log, state.out_dir)
+    artifact_inventory(log, state.out_dir)
 
     until_note = (
         f" Stopped after --until {state.until_stage}."
         if state.until_stage and profile == ComplianceProfile.CERTIFIED
         else ""
     )
-    return _write_certification_and_finish(
+    return write_certification_and_finish(
         log,
         runner,
         profile,

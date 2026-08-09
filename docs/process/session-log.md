@@ -4848,3 +4848,11 @@ Assumptions affected:
 - Research look-first was soft skill only — [Resolved — `.cursor/hooks.json` inject + Read receipt + fail-closed design writes; `docs/research/README.md` domain map]
 - `claude/` as process SoR — [Resolved — tombstone + archive under `docs/research/archive/claude-lore/`; adapter packaging kept]
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
+
+## 2026-08-09 — E-COH1 public-surface fitness + residual-bin reshape
+Commit: 36bd64b6
+Tests: 131 focused passed; complexipy 0 offenders; claims OK; public_surface hard in pre_pr
+Assumptions affected:
+- MOD-S1 provisional façades may re-export private `_` indefinitely — [Resolved — `check_public_surface` hard in `pre_pr`; `support.py`/`inventory_drift.py` deleted; `semantic_eval` public façade]
+- Cohesion Accept was LOC-only — [Still accurate bar; [New info — CGQ3 Accept + fitness witness for public `__all__`]]
+Files touched: public_surface_policy.py, check_public_surface.py, pre_pr.py, local_runner_phases/*, semantic_eval*.py, tests/ci/test_public_surface_policy.py, modularity/21-*, concept-split design appendix, quality-backlog, session-log

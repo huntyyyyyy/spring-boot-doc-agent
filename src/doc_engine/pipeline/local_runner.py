@@ -86,11 +86,6 @@ from doc_engine.pipeline.compliance import ComplianceProfile
 from doc_engine.pipeline.local_runner_phases import (  # noqa: F401 — public re-exports
     Log,
     Runner,
-    _artifact_inventory,
-    _py_mod,
-    _quote,
-    _run_drift_check,
-    _write_certification_and_finish,
 )
 from doc_engine.pipeline.local_runner_phases.context import phase_build_context
 from doc_engine.pipeline.local_runner_phases.deterministic import phase_deterministic_only
@@ -100,6 +95,15 @@ from doc_engine.pipeline.local_runner_phases.post_stage0 import phase_post_stage
 from doc_engine.pipeline.local_runner_phases.setup import phase_setup
 from doc_engine.pipeline.local_runner_phases.stage0 import phase_stage0
 
+__all__ = [
+    "ComplianceProfile",
+    "Log",
+    "Runner",
+    "add_run_arguments",
+    "build_arg_parser",
+    "main",
+    "run_pipeline",
+]
 
 def build_arg_parser():
     ap = argparse.ArgumentParser(

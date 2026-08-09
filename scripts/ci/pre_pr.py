@@ -321,6 +321,11 @@ def _facade_poke_surface() -> int:
     return _py_script("scripts", "ci", "check_facade_poke_surface.py")()
 
 
+def _public_surface() -> int:
+    """E-COH1: curated façades must not export private ``_`` names / residual bins."""
+    return _py_script("scripts", "ci", "check_public_surface.py")()
+
+
 def _pytest() -> int:
     """Run pytest; standard mode may domain-select (E-SEL1); full always whole tree."""
     force_full = os.environ.get("PRE_PR_PYTEST_FULL", "").strip() in (
@@ -624,6 +629,7 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
             ),
             ("test_domain_markers", "hard", _domain_markers),
             ("facade_poke_surface", "hard", _facade_poke_surface),
+            ("public_surface", "hard", _public_surface),
             (
                 "stalker_sensors",
                 "advisory",

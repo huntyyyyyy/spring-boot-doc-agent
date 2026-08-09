@@ -10,7 +10,12 @@ from types import SimpleNamespace
 from doc_engine import cli_scan_config
 from doc_engine.config import loader
 from doc_engine.core.context import ScanContext, _ingest_walked_file
-from doc_engine.pipeline.local_runner_phases import support
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    certification_failure_summary,
+)
+from doc_engine.pipeline.local_runner_phases.stage_recording import (
+    record_pipeline_stage_results,
+)
 from doc_engine.pipeline.local_runner_phases.context import (
     _ensure_todos,
     _partition_specs_by_kind,
@@ -124,7 +129,7 @@ def test_record_pipeline_stage_results_sets_abort():
     runner.record = record
     ok = SimpleNamespace(success=True, detail="fine", error=None)
     bad = SimpleNamespace(success=False, detail="", error="boom")
-    support._record_pipeline_stage_results(
+    record_pipeline_stage_results(
         runner, [("s1", ok), ("s2", bad)], ok_status="OK"
     )
     assert runner.aborted is True
@@ -145,7 +150,7 @@ def test_certification_failure_summary_lists_stages_and_gates():
             SimpleNamespace(name="stage_b", status="ok"),
         ]
     )
-    summary = support._certification_failure_summary(runner, report)
+    summary = certification_failure_summary(runner, report)
     assert "stages: stage_a" in summary
     assert "gates: g1" in summary
 

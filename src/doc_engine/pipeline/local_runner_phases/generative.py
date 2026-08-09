@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from typing import Optional
 
-from doc_engine.pipeline.local_runner_phases.state import LocalRunState
-from doc_engine.pipeline.local_runner_phases.support import (
-    _record_pipeline_stage_results,
-    _write_certification_and_finish,
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    write_certification_and_finish,
 )
+from doc_engine.pipeline.local_runner_phases.stage_recording import (
+    record_pipeline_stage_results,
+)
+from doc_engine.pipeline.local_runner_phases.state import LocalRunState
 from doc_engine.pipeline.mock_stages import find_existing_readme
 from doc_engine.pipeline.runner import PipelineRunner
 
@@ -36,12 +38,12 @@ def phase_generative(state: LocalRunState) -> Optional[int]:
         generative_executor=state.mock_executor,
         stages=state.generative_specs,
     )
-    _record_pipeline_stage_results(
+    record_pipeline_stage_results(
         runner, gen_runner.run(state.pipeline_ctx), ok_status="MOCK"
     )
 
     if runner.aborted:
-        return _write_certification_and_finish(
+        return write_certification_and_finish(
             log,
             runner,
             state.profile,
