@@ -158,13 +158,20 @@ def _raw_query_entries_with_resolved_entity(signals):
     lineage was resolved through an entity (lineage.resolved_via_entity,
     spring_signal_scan.py schema_version >= 6) — the only citations with a
     second provenance input beyond their own file. Native-query entries and
-    out-of-scope/unavailable JPQL entries (no resolved_via_entity key at
-    all — see resolve_jpql_to_lineage()) are silently skipped, not an
-    oversight: they have exactly one input (their own file), already
-    covered by the ordinary per-file tier-1/tier-2 loop."""
+    out-of-scope/unavailable JPQL entries (``available`` false / no
+    ``resolved_via_entity`` — see resolve_jpql_to_lineage()) are silently
+    skipped, not an oversight: they have exactly one input (their own file),
+    already covered by the ordinary per-file tier-1/tier-2 loop. Both
+    ``available`` and ``resolved_via_entity`` must be truthy so a corrupt
+    hand-edited signals blob cannot re-open provenance reverify on an
+    unavailable lineage that still carries a stale entity key."""
     for entry in signals.get("evidence", {}).get("raw_queries", []):
         lineage = entry.get("lineage")
-        if lineage and lineage.get("resolved_via_entity"):
+        if (
+            lineage
+            and lineage.get("available")
+            and lineage.get("resolved_via_entity")
+        ):
             yield entry
 
 

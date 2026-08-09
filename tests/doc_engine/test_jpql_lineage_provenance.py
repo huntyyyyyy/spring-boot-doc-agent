@@ -33,7 +33,17 @@ class JpqlLineageProvenanceTest(unittest.TestCase):
     SpringDriftCheckTest above, which cover the same behavior end-to-end."""
 
     def _signals(self, resolved_via_entity="Invoice", available=True):
-        lineage = {"available": available, "source_tables": ["billing_invoice"], "target_tables": []}
+        # Match resolve_jpql_to_lineage shapes: available True carries tables +
+        # resolved_via_entity; unavailable is reason-only (no entity key).
+        lineage = (
+            {"available": False, "reason": "out of scope for the bounded JPQL resolver"}
+            if not available
+            else {
+                "available": True,
+                "source_tables": ["billing_invoice"],
+                "target_tables": [],
+            }
+        )
         if available and resolved_via_entity is not None:
             lineage["resolved_via_entity"] = resolved_via_entity
         return {
@@ -70,10 +80,17 @@ class JpqlLineageProvenanceTest(unittest.TestCase):
         self.assertEqual(found, [])
 
     def test_skips_unavailable_jpql_lineage(self):
-        # An out-of-scope JPQL query (join, traversal, ...) has
-        # lineage = {"available": False, "reason": ...} — no
-        # resolved_via_entity key at all, nothing to re-verify.
+        # Real unavailable shape is reason-only (no resolved_via_entity).
         signals = self._signals(available=False)
+        found = list(spring_drift_check._raw_query_entries_with_resolved_entity(signals))
+        self.assertEqual(found, [])
+
+    def test_skips_unavailable_even_with_stale_resolved_via_entity(self):
+        # Discriminative: corrupt/hand-edited signals may keep a stale
+        # resolved_via_entity while available is false. Pre-fix filter
+        # keyed only on the entity key would still select it for reverify.
+        signals = self._signals(available=False)
+        signals["evidence"]["raw_queries"][0]["lineage"]["resolved_via_entity"] = "Invoice"
         found = list(spring_drift_check._raw_query_entries_with_resolved_entity(signals))
         self.assertEqual(found, [])
 
