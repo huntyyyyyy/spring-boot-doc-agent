@@ -4830,3 +4830,12 @@ Assumptions affected:
 - Research-before-design was skill-only — [Resolved — `require_design_research` commit hook + memo 14 RES1–RES3; Spec needs arXiv+GitHub URLs]
 - God-file split characterization inventory — [Resolved — `check_facade_poke_surface` wired into pre_pr standard + python-gates]
 Files touched: docs/research/14-*, quality-backlog, scripts/ci/check_facade_poke_surface.py, pre_pr.py, python-gates.yml, adapters/claude/hooks/*, .claude/settings.json, AGENTS.md, tests/ci/test_facade_poke_and_design_research.py
+
+## 2026-08-09 — E-SCAN1 AstGrepBackend → scanning/astgrep/
+Commit: b2a6a23
+Tests: 20/20 structure+basic+chunk+destructive+climb edges; claims OK; poke OK; complexipy ≤5; size baseline 30 file offenders (astgrep+spring off hard list)
+Assumptions affected:
+- `docs/research/16-scan1-astgrep-modularity-2026.md` SCAN1-A–J — [Resolved — package + façade + structure tests + LEG8 monkeypatch + AstGrepRunner landed]
+- `CONSTRAINTS.md` item 14 inventory/chunk needles — [Resolved — verify paths include `scanning/astgrep/argv.py`; behavior predicate still on façade `_run_ast_grep`]
+- Size ratchet `_scanner_astgrep.py` 514 LOC offender — [Resolved — thin façade ≤225; concept modules under `scanning/astgrep/`]
+Files touched: src/doc_engine/scanning/astgrep/*, _scanner_astgrep.py, spring.py, scripts/ci/check_facade_poke_surface.py, scripts/ratchets/size_baseline.json, CONSTRAINTS.md, tests/doc_engine/test_scan_context_astgrep_*, test_covering_hard_stops_destructive.py, docs/research/quality-backlog.md, claude/session-log.md

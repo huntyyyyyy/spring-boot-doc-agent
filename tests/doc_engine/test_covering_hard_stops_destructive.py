@@ -9,52 +9,37 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
+
+import pytest
+
 from doc_engine.core.context import FileEntry, ScanContext
-from doc_engine.pipeline.artifacts import Fact
-from doc_engine.scanning._orchestrator import CoveringProofError, run_scan
+from doc_engine.scanning import _scanner_astgrep as facade
+from doc_engine.scanning._orchestrator import CoveringProofError
 from doc_engine.scanning._scanner_astgrep import AstGrepBackend
-from doc_engine.scanning.absence import write_absence_facts
 from doc_engine.scanning.covering import (
-    COVERING_PROOF_SCHEMA_VERSION,
     build_covering_proof,
-    build_receipt,
-    inventory_root,
-    subset_root,
     verify_covering_proof,
     write_covering_proof,
 )
 from doc_engine.scanning.facts import (
-    covering_writer_facts,
     facts_from_signals,
-    write_facts_jsonl,
 )
 from doc_engine.scanning.gap_probe import (
-    CoveringPreconditionError,
     _astgrep_receipt_complete,
-    build_gap_report,
     load_and_verify_covering,
-    measure_r_absence,
-    run_gap_probe,
-)
-from doc_engine.scanning.recall_delta import (
-    collect_arm_entity_keys,
-    write_recall_miss_facts,
 )
 from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import (
     _assert_absence_stamps_match_writer,
     _complete_receipt,
-    _kafka_signals,
     shutil_which,
 )
 
-import pytest
-
 pytestmark = pytest.mark.domain_stage0
 
-class DestructiveFailClosedTest(unittest.TestCase):
-    def test_winerror_206_solo_path_raises(self):
+class TestDestructiveFailClosed:
+    def test_winerror_206_solo_path_raises(self, monkeypatch):
         """Deviation: single-path WinError 206 soft-skipped as empty matches."""
         backend = AstGrepBackend()
         entry = FileEntry(
@@ -66,44 +51,43 @@ class DestructiveFailClosedTest(unittest.TestCase):
         sigs = {entry.rel_path: "sig"}
         win_exc = OSError(22, "filename or extension is too long")
         win_exc.winerror = 206
+        monkeypatch.setattr(backend, "_find_ast_grep", lambda: "/bin/ast-grep")
+        monkeypatch.setattr(
+            facade.subprocess, "run", mock.Mock(side_effect=win_exc)
+        )
+        with pytest.raises(AstGrepError) as ctx:
+            backend._run_ast_grep(
+                "/repo", java_files=[entry], file_signatures=sigs,
+            )
+        assert "incomplete inventory" in str(ctx.value)
 
-        with mock.patch.object(backend, "_find_ast_grep", return_value="/bin/ast-grep"):
-            with mock.patch("subprocess.run", side_effect=win_exc):
-                with self.assertRaises(AstGrepError) as ctx:
-                    backend._run_ast_grep(
-                        "/repo", java_files=[entry], file_signatures=sigs,
-                    )
-        self.assertIn("incomplete inventory", str(ctx.exception))
-
-    def test_empty_java_list_with_java_signatures_fails(self):
+    def test_empty_java_list_with_java_signatures_fails(self, monkeypatch):
         """Deviation: java_files=[] while signatures list .java still greens."""
         backend = AstGrepBackend()
-        with mock.patch.object(backend, "_find_ast_grep", return_value="/bin/ast-grep"):
-            with self.assertRaises(AstGrepError) as ctx:
-                backend._run_ast_grep(
-                    "/repo",
-                    java_files=[],
-                    file_signatures={"StillThere.java": "abc"},
-                )
-        self.assertIn("empty java_files", str(ctx.exception))
+        monkeypatch.setattr(backend, "_find_ast_grep", lambda: "/bin/ast-grep")
+        with pytest.raises(AstGrepError) as ctx:
+            backend._run_ast_grep(
+                "/repo",
+                java_files=[],
+                file_signatures={"StillThere.java": "abc"},
+            )
+        assert "empty java_files" in str(ctx.value)
 
-    def test_mid_batch_fail_propagates_through_scan(self):
+    def test_mid_batch_fail_propagates_through_scan(self, monkeypatch):
         """Deviation: mid-batch ast-grep failure soft-continues into Path A."""
         ctx = ScanContext.build(str(FIXTURE_DIR))
         if len(ctx.java_files) < 1:
-            self.skipTest("fixture needs java files")
-
-        with mock.patch(
+            pytest.skip("fixture needs java files")
+        monkeypatch.setattr(
             "doc_engine.scanning._scanner_astgrep.AstGrepBackend._invoke_ast_grep",
-            side_effect=AstGrepError("exited with status 1: boom"),
-        ):
-            with self.assertRaises((AstGrepError, CoveringProofError)):
-                scan(str(FIXTURE_DIR), scanners=["filesystem", "ast-grep"])
+            mock.Mock(side_effect=AstGrepError("exited with status 1: boom")),
+        )
+        with pytest.raises((AstGrepError, CoveringProofError)):
+            scan(str(FIXTURE_DIR), scanners=["filesystem", "ast-grep"])
 
     def test_load_and_verify_covering_rejects_scanner_version_drift(self):
         """Deviation: covering_proof with drifted scanner_version still verifies."""
         sigs = {"a.java": "1"}
-        root = inventory_root(sigs)
         proof = build_covering_proof(
             file_signatures=sigs,
             scanner_version="old",
@@ -116,8 +100,9 @@ class DestructiveFailClosedTest(unittest.TestCase):
             _, ok, why = load_and_verify_covering(
                 signals, covering_path=path,
             )
-        self.assertFalse(ok)
-        self.assertIn("scanner_version", why)
+        assert ok is False
+        assert "scanner_version" in why
+
 
 class FixtureCliCoveringSmokeTest(unittest.TestCase):
     @classmethod

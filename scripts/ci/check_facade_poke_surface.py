@@ -25,9 +25,10 @@ FACADES: Dict[str, str] = {
     "doc_engine.tools.spring_drift_check": "spring_drift_check",
     "doc_engine.tools.partition_repo": "partition_repo",
     "doc_engine.pipeline.mock_stages": "mock_stages",
+    "doc_engine.scanning._scanner_astgrep": "_scanner_astgrep",
 }
 
-PACKAGE_ROOTS = ("doc_engine.tools", "doc_engine.pipeline")
+PACKAGE_ROOTS = ("doc_engine.tools", "doc_engine.pipeline", "doc_engine.scanning")
 AttrNeed = Tuple[str, str, str]
 
 
