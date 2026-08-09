@@ -108,6 +108,7 @@ class BuildSuitesTest(unittest.TestCase):
         names = [n for n, _, _ in pre_pr.build_suites("standard")]
         self.assertIn("pytest", names)
         self.assertIn("test_domain_markers", names)
+        self.assertIn("facade_poke_surface", names)
         self.assertNotIn("stage0_portable", names)
         self.assertNotIn("mutate_advisory", names)
 

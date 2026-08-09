@@ -4822,3 +4822,11 @@ Assumptions affected:
 - Local pre-push mirrors CI hard gates — [New info — `pre_pr` standard now includes `test_domain_markers`; AGENTS.md requires `--auto` before push; tool-quirks documents scoped-pytest false green]
 - E-MOD3 thin façade monkeypatch surface — [Resolved — re-export `json` for kitchen Ch07 `patch.object(run_manifest.json, "dump")`]
 Files touched: run_manifest.py / run_manifest_io.py, test_pipeline_tools_wave2_ports.py, scripts/ci/pre_pr.py, tests/ci/test_pre_pr_classify_bypass.py, AGENTS.md, claude/tool-quirks.md, session-log
+
+## 2026-08-09 — E-FAC0/E-RES0: façade poke gate + design-research hook
+Commit: uncommitted
+Tests: facade poke + design-research hook + pre_pr BuildSuites + markers + full ruff green
+Assumptions affected:
+- Research-before-design was skill-only — [Resolved — `require_design_research` commit hook + memo 14 RES1–RES3; Spec needs arXiv+GitHub URLs]
+- God-file split characterization inventory — [Resolved — `check_facade_poke_surface` wired into pre_pr standard + python-gates]
+Files touched: docs/research/14-*, quality-backlog, scripts/ci/check_facade_poke_surface.py, pre_pr.py, python-gates.yml, adapters/claude/hooks/*, .claude/settings.json, AGENTS.md, tests/ci/test_facade_poke_and_design_research.py

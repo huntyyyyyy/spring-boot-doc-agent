@@ -31,8 +31,14 @@ install/lint/test/run commands live in `README.md` and
   (do not hardcode suite counts here).
 - **Before push** on non-docs tips: `python3 scripts/ci/pre_pr.py --auto`
   (mirrors CI hard gates: full `ruff check scripts/ src/doc_engine/`, claims,
-  code quality, **domain markers**, rule coverage, pytest). Do not treat a
-  scoped pytest subset as green. `--fast` is docs-only — it skips markers.
+  code quality, **domain markers**, **facade poke surface**, rule coverage,
+  pytest). Do not treat a scoped pytest subset as green. `--fast` is docs-only
+  — it skips markers/poke.
+- Design-shaped / ambiguous research asks: follow skill
+  `principal-se-research-epic` and memo
+  [`docs/research/14-facade-poke-research-hooks-2026.md`](docs/research/14-facade-poke-research-hooks-2026.md)
+  (arXiv + active GitHub + DeepWiki Tier C). Commit hook
+  `require_design_research` blocks design-shaped commits without a Spec memo.
 - Before a final commit that touches `scripts/`, `agents/`, or `skills/`, run
   `python3 scripts/ci/check_repo_claims.py` (see `CLAUDE.md`).
 - If GitHub Actions is down: `python3 scripts/ci/pre_pr.py --actions-outage`

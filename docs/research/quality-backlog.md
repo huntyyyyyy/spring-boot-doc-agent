@@ -170,9 +170,11 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 | P11.1 | **E-MOD1:** `mock_stages` split + `MockStageStrategy` Protocol/registry; stable façade; size baseline `--update` (MOD-S1) | **Done** (2026-08-09) | files ≤225; complexipy ≤5; kitchen/pipeline green |
 | P11.2 | **E-MOD2:** `capacity_preflight` then drift/partition | **Done** (2026-08-09) | same gates; CLI flags/outputs stable |
 | P11.3 | **E-MOD3:** `run_manifest` + `citation_coverage` wave 2 (ports + façades; MOD-S1) | **Active** (2026-08-09) | files ≤225; climb monkeypatch DIP; `-m` stable |
+| P11.4 | **E-FAC0 / E-RES0:** façade poke-surface gate + design-research commit hook | **Active** (2026-08-09) | `check_facade_poke_surface`; `require_design_research` |
 
 Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipeline-stage0-modularity-ports-2026.md),
-[`docs/research/13-tools-wave2-modularity-2026.md`](13-tools-wave2-modularity-2026.md).
+[`docs/research/13-tools-wave2-modularity-2026.md`](13-tools-wave2-modularity-2026.md),
+[`docs/research/14-facade-poke-research-hooks-2026.md`](14-facade-poke-research-hooks-2026.md).
 
 ---
 
