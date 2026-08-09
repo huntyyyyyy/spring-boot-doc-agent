@@ -1,4 +1,8 @@
-"""Kitchen-sink command-chain runner (manifest → scan → mock stages → gates)."""
+"""Kitchen-sink command-chain runner (manifest → scan → mock stages → gates).
+
+Signal scan argv is pinned to ``filesystem,ast-grep`` (no CodeQL) so chapter
+tests stay hermetic and do not pretend to exercise the CodeQL cache/DB path.
+"""
 
 from __future__ import annotations
 

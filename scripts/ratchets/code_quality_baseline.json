@@ -1,7 +1,7 @@
 {
   "schema_version": 5,
-  "production_functions": 1798,
-  "production_functions_annotated": 1529,
+  "production_functions": 1800,
+  "production_functions_annotated": 1531,
   "limits_for_new_functions": {
     "statements": 82,
     "complexity": 42,
@@ -5236,8 +5236,8 @@
       "depth": 3
     },
     "src/doc_engine/scanning/_scanner_codeql.py::CodeQLBackend._version_hash_paths": {
-      "statements": 6,
-      "complexity": 2,
+      "statements": 13,
+      "complexity": 6,
       "depth": 1
     },
     "src/doc_engine/scanning/_scanner_codeql.py::CodeQLBackend.name": {
@@ -6646,9 +6646,9 @@
       "depth": 1
     },
     "src/doc_engine/scanning/support/_codeql_cache_keys.py::_hash_from_scan_context": {
-      "statements": 6,
-      "complexity": 5,
-      "depth": 2
+      "statements": 11,
+      "complexity": 3,
+      "depth": 1
     },
     "src/doc_engine/scanning/support/_codeql_cache_keys.py::_hash_one_walk_file": {
       "statements": 7,
@@ -6687,6 +6687,16 @@
     },
     "src/doc_engine/scanning/support/_codeql_cache_keys.py::_repo_content_hash": {
       "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/scanning/support/_codeql_cache_keys.py::_scan_context_hash_rels": {
+      "statements": 3,
+      "complexity": 5,
+      "depth": 0
+    },
+    "src/doc_engine/scanning/support/_codeql_cache_keys.py::_signature_or_missing": {
+      "statements": 4,
       "complexity": 2,
       "depth": 1
     },
@@ -10550,6 +10560,81 @@
       "complexity": 16,
       "depth": 1
     },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::test_default_fixtures_dir_none_and_root": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::test_github_adequacy_report_and_append": {
+      "statements": 23,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::test_mutator_enforce_and_survivors_errors": {
+      "statements": 12,
+      "complexity": 6,
+      "depth": 1
+    },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::test_mutator_slice_empty_names_and_path_insert": {
+      "statements": 14,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_adequacy.py::test_structural_slice_missing_and_present": {
+      "statements": 9,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_cli_timing.py::test_junit_both_names_and_render_present": {
+      "statements": 19,
+      "complexity": 13,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_cli_timing.py::test_scan_cli_overrides_and_scan_config": {
+      "statements": 13,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_cli_timing.py::test_split_and_optional_scan_flags": {
+      "statements": 9,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_markers.py::_seed": {
+      "statements": 4,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_markers.py::test_evaluate_missing_multi_and_mismatch": {
+      "statements": 8,
+      "complexity": 8,
+      "depth": 1
+    },
+    "tests/ci/test_coverage_climb_b6_markers.py::test_markers_check_main_optional_flags": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_markers.py::test_run_check_empty_and_success": {
+      "statements": 17,
+      "complexity": 9,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_scan_config.py::test_scan_cli_overrides_optional_and_dialect": {
+      "statements": 12,
+      "complexity": 8,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_scan_config.py::test_scan_config_merges_without_repo_json": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/ci/test_coverage_climb_b6_scan_config.py::test_split_scanner_names_strips_and_drops_empties": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
+    },
     "tests/ci/test_coverage_climb_classify_shards.py::test_classification_rules_match": {
       "statements": 6,
       "complexity": 7,
@@ -13560,6 +13645,41 @@
       "complexity": 2,
       "depth": 1
     },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::_seed_repo_pack": {
+      "statements": 7,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::test_cache_is_valid_false_after_java_or_pack_mutate": {
+      "statements": 12,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::test_cache_key_changes_when_java_bytes_change": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::test_cache_key_changes_when_query_pack_changes": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::test_cache_key_ignores_java_under_target_dir": {
+      "statements": 7,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::test_scan_context_missing_java_signature_is_not_empty_digest": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_codeql_cache_key_invalidation.py::test_scan_context_missing_java_signature_is_not_empty_digest._Entry.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
     "tests/doc_engine/test_codeql_complexity_helpers.py::test_acked_java_paths_prefer_scan_context": {
       "statements": 3,
       "complexity": 3,
@@ -14060,6 +14180,1021 @@
       "complexity": 4,
       "depth": 0
     },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_cache.py::test_cache_base_dir_win32_and_home_fallback": {
+      "statements": 8,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_cache.py::test_cache_is_valid_none_meta_and_validate_row": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_cache.py::test_cache_meta_path_validation_and_metadata_none": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_cache.py::test_cache_meta_path_validation_and_metadata_none._boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_cache.py::test_load_save_results_cache_edges": {
+      "statements": 16,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_cache.py::test_refuse_broken_symlink_and_chmod_oserror": {
+      "statements": 13,
+      "complexity": 5,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_db.py::test_create_database_without_overwrite": {
+      "statements": 10,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_db.py::test_create_database_without_overwrite._invoke": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_db.py::test_ensure_reuses_existing_keep_database": {
+      "statements": 13,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_db.py::test_ensure_reuses_existing_keep_database._reuse": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_db.py::test_ensure_writes_meta_and_valid_cache_short_circuit": {
+      "statements": 16,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_db.py::test_ensure_writes_meta_and_valid_cache_short_circuit._create": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_runner_facade.py::_patch_scan_deps": {
+      "statements": 5,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_runner_facade.py::test_load_cached_scan_rows_requires_version": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_runner_facade.py::test_main_usage_and_scan_paths": {
+      "statements": 20,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_runner_facade.py::test_scan_with_codeql_runs_queries_and_caches": {
+      "statements": 18,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_codeql_runner_facade.py::test_validated_build_and_queries_skip_cache_without_version": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_collect_arm_entity_keys_branches": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_join_identity_and_unmatched_edges": {
+      "statements": 23,
+      "complexity": 16,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_recall_delta_entity_keys_and_verdicts": {
+      "statements": 11,
+      "complexity": 9,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_gap_recall.py::test_symbol_collision_non_type_and_bad_map": {
+      "statements": 9,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_symbol_facts.py::test_enrich_query_entry_none_query_text": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_symbol_facts.py::test_facts_append_none_hit_and_covering_true_path": {
+      "statements": 9,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_symbol_facts.py::test_facts_from_signals_skips_non_mapping_bags": {
+      "statements": 8,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_symbol_facts.py::test_split_member_suffix_field_none_falls_through": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b5_symbol_facts.py::test_split_package_segments_empty_after_filter": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_build_arg_parser_wires_epilog": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_main_parses_argv": {
+      "statements": 5,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_main_parses_argv.fake_run": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_phase_stage0_success_and_abort": {
+      "statements": 15,
+      "complexity": 8,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_phase_stage0_success_and_abort.FakeDetRunner.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_phase_stage0_success_and_abort.FakeDetRunner.run": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_phase_stage0_success_and_abort.FakeLog.rule": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_phase_stage0_success_and_abort.FakeOuterRunner.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_phase_stage0_success_and_abort.fake_finish": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_run_pipeline_setup_int_and_phase_short_circuit": {
+      "statements": 9,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_local_runner.py::test_run_pipeline_setup_int_and_phase_short_circuit.boom": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_Ctx.__init__": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_Log.__call__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_Log.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_Log.rule": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_Runner.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_Runner.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::_certified_state": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_generative_abort_path": {
+      "statements": 8,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_generative_abort_path.FakeGenRunner.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_generative_abort_path.FakeGenRunner.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_generative_readme_note": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_generative_readme_note.FakeGenRunner.__init__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_generative_readme_note.FakeGenRunner.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_post_stage0_evidence_pool": {
+      "statements": 10,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_phases.py::test_post_stage0_scan_only_finish": {
+      "statements": 13,
+      "complexity": 8,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_validate_stf.py::_assert_mutant_fails": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_validate_stf.py::test_lint_anchors_and_summary": {
+      "statements": 9,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_validate_stf.py::test_lint_named_mutators_fail": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b6_validate_stf.py::test_scoring_empty_ratios_and_load_key": {
+      "statements": 15,
+      "complexity": 9,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_validate_stf.py::test_validate_all_and_single_failure_paths": {
+      "statements": 14,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b6_validate_stf.py::test_validate_envelope_query_error_and_require_keyerror": {
+      "statements": 8,
+      "complexity": 6,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_compliance.py::test_resolve_compliance_profile_from_string_config": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_compliance.py::test_should_drop_and_normalize_prior_stages": {
+      "statements": 14,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_compliance.py::test_stage_status_and_executor_branches": {
+      "statements": 10,
+      "complexity": 10,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_config_loader.py::test_find_repo_config_skips_outside_root": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_config_loader.py::test_load_repo_config_non_dict_json": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_config_loader.py::test_load_yaml_import_error": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_config_loader.py::test_load_yaml_import_error.fake_import": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_docs_in_target_inventory": {
+      "statements": 17,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_docs_in_target_inventory.FakeLog.__call__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_docs_in_target_inventory.FakeLog.rule": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_docs_in_target_inventory.FakeRunner.run": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_raises_without_split_suite": {
+      "statements": 13,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_raises_without_split_suite.FakeLog.__call__": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_raises_without_split_suite.FakeLog.rule": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_full_finish.py::test_phase_full_finish_raises_without_split_suite.FakeRunner.run": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_classify_and_partition_dir_entries": {
+      "statements": 12,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_classify_and_partition_dir_entries.neither": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_decode_file_bytes_latin1_and_undecodable": {
+      "statements": 7,
+      "complexity": 7,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_decode_file_bytes_latin1_and_undecodable.BadChunk.decode": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_estimate_tokens_stat_failed": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_guard_zero_progress_carry_clears": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_main_path_validation_error": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_read_file_bytes_oserror": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_read_file_bytes_oserror.boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_should_include_file_excludes_and_gitignore": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_partition.py::test_should_include_file_excludes_and_gitignore.Spec.match_file": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_ast_grep_rules_fallback_when_packaged_missing": {
+      "statements": 5,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_ast_grep_rules_fallback_when_packaged_missing.selective_is_file": {
+      "statements": 3,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_checked_output_path_rejects_dotdot": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_join_under_base_oserror": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_join_under_base_oserror.boom": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_join_under_candidate_oserror": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_join_under_candidate_oserror.boom": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_paths_edges.py::test_join_under_escape_when_inside_lies": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_providers.py::test_dependents_provider_emits_rows": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_providers.py::test_facts_provider_breaks_at_limit": {
+      "statements": 4,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_providers.py::test_facts_row_contested_non_mapping_quals": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_providers.py::test_hit_row_and_zone_normalization_shapes": {
+      "statements": 4,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_query_load.py::test_read_artifact_text_oserror": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_query_load.py::test_read_artifact_text_oserror.read_boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_query_load.py::test_require_server_root_oserror": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_query_load.py::test_require_server_root_oserror.boom": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_query_load.py::test_resolve_root_oserror": {
+      "statements": 7,
+      "complexity": 5,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_query_load.py::test_resolve_root_oserror.boom": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_rank.py::test_bucket_priority_empty_and_overlap_empty_request": {
+      "statements": 3,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_rank.py::test_emission_copies_freshness_contested_skips_bad_payload": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_rank.py::test_nested_list_truncate_and_cap_value": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_real_fixture.py::test_live_scan_enabled_via_legacy": {
+      "statements": 6,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_real_fixture.py::test_read_path_file_oserror": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_real_fixture.py::test_read_path_file_oserror.boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_real_fixture.py::test_require_real_repo_missing_and_not_dir": {
+      "statements": 14,
+      "complexity": 5,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_real_fixture.py::test_truthy_accepts_yes_and_true": {
+      "statements": 4,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_best_overlap_skips_empty_tokens": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_main_path_validation_exits": {
+      "statements": 13,
+      "complexity": 6,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_markdown_names_skips_invalid": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_markdown_names_skips_invalid.fake_join": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_resolve_architecture_path_validation_continue": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_resolve_architecture_path_validation_continue.boom": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_semantic_eval.py::test_scan_mermaid_empty_when_no_block": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_stf_review.py::test_epic_findings_skip_duplicate_and_hints": {
+      "statements": 5,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_stf_review.py::test_sev_helpers_and_empty_claim": {
+      "statements": 5,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_timeouts.py::test_env_seconds_positive_override": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b7_timeouts.py::test_env_seconds_rejects_zero": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_validate_artifacts.py::test_dispatch_cli_missing_artifact_path": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b7_validate_artifacts.py::test_handle_envelope_non_dict_and_ok": {
+      "statements": 10,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_capacity.py::test_compute_preflight_derives_when_none": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_capacity.py::test_estimate_file_token_pairs_skips_reason": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_capacity.py::test_main_path_validation": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_capacity.py::test_run_l2b_with_groups_file": {
+      "statements": 9,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_capacity.py::test_run_stage0_astgrep_error": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_capacity.py::test_run_stage0_astgrep_error.boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_ci_gates.py::test_report_gap_average_skips_missing": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_ci_gates.py::test_report_gap_average_skips_missing.mark": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_ci_gates.py::test_size_ratchet_dunder_main": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_ci_gates.py::test_size_ratchet_main_issues_exit": {
+      "statements": 13,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_cross_edges.py::test_ingest_reference_row_skips_missing_path": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_cross_edges.py::test_main_json_error": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_cross_edges.py::test_resolve_type_import_package_fanout": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_dependents.py::test_append_import_arc_dedupes": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_dependents.py::test_append_resolved_and_unresolved_continues": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_lint_tasks.py::test_anchor_rel_filters": {
+      "statements": 3,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_lint_tasks.py::test_lint_locate_anchors_missing": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_lint_tasks.py::test_lint_locate_anchors_missing.check": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_lint_tasks.py::test_lint_waves_cycle_error": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_lint_tasks.py::test_lint_waves_cycle_error.check": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_lint_tasks.py::test_lint_waves_cycle_error.raise_cycle": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_mcp_tools.py::test_context_packet_requires_run_dir": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_mcp_tools.py::test_pin_path_oserror": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_mcp_tools.py::test_pin_path_oserror.boom": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_mcp_tools.py::test_query_dependents_dispatches": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_merge_signals.py::test_dedupe_rows_skips_duplicate": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_merge_signals.py::test_entity_candidate_copies_package_and_skips_blank": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_merge_signals.py::test_sort_entity_table_map": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_path_cohesion.py::test_candidate_foreign_os_raises": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_path_cohesion.py::test_looks_absolute_variants": {
+      "statements": 4,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_path_cohesion.py::test_resolve_and_violations": {
+      "statements": 10,
+      "complexity": 7,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_pipeline_validators.py::test_check_gap_question_missing_keys": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_pipeline_validators.py::test_evidence_item_non_dict": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_pipeline_validators.py::test_validate_review_finding_missing_keys": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_pipeline_validators.py::test_validators_main_module_exit": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b8_resolve_lineage.py::test_annotate_skips_none_query": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_resolve_lineage.py::test_clean_table_name_without_prefix": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::_ctx": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_end_manifest_argv_includes_error": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_end_manifest_returns_prior_failure": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_end_manifest_returns_prior_failure.OkEnd.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_execute_stage_missing_argv_builder": {
+      "statements": 4,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_execute_stage_missing_argv_builder.Unused.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_run_stage_returns_start_failure": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_start_manifest_returns_failure": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_runner.py::test_start_manifest_returns_failure.FailRunner.run": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_process_config_oserror": {
+      "statements": 8,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_process_config_oserror.boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_read_build_text_oserror": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_read_build_text_oserror.boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_scan_builds_context_when_missing": {
+      "statements": 7,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_scan_builds_context_when_missing.FakeCtx.build": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_version_hash_skips_oserror": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b8_scanner_fs.py::test_version_hash_skips_oserror.selective_open": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_ctx_gap.py::test_canonicalize_tokens_win32": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_ctx_gap.py::test_code_dep_non_map_list_and_failure": {
+      "statements": 6,
+      "complexity": 6,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_ctx_gap.py::test_context_until_stage_log": {
+      "statements": 12,
+      "complexity": 5,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_ctx_gap.py::test_uncertainty_full_support": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_ctx_gap.py::test_validate_build_command_empty_tokens": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_signals.py::test_catalog_library_row_none_and_empty_extract": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_signals.py::test_read_text_compat_and_line_number": {
+      "statements": 3,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_build_signals.py::test_safe_match_out_of_range": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_gates_cohesion.py::test_cohesion_compat_wrappers": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_gates_cohesion.py::test_record_gate_outcome_aborts": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_gates_cohesion.py::test_run_subprocess_combines_streams": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_partition_markers_dag.py::test_dag_cycle_self_and_bfs_continue": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_partition_markers_dag.py::test_markers_apply_dunder_main": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_partition_markers_dag.py::test_partition_groups_length_mismatch": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_query_handlers.py::test_entity_candidates_not_list_and_bad_map": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_query_handlers.py::test_evidence_filter_false_and_empty_shapes": {
+      "statements": 4,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_query_handlers.py::test_route_trace_match_path_contains": {
+      "statements": 3,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::_TinyBackend.name": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::_TinyBackend.scan": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::_TinyBackend.version_hash": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::test_capacity_inner_path_validation": {
+      "statements": 6,
+      "complexity": 4,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::test_capacity_inner_path_validation.boom": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::test_certification_dunder_main": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::test_load_certification_rejects_non_object": {
+      "statements": 4,
+      "complexity": 2,
+      "depth": 1
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::test_refold_mismatch_failures_list": {
+      "statements": 4,
+      "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_b9_scanner_cert_cap.py::test_scanner_backend_repr": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
     "tests/doc_engine/test_coverage_climb_batch8.py::test_gap_probe_main_paths": {
       "statements": 9,
       "complexity": 4,
@@ -14181,7 +15316,12 @@
       "depth": 1
     },
     "tests/doc_engine/test_coverage_climb_capacity_codeql.py::test_main_l2b_path": {
-      "statements": 8,
+      "statements": 13,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_capacity_codeql.py::test_main_l2b_path._l2b": {
+      "statements": 1,
       "complexity": 1,
       "depth": 0
     },
@@ -15206,8 +16346,8 @@
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_spring_codeql_backend.py::test_codeql_backend_name_and_version_hash": {
-      "statements": 10,
-      "complexity": 4,
+      "statements": 16,
+      "complexity": 9,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_spring_codeql_backend.py::test_codeql_scan_buckets_rows": {
@@ -15258,6 +16398,16 @@
     "tests/doc_engine/test_coverage_climb_spring_codeql_backend.py::test_spring_scan_kwargs_include_context_when_set": {
       "statements": 4,
       "complexity": 3,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_spring_codeql_backend.py::test_version_hash_changes_when_codeql_sibling_bytes_change": {
+      "statements": 13,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/doc_engine/test_coverage_climb_spring_codeql_backend.py::test_version_hash_changes_when_codeql_sibling_bytes_change._paths": {
+      "statements": 1,
+      "complexity": 1,
       "depth": 0
     },
     "tests/doc_engine/test_coverage_climb_stage0_gap_stf.py::test_gap_probe_main_path_error": {
@@ -16526,7 +17676,7 @@
       "depth": 0
     },
     "tests/doc_engine/test_kitchen_sink_ch10_chain.py::Ch10CommandChainTest.test_covering_proof_verifies_against_path_a_inventory": {
-      "statements": 9,
+      "statements": 10,
       "complexity": 3,
       "depth": 0
     },

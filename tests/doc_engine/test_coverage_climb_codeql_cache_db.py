@@ -3,26 +3,16 @@
 from __future__ import annotations
 
 import json
-import os
 import subprocess
-import sys
 from pathlib import Path
-from types import SimpleNamespace
-from typing import Any, Mapping
 from unittest.mock import MagicMock
+
 import pytest
-from doc_engine.core import excludes as excludes_mod
-from doc_engine.core import timeouts as timeouts_mod
-from doc_engine.pipeline.local_runner_phases import support as phase_support
-from doc_engine.query import kinds as kinds_mod
-from doc_engine.query.protocols import FreshnessPolicy, PacketProvider
-from doc_engine.scanning import spring as spring_mod
-from doc_engine.scanning._scanner_codeql import CodeQLBackend
-from doc_engine.scanning.support import _codeql_runner as runner
+
 import doc_engine.scanning.support._codeql_cache as cache_mod
 import doc_engine.scanning.support._codeql_cli as cli_mod
-import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
+from doc_engine.scanning.support import _codeql_runner as runner
 
 pytestmark = pytest.mark.domain_climb_sensor
 

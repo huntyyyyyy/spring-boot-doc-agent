@@ -4789,3 +4789,11 @@ Assumptions affected:
 - Active tip oracle stabilize to 98.7 — [Resolved — tip Cover% 99.04 after B1–B9 climb + kitchen-sink correctness; fail_under argv untouched]
 - E-QA2 Climb Archive Q2 — [Still accurate — climb modules carry mutmut_slice / Arm-1 witnesses; gap-average alone not treated as proof]
 Files touched: tests/doc_engine/test_coverage_climb_b{7,8,9}_*, tests/ci/test_coverage_climb_*, tests/doc_engine/test_kitchen_sink_*, CONSTRAINTS.md, test_domain_rules.py
+
+## 2026-08-09 — Debug chapter+CodeQL after rescope: cache-key fail-closed + climb hygiene
+Commit: 492a7c7
+Tests: codeql invalidation+hygiene+climb 40/40; ch10 10/10; domain markers OK; check_repo_claims OK
+Assumptions affected:
+- CodeQL cache keys after module split — [Resolved — incomplete ScanContext no longer hashes to empty digest; discriminative invalidation tests; climb CodeQL F401 wallpaper cleaned]
+- Kitchen-sink chapter vs CodeQL — [Still accurate — chain pinned filesystem,ast-grep; ch10 asserts codeql absent from covering receipts]
+Files touched: _codeql_cache_keys.py, test_codeql_cache_key_invalidation.py, kitchen_sink chain/ch10, climb codeql ruff hygiene, code_quality_baseline.json

@@ -2,27 +2,14 @@
 
 from __future__ import annotations
 
-import json
-import os
-import subprocess
-import sys
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any, Mapping
-from unittest.mock import MagicMock
+
 import pytest
-from doc_engine.core import excludes as excludes_mod
-from doc_engine.core import timeouts as timeouts_mod
-from doc_engine.pipeline.local_runner_phases import support as phase_support
-from doc_engine.query import kinds as kinds_mod
-from doc_engine.query.protocols import FreshnessPolicy, PacketProvider
+
 from doc_engine.scanning import spring as spring_mod
 from doc_engine.scanning._scanner_codeql import CodeQLBackend
 from doc_engine.scanning.support import _codeql_runner as runner
-import doc_engine.scanning.support._codeql_cache as cache_mod
-import doc_engine.scanning.support._codeql_cli as cli_mod
-import doc_engine.scanning.support._codeql_database as db_mod
-import doc_engine.scanning.support._codeql_queries as queries_mod
 
 pytestmark = pytest.mark.domain_climb_sensor
 
@@ -99,6 +86,17 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     )
     digest = backend.version_hash()
     assert len(digest) == 16
+    hashed = {Path(p).name for p in CodeQLBackend._version_hash_paths()}
+    siblings = {
+        p.name
+        for p in (Path(__file__).resolve().parents[2]
+                  / "src/doc_engine/scanning/support").glob("_codeql_*.py")
+    }
+    # Prefer package-relative discovery so the assert survives install layout.
+    support = Path(CodeQLBackend._version_hash_paths()[0]).parent / "support"
+    siblings = {p.name for p in support.glob("_codeql_*.py")}
+    assert siblings, "expected modularized _codeql_*.py siblings on disk"
+    assert siblings <= hashed, f"version_hash omitted siblings: {sorted(siblings - hashed)}"
     # Unreadable path should be skipped without failing the hash.
     monkeypatch.setattr(
         CodeQLBackend,
@@ -106,6 +104,32 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
         staticmethod(lambda: [str(tmp_path / "missing.bin")]),
     )
     assert len(backend.version_hash()) == 16
+
+
+def test_version_hash_changes_when_codeql_sibling_bytes_change(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Results-cache scanner_version must move when query/cache modules change."""
+    pack = tmp_path / "pack"
+    pack.mkdir()
+    (pack / "q.ql").write_text("// query\n", encoding="utf-8")
+    monkeypatch.setattr(
+        "doc_engine.scanning._scanner_codeql.codeql_pack_dir",
+        lambda: pack,
+    )
+    sibling = tmp_path / "_codeql_queries.py"
+    sibling.write_text("# original\n", encoding="utf-8")
+    scanner = tmp_path / "_scanner_codeql.py"
+    scanner.write_text("# scanner\n", encoding="utf-8")
+
+    def _paths() -> list[str]:
+        return [str(scanner), str(sibling), str(pack / "q.ql")]
+
+    monkeypatch.setattr(CodeQLBackend, "_version_hash_paths", staticmethod(_paths))
+    before = CodeQLBackend().version_hash()
+    sibling.write_text("# mutated query runner\n", encoding="utf-8")
+    after = CodeQLBackend().version_hash()
+    assert before != after
 
 def test_codeql_scan_requires_build_command() -> None:
     with pytest.raises(runner.CodeQLError, match="build command"):
