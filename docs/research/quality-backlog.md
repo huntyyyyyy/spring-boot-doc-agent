@@ -196,6 +196,17 @@ Research: [`docs/research/15-legacy-size-remediation-2026-frameworks.md`](15-leg
 
 ---
 
+## P13 — CodeQL signals CI skip (fingerprint)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Approved** (2026-08-09, merge) | research 17 `spec_gate: APPROVED E-CQL0` |
+| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Active** (unblocked) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
+
+Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql-signals-skip-fingerprint-2026.md).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
@@ -214,5 +225,7 @@ Research: [`docs/research/15-legacy-size-remediation-2026-frameworks.md`](15-leg
 **Done (E-FAC0 / E-RES0):** façade poke gate + design-research hook (2026-08-09).  
 **Done (E-LEG0):** legacy size-remediation Spec LEG1–LEG10 (2026-08-09).  
 **Done (E-SCAN1 Spec + Implement):** SCAN1-A–J + `scanning/astgrep/` façade (2026-08-09).  
-**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5 — sensors only when product need bites.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream.
+**Done (E-CQL0 Spec):** CQ1–CQ9 Approve (2026-08-09).  
+**Active:** **E-CQL1** — CodeQL signals fingerprint skip Implement (research 17).  
+**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5 — sensors only when product need bites; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR.
