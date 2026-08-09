@@ -84,6 +84,7 @@ jobs:
         run: |
           python3 scripts/ci/coverage_run_summary.py --github-summary
           python3 scripts/ci/suite_timing_summary.py --github-summary
+          python3 scripts/ci/adequacy_summary.py --github-summary
           doc-engine coverage-gap-average \
             --coverage-xml coverage.xml \
             --floor "${COV_FAIL_UNDER}" \

@@ -4701,7 +4701,7 @@ Assumptions affected:
 Files touched: src/doc_engine/ci/size_ratchet.py, quality_gates.py, cli.py, spring_drift_{check,common,tier2}.py, scripts/ci/check_code_quality.py, scripts/ratchets/{code_quality_baseline,size_baseline}.json, CONTRIBUTING.md, CONSTRAINTS.md, tests/ci/*, .github/workflows/ci.yml, claude/steering-prompts/13-*.md, claude/session-log.md
 
 ## 2026-08-08 — Size ratchet includes tests/; cohesive test modularization ≤225
-Commit: uncommitted
+Commit: 229e517
 Tests: size-ratchet exit 0 (0 test file offenders; 38 src legacy baselined); focused pytest 27/27 (size_ratchet + climb covering/query/build_cmd + support)
 Assumptions affected:
 - `claude/steering-prompts/13-code-quality-research-prompt.md` — size ceilings / package roots — [New info — FILE_LOC_HARD 225; SIZE_ROOTS now src/doc_engine + src/stf + tests/; CONTRIBUTING cohesion bar applies to tests]
@@ -4740,3 +4740,12 @@ Tests: pipeline_runner_stages 5/5; domain_marker_cli + suite_timing 20/20; kitch
 Assumptions affected:
 - `docs/research/pr-94-followup-oracle-stabilize.md` — green 3.11 goal — [New info — tip 3.11 completed: 1 FAIL real_repo missing --allow-mock; 5 ERROR missing @pytest.fixture; Cover% 93%; size offenders split]
 Files touched: tests/doc_engine/test_kitchen_sink_*, test_pipeline_runner_stages.py, test_spring_signal_scan_*, tests/ci/test_domain_marker_cli_coverage.py, CONSTRAINTS.md, claude/session-log.md
+
+## 2026-08-09 — E-QA1/E-QA2: adequacy sensors + climb Q2 witness checklist
+Commit: uncommitted
+Tests: pytest tests/ci/test_adequacy_*.py 16/16; ruff OK; complexipy ≤5 on adequacy; size-ratchet exit 0; check_repo_claims OK; check_workflow_yaml OK; oracle argv still fail_under=98.7
+Assumptions affected:
+- E-QA0 design / P8.1–P8.2 Active — [Resolved — `doc_engine.ci.adequacy` + `adequacy_summary.py` wired in python-gates always-summary; CONTRIBUTING Climb Archive Q2; backlog P8.1/P8.2 Done]
+- `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — python-gates owns cov cell — [Still accurate — adequacy sensor only; fail_under argv untouched]
+- Cover% / ENFORCE=False honesty — [Still accurate — sensors echo ENFORCE + floor text; no suite-wide ENFORCE=True]
+Files touched: src/doc_engine/ci/adequacy/*, scripts/ci/adequacy_summary.py, tests/ci/test_adequacy_*.py, .github/workflows/python-gates.yml, CONTRIBUTING.md, docs/research/quality-backlog.md, claude/session-log.md

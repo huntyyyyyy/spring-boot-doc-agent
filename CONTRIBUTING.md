@@ -190,6 +190,28 @@ doc-engine coverage-gap-average --coverage-xml coverage.xml --worst 15
 set only; `below_floor_mean_file` is the unweighted mean of those file percents.
 Drive coverage-climb tests at the worst below-floor files first.
 
+### Climb Archive / adequacy witness (Q2)
+
+Cover% and gap-average measure **execution footprint**, not discriminative
+power. Spec: [`docs/design/test-adequacy-markers-design-2026-08-09.md`](docs/design/test-adequacy-markers-design-2026-08-09.md)
+(policies **Q1–Q8**). CI prints hermetic adequacy sensors via
+`scripts/ci/adequacy_summary.py` (structural / mutator survivors / metamorphic
+pointers) — those rows never claim the oracle floor.
+
+When a climb batch raises Cover% on package **P**, Archive requires naming a
+**witness** that bites **P**:
+
+1. **Incident mutant** (gate mutator and/or assertion-driver mutant scoped to P), and/or
+2. **mutmut slice** on the pure-Python surface under P, and/or
+3. **Metamorphic relation** (Arm-1 / harness vacuity) that would fail if P’s
+   asserts were vacuous
+
+**Gap-average green alone is not Archive proof.** Clearing below-floor files
+without a witness is coverage inflation, not adequacy. Mutation-scope taxonomies
+(Q3) stay three mechanisms — see “Mutation-scope taxonomies” below; do not fold
+them into one PIT/mutmut zoo, and do not flip suite-wide `ENFORCE=True` without
+a defended Spec amendment (Q8).
+
 ### Oracle remesure cadence (saliency)
 
 Full-suite oracle is expensive. Remesure `coverage.xml` only on **salient**

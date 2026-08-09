@@ -130,8 +130,8 @@ Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-run
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P8.0 | **E-QA0 Spec:** approve **Q1–Q8** (necessary Cover% ≠ sufficient quality) | **Done** (2026-08-09) | research 09 `spec_gate: APPROVED E-QA0` + design stub |
-| P8.1 | **E-QA1:** adequacy sensor ports + CI summary (structural + mutator survivors + metamorphic) | **Active** (unblocked) | summary section |
-| P8.2 | **E-QA2:** anti-padding Verify — climb packages need kill/metamorphic witness | **Active** (unblocked) | climb Archive checklist |
+| P8.1 | **E-QA1:** adequacy sensor ports + CI summary (structural + mutator survivors + metamorphic) | **Done** (2026-08-09) | `adequacy_summary` in python-gates always-summary |
+| P8.2 | **E-QA2:** anti-padding Verify — climb packages need kill/metamorphic witness | **Done** (2026-08-09) | CONTRIBUTING Climb Archive / Q2 checklist |
 | P8.3 | **E-QA3:** Hypothesis spike on pure helpers (`suite_timing` / fingerprints) | Spike after E-QA1 | focused suite |
 
 Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-test-adequacy-vs-coverage-inflation-2026.md). Prefer **2026** primaries (2607.22880, 2603.01409, 2604.01799, 2607.02057, 2605.22175, 2604.10126; mutmut; Hypothesis).
@@ -144,6 +144,7 @@ Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-te
 **Done (E-TEST0–1):** domain markers + ABI shards.  
 **Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
 **Done (E-RUN0–1):** suite-stalking sensors Spec + D1/D2/D17.  
-**Active tip:** oracle stabilize (#105) to **98.7** (necessary floor) + **E-QA1/2** adequacy sensors/anti-padding (unblocked by E-QA0).  
+**Active tip:** oracle stabilize (#105) to **98.7** (necessary floor).  
+**Done (E-QA0–2):** adequacy Spec + sensors + Climb Archive Q2 witness checklist.  
 **Spec done:** **E-QA0** (Q1–Q8). Climb Cover% uplift requires adequacy witness; optional E-RUN2/D15 remains sensor-only.  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists.
