@@ -1,6 +1,6 @@
 ---
 category: Concept-split cohesion / tach-aligned modularity
-status: DRAFT — SPEC GATE E-COH0 pending Approve of COH1–COH12
+status: APPROVED — SPEC GATE E-COH0 (2026-08-09) — merge Approve of COH1–COH12
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 related:
@@ -11,31 +11,31 @@ related:
   - docs/research/quality-backlog.md
   - tach.toml
 do_not:
-  - resume LOC/statement thrash as Active tip until this Spec is Approved
+  - resume LOC/statement thrash that fails the COH cohesion bar
   - treat façade re-export of private `_` helpers as a finished interface
   - name modules residual bins (basic, misc, part2, helpers, inventory_drift grab-bags)
   - dual-wire import-linter + tach without LEG-S1
   - raise LOC/statement/complexipy ceilings to clear debt
-spec_gate: DRAFT E-COH0 (2026-08-09) — COH1–COH12 pending Approve
+spec_gate: APPROVED E-COH0 (2026-08-09) — COH1–COH12
 ---
 
 # Design memo: cohesion-first concept splits (post-MOD-S1 tip audit)
 
-> **DRAFT — SPEC GATE E-COH0**
+> **APPROVED — SPEC GATE E-COH0 (2026-08-09)**
 >
-> Tip audit of recent ≤225 / ≤20 splits found **concept-named seams with residual
-> mechanical smells** (private re-export façades, mixed helper bins). User direction:
-> **another design pass** before more size thrash. Do not Approve-by-silence —
-> stamp Approve of **COH1–COH12** to unlock E-COH1 remediation under E-TACH0 order.
+> Merge Approve of **COH1–COH12**. Tip MOD-S1 splits remain **provisional** (COH9).
+> E-COH1 Implement may reshape under the cohesion bar; size gates verify, they do
+> not design. E-TACH0 layers/`depends_on` still require separate Approve.
 
 **Spec record**
 
 | Field | Value |
 | --- | --- |
+| Decisions | **COH1–COH12** Approved |
 | Research SoT | [`modularity/20-tach-dependency-blueprint-2026.md`](../research/modularity/20-tach-dependency-blueprint-2026.md) (Jun–Aug 2026) |
 | Prior Spec | E-LEG0 / E-MOD* / E-SCAN1 / E-TACH0 (draft) |
 | Branch / PR | `cursor/e-doc1-research-taxonomy-61f3` / [#112](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/112) |
-| Backlog | P17 below |
+| Backlog | P17.0 Approved; P17.1 E-COH1 Active |
 
 **Claim tiers:** `[Evidenced]` primary docs/tools · `[Confirmed]` this tip · `[Unknown]` needs measure.
 
@@ -79,7 +79,7 @@ A tip that only optimizes those numbers can still ship:
 
 ---
 
-## 4. Spec decisions (COH1–COH12) — pending Approve
+## 4. Spec decisions (COH1–COH12) — Approved E-COH0
 
 | ID | Decision |
 | --- | --- |
@@ -130,4 +130,4 @@ After E-TACH0 Approve: layers then depends_on+interfaces using COH seam maps.
 
 ## 7. Exit
 
-Human **Approve COH1–COH12** (or explicit subset). Until then: **Active tip = design/Spec only** for modularity; size offender paydown waits on E-COH1 under this bar.
+**E-COH0 Approved (2026-08-09).** Next Active: **E-COH1** reshape provisional tip modules under COH2–COH4. E-TACH0 remains Spec draft until separately Approved.
