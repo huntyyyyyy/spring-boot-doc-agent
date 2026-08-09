@@ -4735,7 +4735,7 @@ Assumptions affected:
 Files touched: src/doc_engine/ci/suite_timing/*, scripts/ci/suite_timing_summary.py, tests/ci/test_suite_timing*.py, .github/workflows/python-gates.yml, docs/research/{08,quality-backlog}.md, docs/design/suite-stalking-sensors-design-2026-08-09.md, claude/session-log.md
 
 ## 2026-08-09 — Oracle tip: pytest green blockers + size splits
-Commit: 1d4f849
+Commit: 947de95
 Tests: pipeline_runner_stages 5/5; domain_marker_cli + suite_timing 20/20; kitchen_sink ch12 9/9; lineage 20/20; size-ratchet exit 0; domain markers OK
 Assumptions affected:
 - `docs/research/pr-94-followup-oracle-stabilize.md` — green 3.11 goal — [New info — tip 3.11 completed: 1 FAIL real_repo missing --allow-mock; 5 ERROR missing @pytest.fixture; Cover% 93%; size offenders split]
