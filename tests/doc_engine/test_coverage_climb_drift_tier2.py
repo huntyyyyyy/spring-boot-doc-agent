@@ -97,7 +97,7 @@ def test_jpql_lineage_verdicts_and_reverify() -> None:
                 {
                     "file": "q.java",
                     "line": 3,
-                    "lineage": {"resolved_via_entity": "E"},
+                    "lineage": {"available": True, "resolved_via_entity": "E"},
                 },
                 {"file": "n.java", "line": 1},
             ]

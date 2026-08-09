@@ -49,14 +49,14 @@ def test_reverify_one_jpql_early_exits() -> None:
     entry = {
         "file": "q.java",
         "line": 1,
-        "lineage": {"resolved_via_entity": "Missing"},
+        "lineage": {"available": True, "resolved_via_entity": "Missing"},
     }
     t2._reverify_one_jpql_entry(entry, {"entity_table_map": {}}, {}, set(), set(), {})
 
     entry2 = {
         "file": "q.java",
         "line": 2,
-        "lineage": {"resolved_via_entity": "E"},
+        "lineage": {"available": True, "resolved_via_entity": "E"},
     }
     signals = {"entity_table_map": {"E": {"file": "E.java", "table": "T"}}}
     t2._reverify_one_jpql_entry(
@@ -67,7 +67,7 @@ def test_reverify_one_jpql_early_exits() -> None:
     entry3 = {
         "file": "q.java",
         "line": 3,
-        "lineage": {"resolved_via_entity": "E"},
+        "lineage": {"available": True, "resolved_via_entity": "E"},
     }
     t2._reverify_one_jpql_entry(
         entry3,

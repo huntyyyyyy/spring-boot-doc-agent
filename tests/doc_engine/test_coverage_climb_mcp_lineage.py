@@ -81,3 +81,17 @@ def test_lineage_reason_and_null_outcome() -> None:
         {"failure_taxonomy": {"entity_lookup": 3, "null_query": 9, "other": 1}}
     )
     assert dom is not None and dom["reason_class"] == "entity_lookup"
+
+def test_jpql_available_without_entity_not_scored_success() -> None:
+    row = {
+        "file": "q.java",
+        "line": 1,
+        "query_kind": "jpql",
+        "query": "SELECT x FROM Y x",
+        "lineage": {"available": True, "source_tables": ["t"], "target_tables": []},
+    }
+    stratum, ok, failure, _tax = lin._lineage_row_outcome(
+        row, scoring_env=lin.SCORING_ENV_CALLABLE
+    )
+    assert stratum == "jpql" and ok is False and failure is not None
+

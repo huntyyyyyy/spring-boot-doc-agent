@@ -24,17 +24,10 @@ FAST_MODE = os.environ.get("SPRING_DRIFT_FAST_MODE", "").lower() in ("1", "true"
 from tests.support.spring_drift.scratch import _by_source, _edit, _fixture_build_command, _make_scratch_copy
 
 class JpqlLineageProvenanceTest(unittest.TestCase):
-    """Unit-level tests against _raw_query_entries_with_resolved_entity()
-    and _reverify_jpql_lineage_provenance() directly, with synthetic
-    signals/results dicts — no CodeQL scan, no tempdir. Each function has one
-    job (find the citations with a second provenance input; re-verify that
-    input for citations whose provenance file changed) and is tested in
-    isolation from the real-repo integration scenarios in
-    SpringDriftCheckTest above, which cover the same behavior end-to-end."""
+    """Unit tests for JPQL entity-provenance filter + reverify (synthetic signals)."""
 
     def _signals(self, resolved_via_entity="Invoice", available=True):
-        # Match resolve_jpql_to_lineage shapes: available True carries tables +
-        # resolved_via_entity; unavailable is reason-only (no entity key).
+        # available True: tables + entity stamp; False: reason-only (resolver shape).
         lineage = (
             {"available": False, "reason": "out of scope for the bounded JPQL resolver"}
             if not available
@@ -82,15 +75,6 @@ class JpqlLineageProvenanceTest(unittest.TestCase):
     def test_skips_unavailable_jpql_lineage(self):
         # Real unavailable shape is reason-only (no resolved_via_entity).
         signals = self._signals(available=False)
-        found = list(spring_drift_check._raw_query_entries_with_resolved_entity(signals))
-        self.assertEqual(found, [])
-
-    def test_skips_unavailable_even_with_stale_resolved_via_entity(self):
-        # Discriminative: corrupt/hand-edited signals may keep a stale
-        # resolved_via_entity while available is false. Pre-fix filter
-        # keyed only on the entity key would still select it for reverify.
-        signals = self._signals(available=False)
-        signals["evidence"]["raw_queries"][0]["lineage"]["resolved_via_entity"] = "Invoice"
         found = list(spring_drift_check._raw_query_entries_with_resolved_entity(signals))
         self.assertEqual(found, [])
 

@@ -42,6 +42,20 @@ class JpqlLineageResolutionTest(unittest.TestCase):
         )
         self.assertNotIn("resolved_via_entity", result)
 
+    def test_available_pairs_with_resolved_via_entity(self):
+        """Producer door: success stamps both badges; failure stamps neither."""
+        ok = spring_signal_scan.resolve_jpql_to_lineage(
+            "SELECT i FROM Invoice i WHERE i.status = :status", self.ENTITY_TABLE_MAP
+        )
+        self.assertTrue(ok["available"])
+        self.assertEqual(ok.get("resolved_via_entity"), "Invoice")
+        bad = spring_signal_scan.resolve_jpql_to_lineage(
+            "SELECT i FROM Invoice i JOIN i.customer c WHERE c.active = true",
+            self.ENTITY_TABLE_MAP,
+        )
+        self.assertFalse(bad["available"])
+        self.assertNotIn("resolved_via_entity", bad)
+
     def test_query_with_as_keyword_resolves(self):
         result = spring_signal_scan.resolve_jpql_to_lineage(
             "SELECT c FROM Customer AS c WHERE c.active = true", self.ENTITY_TABLE_MAP

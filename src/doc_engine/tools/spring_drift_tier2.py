@@ -153,129 +153,15 @@ def _recheck_generic(fresh_entries, group):
     return results
 
 
-def _raw_query_entries_with_resolved_entity(signals):
-    """Single responsibility: yield every raw_queries entry whose JPQL
-    lineage was resolved through an entity (lineage.resolved_via_entity,
-    spring_signal_scan.py schema_version >= 6) — the only citations with a
-    second provenance input beyond their own file. Native-query entries and
-    out-of-scope/unavailable JPQL entries (``available`` false / no
-    ``resolved_via_entity`` — see resolve_jpql_to_lineage()) are silently
-    skipped, not an oversight: they have exactly one input (their own file),
-    already covered by the ordinary per-file tier-1/tier-2 loop. Both
-    ``available`` and ``resolved_via_entity`` must be truthy so a corrupt
-    hand-edited signals blob cannot re-open provenance reverify on an
-    unavailable lineage that still carries a stale entity key."""
-    for entry in signals.get("evidence", {}).get("raw_queries", []):
-        lineage = entry.get("lineage")
-        if (
-            lineage
-            and lineage.get("available")
-            and lineage.get("resolved_via_entity")
-        ):
-            yield entry
-
-
-def _jpql_lineage_needs_reverify(result) -> bool:
-    return result is not None and result["status"] in (STATUS_UNCHANGED, STATUS_CONFIRMED)
-
-
-def _apply_jpql_lineage_verdict(result, entity, entity_file, entity_meta, fresh, entity_file_deleted):
-    if fresh is None:
-        result["status"] = STATUS_DRIFTED
-        result["tier"] = 2
-        if entity_file_deleted:
-            result["detail"] = (
-                f"JPQL lineage for this query was resolved via entity '{entity}', whose "
-                f"defining file ({entity_file}) was deleted — lineage cannot be confirmed"
-            )
-        else:
-            result["detail"] = (
-                f"JPQL lineage for this query was resolved via entity '{entity}', which "
-                f"persistence__entity no longer matches in its file ({entity_file}) — lineage cannot be confirmed"
-            )
-        return
-    if fresh.get("table") == entity_meta.get("table"):
-        result["status"] = STATUS_CONFIRMED
-        result["tier"] = 2
-        result["detail"] = (
-            f"own file unchanged; provenance entity '{entity}' ({entity_file}) changed but its "
-            f"table mapping did not, so this query's lineage is still accurate"
-        )
-        return
-    result["status"] = STATUS_DRIFTED
-    result["tier"] = 2
-    result["detail"] = (
-        f"JPQL lineage for this query was resolved via entity '{entity}', whose table mapping "
-        f"changed in a different file ({entity_file}): {entity_meta.get('table')!r} -> {fresh.get('table')!r}"
-    )
-
-
-def _reverify_one_jpql_entry(
-    entry,
-    signals,
-    fresh_entity_tables,
-    changed_set,
-    deleted_set,
-    results_by_file_line,
-) -> None:
-    entity = entry["lineage"]["resolved_via_entity"]
-    entity_meta = signals.get("entity_table_map", {}).get(entity)
-    if entity_meta is None:
-        return
-    entity_file = entity_meta.get("file")
-    entity_file_deleted = entity_file in deleted_set
-    if entity_file not in changed_set and not entity_file_deleted:
-        return
-    result = results_by_file_line.get((entry.get("file"), entry.get("line")))
-    if not _jpql_lineage_needs_reverify(result):
-        return
-    fresh = fresh_entity_tables.get(entity)
-    _apply_jpql_lineage_verdict(
-        result, entity, entity_file, entity_meta, fresh, entity_file_deleted
-    )
-
-
-def _reverify_jpql_lineage_provenance(results, signals, fresh_entity_tables, changed_set, deleted_set):
-    """A JPQL citation's lineage is DERIVED from two inputs, not one: the
-    query text (its own file, already handled by the per-file loop that
-    produced `results`) and the entity->table mapping (a different file,
-    entity_table_map[entity]["file"]). This citation is fresh only if BOTH
-    inputs are unchanged — the same freshness rule every other,
-    single-input citation already follows, just honestly widened for the
-    one citation type that actually has a second input, rather than a
-    special-cased "dependent entity" status. Mutates `results` in place;
-    runs once, after the main per-file loop, so it doesn't depend on
-    whether the query's file or the entity's file happened to be processed
-    first (ast-grep's per-repo match order isn't guaranteed stable either —
-    see spring_signal_scan.py's own JPQL-resolution pass for the same
-    reasoning).
-
-    A "changed" input file is not the only way the second input can go
-    stale: DELETING (or moving, which classify_files() reports as a delete
-    of the old path) the entity's file also invalidates the mapping. So the
-    entity-provenance gate fires for changed_set OR deleted_set — a deleted
-    entity file simply has no fresh scan, so it flows into the fresh-is-None
-    -> DRIFTED branch below with a delete-specific detail. Without this, a
-    JPQL query whose entity class file was deleted would come back
-    "unchanged" with silently stale lineage — the exact miss this whole
-    provenance pass exists to prevent, in its deletion variant.
-
-    fresh_entity_tables: class_name -> fresh {"table", ...} dict, built as
-    a side effect of the main loop's own ast-grep re-run on entity files
-    already in changed_set (see _recheck_entities) — reused here rather
-    than triggering a second ast-grep invocation against the same file. A
-    deleted entity file is never tier-2 rechecked, so it never appears here,
-    which is exactly why fresh-is-None is the correct deletion signal."""
-    results_by_file_line = {(row["file"], row["line"]): row for row in results}
-    for entry in _raw_query_entries_with_resolved_entity(signals):
-        _reverify_one_jpql_entry(
-            entry,
-            signals,
-            fresh_entity_tables,
-            changed_set,
-            deleted_set,
-            results_by_file_line,
-        )
+# JPQL dual-input provenance lives in spring_drift_jpql (concept module).
+from doc_engine.tools.spring_drift_jpql import (  # noqa: E402
+    _apply_jpql_lineage_verdict,
+    _jpql_lineage_is_entity_resolved,
+    _jpql_lineage_needs_reverify,
+    _raw_query_entries_with_resolved_entity,
+    _reverify_jpql_lineage_provenance,
+    _reverify_one_jpql_entry,
+)
 
 
 def _recheck_config_keys(repo_path, file_rel, old_keys):
