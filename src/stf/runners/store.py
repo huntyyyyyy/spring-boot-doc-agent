@@ -59,9 +59,16 @@ class TasksStore:
         return tasks
 
     def issue_validation_token(self) -> str:
-        """Reviewer (human/CI) issues token — Implement cannot self-approve."""
+        """Reviewer (human/CI) issues token — Implement cannot self-approve.
+
+        Reject leading ``-`` so ``stf mark-done --token <value>`` is safe under
+        argparse (a ``token_urlsafe`` value starting with ``-`` is parsed as a
+        new option and exits 2).
+        """
         tasks = self.load_tasks()
         token = secrets.token_urlsafe(16)
+        while token.startswith("-"):
+            token = secrets.token_urlsafe(16)
         tasks.validation_token = token
         self.write_tasks(tasks)
         return token
