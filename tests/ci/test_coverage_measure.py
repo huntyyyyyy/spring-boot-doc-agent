@@ -7,10 +7,10 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from doc_engine.ci.coverage_measure import CleanMeasureFactory, run_clean_measure
+from doc_engine.ci.coverage_measure import MeasureRun, run_clean_measure
 
 
-class CleanMeasureFactoryTest(unittest.TestCase):
+class MeasureRunTest(unittest.TestCase):
     def test_wipe_removes_only_cwd_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cwd = Path(tmp)
@@ -21,7 +21,7 @@ class CleanMeasureFactoryTest(unittest.TestCase):
             other.mkdir()
             keep = other / ".coverage"
             keep.write_bytes(b"z")
-            removed = CleanMeasureFactory(cwd).wipe_local_artifacts()
+            removed = MeasureRun(cwd).wipe_local_artifacts()
             self.assertFalse((cwd / ".coverage").exists())
             self.assertFalse((cwd / "coverage.xml").exists())
             self.assertTrue(keep.exists())
@@ -49,7 +49,7 @@ class CleanMeasureFactoryTest(unittest.TestCase):
             (cwd / "coverage.xml").write_text(sample, encoding="utf-8")
             (cwd / ".coverage").write_bytes(b"stale")
             with mock.patch(
-                "doc_engine.ci.coverage_measure.CleanMeasureFactory.run_pytest_cov"
+                "doc_engine.ci.coverage_measure.MeasureRun.run_pytest_cov"
             ) as run_cov:
                 rc, xml = run_clean_measure(cwd=cwd, skip_pytest=True)
             run_cov.assert_not_called()

@@ -31,7 +31,9 @@ jobs:
       # Fail-fast: one interpreter failure cancels siblings (cheapest→dearest
       # signal). ABI-sensitive steps still run on every cell that starts; the
       # expensive hermetic/advisory steps below are pinned to 3.11 only so a
-      # green 3.10/3.12 cell is not 3× Stage-0 / rule-coverage / mutate cost.
+      # green 3.10/3.12 cell is not 3× Stage-0 / rule-coverage / mutate /
+      # coverage-measure cost. Coverage+fail_under+xml is 3.11-only (single
+      # writer) — never combine .coverage* across matrix cells or worktrees.
       fail-fast: true
       matrix:
         # Supported interpreters for the install/test surface. Classifiers also
@@ -209,10 +211,22 @@ jobs:
         if: matrix.python-version == '3.11'
         run: python3 scripts/ci/check_repo_claims.py --metrics
 
+      # Compatibility cells: correctness only. Measuring coverage on every
+      # interpreter multiplies wall-clock (Hilton CI assurance trade-off) and
+      # invites silent combine of parallel .coverage* shards / stale XML —
+      # the same dilution class as cross-worktree combine. Canonical Cover%
+      # + fail_under lives only on 3.11 below.
+      - name: pytest tests/ (ABI matrix — no coverage)
+        if: matrix.python-version != '3.11'
+        run: pytest tests/ -v --tb=short
+
       - name: pytest tests/ (line coverage ratchet on doc_engine + stf)
+        if: matrix.python-version == '3.11'
         run: |
           # Drop stale .coverage* so statement-only local data cannot clash with
           # branch=true from pyproject.toml (coverage raises cant-combine).
+          # Single writer for this checkout — do not coverage combine across
+          # worktrees or matrix cells.
           rm -f .coverage .coverage.* coverage.xml
           pytest tests/ -v --tb=short \
             --cov=doc_engine --cov=stf \
@@ -227,7 +241,7 @@ jobs:
           COV_FAIL_UNDER: "98.7"
 
       - name: Coverage summary + below-floor gap-average
-        if: always()
+        if: always() && matrix.python-version == '3.11'
         run: |
           python3 - <<'PY'
           import os

@@ -1,13 +1,11 @@
-"""Guard: coverage report source paths must stay inside one checkout.
+"""PathCohesionGuard — coverage report paths must stay in one checkout.
 
-Rejects Cobertura ``filename`` values that escape the active git worktree
-(absolute paths into a sibling ``wt-*`` tree, ``..`` climbs, or foreign
-worktree directory segments). Callers such as gap-average depend on this
-check — never on ``cwd`` accidentally holding another tree's XML.
+Rejects Cobertura filenames that escape the active git worktree (absolute
+paths into a sibling ``wt-*`` tree, ``..`` climbs, foreign worktree segments).
 
 Usage:
-    from doc_engine.ci.coverage_path_cohesion import assert_paths_cohesive
-    assert_paths_cohesive(paths, repo_root)
+    from doc_engine.ci.coverage_path_cohesion import PathCohesionGuard
+    PathCohesionGuard(repo_root).assert_cohesive(paths)
 """
 
 from __future__ import annotations
@@ -15,7 +13,6 @@ from __future__ import annotations
 import re
 from pathlib import Path, PurePosixPath, PureWindowsPath
 
-# Sibling climb/measure worktrees and the recurring defect prefix.
 _FOREIGN_SEGMENT_RE = re.compile(
     r"(?i)(^|[/\\])(wt-cov-[^/\\]*|wt-complexity-[^/\\]*|wt-pr\d+|wt-size-[^/\\]*|"
     r"wt-mutation-[^/\\]*)([/\\]|$)"
@@ -42,17 +39,12 @@ def _looks_absolute(raw: str) -> bool:
 
 def _foreign_segment(raw: str) -> str | None:
     match = _FOREIGN_SEGMENT_RE.search(normalize_source_path(raw))
-    if not match:
-        return None
-    return match.group(2)
+    return match.group(2) if match else None
 
 
 def _resolve_under_root(raw: str, root: Path) -> Path | None:
-    """Return resolved path if it stays under *root*, else ``None``."""
     root_res = root.resolve()
-    candidate = Path(raw)
-    if not _looks_absolute(raw):
-        candidate = root_res / raw
+    candidate = Path(raw) if _looks_absolute(raw) else root_res / raw
     try:
         resolved = candidate.resolve()
         resolved.relative_to(root_res)
@@ -61,36 +53,48 @@ def _resolve_under_root(raw: str, root: Path) -> Path | None:
         return None
 
 
+class PathCohesionGuard:
+    """Behavioral check: every report source path belongs to *repo_root*."""
+
+    def __init__(self, repo_root: Path) -> None:
+        self.repo_root = repo_root.resolve()
+
+    def violations(self, paths: list[str]) -> list[str]:
+        """Return human-readable violations (empty means cohesive)."""
+        root_name = self.repo_root.name
+        out: list[str] = []
+        for raw in paths:
+            if not raw or not str(raw).strip():
+                continue
+            norm = normalize_source_path(raw)
+            if _resolve_under_root(raw, self.repo_root) is not None:
+                continue
+            foreign = _foreign_segment(norm)
+            if foreign and foreign != root_name:
+                out.append(f"foreign worktree segment {foreign!r}: {norm}")
+            else:
+                out.append(f"path escapes repo root {self.repo_root}: {norm}")
+        return out
+
+    def assert_cohesive(self, paths: list[str]) -> None:
+        """Raise :class:`PathCohesionError` when any source path is foreign."""
+        bad = self.violations(paths)
+        if not bad:
+            return
+        detail = "; ".join(bad[:8])
+        extra = f" (+{len(bad) - 8} more)" if len(bad) > 8 else ""
+        raise PathCohesionError(
+            "coverage report path cohesion failed — refuse gap-average / measure "
+            f"on a cross-worktree or escaped report ({len(bad)} path(s)): "
+            f"{detail}{extra}"
+        )
+
+
 def cohesion_violations(paths: list[str], repo_root: Path) -> list[str]:
-    """Return human-readable violations for *paths* vs *repo_root*."""
-    root = repo_root.resolve()
-    root_name = root.name
-    violations: list[str] = []
-    for raw in paths:
-        if not raw or not str(raw).strip():
-            continue
-        norm = normalize_source_path(raw)
-        # Paths that resolve inside this checkout are cohesive even when the
-        # worktree directory itself is named wt-cov-* (measure trees).
-        if _resolve_under_root(raw, root) is not None:
-            continue
-        foreign = _foreign_segment(norm)
-        if foreign and foreign != root_name:
-            violations.append(f"foreign worktree segment {foreign!r}: {norm}")
-            continue
-        violations.append(f"path escapes repo root {root}: {norm}")
-    return violations
+    """Compat: list violations for *paths* vs *repo_root*."""
+    return PathCohesionGuard(repo_root).violations(paths)
 
 
 def assert_paths_cohesive(paths: list[str], repo_root: Path) -> None:
-    """Raise :class:`PathCohesionError` when any source path is foreign."""
-    bad = cohesion_violations(paths, repo_root)
-    if not bad:
-        return
-    detail = "; ".join(bad[:8])
-    extra = f" (+{len(bad) - 8} more)" if len(bad) > 8 else ""
-    raise PathCohesionError(
-        "coverage report path cohesion failed — refuse gap-average / measure "
-        f"on a cross-worktree or escaped report ({len(bad)} path(s)): "
-        f"{detail}{extra}"
-    )
+    """Compat: raise when any path escapes *repo_root*."""
+    PathCohesionGuard(repo_root).assert_cohesive(paths)

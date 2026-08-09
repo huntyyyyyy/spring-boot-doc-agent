@@ -1,17 +1,14 @@
-"""Single-writer coverage measure for one checkout (Factory + Facade).
+"""MeasureRun — single-writer coverage measure for one checkout.
 
-Wipes local ``.coverage*`` / ``coverage.xml`` in the active tree only, runs one
-pytest+cov invocation, validates path cohesion, then optionally prints
-gap-average. Never combines coverage DBs across worktrees.
+Wipes cwd-local ``.coverage*`` / ``coverage.xml``, runs one pytest+cov,
+validates path cohesion, then optionally prints gap-average. Never combines
+coverage DBs across worktrees.
 
 Usage:
     doc-engine coverage-measure
     python -m doc_engine.ci.coverage_measure --floor 98.7
 
-Exit codes:
-    0  measure + optional gap report succeeded
-    1  pytest / fail_under failed
-    2  cohesion / missing report / bad args
+Exit codes: 0 ok; 1 pytest/fail_under failed; 2 cohesion/missing/bad args
 """
 
 from __future__ import annotations
@@ -22,14 +19,13 @@ import sys
 from pathlib import Path
 
 from doc_engine.ci.coverage_gap_average import DEFAULT_FLOOR, build_report_from_coverage
-from doc_engine.ci.coverage_gap_format import format_text
-from doc_engine.ci.coverage_path_cohesion import PathCohesionError, assert_paths_cohesive
+from doc_engine.ci.coverage_path_cohesion import PathCohesionError, PathCohesionGuard
 from doc_engine.ci.coverage_report import load_cobertura_report
 from doc_engine.ci.gate_tools import checkout_root
 
 
-class CleanMeasureFactory:
-    """Start a clean measure in *cwd* — single writer, no silent combine."""
+class MeasureRun:
+    """Single-writer measure in *cwd* — wipe, one pytest+cov, cohesion check."""
 
     def __init__(self, cwd: Path | None = None) -> None:
         self.cwd = (cwd or Path.cwd()).resolve()
@@ -70,17 +66,46 @@ class CleanMeasureFactory:
         ]
         if extra_pytest_args:
             cmd.extend(extra_pytest_args)
-        completed = subprocess.run(cmd, cwd=str(self.cwd), check=False)
-        return int(completed.returncode)
+        return int(subprocess.run(cmd, cwd=str(self.cwd), check=False).returncode)
 
     def load_and_validate(self) -> Path:
-        """Require ``coverage.xml`` in cwd and cohesive source paths."""
+        """Require ``coverage.xml`` in cwd with cohesive source paths."""
         xml_path = self.cwd / "coverage.xml"
         if not xml_path.is_file():
             raise FileNotFoundError(f"missing coverage report: {xml_path}")
         report = load_cobertura_report(xml_path)
-        assert_paths_cohesive(report.source_paths(), self.cwd)
+        PathCohesionGuard(self.cwd).assert_cohesive(report.source_paths())
         return xml_path
+
+    def execute(
+        self,
+        *,
+        fail_under: float = DEFAULT_FLOOR,
+        extra_pytest_args: list[str] | None = None,
+        skip_pytest: bool = False,
+    ) -> tuple[int, Path | None]:
+        """Wipe → (optional) pytest → validate. Returns (exit_code, xml_path)."""
+        if skip_pytest:
+            for path in sorted(self.cwd.glob(".coverage*")):
+                if path.is_file():
+                    path.unlink()
+        else:
+            self.wipe_local_artifacts()
+            rc = self.run_pytest_cov(
+                fail_under=fail_under, extra_pytest_args=extra_pytest_args
+            )
+            if rc != 0:
+                xml = self.cwd / "coverage.xml"
+                return rc, xml if xml.is_file() else None
+        try:
+            return 0, self.load_and_validate()
+        except (FileNotFoundError, PathCohesionError) as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2, None
+
+
+# Compat alias used by tests / callers during the rename window.
+CleanMeasureFactory = MeasureRun
 
 
 def run_clean_measure(
@@ -90,59 +115,22 @@ def run_clean_measure(
     extra_pytest_args: list[str] | None = None,
     skip_pytest: bool = False,
 ) -> tuple[int, Path | None]:
-    """Wipe → (optional) pytest → validate. Returns (exit_code, xml_path)."""
-    factory = CleanMeasureFactory(cwd)
-    if skip_pytest:
-        # Keep coverage.xml; only drop stale SQLite shards that confuse combine.
-        for path in sorted(factory.cwd.glob(".coverage*")):
-            if path.is_file():
-                path.unlink()
-    else:
-        factory.wipe_local_artifacts()
-        rc = factory.run_pytest_cov(
-            fail_under=fail_under, extra_pytest_args=extra_pytest_args
-        )
-        if rc != 0:
-            xml = factory.cwd / "coverage.xml"
-            return rc, xml if xml.is_file() else None
-    try:
-        xml_path = factory.load_and_validate()
-    except (FileNotFoundError, PathCohesionError) as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 2, None
-    return 0, xml_path
+    """Compat wrapper around :meth:`MeasureRun.execute`."""
+    return MeasureRun(cwd).execute(
+        fail_under=fail_under,
+        extra_pytest_args=extra_pytest_args,
+        skip_pytest=skip_pytest,
+    )
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--floor",
-        type=float,
-        default=DEFAULT_FLOOR,
-        help=f"fail_under + gap floor (default: {DEFAULT_FLOOR}; do not weaken)",
-    )
-    parser.add_argument(
-        "--worst",
-        type=int,
-        default=15,
-        help="Worst below-floor files to list after measure",
-    )
-    parser.add_argument(
-        "--skip-pytest",
-        action="store_true",
-        help="Wipe + validate existing coverage.xml only (debug)",
-    )
-    parser.add_argument(
-        "--no-gap-report",
-        action="store_true",
-        help="Skip gap-average print after a successful measure",
-    )
-    parser.add_argument(
-        "pytest_args",
-        nargs="*",
-        help="Extra args forwarded to pytest after the standard cov flags",
-    )
-    return parser.parse_args(argv)
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--floor", type=float, default=DEFAULT_FLOOR)
+    p.add_argument("--worst", type=int, default=15)
+    p.add_argument("--skip-pytest", action="store_true")
+    p.add_argument("--no-gap-report", action="store_true")
+    p.add_argument("pytest_args", nargs="*")
+    return p.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -160,8 +148,7 @@ def main(argv: list[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 2
-    rc, xml_path = run_clean_measure(
-        cwd=root,
+    rc, xml_path = MeasureRun(root).execute(
         fail_under=args.floor,
         extra_pytest_args=list(args.pytest_args) or None,
         skip_pytest=args.skip_pytest,
@@ -172,16 +159,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"coverage-measure wrote {xml_path}", flush=True)
         return rc
     try:
-        loaded = load_cobertura_report(xml_path)
         report = build_report_from_coverage(
-            loaded, floor=args.floor, repo_root=root
+            load_cobertura_report(xml_path), floor=args.floor, repo_root=root
         )
     except PathCohesionError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
-    print(format_text(report, worst=args.worst), flush=True)
+    print(report.as_text(worst=args.worst), flush=True)
     return rc
 
 
-if __name__ == "__main__":  # pragma: no cover - CLI entry glue
+if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(main())

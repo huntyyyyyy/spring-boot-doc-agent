@@ -138,12 +138,18 @@ validates path cohesion, then prints gap-average:
 doc-engine coverage-measure
 ```
 
+CI mirrors this contract: **only the Python 3.11 matrix cell** runs
+pytest-cov / `fail_under` / `coverage.xml` upload; 3.10 and 3.12 run plain
+pytest for ABI signal. Do not treat a retrieved/stale artifact or a partial
+worktree measure as the Cover% oracle — measure fresh in one tree.
+
 Do not weaken `[tool.coverage.report] fail_under` (**98.7**). coverage.py's
 `relative_files = true` only relativizes paths under the **current working
 directory** at collection time; paths from adjacent worktrees stay absolute and
 `combine` will silently union them — that is the dilution failure mode this
 guard exists to catch ([coveragepy#1647](https://github.com/nedbat/coveragepy/issues/1647),
-[coveragepy#1674](https://github.com/coveragepy/coveragepy/issues/1674)).
+[coveragepy#1674](https://github.com/coveragepy/coveragepy/issues/1674);
+DeepWiki on path normalization: [feldroy/air coverage](https://deepwiki.com/feldroy/air/4.4.2-coverage-requirements)).
 
 Locally (after `pip install -r requirements-dev.txt` and `pip install -e .`):
 
