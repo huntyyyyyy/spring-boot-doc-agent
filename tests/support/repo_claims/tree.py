@@ -69,6 +69,10 @@ class TreeCase(unittest.TestCase):
                          "--baseline", str(self.dir / "missing_baseline.json")])
 
     def write(self, rel: str, text: str) -> None:
-        target = self.dir / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(text, encoding="utf-8")
+        write_text_creating_parents(self.dir / rel, text)
+
+
+def write_text_creating_parents(path: Path, text: str) -> None:
+    """Create parent dirs then write UTF-8 text (fixture tree helper)."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")

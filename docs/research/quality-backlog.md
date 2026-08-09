@@ -227,9 +227,10 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-SCAN1 Spec + Implement):** SCAN1-A–J + `scanning/astgrep/` façade (2026-08-09).  
 **Done (E-CQL0 Spec):** CQ1–CQ9 Approve (2026-08-09).  
 **Done (E-DOC0 Spec):** DOC1–DOC12 Approve (2026-08-09).  
-**Active:** **E-DOC1** — research domains + `claude/`→`docs/` + look-first (research 18); one stream.  
-**Spec draft (not Active tip):** **E-STK0** — watch/stalker agents without context bloat ([`process/19-…`](process/19-watch-stalker-agents-context-lean-2026.md)); Approve STK1–STK10 before Implement.  
-**Defer:** E-CQL1 (next after E-DOC1 Archive); E-STK1 (after E-STK0 Approve); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
+**Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
+**Active:** **none** — pick E-CQL1 or E-STK1 next (one stream).  
+**Defer:** E-CQL1 (ready); E-STK1 (ready after E-STK0 Approve); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT.
 
 ---
@@ -238,8 +239,8 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Draft** (2026-08-09) | research 19 `spec_gate` → APPROVED |
-| P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | After Approve; one stream | context resets; claims green; LOC/complexipy |
+| P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Approved** (2026-08-09) | research 19 `spec_gate: APPROVED E-STK0` |
+| P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | Deferred (ready; pick as Active) | context resets; claims green; LOC/complexipy |
 
 Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md) §5.1. **Embody** sensors+ledger+react-doctor pattern; **Spike** headroom/loopx/gh-aw proposer; **Defer** claude-mem; **Refuse** agentmemory dep, context-mode (ELv2), alternate hosts. GH inventory still ≥1k★+14-day push for research SoR.
 
@@ -250,6 +251,6 @@ Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`]
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P14.0 | **E-DOC0 Spec:** approve **DOC1–DOC12** (domains ≤2 deep; migrate `claude/` valuables; Cursor hooks look-first; keep adapter) | **Approved** (2026-08-09, merge) | research 18 `spec_gate: APPROVED E-DOC0` |
-| P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Active** | claims green; design writes denied without research-map Read; marketplace intact |
+| P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).

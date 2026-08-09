@@ -1352,6 +1352,14 @@ def mirror_debt(root: Path) -> List[str]:
     return stale
 
 
+def _write_mirror_payload(target: Path, payload: dict) -> None:
+    """Create parent dirs then write the mirrored-prompt JSON payload."""
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        json.dumps(payload, indent=2, sort_keys=False) + "\n",
+        encoding="utf-8", newline="\n")
+
+
 def write_mirror_state(root: Path) -> int:
     """Record every mirrored prompt's current signature. Run this *after*
     copying the changes into the Claude project, never instead of it."""
@@ -1367,10 +1375,7 @@ def write_mirror_state(root: Path) -> int:
                      "the project and does not confirm the copies match."),
         "mirrored": recorded,
     }
-    target = root / MIRROR_STATE
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(
-        json.dumps(payload, indent=2, sort_keys=False) + "\n", encoding="utf-8", newline="\n")
+    _write_mirror_payload(root / MIRROR_STATE, payload)
     return len(recorded)
 
 

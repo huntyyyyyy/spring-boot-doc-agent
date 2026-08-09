@@ -1,6 +1,6 @@
 ---
 title: E-STK0 — Watch/stalker agents (findings → research → refactor) without context bloat
-status: DRAFT Spec — pending Approve of STK1–STK10
+status: E-STK0 APPROVED (2026-08-09) — merge Approve of STK1–STK10
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Meta-repo process SoR + optional Cursor/CI watch agent — not doc-engine kernel SoT
@@ -18,10 +18,18 @@ do_not:
   - adopt `riponcm/projectmem` (≈579★) or `Acquarts/ai-repo-health-agent` (0★) as merge SoR
   - adopt agentmemory / context-mode / prime-agent as product dependencies or default hosts
   - treat ≥1k★ + recent push as automatic Adopt (discernment §5.1 required)
-spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
+spec_gate: APPROVED E-STK0 (2026-08-09) — STK1–STK10
 ---
 
 # Principal memo: stalker-shaped watch agents (mid-2026)
+
+> **APPROVED — SPEC GATE E-STK0 (2026-08-09)**
+>
+> Merge Approve of **STK1–STK10**. **Embody** sensors + in-repo ledger + react-doctor
+> *pattern*; **Adopt** rotate focus / Spec chain / watch≠fixer / cycle reset;
+> **Spike** headroom / loopx-as-projection / optional gh-aw proposer. **Defer/Refuse**
+> memory daemons, ELv2 routers, alternate hosts (§5.1). E-STK1 Implement stays Deferred
+> until chosen as Active tip.
 
 ## 0. One-page verdict
 
@@ -29,8 +37,8 @@ spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
 | --- | --- |
 | Is there a 2026 pattern for agents that *watch* systems, surface bugs / inefficiencies / wrong frameworks / gaps, then drive research + refactor adoption? | **Yes.** Strongest native shape is **sensor findings → compact external memory → research memo / backlog → Spec → implement**, not a forever-growing chat. `[Evidenced]` |
 | What maps to this repo’s “stalker”? | **Suite-stalking sensors (E-RUN)** already Embody the *watch* half for CI plateaus — deterministic junit / cascade clarity; LLM flake triage refused. Broader “framework/gap stalking” is a **separate meta-agent** that must not dilute oracle SoT. `[Confirmed]` |
-| How do mid-2026 systems avoid context bloat? | Prefer **newer ≥1k★ + 14-day push**: **claude-mem**, **headroom**, **agentmemory**, **context-mode**, **loopx**; **Prime Agent** / **OpenHands** / **gh-aw** for watch→act — plus arXiv compaction papers. `[Evidenced]` |
-| Adopt for *this* product now? | **Spec-only.** **Embody** sensors + in-repo ledger + react-doctor *pattern*. **Adopt** process (rotate focus, Spec chain, cycle reset). **Spike** headroom (compress dumps) + loopx (handoffs) + optional gh-aw *proposer*. **Defer/Refuse** full memory daemons / alternate agent hosts / ELv2 routers (see §5.1). |
+| How do mid-2026 systems avoid context bloat? | ≥1k★ + 14-day push qualifies **research SoR only**. Product stance (§5.1): thin **in-repo ledger** default; **Spike** headroom / loopx; **Defer** claude-mem; **Refuse** agentmemory dep + context-mode (ELv2) + alternate hosts — not Adopt those as merge deps. `[Evidenced]` |
+| Adopt for *this* product now? | **Spec Approved.** **Embody** sensors + in-repo ledger + react-doctor *pattern*. **Adopt** process (rotate focus, Spec chain, cycle reset). **Spike** headroom (compress dumps) + loopx (handoffs) + optional gh-aw *proposer*. **Defer/Refuse** full memory daemons / alternate agent hosts / ELv2 routers (see §5.1). |
 
 ---
 
@@ -213,7 +221,7 @@ Star count and 14-day push qualify a tree as *research SoR*, not as *merge depen
 | claude-mem / magic-context / mem0 / letta | **Defer** |
 | agentmemory dep; context-mode; prime-agent/open-swe as host; LLM-judge/oracle; CompactionRL; auto-PR factory | **Refuse** |
 
-## 6. Spec decisions (STK1–STK10) — pending Approve
+## 6. Spec decisions (STK1–STK10) — Approved E-STK0
 
 | ID | Decision |
 | --- | --- |
