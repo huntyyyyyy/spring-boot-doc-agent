@@ -84,6 +84,8 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 - Parallel tip thrash on SoT files  
 - Suite-wide pytest-xdist before E-TEST domain shards (policy **T-A**)  
 - Cross-job `coverage combine` to parallelize the oracle cell  
+- Real-time / climb / LTL-score as substitute for whole-repo oracle 98.7 (E-RT0)  
+- In-tree Rust rewrite for “architecture assertion” without profile (Embody wheels only)  
 
 ---
 
@@ -232,7 +234,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
 **Done slice (2026-08-09):** E-COH1 public-surface fitness + delete `support`/`inventory_drift` warehouses; `semantic_eval` public façade.  
-**Done Spec + Implement:** **E-HOOK2** — local oracle Cover% remesure on push when src/tests change (2026-08-09).  
+**Done Spec + Implement:** **E-HOOK2** — local oracle Cover% remesure on push when src/tests change (2026-08-09); stalker/path-parity tests lift tip to ≥98.7.  
 **Done Spec + Implement:** **E-CQL1** — CodeQL signals content-fingerprint skip of compile/runtime (2026-08-09).  
 **Done Spec + Implement:** **E-TEL2** — path-parity sensors G8–G10 (2026-08-09).  
 **Done Spec + Implement:** **E-SEL0 / E-SEL1** — fine ABI file paths + path→domain pre_pr pytest select (2026-08-09).  
@@ -247,8 +249,9 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Spec draft (parked):** **E-SOL0** — vocabulary landed; not tip-blocking.  
 **Spec draft (demoted — later):** **E-GND0** — tip-grounding MCP; after E-COH1 has a green slice.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1).  
-**Defer:** E-CQL1; E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; `quality_knobs.py` mega-config; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**.
+**Spec draft (not Active tip):** **E-RT0** — realtime architecture/logic assertion envelope (P27.0); research 32.  
+**Defer:** E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**; **E-RT1** until E-RT0 Approve.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; `quality_knobs.py` mega-config; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**; **climb/LTL/RT score as Cover% SoT**.
 
 ---
 
@@ -396,6 +399,17 @@ Research: [`docs/research/process/28-local-stalker-telemetry-etl-2026.md`](proce
 | P26.1 | **E-SEL1 Implement:** mixed-dir file paths; `pytest_domain_select`; pre_pr wire + junit timing | **Done** (2026-08-09) | `test_pytest_domain_select.py`; climb paths are `.py` files |
 
 Research: [`docs/research/process/29-local-domain-pytest-select-2026.md`](process/29-local-domain-pytest-select-2026.md). Design: [`docs/design/local-domain-pytest-select-design-2026-08-09.md`](../design/local-domain-pytest-select-design-2026-08-09.md).
+
+---
+
+## P27 — Real-time architecture & logic assertion (agents) — Spec only
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P27.0 | **E-RT0 Spec:** approve **RT0-1–RT0-8** (layered RT envelope; tool receipts; incremental fitness; refuse fake Cover%) | **DRAFT** (2026-08-09) — pending human Approve | research 32; no implement until Approve |
+| P27.1 | **E-RT1 Implement** | Deferred | only after E-RT0 + E-TACH0/E-COH deps |
+
+Research: [`docs/research/coverage-quality/32-realtime-architecture-assertion-agents-2026.md`](coverage-quality/32-realtime-architecture-assertion-agents-2026.md). **Embody** oracle≠climb + tach/ruff/ast-grep wheels; **Adopt** Spec-gated edit-time pack + receipts; **Refuse** LLM-judge SoT, in-tree Rust, climb-as-floor.
 
 ---
 

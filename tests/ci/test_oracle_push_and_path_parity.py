@@ -81,3 +81,52 @@ def test_path_parity_sensors_clean_on_tip() -> None:
     assert "oracle_cell_posture" in ALL_KINDS
     assert "codeql_change_presence" in ALL_KINDS
     assert "workflow_suite_map" in ALL_KINDS
+
+
+def test_oracle_cell_posture_flags_missing_policy(tmp_path: Path) -> None:
+    hits = scan_oracle_cell_posture(tmp_path)
+    assert hits and hits[0].kind == "oracle_cell_posture"
+    assert "missing" in hits[0].summary
+
+
+def test_oracle_cell_posture_flags_unwired_pre_pr(tmp_path: Path) -> None:
+    policy = tmp_path / "src/doc_engine/ci/oracle_push_policy.py"
+    policy.parent.mkdir(parents=True)
+    policy.write_text("# present\n", encoding="utf-8")
+    pre = tmp_path / "scripts/ci/pre_pr.py"
+    pre.parent.mkdir(parents=True)
+    pre.write_text("print('no oracle wire')\n", encoding="utf-8")
+    qg = tmp_path / "scripts/ci/pre_pr_quality_gates_suite.py"
+    qg.write_text("skip_coverage = True\n# never opens oracle xml\n", encoding="utf-8")
+    kinds = {f.summary for f in scan_oracle_cell_posture(tmp_path)}
+    assert any("oracle remesure" in s for s in kinds)
+    assert any("never consults" in s for s in kinds)
+
+
+def test_codeql_change_presence_flags_absent(tmp_path: Path) -> None:
+    wf = tmp_path / ".github/workflows/codeql-signals.yml"
+    wf.parent.mkdir(parents=True)
+    wf.write_text("name: bare\n", encoding="utf-8")
+    hits = scan_codeql_change_presence(tmp_path)
+    assert len(hits) == 2
+    assert all(h.kind == "codeql_change_presence" for h in hits)
+
+
+def test_workflow_suite_map_flags_missing_hard_names(tmp_path: Path) -> None:
+    pre = tmp_path / "scripts/ci/pre_pr.py"
+    pre.parent.mkdir(parents=True)
+    pre.write_text("SUITES = []\n", encoding="utf-8")
+    hits = scan_workflow_suite_map(tmp_path)
+    assert len(hits) == 3
+    assert all(h.kind == "workflow_suite_map" for h in hits)
+
+
+def test_public_surface_policy_residuals_and_private_all(tmp_path: Path) -> None:
+    from doc_engine.ci import public_surface_policy as psp
+
+    base = tmp_path / "src/doc_engine/pipeline/local_runner_phases"
+    base.mkdir(parents=True)
+    (base / "support.py").write_text("# residual\n", encoding="utf-8")
+    assert any(p.endswith("support.py") for p in psp.forbidden_residual_paths(tmp_path))
+    assert psp.forbidden_residual_paths(tmp_path / "nope") == []
+    assert psp.module_private_all_exports("doc_engine.ci.oracle_push_policy") == []
