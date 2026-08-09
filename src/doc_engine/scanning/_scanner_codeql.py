@@ -31,16 +31,10 @@ class CodeQLBackend(ScannerBackend):
 
     @staticmethod
     def _version_hash_paths() -> List[str]:
-        """Paths whose bytes feed ``version_hash`` / results-cache ``scanner_version``.
-
-        After the CodeQL modularize, behavior lives in every ``_codeql_*.py``
-        sibling — hashing only the facade left stale results-cache hits when
-        cache/query/cli modules changed.
-        """
+        """Hash every ``support/_codeql_*.py`` so modularize cannot stale results cache."""
         self_file = Path(__file__).resolve()
         support = self_file.parent / "support"
-        paths = [str(self_file)]
-        paths.extend(sorted(str(path) for path in support.glob("_codeql_*.py")))
+        paths = [str(self_file), *sorted(map(str, support.glob("_codeql_*.py")))]
         pack_dir = codeql_pack_dir()
         if pack_dir.is_dir():
             paths.extend(sorted(glob.glob(str(pack_dir / "*.ql"))))

@@ -24,7 +24,7 @@
     "src/doc_engine/query/rank.py": 259,
     "src/doc_engine/scanning/_merge_signals.py": 343,
     "src/doc_engine/scanning/_scanner_astgrep.py": 514,
-    "src/doc_engine/scanning/_scanner_codeql.py": 355,
+    "src/doc_engine/scanning/_scanner_codeql.py": 354,
     "src/doc_engine/scanning/_scanner_filesystem.py": 275,
     "src/doc_engine/scanning/absence.py": 251,
     "src/doc_engine/scanning/covering.py": 260,
