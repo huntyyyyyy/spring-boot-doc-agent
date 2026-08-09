@@ -110,15 +110,18 @@ Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modulari
 
 ---
 
-## P7 — Suite stalking / Rust-class runners (2026 research)
+## P7 — Suite stalking feature space (2026 research)
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P7.0 | **E-RUN0 Spec:** approve **R1–R5** in research 08 | Not started | design/research Spec gate |
-| P7.1 | **E-RUN1:** oracle (+ optional ABI) `--durations` report as bottleneck SoT | Adopt after Spec | CI log / summary artifact |
-| P7.2 | **E-RUN2:** optional rpytest `--verify-dropin` spike on one `domain_*` (no cov) | Spike / refuse if &lt;15% or drop-in fail | wall-clock + parity |
+| P7.0 | **E-RUN0 Spec:** approve **R1–R8** (dimensions D1–D20 map) | Not started | research 08 Spec gate |
+| P7.1 | **E-RUN1:** oracle (+ optional ABI) durations + pre-pytest cascade clarity (**D1/D17**) | Adopt after Spec | CI log / artifact |
+| P7.2 | **E-RUN2:** plateau map + optional durations ⋈ gap-average (**D2/D15**) | Adopt after Spec | script or summary section |
+| P7.3 | **E-RUN3:** rpytest `--verify-dropin` spike on one `domain_*` (**D3**) | Spike / refuse if &lt;15% or drop-in fail | wall-clock + parity |
+| P7.4 | **E-RUN4:** NameRTS-shaped selection + agent card behind `pre_pr` only (**D9/D18**) | Adopt after Spec · never oracle | `pre_pr` receipt |
+| P7.5 | **E-RUN5:** advisory flake/job log triage (**D7/D8**) | Defer | non-blocking artifact |
 
-Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-runners-bottlenecks.md). Prefer **2026** primaries (arXiv 2607/2602/2601; rpytest product docs).
+Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-runners-bottlenecks.md). Prefer **2026** primaries (arXiv 2607/2602/2601/2605/2604; rpytest; OTel CI semconv).
 
 ---
 
@@ -128,5 +131,5 @@ Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-run
 **Done (E-TEST0–1):** domain markers + ABI shards.  
 **Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
 **Active tip:** oracle stabilize (#105) to **98.7**.  
-**Next research Spec (when tip free):** **E-RUN0** (suite stalking) — do **not** swap oracle runner first.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; fuzzy green; Spec Kit WorkflowEngine as CI runtime.
+**Next research Spec (when tip free):** **E-RUN0** — durations/sensors first; not oracle runner swap.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; Spec Kit WorkflowEngine as CI runtime.

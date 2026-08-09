@@ -1,9 +1,9 @@
 ---
-title: Rust-class test runners, suite stalking, and oracle bottlenecks
+title: Suite stalking feature space — runners, telemetry, selection, triage (2026)
 status: RESEARCH COMPLETE — Spec gate not yet approved (E-RUN0)
 date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
-prefer_sources: "2026 primary (arXiv / product docs); older only as contrast"
+prefer_sources: "2026 primary (arXiv / product docs / OTel semconv); older only as contrast"
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 siblings:
   - docs/research/06-test-suite-bounded-contexts-parallel.md
@@ -12,48 +12,50 @@ siblings:
 related:
   - docs/research/pr-94-followup-oracle-stabilize.md
   - docs/research/quality-backlog.md
+  - docs/research/01-coverage-oracle-climb-solid.md
 do_not:
   - weaken fail_under=98.7 or replace oracle with runner green
   - suite-wide -n / xdist / rpytest shard of the cov cell without E-TEST2 Spec
   - in-tree Rust / Cargo workspace for this question
   - LLM-as-judge of flaky vs real as merge SoT
+  - RTS that skips the oracle cell on merge
 ---
 
-# 08 — Rust test runners & “suite stalking” vs this oracle (2026)
+# 08 — Suite stalking feature space vs this oracle (2026)
 
-Sibling to **06–07** and the [rust-stack-fit memo](../design/rust-stack-fit-memo-2026-08-08.md).
-Those embodied test BCs, CI YAML modularity, and **no in-tree Rust by default**.
-This segment asks: when progress bars stall mid-suite and a Rust “stalker”
-(daemon runner / flake reporter / slow-test tracker) looks attractive, what to
-**Embody / Adopt / Refuse** for *spring-boot-doc-agent* — without confusing
-**ABI green** with the **3.11 fail_under=98.7** oracle.
+Sibling to **06–07**, [rust-stack-fit](../design/rust-stack-fit-memo-2026-08-08.md),
+and **01** (oracle vs climb). Expands beyond “install rpytest” into a **feature
+map**: what a stalker-class capability can mean for *this* Python CLI product,
+which dimensions earn Spec tickets, and which are category errors.
 
-**Prefer 2026 primaries.** Pre-2026 work is cited only as contrast.
+**Prefer 2026 primaries.** Pre-2026 cited only as contrast.
+
+**Claim tiers:** `[Evidenced]` primary · `[Confirmed]` this repo · `[Unknown]`
+needs measure or Spec choice.
 
 ---
 
 ## 1. Frame
 
-**Symptom:** ABI / domain shards show plateaus (~28–29%, ~55%, ~57%, ~62%) that
-feel like “the runner is stuck.” Separately, engineers notice Rust-powered
-pytest replacements (warm daemon, flaky reports, slow-test status) and ask
-whether that class of tool should enter the tip.
+**Symptom cluster:**
 
-**Category errors to refuse:**
+1. Mid-suite progress plateaus feel like runner stalls.
+2. Agents and humans lack a durable **bottleneck / failure inventory** across
+   oracle vs ABI.
+3. Industry “Rust stalkers” (warm daemon, flake reports, slow marks) look like
+   a single product — they are actually a **bundle of dimensions**.
 
-1. Treating a faster *runner* as proof the **coverage floor** is met.
-2. Treating progress-% stalls as collection/startup cost when they are
-   **subprocess-heavy Python tests**.
-3. Adopting suite-wide parallel dispatch as a substitute for E-TEST domain
-   quarantine (**06** / policy **T-A**).
-4. Using LLM flaky-vs-bug classifiers as merge SoT (synthesis **20**).
+**Category errors to refuse (unchanged core):**
 
-**Real design questions:**
+1. Faster *runner* ≠ Cover% floor proof.
+2. Progress-% stalls ≠ collection/startup cost here.
+3. Suite-wide parallel ≠ E-TEST quarantine (**06** / **T-A**).
+4. LLM flaky-vs-bug as merge SoT (synthesis **20**).
+5. Selective testing that **skips the oracle** on merge.
 
-1. Where does wall clock actually go in *this* suite?
-2. What does a Rust-class runner buy vs steal (daemon, `-n`, sharding)?
-3. What 2026 evidence says about flaky detection and CI optimization — and what
-   transfers to a Python CLI with a single-writer Cover% SoT?
+**Real design question:** Which stalker dimensions become **sensors** under
+DDIA (rebuildable views), which stay **local accelerators**, and which must
+never touch the single-writer oracle?
 
 ---
 
@@ -61,154 +63,181 @@ whether that class of tool should enter the tip.
 
 | Fact | Value | Tier |
 | --- | --- | --- |
-| Oracle SoT | One 3.11 `pytest tests/` cell; `fail_under=98.7`; `coverage.xml` | `[Confirmed]` E-CM0 / 16-A |
-| ABI path | Marker shards (`domain_*`); **no** cov combine | `[Confirmed]` E-TEST1 |
-| Progress stalls (ABI `domain_ci_meta` log) | ~28% `gate_tools` · ~50–55% real-repo `repo_claims` · ~57–62% `run_manifest` + signal/CLI | `[Confirmed]` 2026-08-09 CI paste |
-| In-tree Rust | None (`Cargo.toml` absent); Rust consumed as **pinned CLIs** (ruff, ast-grep) | `[Confirmed]` rust-stack-fit memo |
-| pytest-xdist | Not a dep; suite-wide `-n` refused until E-TEST2 | `[Confirmed]` **06** / backlog P5.2 |
-| Mutation / flake tooling | Incident-seeded `gate_mutators`; not PIT zoo | `[Confirmed]` CONTRIBUTING |
-
-**Reading:** the “stalker” product class (slow/flaky telemetry + warm re-runs)
-overlaps **local agent loops** and **ABI diagnosis**. It does **not** remove
-Stage-0 / claims / kitchen-sink subprocess cost inside the oracle cell.
+| Oracle SoT | 3.11 `pytest tests/` + `fail_under=98.7` + `coverage.xml` | `[Confirmed]` |
+| ABI | `domain_*` shards; no cov combine | `[Confirmed]` E-TEST1 |
+| Plateau map (`domain_ci_meta`) | ~28% gate_tools · ~50–55% real `repo_claims` · ~57–62% run_manifest/scan | `[Confirmed]` 2026-08-09 |
+| Rust in-tree | None; pinned CLIs (ruff, ast-grep) | `[Confirmed]` |
+| Existing adjacent seams | `pre_pr` path-risk modes · `coverage_run_summary` · gap-average · Tach (local) · incident mutators | `[Confirmed]` |
+| xdist | Not a dep; E-TEST2 deferred | `[Confirmed]` |
 
 ---
 
 ## 3. Primary sources (prefer 2026)
 
-### 3.1 Flaky / intermittent CI (2026)
+### 3.1 Flaky / intermittent CI
 
 | Source | Claim | Tier |
 | --- | --- | --- |
-| arXiv [2607.09345](https://arxiv.org/abs/2607.09345) — *How Far Are We from Detecting Flaky Tests?* | Code-only / CV protocols overstate detectors; many E2E flakes need **CI log + same-commit** evidence; reruns remain expensive at scale | `[Evidenced]` |
-| arXiv [2602.05465](https://arxiv.org/abs/2602.05465) — *Can We Classify Flaky Tests Using Only Test Code?* | LLMs on test code alone struggle; non-determinism even at T=0; humans need extra context for sophisticated flakes | `[Evidenced]` |
-| arXiv [2601.22264](https://arxiv.org/abs/2601.22264) — *FlaXifyer* | Intermittent **job** failures ≫ flaky unit tests alone; few-shot LM triage on **logs**; interpretability reduces review | `[Evidenced]` (industrial CI; transfer = advisory triage, not floor SoT) |
+| [2607.09345](https://arxiv.org/abs/2607.09345) | Code-only detectors overfit protocols; many flakes need CI logs / same-commit evidence; reruns costly | `[Evidenced]` |
+| [2602.05465](https://arxiv.org/abs/2602.05465) | LLM on test code alone weak; need extra context | `[Evidenced]` |
+| [2601.22264](https://arxiv.org/abs/2601.22264) FlaXifyer | Intermittent **jobs** ≫ unit flakes; log triage + interpretability | `[Evidenced]` sensor-shaped |
 
-**Product bind:** Flake *telemetry* (reruns, slow marks, log triage) can be a
-**sensor**. It must not redefine pass/fail of the 98.7 oracle or silently
-quarantine fault-triggering failures as “flake.” Aligns with 2607.09345’s
-warning that shortcuts hide real defects. `[Evidenced]` + `[Confirmed]` SoT.
-
-### 3.2 CI / suite efficiency (2026) — transfer carefully
+### 3.2 Selection / RTS (Python-relevant)
 
 | Source | Claim | Tier |
 | --- | --- | --- |
-| arXiv [2601.11647](https://arxiv.org/abs/2601.11647) — RL CI/CD workflow optimization | Dynamic test-scope selection can cut overhead in simulation | `[Evidenced]` domain · **Refuse transfer** as oracle skip heuristic without Spec |
-| arXiv [2603.01409](https://arxiv.org/abs/2603.01409) — MIST-RL | Scale test *utility* not quantity (mutation score ↑, suite length ↓) | `[Evidenced]` · Adopt as **philosophy** for incident-seeded mutators already here; not a runner swap |
-| AgenticCI / mobile selection (2026 Zenodo) | Risk-based selection cuts wall clock on app CI | `[Evidenced]` secondary · **Refuse** as Cover% substitute |
+| [2605.25356](https://arxiv.org/abs/2605.25356) NameRTS | Name-graph RTS for Python: ~70% test-file skip, ~46% time cut, high safety on commits | `[Evidenced]` · **Adopt shape for pre-PR / agent loops only** |
+| [2509.10279](https://arxiv.org/abs/2509.10279) T-TS | ML test selection without coverage maps; industrial speedups | `[Evidenced]` · transfer = advisory; not oracle skip |
+| ChaCo [2601.10942](https://arxiv.org/abs/2601.10942) | Patch-scoped cover augmentation ≠ whole-repo floor | `[Evidenced]` · already in **01** |
 
-### 3.3 Rust-class pytest runner (product docs, 2026)
+### 3.3 Behavioral / CI telemetry
 
 | Source | Claim | Tier |
 | --- | --- | --- |
-| [rpytest docs](https://docs.neullabs.com/rpytest/) / [GitHub](https://github.com/neul-labs/rpytest) / PyPI 0.1.x (2026) | Rust CLI + warm Python daemon; collection/startup wins; built-in `-n`, `--shard`, `--reruns` / `--flaky-report`, `--watch`; `--verify-dropin` | `[Evidenced]` |
-| [BENCHMARK.md](https://github.com/neul-labs/rpytest/blob/main/BENCHMARK.md) | Synthetic ~500-test suite: warm runs beat cold pytest; xdist worker startup can *hurt* tiny suites | `[Evidenced]` (vendor bench · **Unknown** on *this* suite until measured) |
+| [2604.16933](https://arxiv.org/abs/2604.16933) Behavioral Co-Versioning | CI discards rich run-time signals → pass/fail; archive selected observations keyed by commit/test | `[Evidenced]` · Adopt **narrow** (durations/failures), refuse full behavior DB as SoT |
+| [OTel CI/CD semconv](https://opentelemetry.io/docs/specs/semconv/cicd/cicd-metrics/) (2025–26 RC) | Pipeline/job/step metrics & resources | `[Evidenced]` · Adopt only if cheap; refuse high-cardinality run IDs as required |
 
-**Category:** *external* runner binary — same adoption pattern as ruff/ast-grep
-(consume Rust product), **not** in-tree PyO3. Still a **CI SoT** decision if
-Actions replaces `pytest` on the cov cell.
+### 3.4 Suite efficiency / utility (transfer carefully)
 
-### 3.4 Contrast (non-2026 / adjacent — not preferred SoT)
+| Source | Claim | Tier |
+| --- | --- | --- |
+| [2601.11647](https://arxiv.org/abs/2601.11647) RL CI workflow | Dynamic scope selection | `[Evidenced]` · **Refuse** as oracle omit |
+| [2603.01409](https://arxiv.org/abs/2603.01409) MIST-RL | Utility over quantity for tests/mutants | `[Evidenced]` · already matches incident-seeded mutators |
 
-| Source | Use here |
-| --- | --- |
-| cargo-nextest slow-timeout / retries docs | Pattern cousin (“SLOW” status, retries); Rust-*cargo* domain, not pytest | Vocabulary only |
-| Pre-2026 Chromium flaky-vs-fault work | Superseded in preference by **2607.09345** / **2602.05465** | Do not cite as tip SoT |
+### 3.5 Rust-class pytest runner (product)
 
-DeepWiki cartography for rpytest: **Unknown** (no stable DeepWiki page found
-in this pass).
+| Source | Claim | Tier |
+| --- | --- | --- |
+| [rpytest](https://docs.neullabs.com/rpytest/) / PyPI 2026 | Warm daemon; `-n`; shard; `--reruns` / `--flaky-report`; `--watch`; `--verify-dropin` | `[Evidenced]` |
+| [BENCHMARK.md](https://github.com/neul-labs/rpytest/blob/main/BENCHMARK.md) | Synthetic wins; xdist startup can hurt tiny suites | `[Evidenced]` vendor · **Unknown** here until measured |
+
+DeepWiki for rpytest: **Unknown** this pass.
 
 ---
 
-## 4. Where wall clock goes (this product)
+## 4. Feature dimensions (scoped to this product)
+
+Each row is a stalker-class capability. **Layer** = DDIA bind.
+
+| # | Dimension | What it is | Layer | Stance for *this* repo | Existing seam |
+| --- | --- | --- | --- | --- | --- |
+| **D1** | Duration inventory | Rank slowest tests/files per cell | Sensor | **Adopt first** (`--durations` / junit timing) | none as SoT |
+| **D2** | Plateau attribution | Map % stalls → named suites (claims/manifest/…) | Sensor | **Adopt** (doc + optional script over durations JSON) | CI logs only |
+| **D3** | Warm re-run / daemon | Skip cold collect on TDD loops | Local accel | **Adopt optional** (rpytest spike) · never oracle-required | Tach skip (local) |
+| **D4** | Watch / affected re-run | Re-run touched tests on edit | Local accel | **Adopt optional**; Tach already approximates | Tach |
+| **D5** | Built-in parallel (`-n`) | Multi-worker dispatch | Parallel | **Refuse** on oracle; E-TEST2 only inside non-cov shard | ABI jobs |
+| **D6** | CI sharding flags | `--shard i/n` | Parallel | **Refuse** for cov combine; ABI already path-sharded | `abi-tests.yml` |
+| **D7** | Flake reruns / report | Retry fails; summarize flake | Sensor | **Adopt advisory only**; fail-closed on hard gates | — |
+| **D8** | Job-failure triage | Infra vs real vs flake from **logs** | Sensor | **Adopt later** (scripted categories); LLM advisory | FlaXifyer shape |
+| **D9** | RTS / NameRTS-class | Run tests reaching changed names | Accelerator | **Adopt for `pre_pr` / agent**; **Refuse** as merge oracle substitute | `pre_pr` modes |
+| **D10** | Patch cover sensor | ChaCo-style last-mile | Climb sensor | **Adopt** only under climb mode (**01**/16-A) | dual-mode design |
+| **D11** | Behavioral archive | Persist timings/fail signatures by commit | Sensor archive | **Adopt narrow** durations+failures artifact; refuse full I/O archive v1 | — |
+| **D12** | OTel CI spans | Job/step latency metrics | Ops sensor | **Defer**; GHA logs + durations cheaper first | — |
+| **D13** | Slow-timeout / kill | Mark/kill runaway tests | Gate-adjacent | **Adopt** only with Spec + known-serial quarantine | — |
+| **D14** | Mutation stalker | Which mutants survive; duration per mutant | Sensor | **Embody** incident mutators; report survivors (already) | `mutate.py` |
+| **D15** | Gap-average coupling | Feed slow *and* under-floor files to climb | Climb sensor | **Adopt** join view (durations ⋈ gap rows) | gap-average |
+| **D16** | Path-cohesion stalker | Reject foreign/wt Cobertura paths | SoT guard | **Embody** (already PathCohesionGuard) | `coverage_path_cohesion` |
+| **D17** | Gate-order / fail-fast inventory | Surface “stopped before pytest” (ruff/CQ) | Sensor | **Adopt** in summaries (missing xml cascade) | `coverage_run_summary` |
+| **D18** | Agent next-action card | From D1+D8+D9: “run these nodes” | Agentic | **Adopt** as markdown receipt; never auto-merge | `pre_pr` receipt |
+| **D19** | Memory/CPU of workers | Profile pytest process | Spike | **Unknown** until durations prove need | — |
+| **D20** | In-tree Rust stalker | Own Cargo crate | Product | **Refuse** | rust-stack-fit |
 
 ```text
-COLD START / COLLECTION          TEST BODY (this suite)
-──────────────────────────       ──────────────────────────────
-interpreter + plugin import      repo_claims real-tree scans
-pytest collection                run_manifest + spring_signal_scan
-                                 kitchen-sink / ETL chains
-rpytest / warm daemon helps ↑    Rust runner barely moves ↑
+SO T (boolean)                    SENSORS (rebuildable)              LOCAL ACCEL
+─────────────────────────         ─────────────────────              ───────────
+fail_under 98.7                   D1 durations                       D3 warm daemon
+coverage.xml (16-A)               D2 plateau map                     D4 watch / Tach
+PathCohesion (D16)                D7/D8 flake·triage reports         D9 RTS pre-PR
+claims / size / complexipy        D11 narrow archive                 D5/D6 only non-oracle
+                                  D15 durations ⋈ gap-average
+                                  D17 pre-pytest cascade
+                                  D18 agent card
 ```
-
-**Plateau map `[Confirmed]`** from the pasted `domain_ci_meta` run:
-
-| ~% | Suite region | Cost shape |
-| --- | --- | --- |
-| 28–29 | `gate_tools*` | path / jscpd / subprocess edges |
-| 50–55 | `repo_claims_real_repo*` | whole-checkout claim checker |
-| 57–62 | `run_manifest_*` CLI + signatures | multi-step CLI / scan |
-| late | metamorphic / mutate sandboxes | copy + suite per mutant |
-
-A daemon that skips re-collection helps **agent TDD loops** and **ABI retries**.
-It does not make `check_repo_claims` or Stage-0 scans free.
 
 ---
 
-## 5. Embody / Adopt / Refuse
+## 5. Wall clock (this suite) — where runners help
+
+```text
+COLD START / COLLECTION          TEST BODY
+──────────────────────────       ──────────────────────────────
+D3/D4 help a lot                 D1/D2/D15 measure; D9 may skip
+                                 D5/D6 do not remove scan cost
+```
+
+| ~% | Region | Dimension that helps |
+| --- | --- | --- |
+| 28–29 | `gate_tools*` | D1; maybe D9 if unused in change |
+| 50–55 | real `repo_claims` | D1/D2; body rewrite — **not** runner |
+| 57–62 | manifest + scan | D1/D2; Stage-0 profile (rust-stack-fit Rank 2) if hot |
+| late | mutate / metamorphic | D14; MIST-RL utility philosophy |
+
+---
+
+## 6. Embody / Adopt / Refuse (rolled up)
 
 | Stance | Choice |
 | --- | --- |
-| **Embody** | Boolean oracle SoT stays `pytest` (or verified drop-in) + `fail_under=98.7` + cohesive `coverage.xml`; sensors ≠ SoT (**01** / **16-A**) |
-| **Embody** | Profile before native/runner adoption (rust-stack-fit; synthesis **22**) |
-| **Adopt (sensor)** | `pytest --durations=N` (or equivalent) on 3.11 oracle + ABI as the **first** bottleneck SoT — hermetic, no new runtime |
-| **Adopt (optional local)** | Spike **rpytest** *outside* the cov cell: `--verify-dropin` on a domain marker; measure wall clock on `domain_ci_meta` / serial domains only |
-| **Adopt (telemetry)** | Duration / flake **reports** as advisory CI artifacts (never auto-green) |
-| **Refuse** | Replacing 3.11 oracle `pytest` with `rpytest -n` / shard **before** E-TEST2 Spec + path-cohesion review |
-| **Refuse** | In-tree Rust for test stalking |
-| **Refuse** | LLM flake classifiers as merge gate (**2602.05465** + synthesis **20**) |
-| **Refuse** | RL / agentic test-skip policies that omit the oracle cell (**2601.11647** transfer refuse) |
-| **Refuse** | Treating ABI domain pass as “CI passed” when 98.7 is red |
+| **Embody** | Oracle boolean SoT; PathCohesion; incident mutators; ABI domains already |
+| **Adopt (v1 Spec)** | **D1, D2, D17** — durations + plateau attribution + pre-pytest cascade clarity |
+| **Adopt (v1.5)** | **D7** advisory flake report; **D15** join durations with gap-average; **D18** agent card from `pre_pr` |
+| **Adopt (spike)** | **D3** rpytest `--verify-dropin` on one `domain_*`; **D9** NameRTS-shaped selection behind `pre_pr` only |
+| **Defer** | **D8** log triage; **D11** archive beyond CI artifacts; **D12** OTel; **D13** timeouts; **D19** CPU profile |
+| **Refuse** | **D5/D6** on oracle; **D20** in-tree Rust; LLM flake merge SoT; RTS skipping oracle; RL skip of cov cell |
 
 ---
 
-## 6. Decision sketch (for later Spec gate **E-RUN0**)
-
-Proposed policies (not approved until Spec):
+## 7. Policies for Spec gate **E-RUN0** (proposed)
 
 | ID | Policy |
 | --- | --- |
-| **R1** | Bottleneck SoT = committed durations artifact or job log section from **oracle** cell, not vendor synthetic benches |
-| **R2** | External Rust runners allowed as **dev/ABI accelerators** only after `--verify-dropin` parity on collection + exit codes for that marker set |
-| **R3** | Oracle cell command remains single-process coverage write until E-TEST2 explicitly allows in-shard parallel **without** `coverage combine` |
-| **R4** | Flaky reruns: advisory / non-blocking jobs only; hard gates stay fail-closed on first deterministic failure |
-| **R5** | No Cargo in-repo for this epic |
+| **R1** | Bottleneck SoT = oracle-cell durations (log or artifact), not vendor benches |
+| **R2** | External runners (rpytest) only after `--verify-dropin` on a named marker set; never required for merge |
+| **R3** | Oracle remains single-process cov write until E-TEST2 amends (no combine) |
+| **R4** | Flake reruns / triage = advisory; hard gates fail-closed |
+| **R5** | No Cargo in-repo for E-RUN |
+| **R6** | RTS / Tach / warm daemon may accelerate **pre-PR and ABI**; they must not claim 98.7 |
+| **R7** | Behavioral archive v1 = durations + failure node ids + gate exit cascade only |
+| **R8** | Agent “next action” cards are receipts (like `pre_pr`), not SoT |
 
 ---
 
-## 7. Epic sketch (fresh-chat)
+## 8. Epic sketch (expanded)
 
 | Field | Content |
 | --- | --- |
-| **Epic** | **E-RUN** — Suite stalking / runner policy without SoT dilution |
-| **Goal** | Evidence-bound decision: durations first; optional rpytest local/ABI; oracle stays 98.7 |
-| **E-RUN0** | Spec approve **R1–R5** (this memo) |
-| **E-RUN1** | Implement durations reporting on 3.11 python-gates (+ optional ABI) |
-| **E-RUN2** | Optional spike: rpytest `--verify-dropin` + wall-clock vs pytest on one `domain_*` (no cov) |
-| **Exit** | Spec recorded; durations in CI; spike accept/reject memo; **no** oracle command change unless R3 amended |
-| **Invariants** | 98.7 · 16-A · complexipy ≤5 · LOC ≤225 · T-A · no LLM-judge floor |
-
-**Spike exit (E-RUN2):** If rpytest does not cut ≥15% wall clock on the chosen
-ABI domain **or** fails drop-in verify → **Refuse** adoption; keep durations only.
+| **Epic** | **E-RUN** — Suite stalking without SoT dilution |
+| **Goal** | Instrument bottlenecks/failures as sensors; optional local accel; oracle stays 98.7 |
+| **E-RUN0** | Spec approve **R1–R8** |
+| **E-RUN1** | **D1+D17:** durations on 3.11 (+ optional ABI); missing-xml cascade already explains pre-pytest fails |
+| **E-RUN2** | **D2+D15:** plateau map doc/script; optional durations ⋈ gap-average worst files |
+| **E-RUN3** | **D3** spike: rpytest verify-dropin + wall clock on one domain (exit: ≥15% or refuse) |
+| **E-RUN4** | **D9+D18:** NameRTS-shaped / import-graph selection behind `pre_pr` + agent card (never oracle) |
+| **E-RUN5** (defer) | **D7/D8** advisory flake/job triage from logs |
+| **Exit** | Spec recorded; D1 in CI; spikes accept/reject; oracle command unchanged unless R3 amended |
+| **Invariants** | 98.7 · 16-A · ≤5 complexipy · ≤225 LOC · T-A · no LLM-judge floor |
 
 ---
 
-## 8. One-page verdict
+## 9. One-page verdict
 
 | Question | Answer |
 | --- | --- |
-| Is the Rust “stalker” real? | Yes — **rpytest** (2026) fits the description: warm daemon, flake/slow-adjacent UX, parallel/shard flags. `[Evidenced]` |
-| Will it fix mid-suite % stalls here? | **Mostly no** — stalls are test bodies (claims / manifest / scan). `[Confirmed]` |
-| Prefer 2026 research takeaway? | Flake detection needs **execution/logs**, not code-only or LLM-on-test-source; keep sensors off the Cover% SoT. `[Evidenced]` 2607 / 2602 / 2601 |
-| Implement runner swap now? | **No** — Spec **E-RUN0** first; durations (**E-RUN1**) before any runner spike |
-| In-tree Rust? | **Refuse** (unchanged vs rust-stack-fit / **22**) |
+| Is “the Rust stalker” one feature? | **No** — ~20 dimensions; runner is a subset (**D3–D7**). |
+| What should this project Spec first? | **D1/D2/D17** sensors — cheap, hermetic, SoT-safe. |
+| Where does NameRTS / selection fit? | **pre_pr / agents (D9/D18)** — not merge oracle. `[Evidenced]` 2605.25356 |
+| Behavioral co-versioning? | Narrow archive of timings/failures (**D11/R7**); refuse full runtime DB v1. `[Evidenced]` 2604.16933 |
+| Will rpytest fix 50–62% stalls? | **No** — those are test bodies. `[Confirmed]` |
+| Implement now? | **No** — **E-RUN0** Spec first. |
 
 ---
 
-## 9. Adversarial checklist
+## 10. Adversarial checklist
 
-- [ ] Did we almost replace oracle `pytest` because ABI felt slow?
-- [ ] Did vendor BENCHMARK.md substitute for *this* suite’s `--durations`?
-- [ ] Did `--reruns` / flake reports risk greenwashing fault-triggering fails?
-- [ ] Did `-n` / `--shard` threaten single-writer `coverage.xml`?
-- [ ] Did LLM flake triage creep toward merge SoT?
+- [ ] Collapsed all dimensions into “add rpytest”?
+- [ ] Used RTS to skip oracle on merge?
+- [ ] Treated flake reruns as green?
+- [ ] Sharded cov + `coverage combine`?
+- [ ] Built OTel/behavior archive before durations?
+- [ ] Let LLM triage become fail_under?
+- [ ] Ignored existing `pre_pr` / gap-average / PathCohesion seams?
