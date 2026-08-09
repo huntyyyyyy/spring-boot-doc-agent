@@ -241,7 +241,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 | P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Draft** (2026-08-09) | research 19 `spec_gate` → APPROVED |
 | P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | After Approve; one stream | context resets; claims green; LOC/complexipy |
 
-Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md). GH SoR: ≥1k★ + 14-day push — **claude-mem**, **headroom**, **agentmemory**, **context-mode**, **loopx**, prime-agent, OpenHands, deepagents/open-swe, gh-aw, …. **Refuse** &lt;1k★ or stale tips.
+Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md) §5.1. **Embody** sensors+ledger+react-doctor pattern; **Spike** headroom/loopx/gh-aw proposer; **Defer** claude-mem; **Refuse** agentmemory dep, context-mode (ELv2), alternate hosts. GH inventory still ≥1k★+14-day push for research SoR.
 
 ---
 

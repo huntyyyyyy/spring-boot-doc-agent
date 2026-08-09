@@ -16,6 +16,8 @@ do_not:
   - treat commercial “mend” SaaS or GitHub repos under **1000★** as implement SoR
   - schedule CompactionRL / weight training as a product dependency
   - adopt `riponcm/projectmem` (≈579★) or `Acquarts/ai-repo-health-agent` (0★) as merge SoR
+  - adopt agentmemory / context-mode / prime-agent as product dependencies or default hosts
+  - treat ≥1k★ + recent push as automatic Adopt (discernment §5.1 required)
 spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
 ---
 
@@ -28,7 +30,7 @@ spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
 | Is there a 2026 pattern for agents that *watch* systems, surface bugs / inefficiencies / wrong frameworks / gaps, then drive research + refactor adoption? | **Yes.** Strongest native shape is **sensor findings → compact external memory → research memo / backlog → Spec → implement**, not a forever-growing chat. `[Evidenced]` |
 | What maps to this repo’s “stalker”? | **Suite-stalking sensors (E-RUN)** already Embody the *watch* half for CI plateaus — deterministic junit / cascade clarity; LLM flake triage refused. Broader “framework/gap stalking” is a **separate meta-agent** that must not dilute oracle SoT. `[Confirmed]` |
 | How do mid-2026 systems avoid context bloat? | Prefer **newer ≥1k★ + 14-day push**: **claude-mem**, **headroom**, **agentmemory**, **context-mode**, **loopx**; **Prime Agent** / **OpenHands** / **gh-aw** for watch→act — plus arXiv compaction papers. `[Evidenced]` |
-| Adopt for *this* product now? | **Spec-only (E-STK0).** Prefer **deterministic sensors + in-repo backlog**. GH SoR = **≥1000★** *and* **`pushed_at` in the last 14 days**, preferring **2025–2026 trees with Releases/CHANGELOG**. |
+| Adopt for *this* product now? | **Spec-only.** **Embody** sensors + in-repo ledger + react-doctor *pattern*. **Adopt** process (rotate focus, Spec chain, cycle reset). **Spike** headroom (compress dumps) + loopx (handoffs) + optional gh-aw *proposer*. **Defer/Refuse** full memory daemons / alternate agent hosts / ELv2 routers (see §5.1). |
 
 ---
 
@@ -161,7 +163,7 @@ Window: **`pushed_at` ≥ 2026-07-26**. Rows verified via GitHub API. Prefer **c
 | Layer | Mid-2026 recipe | Anti-pattern |
 | --- | --- | --- |
 | **Sense** | Deterministic auditors + CI sensors (E-RUN, CodeQL, claims, size) | LLM re-grades Cover% |
-| **Remember** | **claude-mem** / **headroom** / **agentmemory** / **context-mode** (compress *before* LLM) **or** thin in-repo ledger; **loopx** for evidence/handoffs | Append-only chat as SoT; sub-1k GH memory toys as deps |
+| **Remember** | **Thin in-repo ledger** (default); **headroom** Spike for dump compression; **loopx** Spike for handoffs | Memory daemons as SoT; ELv2 routers; 50+ MCP tool zoos |
 | **Judge** | Rubric pivot (`icat` arXiv); pre-action warnings from **our** ledger | Soft “remember to check backlog” only |
 | **Propose** | Findings → discussion/memo → Plan (gh-aw ResearchPlanAssignOps) | Silent auto-refactor on main |
 | **Act** | Short-horizon fixer with event messages + compaction (`icat`, Focus, RefactorAssist static-first) | Shared megacontext explorer+fixer forever |
@@ -171,27 +173,45 @@ Window: **`pushed_at` ≥ 2026-07-26**. Rows verified via GitHub API. Prefer **c
 
 ## 5. Embody / Adopt / Refuse (this Python CLI / meta-repo)
 
-| Choice | Stance | Why here |
-| --- | --- | --- |
-| Sensor-first watch (junit durations, claims, size, CodeQL, façade poke) | **Embody** | Already SoT; matches E-RUN / constitution |
-| Findings ledger outside chat (compact projection → backlog/memo) | **Embody** | DOC refuse chat dumps; arXiv Memory-as-Governance idea without weak GH |
-| Rotating focus areas + revisit budget (gh-aw Quality Improver 60/30/10) | **Adopt** | Stops “always scan everything”; **≥1k★** official stack |
-| ResearchPlanAssignOps (findings → Spec → tickets → PR) | **Adopt** | Matches principal-SE skill Phase A–C |
-| Separate watch vs fix agents; event messages not shared dump | **Adopt** | `icat-agent` Jun 2026 (paper) |
-| Active compaction between watch cycles (Focus / CAT-shaped) | **Adopt** (process) | Do **not** train CompactionRL in-tree |
-| Static-first then agentic repair for refactors | **Adopt** | RefactorAssist Aug 2026 |
-| **claude-mem** / **agentmemory** / **headroom** / **context-mode** as optional memory Spike | **Adopt spike** | All ≥1k★ + 14-day push + Releases/CHANGELOG; prefer local/self-hosted; no mandatory cloud SoT |
-| **loopx** evidence-log / handoff pattern | **Adopt spike** | Durable goals + verifiable handoffs without shared megacontext |
-| OpenHands condenser / Prime compaction patterns | **Adopt** (process) | Copy *ideas* into cycle reset — do not vend whole monorepo |
-| Thin in-repo event ledger (no third-party memory product) | **Adopt default** | Fits claims/session-log contracts; LOC ≤225 modules |
-| react-doctor-style deterministic scan → skill | **Adopt pattern** | Sensors first; React-specific product refused for this Python CLI |
-| gh-aw continuous auto-PR factory as default | **Refuse** (v1) | Tip thrash / Spec bypass; remix later |
-| `projectmem` GH (<1k★) / `ai-repo-health-agent` (0★) as SoR | **Refuse** | Star floor; paper ideas may inform design without the trees |
-| Vendor mend SaaS | **Refuse** | Unknown maturity |
-| LLM flake triage / LLM-judge as oracle | **Refuse** | E-RUN D8 Defer; synthesis refuse |
-| CompactionRL / weight training as product dep | **Refuse** | Research only; no model zoo |
+### 5.1 Deep adoption discernment (candidate → stance)
 
----
+Star count and 14-day push qualify a tree as *research SoR*, not as *merge dependency*. Discernment below is against: Python 3.10+ CLI, deterministic gates, `quality-backlog` tip SoT, Cursor look-first, refuse LLM-as-fail_under, LOC≤225 / complexipy≤5, one tip writer, local-first.
+
+| Candidate | Solves | Coupling / deps | Stance | Why (one line) |
+| --- | --- | --- | --- | --- |
+| **In-repo sensors** (E-RUN, claims, size, CodeQL, poke) | Detect CI/oracle/process defects | Already Python/CI | **Embody** | Only boolean watch SoT that matches constitution |
+| **In-repo findings ledger → backlog** | Present research areas without chat dumps | Markdown/JSON under `docs/` | **Embody** | Closes the user loop without new runtime |
+| **react-doctor *pattern*** | Deterministic scan → structured finding → skill/CI delta | Pattern only (not the React npm) | **Embody** | Best “stalker shape”; domain product refused |
+| **OpenHands condenser *interface*** | Pipeline reduce history without deleting SoT | Pattern; stock LLM summarizer optional | **Embody** interface / **Refuse** LLM-summarize-as-SoT | Condensation events OK; lossy summary ≠ verified state |
+| **gh-aw rotate focus + ResearchPlanAssignOps** | Continuous improve without scanning everything | Ideas from Actions markdown workflows | **Adopt** (process) | 60/30/10 + findings→Spec→tickets; not auto-merge factory |
+| **icat / Focus / CAT / RefactorAssist** (arXiv) | Event-pass, cycle compress, static-first repair | Papers | **Adopt** (process) | Algorithms only — no weight training / host swap |
+| **headroom** | Compress tool/logs/RAG *before* LLM | Python 3.10+ lib/proxy/MCP; can wrap agents | **Spike** | Highest-fit lean tool; never a quality gate; watch tip thrash from `wrap` |
+| **loopx** | Durable goals, evidence, handoffs across loops | Python 3.11+; stdlib-ish; `.loopx/` state | **Spike** | Useful handoff kernel **only if** it *projects from* backlog — not a second tip |
+| **gh-aw scheduled watcher** (optional) | Cron propose issues/discussions | GitHub Actions + cloud minutes | **Spike** | Proposer-only; merge gates stay local/deterministic |
+| **claude-mem** | Cross-session capture→compress→reinject | Node/Bun + SQLite/Chroma; Claude-first hooks | **Defer** | Memory daemon beside SoT; risk of non-auditable second tip + optional cloud |
+| **magic-context** | Self-managing long context | TS/Bun; OpenCode/Pi hosts | **Defer** | Wrong host surface for this Cursor/Claude-disciplined meta-repo |
+| **agentmemory** | Broad MCP memory (many tools) | Node + iii-engine daemon; 50+ MCP tools | **Refuse** (dep) | Daemon/tool sprawl fights look-first, LOC bar, single tip writer |
+| **context-mode** | Sandbox tool output + forced routing | Node; **ELv2** license; deep hooks | **Refuse** | ELv2 + routing hooks collide with agent policy / OSS posture |
+| **prime-agent** / **open-swe** / **deepagents** as default runtime | Replace/compose coding agent host | TS/Python agent platforms | **Refuse** (v1 product) | Category error: do not swap our Cursor/CI constitution for another harness |
+| **mem0** / **letta** | Generic agent memory platforms | Heavier productized stacks | **Defer** | Valid ≥1k★/push; prefer thinner Spike (headroom) or in-repo ledger first |
+| **CompactionRL** / vendor mend SaaS | Trainable compact / commercial mend | Weights / vendor | **Refuse** | No model zoo; Unknown vendor SoR |
+
+**Ranking for “watch findings → research backlog without context bloat” (this product):**
+
+1. **Embody** react-doctor *pattern* + existing sensors → ledger → backlog  
+2. **Embody/Adopt** condenser *pipeline* + cycle reset (STK4) — LLM summarize optional only  
+3. **Spike** headroom for bulky CI/sensor dumps — never fail_under  
+
+### 5.2 Stance summary (what Approve locks)
+
+| Choice | Stance |
+| --- | --- |
+| Sensor-first watch; findings ledger outside chat | **Embody** |
+| Rotating focus; ResearchPlanAssignOps; watch≠fixer; static-first refactor; cycle reset | **Adopt** (process) |
+| Thin in-repo ledger as memory default | **Adopt default** |
+| headroom / loopx-as-projection / gh-aw proposer | **Spike** (post-Approve) |
+| claude-mem / magic-context / mem0 / letta | **Defer** |
+| agentmemory dep; context-mode; prime-agent/open-swe as host; LLM-judge/oracle; CompactionRL; auto-PR factory | **Refuse** |
 
 ## 6. Spec decisions (STK1–STK10) — pending Approve
 
@@ -204,7 +224,7 @@ Window: **`pushed_at` ≥ 2026-07-26**. Rows verified via GitHub API. Prefer **c
 | **STK5** | Prefer **deterministic sensors** for detect; LLM only for *ranking / explaining / drafting research questions* when sensors already fired |
 | **STK6** | Adoption path = **Evidenced research memo → Spec gate → Implement** (principal-SE); watch agent stops at memo/backlog draft unless explicitly Spec’d to open draft PRs |
 | **STK7** | Fixer agents (if any) use **event-passed** handoffs + static-first repair; no shared megacontext with the watcher |
-| **STK8** | Memory default = **thin in-repo ledger**; optional Spike prefers **claude-mem** / **headroom** / **agentmemory** / **context-mode** — ≥1k★ + **14-day push** + Releases/CHANGELOG, local-first — **never** sub-1k or stale tips |
+| **STK8** | Memory default = **thin in-repo ledger**. Optional Spike order: **headroom** (compress) → **loopx** (handoffs projecting from backlog) → **gh-aw proposer**. **Defer** claude-mem/mem0/letta; **Refuse** agentmemory dep + context-mode (ELv2) |
 | **STK9** | Suite-stalking remains **E-RUN sensors**; E-STK does not reopen D3/D8/D9 refuses without a new Spec |
 | **STK10** | Refuse: chat dumps as SoT; LLM as 98.7 proof; GH trees **&lt;1000★** or **no push in 14 days** as implement SoR; forever-grandfather of watch noise; parallel tip thrash from auto-PRs |
 
@@ -227,11 +247,12 @@ Window: **`pushed_at` ≥ 2026-07-26**. Rows verified via GitHub API. Prefer **c
 | --- | --- |
 | **Epic goal** | Spec a stalker-shaped watch loop that surfaces actionable research/refactor opportunities from sensors + focused LLM judgment **without** context accumulation or oracle dilution |
 | **STK0-1** | Approve **STK1–STK10** in this memo | Acceptance: `spec_gate: APPROVED E-STK0` |
-| **STK0-2** | Spike: map existing sensors (suite_timing, claims, size, CodeQL, poke) → finding schema | Exit: one JSON schema draft ≤1 page |
-| **STK0-3** | Spike: thin in-repo ledger vs **claude-mem** / **headroom** / **agentmemory** (14-day push, changelog) — **exclude** projectmem GH | Exit: Adopt default + optional Spike with LOC/complexipy impact |
-| **STK0-4** | Spike: **loopx**-shaped evidence log + handoff schema for watch→fix | Exit: one-page schema; no shared megacontext |
-| **STK1-1** (after Approve) | Implement ledger writer + rotating focus CLI/hook | Acceptance: cycle resets context; claims green; LOC ≤225 |
-| **STK1-2** | Presenter: findings → backlog stub / research question template | Acceptance: no auto-merge; draft only |
+| **STK0-2** | Map sensors → finding schema (Embody path; not a product Spike) | Exit: ≤1-page JSON/markdown schema |
+| **STK0-3** | Spike **headroom** only: compress bulky CI/sensor dumps into ledger fields | Exit: go/no-go; never gate; LOC/complexipy impact |
+| **STK0-4** | Spike **loopx**-shaped handoff **projected from** `quality-backlog` (no dual tip) | Exit: one-page schema; dual-SoT refuse |
+| **STK0-5** | Optional Spike: gh-aw **proposer** workflow (discussions/issues only) | Exit: no write to SoT paths; local gates remain |
+| **STK1-1** (after Approve) | Implement ledger writer + rotating focus (in-repo) | Acceptance: STK4 reset; claims green; LOC ≤225 |
+| **STK1-2** | Presenter: findings → backlog stub / research question template | Acceptance: draft only; no auto-merge |
 | **Invariants** | fail_under 98.7; complexipy ≤5; LOC ≤225; no utils/; E-RUN refuses intact; GH SoR ≥1k★ **and** 14-day push |
 
 **Ordering:** Do **not** start E-STK1 while E-DOC1 or E-CQL1 owns the tip unless this becomes the single Active stream.
