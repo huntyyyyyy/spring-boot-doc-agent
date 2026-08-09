@@ -4824,7 +4824,7 @@ Assumptions affected:
 Files touched: run_manifest.py / run_manifest_io.py, test_pipeline_tools_wave2_ports.py, scripts/ci/pre_pr.py, tests/ci/test_pre_pr_classify_bypass.py, AGENTS.md, claude/tool-quirks.md, session-log
 
 ## 2026-08-09 — E-FAC0/E-RES0: façade poke gate + design-research hook
-Commit: uncommitted
+Commit: b93921b
 Tests: facade poke + design-research hook + pre_pr BuildSuites + markers + full ruff green
 Assumptions affected:
 - Research-before-design was skill-only — [Resolved — `require_design_research` commit hook + memo 14 RES1–RES3; Spec needs arXiv+GitHub URLs]
