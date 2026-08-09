@@ -35,7 +35,7 @@ class TestRealRepoEtlValidate():
 
 Hermetic FIXTURE_DIR is not a stand-in for mid-size Spring distributions —
 these scans must hit the operator's real tree."""
-def test_real_scan_then_validate_all(self, tmp_path: Path) -> None:
+    def test_real_scan_then_validate_all(self, tmp_path: Path) -> None:
         repo = _product_scan_tree()
         out_signals = tmp_path / "spring_signals.json"
         env = {**os.environ, "PYTHONPATH": str(REPO_ROOT / "src")}
@@ -89,7 +89,7 @@ def test_real_scan_then_validate_all(self, tmp_path: Path) -> None:
         code = validate_artifacts.main(["--all", str(tmp_path)])
         assert code == 0
 
-def test_validate_all_rejects_signals_without_gap_report(self, tmp_path: Path) -> None:
+    def test_validate_all_rejects_signals_without_gap_report(self, tmp_path: Path) -> None:
         """Deviation: Path A + siblings greened without gap_probe measurement."""
         repo = _product_scan_tree()
         out_signals = tmp_path / "spring_signals.json"
@@ -117,7 +117,7 @@ def test_validate_all_rejects_signals_without_gap_report(self, tmp_path: Path) -
         code = validate_artifacts.main(["--all", str(tmp_path)])
         assert code == 1
 
-def test_planted_empty_gap_report_fails_validate_all(self, tmp_path: Path) -> None:
+    def test_planted_empty_gap_report_fails_validate_all(self, tmp_path: Path) -> None:
         """Deviation: existence-only gap_report greened planted {}."""
         repo = _product_scan_tree()
         out_signals = tmp_path / "spring_signals.json"

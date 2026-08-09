@@ -35,7 +35,7 @@ class TestRealRepoEtlTamper():
 
 Hermetic FIXTURE_DIR is not a stand-in for mid-size Spring distributions —
 these scans must hit the operator's real tree."""
-def test_planted_unverified_gap_report_fails_validate_all(self, tmp_path: Path) -> None:
+    def test_planted_unverified_gap_report_fails_validate_all(self, tmp_path: Path) -> None:
         """Deviation: schema-valid but s1_covering.verified=false greened --all."""
         repo = _product_scan_tree()
         out_signals = tmp_path / "spring_signals.json"
@@ -87,7 +87,7 @@ def test_planted_unverified_gap_report_fails_validate_all(self, tmp_path: Path) 
         code = validate_artifacts.main(["--all", str(tmp_path)])
         assert code == 1
 
-def test_until_signal_scan_not_certified_even_with_planted_gap(self, tmp_path: Path) -> None:
+    def test_until_signal_scan_not_certified_even_with_planted_gap(self, tmp_path: Path) -> None:
         """Deviation: --until signal_scan + planted gap_report greened det cert."""
         repo = _product_scan_tree()
         out = tmp_path / "run"
@@ -142,7 +142,7 @@ def test_until_signal_scan_not_certified_even_with_planted_gap(self, tmp_path: P
         assert any("gap_probe" in f for f in cert["failures"])
         assert proc.returncode != 0
 
-def test_tampered_covering_fails_gap_probe(self, tmp_path: Path) -> None:
+    def test_tampered_covering_fails_gap_probe(self, tmp_path: Path) -> None:
         from doc_engine.scanning.gap_probe import CoveringPreconditionError, run_gap_probe
 
         repo = _product_scan_tree()
