@@ -25,12 +25,15 @@ from doc_engine.ci.coverage_path_cohesion import PathCohesionError, PathCohesion
 from doc_engine.ci.coverage_report import (
     CoverageReport,
     FileCoverage,
+    _parse_condition_coverage,
     load_cobertura_report,
     parse_cobertura_files,
 )
 from doc_engine.ci.gate_tools import checkout_root
 
 DEFAULT_FLOOR = 98.7
+# Mutable so tests can patch the active checkout (same pattern as gate_tools).
+REPO_ROOT = checkout_root()
 
 
 def parse_file_coverages(coverage_xml: Path) -> list[FileCoverage]:
@@ -165,29 +168,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return p.parse_args(argv)
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
-    repo_root = checkout_root()
-    coverage_xml = args.coverage_xml or (repo_root / "coverage.xml")
+def _resolve_coverage_xml(args: argparse.Namespace) -> Path:
+    coverage_xml = args.coverage_xml or (REPO_ROOT / "coverage.xml")
     if not coverage_xml.is_absolute():
-        coverage_xml = repo_root / coverage_xml
-    if not coverage_xml.is_file():
-        print(f"error: missing coverage report: {coverage_xml}", file=sys.stderr)
-        return 2
-    try:
-        report = build_report_from_coverage(
-            load_cobertura_report(coverage_xml),
-            floor=args.floor,
-            repo_root=repo_root,
-        )
-    except ET.ParseError as exc:
-        print(f"error: unreadable coverage.xml: {exc}", file=sys.stderr)
-        return 2
-    except PathCohesionError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 2
-    text = report.as_markdown(worst=args.worst) if args.markdown else report.as_text(
-        worst=args.worst
+        coverage_xml = REPO_ROOT / coverage_xml
+    return coverage_xml
+
+
+def _print_gap_report(report: GapAverageReport, args: argparse.Namespace) -> None:
+    text = (
+        report.as_markdown(worst=args.worst)
+        if args.markdown
+        else report.as_text(worst=args.worst)
     )
     print(text, flush=True)
     if args.append_github_summary:
@@ -196,6 +188,27 @@ def main(argv: list[str] | None = None) -> int:
             Path(summary).open("a", encoding="utf-8").write(
                 "\n" + report.as_markdown(worst=args.worst) + "\n"
             )
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    coverage_xml = _resolve_coverage_xml(args)
+    if not coverage_xml.is_file():
+        print(f"error: missing coverage report: {coverage_xml}", file=sys.stderr)
+        return 2
+    try:
+        report = build_report_from_coverage(
+            load_cobertura_report(coverage_xml),
+            floor=args.floor,
+            repo_root=REPO_ROOT,
+        )
+    except ET.ParseError as exc:
+        print(f"error: unreadable coverage.xml: {exc}", file=sys.stderr)
+        return 2
+    except PathCohesionError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    _print_gap_report(report, args)
     return 0
 
 

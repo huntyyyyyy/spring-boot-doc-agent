@@ -194,8 +194,7 @@ def main(argv=None) -> int:
                         help="rewrite the survivor baseline from this run")
     args = parser.parse_args(argv)
 
-    catalog = list(all_mutators())
-    selected = [m for m in catalog if args.filter in m.name]
+    selected = [m for m in all_mutators() if args.filter in m.name]
     if not selected:
         print(f"error: no mutator matches {args.filter!r}", file=sys.stderr)
         return 2

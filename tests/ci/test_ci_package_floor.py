@@ -390,6 +390,7 @@ def test_main_with_coverage_and_exit_codes(monkeypatch: pytest.MonkeyPatch, tmp_
     xml = tmp_path / "coverage.xml"
     xml.write_text("<coverage/>", encoding="utf-8")
     monkeypatch.setattr(qg, "gate_import_cycles", lambda: 0)
+    monkeypatch.setattr(qg, "gate_size_ratchet", lambda: 0)
     monkeypatch.setattr(qg, "gate_duplication", lambda _r: 0)
     monkeypatch.setattr(qg, "gate_new_code_coverage", lambda _r, _x: 0)
     monkeypatch.setattr(qg, "gate_cognitive_complexity", lambda: 0)

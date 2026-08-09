@@ -334,6 +334,40 @@ def _add_cert_query_parsers(sub: Any) -> None:
     query_ap.set_defaults(func=cmd_query)
 
 
+def _add_coverage_cli_parsers(sub: Any) -> None:
+    """Register coverage-gap-average + coverage-measure (report vs MeasureRun)."""
+    gap_ap = sub.add_parser(
+        "coverage-gap-average",
+        help="Report Cover% averaged only over files still below the floor",
+    )
+    gap_ap.add_argument("--coverage-xml", default=None)
+    gap_ap.add_argument("--floor", type=float, default=None)
+    gap_ap.add_argument("--worst", type=int, default=None)
+    gap_ap.add_argument("--markdown", action="store_true")
+    gap_ap.add_argument("--append-github-summary", action="store_true")
+    gap_ap.set_defaults(func=cmd_coverage_gap_average)
+
+    measure_ap = sub.add_parser(
+        "coverage-measure",
+        help=(
+            "Wipe local .coverage* in this checkout, run one pytest+cov, "
+            "validate path cohesion, print gap-average"
+        ),
+    )
+    measure_ap.add_argument("--floor", type=float, default=None)
+    measure_ap.add_argument("--worst", type=int, default=None)
+    measure_ap.add_argument(
+        "--skip-pytest", action="store_true", help="Validate existing coverage.xml only"
+    )
+    measure_ap.add_argument(
+        "--no-gap-report", action="store_true", help="Skip gap-average after measure"
+    )
+    measure_ap.add_argument(
+        "pytest_args", nargs="*", help="Extra pytest args after standard cov flags"
+    )
+    measure_ap.set_defaults(func=cmd_coverage_measure)
+
+
 def _add_quality_gate_parsers(sub: Any) -> None:
     qg_ap = sub.add_parser(
         "quality-gates",
@@ -363,43 +397,7 @@ def _add_quality_gate_parsers(sub: Any) -> None:
         help="Run every gate even after a failure",
     )
     qg_ap.set_defaults(func=cmd_quality_gates)
-
-    gap_ap = sub.add_parser(
-        "coverage-gap-average",
-        help="Report Cover% averaged only over files still below the floor",
-    )
-    gap_ap.add_argument("--coverage-xml", default=None)
-    gap_ap.add_argument("--floor", type=float, default=None)
-    gap_ap.add_argument("--worst", type=int, default=None)
-    gap_ap.add_argument("--markdown", action="store_true")
-    gap_ap.add_argument("--append-github-summary", action="store_true")
-    gap_ap.set_defaults(func=cmd_coverage_gap_average)
-
-    measure_ap = sub.add_parser(
-        "coverage-measure",
-        help=(
-            "Wipe local .coverage* in this checkout, run one pytest+cov, "
-            "validate path cohesion, print gap-average"
-        ),
-    )
-    measure_ap.add_argument("--floor", type=float, default=None)
-    measure_ap.add_argument("--worst", type=int, default=None)
-    measure_ap.add_argument(
-        "--skip-pytest",
-        action="store_true",
-        help="Validate existing coverage.xml only",
-    )
-    measure_ap.add_argument(
-        "--no-gap-report",
-        action="store_true",
-        help="Skip gap-average after measure",
-    )
-    measure_ap.add_argument(
-        "pytest_args",
-        nargs="*",
-        help="Extra pytest args after standard cov flags",
-    )
-    measure_ap.set_defaults(func=cmd_coverage_measure)
+    _add_coverage_cli_parsers(sub)
 
     ratchet_ap = sub.add_parser(
         "complexipy-ratchet",
