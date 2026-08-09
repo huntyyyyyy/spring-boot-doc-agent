@@ -39,10 +39,10 @@ from doc_engine.tools.run_manifest_cli import (
     main,
 )
 from doc_engine.tools.run_manifest_constants import (
+    _TAG_KEY_MAP,
     END_STAGE_STATUSES,
     PREFLIGHT_TO_MANIFEST_STAGE,
     STAGE_STATUSES,
-    _TAG_KEY_MAP,
 )
 from doc_engine.tools.run_manifest_finalize import (
     _apply_finalize_optional_fields,

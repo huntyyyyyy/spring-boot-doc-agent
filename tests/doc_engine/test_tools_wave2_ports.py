@@ -6,6 +6,7 @@ import pytest
 
 from doc_engine.tools.citation_coverage_ports import CitationCoveragePort
 from doc_engine.tools.citation_coverage_report import check_docs, total_findings
+from doc_engine.tools.run_manifest_finalize import finalize_manifest
 from doc_engine.tools.run_manifest_ports import (
     RunManifestLifecycle,
     RunManifestStore,
@@ -16,7 +17,6 @@ from doc_engine.tools.run_manifest_stages import (
     end_stage,
     start_stage,
 )
-from doc_engine.tools.run_manifest_finalize import finalize_manifest
 
 pytestmark = [
     pytest.mark.domain_pipeline,

@@ -12,8 +12,8 @@ import sys
 from doc_engine.core.jsonio import load_json as _read_json
 from doc_engine.tools import doc_tag_utils
 from doc_engine.tools.run_manifest_constants import (
-    PREFLIGHT_TO_MANIFEST_STAGE,
     _TAG_KEY_MAP,
+    PREFLIGHT_TO_MANIFEST_STAGE,
 )
 
 
