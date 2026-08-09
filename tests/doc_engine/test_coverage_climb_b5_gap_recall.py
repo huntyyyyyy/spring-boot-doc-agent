@@ -90,9 +90,24 @@ def test_join_identity_and_unmatched_edges() -> None:
     join_mod._add_display_keys(keys, None, "com.acme")
     assert keys == set()
     assert join_mod._subject_package("not-a-symbol") is None
+    type_subj = format_type("com.acme", "Order")
+    assert join_mod._subject_package(type_subj) == "com.acme"
+    assert join_mod._subject_package(format_type(None, "Solo")) is None
     assert join_mod._fact_identity_keys({"qualifiers": ["bad"]}) == set()
     assert join_mod._contested_candidate_sources({"candidates": []})[0]["candidates"] == []
     assert join_mod._contested_candidate_sources({"candidates": "x"})[0]["candidates"] == "x"
+    # Non-mapping candidates fall back to the entry; mapping candidates expand.
+    fallback = join_mod._contested_candidate_sources(
+        {"status": "contested", "candidates": ["x", 1]}
+    )
+    assert fallback[0]["status"] == "contested"
+    expanded = join_mod._entity_join_sources(
+        {
+            "status": "contested",
+            "candidates": [{"fqcn": "com.acme.A"}, {"fqcn": "com.acme.B"}],
+        }
+    )
+    assert len(expanded) == 2
     matched, failure = join_mod._score_one_entity("X", "not-map", set())
     assert matched is False and failure is None
     type_sym = format_type("com.acme", "Order")
@@ -117,11 +132,18 @@ def test_join_identity_and_unmatched_edges() -> None:
                 },
                 "Orphan": {"file": "Orphan.java"},
                 "Bad": "skip",
+                "Dup": {
+                    "status": "contested",
+                    "file": "Dup.java",
+                    "candidates": [
+                        {"fqcn": "com.acme.Order", "package": "com.acme"},
+                    ],
+                },
             }
         },
         facts,
     )
-    assert report["numerator"] == 1
+    assert report["numerator"] >= 2
     assert any(f["simple_name"] == "Orphan" for f in report["failures"])
     bad_map = join_mod.measure_r_join({"entity_table_map": 123}, facts)
     assert bad_map["denominator"] == 0
