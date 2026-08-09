@@ -45,6 +45,31 @@ from doc_engine.pipeline.mock_stage_strategy import (
 )
 from doc_engine.pipeline.mock_todo_sweep import sweep_todos
 
+
+def _private_module_attrs(module) -> dict:
+    """Return underscore-prefixed helpers from a concept module."""
+    return {
+        name: value
+        for name, value in vars(module).items()
+        if name.startswith("_") and not name.startswith("__")
+    }
+
+
+def _bind_helper_reexports() -> None:
+    """Expose stage-local helpers on this façade for climb characterization."""
+    from doc_engine.pipeline import mock_architecture_stage as architecture
+    from doc_engine.pipeline import mock_citations as citations
+    from doc_engine.pipeline import mock_docs_stage as docs
+    from doc_engine.pipeline import mock_file_summaries as summaries
+    from doc_engine.pipeline import mock_gap_interview as gap
+    from doc_engine.pipeline import mock_todo_sweep as todos
+
+    for module in (citations, todos, summaries, architecture, gap, docs):
+        globals().update(_private_module_attrs(module))
+
+
+_bind_helper_reexports()
+
 __all__ = [
     "BUCKET_PHRASING",
     "DOC_BUCKETS",

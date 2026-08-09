@@ -16,6 +16,8 @@ from doc_engine.pipeline.mock_stage_strategy import (
 )
 from doc_engine.pipeline.mock_stages import mock_architecture, mock_docs
 
+pytestmark = pytest.mark.domain_pipeline
+
 
 def test_default_registry_covers_generative_mock_stages():
     registry = default_mock_stage_registry()

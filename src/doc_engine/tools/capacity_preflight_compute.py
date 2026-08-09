@@ -8,11 +8,7 @@ from doc_engine.tools.capacity_preflight_constants import (
     STAGE3_FIXED_FANOUT,
     STAGE4_FIXED_FANOUT,
 )
-from doc_engine.tools.capacity_preflight_groups import (
-    _load_or_build_edges,
-    _load_or_build_groups,
-    estimate_stage1_slice_tokens,
-)
+from doc_engine.tools.capacity_preflight_groups import estimate_stage1_slice_tokens
 from doc_engine.tools.capacity_preflight_stage4 import estimate_stage4_shared_pool_tokens
 
 
@@ -151,11 +147,19 @@ def compute_preflight(repo_path, max_tokens=120000, overlap=0.10,
     testable against synthetic data without touching disk.
 
     The two derivation branches below are order-dependent, unlike the pair
-    this replaced: the edge join consumes the partition."""
+    this replaced: the edge join consumes the partition.
+
+    Derivation helpers are resolved via the ``capacity_preflight`` façade so
+    characterization tests can monkeypatch the public module surface.
+    """
+    from doc_engine.tools import capacity_preflight as cap
+
     if groups_data is None:
-        groups_data = _load_or_build_groups(repo_path, max_tokens, overlap, None)
+        groups_data = cap._load_or_build_groups(
+            repo_path, max_tokens, overlap, None
+        )
     if edges is None:
-        edges = _load_or_build_edges(repo_path, None, groups_data, None)
+        edges = cap._load_or_build_edges(repo_path, None, groups_data, None)
 
     num_groups = groups_data["num_groups"]
     stage_fanout = _stage_fanout_for_groups(num_groups)

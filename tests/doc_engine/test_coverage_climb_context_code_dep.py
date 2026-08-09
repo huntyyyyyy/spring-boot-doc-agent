@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import MagicMock
 
 import pytest
 
@@ -58,21 +57,29 @@ def test_handlers_and_partition(monkeypatch: pytest.MonkeyPatch, tmp_path: Path)
     )
     monkeypatch.setattr(ctx_mod, "_ensure_citation_pool", lambda c: c.pool)
     monkeypatch.setattr(ctx_mod, "_ensure_todos", lambda c: None)
-    monkeypatch.setattr(
-        ctx_mod, "mock_file_summaries", lambda *a, **k: calls.append("sum") or "ok"
-    )
-    monkeypatch.setattr(
-        ctx_mod, "mock_architecture", lambda *a, **k: calls.append("arch") or "ok"
-    )
-    monkeypatch.setattr(
-        ctx_mod, "mock_gap_and_interview", lambda *a, **k: calls.append("gap") or "ok"
-    )
+
+    def fake_resolve(stage_key, registry=None):
+        mapping = {
+            ctx_mod.STAGE_FILE_SUMMARIZE: (
+                lambda *a, **k: calls.append("sum") or "ok"
+            ),
+            ctx_mod.STAGE_ARCHITECT: (
+                lambda *a, **k: calls.append("arch") or "ok"
+            ),
+            ctx_mod.STAGE_GAP_INTERVIEW: (
+                lambda *a, **k: calls.append("gap") or "ok"
+            ),
+            ctx_mod.STAGE_DOC_WRITER: (
+                lambda *a, **k: calls.append("docs") or "ok"
+            ),
+        }
+        return mapping[stage_key]
+
+    monkeypatch.setattr(ctx_mod, "resolve_mock_stage", fake_resolve)
     monkeypatch.setattr(ctx_mod, "_read_json", lambda *_a, **_k: {})
     monkeypatch.setattr(ctx_mod, "find_existing_readme", lambda *_a, **_k: None)
-    monkeypatch.setattr(
-        ctx_mod, "mock_docs", lambda *a, **k: calls.append("docs") or "ok"
-    )
-    log = lambda *a, **k: None
+    def log(*_a, **_k):
+        return None
     assert ctx_mod._handler_file_summarize(ctx, log) == "ok"
     assert ctx_mod._handler_architect(ctx, log) == "ok"
     assert ctx_mod._handler_gap(ctx, log) == "ok"

@@ -120,14 +120,14 @@ def _run_l2b_calibration(args, repo_path):
     summaries_path = cap.checked_path(args.summaries_file, want="file")
     with open(summaries_path, encoding="utf-8") as f:
         summaries_data = json.load(f)
-    interview_answers = _load_optional_json(args.interview_answers_file)
-    signals_data = _load_optional_json(args.signals_file)
+    interview_answers = cap._load_optional_json(args.interview_answers_file)
+    signals_data = cap._load_optional_json(args.signals_file)
     groups_data = None
     if args.groups_file:
         groups_data = cap._load_or_build_groups(
             repo_path, args.max_tokens, args.overlap, args.groups_file,
         )
-    stage0_report = _load_optional_json(args.stage0_preflight_report)
+    stage0_report = cap._load_optional_json(args.stage0_preflight_report)
     report = cap.compute_stage4_calibration(
         repo_path,
         summaries_data=summaries_data,
@@ -137,8 +137,8 @@ def _run_l2b_calibration(args, repo_path):
         stage0_preflight_report=stage0_report,
         stage4_shared_tokens_warn_threshold=args.stage4_shared_tokens_warn_threshold,
     )
-    _maybe_write_report(args.out, report)
-    _print_l2b_summary(report)
+    cap._maybe_write_report(args.out, report)
+    cap._print_l2b_summary(report)
 
 
 def _print_stage0_summary(report):
@@ -165,7 +165,7 @@ def _run_stage0_preflight(args, repo_path):
     groups_data = cap._load_or_build_groups(
         repo_path, args.max_tokens, args.overlap, args.groups_file,
     )
-    signals_data = _load_optional_json(args.signals_file)
+    signals_data = cap._load_optional_json(args.signals_file)
     try:
         # Order matters here in a way it did not before: the join consumes
         # the partition, so groups_data must be built first.
@@ -184,8 +184,8 @@ def _run_stage0_preflight(args, repo_path):
         slice_tokens_warn_threshold=args.slice_tokens_warn_threshold,
         stage4_shared_tokens_warn_threshold=args.stage4_shared_tokens_warn_threshold,
     )
-    _maybe_write_report(args.out, report)
-    _print_stage0_summary(report)
+    cap._maybe_write_report(args.out, report)
+    cap._print_stage0_summary(report)
 
 
 def main():
