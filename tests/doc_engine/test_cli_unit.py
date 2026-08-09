@@ -10,6 +10,7 @@ from types import SimpleNamespace
 import pytest
 
 from doc_engine import cli
+from doc_engine import cli_scan_config
 
 pytestmark = pytest.mark.domain_pipeline
 
@@ -42,7 +43,7 @@ def test_scan_config_overrides(tmp_path: Path) -> None:
         db_path="/tmp/db",
         trust_repo_config=False,
     )
-    config = cli._scan_config(str(repo), args)
+    config = cli_scan_config.scan_config(str(repo), args)
     assert config.scanners == ["ast-grep", "codeql"]
     assert config.sql_dialect == "mysql"
     assert config.respect_gitignore is True
@@ -88,7 +89,7 @@ def test_cmd_scan_codeql_error(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) 
             raise CodeQLScannerError("need build")
 
     monkeypatch.setattr(cli, "Engine", BoomEngine)
-    monkeypatch.setattr(cli, "_scan_config", lambda *_args, **_kwargs: object())
+    monkeypatch.setattr(cli, "scan_config", lambda *_args, **_kwargs: object())
     rc = cli.cmd_scan(SimpleNamespace(
         repo=str(tmp_path),
         out=str(tmp_path / "out.json"),
