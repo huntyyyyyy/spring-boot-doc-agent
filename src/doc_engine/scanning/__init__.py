@@ -53,9 +53,7 @@ def scan_repository(
     allow_codeql_build: bool = False,
 ) -> Dict[str, Any]:
     """Run Stage 0 signal extraction for a Spring Boot repository."""
-    from doc_engine.scanning.spring import scan
-
-    return scan(
+    return __getattr__("scan")(
         repo_path,
         sql_dialect=sql_dialect,
         respect_gitignore=respect_gitignore,
