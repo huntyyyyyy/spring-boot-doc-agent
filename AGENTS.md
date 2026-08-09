@@ -1,9 +1,17 @@
 # AGENTS.md
 
-For repo working conventions (steering prompts, session log, `ast-grep`-only
-search mandate, state-claim gates), read `CLAUDE.md` first — it is the source of
-truth and applies to every session. This file is a thin Cursor Cloud ingest
-layer (gotchas + pointers), not a second SoT for recipes or counts.
+For repo working conventions (steering prompts, session log, prefer-ast-grep
+citations with ripgrep allowed, state-claim gates), read `CLAUDE.md` first — it
+is the source of truth and applies to every session. This file is a thin Cursor
+Cloud ingest layer (gotchas + pointers), not a second SoT for recipes or counts.
+
+## One tip branch (cloud)
+
+Cloud agents must stay on the **single Active tip branch** for the open PR
+stream (today: `cursor/local-ci-gate-fix-61f3` → PR #113). Do **not** create
+sibling research-only branches that fork the same tip work; archive research on
+the tip and push there. Parallel `cursor/*-61f3` branches are for **separate**
+epics with separate PRs — never two checkouts of the same Cover%/gate tip.
 
 ## Cursor Cloud specific instructions
 

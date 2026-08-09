@@ -4865,3 +4865,11 @@ Assumptions affected:
 - CodeQL signals always wipe+rebuild — [Resolved — fingerprint gate skips compile/runtime when corpus unchanged; wipe remains on dirty path]
 - Stalker only G1–G7 tip hygiene — [New info — G8–G10 path-parity sensors for oracle/CodeQL/suite map]
 Files touched: oracle_push_policy.py, pre_pr.py, codeql_signals_change_gate.py, codeql-signals.yml, stalker_path_parity/*, process/30–31, quality-backlog, session-log
+
+## 2026-08-09 — E-SEARCH0: allow ripgrep / Grep; keep network deny + ast-grep prefer
+Commit: 4ca8b551
+Tests: adapters deny_text_search + bridge + check F suites (pending run in same commit)
+Assumptions affected:
+- `CLAUDE.md` / `CONSTRAINTS.md` §10 / `adapters/claude/SEARCH.md` — hard "never text search" / Grep denied — [Resolved — text search allowed; prefer ast-grep for structural citations; check F network half unchanged]
+- `docs/process/steering-prompts/` — no status field assumed Grep deny as deliverable absent — [Still accurate]
+Files touched: adapters/claude/hooks/deny_text_search.py, .claude/settings.json, scripts/ci/check_repo_claims.py, CLAUDE.md, AGENTS.md, CONSTRAINTS.md, SEARCH.md, agent prompts, tests/adapters/test_deny_text_search.py, tests/ci/test_repo_claims_*, docs/research/process/34-text-search-allow-ripgrep-2026.md

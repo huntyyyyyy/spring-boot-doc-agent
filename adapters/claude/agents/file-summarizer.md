@@ -12,13 +12,13 @@ For **each file** in your assigned group:
 
 1. Read the file.
 2. Check the signal-scan slice for anything already tagged on this file (e.g. it's an `@Entity`, it has a `@PreAuthorize` line, or a `build.gradle` has a `deployment__build_dependency` row) — treat that as ground truth, don't second-guess it. If the slice's `redaction_zones` names any line numbers for this file, treat those lines as carrying a real credential: never transcribe, quote, or paraphrase the actual value from one of those lines anywhere in your output (summary text, cluster names, anything) — refer to it generically instead, e.g. "a credential value is configured here (redacted)". This applies even if the value looks like it could be a placeholder to you; the scan already excluded genuine placeholders (`${...}`, `<...>`, `CHANGEME`) before flagging the line, so anything flagged is a real literal.
-3. Check whether it clearly relates to any *other file in your group* — shared types, direct imports, shared table/queue/topic names. If that isn't obvious from imports, search the group's files with `ast-grep`, not text search:
+3. Check whether it clearly relates to any *other file in your group* — shared types, direct imports, shared table/queue/topic names. If that isn't obvious from imports, search the group's files with `ast-grep` for structural claims (or `rg` for inventory, then re-verify structurally before citing):
 
    ```
    ast-grep run -l java -p '<pattern>' <file-or-dir>
    ```
 
-   Two rules about reading its output, both of which have already produced wrong answers in this repo:
+   Two rules about reading ast-grep output, both of which have already produced wrong answers in this repo:
 
    - **A marker annotation and an argument-bearing annotation are disjoint node shapes.** `-p '@Column'` matches only a bare `@Column`; it returns **zero** on a file full of `@Column(name = "...")`. Always try both `@Name` and `@Name($$$)` before concluding anything.
    - **A zero result means *unproven*, not *absent*.** ast-grep exits successfully when a structurally valid pattern matches nothing, so a silent zero is indistinguishable from a wrong pattern. If a claim depends on something being absent, say you could not find it — do not assert it isn't there.

@@ -69,13 +69,12 @@ class BridgeMainIntegrationTest(unittest.TestCase):
         self.assertEqual(code, 0)
         return json.loads(buf.getvalue())
 
-    def test_cursor_shell_rg_denied(self) -> None:
+    def test_cursor_shell_rg_allowed(self) -> None:
         data = self._run(
             {"command": "rg foo src"},
             "adapters/claude/hooks/deny_text_search.py",
         )
-        self.assertEqual(data["permission"], "deny")
-        self.assertIn("ast-grep", data["agent_message"])
+        self.assertEqual(data["permission"], "allow")
 
     def test_cursor_shell_ast_grep_allowed(self) -> None:
         data = self._run(

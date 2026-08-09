@@ -249,9 +249,11 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Spec draft (parked):** **E-SOL0** — vocabulary landed; not tip-blocking.  
 **Spec draft (demoted — later):** **E-GND0** — tip-grounding MCP; after E-COH1 has a green slice.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1).  
-**Spec draft (not Active tip):** **E-RT0** — realtime architecture/logic assertion envelope (P27.0); research 32.  
-**Defer:** E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**; **E-RT1** until E-RT0 Approve.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; `quality_knobs.py` mega-config; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**; **climb/LTL/RT score as Cover% SoT**.
+**Spec draft (not Active tip):** **E-RT0** — realtime architecture/logic assertion envelope (P27.0); research 32.
+**Spec draft (not Active tip):** **E-RUST0** — Rust quality toolscape BFS/DFS (P28.0); research 33.
+**Done Spec + Implement:** **E-SEARCH0** — allow ripgrep/Grep; prefer ast-grep for citations (2026-08-09).  
+**Defer:** E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**; **E-RT1** until E-RT0 Approve; **E-RUST1** until E-RUST0 Approve.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; `quality_knobs.py` mega-config; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**; **climb/LTL/RT score as Cover% SoT**; **sibling tip branches for the same PR stream**; **in-tree Rust/WASM-by-default without profiled Spec**.
 
 ---
 
@@ -410,6 +412,28 @@ Research: [`docs/research/process/29-local-domain-pytest-select-2026.md`](proces
 | P27.1 | **E-RT1 Implement** | Deferred | only after E-RT0 + E-TACH0/E-COH deps |
 
 Research: [`docs/research/coverage-quality/32-realtime-architecture-assertion-agents-2026.md`](coverage-quality/32-realtime-architecture-assertion-agents-2026.md). **Embody** oracle≠climb + tach/ruff/ast-grep wheels; **Adopt** Spec-gated edit-time pack + receipts; **Refuse** LLM-judge SoT, in-tree Rust, climb-as-floor.
+
+---
+
+## P28 — Rust quality toolscape (BFS→DFS) — Spec only
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P28.0 | **E-RUST0 Spec:** approve **RUST0-1–RUST0-8** (Embody wheels; Adopt sensors; Refuse in-tree rewrite / climb-as-floor) | **DRAFT** (2026-08-09) — pending human Approve | research 33; no implement until Approve |
+| P28.1 | **E-RUST1 Implement** slices | Deferred | only after E-RUST0 Approve + constitution gates |
+
+Research: [`docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md`](coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md). Supersedes narrow gaps in research 32.
+
+---
+
+## P29 — Text search allow (ripgrep) — Done
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P29.0 | **E-SEARCH0 Spec + Implement:** allow Grep/rg; prefer ast-grep for citations; keep network deny | **Done** (2026-08-09) | research 34; `deny_text_search` allow; settings deny lifted; check F network half |
+
+Research: [`docs/research/process/34-text-search-allow-ripgrep-2026.md`](process/34-text-search-allow-ripgrep-2026.md).
+
 
 ---
 
