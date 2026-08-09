@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from doc_engine.tools import spring_drift_jpql as jpql
 from doc_engine.tools import spring_drift_tier2 as t2
 from doc_engine.tools.spring_drift_common import (
     STATUS_CONFIRMED,
@@ -38,7 +39,7 @@ def test_entity_and_repo_field_drift_details() -> None:
 
 def test_jpql_verdict_entity_gone_without_delete() -> None:
     result = {"status": STATUS_UNCHANGED, "tier": 1, "detail": None}
-    t2._apply_jpql_lineage_verdict(
+    jpql._apply_jpql_lineage_verdict(
         result, "E", "E.java", {"table": "T"}, None, entity_file_deleted=False
     )
     assert result["status"] == STATUS_DRIFTED
@@ -51,7 +52,7 @@ def test_reverify_one_jpql_early_exits() -> None:
         "line": 1,
         "lineage": {"available": True, "resolved_via_entity": "Missing"},
     }
-    t2._reverify_one_jpql_entry(entry, {"entity_table_map": {}}, {}, set(), set(), {})
+    jpql._reverify_one_jpql_entry(entry, {"entity_table_map": {}}, {}, set(), set(), {})
 
     entry2 = {
         "file": "q.java",
@@ -59,7 +60,7 @@ def test_reverify_one_jpql_early_exits() -> None:
         "lineage": {"available": True, "resolved_via_entity": "E"},
     }
     signals = {"entity_table_map": {"E": {"file": "E.java", "table": "T"}}}
-    t2._reverify_one_jpql_entry(
+    jpql._reverify_one_jpql_entry(
         entry2, signals, {}, changed_set=set(), deleted_set=set(), results_by_file_line={}
     )
 
@@ -69,7 +70,7 @@ def test_reverify_one_jpql_early_exits() -> None:
         "line": 3,
         "lineage": {"available": True, "resolved_via_entity": "E"},
     }
-    t2._reverify_one_jpql_entry(
+    jpql._reverify_one_jpql_entry(
         entry3,
         signals,
         {},

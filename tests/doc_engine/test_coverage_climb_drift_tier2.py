@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from doc_engine.tools import spring_drift_jpql as jpql
 from doc_engine.tools import spring_drift_tier2 as t2
 from doc_engine.tools.spring_drift_common import (
     STATUS_CONFIRMED,
@@ -73,20 +74,20 @@ def test_recheck_queries_and_generic() -> None:
     assert gen[1]["status"] == STATUS_DRIFTED
 
 def test_jpql_lineage_verdicts_and_reverify() -> None:
-    assert t2._jpql_lineage_needs_reverify({"status": STATUS_UNCHANGED})
-    assert not t2._jpql_lineage_needs_reverify({"status": STATUS_DRIFTED})
+    assert jpql._jpql_lineage_needs_reverify({"status": STATUS_UNCHANGED})
+    assert not jpql._jpql_lineage_needs_reverify({"status": STATUS_DRIFTED})
     result = {"status": STATUS_UNCHANGED, "tier": 1, "detail": None}
-    t2._apply_jpql_lineage_verdict(
+    jpql._apply_jpql_lineage_verdict(
         result, "E", "E.java", {"table": "T"}, None, entity_file_deleted=True
     )
     assert result["status"] == STATUS_DRIFTED
     result = {"status": STATUS_UNCHANGED, "tier": 1, "detail": None}
-    t2._apply_jpql_lineage_verdict(
+    jpql._apply_jpql_lineage_verdict(
         result, "E", "E.java", {"table": "T"}, {"table": "T"}, False
     )
     assert result["status"] == STATUS_CONFIRMED
     result = {"status": STATUS_UNCHANGED, "tier": 1, "detail": None}
-    t2._apply_jpql_lineage_verdict(
+    jpql._apply_jpql_lineage_verdict(
         result, "E", "E.java", {"table": "OLD"}, {"table": "NEW"}, False
     )
     assert result["status"] == STATUS_DRIFTED
@@ -104,7 +105,7 @@ def test_jpql_lineage_verdicts_and_reverify() -> None:
         },
         "entity_table_map": {"E": {"file": "E.java", "table": "T"}},
     }
-    resolved = list(t2._raw_query_entries_with_resolved_entity(signals))
+    resolved = list(jpql._raw_query_entries_with_resolved_entity(signals))
     assert len(resolved) == 1
     rows = [
         {
@@ -115,7 +116,7 @@ def test_jpql_lineage_verdicts_and_reverify() -> None:
             "detail": None,
         }
     ]
-    t2._reverify_jpql_lineage_provenance(
+    jpql._reverify_jpql_lineage_provenance(
         rows,
         signals,
         {"E": {"table": "T2"}},

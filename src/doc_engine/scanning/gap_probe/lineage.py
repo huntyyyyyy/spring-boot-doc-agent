@@ -13,6 +13,7 @@ from .common import (
     _rate_block,
 )
 
+
 def _reason_mentions(reason: str, *needles: str) -> bool:
     lowered = reason.lower()
     return any(needle in reason or needle in lowered for needle in needles)

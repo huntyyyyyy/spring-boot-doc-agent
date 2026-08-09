@@ -13,7 +13,6 @@ from doc_engine.tools.spring_drift_common import (
     STATUS_CONFIG_VALUES_ONLY_CHANGED,
     STATUS_CONFIRMED,
     STATUS_DRIFTED,
-    STATUS_UNCHANGED,
     drift_result,
 )
 
@@ -151,17 +150,6 @@ def _recheck_generic(fresh_entries, group):
             detail = "no fresh match with the same text found for this rule in this file"
             results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
     return results
-
-
-# JPQL dual-input provenance lives in spring_drift_jpql (concept module).
-from doc_engine.tools.spring_drift_jpql import (  # noqa: E402
-    _apply_jpql_lineage_verdict,
-    _jpql_lineage_is_entity_resolved,
-    _jpql_lineage_needs_reverify,
-    _raw_query_entries_with_resolved_entity,
-    _reverify_jpql_lineage_provenance,
-    _reverify_one_jpql_entry,
-)
 
 
 def _recheck_config_keys(repo_path, file_rel, old_keys):

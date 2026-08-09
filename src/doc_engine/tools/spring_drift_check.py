@@ -232,6 +232,7 @@ from doc_engine.paths import (
     checked_path,
 )
 from doc_engine.tools import spring_drift_common as _drift_common
+from doc_engine.tools import spring_drift_jpql as _drift_jpql
 from doc_engine.tools import spring_drift_tier2 as _drift_tier2
 from doc_engine.tools import spring_signal_scan
 
@@ -246,11 +247,9 @@ STATUS_NO_RULE_FALLBACK = _drift_common.STATUS_NO_RULE_FALLBACK
 STATUS_UNCHANGED = _drift_common.STATUS_UNCHANGED
 STATUS_UNKNOWN_NO_SIGNATURE = _drift_common.STATUS_UNKNOWN_NO_SIGNATURE
 drift_result = _drift_common.drift_result
-_raw_query_entries_with_resolved_entity = (
-    _drift_tier2._raw_query_entries_with_resolved_entity
-)
+_raw_query_entries_with_resolved_entity = _drift_jpql._raw_query_entries_with_resolved_entity
 _recheck_config_keys = _drift_tier2._recheck_config_keys
-_reverify_jpql_lineage_provenance = _drift_tier2._reverify_jpql_lineage_provenance
+_reverify_jpql_lineage_provenance = _drift_jpql._reverify_jpql_lineage_provenance
 tier2_recheck_file = _drift_tier2.tier2_recheck_file
 
 
