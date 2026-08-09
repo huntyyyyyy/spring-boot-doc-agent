@@ -4841,7 +4841,7 @@ Assumptions affected:
 Files touched: src/doc_engine/scanning/astgrep/*, _scanner_astgrep.py, spring.py, scripts/ci/check_facade_poke_surface.py, scripts/ratchets/size_baseline.json, CONSTRAINTS.md, tests/doc_engine/test_scan_context_astgrep_*, test_covering_hard_stops_destructive.py, docs/research/quality-backlog.md, claude/session-log.md
 
 ## 2026-08-09 — E-DOC1 research taxonomy + claude→docs + look-first hooks
-Commit: uncommitted
+Commit: 887b8ed
 Tests: claims OK; look-first + claims fixture suites 123 passed; complexipy ≤5 on hooks
 Assumptions affected:
 - `docs/process/steering-prompts/` live under `claude/` — [Resolved — migrated to `docs/process/steering-prompts/`; claims MIRRORED_PROMPT_GLOB + CLAIM_CORPORA retargeted]
