@@ -162,6 +162,18 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 
 ---
 
+## P11 — Pipeline / Stage-0 modularity (ports / vertical slices)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P11.0 | **E-MOD0 Spec:** approve **M1–M12** (CLI BCs; hexagonal Protocols; vertical slices; refuse DI/`utils`/mesh) | **Done** (2026-08-09) | research 12 `spec_gate: APPROVED E-MOD0` |
+| P11.1 | **E-MOD1:** `mock_stages` split + `MockStageStrategy` Protocol/registry; stable façade; size baseline `--update` (MOD-S1) | **Active** | files ≤225; complexipy ≤5; kitchen/pipeline green; oracle 3.11 |
+| P11.2 | **E-MOD2:** `capacity_preflight` then drift/partition (follow-on tips) | Later (after MOD1) | same gates; CLI flags/outputs stable |
+
+Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipeline-stage0-modularity-ports-2026.md).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
@@ -173,5 +185,6 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 **Done (E-UX0–1):** UX Spec Approve + quality-gates / step-summary append slice.  
 **Done (E-KH0):** K1–K12 Approve (2026-08-09).  
 **Done (E-KH1):** `KitchenArtifacts` + session fixtures; chapters off `setUpModule`/`_STATE` (2026-08-09).  
-**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT.
+**Active:** **E-MOD0/1** — pipeline `mock_stages` modularity (ports / vertical slices); E-MOD0 Spec Approve recorded.  
+**Defer:** E-MOD2 Stage-0 tools until MOD1 exits; E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps.
