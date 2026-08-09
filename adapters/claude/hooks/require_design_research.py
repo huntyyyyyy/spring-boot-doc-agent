@@ -29,6 +29,8 @@ DESIGN_PATH_RE = re.compile(
     r"|docs/research/"
     r"|scripts/ci/check_facade_poke_surface\.py$"
     r"|adapters/claude/hooks/require_design_research\.py$"
+    r"|\.cursor/hooks\.json$"
+    r"|\.cursor/hooks/"
     r")"
 )
 

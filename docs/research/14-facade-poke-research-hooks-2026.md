@@ -1,6 +1,6 @@
 ---
 title: Façade poke-surface fitness + design-research hooks (2026)
-status: E-FAC0 / E-RES0 APPROVED (2026-08-09) — plan accept this conversation
+status: E-FAC0 / E-RES0 / E-CUR0 APPROVED (2026-08-09) — Cursor-native hooks this tip
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — agent hooks + CI fitness functions
@@ -14,7 +14,7 @@ do_not:
   - treat LLM-judge or Cover% climb as merge SoT for façade correctness
   - adopt DI containers or microservice decomposition theater for this CLI
   - replace tach (already Adopted) with a second conflicting architecture linter without Spec
-spec_gate: APPROVED E-FAC0 + E-RES0 (2026-08-09) — FAC1–FAC6 · RES1–RES6
+spec_gate: APPROVED E-FAC0 + E-RES0 + E-CUR0 (2026-08-09) — FAC1–FAC6 · RES1–RES6 · CUR1–CUR4
 ---
 
 # Principal memo: why modularity splits leaked CI, and how to catch it in any tip
@@ -85,6 +85,15 @@ spec_gate: APPROVED E-FAC0 + E-RES0 (2026-08-09) — FAC1–FAC6 · RES1–RES6
 
 **Unknown:** whether Cursor Cloud PreToolUse can see user-query text for “research ask” classification (may need Agent-tool matcher + prompt heuristics). Spec locks Claude-plugin commit hook first; Cursor rule points at same skill.
 
+### 2.4 Cursor-native hooks portability (E-CUR0)
+
+| Claim | Tier | Source |
+| --- | --- | --- |
+| Cloud agents load **project** `.cursor/hooks.json` command hooks; user `~/.cursor/hooks.json` is **not** available in Cloud VMs | Evidenced | [Cursor Hooks docs — Cloud agent support](https://cursor.com/docs/hooks) (fetched this session) |
+| `beforeShellExecution` + `preToolUse` are supported on Cloud; exit 0 + JSON `permission` deny/allow | Evidenced | same docs — Supported hooks table + `beforeShellExecution` / `preToolUse` schemas |
+| Claude `Bash` ↔ Cursor `Shell`; Claude `PreToolUse` ↔ Cursor `preToolUse` / shell-specific `beforeShellExecution` | Evidenced | Cursor docs tool schemas; Claude plugin hooks under `adapters/claude/hooks/` `[Confirmed]` |
+| Optional Claude third-party hook import in Cursor is **not** a reliable Cloud SoT | Confirmed | this tip’s local-green / remote-red gap: Claude hooks did not fire on Cloud commits |
+
 ---
 
 ## 3. Embody / Adopt / Refuse → FAC1–FAC6 · RES1–RES6
@@ -111,7 +120,16 @@ spec_gate: APPROVED E-FAC0 + E-RES0 (2026-08-09) — FAC1–FAC6 · RES1–RES6
 | **RES5** | Refuse LLM-as-judge as research Spec gate; refuse DeepWiki-only “evidence” | Refuse |
 | **RES6** | One tip writer; research memo + fitness gate land before claiming Archive on modularity tips | Embody SDD |
 
-Human Approve = this conversation’s request for a general catch + research hook (2026-08-09).
+### Cursor-native policy portability (E-CUR0)
+
+| ID | Decision | Stance |
+| --- | --- | --- |
+| **CUR1** | Ship project `.cursor/hooks.json` so Claude PreToolUse policies run in Cursor Desktop **and** Cloud without third-party Claude import | Embody |
+| **CUR2** | Keep policy SoT in `adapters/claude/hooks/` + `.claude/hooks/`; thin `.cursor/hooks/bridge_claude_policy.py` only normalizes stdin/stdout (Shell→Bash, Claude deny → Cursor `permission`) | Embody (DRY / OCP) |
+| **CUR3** | Wire `beforeShellExecution` for Bash-equivalent policies; `preToolUse` matcher `Grep` for the Grep tool (Shell already covered by beforeShell — do not double-run) | Adopt |
+| **CUR4** | Refuse depending on `~/.cursor/hooks.json` or Claude third-party toggle as the Cloud control plane | Refuse |
+
+Human Approve = this conversation’s request for a general catch + research hook (2026-08-09), plus native Cursor PreToolUse portability (same thread).
 
 ---
 
@@ -121,8 +139,9 @@ Human Approve = this conversation’s request for a general catch + research hoo
 | --- | --- | --- |
 | **E-FAC0** | **Active (this tip)** | Ship `check_facade_poke_surface` + wire pre_pr/CI; inventory covers `run_manifest` / known façades |
 | **E-RES0** | **Active (this tip)** | Ship `require_design_research` commit hook + wire `.claude/settings.json` / plugin hooks; AGENTS pointer |
+| **E-CUR0** | **Active (this tip)** | Ship `.cursor/hooks.json` + bridge; Grep + shell policies fire on Cursor Cloud/Desktop; tests for normalize/deny map |
 | **E-FAC1** | Suggested next | Expand inventory auto-discovery; optional approvaltests for opaque CLI golden masters — only if poke gate false-negatives recur |
-| **E-RES1** | Defer | Cursor-native hook if PreToolUse parity differs from Claude plugin |
+| **E-RES1** | Superseded by E-CUR0 | Was “Cursor-native hook if PreToolUse parity differs” — landed as E-CUR0 |
 
 ---
 

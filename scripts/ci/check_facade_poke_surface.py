@@ -14,11 +14,10 @@ import ast
 import importlib
 import sys
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
-# Stable public façades that characterization / kitchen / climb tests patch.
 FACADES: Dict[str, str] = {
     "doc_engine.tools.run_manifest": "run_manifest",
     "doc_engine.tools.citation_coverage": "citation_coverage",
@@ -28,12 +27,50 @@ FACADES: Dict[str, str] = {
     "doc_engine.pipeline.mock_stages": "mock_stages",
 }
 
-AttrNeed = Tuple[str, str, str]  # facade_mod, attr, test_path
+PACKAGE_ROOTS = ("doc_engine.tools", "doc_engine.pipeline")
+AttrNeed = Tuple[str, str, str]
 
 
 def _iter_test_files() -> Iterable[Path]:
-    tests = REPO_ROOT / "tests"
-    yield from sorted(tests.rglob("test_*.py"))
+    yield from sorted((REPO_ROOT / "tests").rglob("test_*.py"))
+
+
+def _facade_for_short_name(short: str) -> Optional[str]:
+    for full, name in FACADES.items():
+        if name == short:
+            return full
+    return None
+
+
+def _record_import(aliases: Dict[str, str], local: str, mod: str) -> None:
+    if mod in FACADES:
+        aliases[local] = mod
+
+
+def _handle_import(aliases: Dict[str, str], node: ast.Import) -> None:
+    for alias in node.names:
+        _record_import(aliases, alias.asname or alias.name.split(".")[-1], alias.name)
+
+
+def _handle_import_from(aliases: Dict[str, str], node: ast.ImportFrom) -> None:
+    if not node.module:
+        return
+    if node.module in PACKAGE_ROOTS:
+        for alias in node.names:
+            candidate = f"{node.module}.{alias.name}"
+            _record_import(aliases, alias.asname or alias.name, candidate)
+        return
+    if node.module not in FACADES:
+        return
+    for alias in node.names:
+        if alias.name == "*":
+            continue
+        local = alias.asname or alias.name
+        short = _facade_for_short_name(alias.name)
+        if short:
+            aliases[local] = short
+        else:
+            _record_import(aliases, local, node.module)
 
 
 def _alias_map(tree: ast.AST) -> Dict[str, str]:
@@ -41,42 +78,9 @@ def _alias_map(tree: ast.AST) -> Dict[str, str]:
     aliases: Dict[str, str] = {}
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
-            for alias in node.names:
-                mod = alias.name
-                if mod in FACADES:
-                    aliases[alias.asname or alias.name.split(".")[-1]] = mod
-        elif isinstance(node, ast.ImportFrom) and node.module:
-            if node.module in FACADES:
-                for alias in node.names:
-                    if alias.name == "*":
-                        continue
-                    local = alias.asname or alias.name
-                    # from doc_engine.tools import run_manifest as rm
-                    if f"{node.module}" in FACADES or node.module.startswith(
-                        "doc_engine.tools"
-                    ):
-                        # import submodule from package path
-                        full = (
-                            node.module
-                            if alias.name == node.module.split(".")[-1]
-                            else f"{node.module}.{alias.name}"
-                            if node.module.count(".") >= 2
-                            else f"doc_engine.tools.{alias.name}"
-                        )
-                        # Prefer exact façade keys
-                        if full in FACADES:
-                            aliases[local] = full
-                        elif alias.name in {v for v in FACADES.values()}:
-                            for k, v in FACADES.items():
-                                if v == alias.name:
-                                    aliases[local] = k
-                                    break
-            # from doc_engine.tools import run_manifest as rm
-            if node.module in {"doc_engine.tools", "doc_engine.pipeline"}:
-                for alias in node.names:
-                    candidate = f"{node.module}.{alias.name}"
-                    if candidate in FACADES:
-                        aliases[alias.asname or alias.name] = candidate
+            _handle_import(aliases, node)
+        elif isinstance(node, ast.ImportFrom):
+            _handle_import_from(aliases, node)
     return aliases
 
 
@@ -93,6 +97,53 @@ def _attr_chain(node: ast.AST) -> List[str]:
     return []
 
 
+def _call_kind(func: ast.AST) -> Optional[str]:
+    if not isinstance(func, ast.Attribute):
+        return None
+    if func.attr == "setattr":
+        return "setattr"
+    if func.attr == "patch":
+        return "patch"
+    if func.attr == "object":
+        return "patch_object"
+    return None
+
+
+def _needs_from_patch_string(target: str, rel: str) -> List[AttrNeed]:
+    needs: List[AttrNeed] = []
+    for fac in FACADES:
+        prefix = fac + "."
+        if target.startswith(prefix):
+            needs.append((fac, target[len(prefix) :].split(".", 1)[0], rel))
+    return needs
+
+
+def _needs_from_setattr(
+    aliases: Dict[str, str], node: ast.Call, rel: str
+) -> List[AttrNeed]:
+    if len(node.args) < 2:
+        return []
+    target, attr_node = node.args[0], node.args[1]
+    if not isinstance(attr_node, ast.Constant) or not isinstance(attr_node.value, str):
+        return []
+    chain = _attr_chain(target)
+    if not chain or chain[0] not in aliases:
+        return []
+    need_attr = chain[1] if len(chain) > 1 else attr_node.value
+    return [(aliases[chain[0]], need_attr, rel)]
+
+
+def _needs_from_patch_object(
+    aliases: Dict[str, str], node: ast.Call, rel: str
+) -> List[AttrNeed]:
+    if not node.args:
+        return []
+    chain = _attr_chain(node.args[0])
+    if len(chain) < 2 or chain[0] not in aliases:
+        return []
+    return [(aliases[chain[0]], chain[1], rel)]
+
+
 def _collect_needs(path: Path) -> List[AttrNeed]:
     try:
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
@@ -101,85 +152,36 @@ def _collect_needs(path: Path) -> List[AttrNeed]:
     aliases = _alias_map(tree)
     needs: List[AttrNeed] = []
     rel = str(path.relative_to(REPO_ROOT))
-
     for node in ast.walk(tree):
         if not isinstance(node, ast.Call):
             continue
-        func = node.func
-        # monkeypatch.setattr(target, name, ...) or setattr(mp, ...)
-        name = None
-        if isinstance(func, ast.Attribute) and func.attr == "setattr":
-            name = "setattr"
-        elif isinstance(func, ast.Attribute) and func.attr == "patch":
-            # mock.patch("doc_engine.tools.run_manifest.json.dump") — string form
-            if node.args and isinstance(node.args[0], ast.Constant) and isinstance(
-                node.args[0].value, str
-            ):
-                target = node.args[0].value
-                for fac in FACADES:
-                    prefix = fac + "."
-                    if target.startswith(prefix):
-                        rest = target[len(prefix) :].split(".", 1)[0]
-                        needs.append((fac, rest, rel))
-            continue
-        elif isinstance(func, ast.Attribute) and func.attr == "object":
-            # mock.patch.object(run_manifest.json, "dump")
-            name = "patch_object"
-        else:
-            continue
-
-        if name == "setattr" and len(node.args) >= 2:
-            target, attr_node = node.args[0], node.args[1]
-            if not isinstance(attr_node, ast.Constant) or not isinstance(
-                attr_node.value, str
-            ):
-                continue
-            chain = _attr_chain(target)
-            if not chain:
-                continue
-            root = chain[0]
-            if root not in aliases:
-                continue
-            fac = aliases[root]
-            # setattr(rm, "dfs_walk") → need dfs_walk; setattr(rm.os, "replace") → need os
-            need_attr = chain[1] if len(chain) > 1 else attr_node.value
-            needs.append((fac, need_attr, rel))
-        elif name == "patch_object" and len(node.args) >= 1:
-            target = node.args[0]
-            chain = _attr_chain(target)
-            if len(chain) < 2:
-                continue
-            root = chain[0]
-            if root not in aliases:
-                continue
-            fac = aliases[root]
-            needs.append((fac, chain[1], rel))
+        kind = _call_kind(node.func)
+        if kind == "patch":
+            arg0 = node.args[0] if node.args else None
+            if isinstance(arg0, ast.Constant) and isinstance(arg0.value, str):
+                needs.extend(_needs_from_patch_string(arg0.value, rel))
+        elif kind == "setattr":
+            needs.extend(_needs_from_setattr(aliases, node, rel))
+        elif kind == "patch_object":
+            needs.extend(_needs_from_patch_object(aliases, node, rel))
     return needs
 
 
 def _module_has_attr(mod_name: str, attr: str) -> bool:
-    mod = importlib.import_module(mod_name)
-    return hasattr(mod, attr)
+    return hasattr(importlib.import_module(mod_name), attr)
 
 
 def main() -> int:
-    needs: List[AttrNeed] = []
-    for path in _iter_test_files():
-        needs.extend(_collect_needs(path))
-
-    # Deduplicate by facade+attr
     unique: Dict[Tuple[str, str], str] = {}
-    for fac, attr, rel in needs:
-        unique.setdefault((fac, attr), rel)
+    for path in _iter_test_files():
+        for fac, attr, rel in _collect_needs(path):
+            unique.setdefault((fac, attr), rel)
 
-    missing: List[str] = []
-    for (fac, attr), rel in sorted(unique.items()):
-        if not _module_has_attr(fac, attr):
-            missing.append(
-                f"{fac!s} missing attribute {attr!r} "
-                f"(poked from {rel})"
-            )
-
+    missing = [
+        f"{fac} missing attribute {attr!r} (poked from {rel})"
+        for (fac, attr), rel in sorted(unique.items())
+        if not _module_has_attr(fac, attr)
+    ]
     if missing:
         print("facade poke-surface check failed:", file=sys.stderr)
         for line in missing:

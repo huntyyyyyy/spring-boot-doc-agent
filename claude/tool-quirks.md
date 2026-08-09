@@ -392,3 +392,12 @@ Status: [Resolved — product + local gate gap]
 Symptom: PR #108 failed remote after local climb/citation/ci `run_manifest` suites passed. Failures were (1) ruff I001 on façade import blocks, (2) `test_tools_wave2_ports.py` marked `domain_pipeline` while classifier expected `domain_unclassified` (3.11-only step; 3.12 cancelled via fail-fast), (3) ABI serial kitchen Ch07 `AttributeError: run_manifest has no attribute 'json'` because `_write_json_atomic` no longer used façade-bound `json.dump` after the vertical split.
 Cause: agent loop ran a **pytest subset** + size/complexipy/claims, not the CI hard surface. `pre_pr.py --fast` also skipped domain markers; even `--standard` historically omitted `test_domain_markers_check` despite CI running it on 3.11. Thin-façade DIP must re-export every name characterization/kitchen patches (`os`, `subprocess`, `dfs_walk`, `compute_file_signature`, `_read_json`, **`json`**).
 Resolution: rename ports test to `test_pipeline_tools_wave2_ports.py`; re-export `json` + `rm.json.dump` in io; add `test_domain_markers` hard suite to `pre_pr` standard/full/outage. Before push on src/tools splits: `python3 scripts/ci/pre_pr.py --auto` (or at least full ruff + domain markers + kitchen domains that poke the façade).
+
+---
+
+## 2026-08-09 — Claude PreToolUse hooks do not run on Cursor Cloud; project `.cursor/hooks.json` is the portable control plane
+Tools/commands involved: `.claude/settings.json` / `adapters/claude/hooks/*`, Cursor Cloud agent Shell tool, [Cursor Hooks docs](https://cursor.com/docs/hooks)
+Status: [Resolved — project-native bridge]
+Symptom: Cloud agent commits skipped `require_hardened_tests` / pipe-exit / text-search denies that Claude Code sessions enforce, so scoped-pytest “green” reached remote CI.
+Cause: Claude plugin hooks and optional Cursor “third-party Claude hooks” import are not the Cloud SoT. Cloud loads **project** `.cursor/hooks.json` only (not `~/.cursor/hooks.json`). Claude tool name is `Bash`; Cursor shell event is `beforeShellExecution` with top-level `command`, and the Shell tool is named `Shell` on `preToolUse`.
+Resolution: commit `.cursor/hooks.json` + `.cursor/hooks/bridge_claude_policy.py` that normalizes Cursor stdin → Claude `{tool_name, tool_input}` and maps Claude `hookSpecificOutput` / design-research `decision:block` → Cursor `{permission, agent_message}`. Policy SoT stays under `adapters/claude/hooks/` (+ `.claude/hooks/check_pipe_exit_code.py`). Do not treat Claude third-party import as sufficient for this repo.
