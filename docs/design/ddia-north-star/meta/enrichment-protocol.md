@@ -9,3 +9,4 @@
 7. Intentional DDIA divergence → [deviations/](../deviations/) entry in the **same change** when practical.
 8. Rebuild `catalog.json` via `_build_catalog.py` and keep the sync test green.
 9. Domain README must list every concept and relationship under that domain.
+10. **Remedies required (E-SOL0 / SOL11).** Every operational `concept`, `relationship`, and `playbook` page MUST include an `## Effective remedies` section that names at least one mechanism id from [effective-remedies.md](effective-remedies.md) (`fitness-function`, `single-write-derive`, `characterization-net`, `adequacy-witness`, `sensor-ledger-spec`) plus Accept shape — not Applications/Fail-if alone. Diagnosis without a remedy is incomplete enrichment. Chapters/domains stay vocabulary; they point here via related concepts.

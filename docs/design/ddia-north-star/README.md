@@ -4,9 +4,11 @@
 
 **Purpose.** Carry-forward, **principal-engineer grade** guidance from *Designing Data-Intensive Applications* (2e, Kleppmann & Riccomini) for **any** work on this project: direction, domain modeling, subdomain boundaries, relationships between artifacts, upstream/downstream contracts, review, refactor, and day-to-day control design. Not a substitute for the book; not a scrape of deepwiki.com (Tier C).
 
+**Vocabulary vs remedies.** Concept/relationship pages name **concerns** (SoR vs derived, gate needs witness, …). Spec Accept must name a **remedy mechanism** from [meta/effective-remedies.md](meta/effective-remedies.md) (fitness functions, single-write+derive, characterization nets, adequacy witnesses, sensor→ledger→Spec) — citing a DDIA `id` alone is incomplete (E-SOL0). Research SoR: `docs/research/process/23-concern-to-solution-remedies-2026.md`.
+
 **Copyright.** Paraphrases, structure, fragment ids, and concept maps only. The O'Reilly epub is **not** vendored. Do not paste long verbatim chapter text into this tree.
 
-**Last refined:** 2026-07-30.
+**Last refined:** 2026-08-09.
 
 ## Scope (what “any level” means)
 
@@ -55,6 +57,7 @@ docs/design/ddia-north-star/
 | Activity | Start |
 |----------|--------|
 | Any design / direction / review question | [INDEX.md](INDEX.md) → one domain or `operational` page |
+| “What remedy do we install?” | [meta/effective-remedies.md](meta/effective-remedies.md) after the concern page |
 | “How deep should I go?” | [meta/usage-levels.md](meta/usage-levels.md) |
 | Chapter context (5W1H) | [chapters/](chapters/) |
 | Project ≠ DDIA | [deviations/](deviations/) |
@@ -67,10 +70,11 @@ Cite catalog **`id`** values in PR bodies, review findings, ADRs, and session-lo
 1. Read this README once per session that needs the lens.
 2. Query [INDEX.md](INDEX.md) with the decision or review question (domain-first if unsure).
 3. Open **one** page whose `completeness` is `operational` (see [COMPLETENESS.md](COMPLETENESS.md)).
-4. If the work **deviates** from a concept’s Core claims, open [deviations/](deviations/) before merging.
-5. Open `related` ids only if blocked.
-6. If the page is `outline` or `partial`, say so — do not fake Tier A from a stub.
-7. Cite the `id` (and deviation id if any) in the finding.
+4. Read that page’s **Effective remedies** (or [meta/effective-remedies.md](meta/effective-remedies.md)) and name the mechanism in Accept.
+5. If the work **deviates** from a concept’s Core claims, open [deviations/](deviations/) before merging.
+6. Open `related` ids only if blocked.
+7. If the page is `outline` or `partial`, say so — do not fake Tier A from a stub.
+8. Cite the concern `id` **and** remedy mechanism id (and deviation id if any) in the finding.
 
 Machine index: [catalog.json](catalog.json) (schema: [catalog.schema.json](catalog.schema.json)).
 

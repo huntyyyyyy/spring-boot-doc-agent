@@ -3,8 +3,8 @@ id: choosing-sor-vs-view
 kind: playbook
 completeness: operational
 tags: [sor, derived, decision]
-related: [sor-vs-derived, replication-lag-and-lww, materialized-views-and-caches]
-last_refined: 2026-07-30
+related: [sor-vs-derived, replication-lag-and-lww, materialized-views-and-caches, effective-remedies]
+last_refined: 2026-08-09
 path: playbooks/choosing-sor-vs-view.md
 
 ---
@@ -44,6 +44,12 @@ Decide whether a new artifact is written as system of record or maintained as a 
 ## Repo path witness
 
 - [Repo] `playbooks/choosing-sor-vs-view.md`
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` decision procedure → install writer + rebuild path in same PR.
+- **Accept:** artifact labeled SoR|derived with single writer named.
+- **Catalog:** [meta/effective-remedies.md](../meta/effective-remedies.md) (SOL3).
 
 ## See also
 

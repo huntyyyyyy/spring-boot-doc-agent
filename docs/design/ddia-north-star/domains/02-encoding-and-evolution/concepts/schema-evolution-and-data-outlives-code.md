@@ -6,8 +6,8 @@ tags: [schema, evolution, compatibility, baseline]
 epub_anchors:
   - { chapter: 5, title: "Schema evolution rules" }
   - { chapter: 5, title: "Different values written at different times" }
-related: [encoding-and-compatibility, claims-and-status-drift]
-last_refined: 2026-07-30
+related: [encoding-and-compatibility, claims-and-status-drift, effective-remedies]
+last_refined: 2026-08-09
 path: domains/02-encoding-and-evolution/concepts/schema-evolution-and-data-outlives-code.md
 
 ---
@@ -60,6 +60,13 @@ Deployed code turns over quickly; stored data and baselines persist in old shape
 ## Anti-patterns seen
 
 - Coverage docs/`verify:` still pointing at `rule_fixtures` after SoR moved to `spring_signals`.
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` for facts that outlive writers; versioned baselines.
+- **Embodied:** additive JSON fields; hermetic baseline stamps in CI.
+- **Accept:** migrate readers before deleting writers; document rebuild path.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

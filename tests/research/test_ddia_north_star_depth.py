@@ -136,6 +136,33 @@ class TestDdiaNorthStarDepth(unittest.TestCase):
                 f"{entry['id']} needs Fail if in Review checks",
             )
 
+    def test_operational_pages_name_effective_remedies(self) -> None:
+        """SOL11: diagnosis-only concept/relationship/playbook pages are incomplete."""
+        mechanism_ids = (
+            "fitness-function",
+            "single-write-derive",
+            "characterization-net",
+            "adequacy-witness",
+            "sensor-ledger-spec",
+        )
+        for entry in self.entries:
+            if entry["completeness"] != "operational":
+                continue
+            if entry["kind"] not in {"concept", "relationship", "playbook"}:
+                continue
+            text = (NORTH / entry["path"]).read_text(encoding="utf-8")
+            bodies = _section_bodies(text)
+            remedies = bodies.get("Effective remedies", "")
+            self.assertTrue(
+                remedies.strip(),
+                f"{entry['id']} missing ## Effective remedies (SOL11)",
+            )
+            self.assertTrue(
+                any(mid in remedies for mid in mechanism_ids),
+                f"{entry['id']} Effective remedies must name a mechanism id "
+                f"from meta/effective-remedies.md",
+            )
+
     def test_operational_domain_owns_local_concept(self) -> None:
         """Hollow domains (pointer-only) must not be operational."""
         for entry in self.entries:

@@ -60,6 +60,9 @@ def parse_frontmatter(path: Path) -> dict:
 
 def main() -> None:
     entries = [parse_frontmatter(ROOT / "meta" / "taxonomy.md")]
+    remedies = ROOT / "meta" / "effective-remedies.md"
+    if remedies.is_file():
+        entries.append(parse_frontmatter(remedies))
     for path in sorted((ROOT / "domains").glob("*/README.md")):
         entries.append(parse_frontmatter(path))
     for path in sorted(ROOT.glob("domains/*/concepts/*.md")):
@@ -74,7 +77,7 @@ def main() -> None:
         entries.append(parse_frontmatter(path))
     payload = {
         "schema_version": 1,
-        "last_refined": "2026-07-30",
+        "last_refined": "2026-08-09",
         "$comment": (
             "Machine index for docs/design/ddia-north-star. Bodies live in markdown; "
             "keep 1:1 by id. Sync test enforces."

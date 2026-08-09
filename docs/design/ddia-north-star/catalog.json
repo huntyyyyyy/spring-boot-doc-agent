@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_refined": "2026-07-30",
+  "last_refined": "2026-08-09",
   "$comment": "Machine index for docs/design/ddia-north-star. Bodies live in markdown; keep 1:1 by id. Sync test enforces.",
   "entries": [
     {
@@ -17,6 +17,28 @@
       "kind": "taxonomy",
       "completeness": "operational",
       "last_refined": "2026-07-30"
+    },
+    {
+      "tags": [
+        "remedy",
+        "fitness",
+        "characterization",
+        "mutation",
+        "sensor",
+        "sot"
+      ],
+      "related": [
+        "sor-vs-derived",
+        "rel-gate-needs-witness",
+        "maintainability-operability-evolvability",
+        "coverage-gates",
+        "refactor-sequencing"
+      ],
+      "path": "meta/effective-remedies.md",
+      "id": "effective-remedies",
+      "kind": "taxonomy",
+      "completeness": "operational",
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -211,7 +233,8 @@
       "related": [
         "sor-vs-derived",
         "batch-vs-stream-derived-state",
-        "coverage-gates"
+        "coverage-gates",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -228,7 +251,7 @@
       "id": "materialized-views-and-caches",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -244,7 +267,8 @@
         "choosing-sor-vs-view",
         "rel-sor-feeds-views",
         "dev-certification-derived-view",
-        "dev-coverage-denominator-codeql"
+        "dev-coverage-denominator-codeql",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -257,7 +281,7 @@
       "id": "sor-vs-derived",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -268,7 +292,8 @@
         "compatibility"
       ],
       "related": [
-        "schema-evolution-and-data-outlives-code"
+        "schema-evolution-and-data-outlives-code",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -284,7 +309,7 @@
       "id": "encoding-and-compatibility",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -295,7 +320,8 @@
       ],
       "related": [
         "encoding-and-compatibility",
-        "claims-and-status-drift"
+        "claims-and-status-drift",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -311,7 +337,7 @@
       "id": "schema-evolution-and-data-outlives-code",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -323,7 +349,8 @@
       "related": [
         "sor-vs-derived",
         "consistency-and-consensus-lite",
-        "choosing-sor-vs-view"
+        "choosing-sor-vs-view",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -339,7 +366,7 @@
       "id": "replication-lag-and-lww",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -378,7 +405,8 @@
       "related": [
         "sor-vs-derived",
         "coverage-gates",
-        "transactions-and-integrity-lite"
+        "transactions-and-integrity-lite",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -398,7 +426,7 @@
       "id": "trust-but-verify-and-auditability",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -409,7 +437,8 @@
       ],
       "related": [
         "refactor-sequencing",
-        "architecture-decision-review"
+        "architecture-decision-review",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -429,7 +458,7 @@
       "id": "maintainability-operability-evolvability",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -470,7 +499,8 @@
         "secondary-indexes-cross-partition",
         "rel-partition-bounds-fanout",
         "maintainability-operability-evolvability",
-        "ch07"
+        "ch07",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -486,7 +516,7 @@
       "id": "partition-key-and-hotspots",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -498,7 +528,8 @@
         "partition-key-and-hotspots",
         "rel-partition-bounds-fanout",
         "materialized-views-and-caches",
-        "ch07"
+        "ch07",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -510,7 +541,7 @@
       "id": "secondary-indexes-cross-partition",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -525,7 +556,8 @@
         "sor-vs-derived",
         "trust-but-verify-and-auditability",
         "rel-batch-feeds-serving",
-        "domain-derived-data-processing"
+        "domain-derived-data-processing",
+        "effective-remedies"
       ],
       "epub_anchors": [
         {
@@ -541,7 +573,7 @@
       "id": "batch-vs-stream-derived-state",
       "kind": "concept",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -553,13 +585,14 @@
         "sor-vs-derived",
         "materialized-views-and-caches",
         "choosing-sor-vs-view",
-        "dev-certification-derived-view"
+        "dev-certification-derived-view",
+        "effective-remedies"
       ],
       "path": "domains/01-data-flow-and-truth/relationships/sor-feeds-views.md",
       "id": "rel-sor-feeds-views",
       "kind": "relationship",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -569,13 +602,14 @@
       ],
       "related": [
         "schema-evolution-and-data-outlives-code",
-        "encoding-and-compatibility"
+        "encoding-and-compatibility",
+        "effective-remedies"
       ],
       "path": "domains/02-encoding-and-evolution/relationships/schema-outlives-writers.md",
       "id": "rel-schema-outlives-writers",
       "kind": "relationship",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -586,13 +620,14 @@
       "related": [
         "replication-lag-and-lww",
         "sor-vs-derived",
-        "rel-sor-feeds-views"
+        "rel-sor-feeds-views",
+        "effective-remedies"
       ],
       "path": "domains/03-replication-and-conflicts/relationships/conflict-vs-recompute.md",
       "id": "rel-conflict-vs-recompute",
       "kind": "relationship",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -603,13 +638,14 @@
       "related": [
         "trust-but-verify-and-auditability",
         "coverage-gates",
-        "dev-fp-ratchet-separate-from-recall"
+        "dev-fp-ratchet-separate-from-recall",
+        "effective-remedies"
       ],
       "path": "domains/04-integrity-and-verification/relationships/gate-needs-witness.md",
       "id": "rel-gate-needs-witness",
       "kind": "relationship",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -622,13 +658,14 @@
         "partition-key-and-hotspots",
         "secondary-indexes-cross-partition",
         "claims-and-status-drift",
-        "ch07"
+        "ch07",
+        "effective-remedies"
       ],
       "path": "domains/07-partitioning-and-skew/relationships/partition-bounds-fanout.md",
       "id": "rel-partition-bounds-fanout",
       "kind": "relationship",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -641,13 +678,14 @@
         "batch-vs-stream-derived-state",
         "materialized-views-and-caches",
         "rel-sor-feeds-views",
-        "ch11"
+        "ch11",
+        "effective-remedies"
       ],
       "path": "domains/09-derived-data-processing/relationships/batch-feeds-serving.md",
       "id": "rel-batch-feeds-serving",
       "kind": "relationship",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -658,13 +696,14 @@
       "related": [
         "trust-but-verify-and-auditability",
         "maintainability-operability-evolvability",
-        "choosing-sor-vs-view"
+        "choosing-sor-vs-view",
+        "effective-remedies"
       ],
       "path": "playbooks/architecture-decision-review.md",
       "id": "architecture-decision-review",
       "kind": "playbook",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -675,13 +714,14 @@
       "related": [
         "sor-vs-derived",
         "replication-lag-and-lww",
-        "materialized-views-and-caches"
+        "materialized-views-and-caches",
+        "effective-remedies"
       ],
       "path": "playbooks/choosing-sor-vs-view.md",
       "id": "choosing-sor-vs-view",
       "kind": "playbook",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -693,13 +733,14 @@
       "related": [
         "sor-vs-derived",
         "schema-evolution-and-data-outlives-code",
-        "maintainability-operability-evolvability"
+        "maintainability-operability-evolvability",
+        "effective-remedies"
       ],
       "path": "playbooks/claims-and-status-drift.md",
       "id": "claims-and-status-drift",
       "kind": "playbook",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -711,13 +752,14 @@
       "related": [
         "materialized-views-and-caches",
         "trust-but-verify-and-auditability",
-        "batch-vs-stream-derived-state"
+        "batch-vs-stream-derived-state",
+        "effective-remedies"
       ],
       "path": "playbooks/coverage-gates.md",
       "id": "coverage-gates",
       "kind": "playbook",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [
@@ -728,13 +770,14 @@
       "related": [
         "maintainability-operability-evolvability",
         "schema-evolution-and-data-outlives-code",
-        "coverage-gates"
+        "coverage-gates",
+        "effective-remedies"
       ],
       "path": "playbooks/refactor-sequencing.md",
       "id": "refactor-sequencing",
       "kind": "playbook",
       "completeness": "operational",
-      "last_refined": "2026-07-30"
+      "last_refined": "2026-08-09"
     },
     {
       "tags": [

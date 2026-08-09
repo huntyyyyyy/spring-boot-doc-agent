@@ -1,12 +1,13 @@
 ---
 title: E-SOL0 — Concern→solution map (DDIA labels → 2026 effective remedies)
-status: DRAFT Spec — pending Approve of SOL1–SOL10
+status: DRAFT Spec — pending Approve of SOL1–SOL11
 research date: 2026-08-09
 research_window: 2026-06-01 → 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
   - docs/design/ddia-north-star/INDEX.md
+  - docs/design/ddia-north-star/meta/effective-remedies.md
   - docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
   - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
@@ -18,7 +19,7 @@ do_not:
   - invent new SoT floors from LLM-judge or scoped Cover%
   - dual-wire Sonar/Spec Kit/Nx as runtime SoT
   - raise constitution ceilings to “make room”
-spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL10 pending Approve
+spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL11 pending Approve
 gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue (HOT13/STACK)"
 critique: "Human 2026-08-09: north-star tables described problems without solution mechanisms research shows effective"
 ---
@@ -106,7 +107,7 @@ Concern → DDIA lens (optional vocabulary)
 
 ---
 
-## 4. Spec decisions (SOL1–SOL10) — pending Approve
+## 4. Spec decisions (SOL1–SOL11) — pending Approve
 
 | ID | Decision |
 | --- | --- |
@@ -120,6 +121,8 @@ Concern → DDIA lens (optional vocabulary)
 | **SOL8** | ≥10k★ bar still binds *new* tool Adopts; Confirmed pins may host fitness functions (tach, pytest, ast-grep) |
 | **SOL9** | E-COH1 / E-STK1 / E-TACH0 Specs must cite SOL remedy ids, not only DDIA page ids |
 | **SOL10** | Wrap-annotation first-line defect: Defer product fix; keep ratchet; do not pretend HOT7 “fixed” it |
+| **SOL11** | North-star operational concepts/relationships/playbooks carry `## Effective remedies`; companion SoR is `meta/effective-remedies.md`; depth fitness fails if missing |
+| **SOL11** | Operational north-star `concept` / `relationship` / `playbook` pages MUST carry `## Effective remedies` naming a mechanism from `meta/effective-remedies.md`; depth fitness enforces it |
 
 ---
 
@@ -127,7 +130,7 @@ Concern → DDIA lens (optional vocabulary)
 
 ### E-SOL0 — Spec gate (this memo)
 
-Exit: Approve SOL1–SOL10; backlog P20.0.
+Exit: Approve SOL1–SOL11; backlog P20.0. Catalog companion + page sections land under SOL11 even while Spec is Draft (install the remedy vocabulary before Accept stamp).
 
 ### Follow-ons (ordered, one Active)
 
@@ -146,12 +149,15 @@ Exit: Approve SOL1–SOL10; backlog P20.0.
 - [ ] Are we adding a second authoritative API to “make tests green”? — **Fail SOL3.**
 - [ ] Is reshape starting without a characterization net? — **Fail SOL5.**
 - [ ] Is the “solution” another one-off patch for a class G2 already witnessed? — **Fail SOL6** unless expanding the fitness function.
+- [ ] Is an operational concept/relationship/playbook missing `## Effective remedies`? — **Fail SOL11.**
 
 ---
 
 ## 7. Exit
 
-**E-SOL0 DRAFT** until human Approve of SOL1–SOL10.
+**E-SOL0 DRAFT** until human Approve of SOL1–SOL11.
 This memo answers the critique: north-star pages stay useful as *lenses*;
 **research-backed remedies** (fitness functions, single-write/derive, characterization,
-mutation/metamorphic witnesses, sensor→Spec) become the load-bearing Accept path.
+mutation/metamorphic witnesses, sensor→Spec) become the load-bearing Accept path —
+installed in-catalog at `docs/design/ddia-north-star/meta/effective-remedies.md` and on each
+operational concept/relationship/playbook.

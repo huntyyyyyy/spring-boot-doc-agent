@@ -3,8 +3,8 @@ id: rel-batch-feeds-serving
 kind: relationship
 completeness: operational
 tags: [relationship, batch, serving, derived]
-related: [batch-vs-stream-derived-state, materialized-views-and-caches, rel-sor-feeds-views, ch11]
-last_refined: 2026-07-30
+related: [batch-vs-stream-derived-state, materialized-views-and-caches, rel-sor-feeds-views, ch11, effective-remedies]
+last_refined: 2026-08-09
 path: domains/09-derived-data-processing/relationships/batch-feeds-serving.md
 
 ---
@@ -52,6 +52,12 @@ Live row writes from bulk jobs create dual writers and unauditable history (`dev
 ## Repo path witness
 
 - [Repo] `docs/design/ddia-north-star/_build_catalog.py`
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` with stage→load; batch feeds serving **views** only.
+- **Accept:** serving swap is atomic relative to readers; no live SoR hammering.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

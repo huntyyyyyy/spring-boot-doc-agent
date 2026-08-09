@@ -3,8 +3,8 @@ id: architecture-decision-review
 kind: playbook
 completeness: operational
 tags: [review, architecture, adr]
-related: [trust-but-verify-and-auditability, maintainability-operability-evolvability, choosing-sor-vs-view]
-last_refined: 2026-07-30
+related: [trust-but-verify-and-auditability, maintainability-operability-evolvability, choosing-sor-vs-view, effective-remedies]
+last_refined: 2026-08-09
 path: playbooks/architecture-decision-review.md
 
 ---
@@ -46,6 +46,12 @@ Run a principal-level AD review using the north-star catalog plus prompt 10 evid
 ## Repo path witness
 
 - [Repo] `playbooks/architecture-decision-review.md`
+
+## Effective remedies
+
+- **Primary:** name one of `fitness-function` / `single-write-derive` / `characterization-net` / `adequacy-witness` / `sensor-ledger-spec` from [meta/effective-remedies.md](../meta/effective-remedies.md) by concern — DDIA id is vocabulary only (SOL1).
+- **Accept:** ADR / review finding names **remedy mechanism id** + Accept = installed|Defer.
+- **Fail if:** review cites only north-star concept ids with no remedy column.
 
 ## See also
 

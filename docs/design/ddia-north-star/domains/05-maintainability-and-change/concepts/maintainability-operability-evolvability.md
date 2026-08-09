@@ -7,8 +7,8 @@ epub_anchors:
   - { chapter: 2, title: "Operability: Making Life Easy for Operations" }
   - { chapter: 2, title: "Simplicity: Managing Complexity" }
   - { chapter: 2, title: "Evolvability: Making Change Easy" }
-related: [refactor-sequencing, architecture-decision-review]
-last_refined: 2026-07-30
+related: [refactor-sequencing, architecture-decision-review, effective-remedies]
+last_refined: 2026-08-09
 path: domains/05-maintainability-and-change/concepts/maintainability-operability-evolvability.md
 
 ---
@@ -61,6 +61,13 @@ Maintainability splits into making operations possible, keeping accidental compl
 ## Anti-patterns seen
 
 - CI comments pointing at deleted fixture paths.
+
+## Effective remedies
+
+- **Primary:** `fitness-function` (structure) + `characterization-net` before reshape.
+- **Embodied:** tach cycles; size/complexipy; E-COH cohesion bar; façade poke.
+- **Accept:** reshape Specs cite characterization + seam map (SOL5); not “move files until green.”
+- **Research:** `docs/research/process/15-legacy-size-remediation-2026-frameworks.md`.
 
 ## See also
 

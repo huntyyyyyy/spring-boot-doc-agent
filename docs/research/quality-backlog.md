@@ -233,7 +233,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Active:** **E-COH1** reshape provisional tip modules (after E-HOT1 Verify green) — must cite **E-SOL0** remedies when Spec’d (fitness / characterization / seam map), not DDIA ids alone.  
 **Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
 **Docs Spec Approved:** **E-STACK0** — stack rescope under ≥10k★ (Backstage scoped: corp IDP supported; CLI runtime Refuse).  
-**Active Spec draft:** **E-SOL0** — concern→solution remedies ([`process/23-…`](process/23-concern-to-solution-remedies-2026.md)); Approve SOL1–SOL10 so north-star tables stop at diagnosis.  
+**Active Spec draft:** **E-SOL0** — concern→solution remedies ([`process/23-…`](process/23-concern-to-solution-remedies-2026.md)); Approve **SOL1–SOL11**. Catalog companion + page sections **landed** ([`meta/effective-remedies.md`](../design/ddia-north-star/meta/effective-remedies.md)); depth fitness enforces `## Effective remedies`.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1) before depends_on Approve.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready — preferred consumer of SOL2/4/6); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs that only cite DDIA page ids without a named remedy mechanism (SOL1)**.
@@ -306,6 +306,18 @@ Research: [`docs/research/process/21-post-merge-gate-repair-cohesion-2026.md`](p
 | P19.2 | Optional tool Spike (in-repo depends_on vs tach expansion) | After E-HOT1 green + human ask | Spike exit criteria |
 
 Research: [`docs/research/process/22-stack-rescope-10k-star-bar-2026.md`](process/22-stack-rescope-10k-star-bar-2026.md). Design: [`docs/design/stack-rescope-10k-design-2026-08-09.md`](../design/stack-rescope-10k-design-2026-08-09.md).
+
+---
+
+## P20 — Concern→solution remedies (DDIA vocabulary → effective mechanisms)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P20.0 | **E-SOL0 Spec:** approve **SOL1–SOL11** (Accept requires named remedy: fitness / single-write / characterization / mutation-MT / sensor→Spec; north-star pages carry Effective remedies) | **Draft** (2026-08-09) | research 23 + design → APPROVED |
+| P20.1 | E-COH1 / E-STK1 / E-TACH0 Specs cite SOL remedy ids | After Approve | Spec tables include Concern→Remedy→Accept |
+| P20.2 | North-star companion `meta/effective-remedies.md` + page sections + depth fitness (SOL11) | **Landed** (2026-08-09) pending Spec stamp | `test_ddia_north_star_depth` Effective remedies |
+
+Research: [`docs/research/process/23-concern-to-solution-remedies-2026.md`](process/23-concern-to-solution-remedies-2026.md). Design: [`docs/design/concern-to-solution-remedies-design-2026-08-09.md`](../design/concern-to-solution-remedies-design-2026-08-09.md).
 
 ---
 

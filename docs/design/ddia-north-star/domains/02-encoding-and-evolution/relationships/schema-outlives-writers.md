@@ -3,8 +3,8 @@ id: rel-schema-outlives-writers
 kind: relationship
 completeness: operational
 tags: [relationship, schema, evolution]
-related: [schema-evolution-and-data-outlives-code, encoding-and-compatibility]
-last_refined: 2026-07-30
+related: [schema-evolution-and-data-outlives-code, encoding-and-compatibility, effective-remedies]
+last_refined: 2026-08-09
 path: domains/02-encoding-and-evolution/relationships/schema-outlives-writers.md
 
 ---
@@ -48,6 +48,12 @@ Data (and baselines) outlive the PR that wrote them; breaking readers without a 
 ## Repo path witness
 
 - [Repo] `domains/02-encoding-and-evolution/relationships/schema-outlives-writers.md`
+
+## Effective remedies
+
+- **Primary:** additive schema + dual-read windows; `fitness-function` on baseline schema_version.
+- **Accept:** delete writer only after readers tolerate absence.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

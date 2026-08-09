@@ -3,8 +3,8 @@ id: claims-and-status-drift
 kind: playbook
 completeness: operational
 tags: [claims, status, drift, verify]
-related: [sor-vs-derived, schema-evolution-and-data-outlives-code, maintainability-operability-evolvability]
-last_refined: 2026-07-30
+related: [sor-vs-derived, schema-evolution-and-data-outlives-code, maintainability-operability-evolvability, effective-remedies]
+last_refined: 2026-08-09
 path: playbooks/claims-and-status-drift.md
 
 ---
@@ -44,6 +44,12 @@ Keep current-state docs as honest derived views of code SoR; mechanical `verify:
 ## Repo path witness
 
 - [Repo] `playbooks/claims-and-status-drift.md`
+
+## Effective remedies
+
+- **Primary:** `fitness-function` via `scripts/ci/check_repo_claims.py` + human judgment on meaning.
+- **Accept:** prose/`verify:` move with SoR; counts use `derived:` blocks.
+- **Catalog:** [meta/effective-remedies.md](../meta/effective-remedies.md).
 
 ## See also
 

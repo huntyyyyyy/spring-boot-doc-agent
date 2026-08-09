@@ -6,8 +6,8 @@ tags: [materialized-view, cache, fan-out, read-model]
 epub_anchors:
   - { chapter: 2, fragment: sec_introduction_materializing, title: "Materializing and Updating Timelines" }
   - { chapter: 12, title: "Maintaining materialized views" }
-related: [sor-vs-derived, batch-vs-stream-derived-state, coverage-gates]
-last_refined: 2026-07-30
+related: [sor-vs-derived, batch-vs-stream-derived-state, coverage-gates, effective-remedies]
+last_refined: 2026-08-09
 path: domains/01-data-flow-and-truth/concepts/materialized-views-and-caches.md
 
 ---
@@ -60,6 +60,13 @@ A materialized view is a stored query result kept in sync with underlying facts 
 ## Anti-patterns seen
 
 - Semgrep recall `check_ratchet` is not an FP ratchet; L1 adds `check_fp_ratchet`.
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` + separate **adequacy-witness** polarities per view.
+- **Embodied:** positive / FP / recall as distinct measurements over one ruleset.
+- **Accept:** new view declares rebuild inputs + fail direction; never overload one helper for inverted polarities.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

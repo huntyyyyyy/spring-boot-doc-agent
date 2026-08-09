@@ -5,8 +5,8 @@ completeness: operational
 tags: [partition, secondary-index, scatter-gather]
 epub_anchors:
   - { chapter: 7, title: "Partitioning and Secondary Indexes" }
-related: [partition-key-and-hotspots, rel-partition-bounds-fanout, materialized-views-and-caches, ch07]
-last_refined: 2026-07-30
+related: [partition-key-and-hotspots, rel-partition-bounds-fanout, materialized-views-and-caches, ch07, effective-remedies]
+last_refined: 2026-08-09
 path: domains/07-partitioning-and-skew/concepts/secondary-indexes-cross-partition.md
 
 ---
@@ -56,6 +56,13 @@ Secondary indexes and queries that are not keyed by the partition key reintroduc
 ## Anti-patterns seen
 
 - capacity_preflight measuring removed broadcast long after Stage 0 switched to partitioned edges (~21× overstatement).
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` for index views; measure cross-partition cost explicitly.
+- **Embodied:** capacity / fan-out measurements separate from SoR facts.
+- **Accept:** new secondary index names rebuild source + skew witness.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

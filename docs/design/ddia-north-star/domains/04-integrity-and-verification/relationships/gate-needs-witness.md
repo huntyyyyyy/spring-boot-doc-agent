@@ -3,8 +3,8 @@ id: rel-gate-needs-witness
 kind: relationship
 completeness: operational
 tags: [relationship, gate, audit]
-related: [trust-but-verify-and-auditability, coverage-gates, dev-fp-ratchet-separate-from-recall]
-last_refined: 2026-07-30
+related: [trust-but-verify-and-auditability, coverage-gates, dev-fp-ratchet-separate-from-recall, effective-remedies]
+last_refined: 2026-08-09
 path: domains/04-integrity-and-verification/relationships/gate-needs-witness.md
 
 ---
@@ -49,6 +49,13 @@ Without a witness, green CI means “script ran,” not “property holds.”
 ## Repo path witness
 
 - [Repo] `domains/04-integrity-and-verification/relationships/gate-needs-witness.md`
+
+## Effective remedies
+
+- **Primary:** `fitness-function` + `adequacy-witness` (fixture, mutant, metamorphic, AST).
+- **Embodied:** G2 prelude leak witness; rule_coverage fixtures; metamorphic.
+- **Accept:** new gate documents witness path + fail direction (SOL2/SOL4).
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

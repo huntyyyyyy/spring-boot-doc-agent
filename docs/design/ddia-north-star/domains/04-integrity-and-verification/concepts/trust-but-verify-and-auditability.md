@@ -7,8 +7,8 @@ epub_anchors:
   - { chapter: 13, title: "Trust, but Verify" }
   - { chapter: 13, title: "Designing for auditability" }
   - { chapter: 13, title: "The End-to-End Argument for Databases" }
-related: [sor-vs-derived, coverage-gates, transactions-and-integrity-lite]
-last_refined: 2026-07-30
+related: [sor-vs-derived, coverage-gates, transactions-and-integrity-lite, effective-remedies]
+last_refined: 2026-08-09
 path: domains/04-integrity-and-verification/concepts/trust-but-verify-and-auditability.md
 
 ---
@@ -61,6 +61,13 @@ Assume components usually keep their promises, but design so integrity can be ch
 ## Anti-patterns seen
 
 - Positive-only semgrep coverage: rules can fire, FPs unmeasured until L1.
+
+## Effective remedies
+
+- **Primary:** `adequacy-witness` + `fitness-function` (planted counterexample / mutation / metamorphic).
+- **Embodied:** metamorphic suite; mutmut advisory; `check_repo_claims`; G2 AST witness.
+- **Accept:** gate change ships with a witness that fails closed on a known bad case.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md) (SOL4).
 
 ## See also
 
