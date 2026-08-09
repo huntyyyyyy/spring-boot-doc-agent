@@ -4881,3 +4881,11 @@ Assumptions affected:
 - `docs/research/process/28-local-stalker-telemetry-etl-2026.md` — suite log ETL non-empty bodies — [New info — tip runs still had 0-byte suite logs; live sink + post-with getvalue repair; E-CPL0 Spec DRAFT for standing closed-loop fitness]
 - Steering prompts — no Grep/rg deny revival — [Still accurate]
 Files touched: docs/research/process/35-control-plane-closed-loop-2026.md, docs/design/control-plane-closed-loop-design-2026-08-09.md, docs/research/quality-backlog.md, docs/research/README.md, scripts/ci/pre_pr.py, src/doc_engine/ci/stalker_telemetry/run_store.py, tests/ci/test_stalker_telemetry.py, docs/process/session-log.md
+
+
+## 2026-08-09 — Non-vacuous receipt hook on test writes
+Commit: uncommitted
+Tests: test_nonvacuous_receipt_witness + test_inject_nonvacuous_test_witness + hardened 39 passing
+Assumptions affected:
+- E-TEL / E-CPL0 — empty telemetry counted as observed — [Resolved — postToolUse inject on tests/** + commit-time witness markers on control-plane stage]
+Files touched: .cursor/hooks/inject_nonvacuous_test_witness.py, .cursor/hooks.json, adapters/claude/hooks/nonvacuous_receipt_witness.py, adapters/claude/hooks/require_hardened_tests.py, tests/adapters/test_nonvacuous_receipt_witness.py, tests/ci/test_inject_nonvacuous_test_witness.py, docs/design/control-plane-closed-loop-design-2026-08-09.md

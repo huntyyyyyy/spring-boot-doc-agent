@@ -53,6 +53,12 @@ Tickets CPL1-1…CPL1-6 in research §6. **CPL1-1** (tee non-empty logs) may lan
 as E-TEL repair under already-Approved E-TEL0 without waiting — it restores a
 landed witness, it does not invent a new SoT.
 
+**Hook (landed):** `.cursor/hooks/inject_nonvacuous_test_witness.py` (postToolUse
+on `tests/**`) injects the non-vacuous receipt rule when agents edit tests;
+`require_hardened_tests` fails closed if control-plane files are staged without
+`tests/ci/test_stalker_telemetry.py` markers (success WARNING excerpt + live
+`getvalue`).
+
 ## Exit
 
 Human sets `status: APPROVED E-CPL0` here and on research `spec_gate`. Then one

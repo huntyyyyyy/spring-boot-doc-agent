@@ -3,6 +3,7 @@
     "Project-native Cursor hooks. Claude PreToolUse policies bridge via",
     "bridge_claude_policy.py. E-DOC1 adds research-map look-first (DOC7/DOC9):",
     "beforeSubmitPrompt inject + Read receipt + deny design writes without it.",
+    "postToolUse on tests/** injects non-vacuous receipt witness (E-CPL/TEL).",
     "Cloud loads this file only (not ~/.cursor/hooks.json).",
     "Docs: https://cursor.com/docs/hooks — no sessionStart on cloud agents."
   ],
@@ -53,6 +54,11 @@
       {
         "command": "python3 .cursor/hooks/record_research_map_read.py",
         "matcher": "Read",
+        "timeout": 10
+      },
+      {
+        "command": "python3 .cursor/hooks/inject_nonvacuous_test_witness.py",
+        "matcher": "Write|StrReplace|EditNotebook",
         "timeout": 10
       }
     ]
