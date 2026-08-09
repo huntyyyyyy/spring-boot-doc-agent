@@ -29,6 +29,23 @@ install/lint/test/run commands live in `README.md` and
 
 - Lint / tests / E2E smoke: follow `.github/workflows/ci.yml` and `README.md`
   (do not hardcode suite counts here).
+- **Before push** on non-docs tips: `python3 scripts/ci/pre_pr.py --auto`
+  (mirrors CI hard gates: full `ruff check scripts/ src/doc_engine/`, claims,
+  code quality, **domain markers**, **facade poke surface**, rule coverage,
+  pytest). Do not treat a scoped pytest subset as green. `--fast` is docs-only
+  — it skips markers/poke.
+- Design-shaped / ambiguous research asks: follow skill
+  `principal-se-research-epic` and memo
+  [`docs/research/14-facade-poke-research-hooks-2026.md`](docs/research/14-facade-poke-research-hooks-2026.md)
+  (arXiv + active GitHub + DeepWiki Tier C). Commit hook
+  `require_design_research` blocks design-shaped commits without a Spec memo.
+- **Agent policy hooks (portable):** project [`.cursor/hooks.json`](.cursor/hooks.json)
+  bridges Claude PreToolUse scripts (`deny_text_search`, `deny_raw_network`,
+  `check_pipe_exit_code`, `require_design_research`, `require_hardened_tests`)
+  so they run on Cursor Desktop **and** Cloud. Do not rely on Claude
+  third-party hook import or `~/.cursor/hooks.json` for this repo — Cloud
+  only loads the project file. Policy SoT stays under `adapters/claude/hooks/`
+  (+ `.claude/hooks/check_pipe_exit_code.py`); the bridge only normalizes I/O.
 - Before a final commit that touches `scripts/`, `agents/`, or `skills/`, run
   `python3 scripts/ci/check_repo_claims.py` (see `CLAUDE.md`).
 - If GitHub Actions is down: `python3 scripts/ci/pre_pr.py --actions-outage`
@@ -49,8 +66,9 @@ install/lint/test/run commands live in `README.md` and
   only the Claude Code adapter. Live generative *stages* (1–4) still need an
   LLM runtime; deterministic Stage 0 + gates do not need an LLM.
 - Pipe-exit pitfall: piping build/test output into `tail`/`head`/`grep` can
-  mask a non-zero tool exit (`tail` exits 0). Claude Code sessions have a
-  `PreToolUse` hook that blocks that pattern; Cursor Cloud shells may not.
-  Always redirect to a file and check the tool’s own exit code, e.g.
+  mask a non-zero tool exit (`tail` exits 0). Project hooks block that pattern
+  in Claude Code **and** Cursor (via `.cursor/hooks.json` →
+  `check_pipe_exit_code.py`). Safe pattern: redirect to a file and check the
+  tool’s own exit code, e.g.
   `pytest tests/ -q > log.txt 2>&1; RC=$?; tail -n 40 log.txt` (see
   `claude/tool-quirks.md`).

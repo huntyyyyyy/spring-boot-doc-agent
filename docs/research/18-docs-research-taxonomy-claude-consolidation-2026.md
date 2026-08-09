@@ -1,6 +1,6 @@
 ---
 title: E-DOC0 — Research domain taxonomy + claude→docs consolidation + look-first hook
-status: RESEARCH COMPLETE — awaiting Approve E-DOC0 (2026-08-09)
+status: E-DOC0 APPROVED (2026-08-09) — merge Approve of DOC1–DOC12
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Meta-repo process SoR (docs) + Cursor/Claude agent adapters — not doc-engine kernel
@@ -16,7 +16,7 @@ do_not:
   - delete adapters/claude without a Cursor-equivalent adapter Spec
   - treat .claude/settings deny lists as deletable without check F replacement
   - mass-move claude/ without rewriting check_repo_claims OWN_PATH_PREFIXES + predicates
-spec_gate: PENDING APPROVE E-DOC0 — decisions DOC1–DOC12
+spec_gate: APPROVED E-DOC0 (2026-08-09) — DOC1–DOC12
 ---
 
 # Principal memo: research domains, claude→docs, look-first hook

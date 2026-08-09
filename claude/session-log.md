@@ -4806,3 +4806,36 @@ Assumptions affected:
 - `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`spring_drift_check.py` gained optional `--manifest`" — [New info — `--manifest` CLI flag now lives in `spring_drift_cli.py`; façade `spring_drift_check` re-exports `main`; verify predicate updated]
 - `CONSTRAINTS.md` Integration gaps item 3 / Known precision item 6 — path needles for `--manifest` / partition overlap comments — [Resolved — verify paths retargeted to `spring_drift_cli.py` / `partition_repo_groups.py` after vertical split]
 Files touched: CONSTRAINTS.md, claude/steering-prompts/04-analytics-logging-research-prompt.md, src/doc_engine/tools/capacity_preflight*.py, spring_drift_*.py, partition_repo*.py, scripts/ratchets/size_baseline.json, docs/research/12-*, quality-backlog.md
+
+## 2026-08-09 — E-MOD3 tools wave 2 (run_manifest / citation_coverage)
+Commit: 0368487
+Tests: climb run_manifest + citation + live_gates citations + ports + ci run_manifest suites passing (scoped); complexipy 0; size baseline ratcheted (file offenders 30)
+Assumptions affected:
+- `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`path_exists:src/doc_engine/tools/run_manifest.py`" — [Still accurate — thin façade path retained; concept modules `run_manifest_*` hold io/stages/finalize/cli]
+- E-MOD2 Stage-0 tool façades playbook — [New info — same façade + Protocol + late-import DIP applied to analytics `run_manifest` and `citation_coverage`]
+Files touched: docs/research/13-tools-wave2-modularity-2026.md, docs/research/12-*, quality-backlog.md, src/doc_engine/tools/run_manifest*.py, citation_coverage*.py, tests/doc_engine/test_tools_wave2_ports.py, scripts/ratchets/size_baseline.json, claude/session-log.md
+
+## 2026-08-09 — Debug E-MOD3 CI: façade json DIP + domain markers + pre_pr gap
+Commit: 7183f01
+Tests: kitchen Ch07 atomic write + climb run_manifest + ports + markers + pre_pr suites green; full ruff green
+Assumptions affected:
+- Local pre-push mirrors CI hard gates — [New info — `pre_pr` standard now includes `test_domain_markers`; AGENTS.md requires `--auto` before push; tool-quirks documents scoped-pytest false green]
+- E-MOD3 thin façade monkeypatch surface — [Resolved — re-export `json` for kitchen Ch07 `patch.object(run_manifest.json, "dump")`]
+Files touched: run_manifest.py / run_manifest_io.py, test_pipeline_tools_wave2_ports.py, scripts/ci/pre_pr.py, tests/ci/test_pre_pr_classify_bypass.py, AGENTS.md, claude/tool-quirks.md, session-log
+
+## 2026-08-09 — E-FAC0/E-RES0: façade poke gate + design-research hook
+Commit: b93921b
+Tests: facade poke + design-research hook + pre_pr BuildSuites + markers + full ruff green
+Assumptions affected:
+- Research-before-design was skill-only — [Resolved — `require_design_research` commit hook + memo 14 RES1–RES3; Spec needs arXiv+GitHub URLs]
+- God-file split characterization inventory — [Resolved — `check_facade_poke_surface` wired into pre_pr standard + python-gates]
+Files touched: docs/research/14-*, quality-backlog, scripts/ci/check_facade_poke_surface.py, pre_pr.py, python-gates.yml, adapters/claude/hooks/*, .claude/settings.json, AGENTS.md, tests/ci/test_facade_poke_and_design_research.py
+
+## 2026-08-09 — E-SCAN1 AstGrepBackend → scanning/astgrep/
+Commit: b2a6a23
+Tests: 20/20 structure+basic+chunk+destructive+climb edges; claims OK; poke OK; complexipy ≤5; size baseline 30 file offenders (astgrep+spring off hard list)
+Assumptions affected:
+- `docs/research/16-scan1-astgrep-modularity-2026.md` SCAN1-A–J — [Resolved — package + façade + structure tests + LEG8 monkeypatch + AstGrepRunner landed]
+- `CONSTRAINTS.md` item 14 inventory/chunk needles — [Resolved — verify paths include `scanning/astgrep/argv.py`; behavior predicate still on façade `_run_ast_grep`]
+- Size ratchet `_scanner_astgrep.py` 514 LOC offender — [Resolved — thin façade ≤225; concept modules under `scanning/astgrep/`]
+Files touched: src/doc_engine/scanning/astgrep/*, _scanner_astgrep.py, spring.py, scripts/ci/check_facade_poke_surface.py, scripts/ratchets/size_baseline.json, CONSTRAINTS.md, tests/doc_engine/test_scan_context_astgrep_*, test_covering_hard_stops_destructive.py, docs/research/quality-backlog.md, claude/session-log.md
