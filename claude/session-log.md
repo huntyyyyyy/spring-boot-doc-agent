@@ -4775,3 +4775,9 @@ Assumptions affected:
 - Cover% climb scan-related below-floor inventory — [Resolved — hermetic `domain_climb_sensor` suites close `_codeql_*`, `recall_delta`, `gap_probe/{join,symbol_collision}`, residual `symbol`/`facts` gaps]
 Files touched: tests/doc_engine/test_coverage_climb_b5_{codeql_cache,codeql_db,codeql_runner_facade,gap_recall,symbol_facts}.py, CONTRIBUTING.md, claude/session-log.md
 
+## 2026-08-09 — Cover% climb B5 follow-up: LOC split + runner main
+Commit: 2c30c12
+Tests: 21/21 climb B5; complexipy≤5; LOC≤225
+Assumptions affected:
+- E-QA2 Climb Archive Q2 — [Still accurate — Arm-1 witness unchanged]
+Files touched: tests/doc_engine/test_coverage_climb_b5_codeql_{db,runner_facade}.py (deleted codeql_db_runner), claude/session-log.md
