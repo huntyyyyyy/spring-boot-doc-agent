@@ -241,7 +241,7 @@ in reusable workflows:
 | `abi-tests.yml` | domain ABI shards (policy T-A; never writes coverage) |
 | `codeql-signals.yml` | CodeQL pack invariants / compile / fixture runtime (+ bundle pin) |
 | `quality-gates.yml` | hard in-repo gates after downloading `coverage-xml` |
-| `sonar.yml` | soft SonarCloud signal (`continue-on-error` on the caller) |
+| `sonar.yml` | soft SonarCloud signal (`continue-on-error` on the called job) |
 
 Step bundles stay in-repo under `.github/actions/` (e.g. `setup-python-repo`).
 Gate *logic* stays in `scripts/ci/` / `doc-engine` CLIs — no inline

@@ -56,3 +56,20 @@ def test_heredoc_marker_detected(tmp_path: Path) -> None:
     (tmp_path / "h.yml").write_text("run: |\n  python3 - <<'PY'\n  PY\n", encoding="utf-8")
     errors = check_no_python_heredocs(tmp_path, label_fn=lambda p: p.name)
     assert errors and "h.yml" in errors[0]
+
+
+def test_continue_on_error_on_reusable_call_hard_fails(tmp_path: Path) -> None:
+    from doc_engine.ci.workflow_size import (
+        check_no_continue_on_error_on_reusable_call,
+    )
+
+    (tmp_path / "ci.yml").write_text(
+        "name: CI\non: [push]\njobs:\n  soft:\n"
+        "    continue-on-error: true\n"
+        "    uses: ./.github/workflows/sonar.yml\n",
+        encoding="utf-8",
+    )
+    errors = check_no_continue_on_error_on_reusable_call(
+        tmp_path, label_fn=lambda p: p.name
+    )
+    assert errors and "soft" in errors[0]

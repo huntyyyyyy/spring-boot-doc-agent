@@ -4716,3 +4716,12 @@ Assumptions affected:
 - `claude/steering-prompts/14-software-architect-and-testing-agent-prompt.md` — `semgrep_rule_coverage.py` wired in `ci.yml` — [Resolved — step lives in `python-gates.yml`; verify predicate retargeted]
 - `CONSTRAINTS.md` Integration item 2 / Runtime item 4 / Known precision item 10 — gate strings in `ci.yml` — [Resolved — prose + verify HTML comments point at `python-gates.yml` / setup action under policy C-A]
 Files touched: .github/workflows/{ci,python-gates,codeql-signals,quality-gates,sonar}.yml, scripts/ci/{verify_tool_pins,coverage_run_summary,check_workflow_yaml}.py, src/doc_engine/ci/workflow_size.py, tests/ci/test_*, CONTRIBUTING.md, CONSTRAINTS.md, docs/research/{07-ci-workflow-modularity,quality-backlog}.md, docs/design/ci-workflow-modularity-design-2026-08-09.md, claude/steering-prompts/{08,14}-*.md, claude/session-log.md
+
+
+## 2026-08-09 — Fix CI: continue-on-error invalid on reusable-workflow caller
+Commit: uncommitted
+Tests: check_workflow_yaml OK; check_code_quality OK; pytest tests/ci workflow_size + check_workflow_yaml 17/17
+Assumptions affected:
+- E-CI sonar soft job — `continue-on-error` on `ci.yml` caller — [Resolved — moved onto `sonar.yml` called job; Actions rejects caller-level continue-on-error with 0-job failure]
+- `check_workflow_yaml` / `workflow_size` — LOC/heredoc only — [New info — hard-fails continue-on-error on reusable-workflow caller jobs]
+Files touched: .github/workflows/{ci,sonar}.yml, src/doc_engine/ci/workflow_size.py, scripts/ci/check_workflow_yaml.py, tests/ci/test_workflow_size.py, CONTRIBUTING.md, claude/session-log.md

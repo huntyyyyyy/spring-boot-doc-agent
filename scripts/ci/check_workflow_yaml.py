@@ -35,6 +35,7 @@ except ImportError:  # pragma: no cover - CI installs requirements-dev
     raise SystemExit(2) from None
 
 from doc_engine.ci.workflow_size import (
+    check_no_continue_on_error_on_reusable_call,
     check_no_python_heredocs,
     check_workflow_loc,
 )
@@ -244,15 +245,16 @@ def _print_failures(header: str, messages: list[str]) -> int:
 def _loc_heredoc_gate() -> tuple[int | None, list[str]]:
     """Return (exit_code_or_None, advisory messages) for C3/C4 predicates."""
     heredoc_errors = check_no_python_heredocs(WORKFLOWS, label_fn=_label)
+    call_errors = check_no_continue_on_error_on_reusable_call(
+        WORKFLOWS, label_fn=_label
+    )
     loc_hard, loc_advisory = check_workflow_loc(WORKFLOWS, label_fn=_label)
     for msg in loc_advisory:
         print(f"advisory: {msg}")
-    if heredoc_errors or loc_hard:
+    hard = heredoc_errors + call_errors + loc_hard
+    if hard:
         return (
-            _print_failures(
-                "workflow size/heredoc check failed:",
-                heredoc_errors + loc_hard,
-            ),
+            _print_failures("workflow size/heredoc check failed:", hard),
             loc_advisory,
         )
     return None, loc_advisory

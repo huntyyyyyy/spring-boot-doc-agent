@@ -2,7 +2,8 @@ name: SonarCloud (soft)
 
 # Soft SonarCloud signal only (E-CI / policy C-A). Free-plan Quality Gates
 # cannot enforce this repo's thresholds; hard fail lives in quality-gates.yml.
-# Caller sets continue-on-error so Sonar never blocks merges.
+# continue-on-error must sit on this called job (invalid on a workflow_call
+# caller — Actions rejects ci.yml with 0 jobs).
 
 on:
   workflow_call:
@@ -15,6 +16,9 @@ jobs:
   sonarcloud:
     name: "SonarCloud (non-blocking; Free QG not policy SoT)"
     runs-on: ubuntu-latest
+    # Must live on the called job — continue-on-error is invalid on a
+    # workflow_call caller (Actions rejects the whole ci.yml with 0 jobs).
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
         with:

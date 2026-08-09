@@ -39,6 +39,5 @@ jobs:
   sonarcloud:
     name: "SonarCloud (non-blocking; Free QG not policy SoT)"
     needs: python-gates
-    continue-on-error: true
     uses: ./.github/workflows/sonar.yml
     secrets: inherit
