@@ -11,15 +11,18 @@ from doc_engine.pipeline.compliance import stages_for_profile
 from doc_engine.pipeline.context import PipelineContext, StageKind
 from doc_engine.pipeline.executor import MockStageExecutor
 from doc_engine.pipeline.local_runner_phases.state import LocalRunState
+from doc_engine.pipeline.mock_stage_constants import (
+    STAGE_ARCHITECT,
+    STAGE_DOC_WRITER,
+    STAGE_FILE_SUMMARIZE,
+    STAGE_GAP_INTERVIEW,
+)
 from doc_engine.pipeline.mock_stages import (
     _read_json,
     _write_json,
     find_existing_readme,
     load_citations,
-    mock_architecture,
-    mock_docs,
-    mock_file_summaries,
-    mock_gap_and_interview,
+    resolve_mock_stage,
     sweep_todos,
 )
 from doc_engine.pipeline.stages import build_stage_specs
@@ -33,14 +36,16 @@ def _ensure_citation_pool(ctx: PipelineContext):
 
 def _handler_file_summarize(ctx: PipelineContext, log):
     _ensure_citation_pool(ctx)
-    return mock_file_summaries(
+    return resolve_mock_stage(STAGE_FILE_SUMMARIZE)(
         str(ctx.out_dir), ctx.groups, ctx.pool, ctx.edges, log,
     )
 
 
 def _handler_architect(ctx: PipelineContext, log):
     _ensure_citation_pool(ctx)
-    return mock_architecture(str(ctx.out_dir), ctx.groups, ctx.pool, log)
+    return resolve_mock_stage(STAGE_ARCHITECT)(
+        str(ctx.out_dir), ctx.groups, ctx.pool, log,
+    )
 
 
 def _ensure_todos(ctx: PipelineContext) -> None:
@@ -55,7 +60,7 @@ def _ensure_todos(ctx: PipelineContext) -> None:
 def _handler_gap(ctx: PipelineContext, log):
     _ensure_citation_pool(ctx)
     _ensure_todos(ctx)
-    return mock_gap_and_interview(
+    return resolve_mock_stage(STAGE_GAP_INTERVIEW)(
         str(ctx.out_dir), ctx.pool, ctx.todos, ctx.today, log,
     )
 
@@ -64,19 +69,18 @@ def _handler_doc_writer(ctx: PipelineContext, log):
     _ensure_citation_pool(ctx)
     answers = _read_json(str(ctx.out_dir / "interview_answers.json"))
     readme = ctx.existing_readme or find_existing_readme(str(ctx.repo_path))
-    return mock_docs(
+    return resolve_mock_stage(STAGE_DOC_WRITER)(
         str(ctx.docs_dir), ctx.pool, ctx.todos, answers, ctx.today, readme, log,
     )
 
 
 def _build_mock_executor(log) -> MockStageExecutor:
     return MockStageExecutor({
-        "file_summarize": lambda ctx: _handler_file_summarize(ctx, log),
-        "architect": lambda ctx: _handler_architect(ctx, log),
-        "gap_analysis_interview": lambda ctx: _handler_gap(ctx, log),
-        "doc_writer": lambda ctx: _handler_doc_writer(ctx, log),
+        STAGE_FILE_SUMMARIZE: lambda ctx: _handler_file_summarize(ctx, log),
+        STAGE_ARCHITECT: lambda ctx: _handler_architect(ctx, log),
+        STAGE_GAP_INTERVIEW: lambda ctx: _handler_gap(ctx, log),
+        STAGE_DOC_WRITER: lambda ctx: _handler_doc_writer(ctx, log),
     })
-
 
 def _select_specs_for_state(state: LocalRunState):
     """Return selected stage specs, or an int exit code on profile error."""
