@@ -67,11 +67,12 @@ Refuse: LLM as fail_under; sensors rewriting oracle SoT (STK1).
   keep ≥10k pins; Confirmed exempt; Nx patterns for boundaries; no tool swap
   before E-HOT1 green.
   **No further product Implement until HOT1–HOT13 Approve** (STACK Approve is docs-parallel).
-- **E-HOT1 (2026-08-09):** Spike receipts
+-   **E-HOT1 (2026-08-09):** Spike receipts
   [`2026-08-09-e-hot-r1-r4-spike-receipts.md`](2026-08-09-e-hot-r1-r4-spike-receipts.md);
   G2 return/pass + AST witness; CQ HOT5 slash-free scope; size soft-band test;
   cert patch-at-use; docs path pin. Metamorphic wrap ratchet **retained** (defect
-  still moves set). Disposition: **repaired under E-HOT1** pending Verify pack green.
+  still moves set). **Verify:** `pre_pr --full` overall=pass. Disposition: **closed**.
+  Next Active: **E-COH1** reshape.
 - **Do not:** start full E-STK1 Implement in the same tip as deep E-COH1 without
   an explicit Active switch; more parallel statement/LOC agents; treat
   `ruff --fix` as Verify; push before local full-gate green.

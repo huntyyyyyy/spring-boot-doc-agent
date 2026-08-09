@@ -290,7 +290,7 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P18.0 | **E-HOT0 Spec:** approve **HOT1–HOT13** (G2 return/pass; patch-at-use; CQ slash-free scope; local-full before push; no tach-map / no E-STK1; **≥10k★** new external SoR) | **Approved** (2026-08-09) | research 21 + design memo `APPROVED E-HOT0` |
-| P18.1 | **E-HOT1 Implement:** F1–F6 repairs only; `pre_pr --full` green before push | **Active** | focused suites + full local gate; finding disposition |
+| P18.1 | **E-HOT1 Implement:** F1–F6 repairs only; `pre_pr --full` green before push | **Done** (2026-08-09) | focused suites + `pre_pr --full` overall=pass; G2 AST witness |
 
 Research: [`docs/research/process/21-post-merge-gate-repair-cohesion-2026.md`](process/21-post-merge-gate-repair-cohesion-2026.md). Design: [`docs/design/post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md). Finding: [`findings/2026-08-09-statement-split-cascade.md`](findings/2026-08-09-statement-split-cascade.md).
 
