@@ -150,6 +150,18 @@ Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-
 
 ---
 
+## P10 — CI / script output UX (summary-first)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P10.0 | **E-UX0 Spec:** approve **U1–U7** (summary-first; groups; shared append; refuse rich/LLM) | **Approved 2026-08-09** | research 11 `spec_gate: APPROVED E-UX0` |
+| P10.1 | **E-UX1:** quality-gates markdown rollup + `::group::` + coverage/gap → `github_step_summary` | Adopt after P10.0 | step summary has gate table; no overwrite; size/complexipy |
+| P10.2 | **E-UX2:** claims / code_quality headline + `<details>` | Later | optional |
+
+Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci-output-ux-progressive-disclosure-2026.md).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
@@ -158,5 +170,6 @@ Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-
 **Done (E-RUN0–1):** suite-stalking sensors Spec + D1/D2/D17.  
 **Active tip:** oracle stabilize (#105) to **98.7** (necessary floor).  
 **Done (E-QA0–2):** adequacy Spec + sensors + Climb Archive Q2 witness checklist.  
+**Active:** **E-UX1** (quality-gates UX slice) after E-UX0 Approve.  
 **Spec pending:** **E-KH0** (K1–K12) — kitchen fixtures/ports; do not implement E-KH1 until Approve.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT.

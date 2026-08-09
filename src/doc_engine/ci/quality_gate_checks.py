@@ -7,6 +7,7 @@ exit mapping). ``quality_gates`` owns scheduling / fail-fast / summary only.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -18,6 +19,7 @@ from doc_engine.ci.gate_tools import (
     python_module_command,
     validate_git_rev,
 )
+from doc_engine.ci.quality_gate_presenters import begin_grouped_run, end_grouped_run
 
 PACKAGE_ROOTS = ("src/doc_engine", "src/stf")
 NEW_CODE_COVERAGE_FLOOR = 98.7
@@ -27,10 +29,13 @@ COMPLEXITY_BASELINE = REPO_ROOT / "scripts" / "ratchets" / "complexipy_baseline.
 
 
 def _run(command: list[str], *, label: str) -> int:
-    """Run *command* as an argv list (no shell); return the process exit code."""
-    print(f"\n=== {label} ===", flush=True)
-    print("+", " ".join(command), flush=True)
+    """Run *command* as an argv list (no shell); return the process exit code.
+
+    Under GitHub Actions, wrap output in a collapsible ``::group::`` (E-UX1).
+    """
+    grouped = begin_grouped_run(label, command)
     completed = subprocess.run(command, cwd=REPO_ROOT, check=False)
+    end_grouped_run(grouped)
     return int(completed.returncode)
 
 
@@ -193,15 +198,24 @@ def report_gap_average(coverage_xml: Path) -> None:
     _run(
         python_module_command(
             "doc_engine.ci.coverage_gap_average",
-            "--coverage-xml",
-            str(resolved),
-            "--floor",
-            str(NEW_CODE_COVERAGE_FLOOR),
-            "--worst",
-            "15",
+            *_gap_average_argv(resolved),
         ),
         label=(
             f"coverage gap-average "
             f"(below-floor files only; floor={NEW_CODE_COVERAGE_FLOOR:g}%)"
         ),
     )
+
+
+def _gap_average_argv(coverage_xml: Path) -> list[str]:
+    argv = [
+        "--coverage-xml",
+        str(coverage_xml),
+        "--floor",
+        str(NEW_CODE_COVERAGE_FLOOR),
+        "--worst",
+        "15",
+    ]
+    if os.environ.get("GITHUB_STEP_SUMMARY"):
+        argv.extend(["--markdown", "--append-github-summary"])
+    return argv

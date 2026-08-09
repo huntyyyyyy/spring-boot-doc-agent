@@ -33,6 +33,7 @@ from doc_engine.ci.coverage_report import (
     parse_cobertura_files,
 )
 from doc_engine.ci.gate_tools import checkout_root
+from doc_engine.ci.github_step_summary import append_markdown
 
 # Mutable so tests can patch the active checkout (same pattern as gate_tools).
 REPO_ROOT = checkout_root()
@@ -177,10 +178,10 @@ def _resolve_coverage_xml(args: argparse.Namespace) -> Path:
     return coverage_xml
 
 
-def _append_github_summary(markdown: str) -> None:
+def _append_gap_markdown(report: GapAverageReport, *, worst: int) -> None:
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
-        Path(summary).open("a", encoding="utf-8").write("\n" + markdown + "\n")
+        append_markdown(report.as_markdown(worst=worst), summary)
 
 
 def _print_gap_report(report: GapAverageReport, args: argparse.Namespace) -> None:
@@ -191,7 +192,7 @@ def _print_gap_report(report: GapAverageReport, args: argparse.Namespace) -> Non
     )
     print(text, flush=True)
     if args.append_github_summary:
-        _append_github_summary(report.as_markdown(worst=args.worst))
+        _append_gap_markdown(report, worst=args.worst)
 
 
 def main(argv: list[str] | None = None) -> int:
