@@ -168,7 +168,7 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 | --- | --- | --- | --- |
 | P11.0 | **E-MOD0 Spec:** approve **M1–M12** (CLI BCs; hexagonal Protocols; vertical slices; refuse DI/`utils`/mesh) | **Done** (2026-08-09) | research 12 `spec_gate: APPROVED E-MOD0` |
 | P11.1 | **E-MOD1:** `mock_stages` split + `MockStageStrategy` Protocol/registry; stable façade; size baseline `--update` (MOD-S1) | **Done** (2026-08-09) | files ≤225; complexipy ≤5; kitchen/pipeline green |
-| P11.2 | **E-MOD2:** `capacity_preflight` then drift/partition | **Active** | same gates; CLI flags/outputs stable |
+| P11.2 | **E-MOD2:** `capacity_preflight` then drift/partition | **Done** (2026-08-09) | same gates; CLI flags/outputs stable |
 
 Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipeline-stage0-modularity-ports-2026.md).
 
@@ -187,6 +187,7 @@ Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipel
 **Done (E-KH1):** `KitchenArtifacts` + session fixtures; chapters off `setUpModule`/`_STATE` (2026-08-09).  
 **Done (E-MOD0):** M1–M12 Spec Approve (2026-08-09).  
 **Done (E-MOD1):** `mock_stages` concept modules + `MockStageStrategy` registry (2026-08-09).  
-**Active:** **E-MOD2** — Stage-0 tool façades (`capacity_preflight` → drift → partition).  
+**Done (E-MOD2):** Stage-0 tool façades — `capacity_preflight` / `spring_drift_check` / `partition_repo` (2026-08-09).  
+**Active:** pick next from Defer (E-UX2 / E-QA3 / E-RUN*) only when product need bites — no sensor-by-default.  
 **Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps.

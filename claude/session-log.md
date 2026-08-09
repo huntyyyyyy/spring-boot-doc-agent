@@ -4797,3 +4797,12 @@ Assumptions affected:
 - CodeQL cache keys after module split — [Resolved — incomplete ScanContext no longer hashes to empty digest; discriminative invalidation tests; climb CodeQL F401 wallpaper cleaned]
 - Kitchen-sink chapter vs CodeQL — [Still accurate — chain pinned filesystem,ast-grep; ch10 asserts codeql absent from covering receipts]
 Files touched: _codeql_cache_keys.py, test_codeql_cache_key_invalidation.py, kitchen_sink chain/ch10, climb codeql ruff hygiene, code_quality_baseline.json
+
+
+## 2026-08-09 — E-MOD2 Stage-0 tool façades (capacity / drift / partition)
+Commit: uncommitted
+Tests: capacity/drift/partition characterization + kitchen ch01–03 + mock strategy — 127 passed (scoped); complexipy 0 offenders; size baseline ratcheted to 32 file offenders
+Assumptions affected:
+- `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`spring_drift_check.py` gained optional `--manifest`" — [New info — `--manifest` CLI flag now lives in `spring_drift_cli.py`; façade `spring_drift_check` re-exports `main`; verify predicate updated]
+- `CONSTRAINTS.md` Integration gaps item 3 / Known precision item 6 — path needles for `--manifest` / partition overlap comments — [Resolved — verify paths retargeted to `spring_drift_cli.py` / `partition_repo_groups.py` after vertical split]
+Files touched: CONSTRAINTS.md, claude/steering-prompts/04-analytics-logging-research-prompt.md, src/doc_engine/tools/capacity_preflight*.py, spring_drift_*.py, partition_repo*.py, scripts/ratchets/size_baseline.json, docs/research/12-*, quality-backlog.md
