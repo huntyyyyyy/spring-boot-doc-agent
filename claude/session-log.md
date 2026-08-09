@@ -4781,3 +4781,11 @@ Tests: 21/21 climb B5; complexipy≤5; LOC≤225
 Assumptions affected:
 - E-QA2 Climb Archive Q2 — [Still accurate — Arm-1 witness unchanged]
 Files touched: tests/doc_engine/test_coverage_climb_b5_codeql_{db,runner_facade}.py (deleted codeql_db_runner), claude/session-log.md
+
+## 2026-08-09 — Oracle Cover% closed to 99.04 (fail_under 98.7)
+Commit: 625e03e
+Tests: oracle remesure whole_repo_cover=99.04% (exit 0 on climb branch remesure); kitchen-sink real-repo opt-in restored earlier
+Assumptions affected:
+- Active tip oracle stabilize to 98.7 — [Resolved — tip Cover% 99.04 after B1–B9 climb + kitchen-sink correctness; fail_under argv untouched]
+- E-QA2 Climb Archive Q2 — [Still accurate — climb modules carry mutmut_slice / Arm-1 witnesses; gap-average alone not treated as proof]
+Files touched: tests/doc_engine/test_coverage_climb_b{7,8,9}_*, tests/ci/test_coverage_climb_*, tests/doc_engine/test_kitchen_sink_*, CONSTRAINTS.md, test_domain_rules.py
