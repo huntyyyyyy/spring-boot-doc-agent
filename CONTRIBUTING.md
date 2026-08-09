@@ -120,11 +120,40 @@ editing that one number after a deliberate coverage gain. Delete local
 `.coverage*` files before measuring if you previously collected statement-only
 data — mixing them with `branch = true` makes coverage refuse to combine.
 
+### One checkout, one measure (no cross-worktree combine)
+
+Coverage DBs and `coverage.xml` are **single-writer, per-worktree** artifacts
+(gitignored). Agents and humans must **never**:
+
+- run `coverage combine` across sibling worktrees (`wt-cov-*`, `wt-complexity-*`, …)
+- copy or merge `.coverage*` / `coverage.xml` from worktree A into worktree B
+- compute gap-average against an XML whose `filename` paths escape the active
+  checkout (absolute paths into another tree, `wt-cov-*` segments, `..` climbs)
+
+`doc-engine coverage-gap-average` **refuses** non-cohesive reports (exit 2). Prefer
+the single entry point that wipes cwd-local artifacts, runs **one** pytest+cov,
+validates path cohesion, then prints gap-average:
+
+```bash
+doc-engine coverage-measure
+```
+
+Do not weaken `[tool.coverage.report] fail_under` (**98.7**). coverage.py's
+`relative_files = true` only relativizes paths under the **current working
+directory** at collection time; paths from adjacent worktrees stay absolute and
+`combine` will silently union them — that is the dilution failure mode this
+guard exists to catch ([coveragepy#1647](https://github.com/nedbat/coveragepy/issues/1647),
+[coveragepy#1674](https://github.com/coveragepy/coveragepy/issues/1674)).
+
 Locally (after `pip install -r requirements-dev.txt` and `pip install -e .`):
 
 ```bash
+# Preferred (wipe + one run + cohesion check + gap-average):
+doc-engine coverage-measure
+
+# Manual equivalent (still: one tree only; never combine across worktrees):
 rm -f .coverage .coverage.* coverage.xml
-pytest tests/ -q --cov=doc_engine --cov=stf --cov-branch --cov-report=term-missing
+pytest tests/ -q --cov=doc_engine --cov=stf --cov-branch --cov-report=term-missing --cov-report=xml
 ```
 
 CI also uploads `coverage.xml` from the Python 3.11 matrix cell. The hard

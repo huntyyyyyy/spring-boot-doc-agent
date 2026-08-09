@@ -151,6 +151,24 @@ def cmd_coverage_gap_average(args: argparse.Namespace) -> int:
     return gap_main(argv)
 
 
+def cmd_coverage_measure(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine coverage-measure`` — clean single-tree measure."""
+    from doc_engine.ci.coverage_measure import main as measure_main
+
+    argv: list[str] = []
+    if args.floor is not None:
+        argv.extend(["--floor", str(args.floor)])
+    if args.worst is not None:
+        argv.extend(["--worst", str(args.worst)])
+    if args.skip_pytest:
+        argv.append("--skip-pytest")
+    if args.no_gap_report:
+        argv.append("--no-gap-report")
+    if args.pytest_args:
+        argv.extend(args.pytest_args)
+    return measure_main(argv)
+
+
 def cmd_complexipy_ratchet(args: argparse.Namespace) -> int:
     """Facade: ``doc-engine complexipy-ratchet``."""
     from doc_engine.ci.complexipy_ratchet import main as ratchet_main
@@ -356,6 +374,32 @@ def _add_quality_gate_parsers(sub: Any) -> None:
     gap_ap.add_argument("--markdown", action="store_true")
     gap_ap.add_argument("--append-github-summary", action="store_true")
     gap_ap.set_defaults(func=cmd_coverage_gap_average)
+
+    measure_ap = sub.add_parser(
+        "coverage-measure",
+        help=(
+            "Wipe local .coverage* in this checkout, run one pytest+cov, "
+            "validate path cohesion, print gap-average"
+        ),
+    )
+    measure_ap.add_argument("--floor", type=float, default=None)
+    measure_ap.add_argument("--worst", type=int, default=None)
+    measure_ap.add_argument(
+        "--skip-pytest",
+        action="store_true",
+        help="Validate existing coverage.xml only",
+    )
+    measure_ap.add_argument(
+        "--no-gap-report",
+        action="store_true",
+        help="Skip gap-average after measure",
+    )
+    measure_ap.add_argument(
+        "pytest_args",
+        nargs="*",
+        help="Extra pytest args after standard cov flags",
+    )
+    measure_ap.set_defaults(func=cmd_coverage_measure)
 
     ratchet_ap = sub.add_parser(
         "complexipy-ratchet",

@@ -95,6 +95,31 @@ class CoverageGapAverageTest(unittest.TestCase):
         self.assertIn("below_floor_cover", text)
         self.assertIn("green files excluded", text)
 
+    def test_main_refuses_foreign_worktree_paths(self) -> None:
+        foreign_xml = """\
+<?xml version="1.0" ?>
+<coverage line-rate="1" branch-rate="1" version="7.0" timestamp="1">
+  <packages>
+    <package name="demo" line-rate="1" branch-rate="1" complexity="0">
+      <classes>
+        <class name="x.py"
+               filename="C:/Users/x/wt-cov-measure/src/doc_engine/x.py"
+               line-rate="1" branch-rate="1" complexity="0">
+          <lines>
+            <line number="1" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
+"""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "coverage.xml"
+            path.write_text(foreign_xml, encoding="utf-8")
+            code = cga.main(["--coverage-xml", str(path)])
+        self.assertEqual(code, 2)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
