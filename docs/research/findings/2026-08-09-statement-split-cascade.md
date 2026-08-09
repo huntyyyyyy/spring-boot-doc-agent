@@ -62,7 +62,11 @@ Refuse: LLM as fail_under; sensors rewriting oracle SoT (STK1).
   ([`process/21-…`](../process/21-post-merge-gate-repair-cohesion-2026.md),
   design [`post-merge-gate-repair-design-2026-08-09.md`](../../design/post-merge-gate-repair-design-2026-08-09.md);
   SoR bar raised to **≥10k★** for new external Adopt on this stream).
-  **No further product Implement until HOT1–HOT13 Approve.**
+  **Stack rescope DRAFT:** E-STACK0
+  ([`process/22-…`](../process/22-stack-rescope-10k-star-bar-2026.md)) —
+  keep ≥10k pins; Confirmed exempt; Nx patterns for boundaries; no tool swap
+  before E-HOT1 green.
+  **No further product Implement until HOT1–HOT13 Approve** (STACK Approve is docs-parallel).
 - **Do not:** start full E-STK1 Implement in the same tip as deep E-COH1 without
   an explicit Active switch; more parallel statement/LOC agents; treat
   `ruff --fix` as Verify; push before local full-gate green.
