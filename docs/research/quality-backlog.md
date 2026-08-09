@@ -188,6 +188,18 @@ Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipel
 **Done (E-MOD0):** M1–M12 Spec Approve (2026-08-09).  
 **Done (E-MOD1):** `mock_stages` concept modules + `MockStageStrategy` registry (2026-08-09).  
 **Done (E-MOD2):** Stage-0 tool façades — `capacity_preflight` / `spring_drift_check` / `partition_repo` (2026-08-09).  
-**Active:** pick next from Defer (E-UX2 / E-QA3 / E-RUN*) only when product need bites — no sensor-by-default.  
-**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps.
+**Active (Spec):** **E-DOC0** — research domain taxonomy + `claude/`→`docs/` consolidation + Cursor look-first hook (research 18); Implement blocked on Approve.  
+**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5; E-CQL0/1 on separate tip when approved.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`.
+
+---
+
+## P14 — Docs research taxonomy + claude consolidation + look-first
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P14.0 | **E-DOC0 Spec:** approve **DOC1–DOC12** (domains ≤2 deep; migrate `claude/` valuables; Cursor hooks look-first; keep adapter) | **Research complete — awaiting Approve** (2026-08-09) | research 18 `spec_gate: PENDING APPROVE E-DOC0` |
+| P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Blocked on P14.0** | claims green; design writes denied without research-map Read; marketplace intact |
+
+Research: [`docs/research/18-docs-research-taxonomy-claude-consolidation-2026.md`](18-docs-research-taxonomy-claude-consolidation-2026.md).
+
