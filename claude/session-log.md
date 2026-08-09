@@ -4727,7 +4727,7 @@ Assumptions affected:
 Files touched: .github/workflows/{ci,sonar}.yml, src/doc_engine/ci/workflow_size.py, scripts/ci/check_workflow_yaml.py, tests/ci/test_workflow_size.py, CONTRIBUTING.md, claude/session-log.md
 
 ## 2026-08-09 — E-RUN1: suite-stalking sensors (D1/D2/D17) on oracle cell
-Commit: 607336a
+Commit: 641887a
 Tests: pytest tests/ci/test_suite_timing*.py 8/8; ruff OK; check_repo_claims OK; check_workflow_yaml OK; check_code_quality OK; complexipy ≤5 on suite_timing; oracle argv still fail_under=98.7
 Assumptions affected:
 - `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — python-gates owns cov cell — [Still accurate — added `--junitxml` + `suite_timing_summary.py` sensor only; fail_under argv untouched]
