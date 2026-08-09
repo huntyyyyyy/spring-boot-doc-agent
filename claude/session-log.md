@@ -4751,7 +4751,7 @@ Assumptions affected:
 Files touched: src/doc_engine/ci/adequacy/*, scripts/ci/adequacy_summary.py, tests/ci/test_adequacy_*.py, .github/workflows/python-gates.yml, CONTRIBUTING.md, docs/research/quality-backlog.md, claude/session-log.md
 
 ## 2026-08-09 — Kitchen-sink correctness: restore real-repo opt-in skip
-Commit: uncommitted
+Commit: 2fccac6
 Tests: kitchen-sink focused 31 passed / 9 skipped (real_repo); domain markers OK; check_repo_claims OK
 Assumptions affected:
 - RealEnterpriseRepoTest opt-in hermetic skip — [Resolved — restored skipUnless; forbid cwd fallback; domain_live_optin classifier; --allow-mock only on configured Spring tree]
