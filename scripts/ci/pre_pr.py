@@ -38,9 +38,11 @@ from typing import Callable, List, Optional, Sequence, Tuple
 
 from pre_pr_quality_gates_suite import quality_gates_argv
 
+from doc_engine.ci.stalker_telemetry.run_store import TelemetryRun, tee_stdio
 from doc_engine.paths import repo_root
 
 REPO_ROOT = repo_root()
+_TELEMETRY: TelemetryRun | None = None
 RECEIPT_PATH = REPO_ROOT / ".git" / "pre-pr-receipt.json"
 BYPASS_LOG = REPO_ROOT / ".git" / "pre-pr-bypass.log"
 # schema 2 adds attestation + github_status_note for actions-outage receipts.
@@ -261,13 +263,24 @@ def require_outage_toolchain() -> int:
 
 def _suite(name: str, kind: str, fn: SuiteFn) -> SuiteResult:
     started = time.perf_counter()
-    code = fn()
+    body = ""
+    with tee_stdio() as buf:
+        code = fn()
+        body = buf.getvalue()
     ms = int((time.perf_counter() - started) * 1000)
     if kind == "advisory":
-        status = "advisory" if code == 0 else "advisory"
-        # Advisory never fails the gate; still record non-zero as detail.
-        return SuiteResult(name, status, ms, kind, detail=f"exit={code}")
-    status = "pass" if code == 0 else "fail"
+        status = "advisory"
+    else:
+        status = "pass" if code == 0 else "fail"
+    if _TELEMETRY is not None:
+        _TELEMETRY.record(
+            name=name,
+            kind=kind,
+            status=status,
+            exit_code=int(code),
+            duration_ms=ms,
+            body=body,
+        )
     return SuiteResult(name, status, ms, kind, detail=f"exit={code}")
 
 
@@ -310,6 +323,14 @@ def _facade_poke_surface() -> int:
 
 def _pytest() -> int:
     proc = _run([sys.executable, "-m", "pytest", "tests/", "-q", "--tb=line"])
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
+def _mutation_driver() -> int:
+    """Assertion-engine mutants — same entry as python-gates (module form)."""
+    proc = _run([sys.executable, "-m", "tests.spring_signals.mutation_driver"])
     sys.stdout.write(proc.stdout)
     sys.stderr.write(proc.stderr)
     return proc.returncode
@@ -480,13 +501,7 @@ def _append_full_extras(hard: List[Tuple[str, str, SuiteFn]]) -> None:
     )
     mutation_driver = REPO_ROOT / "tests" / "spring_signals" / "mutation_driver.py"
     if mutation_driver.is_file():
-        hard.append(
-            (
-                "mutation_driver_advisory",
-                "advisory",
-                _py_script("tests", "spring_signals", "mutation_driver.py"),
-            )
-        )
+        hard.append(("mutation_driver", "hard", _mutation_driver))
 
     def claims_metrics() -> int:
         proc = _run(
@@ -701,15 +716,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"receipt: {RECEIPT_PATH}")
         return 0
 
+    global _TELEMETRY
+    _TELEMETRY = TelemetryRun(REPO_ROOT, receipt.git_sha, mode)
     results: List[SuiteResult] = []
     failed = False
-    for name, kind, fn in build_suites(mode):
-        print(f"\n--- {name} ({kind}) ---")
-        result = _suite(name, kind, fn)
-        results.append(result)
-        if kind == "hard" and result.status == "fail":
-            failed = True
-            break
+    try:
+        for name, kind, fn in build_suites(mode):
+            print(f"\n--- {name} ({kind}) ---")
+            result = _suite(name, kind, fn)
+            results.append(result)
+            if kind == "hard" and result.status == "fail":
+                failed = True
+                break
+    finally:
+        tel_path = _TELEMETRY.flush()
+        _TELEMETRY = None
+        print(f"telemetry: {tel_path}")
 
     receipt.suites = results
     receipt.overall = "fail" if failed else "pass"

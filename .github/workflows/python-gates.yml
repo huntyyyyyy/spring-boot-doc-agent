@@ -127,7 +127,7 @@ jobs:
 
       - name: spring-signals mutation_driver.py (assertion mutants; non-blocking)
         if: matrix.python-version == '3.11'
-        run: python3 tests/spring_signals/mutation_driver.py
+        run: python3 -m tests.spring_signals.mutation_driver
 
       - name: "check_llms_coverage.py (advisory: merged PRs without claude/llms/pr-N.md)"
         if: matrix.python-version == '3.11'

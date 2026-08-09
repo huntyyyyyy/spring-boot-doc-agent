@@ -119,8 +119,11 @@ class BuildSuitesTest(unittest.TestCase):
         self.assertIn("in_repo_quality_gates", names)
         self.assertIn("sonar_local_advisory", names)
         self.assertIn("mutate_advisory", names)
+        self.assertIn("mutation_driver", names)
         self.assertIn("stage0_portable", names)
         self.assertNotIn("codeql_invariants", names)
+        kinds = {n: k for n, k, _ in pre_pr.build_suites("full")}
+        self.assertEqual(kinds["mutation_driver"], "hard")
 
     def test_actions_outage_includes_codeql_and_certify(self):
         names = [n for n, _, _ in pre_pr.build_suites("actions_outage")]

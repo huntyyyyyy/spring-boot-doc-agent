@@ -17,7 +17,6 @@ not a soft score.
 
 from __future__ import annotations
 
-import subprocess
 import sys
 from pathlib import Path
 
@@ -85,13 +84,22 @@ MUTANTS = [
 
 
 def main() -> int:
-    from tests.spring_signals.mutation_loop import apply_and_collect_survivors, exit_for_survivors
+    # Script execution puts ``tests/spring_signals/`` on ``sys.path[0]``, not the
+    # repo root — so ``from tests.…`` fails unless we bootstrap (CI remote red).
+    root = str(REPO_ROOT)
+    if root not in sys.path:
+        sys.path.insert(0, root)
+    from tests.spring_signals.mutation_loop import (
+        apply_and_collect_survivors,
+        exit_for_survivors,
+    )
+
     pristine = ENGINE.read_text(encoding="utf-8")
     result = apply_and_collect_survivors(ENGINE, pristine, MUTANTS, REPO_ROOT)
     if isinstance(result, int):
         return result
     return exit_for_survivors(result, enforce=ENFORCE, mutant_count=len(MUTANTS))
 
+
 if __name__ == "__main__":
-    import sys
-    sys.exit(main())
+    raise SystemExit(main())

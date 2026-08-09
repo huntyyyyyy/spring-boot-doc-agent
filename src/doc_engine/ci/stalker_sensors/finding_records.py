@@ -11,8 +11,9 @@ KIND_G3 = "facade_api_regress"
 KIND_G4 = "collect_or_syntax"
 KIND_G5 = "process_parallel_tip"
 KIND_G6 = "policy_verify_incomplete"
+KIND_G7 = "masked_advisory_nonzero"
 
-ALL_KINDS = (KIND_G1, KIND_G2, KIND_G3, KIND_G4, KIND_G5, KIND_G6)
+ALL_KINDS = (KIND_G1, KIND_G2, KIND_G3, KIND_G4, KIND_G5, KIND_G6, KIND_G7)
 
 
 @dataclass(frozen=True)

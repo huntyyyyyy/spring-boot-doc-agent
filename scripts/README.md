@@ -47,6 +47,9 @@ Override base with `PRE_PR_COMPARE_REF=origin/main`.
 Local SonarQube (advisory): [`scripts/ci/sonar-local/README.md`](ci/sonar-local/README.md).
 Modern approach choices (husky / lefthook / pre-commit / act ★ table):
 [`docs/research/process/27-local-pre-push-hook-2026.md`](../docs/research/process/27-local-pre-push-hook-2026.md).
+Local suite telemetry (ETL under `.git/pre-pr-telemetry/`; debugger CLI):
+`python3 scripts/ci/stalker_telemetry.py show --failures-only`
+([`process/28`](../docs/research/process/28-local-stalker-telemetry-etl-2026.md)).
 
 Receipt: `.git/pre-pr-receipt.json` (schema 2: optional `attestation` /
 `github_status_note` for outage mode). Bypass (logged): `PRE_PR_SKIP=1` **and**

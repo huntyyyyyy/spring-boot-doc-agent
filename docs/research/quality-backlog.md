@@ -231,6 +231,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Done Spec + Implement:** **E-TEL0 / E-TEL1** — mutation_driver regression + local telemetry ETL + G7 (2026-08-09).  
 **Done Spec + Implement:** **E-HOOK0 / E-HOOK1** — pre-push install/chain + local quality-gates; optional Sonar advisory (2026-08-09).  
 **Done Spec + Implement:** **E-KNOB0 / E-KNOB1** — one setpoint owner per concern; no `quality_knobs` god file (2026-08-09).  
 **Done Implement:** **E-STK1** — G1–G6 advisory sensors + ledger writer + `pre_pr` wire (2026-08-09).  
@@ -368,6 +369,17 @@ Research: [`docs/research/process/26-quality-policy-setpoints-2026.md`](process/
 | P24.1 | **E-HOOK1 Implement:** `install_git_hooks` + wire `in_repo_quality_gates` + sonar-local advisory | **Done** (2026-08-09) | `install_git_hooks --check`; suite tests; pre_pr green |
 
 Research: [`docs/research/process/27-local-pre-push-hook-2026.md`](process/27-local-pre-push-hook-2026.md). Design: [`docs/design/local-pre-push-hook-design-2026-08-09.md`](../design/local-pre-push-hook-design-2026-08-09.md).
+
+---
+
+## P25 — Local stalker telemetry ETL + mutation_driver remote-red
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P25.0 | **E-TEL0 Spec:** approve **TEL1–TEL10** (suite log ETL; G7 masked advisory; mutation_driver hard) | **Approved** (2026-08-09) | research 28 + design `APPROVED E-TEL0` |
+| P25.1 | **E-TEL1 Implement:** fix driver import; regression tests; telemetry store; G7 | **Done** (2026-08-09) | `tests/ci/test_mutation_driver_entrypoint.py`; `test_stalker_telemetry.py` |
+
+Research: [`docs/research/process/28-local-stalker-telemetry-etl-2026.md`](process/28-local-stalker-telemetry-etl-2026.md). Design: [`docs/design/local-stalker-telemetry-design-2026-08-09.md`](../design/local-stalker-telemetry-design-2026-08-09.md).
 
 ---
 
