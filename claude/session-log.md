@@ -4749,3 +4749,12 @@ Assumptions affected:
 - `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — python-gates owns cov cell — [Still accurate — adequacy sensor only; fail_under argv untouched]
 - Cover% / ENFORCE=False honesty — [Still accurate — sensors echo ENFORCE + floor text; no suite-wide ENFORCE=True]
 Files touched: src/doc_engine/ci/adequacy/*, scripts/ci/adequacy_summary.py, tests/ci/test_adequacy_*.py, .github/workflows/python-gates.yml, CONTRIBUTING.md, docs/research/quality-backlog.md, claude/session-log.md
+
+## 2026-08-09 — Kitchen-sink correctness: restore real-repo opt-in skip
+Commit: uncommitted
+Tests: kitchen-sink focused 31 passed / 9 skipped (real_repo); domain markers OK; check_repo_claims OK
+Assumptions affected:
+- RealEnterpriseRepoTest opt-in hermetic skip — [Resolved — restored skipUnless; forbid cwd fallback; domain_live_optin classifier; --allow-mock only on configured Spring tree]
+- CONSTRAINTS.md §8 gitignored write blind — [Resolved — product already fixed; claim + verify predicates retargeted to list_ignored_untracked + ch12 fail-path]
+- NestedEntity plant "characterized by the test" — [New info — pinned scavenger quirk: NestedEntityHolder maps to nested_inner today]
+Files touched: tests/doc_engine/test_kitchen_sink_*, src/doc_engine/ci/test_domain_rules.py, CONSTRAINTS.md, deleted test_enterprise_kitchen_sink.py

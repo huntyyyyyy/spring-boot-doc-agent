@@ -95,6 +95,8 @@ CLASSIFICATION_RULES: tuple[ClassificationRule, ...] = (
     DirPrefixRule("tests/research", "domain_ci_meta"),
     DirPrefixRule("tests/fixtures", "domain_ci_meta"),
     FilenameContainsRule("ocs_real_world", "domain_live_optin"),
+    # Real-repo kitchen-sink lane is opt-in (skipUnless); do not serial-ABI it.
+    FilenameContainsRule("kitchen_sink_real_repo", "domain_live_optin"),
     FilenamePrefixRule("test_kitchen_sink", "domain_integration"),
     FilenamePrefixRule("test_enterprise_kitchen", "domain_integration"),
     FilenamePrefixRule("test_local_runner_certified", "domain_integration"),

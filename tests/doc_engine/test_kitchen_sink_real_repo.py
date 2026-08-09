@@ -1,4 +1,9 @@
-"""Cohesive suite from tests/doc_engine/test_enterprise_kitchen_sink.py: RealEnterpriseRepoTest."""
+"""Opt-in kitchen-sink lane: invariants that hold for *any* Spring repo.
+
+Requires ``DOC_ENGINE_REAL_REPO`` / ``local-runs/real-repo.path`` (same resolver
+as ``test_partition_repo_real_world``). When unset, the class skips — CI stays
+hermetic. Never falls back to cwd / the plugin checkout.
+"""
 
 from __future__ import annotations
 
@@ -22,28 +27,43 @@ from tests.support.kitchen_sink.harness import (
     _run,
 )
 
-pytestmark = pytest.mark.domain_integration
+pytestmark = pytest.mark.domain_live_optin
 
 PY = sys.executable
 SCRIPT_DIR = SCRIPTS_DIR  # retained for kitchen-sink suite cohesion
 
 
+def _real_repo_or_none() -> str | None:
+    return _kitchen_sink_real_repo()
+
+
+@unittest.skipUnless(
+    _real_repo_or_none(),
+    "DOC_ENGINE_REAL_REPO / local-runs/real-repo.path not set — opt-in "
+    "kitchen-sink real-repo lane skipped; see this file's module docstring.",
+)
 class RealEnterpriseRepoTest(unittest.TestCase):
     """Only assertions that hold for *any* Spring repo.
 
-    Content-specific expectations stay in the synthetic classes. Same opt-in
-    shape as ``test_partition_repo_real_world`` so CI stays hermetic when the
-    real-repo env is unset (class skips).
+    Content-specific expectations stay in the synthetic classes. Opt-in skip
+    matches ``test_partition_repo_real_world`` so CI never runs this against
+    the plugin checkout.
     """
 
     @classmethod
     def setUpClass(cls):
-        repo = os.path.abspath(_kitchen_sink_real_repo() or "")
+        repo = _real_repo_or_none()
+        if repo is None:
+            raise unittest.SkipTest("real-repo path unset")
+        repo = os.path.abspath(repo)
         if not os.path.isdir(repo):
             raise unittest.SkipTest(f"real repo {repo!r} is not a directory")
         cls.repo = repo
         cls.scratch = tempfile.mkdtemp(prefix="ks_real_")
         cls.out = os.path.join(cls.scratch, "run")
+        # Real trees still use mock generative stages unless a live LLM is wired;
+        # --allow-mock is required for certification verify, but the *repo* must
+        # be the configured Spring checkout — never the plugin root.
         cls.proc = _run(
             [
                 PY,
@@ -60,10 +80,30 @@ class RealEnterpriseRepoTest(unittest.TestCase):
             cls.signals = json.load(handle)
         with open(os.path.join(cls.out, "groups.json"), encoding="utf-8") as handle:
             cls.groups = json.load(handle)
+        cert_path = os.path.join(cls.out, "certification.json")
+        if os.path.isfile(cert_path):
+            with open(cert_path, encoding="utf-8") as handle:
+                cls.cert = json.load(handle)
+        else:
+            cls.cert = {}
 
     @classmethod
     def tearDownClass(cls):
         shutil.rmtree(cls.scratch, ignore_errors=True)
+
+    def test_configured_repo_is_not_the_plugin_checkout(self):
+        """Wrong-context guard: empty env must skip, not run against cwd."""
+        plugin_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+        self.assertNotEqual(
+            os.path.abspath(self.repo),
+            plugin_root,
+            "real-repo lane must not target the doc-engine plugin checkout",
+        )
+        self.assertEqual(
+            self.cert.get("generative_executor"),
+            "mock",
+            "allow-mock certification must stamp generative_executor=mock",
+        )
 
     def test_chain_completes_and_gates_pass(self):
         self.assertEqual(self.proc.returncode, 0, self.proc.stdout[-4000:])
@@ -104,6 +144,11 @@ class RealEnterpriseRepoTest(unittest.TestCase):
             for name, entry in self.signals["entity_table_map"].items()
             if entry.get("status") == "contested"
         }
+        if not contested:
+            self.skipTest(
+                "this Spring checkout has no contested entity keys — "
+                "nothing to check (not a vacuous pass over empty iter)"
+            )
         for name, entry in contested.items():
             with self.subTest(entity=name):
                 self.assertGreaterEqual(len(entry.get("candidates") or []), 2)
@@ -134,6 +179,11 @@ class RealEnterpriseRepoTest(unittest.TestCase):
                 if name.count("-") >= 2:
                     rel = os.path.relpath(os.path.join(dirpath, name), self.repo)
                     on_disk.append(rel.replace("\\", "/"))
+        if not on_disk:
+            self.skipTest(
+                "this Spring checkout has no multi-hyphen application-* profiles — "
+                "nothing to check (not a vacuous pass over empty iter)"
+            )
         keys = self.signals.get("config_key_sets") or {}
         for rel in on_disk:
             with self.subTest(file=rel):

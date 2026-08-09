@@ -192,6 +192,17 @@ class Ch03DerivedIndexTest(unittest.TestCase):
             self.assertFalse(e["lineage"]["available"], e)
             self.assertIn("contested", e["lineage"]["reason"])
 
+    def test_nested_entity_holder_scavenges_inner_table_today(self):
+        """Characterizes nested @Entity under stopBy:end — both InnerEntity and
+        non-@Entity NestedEntityHolder currently map to nested_inner (scavenge).
+        Not endorsed; pin so a silent change is visible."""
+        self.assertEqual(self.mapping["InnerEntity"]["table"], "nested_inner")
+        self.assertEqual(self.mapping["InnerEntity"]["file"], NESTED_ENTITY)
+        self.assertEqual(
+            self.mapping["NestedEntityHolder"]["table"], "nested_inner"
+        )
+        self.assertEqual(self.mapping["NestedEntityHolder"]["file"], NESTED_ENTITY)
+
     def test_index_keys_are_sorted_and_every_entry_resolves(self):
         keys = list(self.mapping)
         self.assertEqual(keys, sorted(keys))

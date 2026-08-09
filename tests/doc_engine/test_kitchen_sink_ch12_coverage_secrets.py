@@ -84,7 +84,7 @@ class Ch12CoverageSecretsGateTest(unittest.TestCase):
             handle.write("password: ${DB_PASSWORD}\napi-key: CHANGEME\nsecret: <set-me>\n")
         self.assertEqual(self._secrets(path).returncode, 0)
 
-    def test_a_secret_in_prose_is_caught_by_no_layer_at_all(self):
+    def test_a_secret_in_prose_is_not_caught_by_the_heuristic(self):
         """Pinned scope limit: prose passwords stay invisible to the heuristic."""
         scratch = tempfile.mkdtemp(prefix="ks_prose_")
         self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
