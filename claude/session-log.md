@@ -4800,7 +4800,7 @@ Files touched: _codeql_cache_keys.py, test_codeql_cache_key_invalidation.py, kit
 
 
 ## 2026-08-09 — E-MOD2 Stage-0 tool façades (capacity / drift / partition)
-Commit: uncommitted
+Commit: 62e5e06
 Tests: capacity/drift/partition characterization + kitchen ch01–03 + mock strategy — 127 passed (scoped); complexipy 0 offenders; size baseline ratcheted to 32 file offenders
 Assumptions affected:
 - `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`spring_drift_check.py` gained optional `--manifest`" — [New info — `--manifest` CLI flag now lives in `spring_drift_cli.py`; façade `spring_drift_check` re-exports `main`; verify predicate updated]
