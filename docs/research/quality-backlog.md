@@ -110,10 +110,23 @@ Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modulari
 
 ---
 
+## P7 — Suite stalking / Rust-class runners (2026 research)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P7.0 | **E-RUN0 Spec:** approve **R1–R5** in research 08 | Not started | design/research Spec gate |
+| P7.1 | **E-RUN1:** oracle (+ optional ABI) `--durations` report as bottleneck SoT | Adopt after Spec | CI log / summary artifact |
+| P7.2 | **E-RUN2:** optional rpytest `--verify-dropin` spike on one `domain_*` (no cov) | Spike / refuse if &lt;15% or drop-in fail | wall-clock + parity |
+
+Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-runners-bottlenecks.md). Prefer **2026** primaries (arXiv 2607/2602/2601; rpytest product docs).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
 **Done (E-TEST0–1):** domain markers + ABI shards.  
-**Done (E-CI0):** Spec approve **C1–C6** + policy **C-A**.  
-**Done (E-CI1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
-**Never:** suite-wide xdist before shards; fuzzy green; Spec Kit WorkflowEngine as CI runtime.
+**Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
+**Active tip:** oracle stabilize (#105) to **98.7**.  
+**Next research Spec (when tip free):** **E-RUN0** (suite stalking) — do **not** swap oracle runner first.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; fuzzy green; Spec Kit WorkflowEngine as CI runtime.
