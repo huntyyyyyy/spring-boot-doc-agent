@@ -114,6 +114,13 @@ def test_append_github_summary_appends(tmp_path: Path) -> None:
     assert "Adequacy sensors" in text
 
 
+def test_append_github_summary_rejects_dotdot(tmp_path: Path) -> None:
+    from doc_engine.paths import PathValidationError
+
+    with pytest.raises(PathValidationError, match=r"\.\."):
+        append_github_summary("x", tmp_path / ".." / "nope.md")
+
+
 def test_adequacy_summary_cli_appends(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

@@ -23,6 +23,7 @@ from doc_engine.ci.suite_timing.github_timing_summary import (
     append_github_summary,
     render_from_junit,
 )
+from doc_engine.paths import PathValidationError
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -61,7 +62,11 @@ def main(argv: list[str] | None = None) -> int:
         coverage_xml=args.coverage_xml,
         top_n=args.top_n,
     )
-    append_github_summary(markdown, Path(summary))
+    try:
+        append_github_summary(markdown, Path(summary))
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     print("suite timing summary appended")
     return 0
 

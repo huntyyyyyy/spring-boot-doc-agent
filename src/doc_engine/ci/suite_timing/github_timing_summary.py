@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from doc_engine.ci.github_step_summary import append_markdown
 from doc_engine.ci.suite_timing.duration_records import SuiteTimingReport
 from doc_engine.ci.suite_timing.junit_duration_parse import parse_junit_durations
 from doc_engine.ci.suite_timing.plateau_buckets import (
@@ -74,10 +75,5 @@ def render_from_junit(
 
 
 def append_github_summary(markdown: str, summary_path: Path) -> None:
-    """Append markdown to an existing GitHub step summary file."""
-    previous = ""
-    if summary_path.is_file():
-        previous = summary_path.read_text(encoding="utf-8")
-    if previous and not previous.endswith("\n"):
-        previous += "\n"
-    summary_path.write_text(previous + markdown, encoding="utf-8")
+    """Append markdown to a GitHub step summary file (path-validated)."""
+    append_markdown(markdown, summary_path)
