@@ -1,14 +1,15 @@
 """Stage 0 scanning package.
 
-Heavy scanners and sqllineage stay behind lazy loaders so lightweight tool
-CLIs (secrets heuristics, walk helpers) do not cold-start sqlfluff on every
-``python -m`` invocation. Public names are listed in ``__all__`` and resolved
-via ``__getattr__`` (PEP 562) — not by calling ``__getattr__`` from wrappers.
+Heavy scanners and sqllineage stay behind ``__getattr__`` so lightweight tool
+CLIs do not cold-start sqlfluff. ``scan_repository`` lives in
+``repository_scan`` — this module only dispatches, it does not call
+``__getattr__`` from a wrapper body.
 """
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict
+import importlib
+from typing import Any
 
 __all__ = [
     "scan",
@@ -20,62 +21,30 @@ __all__ = [
     "SpringLineageResolver",
 ]
 
-
-def _load_scan() -> Any:
-    from doc_engine.scanning.spring import scan
-
-    return scan
-
-
-def _load_scan_repository() -> Any:
-    from doc_engine.scanning.repository_scan import scan_repository
-
-    return scan_repository
-
-
-def _load_run_scan() -> Any:
-    from doc_engine.scanning._orchestrator import run_scan
-
-    return run_scan
-
-
-def _load_get_scanner() -> Any:
-    from doc_engine.scanning._scanner_registry import get_scanner
-
-    return get_scanner
-
-
-def _load_resolve_scanner_names() -> Any:
-    from doc_engine.scanning._scanner_registry import resolve_scanner_names
-
-    return resolve_scanner_names
-
-
-def _load_spring_signal_merger() -> Any:
-    from doc_engine.scanning._merge_signals import SpringSignalMerger
-
-    return SpringSignalMerger
-
-
-def _load_spring_lineage_resolver() -> Any:
-    from doc_engine.scanning._resolve_lineage import SpringLineageResolver
-
-    return SpringLineageResolver
-
-
-_LAZY_LOADERS: Dict[str, Callable[[], Any]] = {
-    "scan": _load_scan,
-    "scan_repository": _load_scan_repository,
-    "run_scan": _load_run_scan,
-    "get_scanner": _load_get_scanner,
-    "resolve_scanner_names": _load_resolve_scanner_names,
-    "SpringSignalMerger": _load_spring_signal_merger,
-    "SpringLineageResolver": _load_spring_lineage_resolver,
+# Pair of class exports — one branch keeps __getattr__ at complexipy ≤5.
+_CLASS_EXPORTS = {
+    "SpringSignalMerger": "doc_engine.scanning._merge_signals",
+    "SpringLineageResolver": "doc_engine.scanning._resolve_lineage",
 }
 
 
 def __getattr__(name: str) -> Any:
-    loader = _LAZY_LOADERS.get(name)
-    if loader is None:
-        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-    return loader()
+    if name == "scan":
+        from doc_engine.scanning.spring import scan
+
+        return scan
+    if name == "scan_repository":
+        from doc_engine.scanning.repository_scan import scan_repository
+
+        return scan_repository
+    if name == "run_scan":
+        from doc_engine.scanning._orchestrator import run_scan
+
+        return run_scan
+    if name in ("get_scanner", "resolve_scanner_names"):
+        from doc_engine.scanning import _scanner_registry as registry
+
+        return getattr(registry, name)
+    if name in _CLASS_EXPORTS:
+        return getattr(importlib.import_module(_CLASS_EXPORTS[name]), name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
