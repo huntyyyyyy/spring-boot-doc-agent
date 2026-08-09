@@ -212,6 +212,10 @@ without a witness is coverage inflation, not adequacy. Mutation-scope taxonomies
 them into one PIT/mutmut zoo, and do not flip suite-wide `ENFORCE=True` without
 a defended Spec amendment (Q8).
 
+| Batch | Package / modules | Witness kind | Note |
+| --- | --- | --- | --- |
+| B4 | `doc_engine.tools` — `spring_drift_tier2`, `spring_drift_check`, `run_manifest` | `mutmut_slice` | Tools/telemetry surface — not scan formatting; Arm-1 not cited |
+
 ### Oracle remesure cadence (saliency)
 
 Full-suite oracle is expensive. Remesure `coverage.xml` only on **salient**

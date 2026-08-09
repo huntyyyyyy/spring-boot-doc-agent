@@ -4758,3 +4758,11 @@ Assumptions affected:
 - CONSTRAINTS.md §8 gitignored write blind — [Resolved — product already fixed; claim + verify predicates retargeted to list_ignored_untracked + ch12 fail-path]
 - NestedEntity plant "characterized by the test" — [New info — pinned scavenger quirk: NestedEntityHolder maps to nested_inner today]
 Files touched: tests/doc_engine/test_kitchen_sink_*, src/doc_engine/ci/test_domain_rules.py, CONSTRAINTS.md, deleted test_enterprise_kitchen_sink.py
+
+## 2026-08-09 — Cover% climb batch B4: tools drift/manifest
+Commit: 5a628d9
+Tests: 29/29 climb B4 suites passing; scoped cover spring_drift_tier2 100% / spring_drift_check 100% / run_manifest 97% stmt
+Assumptions affected:
+- E-QA2 Climb Archive Q2 — [New info — B4 archives `mutmut_slice` for `doc_engine.tools` drift/manifest (not Arm-1; not scan formatting)]
+- Cover% climb high-miss tools inventory — [Resolved — hermetic `domain_climb_sensor` suites close tier2/check/manifest gaps]
+Files touched: tests/doc_engine/test_coverage_climb_drift_tier2_recheck.py, test_coverage_climb_drift_check_{process,load}.py, test_coverage_climb_run_manifest_{core,cli}.py, CONTRIBUTING.md, claude/session-log.md
