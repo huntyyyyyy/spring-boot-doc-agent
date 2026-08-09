@@ -10,6 +10,7 @@ from unittest.mock import MagicMock
 import pytest
 
 from doc_engine.ci import coverage_gap_average as cga
+from doc_engine.ci import coverage_report as cov_report
 from doc_engine.ci import gate_tools
 from doc_engine.ci import quality_gate_checks as qgc
 from doc_engine.ci import quality_gates as qg
@@ -17,10 +18,10 @@ from doc_engine.ci import quality_gates as qg
 pytestmark = pytest.mark.domain_ci_meta
 
 def test_parse_condition_coverage_edges() -> None:
-    assert cga._parse_condition_coverage(None) == (0, 0)
-    assert cga._parse_condition_coverage("no-paren") == (0, 0)
-    assert cga._parse_condition_coverage("50% (1/2)") == (1, 2)
-    assert cga._parse_condition_coverage("bad (x/y)") == (0, 0)
+    assert cov_report._parse_condition_coverage(None) == (0, 0)
+    assert cov_report._parse_condition_coverage("no-paren") == (0, 0)
+    assert cov_report._parse_condition_coverage("50% (1/2)") == (1, 2)
+    assert cov_report._parse_condition_coverage("bad (x/y)") == (0, 0)
 
 def test_file_coverage_empty_measurable() -> None:
     row = cga.FileCoverage("x.py", 0, 0, 0, 0)

@@ -20,13 +20,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from doc_engine.ci.gate_tools import REPO_ROOT, checked_path_under_repo
-from doc_engine.ci.size_measure import (
-    PACKAGE_ROOTS,
-    _visit_functions,
-    line_count as _line_count,
-    measure_tree,
-    statement_count,
-)
+from doc_engine.ci.size_measure import PACKAGE_ROOTS, measure_tree
 
 FILE_LOC_HARD = 225
 FILE_LOC_SOFT = 150

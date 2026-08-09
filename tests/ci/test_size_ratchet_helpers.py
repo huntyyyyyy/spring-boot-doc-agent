@@ -9,14 +9,15 @@ from types import SimpleNamespace
 
 import pytest
 
+from doc_engine.ci import size_measure
 from doc_engine.ci import size_ratchet as sr
 
 pytestmark = pytest.mark.domain_ci_meta
 
 def test_line_count_and_statement_count() -> None:
-    assert sr._line_count("") == 0
-    assert sr._line_count("a\nb") == 2
-    assert sr._line_count("a\n") == 1
+    assert size_measure.line_count("") == 0
+    assert size_measure.line_count("a\nb") == 2
+    assert size_measure.line_count("a\n") == 1
     tree = ast.parse(
         "def f(x):\n"
         "    if x:\n"
@@ -29,11 +30,11 @@ def test_line_count_and_statement_count() -> None:
     )
     fn = tree.body[0]
     assert isinstance(fn, ast.FunctionDef)
-    assert sr.statement_count(fn) >= 2
+    assert size_measure.statement_count(fn) >= 2
     cls = tree.body[1]
     assert isinstance(cls, ast.ClassDef)
     out: dict[str, int] = {}
-    sr._visit_functions(tree, "", "mod.py", out)
+    size_measure._visit_functions(tree, "", "mod.py", out)
     assert "mod.py::f" in out
     assert "mod.py::C.m" in out
 

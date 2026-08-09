@@ -29,7 +29,6 @@ from doc_engine.ci.coverage_path_cohesion import PathCohesionError, PathCohesion
 from doc_engine.ci.coverage_report import (
     CoverageReport,
     FileCoverage,
-    _parse_condition_coverage,
     load_cobertura_report,
     parse_cobertura_files,
 )

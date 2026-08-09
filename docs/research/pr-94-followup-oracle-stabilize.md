@@ -17,3 +17,21 @@ Inherited debt from merging #94 while **UNSTABLE**:
 
 Reproduce → minimal fix for the 3.11 oracle failures → green `python-gates` 3.11
 without weakening the floor.
+
+## E-OR1 Spec (ruff ownership / oracle unblock)
+
+**Confirmed:** tip CI failed at `ruff check` (F401 false facade re-exports). Pytest
+never ran, so `coverage.xml` was absent and the always-on gap-average step reported
+`coverage.xml missing` as a downstream symptom — not an oracle SoT failure.
+
+**Spec gate:**
+
+1. Measurement helpers live only in `doc_engine.ci.size_measure`
+   (`line_count`, `statement_count`, `_visit_functions`).
+2. Cobertura condition parsing lives only in `doc_engine.ci.coverage_report`
+   (`_parse_condition_coverage`).
+3. `coverage_gap_average` / `size_ratchet` import from those modules **only what
+   they call** (no test-only re-export wallpaper; no `# noqa: F401`).
+4. Edge tests assert against the **owner** module, not a facade alias.
+5. Invariants unchanged: fail_under **98.7**, LOC ≤225, complexipy ≤5, 16-A
+   single-writer `coverage.xml`.
