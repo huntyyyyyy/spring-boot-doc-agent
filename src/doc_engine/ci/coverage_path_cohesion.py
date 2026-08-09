@@ -42,11 +42,26 @@ def _foreign_segment(raw: str) -> str | None:
     return match.group(2) if match else None
 
 
+def _candidate_under_root(raw: str, root: Path) -> Path:
+    """Build a path to resolve under *root*.
+
+    Windows drive paths look absolute to :func:`_looks_absolute` but are
+    relative ``pathlib.Path`` objects on POSIX; resolving them would join the
+    checkout (``/repo/C:/Users/...``) and falsely pass cohesion.
+    """
+    if not _looks_absolute(raw):
+        return root / raw
+    candidate = Path(raw)
+    if not candidate.is_absolute():
+        raise ValueError("foreign-os absolute path")
+    return candidate
+
+
 def _resolve_under_root(raw: str, root: Path) -> Path | None:
+    """Return resolved path when *raw* is inside *root*; else None."""
     root_res = root.resolve()
-    candidate = Path(raw) if _looks_absolute(raw) else root_res / raw
     try:
-        resolved = candidate.resolve()
+        resolved = _candidate_under_root(raw, root_res).resolve()
         resolved.relative_to(root_res)
         return resolved
     except (OSError, ValueError):

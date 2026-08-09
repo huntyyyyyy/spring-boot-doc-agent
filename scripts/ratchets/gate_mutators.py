@@ -45,7 +45,7 @@ def definitions() -> tuple[Mutator, ...]:
             "src/doc_engine/query/envelope.py", "python",
             "cap = max(0, min(cap, max_limit))",
             "cap = max(0, cap)",
-            "test_query_artifacts.py",
+            "test_query_artifacts_evidence_routes.py",
             "agents rely on hard --limit clamp; removing it dumps unbounded "
             "evidence into context (DDIA backpressure)"),
         Mutator(
@@ -53,7 +53,7 @@ def definitions() -> tuple[Mutator, ...]:
             "src/doc_engine/query/rank.py", "python",
             "tokens_used + cost <= budget",
             "True",
-            "test_context_packet.py",
+            "test_context_packet_assemble.py",
             "context_packet budgetTokens must trim primaryContext; disabling "
             "the guard dumps unbounded packets"),
         Mutator(
@@ -62,7 +62,7 @@ def definitions() -> tuple[Mutator, ...]:
             "return (FreshnessLabel.FRESH_INDEXED if actual == expected "
             "else FreshnessLabel.STALE)",
             "return FreshnessLabel.FRESH_INDEXED",
-            "test_context_packet.py",
+            "test_context_packet_freshness.py",
             "signature mismatch must label stale; always-fresh hides drift"),
 
         # --- literal: see Mutator's docstring for why each cannot be ---------
@@ -77,7 +77,7 @@ def definitions() -> tuple[Mutator, ...]:
             "rule-loses-its-args-form",
             "src/doc_engine/scanning/resources/spring_ast_grep_rules.yml", "",
             '    - pattern: "@JoinColumn($$$ARGS)"\n', "",
-            "test_rule_coverage.py",
+            "test_rule_coverage_ids.py",
             "a marker pattern and an argument-bearing one are disjoint node "
             "shapes; dropping one silently halves a rule"),
         Mutator(

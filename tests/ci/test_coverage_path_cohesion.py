@@ -55,6 +55,15 @@ class PathCohesionGuardTest(unittest.TestCase):
             bad = PathCohesionGuard(root).violations([str(outside)])
             self.assertTrue(bad)
 
+    def test_windows_absolute_foreign_path_fails_on_posix(self) -> None:
+        """Drive-letter Cobertura paths must not resolve under a POSIX checkout."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "spring-boot-doc-agent"
+            root.mkdir()
+            foreign = "C:/Users/x/wt-cov-measure/src/doc_engine/x.py"
+            bad = PathCohesionGuard(root).violations([foreign])
+            self.assertTrue(bad, msg="Windows absolute path must violate on POSIX")
+
     def test_report_adapter_source_paths_feed_guard(self) -> None:
         report = CoberturaXmlReport(
             (
