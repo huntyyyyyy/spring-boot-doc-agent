@@ -5,6 +5,9 @@ Replaces inline ``python <<'PY'`` heredocs in workflows (policy C-A / C3).
 Missing coverage.xml is non-fatal for the summary mode (pytest may have
 failed before writing); print-line-rate mode requires the file.
 
+``--print-line-rate`` is stdlib-only so sonar.yml can run it without
+installing the package. ``--github-summary`` imports doc_engine lazily.
+
 Usage:
     python3 scripts/ci/coverage_run_summary.py --github-summary
     python3 scripts/ci/coverage_run_summary.py --print-line-rate
@@ -21,7 +24,8 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from doc_engine.ci.github_step_summary import append_markdown_cli
+# ``--print-line-rate`` is stdlib-only (sonar.yml has no package install).
+# Import append_markdown_cli lazily in write_github_summary.
 
 
 def _line_rate_pct(coverage_xml: Path) -> float:
@@ -54,6 +58,8 @@ def write_github_summary(
     fail_under: str,
 ) -> int:
     """Append coverage headline to the GitHub step summary (validated path)."""
+    from doc_engine.ci.github_step_summary import append_markdown_cli
+
     line_rate: float | None = None
     if coverage_xml.is_file():
         line_rate = _line_rate_pct(coverage_xml)
