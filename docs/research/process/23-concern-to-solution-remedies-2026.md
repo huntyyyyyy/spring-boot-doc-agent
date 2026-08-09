@@ -1,6 +1,6 @@
 ---
 title: E-SOL0 — Concern→solution map (DDIA labels → 2026 effective remedies)
-status: DRAFT Spec — pending Approve of SOL1–SOL11
+status: DRAFT Spec — pending Approve of SOL1–SOL12
 research date: 2026-08-09
 research_window: 2026-06-01 → 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
@@ -8,6 +8,7 @@ product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
   - docs/design/ddia-north-star/INDEX.md
   - docs/design/ddia-north-star/meta/effective-remedies.md
+  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
   - docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
   - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
@@ -16,12 +17,13 @@ related:
   - docs/research/quality-backlog.md
 do_not:
   - treat DDIA page ids as Accept criteria without a named remedy mechanism
+  - Embody new fitness/ETL from remedy labels alone — need E-CGQ0 depth rows (CGQ2/CGQ6)
   - invent new SoT floors from LLM-judge or scoped Cover%
   - dual-wire Sonar/Spec Kit/Nx as runtime SoT
   - raise constitution ceilings to “make room”
-spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL11 pending Approve
+spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL11 pending Approve; catalog = vocabulary until E-CGQ0 depth Approve (CGQ6)
 gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue (HOT13/STACK)"
-critique: "Human 2026-08-09: north-star tables described problems without solution mechanisms research shows effective"
+critique: "Human 2026-08-09: north-star tables described problems without solution mechanisms research shows effective; follow-up: labels without depth → vague codegen"
 ---
 
 # Principal memo: from DDIA *concern labels* to *effective remedies*
@@ -107,7 +109,7 @@ Concern → DDIA lens (optional vocabulary)
 
 ---
 
-## 4. Spec decisions (SOL1–SOL11) — pending Approve
+## 4. Spec decisions (SOL1–SOL12) — pending Approve
 
 | ID | Decision |
 | --- | --- |
@@ -122,6 +124,7 @@ Concern → DDIA lens (optional vocabulary)
 | **SOL9** | E-COH1 / E-STK1 / E-TACH0 Specs must cite SOL remedy ids, not only DDIA page ids |
 | **SOL10** | Wrap-annotation first-line defect: Defer product fix; keep ratchet; do not pretend HOT7 “fixed” it |
 | **SOL11** | North-star operational concepts/relationships/playbooks carry `## Effective remedies`; companion SoR is `meta/effective-remedies.md`; depth fitness fails if missing |
+| **SOL12** | **Amend (CGQ6):** remedy mechanism ids in catalog/pages are **vocabulary only** until E-CGQ0 depth rows ([`process/24`](24-codegen-quality-dimensions-mechanism-depth-2026.md) §2) are Approved; do not Embody new fitness/ETL from the id alone |
 | **SOL11** | Operational north-star `concept` / `relationship` / `playbook` pages MUST carry `## Effective remedies` naming a mechanism from `meta/effective-remedies.md`; depth fitness enforces it |
 
 ---
@@ -130,7 +133,7 @@ Concern → DDIA lens (optional vocabulary)
 
 ### E-SOL0 — Spec gate (this memo)
 
-Exit: Approve SOL1–SOL11; backlog P20.0. Catalog companion + page sections land under SOL11 even while Spec is Draft (install the remedy vocabulary before Accept stamp).
+Exit: Approve SOL1–SOL12; backlog P20.0. Catalog companion + page sections land under SOL11; **depth Embody gated by E-CGQ0** (SOL12 / CGQ6).
 
 ### Follow-ons (ordered, one Active)
 
@@ -155,9 +158,8 @@ Exit: Approve SOL1–SOL11; backlog P20.0. Catalog companion + page sections lan
 
 ## 7. Exit
 
-**E-SOL0 DRAFT** until human Approve of SOL1–SOL11.
-This memo answers the critique: north-star pages stay useful as *lenses*;
-**research-backed remedies** (fitness functions, single-write/derive, characterization,
-mutation/metamorphic witnesses, sensor→Spec) become the load-bearing Accept path —
-installed in-catalog at `docs/design/ddia-north-star/meta/effective-remedies.md` and on each
-operational concept/relationship/playbook.
+**E-SOL0 DRAFT** until human Approve of SOL1–SOL12.
+This memo answers the first critique: north-star pages stay useful as *lenses*;
+remedy **ids** land in-catalog as vocabulary (`meta/effective-remedies.md` + page sections).
+**Depth before Embody** is owned by **E-CGQ0** ([`process/24`](24-codegen-quality-dimensions-mechanism-depth-2026.md)):
+theory/math/algo/DS/ETL rows + pre-generation dimensions — Approve CGQ before new fitness code.

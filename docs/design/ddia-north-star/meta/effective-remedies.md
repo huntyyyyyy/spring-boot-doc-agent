@@ -13,12 +13,23 @@ path: meta/effective-remedies.md
 
 ## In one sentence
 
-DDIA concept pages name **concerns**; this page names **mechanisms research and high-adoption practice show work** for those concerns in this product — Spec Accept must cite a mechanism here (or Explicit Defer), not a DDIA `id` alone.
+DDIA concept pages name **concerns**; this page names **mechanism vocabulary** for those concerns — Spec Accept must cite a mechanism id here **and** a depth-row cite from [`process/24`](../../../research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md) §2 (or Explicit Defer), not a DDIA `id` or bare remedy label alone.
 
 ## Why this exists
 
 Human critique (2026-08-09): north-star tables described problems without installing solutions.
-Research Spec: [`docs/research/process/23-concern-to-solution-remedies-2026.md`](../../../research/process/23-concern-to-solution-remedies-2026.md) (E-SOL0).
+Follow-up: installing labels without theory/math/algo/DS/ETL still yields vague codegen.
+Research Spec: [`docs/research/process/23-…`](../../../research/process/23-concern-to-solution-remedies-2026.md) (E-SOL0) + [`process/24-…`](../../../research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md) (E-CGQ0).
+
+## Vocabulary vs depth (CGQ6)
+
+| Layer | Authority | Status |
+| --- | --- | --- |
+| Mechanism **id** on this page + `## Effective remedies` sections | Vocabulary / routing | Landed (SOL11) |
+| Mechanism **depth rows** (theory, math, algorithms, DS, ETL, traversal checklist) | [`process/24`](../../../research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md) §2 | Draft E-CGQ0 — required before Embody of *new* fitness/ETL |
+| Spec Accept | Concern → Remedy id → Depth cite → Witness | CGQ3 pending Approve |
+
+**Fail if:** a Spec or Impl Embody cites only a mechanism id from this page with no depth-row cite (or Explicit Defer).
 
 ## Remedy mechanisms (default Adopt set)
 
@@ -43,22 +54,27 @@ Research Spec: [`docs/research/process/23-concern-to-solution-remedies-2026.md`]
 | `refactor-sequencing` | characterization-net + sensor-ledger-spec | Spike receipts; finding ledger | Cite SOL remedy ids on reshape Specs |
 | `architecture-decision-review` | all five (pick by concern) | Prompt-10 tiers + catalog cite | **Fail** ADRs that only cite DDIA ids |
 
-## Spec Accept shape (non-negotiable once E-SOL0 Approved)
+## Spec Accept shape (non-negotiable once E-SOL0 + E-CGQ0 Approved)
 
 ```text
 Concern → DDIA id (vocabulary)
        → Remedy mechanism id (this page)
-       → Accept = mechanism installed | Explicit Defer + exit criterion
+       → Depth-row cite (process/24 §2.x) | Explicit Defer + exit
+       → Witness path
+       → Accept = mechanism installed | Explicit Defer
 ```
 
 ## Fail if
 
 - Fail if a Spec Accept row cites only a DDIA page id with no remedy mechanism id from this page (or Explicit Defer).
+- Fail if a Spec cites only a remedy mechanism id with no depth-row cite from `process/24` §2 (CGQ3/CGQ6).
 - Fail if Cover% or LLM-as-judge is offered as proof a **structural** fitness function holds.
 - Fail if a reshape starts without a characterization net when the concern is maintainability / refactor.
 
 ## See also
 
 - Research: `docs/research/process/23-concern-to-solution-remedies-2026.md`
+- Depth SoR: `docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md`
 - Design Spec: `docs/design/concern-to-solution-remedies-design-2026-08-09.md`
+- CGQ Spec: `docs/design/codegen-quality-dimensions-design-2026-08-09.md`
 - Enrichment: [enrichment-protocol.md](enrichment-protocol.md) (requires `## Effective remedies` on operational concepts / relationships / playbooks)

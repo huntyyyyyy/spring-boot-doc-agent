@@ -230,13 +230,14 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Active:** **E-COH1** reshape provisional tip modules (after E-HOT1 Verify green) — must cite **E-SOL0** remedies when Spec’d (fitness / characterization / seam map), not DDIA ids alone.  
+**Active:** **E-COH1** reshape — **paused** until **E-CGQ0** Approve + CGQ3 Accept rows (characterization depth + structural probe); must not Spec from DDIA/remedy labels alone.  
 **Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
 **Docs Spec Approved:** **E-STACK0** — stack rescope under ≥10k★ (Backstage scoped: corp IDP supported; CLI runtime Refuse).  
-**Active Spec draft:** **E-SOL0** — concern→solution remedies ([`process/23-…`](process/23-concern-to-solution-remedies-2026.md)); Approve **SOL1–SOL11**. Catalog companion + page sections **landed** ([`meta/effective-remedies.md`](../design/ddia-north-star/meta/effective-remedies.md)); depth fitness enforces `## Effective remedies`.  
+**Active Spec draft:** **E-CGQ0** — codegen-quality dimensions + remedy-mechanism depth ([`process/24-…`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md)); Approve **CGQ1–CGQ10**.  
+**Spec draft (paired):** **E-SOL0** — concern→solution vocabulary ([`process/23-…`](process/23-concern-to-solution-remedies-2026.md)); Approve **SOL1–SOL12** (SOL12 = vocabulary until CGQ depth). Catalog companion landed; depth fitness = section presence only.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1) before depends_on Approve.  
-**Defer:** E-CQL1 (ready); E-STK1 (ready — preferred consumer of SOL2/4/6); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs that only cite DDIA page ids without a named remedy mechanism (SOL1)**.
+**Defer:** E-CQL1 (ready); E-STK1 (ready — after CGQ3); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs that only cite DDIA page ids or bare remedy labels without depth-row cite (SOL1 / CGQ3)**; **Embody new fitness from catalog ids before E-CGQ0 Approve (CGQ2/CGQ6)**.
 
 ---
 
@@ -313,11 +314,22 @@ Research: [`docs/research/process/22-stack-rescope-10k-star-bar-2026.md`](proces
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P20.0 | **E-SOL0 Spec:** approve **SOL1–SOL11** (Accept requires named remedy: fitness / single-write / characterization / mutation-MT / sensor→Spec; north-star pages carry Effective remedies) | **Draft** (2026-08-09) | research 23 + design → APPROVED |
-| P20.1 | E-COH1 / E-STK1 / E-TACH0 Specs cite SOL remedy ids | After Approve | Spec tables include Concern→Remedy→Accept |
-| P20.2 | North-star companion `meta/effective-remedies.md` + page sections + depth fitness (SOL11) | **Landed** (2026-08-09) pending Spec stamp | `test_ddia_north_star_depth` Effective remedies |
+| P20.0 | **E-SOL0 Spec:** approve **SOL1–SOL12** (Accept requires named remedy vocabulary; SOL12 = depth via E-CGQ0 before Embody) | **Draft** (2026-08-09) | research 23 + design → APPROVED |
+| P20.1 | E-COH1 / E-STK1 / E-TACH0 Specs cite SOL remedy ids **and** CGQ3 depth/witness | After E-CGQ0 + E-SOL0 Approve | Spec tables include Concern→Remedy→Depth→Accept |
+| P20.2 | North-star companion `meta/effective-remedies.md` + page sections + depth fitness (SOL11) | **Landed** (2026-08-09) vocabulary pending CGQ | `test_ddia_north_star_depth` Effective remedies |
 
 Research: [`docs/research/process/23-concern-to-solution-remedies-2026.md`](process/23-concern-to-solution-remedies-2026.md). Design: [`docs/design/concern-to-solution-remedies-design-2026-08-09.md`](../design/concern-to-solution-remedies-design-2026-08-09.md).
+
+---
+
+## P21 — Codegen-quality dimensions + remedy-mechanism depth
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P21.0 | **E-CGQ0 Spec:** approve **CGQ1–CGQ10** (pre-generation controls; depth rows before Embody; Accept Concern→Remedy→Depth→Witness; structural probe; independent Verify; E-SOL0 vocabulary Amend) | **Draft** (2026-08-09) — **Active Spec draft** | research 24 + design → APPROVED |
+| P21.1 | E-COH1 / E-STK1 Activate only with CGQ3 Accept rows | After Approve | Spec tables cite process/24 §2 |
+
+Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md). Design: [`docs/design/codegen-quality-dimensions-design-2026-08-09.md`](../design/codegen-quality-dimensions-design-2026-08-09.md).
 
 ---
 
