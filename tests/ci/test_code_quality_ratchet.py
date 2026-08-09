@@ -61,6 +61,24 @@ class RatchetTest(unittest.TestCase):
             self.assertTrue(any("statements" in i for i in issues), issues)
             self.assertEqual(checker.exit_code(issues), 1)
 
+    def test_statement_growth_within_ceiling_passes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            scripts = self._tree(tmp, "def f(a):\n    return a\n")
+            baseline = checker.measure_tree(scripts)
+            (scripts / "mod.py").write_text(
+                "def f(a):\n    x = 1\n    y = 2\n    return a\n",
+                encoding="utf-8")
+            self.assertEqual(checker.compare(baseline, checker.measure_tree(scripts)), [])
+
+    def test_existing_oversized_function_fails_without_grandfather(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            body = "\n".join(f"    x{i} = {i}" for i in range(25))
+            scripts = self._tree(tmp, f"def f():\n{body}\n    return 0\n")
+            baseline = checker.measure_tree(scripts)
+            issues = checker.compare(baseline, checker.measure_tree(scripts))
+            self.assertTrue(any("statements=" in i for i in issues), issues)
+            self.assertEqual(checker.exit_code(issues), 1)
+
     def test_adding_comments_is_not_a_regression(self):
         """The metric is statements, not line span, precisely so that
         documenting a subtle piece of code does not read as making it worse.
@@ -108,7 +126,7 @@ class RatchetTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             scripts = self._tree(tmp, self.SIMPLE)
             baseline = checker.measure_tree(scripts)
-            body = "\n".join(f"    x{i} = {i}" for i in range(55))
+            body = "\n".join(f"    x{i} = {i}" for i in range(25))
             (scripts / "mod.py").write_text(
                 self.SIMPLE + f"def g():\n{body}\n    return 0\n",
                 encoding="utf-8")
