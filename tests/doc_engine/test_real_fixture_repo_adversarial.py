@@ -28,6 +28,7 @@ pytestmark = pytest.mark.domain_stage0
 REPO_ROOT = repo_root()
 BASELINE = REPO_ROOT / "scripts" / "coverage" / "real_repo_gap_baseline.json"
 from tests.support.real_fixture.adversarial_factories import (
+    _minimal_signals,
     _real_artifacts_available,
     real_artifacts_bundle,
 )

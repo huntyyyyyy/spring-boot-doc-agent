@@ -11,6 +11,7 @@ import pytest
 
 from doc_engine.ci import coverage_gap_average as cga
 from doc_engine.ci import gate_tools
+from doc_engine.ci import quality_gate_checks as qgc
 from doc_engine.ci import quality_gates as qg
 
 pytestmark = pytest.mark.domain_ci_meta
@@ -90,18 +91,18 @@ def test_gate_new_code_coverage_missing_xml(tmp_path: Path) -> None:
     assert qg.gate_new_code_coverage("origin/main", tmp_path / "no.xml") == 2
 
 def test_gate_duplication_skip_paths(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(qg, "changed_python_under_packages", lambda _ref: [])
-    assert qg.gate_duplication("origin/main") == 0
+    monkeypatch.setattr(qgc, "changed_python_under_packages", lambda _ref: [])
+    assert qgc.gate_duplication("origin/main") == 0
     monkeypatch.setattr(
-        qg, "changed_python_under_packages", lambda _ref: ["src/doc_engine/a.py"]
+        qgc, "changed_python_under_packages", lambda _ref: ["src/doc_engine/a.py"]
     )
-    assert qg.gate_duplication("origin/main") == 0
+    assert qgc.gate_duplication("origin/main") == 0
 
 def test_changed_python_git_failure(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
-        qg.subprocess,
+        qgc.subprocess,
         "run",
         lambda *a, **k: MagicMock(returncode=1, stdout="", stderr="boom"),
     )
     with pytest.raises(SystemExit):
-        qg.changed_python_under_packages("origin/main")
+        qgc.changed_python_under_packages("origin/main")

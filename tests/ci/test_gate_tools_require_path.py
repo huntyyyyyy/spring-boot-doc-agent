@@ -12,6 +12,7 @@ import pytest
 from doc_engine.ci import complexipy_ratchet as ratchet
 from doc_engine.ci import coverage_gap_average as cga
 from doc_engine.ci import gate_tools
+from doc_engine.ci import quality_gate_checks as qgc
 from doc_engine.ci import quality_gates as qg
 
 pytestmark = pytest.mark.domain_ci_meta
@@ -99,33 +100,33 @@ def test_python_module_command() -> None:
 
 def test_run_prints_and_returns(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
     monkeypatch.setattr(
-        qg.subprocess,
+        qgc.subprocess,
         "run",
         lambda *a, **k: SimpleNamespace(returncode=7),
     )
-    assert qg._run(["echo", "hi"], label="demo") == 7
+    assert qgc._run(["echo", "hi"], label="demo") == 7
     assert "demo" in capsys.readouterr().out
 
 def test_changed_python_filters(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    monkeypatch.setattr(qg, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(qgc, "REPO_ROOT", tmp_path)
     (tmp_path / "src" / "doc_engine").mkdir(parents=True)
     keep = tmp_path / "src" / "doc_engine" / "a.py"
     keep.write_text("x", encoding="utf-8")
     stdout = "src/doc_engine/a.py\nsrc/doc_engine/missing.py\nREADME.md\n"
     monkeypatch.setattr(
-        qg.subprocess,
+        qgc.subprocess,
         "run",
         lambda *a, **k: SimpleNamespace(returncode=0, stdout=stdout, stderr=""),
     )
-    assert qg.changed_python_under_packages("HEAD~1") == ["src/doc_engine/a.py"]
+    assert qgc.changed_python_under_packages("HEAD~1") == ["src/doc_engine/a.py"]
 
 def test_gate_cognitive_complexity(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         "doc_engine.ci.gate_tools.require_on_path",
         lambda _n: "/bin/complexipy",
     )
-    monkeypatch.setattr(qg, "_run", lambda cmd, label: 0)
-    assert qg.gate_cognitive_complexity() == 0
+    monkeypatch.setattr(qgc, "_run", lambda cmd, label: 0)
+    assert qgc.gate_cognitive_complexity() == 0
 
 def test_baseline_offender_ceiling_bad_json(tmp_path: Path) -> None:
     path = tmp_path / "b.json"
@@ -138,11 +139,12 @@ def test_main_with_coverage_and_exit_codes(monkeypatch: pytest.MonkeyPatch, tmp_
     xml = tmp_path / "coverage.xml"
     xml.write_text("<coverage/>", encoding="utf-8")
     monkeypatch.setattr(qg, "gate_import_cycles", lambda: 0)
+    monkeypatch.setattr(qg, "gate_size_ratchet", lambda: 0)
     monkeypatch.setattr(qg, "gate_duplication", lambda _r: 0)
     monkeypatch.setattr(qg, "gate_new_code_coverage", lambda _r, _x: 0)
     monkeypatch.setattr(qg, "gate_cognitive_complexity", lambda: 0)
     monkeypatch.setattr(qg, "gate_complexity_ratchet", lambda: 0)
-    monkeypatch.setattr(qg, "_report_gap_average", lambda _x: None)
+    monkeypatch.setattr(qg, "report_gap_average", lambda _x: None)
     assert qg.main(["--compare-ref", "HEAD~1", "--coverage-xml", str(xml)]) == 0
 
     monkeypatch.setattr(qg, "gate_import_cycles", lambda: 2)

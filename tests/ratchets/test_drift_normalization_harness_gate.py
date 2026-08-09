@@ -28,9 +28,7 @@ CONFIRMING = ("confirmed_still_present", "unchanged")
 CONTROLLER_BASENAME = "InvoiceController.java"
 LEDGER_BASENAME = "PaymentLedger.java"
 SEMANTIC_TOUCHED = frozenset({CONTROLLER_BASENAME, LEDGER_BASENAME})
-_TMP: Optional[str] = None
-OUTCOMES: Dict[str, "Outcome"] = {}
-GETMAPPING_LINE: Optional[int] = None
+from tests.support.drift_normalization import harness as dn
 from tests.support.drift_normalization.harness import (
     Outcome,
     _apply_to_java,
@@ -40,9 +38,15 @@ from tests.support.drift_normalization.harness import (
     _report_basename,
     _run_scenario,
     _semantic_edits,
-    setUpModule,
-    tearDownModule,
 )
+
+
+def setUpModule() -> None:
+    dn.setUpModule()
+
+
+def tearDownModule() -> None:
+    dn.tearDownModule()
 
 class Test00HarnessValidityGate(unittest.TestCase):
     """The instrument, before anything it measures.
@@ -56,7 +60,7 @@ class Test00HarnessValidityGate(unittest.TestCase):
         -- it is just off."""
         for p_name in perturb.FORMATTING_ONLY:
             with self.subTest(perturbation=p_name):
-                outcome = OUTCOMES[f"{norms.STATUS_QUO}/{p_name}"]
+                outcome = dn.OUTCOMES[f"{norms.STATUS_QUO}/{p_name}"]
                 self.assertTrue(
                     outcome.valid,
                     f"{p_name} is declared formatting-only but a fresh scan found "
@@ -67,7 +71,7 @@ class Test00HarnessValidityGate(unittest.TestCase):
         """broken_wrap_annotation_args rewrites annotations inside comments and
         leaves the file unparseable. The gate must catch that. Without this
         test the gate is a claim, and this exact claim was false once."""
-        outcome = OUTCOMES["broken/broken_wrap_annotation_args"]
+        outcome = dn.OUTCOMES["broken/broken_wrap_annotation_args"]
         self.assertFalse(
             outcome.valid,
             "the deliberately-broken perturbation passed the validity gate, so "
@@ -81,7 +85,7 @@ class Test00HarnessValidityGate(unittest.TestCase):
         perturbation contributes drift verdicts that look exactly like tier-2
         false positives."""
         self.assertGreater(
-            len(OUTCOMES["broken/broken_wrap_annotation_args"].drifted()), 0,
+            len(dn.OUTCOMES["broken/broken_wrap_annotation_args"].drifted()), 0,
             "if the broken edit produced no drift, the validity gate would be "
             "protecting against nothing and this suite would be overstating "
             "its own rigour")
@@ -92,7 +96,7 @@ class Test01FormattingMustNotProduceDrift(unittest.TestCase):
     quietly lose them."""
 
     def _false_positives(self, p_name: str) -> List[dict]:
-        outcome = OUTCOMES[f"{norms.STATUS_QUO}/{p_name}"]
+        outcome = dn.OUTCOMES[f"{norms.STATUS_QUO}/{p_name}"]
         self.assertTrue(outcome.valid, f"{p_name} failed the validity gate")
         return outcome.drifted()
 
@@ -124,7 +128,7 @@ class Test02TheKnownGap(unittest.TestCase):
         If this fails LOW, the gap was fixed -- adopt the normalizer, drop this
         count to 0, and delete this docstring's second half. If it fails HIGH,
         something made the generic comparison more brittle."""
-        fps = OUTCOMES[f"{norms.STATUS_QUO}/wrap_annotation_args"].drifted()
+        fps = dn.OUTCOMES[f"{norms.STATUS_QUO}/wrap_annotation_args"].drifted()
         self.assertEqual(
             self.KNOWN_FALSE_POSITIVES, len(fps),
             f"expected the known {self.KNOWN_FALSE_POSITIVES} false positives "
@@ -136,7 +140,7 @@ class Test02TheKnownGap(unittest.TestCase):
         an unrelated reason. Every false positive must be a one-line annotation
         with arguments — wrapping splits it so first_line_match keeps only
         ``@Name(``."""
-        for r in OUTCOMES[f"{norms.STATUS_QUO}/wrap_annotation_args"].drifted():
+        for r in dn.OUTCOMES[f"{norms.STATUS_QUO}/wrap_annotation_args"].drifted():
             with self.subTest(file=r["file"], line=r["line"], rule=r["rule_id"]):
                 match = r.get("match") or ""
                 self.assertIn(

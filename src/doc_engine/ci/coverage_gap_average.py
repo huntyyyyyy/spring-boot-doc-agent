@@ -29,6 +29,7 @@ from doc_engine.ci.coverage_path_cohesion import PathCohesionError, PathCohesion
 from doc_engine.ci.coverage_report import (
     CoverageReport,
     FileCoverage,
+    _parse_condition_coverage,
     load_cobertura_report,
     parse_cobertura_files,
 )
@@ -177,6 +178,12 @@ def _resolve_coverage_xml(args: argparse.Namespace) -> Path:
     return coverage_xml
 
 
+def _append_github_summary(markdown: str) -> None:
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        Path(summary).open("a", encoding="utf-8").write("\n" + markdown + "\n")
+
+
 def _print_gap_report(report: GapAverageReport, args: argparse.Namespace) -> None:
     text = (
         report.as_markdown(worst=args.worst)
@@ -185,11 +192,7 @@ def _print_gap_report(report: GapAverageReport, args: argparse.Namespace) -> Non
     )
     print(text, flush=True)
     if args.append_github_summary:
-        summary = os.environ.get("GITHUB_STEP_SUMMARY")
-        if summary:
-            Path(summary).open("a", encoding="utf-8").write(
-                "\n" + report.as_markdown(worst=args.worst) + "\n"
-            )
+        _append_github_summary(report.as_markdown(worst=args.worst))
 
 
 def main(argv: list[str] | None = None) -> int:
