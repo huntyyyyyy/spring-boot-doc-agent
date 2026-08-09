@@ -1,10 +1,12 @@
 ---
 title: Suite stalking feature space — runners, telemetry, selection, triage (2026)
-status: RESEARCH COMPLETE — Spec gate not yet approved (E-RUN0)
+status: RESEARCH COMPLETE — Spec gate APPROVED E-RUN0 (2026-08-09)
+spec_gate: APPROVED E-RUN0
 date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 prefer_sources: "2026 primary (arXiv / product docs / OTel semconv); older only as contrast"
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+design: docs/design/suite-stalking-sensors-design-2026-08-09.md
 siblings:
   - docs/research/06-test-suite-bounded-contexts-parallel.md
   - docs/research/07-ci-workflow-modularity.md
@@ -187,7 +189,7 @@ D3/D4 help a lot                 D1/D2/D15 measure; D9 may skip
 
 ---
 
-## 7. Policies for Spec gate **E-RUN0** (proposed)
+## 7. Policies for Spec gate **E-RUN0** — **APPROVED** (2026-08-09)
 
 | ID | Policy |
 | --- | --- |
@@ -199,6 +201,11 @@ D3/D4 help a lot                 D1/D2/D15 measure; D9 may skip
 | **R6** | RTS / Tach / warm daemon may accelerate **pre-PR and ABI**; they must not claim 98.7 |
 | **R7** | Behavioral archive v1 = durations + failure node ids + gate exit cascade only |
 | **R8** | Agent “next action” cards are receipts (like `pre_pr`), not SoT |
+
+**Spec record:** R1–R8 approved; design stub
+[`suite-stalking-sensors-design-2026-08-09.md`](../design/suite-stalking-sensors-design-2026-08-09.md).
+Implement **E-RUN1** = D1 + D17 (+ D2 plateau in presenter); do not implement
+D3/D5/D6/D8/D9/D12/D20 in this stream.
 
 ---
 
@@ -228,7 +235,7 @@ D3/D4 help a lot                 D1/D2/D15 measure; D9 may skip
 | Where does NameRTS / selection fit? | **pre_pr / agents (D9/D18)** — not merge oracle. `[Evidenced]` 2605.25356 |
 | Behavioral co-versioning? | Narrow archive of timings/failures (**D11/R7**); refuse full runtime DB v1. `[Evidenced]` 2604.16933 |
 | Will rpytest fix 50–62% stalls? | **No** — those are test bodies. `[Confirmed]` |
-| Implement now? | **No** — **E-RUN0** Spec first. |
+| Implement now? | **E-RUN0 approved** — ship **D1/D2/D17** sensors (E-RUN1); refuse runner swap. |
 
 ---
 

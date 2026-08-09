@@ -114,9 +114,9 @@ Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modulari
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P7.0 | **E-RUN0 Spec:** approve **R1–R8** (dimensions D1–D20 map) | Not started | research 08 Spec gate |
-| P7.1 | **E-RUN1:** oracle (+ optional ABI) durations + pre-pytest cascade clarity (**D1/D17**) | Adopt after Spec | CI log / artifact |
-| P7.2 | **E-RUN2:** plateau map + optional durations ⋈ gap-average (**D2/D15**) | Adopt after Spec | script or summary section |
+| P7.0 | **E-RUN0 Spec:** approve **R1–R8** (dimensions D1–D20 map) | **Done** (2026-08-09) | research 08 `spec_gate: APPROVED E-RUN0` + design stub |
+| P7.1 | **E-RUN1:** oracle (+ optional ABI) durations + pre-pytest cascade clarity (**D1/D17**) | **Active** (v1 sensors) | CI log / artifact |
+| P7.2 | **E-RUN2:** plateau map + optional durations ⋈ gap-average (**D2/D15**) | D2 in E-RUN1 presenter; D15 defer | script or summary section |
 | P7.3 | **E-RUN3:** rpytest `--verify-dropin` spike on one `domain_*` (**D3**) | Spike / refuse if &lt;15% or drop-in fail | wall-clock + parity |
 | P7.4 | **E-RUN4:** NameRTS-shaped selection + agent card behind `pre_pr` only (**D9/D18**) | Adopt after Spec · never oracle | `pre_pr` receipt |
 | P7.5 | **E-RUN5:** advisory flake/job log triage (**D7/D8**) | Defer | non-blocking artifact |
@@ -130,6 +130,6 @@ Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-run
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
 **Done (E-TEST0–1):** domain markers + ABI shards.  
 **Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
-**Active tip:** oracle stabilize (#105) to **98.7**.  
-**Next research Spec (when tip free):** **E-RUN0** — durations/sensors first; not oracle runner swap.  
+**Active tip:** oracle stabilize (#105) to **98.7** + **E-RUN1** suite-stalking sensors (D1/D2/D17).  
+**Spec done:** **E-RUN0** (R1–R8). Next after sensors: optional D15 join; refuse oracle runner swap.  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; Spec Kit WorkflowEngine as CI runtime.
