@@ -29,6 +29,11 @@ class Ch01FaultInjectionTest(KitchenBoundTestCase):
     class, nothing proved a corrupted run actually fails.
     """
 
+    @pytest.fixture(autouse=True)
+    def _bind_docs_scratch(self, kitchen_docs_scratch):
+        # unittest.TestCase cannot take fixture args on test methods (pytest).
+        self._docs_scratch = kitchen_docs_scratch
+
     def _gate(self, docs, *extra):
         # --no-write-check because these run against a *copy* of docs/ that
         # lives outside the target repo. With docs elsewhere the write check
@@ -48,29 +53,27 @@ class Ch01FaultInjectionTest(KitchenBoundTestCase):
             ]
         )
 
-    def test_clean_output_passes(self, kitchen_docs_scratch):
+    def test_clean_output_passes(self):
         """The control. Without it every assertion below could pass for the
         wrong reason."""
-        _scratch, docs = kitchen_docs_scratch
+        _scratch, docs = self._docs_scratch
         proc = self._gate(docs)
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 
-    def test_a_missing_doc_becomes_a_process_failure(self, kitchen_docs_scratch):
-        _scratch, docs = kitchen_docs_scratch
+    def test_a_missing_doc_becomes_a_process_failure(self):
+        _scratch, docs = self._docs_scratch
         os.remove(os.path.join(docs, "testing.md"))
         proc = self._gate(docs)
         self.assertEqual(proc.returncode, 1)
         self.assertIn("missing expected doc: testing.md", proc.stderr)
 
-    def test_a_miscased_tag_is_a_fault_that_never_becomes_a_failure(
-        self, kitchen_docs_scratch
-    ):
+    def test_a_miscased_tag_is_a_fault_that_never_becomes_a_failure(self):
         """Deliberately adjacent to the test above: the same magnitude of
         defect, and the gate the pipeline actually blocks on returns 0. A
         lowercase tag word matches neither the valid patterns nor the
         malformed-span detector, so the citation is scored as absent
         everywhere. Fault without failure — the contrast is the point."""
-        _scratch, docs = kitchen_docs_scratch
+        _scratch, docs = self._docs_scratch
         _miscase_first_tag(self, os.path.join(docs, "database.md"))
         self.assertEqual(self._gate(docs).returncode, 0)
 

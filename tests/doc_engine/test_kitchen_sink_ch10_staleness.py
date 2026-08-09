@@ -23,6 +23,11 @@ class Ch10StalenessTest(KitchenBoundTestCase):
     """Drift as a staleness detector, on a copy so mutation cannot perturb the
     artifacts every other class reads (and so test order stays irrelevant)."""
 
+    @pytest.fixture(autouse=True)
+    def _bind_repo_copy(self, kitchen_repo_copy):
+        # unittest.TestCase cannot take fixture args on test methods (pytest).
+        self.repo = kitchen_repo_copy
+
     def _drift(self):
         out = os.path.join(os.path.dirname(self.repo), "drift.json")
         proc = _run(
@@ -54,13 +59,11 @@ class Ch10StalenessTest(KitchenBoundTestCase):
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             f.write(text.replace(old, new) if old else text + new)
 
-    def test_renamed_table_drifts_its_citation(self, kitchen_repo_copy):
-        self.repo = kitchen_repo_copy
+    def test_renamed_table_drifts_its_citation(self):
         self._mutate(TWO_ENTITIES, 'name = "alpha_tbl"', 'name = "alpha_renamed"')
         self.assertIn("drifted", self._statuses(self._drift(), TWO_ENTITIES))
 
-    def test_deleted_file_marks_its_citations_deleted(self, kitchen_repo_copy):
-        self.repo = kitchen_repo_copy
+    def test_deleted_file_marks_its_citations_deleted(self):
         path = os.path.join(self.repo, DUP_LEDGER.replace("/", os.sep))
         text = open(path, encoding="utf-8").read()
         os.remove(path)
@@ -69,19 +72,17 @@ class Ch10StalenessTest(KitchenBoundTestCase):
         )
         self.assertIn("file_deleted", self._statuses(self._drift(), DUP_LEDGER))
 
-    def test_config_value_only_change_is_flagged_for_review(self, kitchen_repo_copy):
+    def test_config_value_only_change_is_flagged_for_review(self):
         """The enterprise case this outcome exists for: checked-in config is a
         placeholder and real values arrive at deploy time, so a value moving
         under an unchanged key means something unusual happened."""
-        self.repo = kitchen_repo_copy
         self._mutate(SECRETS_YML, "hunter2literalvalue", "differentliteralvalue")
         self.assertIn(
             "config_values_only_changed_review_needed",
             self._statuses(self._drift(), SECRETS_YML),
         )
 
-    def test_added_config_key_is_structural_drift(self, kitchen_repo_copy):
-        self.repo = kitchen_repo_copy
+    def test_added_config_key_is_structural_drift(self):
         self._mutate(SECRETS_YML, None, "extra:\n  added: 1\n")
         self.assertIn(
             "config_structure_changed",
