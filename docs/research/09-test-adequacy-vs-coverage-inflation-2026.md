@@ -1,10 +1,12 @@
 ---
 title: Test adequacy vs coverage inflation — 2026 math, criteria, and this repo
-status: RESEARCH COMPLETE — Spec gate not yet approved (E-QA0)
+status: RESEARCH COMPLETE — Spec gate APPROVED E-QA0 (2026-08-09)
+spec_gate: APPROVED E-QA0
 date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 prefer_sources: "2026 primary (arXiv / GitHub / DeepWiki); older only as contrast"
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+design: docs/design/test-adequacy-markers-design-2026-08-09.md
 siblings:
   - docs/research/01-coverage-oracle-climb-solid.md
   - docs/research/03-scientific-dimensions-metrics.md
@@ -45,7 +47,7 @@ needs Spec or measure.
 | Is Cover% alone a quality marker? | **No.** Necessary, not sufficient. `[Evidenced]` 2026 + classical |
 | Is “climb to clear gap-average” at risk of lousy padding? | **Yes — Confirmed** incentive on this tip (`ENFORCE=False` mutation). |
 | Replace framework with one 2026 product (MIST-RL, Prompt Coverage, …)? | **Refuse** as SoT swap; **Adopt** algorithms as *sensors / Verify steps*. |
-| Next Spec? | **E-QA0** — adequacy criteria ports + anti-padding Verify (mutation graduate). |
+| Next Spec? | **E-QA0 approved** — ship **E-QA1/E-QA2**; refuse Cover% padding without witness. |
 
 ```text
 NECESSARY (execution footprint)     SUFFICIENT (discriminative power)
@@ -173,7 +175,7 @@ ESE witness-in-progress).
 
 ---
 
-## 7. Policies for Spec gate **E-QA0** (proposed)
+## 7. Policies for Spec gate **E-QA0** — **APPROVED** (2026-08-09)
 
 | ID | Policy |
 | --- | --- |
@@ -185,6 +187,11 @@ ESE witness-in-progress).
 | **Q6** | New criteria land as OCP strategies under concept packages — no `utils/adequacy.py` |
 | **Q7** | LLM-generated climb tests are held to the same witnesses as human tests |
 | **Q8** | Measurement-first: mutation kill-rate baselines before hard `ENFORCE=True` |
+
+**Spec record:** Q1–Q8 approved; design stub
+[`test-adequacy-markers-design-2026-08-09.md`](../design/test-adequacy-markers-design-2026-08-09.md).
+Implement **E-QA1** (adequacy sensor ports + CI summary) then **E-QA2**
+(anti-padding Verify). Do not scrap Cover%/E-TEST; do not fold mutator taxonomies.
 
 ---
 
