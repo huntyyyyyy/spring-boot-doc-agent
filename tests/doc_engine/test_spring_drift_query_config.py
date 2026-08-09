@@ -24,6 +24,7 @@ FAST_MODE = os.environ.get("SPRING_DRIFT_FAST_MODE", "").lower() in ("1", "true"
 from tests.support.spring_drift.scratch import _by_source, _edit, _fixture_build_command, _make_scratch_copy
 
 class SpringDriftQueryConfigTest(unittest.TestCase):
+    @classmethod
     def setUpClass(cls):
             # One baseline scan of the committed fixture, reused by every test.
             # Each test still gets its own scratch copy to mutate in isolation.
