@@ -57,33 +57,11 @@ def _hash_from_scan_context(scan_context: Any) -> str:
     fail-closed sentinel so incomplete contexts cannot share the empty digest.
     """
     h = hashlib.sha256()
-    rels = _scan_context_hash_rels(scan_context)
-    for rel in rels:
+    for rel in _scan_context_hash_rels(scan_context):
         _update_hash_pair(
             h, rel, _signature_or_missing(scan_context.file_signatures, rel)
         )
-    digest = h.hexdigest()[:32]
-    # #region agent log
-    try:
-        import json as _json, time as _time
-        open("/opt/cursor/logs/debug.log", "a", encoding="utf-8").write(
-            _json.dumps({
-                "hypothesisId": "B",
-                "location": "_codeql_cache_keys.py:_hash_from_scan_context",
-                "message": "scan_context hash",
-                "data": {
-                    "rel_count": len(rels),
-                    "digest_prefix": digest[:8],
-                    "empty_sha_prefix": digest == "e3b0c44298fc1c149afbf4c8996fb924",
-                },
-                "timestamp": int(_time.time() * 1000),
-            })
-            + "\n"
-        )
-    except OSError:
-        pass
-    # #endregion
-    return digest
+    return h.hexdigest()[:32]
 
 def _is_codeql_walk_filename(name: str) -> bool:
     return name.endswith(".java") or _is_codeql_hash_file(name)
