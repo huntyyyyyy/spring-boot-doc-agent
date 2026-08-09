@@ -174,6 +174,17 @@ Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipel
 
 ---
 
+## P13 — CodeQL signals CI skip (fingerprint)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Research complete — awaiting Approve** (2026-08-09) | research 17 `spec_gate: PENDING APPROVE E-CQL0` |
+| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Blocked on P13.0** | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
+
+Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql-signals-skip-fingerprint-2026.md).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
@@ -188,6 +199,6 @@ Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipel
 **Done (E-MOD0):** M1–M12 Spec Approve (2026-08-09).  
 **Done (E-MOD1):** `mock_stages` concept modules + `MockStageStrategy` registry (2026-08-09).  
 **Done (E-MOD2):** Stage-0 tool façades — `capacity_preflight` / `spring_drift_check` / `partition_repo` (2026-08-09).  
-**Active:** pick next from Defer (E-UX2 / E-QA3 / E-RUN*) only when product need bites — no sensor-by-default.  
-**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps.
+**Active (Spec):** **E-CQL0** — CodeQL signals fingerprint skip (research 17); Implement blocked on Approve.  
+**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; workflow `paths` on required CI; Actions cache as CodeQL merge SoR.
