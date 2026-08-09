@@ -8,6 +8,8 @@ run queries. Ports/adapters live in sibling modules:
 - ``_codeql_cache`` — cache directory / metadata / results JSON
 - ``_codeql_database`` — database create + pack install + reuse
 - ``_codeql_queries`` — query run + BQRS decode
+- ``_codeql_evidence`` — project rows → Stage-0 evidence buckets
+- ``_codeql_entity_map`` — project entity hits → entity_table_map candidates
 """
 
 from __future__ import annotations

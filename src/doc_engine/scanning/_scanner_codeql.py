@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""CodeQL scanner backend (thin facade over evidence ingest + runner)."""
+"""CodeQL ``ScannerBackend`` port.
+
+Orchestrates Stage-0 CodeQL: run queries (``support/_codeql_runner``), project
+rows into evidence + entity_table_map candidates (``support/_codeql_evidence``,
+``support/_codeql_entity_map``), and emit a covering receipt for the Java scope.
+"""
 
 from __future__ import annotations
 
@@ -12,12 +17,19 @@ from typing import Any, Dict, List, Optional
 from doc_engine.core.context import ScanContext
 from doc_engine.scanning._paths import codeql_pack_dir
 from doc_engine.scanning._scanner_base import ScannerBackend
-from doc_engine.scanning._scanner_codeql_evidence import (
-    acked_java_paths,
-    bucket_codeql_rows,
-)
 from doc_engine.scanning.covering import COVERING_RECEIPT_KEY
+from doc_engine.scanning.support._codeql_evidence import project_codeql_rows
 from doc_engine.scanning.support._codeql_runner import CodeQLError, scan_with_codeql
+
+
+def _acked_java_paths(
+    scan_context: Optional[ScanContext],
+    expected_paths: List[str],
+) -> List[str]:
+    """Java paths CodeQL covering treats as acknowledged for this scan."""
+    if scan_context is None:
+        return expected_paths
+    return sorted({entry.rel_path for entry in scan_context.java_files})
 
 
 class CodeQLBackend(ScannerBackend):
@@ -29,11 +41,10 @@ class CodeQLBackend(ScannerBackend):
 
     @staticmethod
     def _version_hash_paths() -> List[str]:
-        """Hash facade + ``_scanner_codeql_*.py`` + ``support/_codeql_*.py`` + pack."""
+        """Hash this port + every ``support/_codeql_*.py`` sibling + query pack."""
         self_file = Path(__file__).resolve()
         support = self_file.parent / "support"
         paths = [str(self_file)]
-        paths.extend(sorted(map(str, self_file.parent.glob("_scanner_codeql_*.py"))))
         paths.extend(sorted(map(str, support.glob("_codeql_*.py"))))
         pack_dir = codeql_pack_dir()
         if pack_dir.is_dir():
@@ -81,7 +92,7 @@ class CodeQLBackend(ScannerBackend):
             scan_context=scan_context,
         )
 
-        evidence, entity_candidates = bucket_codeql_rows(
+        evidence, entity_candidates = project_codeql_rows(
             repo_path=repo_path,
             rows=rows,
             scan_context=scan_context,
@@ -106,7 +117,7 @@ class CodeQLBackend(ScannerBackend):
         sigs = dict(scan_context.file_signatures) if scan_context is not None else {}
         expected_paths = java_scope_paths(sigs)
         expected_root = subset_root(sigs, expected_paths)
-        acked = acked_java_paths(scan_context, expected_paths)
+        acked = _acked_java_paths(scan_context, expected_paths)
         acked_root = subset_root(sigs, acked)
         status = "complete" if acked_root == expected_root else "failed"
         receipt = build_receipt(

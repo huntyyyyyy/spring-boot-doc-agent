@@ -8,15 +8,12 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from doc_engine.scanning._scanner_codeql import CodeQLBackend
-from doc_engine.scanning._scanner_codeql_entity_map import (
+from doc_engine.scanning._scanner_codeql import CodeQLBackend, _acked_java_paths
+from doc_engine.scanning.support._codeql_entity_map import (
     entity_map_entry,
     explicit_table_map_entry,
 )
-from doc_engine.scanning._scanner_codeql_evidence import (
-    acked_java_paths,
-    evidence_entry_from_codeql_row,
-)
+from doc_engine.scanning.support._codeql_evidence import evidence_entry_from_codeql_row
 from doc_engine.scanning.support import _codeql_runner as runner
 from doc_engine.scanning.support import _codeql_cache as cache_mod
 
@@ -80,7 +77,7 @@ def test_evidence_entry_raw_query_fields():
 
 def test_evidence_entry_repository_falls_back_to_entity_name(monkeypatch):
     monkeypatch.setattr(
-        "doc_engine.scanning._scanner_codeql_evidence.extract_repository",
+        "doc_engine.scanning.support._codeql_evidence.extract_repository",
         lambda _text: {"repository": "FooRepo"},
     )
     entry = evidence_entry_from_codeql_row(
@@ -151,11 +148,11 @@ def test_acked_java_paths_prefer_scan_context():
             SimpleNamespace(rel_path="a/A.java"),
         ]
     )
-    assert acked_java_paths(ctx, ["z/Z.java"]) == [
+    assert _acked_java_paths(ctx, ["z/Z.java"]) == [
         "a/A.java",
         "b/B.java",
     ]
-    assert acked_java_paths(None, ["z/Z.java"]) == ["z/Z.java"]
+    assert _acked_java_paths(None, ["z/Z.java"]) == ["z/Z.java"]
 
 def test_covering_receipt_complete_when_acked_matches(monkeypatch):
     backend = CodeQLBackend()

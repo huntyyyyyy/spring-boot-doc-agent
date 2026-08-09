@@ -9,10 +9,8 @@ import pytest
 
 from doc_engine.scanning import spring as spring_mod
 from doc_engine.scanning._scanner_codeql import CodeQLBackend
-from doc_engine.scanning._scanner_codeql_evidence import (
-    ingest_codeql_row,
-    ingest_entity_row,
-)
+from doc_engine.scanning.support._codeql_entity_map import record_entity_hit
+from doc_engine.scanning.support._codeql_evidence import project_codeql_row
 from doc_engine.scanning.support import _codeql_runner as runner
 
 pytestmark = pytest.mark.domain_climb_sensor
@@ -97,11 +95,8 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     siblings = {p.name for p in support.glob("_codeql_*.py")}
     assert siblings, "expected modularized _codeql_*.py siblings on disk"
     assert siblings <= hashed, f"version_hash omitted siblings: {sorted(siblings - hashed)}"
-    facade_siblings = {p.name for p in scanning_dir.glob("_scanner_codeql_*.py")}
-    assert facade_siblings, "expected _scanner_codeql_*.py LOC-split modules on disk"
-    assert facade_siblings <= hashed, (
-        f"version_hash omitted facade siblings: {sorted(facade_siblings - hashed)}"
-    )
+    assert "_codeql_evidence.py" in siblings
+    assert "_codeql_entity_map.py" in siblings
     # Unreadable path should be skipped without failing the hash.
     monkeypatch.setattr(
         CodeQLBackend,
@@ -174,14 +169,14 @@ def test_codeql_scan_buckets_rows(tmp_path: Path, monkeypatch) -> None:
     assert "api_surface" in result["evidence"]
     assert result["entity_table_map_candidates"]
 
-def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
+def test_project_skips_rows_outside_java_scope(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
     (repo / "A.java").write_text("class A {}", encoding="utf-8")
     evidence: dict = {}
     entities: dict = {}
     ctx_rels = {"B.java"}
-    ingest_codeql_row(
+    project_codeql_row(
         repo_path=str(repo),
         row={"file": "A.java", "line": 1, "rule_id": "api_surface__x"},
         java_rels=ctx_rels,
@@ -190,18 +185,18 @@ def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
     )
     assert evidence == {}
 
-def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch) -> None:
+def test_entity_hit_without_extractable_class(tmp_path: Path, monkeypatch) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
     rel = "Empty.java"
     (repo / rel).write_text("// empty\n", encoding="utf-8")
     monkeypatch.setattr(
-        "doc_engine.scanning._scanner_codeql_evidence.extract_entity",
+        "doc_engine.scanning.support._codeql_entity_map.extract_entity",
         lambda *a, **k: None,
     )
     evidence: dict = {}
     entities: dict = {}
-    ingest_entity_row(
+    record_entity_hit(
         repo_path=str(repo),
         rel=rel,
         row={"line": 1, "class_name": ""},
