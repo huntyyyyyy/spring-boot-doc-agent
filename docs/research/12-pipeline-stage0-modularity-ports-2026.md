@@ -1,6 +1,6 @@
 ---
 title: Pipeline / Stage-0 modularity via ports & vertical slices (2026)
-status: E-MOD0 APPROVED · E-MOD1 IN PROGRESS (mock_stages)
+status: E-MOD0 APPROVED · E-MOD1 LANDED · E-MOD2 IN PROGRESS (Stage-0 tools)
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — pipeline + Stage-0 tools BCs
@@ -135,8 +135,8 @@ characterization tests are the oracle.
 | Epic | Status | Goal / exit |
 | --- | --- | --- |
 | **E-MOD0** | **Done** (2026-08-09) | Spec M1–M12 Approve; this memo + backlog P11 |
-| **E-MOD1** | **Active** | `mock_stages` → ≤225 concept modules + Strategy; façade stable; gates green |
-| **E-MOD2** | Later (after MOD1) | `capacity_preflight` → `spring_drift_check` / tier2 → `partition_repo` (follow-on tips as needed); CLI behavior unchanged |
+| **E-MOD1** | **Done** (2026-08-09) | `mock_stages` → ≤225 concept modules + Strategy; façade stable; gates green |
+| **E-MOD2** | **Active** | `capacity_preflight` → `spring_drift_check` / tier2 → `partition_repo`; CLI behavior unchanged |
 
 Deferred (not this tip): E-UX2, E-QA3 Hypothesis, E-RUN3/4 — backlog only.
 
