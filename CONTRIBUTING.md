@@ -296,9 +296,11 @@ by extending the rule tuple (OCP), not by editing CI expressions by hand.
 are discovered and **grouped by parent** `domain_*` marker
 (`doc_engine.ci.test_path_shards.domain_path_matrix`). The CI matrix stays
 short (one row per parallel domain); each job runs `pytest <paths…> -m
-<marker>`. `tests/support/` is a shared helper kernel and is never a shard
-root. Prefer placing new tests in concept subfolders under those roots as the
-tree folderizes — do not hand-edit path lists in the workflow.
+<marker>`. Emission SoT: `python -m doc_engine.ci.emit_abi_matrix`. Job
+definitions live in `.github/workflows/abi-tests.yml` (reusable); `ci.yml`
+only calls it. Shared install boilerplate is
+`.github/actions/setup-python-repo`. `tests/support/` is a shared helper
+kernel and is never a shard root.
 
 ### Quality gates (all OS)
 

@@ -48,3 +48,12 @@ def test_github_matrix_include_paths_are_space_joined() -> None:
         assert row["paths"]
         for path in row["paths"].split():
             assert path.startswith("tests/")
+
+
+def test_emit_abi_matrix_cartesian() -> None:
+    from doc_engine.ci.emit_abi_matrix import build_abi_matrix
+
+    matrix = build_abi_matrix(repo_root(), ("3.10", "3.12"))
+    groups = domain_path_matrix(repo_root())
+    assert len(matrix["include"]) == len(groups) * 2
+    assert {row["python-version"] for row in matrix["include"]} == {"3.10", "3.12"}

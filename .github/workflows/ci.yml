@@ -52,24 +52,9 @@ jobs:
           # shallow default is the kind of thing that fails confusingly later.
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: ./.github/actions/setup-python-repo
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
-          cache-dependency-path: |
-            requirements.txt
-            requirements-dev.txt
-
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Install development dependencies
-        run: |
-          pip install -r requirements-dev.txt
-
-      - name: Install doc-engine package
-        run: pip install -e .
 
       # Fail closed on invalid workflow YAML before any other gate runs.
       # Catches the PR #57 class (unquoted colon in a step name) that Actions
@@ -474,25 +459,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: ./.github/actions/setup-python-repo
         with:
           python-version: "3.11"
-          cache: pip
-          cache-dependency-path: |
-            requirements.txt
-            requirements-dev.txt
 
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: npm
           cache-dependency-path: package-lock.json
-
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
-          pip install -e .
 
       - name: Install Node quality-gate tools (jscpd)
         run: npm ci
@@ -534,114 +509,11 @@ jobs:
             --compare-ref "$COMPARE_REF" \
             --coverage-xml coverage.xml
 
-  # ABI path matrix (policy T-A + E-TEST3): discover collection dirs, group by
-  # parallel parent domain_* — no hand-maintained path list. Never writes
-  # coverage.xml (oracle 3.11 cell only).
-  abi-domain-matrix:
-    name: ABI domain path matrix
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.gen.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: pip
-          cache-dependency-path: |
-            requirements.txt
-            requirements-dev.txt
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
-          pip install -e .
-      - id: gen
-        name: Emit domain×paths × python matrix
-        run: |
-          python3 <<'PY'
-          import json
-          import os
-          from doc_engine.ci.test_path_shards import github_matrix_include
-          from doc_engine.paths import repo_root
-
-          rows = []
-          for python_version in ("3.10", "3.12"):
-              for row in github_matrix_include(repo_root()):
-                  rows.append(
-                      {
-                          "python-version": python_version,
-                          "id": row["id"],
-                          "marker": row["marker"],
-                          "paths": row["paths"],
-                      }
-                  )
-          if not rows:
-              raise SystemExit("domain_path_matrix produced zero ABI rows")
-          payload = json.dumps({"include": rows}, separators=(",", ":"))
-          output_path = os.environ["GITHUB_OUTPUT"]
-          with open(output_path, "a", encoding="utf-8") as handle:
-              handle.write("matrix<<EOF\n")
-              handle.write(payload)
-              handle.write("\nEOF\n")
-          print(json.dumps({"include": rows}, indent=2))
-          PY
-
-  abi-domain-shards:
-    name: ABI ${{ matrix.id }} (${{ matrix.python-version }})
-    needs: abi-domain-matrix
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix: ${{ fromJSON(needs.abi-domain-matrix.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: pip
-          cache-dependency-path: |
-            requirements.txt
-            requirements-dev.txt
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
-          pip install -e .
-      - name: pytest ${{ matrix.paths }} -m ${{ matrix.marker }}
-        run: pytest ${{ matrix.paths }} -v --tb=short -m ${{ matrix.marker }}
-
-  abi-domain-serial:
-    name: ABI serial domains (no coverage)
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        python-version: ["3.10", "3.12"]
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: pip
-          cache-dependency-path: |
-            requirements.txt
-            requirements-dev.txt
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
-          pip install -e .
-      - name: pytest serial domain expression
-        run: >
-          pytest tests/ -v --tb=short
-          -m "domain_integration or domain_unclassified or domain_live_optin"
+  # ABI shards live in a reusable workflow so ci.yml stays orchestration-sized
+  # (policy T-A / E-TEST3). Never writes coverage.xml.
+  abi-tests:
+    name: ABI domain tests
+    uses: ./.github/workflows/abi-tests.yml
 
   # Soft SonarCloud signal only. Free-plan Quality Gates cannot enforce the
   # custom thresholds this repo needs; hard fail lives in quality-gates above.
