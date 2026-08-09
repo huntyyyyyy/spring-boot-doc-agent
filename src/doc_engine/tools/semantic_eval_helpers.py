@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Compatibility shim for ``python -m doc_engine.tools.semantic_eval_helpers``.
+"""Compatibility shim for the semantic-eval mechanical pre-pass.
 
 Prefer ``doc_engine.tools.semantic_eval``. Public ``__all__`` only (COH4).
+
+Run::
+
+    python -m doc_engine.tools.semantic_eval_helpers <artifacts_dir>
 """
 
 from __future__ import annotations

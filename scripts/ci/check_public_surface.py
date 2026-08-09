@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Fail closed when curated façades export private ``_`` names or residual bins.
 
-E-COH1 fitness (tach/Nx/Packwerk public-interface pattern). Run:
-  python3 scripts/ci/check_public_surface.py
+E-COH1 fitness (tach/Nx/Packwerk public-interface pattern).
+
+Run::
+
+    python3 scripts/ci/check_public_surface.py
 """
 
 from __future__ import annotations
