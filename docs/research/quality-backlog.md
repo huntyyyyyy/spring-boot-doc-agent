@@ -283,7 +283,7 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P17.0 | **E-COH0 Spec:** approve **COH1–COH12** (pause thrash; concept bar; façade≠private warehouse; seam map before moves) | **Approved** (2026-08-09) | design memo `spec_gate: APPROVED E-COH0` |
-| P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Paused** (until E-HOT1 green) | COH2–COH4 on touch; claims green |
+| P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Active** (2026-08-09) | COH2–COH4 on touch; CGQ3 Accept; claims green |
 | P17.2 | **E-COH2:** align reshape with E-TACH1/2 layers + interfaces | After E-TACH0 Approve | `tach check`; public `expose` only |
 
 Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md). Research: modularity/20. **Refuse** mechanical cut-and-paste that only clears LOC/statement gates.
@@ -330,7 +330,7 @@ Research: [`docs/research/process/23-concern-to-solution-remedies-2026.md`](proc
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P21.0 | **E-CGQ0 Spec:** approve **CGQ1–CGQ10** (pre-generation controls; depth rows; Accept Concern→Remedy→Depth→Witness; process probe until E-GND) | **Approved** (2026-08-09, velocity stamp) | research 24 + design `APPROVED E-CGQ0` |
-| P21.1 | E-COH1 / E-STK1 Activate only with CGQ3 Accept rows | **Satisfied for E-STK1** (2026-08-09) | Active tip cites CGQ3; E-COH1 still paused |
+| P21.1 | E-COH1 / E-STK1 Activate only with CGQ3 Accept rows | **Satisfied** (E-STK1 Done; E-COH1 Active) | Spec Accept cites process/24 §2 |
 
 Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md). Design: [`docs/design/codegen-quality-dimensions-design-2026-08-09.md`](../design/codegen-quality-dimensions-design-2026-08-09.md).
 
