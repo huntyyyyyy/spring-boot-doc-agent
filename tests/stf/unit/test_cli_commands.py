@@ -29,23 +29,19 @@ def test_reviewer_token_mark_done_and_forged(tmp_path: Path) -> None:
     from stf.runners.store import TasksStore
 
     token = TasksStore(tmp_path).issue_validation_token()
-    assert not token.startswith("-")
-    # ``--token=value`` keeps leading-dash values out of argparse's option parser
-    # if generation ever regresses; separate argv form is what users type.
-    assert stf_main(["mark-done", "--target-dir", str(tmp_path), f"--token={token}"]) == 0
+    assert stf_main(["mark-done", "--target-dir", str(tmp_path), "--token", token]) == 0
 
 
-def test_issue_validation_token_rejects_leading_dash(
+def test_issue_validation_token_never_starts_with_dash(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     write_spec_and_tasks_into(tmp_path)
     from stf.runners import store as store_mod
     from stf.runners.store import TasksStore
 
-    seq = iter(["-leadingDashTok", "safeTokenValue12"])
-    monkeypatch.setattr(store_mod.secrets, "token_urlsafe", lambda _n: next(seq))
+    monkeypatch.setattr(store_mod.secrets, "token_urlsafe", lambda _n: "-leadingDashTok")
     token = TasksStore(tmp_path).issue_validation_token()
-    assert token == "safeTokenValue12"
+    assert token == "t-leadingDashTok"
 
 def test_handoff_checklist_and_dry_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     write_spec_and_tasks_into(tmp_path)
