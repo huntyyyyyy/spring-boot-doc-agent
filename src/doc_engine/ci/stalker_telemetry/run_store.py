@@ -108,12 +108,17 @@ class TelemetryRun:
         return path
 
 
+def _is_error_line(line: str) -> bool:
+    lowered = line.lower()
+    return "error" in lowered or "traceback" in line
+
+
 def _error_excerpt(body: str, exit_code: int) -> str:
     if exit_code == 0 or not body.strip():
         return ""
     lines = body.strip().splitlines()
     for idx, line in enumerate(lines):
-        if "Error" in line or "Traceback" in line or "error:" in line.lower():
+        if _is_error_line(line):
             return "\n".join(lines[idx : idx + 12])[:1200]
     return "\n".join(lines[-20:])[:1200]
 
@@ -132,6 +137,16 @@ class _Tee(StringIO):
         super().flush()
 
 
+def _append_tee_buffers(combined: StringIO, out_buf: _Tee, err_buf: _Tee) -> None:
+    combined.write(out_buf.getvalue())
+    err_text = err_buf.getvalue()
+    if not err_text:
+        return
+    if combined.getvalue():
+        combined.write("\n")
+    combined.write(err_text)
+
+
 @contextmanager
 def tee_stdio() -> Iterator[StringIO]:
     """Tee stdout/stderr to a buffer while still printing live."""
@@ -144,22 +159,26 @@ def tee_stdio() -> Iterator[StringIO]:
         yield combined
     finally:
         sys.stdout, sys.stderr = old_out, old_err
-        combined.write(out_buf.getvalue())
-        if err_buf.getvalue():
-            if combined.getvalue():
-                combined.write("\n")
-            combined.write(err_buf.getvalue())
+        _append_tee_buffers(combined, out_buf, err_buf)
+
+
+def _index_from_symlink(root: Path, latest: Path) -> Path | None:
+    target = (root / latest.readlink()).resolve()
+    idx = target / "index.json"
+    return idx if idx.is_file() else None
+
+
+def _index_from_pointer_file(root: Path, latest: Path) -> Path | None:
+    name = latest.read_text(encoding="utf-8").strip()
+    idx = root / name / "index.json"
+    return idx if idx.is_file() else None
 
 
 def latest_index(repo: Path) -> Path | None:
     root = telemetry_root(repo)
     latest = root / "latest"
     if latest.is_symlink():
-        target = (root / latest.readlink()).resolve()
-        idx = target / "index.json"
-        return idx if idx.is_file() else None
+        return _index_from_symlink(root, latest)
     if latest.is_file():
-        name = latest.read_text(encoding="utf-8").strip()
-        idx = root / name / "index.json"
-        return idx if idx.is_file() else None
+        return _index_from_pointer_file(root, latest)
     return None
