@@ -99,13 +99,26 @@ def phase_full_finish(state: LocalRunState) -> int:
         log("        PIPELINE_ARTIFACTS_DIR. With --docs-in-target-repo the docs are")
         log("        elsewhere, so its docs subtest will skip; summaries and gap")
         log("        questions are still validated.")
+    from pathlib import Path
+
+    split_suite = sorted(
+        (Path(REPO_ROOT) / "tests" / "doc_engine").glob(
+            "test_pipeline_stages_*.py"
+        )
+    )
+    if not split_suite:
+        raise RuntimeError(
+            "no tests/doc_engine/test_pipeline_stages_*.py suites found "
+            "(stub test_pipeline_stages.py collects zero tests)"
+        )
     runner.run(
-        "pytest tests/doc_engine/test_pipeline_stages.py -v (real suite vs. mock artifacts)",
+        "pytest tests/doc_engine/test_pipeline_stages_*.py -v "
+        "(real suite vs. mock artifacts)",
         [
             py,
             "-m",
             "pytest",
-            os.path.join(REPO_ROOT, "tests", "doc_engine", "test_pipeline_stages.py"),
+            *[str(p) for p in split_suite],
             "-v",
         ],
         gate=True,
