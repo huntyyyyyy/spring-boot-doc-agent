@@ -3,14 +3,18 @@
 ## Local pre-PR gate (principal-engineer push hook)
 
 Before opening a PR, push is the practical choke point (`gh pr create` cannot be
-hooked by git). Enable the committed hooks once per clone:
+hooked by git). **Force-push still runs `pre-push`** unless you pass
+`--no-verify` (tip practice: refuse except emergency + logged bypass).
+
+Install / repair once per clone (also chains into Cursor’s external hooksPath):
 
 ```bash
-git config core.hooksPath .githooks
+python3 scripts/ci/install_git_hooks.py
+python3 scripts/ci/install_git_hooks.py --check
 ```
 
 `.githooks/pre-push` runs `python scripts/ci/pre_pr.py --auto` (path-risk
-routing over the same hard suites CI runs). Details and tiers:
+routing). Override mode: `PRE_PR_MODE=full git push`. Details and tiers:
 [`scripts/README.md`](scripts/README.md).
 
 When GitHub Actions is unavailable, use
@@ -25,7 +29,11 @@ Emergency bypass (always logged under `.git/pre-pr-bypass.log`):
 PRE_PR_SKIP=1 PRE_PR_SKIP_REASON='short justification here' git push
 ```
 
-`PRE_PR_SKIP` alone is rejected. Prefer fixing the failing suite.
+`PRE_PR_SKIP` alone is rejected. Prefer fixing the failing suite. Do not use
+`git push --no-verify` to hide red local gates.
+
+Optional **local SonarQube** (advisory only, never fail_under SoT):
+[`scripts/ci/sonar-local/README.md`](scripts/ci/sonar-local/README.md).
 
 ## Research look-first (Cursor hooks)
 

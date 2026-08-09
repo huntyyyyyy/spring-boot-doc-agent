@@ -36,6 +36,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Callable, List, Optional, Sequence, Tuple
 
+from pre_pr_quality_gates_suite import quality_gates_argv
+
 from doc_engine.paths import repo_root
 
 REPO_ROOT = repo_root()
@@ -313,6 +315,15 @@ def _pytest() -> int:
     return proc.returncode
 
 
+def _in_repo_quality_gates() -> int:
+    """Local hard gate: complexipy / size / jscpd / tach (skip Cover% remesure)."""
+    argv = quality_gates_argv(REPO_ROOT, skip_coverage=True)
+    proc = _run(_doc_engine_cmd(*argv))
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
 def _doc_engine_cmd(*args: str) -> List[str]:
     if shutil.which("doc-engine") is not None:
         return ["doc-engine", *args]
@@ -574,10 +585,18 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
                 _py_script("scripts", "coverage", "semgrep_rule_coverage.py"),
             ),
             ("pytest", "hard", _pytest),
+            ("in_repo_quality_gates", "hard", _in_repo_quality_gates),
         ]
     )
     if mode in ("full", "actions_outage"):
         _append_full_extras(hard)
+        hard.append(
+            (
+                "sonar_local_advisory",
+                "advisory",
+                _py_script("scripts", "ci", "sonar_local_advisory.py"),
+            )
+        )
     if mode == "actions_outage":
         _append_outage_lanes(hard)
     return hard

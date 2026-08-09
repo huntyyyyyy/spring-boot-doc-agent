@@ -1,0 +1,20 @@
+# Optional local SonarQube Community (evaluation). Not merge SoT.
+# Start: docker compose -f scripts/ci/sonar-local/docker-compose.yml up -d
+# UI: http://localhost:9000 (default admin/admin — change on first login)
+# Then: export SONAR_HOST_URL=http://localhost:9000 SONAR_TOKEN=<token>
+#       python3 scripts/ci/sonar_local_advisory.py
+
+services:
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_extensions:/opt/sonarqube/extensions
+
+volumes:
+  sonarqube_data:
+  sonarqube_logs:
+  sonarqube_extensions:

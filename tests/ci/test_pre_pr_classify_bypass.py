@@ -107,6 +107,7 @@ class BuildSuitesTest(unittest.TestCase):
     def test_standard_includes_pytest_not_stage0(self):
         names = [n for n, _, _ in pre_pr.build_suites("standard")]
         self.assertIn("pytest", names)
+        self.assertIn("in_repo_quality_gates", names)
         self.assertIn("test_domain_markers", names)
         self.assertIn("facade_poke_surface", names)
         self.assertNotIn("stage0_portable", names)
@@ -115,6 +116,8 @@ class BuildSuitesTest(unittest.TestCase):
     def test_full_includes_advisory_mutate(self):
         names = [n for n, _, _ in pre_pr.build_suites("full")]
         self.assertIn("pytest", names)
+        self.assertIn("in_repo_quality_gates", names)
+        self.assertIn("sonar_local_advisory", names)
         self.assertIn("mutate_advisory", names)
         self.assertIn("stage0_portable", names)
         self.assertNotIn("codeql_invariants", names)

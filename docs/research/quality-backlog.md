@@ -231,6 +231,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Done Spec + Implement:** **E-HOOK0 / E-HOOK1** — pre-push install/chain + local quality-gates; optional Sonar advisory (2026-08-09).  
 **Done Spec + Implement:** **E-KNOB0 / E-KNOB1** — one setpoint owner per concern; no `quality_knobs` god file (2026-08-09).  
 **Done Implement:** **E-STK1** — G1–G6 advisory sensors + ledger writer + `pre_pr` wire (2026-08-09).  
 **Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
@@ -356,6 +357,17 @@ Research: [`docs/research/process/25-tip-grounding-mcp-2026.md`](process/25-tip-
 | P23.1 | **E-KNOB1 Implement:** `complexity_policy` / `duplication_policy` / `package_scope`; wire floor echo | **Done** (2026-08-09) | `tests/ci/test_quality_setpoints.py`; no duplicate SoT literals |
 
 Research: [`docs/research/process/26-quality-policy-setpoints-2026.md`](process/26-quality-policy-setpoints-2026.md). Design: [`docs/design/quality-policy-setpoints-design-2026-08-09.md`](../design/quality-policy-setpoints-design-2026-08-09.md). **Refuse** `quality_knobs.py` / `utils/` dump.
+
+---
+
+## P24 — Local pre-push hook as first-line quality (no remote required)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P24.0 | **E-HOOK0 Spec:** approve **HOOK1–HOOK12** (force-push pre-push; install/chain; local quality-gates; Sonar advisory; modern landscape ★ table; act/pre-commit Spikes) | **Approved** (2026-08-09, amended) | research 27 + design `APPROVED E-HOOK0` |
+| P24.1 | **E-HOOK1 Implement:** `install_git_hooks` + wire `in_repo_quality_gates` + sonar-local advisory | **Done** (2026-08-09) | `install_git_hooks --check`; suite tests; pre_pr green |
+
+Research: [`docs/research/process/27-local-pre-push-hook-2026.md`](process/27-local-pre-push-hook-2026.md). Design: [`docs/design/local-pre-push-hook-design-2026-08-09.md`](../design/local-pre-push-hook-design-2026-08-09.md).
 
 ---
 

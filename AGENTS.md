@@ -48,8 +48,12 @@ install/lint/test/run commands live in `README.md` and
   (+ `.claude/hooks/check_pipe_exit_code.py`); the bridge only normalizes I/O.
 - Before a final commit that touches `scripts/`, `agents/`, or `skills/`, run
   `python3 scripts/ci/check_repo_claims.py` (see `CLAUDE.md`).
+- Before push: `python3 scripts/ci/install_git_hooks.py` once per clone (chains
+  into Cursor hooksPath when needed), then rely on `.githooks/pre-push` →
+  `pre_pr --auto` (or run `pre_pr` explicitly). Force-push still runs the hook.
 - If GitHub Actions is down: `python3 scripts/ci/pre_pr.py --actions-outage`
   (runbook in `scripts/README.md` — do not invent a second local-CI SoT).
+- Optional local SonarQube advisory: `scripts/ci/sonar-local/README.md` (never SoT).
 
 ### Non-obvious gotchas
 
