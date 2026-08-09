@@ -125,11 +125,25 @@ Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-run
 
 ---
 
+## P8 — Test adequacy vs coverage inflation (2026 research)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P8.0 | **E-QA0 Spec:** approve **Q1–Q8** (necessary Cover% ≠ sufficient quality) | Not started | research 09 Spec gate |
+| P8.1 | **E-QA1:** adequacy sensor ports + CI summary (structural + mutator survivors + metamorphic) | Adopt after Spec | summary section |
+| P8.2 | **E-QA2:** anti-padding Verify — climb packages need kill/metamorphic witness | Adopt after Spec | climb Archive checklist |
+| P8.3 | **E-QA3:** Hypothesis spike on pure helpers (`suite_timing` / fingerprints) | Spike | focused suite |
+
+Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-test-adequacy-vs-coverage-inflation-2026.md). Prefer **2026** primaries (2607.22880, 2603.01409, 2604.01799, 2607.02057, 2605.22175, 2604.10126; mutmut; Hypothesis).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
 **Done (E-TEST0–1):** domain markers + ABI shards.  
 **Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
-**Active tip:** oracle stabilize (#105) to **98.7** + **E-RUN1** suite-stalking sensors (D1/D2/D17).  
-**Spec done:** **E-RUN0** (R1–R8). Next after sensors: optional D15 join; refuse oracle runner swap.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; Spec Kit WorkflowEngine as CI runtime.
+**Done (E-RUN0–1):** suite-stalking sensors Spec + D1/D2/D17.  
+**Active tip:** oracle stabilize (#105) to **98.7** (necessary floor — not scrapable).  
+**Next Spec (after tip green or in parallel docs-only):** **E-QA0** — refuse lousy Cover% padding; graduate mutation/metamorphic witnesses. Optional E-RUN2/D15 remains sensor-only.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists.
