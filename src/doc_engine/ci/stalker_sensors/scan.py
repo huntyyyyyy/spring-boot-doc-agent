@@ -1,9 +1,14 @@
-"""Run G1–G6 sensors and optional ledger write."""
+"""Run G1–G10 sensors and optional ledger write."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
+from doc_engine.ci.stalker_path_parity import (
+    scan_codeql_change_presence,
+    scan_oracle_cell_posture,
+    scan_workflow_suite_map,
+)
 from doc_engine.ci.stalker_sensors.collect_syntax import scan_collect_syntax
 from doc_engine.ci.stalker_sensors.facade_api import scan_facade_api
 from doc_engine.ci.stalker_sensors.finding_records import StalkerFinding
@@ -24,6 +29,9 @@ def run_all_sensors(root: Path) -> list[StalkerFinding]:
     findings.extend(scan_parallel_tip(root))
     findings.extend(scan_policy_verify(root))
     findings.extend(scan_masked_advisory(root))
+    findings.extend(scan_oracle_cell_posture(root))
+    findings.extend(scan_codeql_change_presence(root))
+    findings.extend(scan_workflow_suite_map(root))
     return findings
 
 

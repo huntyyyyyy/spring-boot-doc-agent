@@ -56,6 +56,7 @@ CODE_PATH_PREFIXES = (
     "adapters/",
     "hooks/",
     ".claude/",
+    "spring-signals/",
     "pyproject.toml",
     "requirements.txt",
     "requirements-dev.txt",
@@ -326,6 +327,16 @@ def _public_surface() -> int:
     return _py_script("scripts", "ci", "check_public_surface.py")()
 
 
+def _oracle_coverage() -> int:
+    """Whole-repo Cover% SoT (same fail_under as CI 3.11). E-HOOK2."""
+    os.environ["_PRE_PR_ORACLE_RAN"] = "1"
+    print("oracle_coverage: remesuring via coverage-measure (fail_under floor)", flush=True)
+    proc = _run([sys.executable, "-m", "doc_engine.ci.coverage_measure_cli"])
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
 def _pytest() -> int:
     """Run pytest; standard mode may domain-select (E-SEL1); full always whole tree."""
     force_full = os.environ.get("PRE_PR_PYTEST_FULL", "").strip() in (
@@ -387,8 +398,9 @@ def _mutation_driver() -> int:
 
 
 def _in_repo_quality_gates() -> int:
-    """Local hard gate: complexipy / size / jscpd / tach (skip Cover% remesure)."""
-    argv = quality_gates_argv(REPO_ROOT, skip_coverage=True)
+    """Local hard gate: size/complexipy/jscpd/tach; Cover% when oracle remesured."""
+    skip_coverage = os.environ.get("_PRE_PR_ORACLE_RAN", "").strip() != "1"
+    argv = quality_gates_argv(REPO_ROOT, skip_coverage=skip_coverage)
     proc = _run(_doc_engine_cmd(*argv))
     sys.stdout.write(proc.stdout)
     sys.stderr.write(proc.stderr)
@@ -650,10 +662,15 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
                 "hard",
                 _py_script("scripts", "coverage", "semgrep_rule_coverage.py"),
             ),
-            ("pytest", "hard", _pytest),
-            ("in_repo_quality_gates", "hard", _in_repo_quality_gates),
         ]
     )
+    from doc_engine.ci.oracle_push_policy import should_remesure_oracle
+
+    if should_remesure_oracle(mode, changed_files_vs_main()):
+        hard.append(("oracle_coverage", "hard", _oracle_coverage))
+    else:
+        hard.append(("pytest", "hard", _pytest))
+    hard.append(("in_repo_quality_gates", "hard", _in_repo_quality_gates))
     if mode in ("full", "actions_outage"):
         _append_full_extras(hard)
         hard.append(

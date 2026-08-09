@@ -4856,3 +4856,12 @@ Assumptions affected:
 - MOD-S1 provisional façades may re-export private `_` indefinitely — [Resolved — `check_public_surface` hard in `pre_pr`; `support.py`/`inventory_drift.py` deleted; `semantic_eval` public façade]
 - Cohesion Accept was LOC-only — [Still accurate bar; [New info — CGQ3 Accept + fitness witness for public `__all__`]]
 Files touched: public_surface_policy.py, check_public_surface.py, pre_pr.py, local_runner_phases/*, semantic_eval*.py, tests/ci/test_public_surface_policy.py, modularity/21-*, concept-split design appendix, quality-backlog, session-log
+
+## 2026-08-09 — E-HOOK2/E-CQL1/E-TEL2: local oracle + CodeQL fingerprint + path parity
+Commit: a1314d17
+Tests: 34 focused ci passed; complexipy 0; claims OK
+Assumptions affected:
+- HOOK6 local push skips Cover% oracle — [Resolved — `oracle_coverage` hard remesure when src/tests change; quality-gates reads coverage.xml]
+- CodeQL signals always wipe+rebuild — [Resolved — fingerprint gate skips compile/runtime when corpus unchanged; wipe remains on dirty path]
+- Stalker only G1–G7 tip hygiene — [New info — G8–G10 path-parity sensors for oracle/CodeQL/suite map]
+Files touched: oracle_push_policy.py, pre_pr.py, codeql_signals_change_gate.py, codeql-signals.yml, stalker_path_parity/*, process/30–31, quality-backlog, session-log

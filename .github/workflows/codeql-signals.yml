@@ -3,6 +3,10 @@ name: CodeQL signals
 # Reusable CodeQL pack gates (E-CI / policy C-A). Called from ci.yml.
 # Bundle pin lives here (this BC owns the CodeQL jobs). Digest provenance:
 # digest field of codeql-bundle-linux64.tar.gz on the matching release tag.
+#
+# E-CQL1: fingerprint gate skips compile+runtime when CI harness inputs are
+# byte-identical to base. Invariants always run. Wipe+rebuild of the fixture
+# DB remains correct *when* runtime runs (hermetic dirty path).
 
 on:
   workflow_call:
@@ -15,6 +19,27 @@ env:
   CODEQL_BUNDLE_URL: https://github.com/github/codeql-action/releases/download/codeql-bundle-v2.26.2/codeql-bundle-linux64.tar.gz
 
 jobs:
+  codeql-signals-gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run_expensive: ${{ steps.gate.outputs.run_expensive }}
+      reason: ${{ steps.gate.outputs.reason }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Content fingerprint (skip expensive jobs when unchanged)
+        id: gate
+        run: |
+          python3 scripts/ci/codeql_signals_change_gate.py \
+            --base origin/main \
+            --write-env
+
   codeql-signals-invariants:
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +54,8 @@ jobs:
 
   codeql-signals-compile:
     runs-on: ubuntu-latest
+    needs: codeql-signals-gate
+    if: needs.codeql-signals-gate.outputs.run_expensive == 'true'
     steps:
       - uses: actions/checkout@v7
 
@@ -72,7 +99,10 @@ jobs:
 
   codeql-signals-runtime:
     runs-on: ubuntu-latest
-    needs: codeql-signals-compile
+    needs:
+      - codeql-signals-gate
+      - codeql-signals-compile
+    if: needs.codeql-signals-gate.outputs.run_expensive == 'true'
     steps:
       - uses: actions/checkout@v7
 

@@ -201,7 +201,7 @@ Research: [`docs/research/process/15-legacy-size-remediation-2026-frameworks.md`
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Approved** (2026-08-09, merge) | research 17 `spec_gate: APPROVED E-CQL0` |
-| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Deferred** (after E-DOC1) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
+| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Done** (2026-08-09) (after E-DOC1) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
 
 Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-codeql-signals-skip-fingerprint-2026.md).
 
@@ -232,6 +232,9 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
 **Done slice (2026-08-09):** E-COH1 public-surface fitness + delete `support`/`inventory_drift` warehouses; `semantic_eval` public façade.  
+**Done Spec + Implement:** **E-HOOK2** — local oracle Cover% remesure on push when src/tests change (2026-08-09).  
+**Done Spec + Implement:** **E-CQL1** — CodeQL signals content-fingerprint skip of compile/runtime (2026-08-09).  
+**Done Spec + Implement:** **E-TEL2** — path-parity sensors G8–G10 (2026-08-09).  
 **Done Spec + Implement:** **E-SEL0 / E-SEL1** — fine ABI file paths + path→domain pre_pr pytest select (2026-08-09).  
 **Done Spec + Implement:** **E-TEL0 / E-TEL1** — mutation_driver regression + local telemetry ETL + G7 (2026-08-09).  
 **Done Spec + Implement:** **E-HOOK0 / E-HOOK1** — pre-push install/chain + local quality-gates; optional Sonar advisory (2026-08-09).  

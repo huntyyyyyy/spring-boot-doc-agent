@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from unittest import mock
 
@@ -12,7 +13,6 @@ import pre_pr
 import pre_pr_quality_gates_suite as qg_suite
 
 pytestmark = pytest.mark.domain_ci_meta
-
 
 def test_quality_gates_argv_skips_coverage_by_default(tmp_path: Path) -> None:
     with mock.patch.dict("os.environ", {}, clear=True):
@@ -25,23 +25,29 @@ def test_quality_gates_argv_skips_coverage_by_default(tmp_path: Path) -> None:
     assert argv[:2] == ["quality-gates", "--compare-ref"]
     assert "--skip-coverage" in argv
 
-
 def test_resolve_compare_ref_prefers_env(tmp_path: Path) -> None:
     with mock.patch.dict("os.environ", {"PRE_PR_COMPARE_REF": "origin/feature"}):
         assert qg_suite.resolve_compare_ref(tmp_path) == "origin/feature"
 
-
 def test_standard_suites_include_in_repo_quality_gates() -> None:
-    names = [name for name, _, _ in pre_pr.build_suites("standard")]
+    os.environ["PRE_PR_SKIP_ORACLE"] = "1"
+    try:
+        names = [name for name, _, _ in pre_pr.build_suites("standard")]
+    finally:
+        os.environ.pop("PRE_PR_SKIP_ORACLE", None)
     assert "in_repo_quality_gates" in names
     assert "sonar_local_advisory" not in names
+    assert "pytest" in names
 
 
 def test_full_suites_include_sonar_advisory() -> None:
-    names = [name for name, _, _ in pre_pr.build_suites("full")]
+    os.environ["PRE_PR_SKIP_ORACLE"] = "1"
+    try:
+        names = [name for name, _, _ in pre_pr.build_suites("full")]
+    finally:
+        os.environ.pop("PRE_PR_SKIP_ORACLE", None)
     assert "in_repo_quality_gates" in names
     assert "sonar_local_advisory" in names
-
 
 def test_hooks_healthy_false_when_unset(tmp_path: Path) -> None:
     (tmp_path / ".githooks").mkdir()
@@ -51,7 +57,6 @@ def test_hooks_healthy_false_when_unset(tmp_path: Path) -> None:
             ok, detail = install_git_hooks.hooks_healthy(tmp_path)
     assert ok is False
     assert "unset" in detail
-
 
 def test_install_chain_writes_marker(tmp_path: Path) -> None:
     hooks = tmp_path / "external-hooks"
