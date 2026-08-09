@@ -19,11 +19,8 @@ import os
 import sys
 from pathlib import Path
 
-from doc_engine.ci.adequacy.github_adequacy_summary import (
-    append_github_summary,
-    render_adequacy_report,
-)
-from doc_engine.paths import PathValidationError
+from doc_engine.ci.adequacy.github_adequacy_summary import render_adequacy_report
+from doc_engine.ci.github_step_summary import append_markdown_cli
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -75,13 +72,9 @@ def main(argv: list[str] | None = None) -> int:
         registry_count=args.registry_count,
         fixtures_dir=args.fixtures_dir,
     )
-    try:
-        append_github_summary(markdown, Path(summary))
-    except PathValidationError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 1
-    print("adequacy summary appended")
-    return 0
+    return append_markdown_cli(
+        markdown, summary, ok_message="adequacy summary appended"
+    )
 
 
 if __name__ == "__main__":

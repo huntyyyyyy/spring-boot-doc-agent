@@ -29,3 +29,13 @@ def test_append_markdown_rejects_dotdot(tmp_path: Path) -> None:
     bad = tmp_path / ".." / "escape.md"
     with pytest.raises(PathValidationError, match=r"\.\."):
         append_markdown("x", bad)
+
+
+def test_append_markdown_cli_rejects_dotdot(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    from doc_engine.ci.github_step_summary import append_markdown_cli
+
+    bad = tmp_path / ".." / "escape.md"
+    assert append_markdown_cli("x", bad, ok_message="ok") == 1
+    assert "error:" in capsys.readouterr().err
