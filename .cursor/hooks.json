@@ -1,0 +1,43 @@
+{
+  "$comment": [
+    "Project-native Cursor hooks so Claude PreToolUse policies apply in",
+    "Cursor Desktop and Cursor Cloud without relying on optional Claude",
+    "third-party hook import. Policy SoT remains under adapters/claude/hooks/",
+    "and .claude/hooks/; .cursor/hooks/bridge_claude_policy.py only normalizes",
+    "I/O. Cloud loads this file only (not ~/.cursor/hooks.json).",
+    "Docs: https://cursor.com/docs/hooks — beforeShellExecution + preToolUse.",
+    "Shell tool maps to Claude Bash via the bridge; Grep is matched on preToolUse."
+  ],
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/deny_text_search.py",
+        "timeout": 15
+      },
+      {
+        "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/deny_raw_network.py",
+        "timeout": 15
+      },
+      {
+        "command": "python3 .cursor/hooks/bridge_claude_policy.py .claude/hooks/check_pipe_exit_code.py",
+        "timeout": 15
+      },
+      {
+        "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/require_design_research.py",
+        "timeout": 20
+      },
+      {
+        "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/require_hardened_tests.py",
+        "timeout": 180
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/deny_text_search.py",
+        "matcher": "Grep",
+        "timeout": 15
+      }
+    ]
+  }
+}
