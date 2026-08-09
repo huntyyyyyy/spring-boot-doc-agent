@@ -134,18 +134,22 @@ def test_baseline_offender_ceiling_bad_json(tmp_path: Path) -> None:
     assert qg.baseline_offender_ceiling(path) is None
     assert qg.baseline_offender_ceiling(tmp_path / "absent.json") is None
 
-def test_main_with_coverage_and_exit_codes(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_main_with_coverage_and_exit_codes(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     monkeypatch.setattr(qg, "REPO_ROOT", tmp_path)
     xml = tmp_path / "coverage.xml"
     xml.write_text("<coverage/>", encoding="utf-8")
-    monkeypatch.setattr(qg, "gate_import_cycles", lambda: 0)
-    monkeypatch.setattr(qg, "gate_size_ratchet", lambda: 0)
-    monkeypatch.setattr(qg, "gate_duplication", lambda _r: 0)
-    monkeypatch.setattr(qg, "gate_new_code_coverage", lambda _r, _x: 0)
-    monkeypatch.setattr(qg, "gate_cognitive_complexity", lambda: 0)
-    monkeypatch.setattr(qg, "gate_complexity_ratchet", lambda: 0)
-    monkeypatch.setattr(qg, "report_gap_average", lambda _x: None)
+    for name, value in (
+        ("gate_import_cycles", lambda: 0),
+        ("gate_size_ratchet", lambda: 0),
+        ("gate_duplication", lambda _r: 0),
+        ("gate_new_code_coverage", lambda _r, _x: 0),
+        ("gate_cognitive_complexity", lambda: 0),
+        ("gate_complexity_ratchet", lambda: 0),
+        ("report_gap_average", lambda _x: None),
+    ):
+        monkeypatch.setattr(qg, name, value)
     assert qg.main(["--compare-ref", "HEAD~1", "--coverage-xml", str(xml)]) == 0
-
     monkeypatch.setattr(qg, "gate_import_cycles", lambda: 2)
     assert qg.main(["--compare-ref", "HEAD~1", "--skip-coverage"]) == 2
