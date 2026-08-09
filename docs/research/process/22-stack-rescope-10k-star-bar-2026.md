@@ -1,6 +1,6 @@
 ---
 title: E-STACK0 — Stack rescope under ≥10k★ SoR bar (2026)
-status: DRAFT Spec — pending Approve of STACK1–STACK12
+status: APPROVED — SPEC GATE E-STACK0 (2026-08-09) — human Approve STACK1–STACK12
 research date: 2026-08-09
 research_window: 2026-06-01 → 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
@@ -20,8 +20,10 @@ do_not:
   - dual-wire SonarQube as fail_under / complexipy replacement without Spec
   - raise LOC/complexipy/fail_under ceilings
   - cite &lt;10000★ GH as *new* implement SoR
-spec_gate: DRAFT E-STACK0 (2026-08-09) — STACK1–STACK12 pending Approve
+  - treat Backstage Refuse as a company IDP ban (Refuse = doc-engine runtime only — §3.8)
+spec_gate: APPROVED E-STACK0 (2026-08-09) — STACK1–STACK12
 gh_sor_bar: "≥10000★ and pushed_at within research_window; Confirmed in-repo pins may Embody-continue"
+approved_by: "human chat 2026-08-09 — approve all STACK incl. Confirmed exemptions; Backstage scoped §3.8"
 ---
 
 # Principal memo: rescope stack choices under ≥10k★
@@ -299,12 +301,15 @@ Only if Approve asks: document Confirmed-pin register; amend E-TACH0 research �
 | **Embody** | ruff, pytest, ast-grep, semgrep, mkdocs-material; DDD/ports/vertical slices; oracle/climb policy; tach **cycles**; complexipy ≤5; coverage.xml floor |
 | **Adopt** | ≥10k★ bar for *new* SoR; Nx boundary **patterns**; pytest patch-at-use; OpenSpec/Spec Kit **process** lessons; STACK order after HOT |
 | **Defer** | tach depends_on/interfaces; Hypothesis/mutmut merge; mypy/pyright as required gates; global rewrite of older ≥1k★ memos |
-| **Refuse** | Spec Kit runtime; Sonar/Cover% as fail_under; flake8+black return; dual arch linters; DI/mesh/Backstage; ★-washing &lt;10k tools as *new* Adopt |
+| **Refuse** | Spec Kit runtime; Sonar/Cover% as fail_under; flake8+black return; dual arch linters; DI/mesh **as this CLI’s deps**; Backstage **as doc-engine runtime** (corp IDP + optional `catalog-info` OK — §3.8); ★-washing &lt;10k tools as *new* Adopt |
 
 ---
 
 ## 8. Exit
 
-**E-STACK0 DRAFT** until human Approve of STACK1–STACK12.
-Does **not** authorize product tool swaps. Complements E-HOT0 (gates) and re-bases
-E-TACH0/E-COH1 framework language on ≥10k★ peers where ★ was doing load-bearing work.
+**E-STACK0 APPROVED (2026-08-09)** — STACK1–STACK12 locked (including STACK10
+scoped Backstage language and Confirmed-pin exemptions STACK2/4–7).
+
+Does **not** authorize product tool swaps in the E-HOT1 tip. Complements E-HOT0
+and re-bases E-TACH0/E-COH1 framework language on ≥10k★ peers where ★ was doing
+load-bearing work. Corp Backstage IDP remains supported; see §3.8.

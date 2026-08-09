@@ -1,6 +1,6 @@
 ---
 category: Stack rescope under ≥10k★ SoR
-status: DRAFT — SPEC GATE E-STACK0 pending Approve of STACK1–STACK12
+status: APPROVED — SPEC GATE E-STACK0 (2026-08-09) — STACK1–STACK12
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 related:
@@ -9,28 +9,26 @@ related:
   - docs/research/modularity/20-tach-dependency-blueprint-2026.md
   - docs/research/quality-backlog.md
 do_not:
-  - Implement tool swaps before Approve
+  - Implement tool swaps in the E-HOT1 tip
   - delay E-HOT1 gate repair for stack theater
   - promote Sonar/Spec Kit/Nx to boolean or runtime SoT
-spec_gate: DRAFT E-STACK0 (2026-08-09) — STACK1–STACK12 pending Approve
+  - read Backstage Refuse as a company IDP ban
+spec_gate: APPROVED E-STACK0 (2026-08-09) — STACK1–STACK12
 ---
 
 # Design memo: E-STACK0 Spec gate (stack rescope)
 
-> **DRAFT — awaiting Approve of STACK1–STACK12.**
+> **APPROVED — SPEC GATE E-STACK0 (2026-08-09)**
 >
-> Research: [`docs/research/process/22-stack-rescope-10k-star-bar-2026.md`](../research/process/22-stack-rescope-10k-star-bar-2026.md).
+> Research: [`docs/research/process/22-stack-rescope-10k-star-bar-2026.md`](../research/process/22-stack-rescope-10k-star-bar-2026.md) (§3.8 Backstage scope).
 
 | Field | Value |
 | --- | --- |
-| Decisions | **STACK1–STACK12** pending |
+| Decisions | **STACK1–STACK12** Approved |
 | Bar | ≥10000★ for *new* external SoR; Confirmed pins Embody-continue |
-| Order | E-HOT1 green → stack Spec → E-COH1; no tool rip in hotfix |
-
-## Verdict
-
-Keep ruff/pytest/ast-grep/semgrep/mkdocs. Keep coverage/tach-cycles/complexipy/CodeQL as Confirmed despite ★. Steal **Nx boundary patterns** for seam maps; re-base E-TACH0 off tach★. Refuse Spec Kit runtime, Sonar-as-floor, dual linters. **Backstage:** support corp IDP; Refuse only as `doc-engine` runtime (optional catalog metadata OK).
+| Backstage | Corp IDP **supported**; Refuse only as `doc-engine` runtime; optional `catalog-info` Adopt |
+| Order | E-HOT1 green before tool rip/replace |
 
 ## Exit
 
-On Approve: stamp APPROVED; backlog P19; amend E-TACH0 draft ★ justification in a follow-up docs commit (not depends_on Implement).
+Docs Spec done. Amend E-TACH0 ★ justification (P19.1) after HOT green; no depends_on Implement in hotfix.

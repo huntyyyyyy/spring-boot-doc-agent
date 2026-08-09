@@ -230,12 +230,12 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Paused (E-COH1 reshape):** inventory/reshape waits until post-merge gates green under E-HOT.  
-**Active Spec (no product code yet):** **E-HOT0** (+ **E-STACK0** docs Spec) — post-merge gate repair ([`process/21-…`](process/21-post-merge-gate-repair-cohesion-2026.md)) and stack rescope under ≥10k★ ([`process/22-…`](process/22-stack-rescope-10k-star-bar-2026.md), design [`stack-rescope-10k-design-2026-08-09.md`](../design/stack-rescope-10k-design-2026-08-09.md)). Approve HOT* then STACK*; **E-HOT1 before any tool swap**.  
-**After E-HOT1 green:** resume **E-COH1** reshape; E-TACH0 draft must re-base ★ justification on Nx patterns (STACK6/8).  
-**Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md)); Approve TACH* only after STACK Amend of ★ SoR.  
+**Paused (E-COH1 reshape):** waits until E-HOT1 green.  
+**Active Implement:** **E-HOT1** — post-merge gate repair (HOT Approved).  
+**Docs Spec Approved:** **E-STACK0** — stack rescope under ≥10k★ (Backstage scoped: corp IDP supported; CLI runtime Refuse).  
+**Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1) before depends_on Approve.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **push while local `pre_pr --full` / oracle cell is red**; **★-wash &lt;10k tools as new Adopt**; **Sonar/Spec Kit/Nx as boolean or runtime SoT**.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT.
 
 ---
 
@@ -289,8 +289,8 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-HOT0 Spec:** approve **HOT1–HOT13** (G2 return/pass; patch-at-use; CQ slash-free scope; local-full before push; no tach-map / no E-STK1; **≥10k★** new external SoR) | **Draft** (2026-08-09) | research 21 + design memo `spec_gate` → APPROVED |
-| P18.1 | **E-HOT1 Implement:** F1–F6 repairs only; `pre_pr --full` green before push | After Approve | focused suites + full local gate; finding disposition |
+| P18.0 | **E-HOT0 Spec:** approve **HOT1–HOT13** (G2 return/pass; patch-at-use; CQ slash-free scope; local-full before push; no tach-map / no E-STK1; **≥10k★** new external SoR) | **Approved** (2026-08-09) | research 21 + design memo `APPROVED E-HOT0` |
+| P18.1 | **E-HOT1 Implement:** F1–F6 repairs only; `pre_pr --full` green before push | **Active** | focused suites + full local gate; finding disposition |
 
 Research: [`docs/research/process/21-post-merge-gate-repair-cohesion-2026.md`](process/21-post-merge-gate-repair-cohesion-2026.md). Design: [`docs/design/post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md). Finding: [`findings/2026-08-09-statement-split-cascade.md`](findings/2026-08-09-statement-split-cascade.md).
 
@@ -300,7 +300,7 @@ Research: [`docs/research/process/21-post-merge-gate-repair-cohesion-2026.md`](p
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P19.0 | **E-STACK0 Spec:** approve **STACK1–STACK12** (keep ≥10k pins; Confirmed exempt; Nx patterns for boundaries; tach cycles-only until re-Spec; no Sonar/Spec Kit runtime SoT) | **Draft** (2026-08-09) | research 22 + design memo → APPROVED |
+| P19.0 | **E-STACK0 Spec:** approve **STACK1–STACK12** (keep ≥10k pins; Confirmed exempt; Nx patterns for boundaries; tach cycles-only until re-Spec; Backstage = corp IDP OK / CLI runtime Refuse; no Sonar/Spec Kit runtime SoT) | **Approved** (2026-08-09) | research 22 + design memo `APPROVED E-STACK0` |
 | P19.1 | Amend E-TACH0 draft ★ justification (Nx patterns + Confirmed tach vehicle) | After STACK Approve; docs only | research 20 frontmatter/verdict updated |
 | P19.2 | Optional tool Spike (in-repo depends_on vs tach expansion) | After E-HOT1 green + human ask | Spike exit criteria |
 

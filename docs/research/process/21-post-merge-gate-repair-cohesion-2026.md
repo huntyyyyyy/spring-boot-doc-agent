@@ -1,6 +1,6 @@
 ---
 title: E-HOT0 — Post-merge CI red vs cohesion (gate repair Spec)
-status: DRAFT Spec — pending Approve of HOT1–HOT13
+status: APPROVED — SPEC GATE E-HOT0 (2026-08-09) — human Approve HOT1–HOT13
 research date: 2026-08-09
 research_window: 2026-06-01 → 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
@@ -21,10 +21,11 @@ do_not:
   - Approve E-TACH0 depends_on in the same tip as gate hotfix
   - start full E-STK1 Implement without Active switch (sensors Spec-ready only)
   - push before local `pre_pr --full` / oracle cell green
-spec_gate: DRAFT E-HOT0 (2026-08-09) — HOT1–HOT13 pending Approve
+spec_gate: APPROVED E-HOT0 (2026-08-09) — HOT1–HOT13
 gh_sor_bar: "≥10000★ and pushed_at within research_window (prefer Releases/CHANGELOG); in-repo Confirmed pins exempt from ★ for Embody-continue"
 bar_raise: "2026-08-09 human: raise from ≥1000★ to ≥10000★ (+10k) for external implement SoR on this stream"
-stack_rescope: "docs/research/process/22-stack-rescope-10k-star-bar-2026.md (E-STACK0 DRAFT)"
+stack_rescope: "docs/research/process/22-stack-rescope-10k-star-bar-2026.md (E-STACK0 APPROVED)"
+approved_by: "human chat 2026-08-09 — approve all HOT+STACK incl. apprehensive Confirmed exemptions"
 ---
 
 # Principal memo: post-merge gate repair under cohesion + 2026 modularity
@@ -264,9 +265,13 @@ Resume **E-COH1** (COH1-1 inventory …) under cohesion bar. Keep E-STK1 / E-TAC
 
 ## 10. Exit
 
-**E-HOT0 remains DRAFT until human Approve of HOT1–HOT13.**
-No product Implement on this stream until Approve is recorded in this memo + backlog.
+**E-HOT0 APPROVED (2026-08-09)** — HOT1–HOT13 locked by human Approve
+(“approve all”, including Confirmed-pin exemptions under HOT13).
+
+**Next:** E-HOT1 Implement on `cursor/local-ci-gate-fix-61f3` with local
+`pre_pr --full` / oracle cell green before push. E-STACK0 Approved in parallel
+as docs Spec (no tool swaps in hotfix).
 
 **Note on bar raise:** Older memos (E-STK0 / E-TACH0) still say ≥1k★. Raising the
-*repo-wide* default is a synthesis decision — out of scope for E-HOT1 code.
-This stream locks **≥10k★** for its own external SoR (HOT13) immediately on Approve.
+*repo-wide* default remains a synthesis follow-up; this stream locks **≥10k★** for
+its own external SoR (HOT13) now.
