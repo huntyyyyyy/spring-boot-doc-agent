@@ -4808,7 +4808,7 @@ Assumptions affected:
 Files touched: CONSTRAINTS.md, claude/steering-prompts/04-analytics-logging-research-prompt.md, src/doc_engine/tools/capacity_preflight*.py, spring_drift_*.py, partition_repo*.py, scripts/ratchets/size_baseline.json, docs/research/12-*, quality-backlog.md
 
 ## 2026-08-09 — E-MOD3 tools wave 2 (run_manifest / citation_coverage)
-Commit: uncommitted
+Commit: 0368487
 Tests: climb run_manifest + citation + live_gates citations + ports + ci run_manifest suites passing (scoped); complexipy 0; size baseline ratcheted (file offenders 30)
 Assumptions affected:
 - `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`path_exists:src/doc_engine/tools/run_manifest.py`" — [Still accurate — thin façade path retained; concept modules `run_manifest_*` hold io/stages/finalize/cli]
