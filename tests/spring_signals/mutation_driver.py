@@ -85,35 +85,13 @@ MUTANTS = [
 
 
 def main() -> int:
+    from tests.spring_signals.mutation_loop import apply_and_collect_survivors, exit_for_survivors
     pristine = ENGINE.read_text(encoding="utf-8")
-    survivors = []
-    try:
-        for name, old, new in MUTANTS:
-            if old not in pristine:
-                print(f"ANCHOR MISSING for {name}; driver is stale")
-                return 2
-            ENGINE.write_text(pristine.replace(old, new, 1), encoding="utf-8")
-            run = subprocess.run(
-                [sys.executable, "-m", "pytest", "tests/spring_signals/", "-q", "-x"],
-                cwd=REPO_ROOT,
-                capture_output=True,
-                text=True,
-            )
-            status = "KILLED" if run.returncode != 0 else "SURVIVED"
-            print(f"{status}: {name}")
-            if run.returncode == 0:
-                survivors.append(name)
-    finally:
-        ENGINE.write_text(pristine, encoding="utf-8")
-    if survivors:
-        print(f"\n{len(survivors)} mutant(s) survived: {survivors}")
-        if not ENFORCE:
-            print("\n(reporting only: ENFORCE is False)", file=sys.stderr)
-            return 0
-        return 1
-    print(f"\nAll {len(MUTANTS)} mutants killed; engine restored.")
-    return 0
-
+    result = apply_and_collect_survivors(ENGINE, pristine, MUTANTS, REPO_ROOT)
+    if isinstance(result, int):
+        return result
+    return exit_for_survivors(result, enforce=ENFORCE, mutant_count=len(MUTANTS))
 
 if __name__ == "__main__":
+    import sys
     sys.exit(main())

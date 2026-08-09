@@ -120,6 +120,12 @@ class Ch10CommandChainTest(KitchenBoundTestCase):
         """The driver's first test. It is the packaged form of this same
         series, exercised against the small checked-in fixture rather than
         paying for a second enterprise-scale scan."""
+        from tests.support.kitchen_sink.local_runner_assert import (
+            assert_covering_proof_matches_signals,
+            assert_local_runner_exit_and_banner,
+            assert_mock_certification,
+        )
+
         with tempfile.TemporaryDirectory() as d:
             run_dir = os.path.join(d, "run")
             proc = _run(
@@ -134,32 +140,6 @@ class Ch10CommandChainTest(KitchenBoundTestCase):
                     "--allow-mock",
                 ]
             )
-            self.assertEqual(
-                proc.returncode, 0, proc.stdout[-4000:] + proc.stderr[-2000:]
-            )
-            self.assertIn("RESULT: every gate passed", proc.stdout)
-            cert_path = os.path.join(run_dir, "certification.json")
-            self.assertTrue(os.path.isfile(cert_path))
-            with open(cert_path, encoding="utf-8") as f:
-                cert = json.load(f)
-            self.assertTrue(
-                cert.get("certified"),
-                f"expected certified under --allow-mock; failures={cert.get('failures')}",
-            )
-            self.assertEqual(cert.get("generative_executor"), "mock")
-            covering = os.path.join(run_dir, "covering_proof.json")
-            signals_path = os.path.join(run_dir, "spring_signals.json")
-            self.assertTrue(
-                os.path.isfile(covering), "local_runner missing covering_proof.json"
-            )
-            with open(signals_path, encoding="utf-8") as f:
-                signals = json.load(f)
-            with open(covering, encoding="utf-8") as f:
-                proof = json.load(f)
-            self.assertNotIn("_covering_proof", signals)
-            ok, why = verify_covering_proof(
-                proof,
-                file_signatures=signals["file_signatures"],
-                scanner_version=signals["scanner_version"],
-            )
-            self.assertTrue(ok, why)
+            assert_local_runner_exit_and_banner(self, proc)
+            assert_mock_certification(self, run_dir)
+            assert_covering_proof_matches_signals(self, run_dir)

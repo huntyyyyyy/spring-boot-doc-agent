@@ -65,63 +65,10 @@ datasource:
 
 def plant_ledger_legacy_noise(root: str) -> None:
     """Ledger collision, legacy encoding hazards, path/noise dirs."""
-    # --- ledger service: name collision + non-ASCII in a matched query ------
-    _w(root, DUP_LEDGER, _entity("com.acme.ledger", "Invoice", "ledger_invoice"))
-    # 'Á' is C3 81 and 'с' is D1 81 — byte 0x81 is undefined in cp1252, so a
-    # locale-decoded read of ast-grep's stdout dies here rather than merely
-    # mangling. é / 日 decode to silent mojibake instead. Both are regressions
-    # against the explicit encoding= on that subprocess call.
-    _w(root, UNICODE_QUERY, """package com.acme.ledger;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-public interface LedgerRepository extends JpaRepository<Invoice, Long> {
-    @Query("SELECT l FROM Invoice l WHERE l.nombre = 'ÁÍÝ спасибо café 日本語'")
-    java.util.List<Invoice> byNombre();
-}
-""")
-    for i in range(2):
-        _w(root, f"{LEDGER}/LedgerService{i}.java",
-           _service("com.acme.ledger", f"LedgerService{i}"))
-
-    # --- legacy batch: the encoding and size hazards ------------------------
-    # ~12 KB, and it carries a @RestController so it is genuinely citable
-    # evidence — which is the point of the Ch.5 divergence test.
-    _w(root, HUGE_JAVA,
-       _controller("com.acme.legacy", "Huge", "huge")
-       + ("// generated padding line kept well under any real size limit\n" * 180))
-    _wb(root, EMPTY_JAVA, b"")
-    _wb(root, LATIN1_JAVA,
-        b"package com.acme.legacy;\n// caf\xe9 latin-1 comment\nclass Latin1 { }\n")
-    _wb(root, NUL_JAVA, b"package com.acme.legacy;\nclass NulInside { }\n\x00// tail\n")
-    _wb(root, CRLF_JAVA,
-        _service("com.acme.legacy", "Crlf").replace("\n", "\r\n").encode("utf-8"))
-    _w(root, "services/legacy-batch/db/migration/V1__init.sql",
-       "CREATE TABLE billing_invoice (id BIGINT PRIMARY KEY);\n")
-
-    # --- path hazards -------------------------------------------------------
-    _w(root, SPACE_PATH, "# Guide\n\nA path segment with spaces in it.\n")
-    _w(root, UNICODE_DIR_JAVA, _controller("com.acme.uni", "UniController", "uni"))
-    _w(root, DEEP_JAVA, _service("com.acme.deep", "Leaf"))
-
-    # --- gitignored dir (empty until write-scope tests plant a stray) -------
-    # Do not seed ignored untracked files here: check_pipeline_output lists
-    # all ignored-untracked paths as write-scope violations, so a pre-seeded
-    # Big.json would fail a clean run. Root-only /generated/ in .gitignore
-    # keeps packages/ui/build/generated/ trackable for scan-exclusion tests.
-
-    # --- build noise that must never be scanned, grouped, or cited ---------
-    _w(root, "packages/ui/node_modules/leftpad/index.js", "module.exports = 1;\n")
-    _w(root, "packages/ui/node_modules/leftpad/Leaked.java",
-       _controller("com.acme.noise", "LeakedController", "leak"))
-    _w(root, "packages/ui/vendor/thirdparty/Vendored.java",
-       _entity("com.acme.noise", "VendoredEntity", "vendored_table"))
-    _w(root, "packages/ui/build/generated/Generated.java",
-       _entity("com.acme.noise", "GeneratedEntity", "generated_table"))
-    _w(root, "services/billing-service/target/generated-sources/Gen.java",
-       _controller("com.acme.noise", "GenController", "gen"))
-    _w(root, "tools/venv/lib/site.py", "# venv noise\n")
-    _w(root, "tools/dist/out.js", "// dist noise\n")
-    _w(root, "coverage/report.xml", "<coverage/>\n")
-    _w(root, "tools/out/Stale.java", _service("com.acme.noise", "Stale"))
+    from tests.support.kitchen_sink.repo_plants_legacy_parts import (
+        plant_build_noise, plant_ledger_collision, plant_legacy_encoding_hazards, plant_path_hazards,
+    )
+    plant_ledger_collision(root)
+    plant_legacy_encoding_hazards(root)
+    plant_path_hazards(root)
+    plant_build_noise(root)

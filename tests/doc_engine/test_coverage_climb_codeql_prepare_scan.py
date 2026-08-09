@@ -12,7 +12,7 @@ from doc_engine.scanning.support import _codeql_runner as runner
 
 pytestmark = pytest.mark.domain_climb_sensor
 
-def test_prepare_scan_targets_and_reuse(tmp_path: Path, monkeypatch) -> None:
+def test_prepare_scan_targets_only(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
     pack = tmp_path / "pack"
     pack.mkdir()
@@ -27,42 +27,37 @@ def test_prepare_scan_targets_and_reuse(tmp_path: Path, monkeypatch) -> None:
     assert keep is True
     assert resolved == pack
     assert db.parent.name == "codeql-cache"
-
     with pytest.raises(runner.CodeQLError, match="query pack not found"):
         runner._prepare_scan_targets(
             repo, "gradlew compileJava", tmp_path / "missing", None, False, None, "2.0"
         )
 
-    created = []
 
+def test_reuse_or_rebuild_cached_db(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
+    pack = tmp_path / "pack"
+    pack.mkdir()
+    (pack / "q.ql").write_text("// q", encoding="utf-8")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    resolved, db, using_cache, keep = runner._prepare_scan_targets(
+        repo, "gradlew compileJava", pack, None, False, None, "2.0"
+    )
+    created = []
     def _create(*a, **k):
         created.append(True)
         db.mkdir(parents=True, exist_ok=True)
-
     monkeypatch.setattr(db_mod, "create_database", _create)
     monkeypatch.setattr(cache_mod, "_cache_is_valid", lambda *a, **k: False)
     runner._reuse_or_rebuild_cached_db(
-        codeql_path=tmp_path / "codeql",
-        repo_path=repo,
-        db_path=db,
-        pack_dir=pack,
-        build_command="gradlew compileJava",
-        using_cache=True,
-        scan_context=None,
-        cli_version="2.0",
+        codeql_path=tmp_path / "codeql", repo_path=repo, db_path=db, pack_dir=pack,
+        build_command="gradlew compileJava", using_cache=True, scan_context=None, cli_version="2.0",
     )
     assert created
-    # Caller-provided keep path trusts existing DB.
     created.clear()
     runner._reuse_or_rebuild_cached_db(
-        codeql_path=tmp_path / "codeql",
-        repo_path=repo,
-        db_path=db,
-        pack_dir=pack,
-        build_command="gradlew compileJava",
-        using_cache=False,
-        scan_context=None,
-        cli_version="2.0",
+        codeql_path=tmp_path / "codeql", repo_path=repo, db_path=db, pack_dir=pack,
+        build_command="gradlew compileJava", using_cache=False, scan_context=None, cli_version="2.0",
     )
     assert not created
 

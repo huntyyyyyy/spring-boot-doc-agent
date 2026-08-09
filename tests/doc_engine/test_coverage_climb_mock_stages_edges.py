@@ -141,7 +141,7 @@ def test_gap_questions_fallback_and_skip(tmp_path: Path) -> None:
     assert tags["unknown"] >= 1
 
 
-def test_load_citations_pick_and_mock_docs(tmp_path: Path) -> None:
+def _ctrl_pool(tmp_path: Path) -> dict:
     src = tmp_path / "Ctrl.java"
     src.write_text("class Ctrl {}\n", encoding="utf-8")
     signals = {
@@ -153,22 +153,32 @@ def test_load_citations_pick_and_mock_docs(tmp_path: Path) -> None:
             "security": [{"file": "Ctrl.java", "line": 0, "match": "bad"}],
         }
     }
-    pool = ms.load_citations(signals, str(tmp_path))
+    return ms.load_citations(signals, str(tmp_path))
+
+
+def test_load_citations_and_pick(tmp_path: Path) -> None:
+    pool = _ctrl_pool(tmp_path)
     assert pool["api_surface"] and not pool["security"]
     picked = ms.pick(pool, ["api_surface", "security"], limit=2)
     assert picked and picked[0][0] == "api_surface"
 
+
+def test_mock_file_summaries_and_architecture(tmp_path: Path) -> None:
+    pool = _ctrl_pool(tmp_path)
     logs: list[str] = []
     groups = {"groups": [{"id": 1, "files": ["Ctrl.java"]}]}
     edges = {"groups": {"1": {"outbound": [{"to": "x"}], "same_package_outside": []}}}
     summary = ms.mock_file_summaries(str(tmp_path), groups, pool, edges, logs.append)
     assert "file summaries" in summary
     assert (tmp_path / "summaries.json").is_file()
-
     arch = ms.mock_architecture(str(tmp_path), groups, pool, logs.append)
     assert "architecture_merged" in arch
     assert (tmp_path / "architecture_merged.md").is_file()
 
+
+def test_mock_docs_todo_and_empty(tmp_path: Path) -> None:
+    pool = _ctrl_pool(tmp_path)
+    logs: list[str] = []
     (tmp_path / "README.md").write_text("# hi\n", encoding="utf-8")
     assert ms.find_existing_readme(str(tmp_path)) == "README.md"
     docs_dir = tmp_path / "docs"
@@ -191,11 +201,18 @@ def test_load_citations_pick_and_mock_docs(tmp_path: Path) -> None:
     kl2 = (tmp_path / "docs2" / "known_limitations.md").read_text(encoding="utf-8")
     assert "No TODO" in kl2
 
+
+def test_mock_gap_and_interview_writes(tmp_path: Path) -> None:
+    pool = _ctrl_pool(tmp_path)
+    logs: list[str] = []
+    todos = [{"file": "Ctrl.java", "line": 1, "marker": "TODO", "text": "fix"}]
     gap = ms.mock_gap_and_interview(str(tmp_path), pool, todos, "2026-08-09", logs.append)
     assert "gap question" in gap
     assert (tmp_path / "gap_questions.json").is_file()
     assert (tmp_path / "interview_answers.json").is_file()
 
+
+def test_node_id_and_group_architecture_fallback(tmp_path: Path) -> None:
     seen: set[str] = set()
     assert ms._node_id("a/Foo.java", seen) == "Foo_java"
     assert ms._node_id("b/Foo.java", seen) == "Foo_java_2"

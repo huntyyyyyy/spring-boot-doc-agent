@@ -78,7 +78,7 @@ def test_stage_end_finalize_infer_and_cancel() -> None:
     assert rm._infer_finalize_status(m4) == "complete"
 
 
-def test_interview_preflight_signatures_and_tags(
+def test_load_file_signatures_sources(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     assert rm.load_file_signatures() == {}
@@ -106,6 +106,8 @@ def test_interview_preflight_signatures_and_tags(
     assert rm.load_file_signatures(repo_path=str(tmp_path))["b.java"] == "sig"
     assert "could not read" in capsys.readouterr().err
 
+
+def test_compute_evidence_tag_counts(tmp_path: Path) -> None:
     docs = tmp_path / "docs"
     docs.mkdir()
     (docs / "readme.md").write_text(
@@ -116,6 +118,10 @@ def test_interview_preflight_signatures_and_tags(
     assert tags["readme.md"]["Evidenced"] == 1
     assert tags["readme.md"]["Confirmed"] == 1
 
+
+def test_parse_interview_file_statuses(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     interview = tmp_path / "interview.json"
     interview.write_text(
         json.dumps(
@@ -135,11 +141,12 @@ def test_interview_preflight_signatures_and_tags(
     err = capsys.readouterr().err
     assert "unrecognized status" in err
     assert "missing required" in err
-
     bad = tmp_path / "bad.json"
     bad.write_text("{", encoding="utf-8")
     assert rm.parse_interview_file(str(bad))["asked"] == 0
 
+
+def test_capacity_preflight_tie_in(tmp_path: Path) -> None:
     preflight = tmp_path / "preflight.json"
     preflight.write_text(
         json.dumps(
