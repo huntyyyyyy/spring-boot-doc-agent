@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from doc_engine.pipeline.compliance import (
+from doc_engine.pipeline.compliance_models import (
     CERTIFICATION_SCHEMA_VERSION,
     GENERATIVE_EXTERNAL_STAGE,
     CertificationReport,
@@ -20,6 +20,8 @@ from doc_engine.pipeline.compliance import (
     StageExecutorKind,
     StageRecord,
     gates_required_for_profile,
+)
+from doc_engine.pipeline.compliance_profile import (
     generative_stage_names,
     required_stage_names_for_profile,
 )

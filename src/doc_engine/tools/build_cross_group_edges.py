@@ -23,26 +23,15 @@ import sys
 from doc_engine.tools.cross_group_cli import main
 from doc_engine.tools.cross_group_emit import (
     SCHEMA_VERSION,
-    append_cut_edge as _append_cut_edge,
     build_report,
-    empty_per_group_buckets as _empty_per_group_buckets,
-    emit_targets_for_import as _emit_targets_for_import,
-    maybe_emit_cut_arc as _maybe_emit_cut_arc,
-    record_resolved_import_arcs as _record_resolved_import_arcs,
-    record_same_package_adjacency as _record_same_package_adjacency,
-    shipping_stats as _shipping_stats,
 )
 from doc_engine.tools.cross_group_resolve import (
     IMPORT_RE,
     PACKAGE_RE,
     build_membership,
-    ingest_reference_row as _ingest_reference_row,
     is_cut,
     parse_references,
     resolve_targets,
-    resolve_type_import as _resolve_type_import,
-    resolve_wildcard_import as _resolve_wildcard_import,
-    type_stem_from_path as _type_stem_from_path,
 )
 
 __all__ = [

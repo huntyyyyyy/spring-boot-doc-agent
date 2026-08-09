@@ -17,41 +17,21 @@ from typing import Any, Dict, List, Mapping
 
 from doc_engine.scanning.facts_core import (
     PathLike,
-    default_scanner as _default_scanner,
-    fact as _fact,
     facts_path_for_signals_out,
+)
+from doc_engine.scanning.facts_core import (
+    default_scanner as _default_scanner,
+)
+from doc_engine.scanning.facts_core import (
     sort_key as _sort_key,
-    type_symbol_quals as _type_symbol_quals,
 )
-from doc_engine.scanning.facts_covering import (
-    astgrep_receipt_complete as _astgrep_receipt_complete,
-    covering_state as _covering_state,
-    covering_writer_facts,
-    first_oracle_arm as _first_oracle_arm,
-    recall_facts_from_meta as _recall_facts_from_meta,
-)
-from doc_engine.scanning.facts_emit import (
-    EMIT_COUNT_KEYS as _EMIT_COUNT_KEYS,
-    bump_emit_count as _bump_emit_count,
-    bump_maps_to_count as _bump_maps_to_count,
-    fact_emit_counts,
-    require_maps_to_type_symbol as _require_maps_to_type_symbol,
-    write_facts_jsonl,
-)
+from doc_engine.scanning.facts_covering import covering_writer_facts
+from doc_engine.scanning.facts_emit import fact_emit_counts, write_facts_jsonl
 from doc_engine.scanning.facts_evidence import (
-    append_evidence_hit as _append_evidence_hit,
-    evidence_hit_fact as _evidence_hit_fact,
-    facts_from_bucket as _facts_from_bucket,
     facts_from_evidence as _facts_from_evidence,
 )
 from doc_engine.scanning.facts_maps_to import (
-    contested_table_name_source as _contested_table_name_source,
-    is_contested_entry as _is_contested_entry,
-    maps_to_fact_from_source as _maps_to_fact_from_source,
-    maps_to_from_contested_entry as _maps_to_from_contested_entry,
     maps_to_from_entity_table_map as _maps_to_from_entity_table_map,
-    maps_to_from_one_entry as _maps_to_from_one_entry,
-    maps_to_from_settled_entry as _maps_to_from_settled_entry,
 )
 
 

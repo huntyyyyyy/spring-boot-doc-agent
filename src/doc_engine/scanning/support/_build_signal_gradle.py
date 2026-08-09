@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
+import re
 from typing import Dict, List
 
 from doc_engine.scanning.support._build_signal_gradle_patterns import (
     GRADLE_APPLY_PLUGIN_RE,
-    GRADLE_BOOT_PLUGIN_RE,
     GRADLE_DEPENDENCY_RE,
     GRADLE_INCLUDE_RE,
     GRADLE_PLUGIN_RE,
