@@ -1,0 +1,116 @@
+"""Cohesive suite from tests/coverage/test_semgrep_rule_coverage.py: TestRuleIdParsing, TestCheckIdNormalization, TestNonVacuity."""
+
+from __future__ import annotations
+
+import collections
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
+import semgrep_rule_coverage as sc
+
+class TestRuleIdParsing(unittest.TestCase):
+    def test_the_real_rule_file_yields_rules(self) -> None:
+        """If this ever returns [], every other check here passes vacuously."""
+        ids = sc.rule_ids()
+        self.assertGreaterEqual(len(ids), 10)
+        self.assertIn("architecture_ddia__entity_no_version_field", ids)
+        self.assertIn("testing_est__test_method_no_assertion", ids)
+
+    def test_a_nested_id_is_not_mistaken_for_a_rule(self) -> None:
+        """A bare `id:` inside a rule body (e.g. metavariable-pattern) is not
+        a rule name -- only a `- id:` list item under `rules:` is."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "rules.yml"
+            path.write_text(
+                "rules:\n"
+                "  - id: bucket__real\n"
+                "    languages: [java]\n"
+                "    pattern-inside: |\n"
+                "      id: not_a_rule\n",
+                encoding="utf-8")
+            self.assertEqual(sc.rule_ids(path), ["bucket__real"])
+
+
+class TestCheckIdNormalization(unittest.TestCase):
+    """semgrep prefixes check_id with a cwd-dependent path when a rule file
+    is passed by local path (see the module docstring); this is the specific
+    behavior that made the un-normalized version of this checker silently
+    report every rule as unfired the first time it was run from a different
+    directory than it was written in."""
+
+    def test_short_prefix_is_stripped(self) -> None:
+        self.assertEqual(
+            sc._normalize_check_id("scripts.architecture_ddia__entity_no_version_field"),
+            "architecture_ddia__entity_no_version_field")
+
+    def test_long_absolute_path_prefix_is_stripped(self) -> None:
+        self.assertEqual(
+            sc._normalize_check_id(
+                "C.Users.someone.Downloads.repo.scripts."
+                "testing_est__test_method_no_assertion"),
+            "testing_est__test_method_no_assertion")
+
+    def test_an_unprefixed_id_is_left_alone(self) -> None:
+        self.assertEqual(
+            sc._normalize_check_id("architecture_ddia__unbounded_findall_exposed"),
+            "architecture_ddia__unbounded_findall_exposed")
+
+
+class TestNonVacuity(unittest.TestCase):
+    def test_every_real_rule_fires_on_the_fixture_corpus(self) -> None:
+        """The invariant itself, against the committed fixtures. Requires a
+        real `semgrep` on PATH -- skipped, not silently passed, if absent."""
+        try:
+            sc.find_semgrep()
+        except sc.SemgrepNotFoundError:
+            self.skipTest("semgrep not on PATH")
+        self.assertEqual(sc.check_non_vacuity(), [])
+
+    def test_an_empty_pack_fails_rather_than_passing_vacuously(self) -> None:
+        original = sc.rule_ids
+        try:
+            sc.rule_ids = lambda *a, **k: []  # type: ignore[assignment]
+            problems = sc.check_non_vacuity()
+            self.assertTrue(any("empty" in p.lower() for p in problems), problems)
+        finally:
+            sc.rule_ids = original  # type: ignore[assignment]
+
+    def test_a_rule_with_no_fixture_is_caught(self) -> None:
+        """Proves the gate is not passing because it looked at nothing: a
+        rule that exists but nothing triggers must be reported."""
+        try:
+            sc.find_semgrep()
+        except sc.SemgrepNotFoundError:
+            self.skipTest("semgrep not on PATH")
+        original = sc.rule_ids
+        try:
+            sc.rule_ids = lambda *a, **k: original() + ["invented__rule"]  # type: ignore[assignment]
+            problems = sc.check_non_vacuity()
+            self.assertTrue(any("invented__rule" in p for p in problems), problems)
+        finally:
+            sc.rule_ids = original  # type: ignore[assignment]
+
+    def test_a_missing_fixture_corpus_fails_rather_than_passing(self) -> None:
+        real_dir = sc.FIXTURE_DIR
+        try:
+            sc.FIXTURE_DIR = Path(tempfile.gettempdir()) / "definitely-not-here"
+            self.assertTrue(sc.check_non_vacuity())
+        finally:
+            sc.FIXTURE_DIR = real_dir
+
+    def test_an_exemption_must_state_a_reason(self) -> None:
+        try:
+            sc.find_semgrep()
+        except sc.SemgrepNotFoundError:
+            self.skipTest("semgrep not on PATH")
+        real = dict(sc.FIXTURE_EXEMPT)
+        try:
+            sc.FIXTURE_EXEMPT["some__rule"] = "   "
+            self.assertTrue(any("no stated reason" in p
+                                for p in sc.check_non_vacuity()))
+        finally:
+            sc.FIXTURE_EXEMPT.clear()
+            sc.FIXTURE_EXEMPT.update(real)

@@ -12,7 +12,7 @@ class FindCodeqlTest(unittest.TestCase):
     def test_uses_doc_engine_codeql_env(self):
         fake = Path(__file__).resolve()
         with mock.patch.dict(os.environ, {"DOC_ENGINE_CODEQL": str(fake)}, clear=False):
-            with mock.patch("doc_engine.scanning.support._codeql_runner.shutil.which", return_value=None):
+            with mock.patch("doc_engine.scanning.support._codeql_cli.shutil.which", return_value=None):
                 self.assertEqual(find_codeql(), fake)
 
     def test_uses_path_when_env_unset(self):
@@ -27,7 +27,7 @@ class FindCodeqlTest(unittest.TestCase):
     def test_raises_when_missing(self):
         with mock.patch.dict(os.environ, {}, clear=False):
             os.environ.pop("DOC_ENGINE_CODEQL", None)
-            with mock.patch("doc_engine.scanning.support._codeql_runner.shutil.which", return_value=None):
+            with mock.patch("doc_engine.scanning.support._codeql_cli.shutil.which", return_value=None):
                 with self.assertRaises(CodeQLNotFoundError) as ctx:
                     find_codeql()
         self.assertNotIn("Users\\16145", str(ctx.exception))

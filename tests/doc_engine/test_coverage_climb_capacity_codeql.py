@@ -10,6 +10,8 @@ from unittest.mock import MagicMock
 import pytest
 
 from doc_engine.scanning.support import _codeql_runner as runner
+import doc_engine.scanning.support._codeql_cli as cli_mod
+import doc_engine.scanning.support._codeql_database as db_mod
 from doc_engine.tools import capacity_preflight as cap
 
 
