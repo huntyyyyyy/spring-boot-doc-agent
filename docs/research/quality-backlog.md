@@ -241,7 +241,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 | P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Draft** (2026-08-09) | research 19 `spec_gate` → APPROVED |
 | P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | After Approve; one stream | context resets; claims green; LOC/complexipy |
 
-Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md). Prefer newer ≥1k★ with releases: **agentmemory**, **prime-agent**, **OpenHands**, **deepagents**/**open-swe**, **react-doctor** (pattern), **gh-aw**; arXiv icat/Focus/CompactionRL/RefactorAssist/Continual Harness. **Refuse** GH SoR &lt;1000★.
+Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md). GH SoR: ≥1k★ **and** `pushed_at` within **14 days** (agentmemory, prime-agent, OpenHands, deepagents/open-swe, react-doctor pattern, gh-aw, …). arXiv icat/Focus/CompactionRL/RefactorAssist/Continual Harness. **Refuse** &lt;1k★ or stale tips.
 
 ---
 

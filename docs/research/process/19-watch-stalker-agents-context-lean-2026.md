@@ -28,7 +28,7 @@ spec_gate: DRAFT E-STK0 (2026-08-09) — STK1–STK10 pending Approve
 | Is there a 2026 pattern for agents that *watch* systems, surface bugs / inefficiencies / wrong frameworks / gaps, then drive research + refactor adoption? | **Yes.** Strongest native shape is **sensor findings → compact external memory → research memo / backlog → Spec → implement**, not a forever-growing chat. `[Evidenced]` |
 | What maps to this repo’s “stalker”? | **Suite-stalking sensors (E-RUN)** already Embody the *watch* half for CI plateaus — deterministic junit / cascade clarity; LLM flake triage refused. Broader “framework/gap stalking” is a **separate meta-agent** that must not dilute oracle SoT. `[Confirmed]` |
 | How do mid-2026 systems avoid context bloat? | Prefer **newer ≥1k★ harnesses with release cadence**: **agentmemory** (MCP + decay), **OpenHands** condensers, **Prime Agent** Continual Harness + compaction, **deepagents** / **open-swe** composition — plus arXiv compaction papers. `[Evidenced]` |
-| Adopt for *this* product now? | **Spec-only (E-STK0).** Prefer **deterministic sensors + in-repo backlog**. GH SoR = **≥1000★** *and* prefer **created/accelerated 2025–2026 with tagged releases/CHANGELOG** over stagnant giants. |
+| Adopt for *this* product now? | **Spec-only (E-STK0).** Prefer **deterministic sensors + in-repo backlog**. GH SoR = **≥1000★** *and* **`pushed_at` in the last 14 days**, preferring **2025–2026 trees with Releases/CHANGELOG**. |
 
 ---
 
@@ -69,21 +69,28 @@ Category errors to refuse up front:
 **GitHub implement SoR bar (this memo):**
 
 1. Stars **≥1000** at research fetch.
-2. Prefer **newer or recently accelerated** trees (created/rewritten **2025–2026**) with **tagged Releases and/or CHANGELOG** — not only legacy star count.
-3. Below 1k★ → **Refuse as SoR** (arXiv may still Evidenced the algorithm).
+2. **`pushed_at` within the last 14 days** of the research date (here: **2026-07-26 → 2026-08-09**). Stale tips are orientation-only even if famous.
+3. Prefer **created/rewritten 2025–2026** with **tagged Releases and/or CHANGELOG**.
+4. Below 1k★ **or** no push in that window → **Refuse as SoR** (arXiv may still Evidenced the algorithm).
 
-### 3.0 Preferred GH SoR — newer, widely adopted, release cadence (fetched 2026-08-09)
+### 3.0 Preferred GH SoR — ≥1k★ **and** pushed in last 14 days (fetched 2026-08-09)
 
-| Repo | Created | ★ | Recent releases / changelog | Why it fits stalker + lean context |
-| --- | --- | --- | --- | --- |
-| [rohitg00/agentmemory](https://github.com/rohitg00/agentmemory) | 2026-02 | **≈26.8k** | `CHANGELOG.md`; tags through **v0.9.28** (2026-07); tip pushed 2026-08-09 | Coding-agent **persistent memory** via MCP; 4-tier consolidation + decay + auto-forget; self-hosted SQLite — preferred memory SoR vs sub-1k toys |
-| [PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent) | 2026-05 | **≈10.7k** | **v0.7.0 / v0.7.1** (2026-08); Continual Harness ([arXiv:2605.09998](https://arxiv.org/abs/2605.09998)) | **Automatic compaction**, durable memories/skills, heartbeats/schedules, bounded autonomous mode + quality gates |
-| [millionco/react-doctor](https://github.com/millionco/react-doctor) | 2026-02 | **≈14.3k** | npm tags **0.9.10–0.9.11** (2026-08-09); CI skill install | **Deterministic** scan → agent skill for self-correction; PR-diff gated findings — stalker *shape* (React-specific; pattern only here) |
-| [langchain-ai/deepagents](https://github.com/langchain-ai/deepagents) | 2025-07 | **≈27.6k** | **deepagents 0.7.4–0.7.5** + `deepagents-code` (2026-08) | Batteries-included harness; composition base for coding agents |
-| [langchain-ai/open-swe](https://github.com/langchain-ai/open-swe) | 2025-05 | **≈10.5k** | Active tip 2026-08 | Async coding agent on Deep Agents; Linear/Slack/GitHub → draft PRs (*act* after findings) |
-| [SWE-agent/mini-swe-agent](https://github.com/SWE-agent/mini-swe-agent) | 2025-06 | **≈6.3k** | Active; supersedes heavy SWE-agent monorepo | Minimal fix-loop scaffold; leaner research baseline |
-| [All-Hands-AI/OpenHands](https://github.com/All-Hands-AI/OpenHands) | 2024-03 | **≈83.5k** | **v1.9–v1.12** in one week (2026-08-03→08-07) | Production scaffold; **event log + LLMSummarizingCondenser** — reference lean-context *implementation* |
-| [github/gh-aw](https://github.com/github/gh-aw) | 2025-08 | **≈4.9k** | Official continuous-improvement workflows | Rotating Quality Improver + cache memory; ResearchPlanAssignOps |
+Window: **`pushed_at` ≥ 2026-07-26**. All rows below verified via GitHub API on the research date.
+
+| Repo | Created | ★ | Last push | Releases / changelog | Fit |
+| --- | --- | --- | --- | --- | --- |
+| [rohitg00/agentmemory](https://github.com/rohitg00/agentmemory) | 2026-02 | ≈26.8k | **2026-08-09** | `CHANGELOG.md`; tags → v0.9.28 (2026-07) | Coding-agent MCP memory; decay/forget; self-hosted SQLite |
+| [PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent) | 2026-05 | ≈10.7k | **2026-08-09** | v0.7.0 / v0.7.1 (2026-08); [arXiv:2605.09998](https://arxiv.org/abs/2605.09998) | Auto compaction + Continual Harness + quality gates |
+| [millionco/react-doctor](https://github.com/millionco/react-doctor) | 2026-02 | ≈14.3k | **2026-08-09** | npm 0.9.10–0.9.11 (same day) | Deterministic scan → agent skill (React pattern only) |
+| [langchain-ai/deepagents](https://github.com/langchain-ai/deepagents) | 2025-07 | ≈27.6k | **2026-08-09** | deepagents 0.7.4–0.7.5 (2026-08) | Harness composition |
+| [langchain-ai/open-swe](https://github.com/langchain-ai/open-swe) | 2025-05 | ≈10.5k | **2026-08-09** | Active tip | Async coding agent → draft PRs |
+| [github/gh-aw](https://github.com/github/gh-aw) | 2025-08 | ≈4.9k | **2026-08-09** | Official continuous-improvement workflows | Rotating Quality Improver + cache memory |
+| [All-Hands-AI/OpenHands](https://github.com/All-Hands-AI/OpenHands) | 2024-03 | ≈83.5k | **2026-08-09** | v1.9–v1.12 (2026-08-03→08-07) | Event log + condensers (lean-context reference) |
+| [SWE-agent/mini-swe-agent](https://github.com/SWE-agent/mini-swe-agent) | 2025-06 | ≈6.3k | **2026-08-03** | Active; supersedes heavy SWE-agent | Minimal fix-loop scaffold |
+| [mem0ai/mem0](https://github.com/mem0ai/mem0) | 2023-06 | ≈62.9k | **2026-08-07** | Apr 2026 algo refresh; MCP/hooks | Valid memory Spike; older tree than agentmemory |
+| [letta-ai/letta](https://github.com/letta-ai/letta) | 2023-10 | ≈24.2k | **2026-08-01** | Active | Spike; framework lock-in risk |
+
+**Checked OUT of SoR (window miss):** e.g. inactive public mirrors with push older than 14 days — do not cite as implement SoR even if high★.
 
 ### 3.1 Watch → findings → adopt (papers + official)
 
@@ -188,7 +195,7 @@ Category errors to refuse up front:
 | **STK7** | Fixer agents (if any) use **event-passed** handoffs + static-first repair; no shared megacontext with the watcher |
 | **STK8** | Memory default = **thin in-repo ledger**; optional Spike prefers **agentmemory** (or Mem0) — ≥1k★ + active Releases/CHANGELOG, local-first — **never** sub-1k GH memory repos |
 | **STK9** | Suite-stalking remains **E-RUN sensors**; E-STK does not reopen D3/D8/D9 refuses without a new Spec |
-| **STK10** | Refuse: chat dumps as SoT; LLM as 98.7 proof; GH trees **&lt;1000★** as implement SoR; forever-grandfather of watch noise; parallel tip thrash from auto-PRs |
+| **STK10** | Refuse: chat dumps as SoT; LLM as 98.7 proof; GH trees **&lt;1000★** or **no push in 14 days** as implement SoR; forever-grandfather of watch noise; parallel tip thrash from auto-PRs |
 
 ---
 
@@ -227,6 +234,7 @@ Category errors to refuse up front:
 | Suite stalker research bundled with LLM flake triage | Sensor-only first (E-RUN0 got this right) |
 | Continuous improvement = unbounded agent chat | gh-aw rotating focus + causal chain to Spec |
 | Citing immature GH (&lt;1k★) as “the” memory/health product | arXiv for algorithms; ≥1k★ or in-repo for implement |
+| Citing high★ but **stale tips** (&gt;14 days without push) | Re-fetch `pushed_at`; drop from implement SoR |
 
 ---
 
