@@ -11,17 +11,16 @@ from doc_engine.query import freshness, load, packet, providers, registry, schem
 from doc_engine.query.handlers import dependents, entity, evidence, facts, route_trace
 from doc_engine.query.load import QueryError
 
+pytestmark = pytest.mark.domain_pipeline
 
 def test_parse_jsonl_object_rejects_non_object(tmp_path: Path):
     with pytest.raises(QueryError, match="must be object"):
         load._parse_jsonl_object(tmp_path / "f.jsonl", 1, "[]")
 
-
 def test_load_jsonl_skips_blanks_and_parses_rows(tmp_path: Path):
     path = tmp_path / "facts.jsonl"
     path.write_text('\n{"a": 1}\n\n{"b": 2}\n', encoding="utf-8")
     assert load.load_jsonl(path, root=tmp_path) == [{"a": 1}, {"b": 2}]
-
 
 def test_stale_paths_from_drift_report_lists_and_files_map():
     report = {
@@ -37,7 +36,6 @@ def test_stale_paths_from_drift_report_lists_and_files_map():
         "c.java",
     }
 
-
 def test_arcs_for_direction_filters_want_file():
     entry = {
         "outbound": [
@@ -51,7 +49,6 @@ def test_arcs_for_direction_filters_want_file():
     assert rows[0]["direction"] == "outbound"
     assert rows[0]["from"] == "A.java"
 
-
 def test_rel_path_is_live_matches_signature(tmp_path: Path):
     src = tmp_path / "src"
     src.mkdir()
@@ -61,7 +58,6 @@ def test_rel_path_is_live_matches_signature(tmp_path: Path):
     sig = compute_file_signature(str(f))
     assert packet._rel_path_is_live(tmp_path.resolve(), {rel: sig}, rel)
     assert not packet._rel_path_is_live(tmp_path.resolve(), {rel: "dead"}, rel)
-
 
 def test_query_route_trace_keeps_mapping_rows_with_guards():
     signals = {
@@ -94,7 +90,6 @@ def test_query_route_trace_keeps_mapping_rows_with_guards():
     assert len(rows) == 1
     assert rows[0]["guards"][0]["rule_id"] == "security__pre_authorize"
 
-
 def test_fact_passes_helpers_compose():
     row = {
         "predicate": "MAPS_TO",
@@ -117,7 +112,6 @@ def test_fact_passes_helpers_compose():
         subject_contains=None,
     )
 
-
 def test_filter_bucket_and_entity_helpers():
     evidence_doc = {
         "api_surface": [
@@ -139,7 +133,6 @@ def test_filter_bucket_and_entity_helpers():
     }
     found = entity.query_entity(signals, table="usr")
     assert len(found) == 1 and found[0]["class_name"] == "User"
-
 
 def test_facts_provider_and_invoke_handler_helpers(tmp_path: Path):
     provider = providers.FactsProvider()
@@ -171,7 +164,6 @@ def test_facts_provider_and_invoke_handler_helpers(tmp_path: Path):
     assert out == [{"a": 1}]
     with pytest.raises(load.QueryMissingError):
         registry._invoke_handler(Spec(), sig=None, fr=None, ed=None, filters={})
-
 
 def test_validate_envelope_kind_specific(tmp_path: Path, monkeypatch):
     schema = {"required": ["kind", "rows"]}

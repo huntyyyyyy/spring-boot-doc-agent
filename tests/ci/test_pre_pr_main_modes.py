@@ -9,6 +9,10 @@ from pathlib import Path
 from unittest import mock
 import pre_pr
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class MainActionsOutageTest(unittest.TestCase):
     def test_missing_toolchain_exits_before_suites(self):
         import tempfile
@@ -84,7 +88,6 @@ class MainActionsOutageTest(unittest.TestCase):
             self.assertEqual(data["schema_version"], 2)
             self.assertEqual(data["overall"], "pass")
 
-
 class MainAutoUsesStandardSuitesTest(unittest.TestCase):
     def test_main_auto_calls_build_suites_with_standard(self):
         import tempfile
@@ -119,7 +122,6 @@ class MainAutoUsesStandardSuitesTest(unittest.TestCase):
             data = json.loads(receipt.read_text(encoding="utf-8"))
             self.assertEqual(data["mode"], "standard")
             self.assertNotEqual(data["mode"], "full")
-
 
 class MainBypassTest(unittest.TestCase):
     def test_main_bypass_exits_zero(self):

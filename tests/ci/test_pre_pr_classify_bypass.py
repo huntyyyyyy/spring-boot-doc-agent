@@ -9,6 +9,10 @@ from pathlib import Path
 from unittest import mock
 import pre_pr
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class ClassifyPathRiskTest(unittest.TestCase):
     def test_docs_only_is_fast(self):
         self.assertEqual(
@@ -30,7 +34,6 @@ class ClassifyPathRiskTest(unittest.TestCase):
             pre_pr.classify_path_risk([".github/workflows/ci.yml"]),
             "standard",
         )
-
 
 class BypassTest(unittest.TestCase):
     def test_skip_without_reason_exits(self):
@@ -54,7 +57,6 @@ class BypassTest(unittest.TestCase):
                     entry = pre_pr.check_bypass()
         self.assertIsNotNone(entry)
         self.assertEqual(entry["reason"], "emergency hotfix")
-
 
 class ReceiptTest(unittest.TestCase):
     def test_write_receipt_has_required_keys(self, tmp_path_factory=None):
@@ -94,7 +96,6 @@ class ReceiptTest(unittest.TestCase):
         self.assertEqual(data["github_status_note"], "https://www.githubstatus.com/")
         self.assertEqual(data["suites"][0]["name"], "ruff")
 
-
 class BuildSuitesTest(unittest.TestCase):
     def test_fast_skips_pytest(self):
         names = [n for n, _, _ in pre_pr.build_suites("fast")]
@@ -124,7 +125,6 @@ class BuildSuitesTest(unittest.TestCase):
         self.assertIn("codeql_fixture_runtime", names)
         self.assertIn("certify_scan_only", names)
         self.assertIn("certify_certified", names)
-
 
 class ResolveModeTest(unittest.TestCase):
     def _ns(self, *, auto=False, fast=False, full=False, actions_outage=False):
@@ -172,7 +172,6 @@ class ResolveModeTest(unittest.TestCase):
     def test_actions_outage_flag(self):
         mode = pre_pr.resolve_mode(self._ns(actions_outage=True))
         self.assertEqual(mode, "actions_outage")
-
 
 class RequireOutageToolchainTest(unittest.TestCase):
     def test_missing_codeql_fails(self):

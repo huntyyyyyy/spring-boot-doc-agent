@@ -14,6 +14,10 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 import check_no_client_identifiers as gate
 from tests.support.client_identifiers.harness import findings, run_main
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class MinimalValidAggregateTest(unittest.TestCase):
     def test_a_minimal_valid_aggregate_has_no_findings(self) -> None:
         payload = {
@@ -34,7 +38,6 @@ class MinimalValidAggregateTest(unittest.TestCase):
         }
         self.assertEqual(findings(payload), [])
 
-
 class UnknownKeyTest(unittest.TestCase):
     def test_an_unknown_top_level_key_is_a_finding(self) -> None:
         result = findings({"totally_new_field": 1})
@@ -46,7 +49,6 @@ class UnknownKeyTest(unittest.TestCase):
         result = findings({"summaries": [{"bogus_field": 1}]})
         self.assertEqual(len(result), 1)
         self.assertIn("bogus_field", result[0])
-
 
 class GeneratedKeyPatternTest(unittest.TestCase):
     def test_a_valid_delta_by_cause_key_has_no_finding(self) -> None:
@@ -68,7 +70,6 @@ class GeneratedKeyPatternTest(unittest.TestCase):
         result = findings({"verdict_by_cause": {"SPURIOUS_CAUSE": "EVIDENTIARY"}})
         self.assertEqual(len(result), 1)
 
-
 class StringValueVocabularyTest(unittest.TestCase):
     def test_allowed_producer_values_have_no_finding(self) -> None:
         self.assertEqual(findings({"_producer": "stage0-oracle-compare"}), [])
@@ -89,7 +90,6 @@ class StringValueVocabularyTest(unittest.TestCase):
         self.assertEqual(len(result), 1)
         self.assertIn("not in the permitted vocabulary", result[0])
 
-
 class ProseFieldTest(unittest.TestCase):
     def test_prose_with_no_package_shaped_token_has_no_finding(self) -> None:
         self.assertEqual(findings({"note": "measured over three runs"}), [])
@@ -98,7 +98,6 @@ class ProseFieldTest(unittest.TestCase):
         result = findings({"note": "seen in com.acme.client.service.FooBar"})
         self.assertEqual(len(result), 1)
         self.assertIn("com.acme.client.service", result[0])
-
 
 class PatternedStringValueTest(unittest.TestCase):
     """shared_input_digest and entity_pseudonym are documented as

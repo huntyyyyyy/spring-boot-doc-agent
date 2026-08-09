@@ -20,6 +20,10 @@ from doc_engine.tools.certification import verify_certification
 from tests.doc_engine.cert_helpers import ok_det_stages_for, ok_stages_for
 from tests.support.live_gates.fixtures import _live_ok_gates, _plant_weak_docs, _mock_non_citation_gates
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 def test_verify_rejects_mock_without_allow_mock():
     with tempfile.TemporaryDirectory() as tmp:
         # Builder itself refuses CERTIFIED+mock without allow_mock.
@@ -56,7 +60,6 @@ def test_verify_rejects_mock_without_allow_mock():
         assert cert_main([str(path)]) == 1
         assert cert_main([str(path), "--allow-mock"]) == 0
 
-
 def test_verify_rejects_none_without_allow_mock():
     with tempfile.TemporaryDirectory() as tmp:
         report = build_certification_report(
@@ -77,7 +80,6 @@ def test_verify_rejects_none_without_allow_mock():
         ok, msg = verify_certification(path)
         assert not ok
         assert "none" in msg
-
 
 def test_verify_accepts_live_certified():
     with tempfile.TemporaryDirectory() as tmp:

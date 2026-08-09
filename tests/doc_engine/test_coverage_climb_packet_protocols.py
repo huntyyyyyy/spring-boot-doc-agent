@@ -24,6 +24,8 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 class _StubPacket:
     name = "stub"
 
@@ -38,11 +40,9 @@ class _StubPacket:
     ) -> list[dict[str, Any]]:
         return [{"path": "a.java", "reason": request, "limit": limit}]
 
-
 class _StubFreshness:
     def freshness_for(self, rel_path: str | None) -> str:
         return "unknown" if not rel_path else "live"
-
 
 def test_packet_provider_protocol_runtime_checkable(tmp_path: Path) -> None:
     stub = _StubPacket()
@@ -56,34 +56,28 @@ def test_packet_provider_protocol_runtime_checkable(tmp_path: Path) -> None:
     )
     assert items[0]["reason"] == "need"
 
-
 def test_freshness_policy_protocol_runtime_checkable() -> None:
     stub = _StubFreshness()
     assert isinstance(stub, FreshnessPolicy)
     assert stub.freshness_for(None) == "unknown"
     assert stub.freshness_for("a.java") == "live"
 
-
 def test_env_seconds_rejects_non_integer(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("DOC_ENGINE_TOOL_TIMEOUT", "not-an-int")
     with pytest.raises(ValueError, match="integer"):
         timeouts_mod.tool_timeout_seconds()
-
 
 def test_env_seconds_rejects_non_positive(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("DOC_ENGINE_CODEQL_TIMEOUT", "0")
     with pytest.raises(ValueError, match="positive"):
         timeouts_mod.codeql_database_timeout_seconds()
 
-
 def test_env_seconds_blank_uses_default(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("DOC_ENGINE_TOOL_TIMEOUT", "   ")
     assert timeouts_mod.tool_timeout_seconds() == 600
 
-
 def test_load_gitignore_returns_none_without_file(tmp_path: Path) -> None:
     assert excludes_mod.load_gitignore_spec(str(tmp_path)) is None
-
 
 def test_load_gitignore_returns_none_when_pathspec_missing(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -98,7 +92,6 @@ def test_load_gitignore_returns_none_when_pathspec_missing(
 
     monkeypatch.setattr("builtins.__import__", _fake_import)
     assert excludes_mod.load_gitignore_spec(str(tmp_path)) is None
-
 
 def test_mcp_input_properties_signal_fact_edge_filters() -> None:
     full = kinds_mod.QueryKindSpec(

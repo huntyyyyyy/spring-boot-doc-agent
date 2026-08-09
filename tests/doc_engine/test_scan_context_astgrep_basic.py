@@ -20,6 +20,10 @@ from doc_engine.scanning.support._codeql_runner import (
 )
 from tests.conftest import FIXTURE_DIR
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class AstGrepScanContextBasicTest(unittest.TestCase):
     def test_run_ast_grep_uses_java_files_from_context(self):
             backend = AstGrepBackend()

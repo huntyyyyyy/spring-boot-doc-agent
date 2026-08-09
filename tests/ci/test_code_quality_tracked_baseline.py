@@ -8,6 +8,11 @@ import tempfile
 import unittest
 from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 import check_code_quality as checker
 from tests.support.code_quality.measure import measure_one
@@ -65,7 +70,6 @@ class TrackedFilesOnlyTest(unittest.TestCase):
             self.assertIn("mod.py::a", keys)
             self.assertNotIn("sample.py::fixture", keys)
 
-
 class BaselineRoundTripTest(unittest.TestCase):
     def test_baseline_survives_a_json_round_trip(self):
         """compare() runs against JSON-loaded data in production, where dict
@@ -106,7 +110,6 @@ class BaselineRoundTripTest(unittest.TestCase):
     def test_a_missing_baseline_is_a_usage_error_not_a_pass(self):
         with tempfile.TemporaryDirectory() as tmp:
             self.assertIsNone(checker.load_baseline(Path(tmp) / "absent.json"))
-
 
 class CommittedBaselineTest(unittest.TestCase):
     def test_the_committed_baseline_matches_the_current_tree(self):

@@ -12,6 +12,11 @@ import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.core.excludes import load_gitignore_spec
 from doc_engine.tools import partition_repo
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 
 class BuildGroupsTest(unittest.TestCase):

@@ -12,6 +12,11 @@ import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.core.excludes import load_gitignore_spec
 from doc_engine.tools import partition_repo
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 
 class EstimateTokensTest(unittest.TestCase):
@@ -66,7 +71,6 @@ class EstimateTokensTest(unittest.TestCase):
         self.assertEqual(tokens, 0)
         self.assertIn("too-large", reason)
 
-
 class RespectGitignoreOptInTest(unittest.TestCase):
     """--respect-gitignore is additive-only: default behavior (flag/spec
     omitted) must be unaffected, and a directory not covered by the
@@ -103,7 +107,6 @@ class RespectGitignoreOptInTest(unittest.TestCase):
         spec = load_gitignore_spec(self.tmpdir)
         self.assertIsNotNone(spec, "pathspec must be installed for this test to be meaningful")
         self.assertEqual(self._relpaths(gitignore_spec=spec), {".gitignore", "kept.txt"})
-
 
 class EmittedPathSeparatorTest(unittest.TestCase):
     """groups.json's `files` are joined by path against spring_signals.json's

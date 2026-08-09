@@ -12,6 +12,9 @@ from unittest import mock
 from doc_engine.ci import quality_gate_checks as checks
 from doc_engine.ci import quality_gates as qg
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class RunQualityGatesTest(unittest.TestCase):
     def test_gate_new_code_coverage_uses_python_module(self) -> None:
@@ -172,7 +175,6 @@ class RunQualityGatesTest(unittest.TestCase):
             [sys.executable, "-m", "doc_engine.ci.size_ratchet"],
         )
         self.assertIn("hard>225", label)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

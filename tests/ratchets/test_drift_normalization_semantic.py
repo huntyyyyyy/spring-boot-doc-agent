@@ -14,6 +14,11 @@ from doc_engine.scanning import _scanner_astgrep as astgrep_backend
 from doc_engine.tools import spring_drift_check, spring_signal_scan
 import drift_match_normalizers as norms
 import java_perturbations as perturb
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 FIXTURES = os.path.join(SCRIPT_DIR, "fixtures", "spring_signals")
 _BILLING = os.path.join("src", "main", "java", "com", "example", "billing")
@@ -84,7 +89,6 @@ class Test03SemanticChangesMustBeCaught(unittest.TestCase):
                               f"{r['match']!r} did not change but was reported "
                               f"{r['status']}")
 
-
 class Test04NormalizerCandidates(unittest.TestCase):
     """The comparison table from drift_match_normalizers.py's docstring,
     re-derived rather than quoted -- a table in a comment goes stale silently,
@@ -132,7 +136,6 @@ class Test04NormalizerCandidates(unittest.TestCase):
                           and r["status"] in CONFIRMING]
                 self.assertEqual([], missed,
                                  f"{cand} confirmed a citation that really changed")
-
 
 class Test05NormalizerProperties(unittest.TestCase):
     """Properties of the candidate relations themselves, independent of the

@@ -2,14 +2,15 @@
 
 from doc_engine.pipeline import mock_stages as ms
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
 
 def test_cross_group_arc_snippets_handles_missing_keys():
     assert ms._cross_group_arc_snippets({}) == []
 
-
 def test_cross_group_arc_snippets_handles_non_list_values():
     assert ms._cross_group_arc_snippets({"outbound": "nope", "same_package_outside": 1}) == []
-
 
 def test_cross_group_arc_snippets_caps_at_five():
     edges = {

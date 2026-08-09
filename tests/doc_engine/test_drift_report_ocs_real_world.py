@@ -37,15 +37,15 @@ from doc_engine.real_fixture import (
 )
 from doc_engine.tools import spring_drift_check
 
-REPO_ROOT = repo_root()
+pytestmark = pytest.mark.domain_live_optin
 
+REPO_ROOT = repo_root()
 
 def _resolve_artifacts_dir() -> Path | None:
     root = real_artifacts_dir(prefer_default=False)
     if root is None:
         root = real_artifacts_dir(prefer_default=True)
     return root
-
 
 def _resolve_repo(signals: dict | None = None) -> Path | None:
     configured = real_repo_path()
@@ -56,7 +56,6 @@ def _resolve_repo(signals: dict | None = None) -> Path | None:
         if candidate.is_dir():
             return candidate
     return None
-
 
 @pytest.fixture(scope="module")
 def ocs_signals_and_repo() -> tuple[dict, Path, Path]:
@@ -83,12 +82,10 @@ def ocs_signals_and_repo() -> tuple[dict, Path, Path]:
         )
     return signals, repo, signals_path
 
-
 @pytest.fixture(scope="module")
 def ocs_drift_report(ocs_signals_and_repo: tuple[dict, Path, Path]) -> dict:
     signals, repo, _signals_path = ocs_signals_and_repo
     return spring_drift_check.check_drift(str(repo), signals)
-
 
 class TestOcsDriftReportSchema:
     """L5 bite: real check_drift output must validate as DriftReportArtifact."""
@@ -137,7 +134,6 @@ class TestOcsDriftReportSchema:
         seen = {row["status"] for row in ocs_drift_report["results"]}
         assert seen <= allowed
         assert set(ocs_drift_report["status_counts"]) <= allowed
-
 
 @pytest.mark.skipif(not live_scan_enabled(), reason="DOC_ENGINE_REAL_LIVE_SCAN not enabled")
 class TestOcsLiveScanDriftSchema:

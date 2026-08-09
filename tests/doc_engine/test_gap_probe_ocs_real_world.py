@@ -39,15 +39,15 @@ from doc_engine.scanning.gap_probe import (
     run_gap_probe,
 )
 
+pytestmark = pytest.mark.domain_live_optin
+
 REPO_ROOT = repo_root()
 
 # Artifact-lane AET must not green covering_ok=True without a proof on disk.
 REQUIRE_COVERING_PROOF = True
 
-
 def _resolve_artifacts_dir() -> Path | None:
     return real_artifacts_dir(prefer_default=False)
-
 
 @pytest.fixture(scope="module")
 def ocs_artifacts() -> tuple[Path, Path]:
@@ -73,7 +73,6 @@ def ocs_artifacts() -> tuple[Path, Path]:
         )
     return signals, facts
 
-
 @pytest.fixture(scope="module")
 def ocs_report(ocs_artifacts: tuple[Path, Path]) -> dict:
     signals_path, facts_path = ocs_artifacts
@@ -95,7 +94,6 @@ def ocs_report(ocs_artifacts: tuple[Path, Path]) -> dict:
         covering_proof=covering_proof,
     )
     return report
-
 
 class TestOcsArtifactsAet:
     """AET bite against precomputed real-repo Stage-0 outputs."""
@@ -155,7 +153,6 @@ class TestOcsArtifactsAet:
         assert report["measurement"]["truncation"]["failures_total"] >= report["measurement"]["truncation"][
             "failures_kept"
         ]
-
 
 @pytest.mark.skipif(not live_scan_enabled(), reason="DOC_ENGINE_REAL_LIVE_SCAN not enabled")
 class TestOcsLiveScanAet:

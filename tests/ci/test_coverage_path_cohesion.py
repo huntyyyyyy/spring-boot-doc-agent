@@ -9,6 +9,9 @@ from pathlib import Path
 from doc_engine.ci.coverage_path_cohesion import PathCohesionError, PathCohesionGuard
 from doc_engine.ci.coverage_report import CoberturaXmlReport, FileCoverage
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class PathCohesionGuardTest(unittest.TestCase):
     def test_clean_relative_paths_ok(self) -> None:
@@ -66,7 +69,6 @@ class PathCohesionGuardTest(unittest.TestCase):
             root.mkdir()
             with self.assertRaises(PathCohesionError):
                 PathCohesionGuard(root).assert_cohesive(report.source_paths())
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

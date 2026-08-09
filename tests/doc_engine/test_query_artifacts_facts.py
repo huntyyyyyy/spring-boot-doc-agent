@@ -13,6 +13,9 @@ from doc_engine.query.handlers import dependents, entity, evidence, facts, route
 from doc_engine.query.load import QueryError, QueryMissingError, QueryPathError, load_json, load_jsonl
 from doc_engine.query.registry import get_query_handler, run_query
 from doc_engine.real_fixture import real_artifacts_dir
+
+pytestmark = pytest.mark.domain_pipeline
+
 FIXTURE_SIGNALS = (
     Path(__file__).resolve().parents[2]
     / "scripts"
@@ -28,7 +31,6 @@ def test_load_jsonl_skips_blank_but_rejects_truncated_line(tmp_path: Path) -> No
     with pytest.raises(QueryError):
         load_jsonl(p, root=tmp_path)
 
-
 def test_path_outside_root_refused(tmp_path: Path) -> None:
     """Deviation: path escape / traversal accepted (untrusted artifact paths)."""
     root = tmp_path / "run"
@@ -37,7 +39,6 @@ def test_path_outside_root_refused(tmp_path: Path) -> None:
     outside.write_text("{}", encoding="utf-8")
     with pytest.raises(QueryPathError):
         load_json(outside, root=root)
-
 
 def test_symlink_escaping_root_refused(tmp_path: Path) -> None:
     """Deviation: symlink into escape path accepted as in-tree artifact."""
@@ -53,7 +54,6 @@ def test_symlink_escaping_root_refused(tmp_path: Path) -> None:
     # resolve() follows the link → outside root
     with pytest.raises(QueryPathError):
         load_json(link, root=root)
-
 
 def test_cli_evidence_exit_zero_and_truncated(tmp_path: Path) -> None:
     """Deviation: CLI dumps uncapped JSON or non-zero on valid input."""
@@ -81,7 +81,6 @@ def test_cli_evidence_exit_zero_and_truncated(tmp_path: Path) -> None:
     assert payload["truncated"] is True
     assert len(payload["rows"]) == 1
 
-
 def test_cli_missing_signals_nonzero(tmp_path: Path) -> None:
     """Deviation: missing --signals exits 0 with empty envelope."""
     proc = subprocess.run(
@@ -98,7 +97,6 @@ def test_cli_missing_signals_nonzero(tmp_path: Path) -> None:
         check=False,
     )
     assert proc.returncode != 0
-
 
 def test_doc_engine_query_facade(tmp_path: Path) -> None:
     """Deviation: doc-engine query subcommand missing from public facade."""
@@ -124,7 +122,6 @@ def test_doc_engine_query_facade(tmp_path: Path) -> None:
     payload = json.loads(proc.stdout)
     assert payload["kind"] == "entity"
     assert payload["rows"][0]["class_name"] == "User"
-
 
 def test_unknown_kind_raises() -> None:
     """Deviation: unknown kind silently no-ops."""

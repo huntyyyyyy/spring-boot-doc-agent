@@ -24,6 +24,8 @@ from doc_engine.query.rank import (
 )
 from tests.support.context_packet.factories import _write_run_dir
 
+pytestmark = pytest.mark.domain_pipeline
+
 def test_signature_freshness_stale_on_mismatch(tmp_path: Path) -> None:
     """Deviation: signature mismatch labeled fresh_indexed."""
     repo = tmp_path / "repo"
@@ -43,10 +45,8 @@ def test_signature_freshness_stale_on_mismatch(tmp_path: Path) -> None:
     policy_ok = SignatureFreshness(repo_root=repo, signatures={"src/Sec.java": good})
     assert label_item_path(policy_ok, "src/Sec.java") == "fresh_indexed"
 
-
 def test_assume_indexed_when_no_repo() -> None:
     assert label_item_path(AssumeIndexed(), "src/X.java") == "unknown"
-
 
 def test_missing_signatures_unknown(tmp_path: Path) -> None:
     """Deviation: missing file_signatures crashes instead of unknown."""
@@ -62,7 +62,6 @@ def test_missing_signatures_unknown(tmp_path: Path) -> None:
     assert pkt["primaryContext"]
     for item in pkt["primaryContext"]:
         assert item.get("freshness") == "unknown"
-
 
 def test_packet_with_repo_marks_stale(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
@@ -81,7 +80,6 @@ def test_packet_with_repo_marks_stale(tmp_path: Path) -> None:
     if "src/Sec.java" in freshes:
         assert freshes["src/Sec.java"] == "stale"
 
-
 def test_mcp_path_escape_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     from doc_engine.query.mcp_tools import dispatch_tool
 
@@ -96,13 +94,11 @@ def test_mcp_path_escape_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
             {"signals": str(outside), "bucket": "security"},
         )
 
-
 def test_mcp_help_lists_tools() -> None:
     from doc_engine.query.mcp_tools import dispatch_tool
 
     out = dispatch_tool("doc_engine_help", {})
     assert "context_packet" in out["tools"]
-
 
 def test_fake_provider_strategy(tmp_path: Path) -> None:
     """Deviation: composer ignores PacketProvider strategies (E4-T2)."""
@@ -133,7 +129,6 @@ def test_fake_provider_strategy(tmp_path: Path) -> None:
     )
     assert pkt["providersUsed"] == ["fake"]
     assert any(i.get("path") == "src/Fake.java" for i in pkt["primaryContext"])
-
 
 def test_mcp_stdio_initialize_roundtrip() -> None:
     from adapters.mcp.server import handle_message

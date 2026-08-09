@@ -13,6 +13,8 @@ from doc_engine.scanning.gap_probe import absence_recall as absence
 from doc_engine.tools import semantic_eval_helpers as seh
 from doc_engine.tools import spring_signal_scan as sss
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_checked_path_file_and_unknown_want(tmp_path: Path) -> None:
     f = tmp_path / "f.txt"
     f.write_text("x", encoding="utf-8")
@@ -23,7 +25,6 @@ def test_checked_path_file_and_unknown_want(tmp_path: Path) -> None:
         paths_mod.checked_path(f, want="dir")
     with pytest.raises(ValueError, match="unknown want"):
         paths_mod.checked_path(tmp_path, want="socket")
-
 
 def test_checked_path_oserror(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     real = Path.resolve
@@ -37,13 +38,11 @@ def test_checked_path_oserror(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -
     with pytest.raises(PathValidationError, match="cannot resolve"):
         paths_mod.checked_path(tmp_path / "bad", want="dir")
 
-
 def test_checked_output_path_refuses_directory(tmp_path: Path) -> None:
     d = tmp_path / "outdir"
     d.mkdir()
     with pytest.raises(PathValidationError, match="not a file"):
         paths_mod.checked_output_path(d)
-
 
 def test_checked_output_path_oserror(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     real = Path.resolve
@@ -57,7 +56,6 @@ def test_checked_output_path_oserror(monkeypatch: pytest.MonkeyPatch, tmp_path: 
     with pytest.raises(PathValidationError, match="cannot resolve"):
         paths_mod.checked_output_path(tmp_path / "boom.json")
 
-
 def test_join_under_absolute_and_escape(tmp_path: Path) -> None:
     with pytest.raises(PathValidationError, match="unsafe|escapes"):
         paths_mod.join_under(tmp_path, "/abs")
@@ -66,7 +64,6 @@ def test_join_under_absolute_and_escape(tmp_path: Path) -> None:
     nested = tmp_path / "a"
     nested.mkdir()
     assert paths_mod.join_under(tmp_path, "a") == nested.resolve()
-
 
 def test_scripts_meta_path_entries_and_packaged_astgrep() -> None:
     entries = paths_mod.scripts_meta_path_entries()

@@ -21,6 +21,8 @@ from stf.schemas.blockers import BlockerClass
 from stf.validators import lint_tasks as lint_mod
 from tests.stf.conftest import build_minimal_valid_tasks
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_scan_prepares_and_runs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(spring_mod, "resolve_scanner_names", lambda _s: ["filesystem"])
     monkeypatch.setattr(
@@ -40,11 +42,9 @@ def test_scan_prepares_and_runs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch)
     out = spring_mod.scan(str(tmp_path), scanners=["filesystem"], allow_codeql_build=False)
     assert out["ok"] is True
 
-
 def test_tool_on_path_misses_all(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(spring_mod.shutil, "which", lambda _n: None)
     assert spring_mod._tool_on_path("gradle", "gradle.bat") is None
-
 
 def test_gradle_maven_tool_requires_marker_and_binary(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -62,7 +62,6 @@ def test_gradle_maven_tool_requires_marker_and_binary(
     assert spring_mod._maven_tool_command(str(tmp_path), "m") is None
     monkeypatch.setattr(spring_mod, "_tool_on_path", lambda *_n: "C:/mvn")
     assert "mvn" in (spring_mod._maven_tool_command(str(tmp_path), "m") or "")
-
 
 def test_runner_keep_going_and_quiet_paths(tmp_path: Path) -> None:
     log = phase_support.Log(tmp_path / "run.log")

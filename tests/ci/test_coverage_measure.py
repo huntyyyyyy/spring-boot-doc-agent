@@ -20,6 +20,10 @@ from doc_engine.ci.coverage_measure_modes import (
     strategy_for,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SAMPLE_XML = """\
 <?xml version="1.0" ?>
 <coverage line-rate="1" branch-rate="1" version="7.0" timestamp="1">
@@ -35,7 +39,6 @@ SAMPLE_XML = """\
   </packages>
 </coverage>
 """
-
 
 class MeasureRunTest(unittest.TestCase):
     def test_wipe_removes_only_cwd_artifacts(self) -> None:
@@ -80,7 +83,6 @@ class MeasureRunTest(unittest.TestCase):
             self.assertEqual(rc, 0)
             self.assertIsNotNone(xml)
             self.assertFalse((cwd / ".coverage").exists())
-
 
 class MeasureModeStrategyTest(unittest.TestCase):
     def test_oracle_argv_includes_fail_under(self) -> None:
@@ -148,7 +150,6 @@ class MeasureModeStrategyTest(unittest.TestCase):
     def test_main_climb_requires_scope(self) -> None:
         rc = main(["--mode", "climb"])
         self.assertEqual(rc, 2)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

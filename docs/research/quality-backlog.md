@@ -92,7 +92,7 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P5.0 | **E-TEST0 Spec:** approve **T1–T18** + policy **T-A** | **DONE** (2026-08-08) | design memo APPROVED |
-| P5.1 | **E-TEST1:** domain markers + CI shards; serial quarantine; unlabeled fail-closed | Adopt research **06** | workflow green; marker ratchet |
+| P5.1 | **E-TEST1:** domain markers + CI shards; serial quarantine; doc_engine meeting ≥**98.7** (debt=`domain_unclassified` only) | **DONE** | marker check + ABI shard jobs |
 | P5.2 | **E-TEST2 (optional):** xdist inside one non-oracle shard only | Defer / spike | flake budget; never oracle combine |
 
 Research: [`docs/research/06-test-suite-bounded-contexts-parallel.md`](06-test-suite-bounded-contexts-parallel.md).
@@ -103,6 +103,6 @@ Research: [`docs/research/06-test-suite-bounded-contexts-parallel.md`](06-test-s
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
 **Done (E-TEST0):** Spec approve **T1–T18** + policy **T-A**.  
-**Next:** **E-TEST1** — domain markers + CI shards (single stream).  
-**Optional:** E-TEST2 / E-CM3 spikes — not prerequisites.  
+**Done (E-TEST1):** domain markers + ABI shards + doc_engine meeting ≥**98.7** (debt=`domain_unclassified` only).  
+**Next:** optional E-TEST2 spikes (in-shard xdist) or other backlog — not prerequisites.  
 **Never:** suite-wide xdist before shards; fuzzy green; scoped fail_under as floor proof.

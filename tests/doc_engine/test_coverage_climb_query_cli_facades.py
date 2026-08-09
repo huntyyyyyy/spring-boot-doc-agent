@@ -16,6 +16,8 @@ from doc_engine.tools import pipeline_validators as pv
 from doc_engine.tools import query_artifacts as qa
 from doc_engine.tools import validate_artifacts as va
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_query_artifacts_root_and_dispatch(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -92,7 +94,6 @@ def test_query_artifacts_root_and_dispatch(
         qa, "_execute_kind", lambda *_a, **_k: (_ for _ in ()).throw(KeyError("k"))
     )
     assert qa.main(["evidence", "--signals", str(sig)]) == 2
-
 
 def test_cli_facade_cmds(monkeypatch: pytest.MonkeyPatch) -> None:
     captured: list[list[str]] = []

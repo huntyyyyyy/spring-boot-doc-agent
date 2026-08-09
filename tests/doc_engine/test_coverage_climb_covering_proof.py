@@ -16,6 +16,8 @@ from doc_engine.tools import pipeline_validators as pv
 from doc_engine.tools import query_artifacts as qa
 from doc_engine.tools import validate_artifacts as va
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_covering_build_receipt_extra_and_verify_edges() -> None:
     sigs = {"a.java": "aa", "b.java": "bb"}
     root = cov.inventory_root(sigs)
@@ -83,7 +85,6 @@ def test_covering_build_receipt_extra_and_verify_edges() -> None:
     assert "no receipts" in (cov._verify_receipts([], sigs) or "")
     assert cov.java_scope_paths(sigs) == ["a.java", "b.java"]
     assert cov.subset_root(sigs, ["missing.java", "a.java"]) != root
-
 
 def test_covering_write_and_pop(tmp_path: Path) -> None:
     path = tmp_path / "nested" / "covering_proof.json"

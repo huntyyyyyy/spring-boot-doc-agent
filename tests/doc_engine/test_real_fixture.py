@@ -18,10 +18,13 @@ from doc_engine.real_fixture import (
     stage0_paths_require_real_repo,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = repo_root()
 BASELINE = REPO_ROOT / "scripts" / "coverage" / "real_repo_gap_baseline.json"
 SHAPES_DIR = REPO_ROOT / "scripts" / "fixtures" / "gap_probe_shapes"
-
 
 class RealFixtureResolverTest(unittest.TestCase):
     def test_canonical_repo_env(self):
@@ -114,7 +117,6 @@ class RealFixtureResolverTest(unittest.TestCase):
             path = real_artifacts_dir()
         self.assertEqual(path, REPO_ROOT / "local-runs" / "real-repo-latest")
 
-
 class AnonymizedGapBaselineTest(unittest.TestCase):
     def test_baseline_shape(self):
         data = json.loads(BASELINE.read_text(encoding="utf-8"))
@@ -148,7 +150,6 @@ class AnonymizedGapBaselineTest(unittest.TestCase):
             self.assertIn("intent", payload)
             self.assertIn("signals", payload)
             self.assertIn("expect", payload)
-
 
 if __name__ == "__main__":
     unittest.main()

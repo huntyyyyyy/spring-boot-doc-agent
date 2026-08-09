@@ -27,6 +27,10 @@ from doc_engine.pipeline.stages import build_stage_specs
 from tests.conftest import FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from tests.doc_engine.cert_helpers import ok_stages_for
 
+import pytest
+
+pytestmark = pytest.mark.domain_compliance
+
 class CertificationReportLiveTest(unittest.TestCase):
     def test_write_certification_json(self):
             with tempfile.TemporaryDirectory() as tmp:
@@ -160,8 +164,6 @@ class CertificationReportLiveTest(unittest.TestCase):
                 )
             )
 
-
-
 class FinishMessagingTest(unittest.TestCase):
     def test_success_lines_only_when_certified(self):
         from doc_engine.pipeline.local_runner import Log, Runner, _write_certification_and_finish
@@ -185,7 +187,6 @@ class FinishMessagingTest(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertNotIn("every gate passed", transcript)
             self.assertIn("certification failed", transcript)
-
 
 class ScanOnlyIntegrationTest(unittest.TestCase):
     def test_scan_only_with_signals_file_writes_certification(self):

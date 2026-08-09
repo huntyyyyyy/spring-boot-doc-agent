@@ -9,6 +9,9 @@ from doc_engine.tools.spring_drift_common import (
     STATUS_UNCHANGED,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_entity_and_repository_verdicts() -> None:
     assert "no longer matched" in t2._entity_missing_detail("Foo")
@@ -48,7 +51,6 @@ def test_entity_and_repository_verdicts() -> None:
     )
     assert repos[0]["status"] == STATUS_DRIFTED
 
-
 def test_recheck_queries_and_generic() -> None:
     group = [
         ("evidence.raw", {"query_kind": "jpql", "query": "select 1", "file": "q.java", "line": 1}),
@@ -69,7 +71,6 @@ def test_recheck_queries_and_generic() -> None:
     )
     assert gen[0]["status"] == STATUS_CONFIRMED
     assert gen[1]["status"] == STATUS_DRIFTED
-
 
 def test_jpql_lineage_verdicts_and_reverify() -> None:
     assert t2._jpql_lineage_needs_reverify({"status": STATUS_UNCHANGED})
@@ -122,7 +123,6 @@ def test_jpql_lineage_verdicts_and_reverify() -> None:
         deleted_set=set(),
     )
     assert rows[0]["status"] == STATUS_DRIFTED
-
 
 def test_build_signal_identity_helpers() -> None:
     assert t2._identity_build_plugin(

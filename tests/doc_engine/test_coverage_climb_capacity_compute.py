@@ -9,6 +9,8 @@ import pytest
 from doc_engine.tools import capacity_preflight as cap
 from doc_engine.tools import spring_drift_check as drift
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_groups_payload_and_load_or_build(tmp_path: Path) -> None:
     groups_file = tmp_path / "groups.json"
     payload = {
@@ -52,7 +54,6 @@ def test_groups_payload_and_load_or_build(tmp_path: Path) -> None:
     finally:
         monkey_mod.build_report = original
 
-
 def test_compute_preflight_and_warnings() -> None:
     groups = {
         "repo_path": "/r",
@@ -80,7 +81,6 @@ def test_compute_preflight_and_warnings() -> None:
     assert "num_groups" in dims
     assert "total_fanout" in dims
     assert report["edge_join_stats"]["reduction_factor"] == 2
-
 
 def test_stage4_calibration_and_proxy_resolve() -> None:
     groups = {
@@ -117,7 +117,6 @@ def test_stage4_calibration_and_proxy_resolve() -> None:
     )
     assert cal["mode"] == "stage4_calibration"
     assert cal["stage4_proxy_comparison"]["proxy_source"] == "stage0_preflight_report"
-
 
 def test_run_l2b_and_stage0_paths(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]

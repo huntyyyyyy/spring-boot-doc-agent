@@ -29,8 +29,9 @@ from doc_engine.query.registry import run_query
 from doc_engine.query.schema_check import validate_envelope
 from doc_engine.real_fixture import real_artifacts_dir, real_repo_path, require_real_repo
 
-REPO_ROOT = repo_root()
+pytestmark = pytest.mark.domain_live_optin
 
+REPO_ROOT = repo_root()
 
 def _artifacts() -> Path:
     art = real_artifacts_dir(prefer_default=True)
@@ -43,11 +44,9 @@ def _artifacts() -> Path:
         pytest.skip(f"missing {signals} — run scripts/ci/regen_real_repo_artifacts.py")
     return art
 
-
 @pytest.fixture(scope="module")
 def ocs_artifacts() -> Path:
     return _artifacts()
-
 
 @pytest.fixture(scope="module")
 def ocs_repo() -> Path:
@@ -55,7 +54,6 @@ def ocs_repo() -> Path:
         return require_real_repo()
     except FileNotFoundError as exc:
         pytest.skip(str(exc))
-
 
 def test_ocs_references_query_stays_capped(ocs_artifacts: Path) -> None:
     """Deviation: OCS-scale references (~8k+) dump uncapped through query."""
@@ -68,7 +66,6 @@ def test_ocs_references_query_stays_capped(ocs_artifacts: Path) -> None:
     assert len(result["rows"]) <= 25
     assert result["truncated"] is True
     assert result["count"] == len(result["rows"])
-
 
 def test_ocs_api_surface_and_persistence_nonempty(ocs_artifacts: Path) -> None:
     """Deviation: real OCS signals have empty api_surface/persistence (bad regen)."""
@@ -86,7 +83,6 @@ def test_ocs_api_surface_and_persistence_nonempty(ocs_artifacts: Path) -> None:
     assert api["count"] >= 1
     assert pers["count"] >= 1
 
-
 def test_ocs_entity_lookup_roundtrip(ocs_artifacts: Path) -> None:
     """Deviation: entity_table_map on OCS not queryable by class name."""
     signals = json.loads((ocs_artifacts / "spring_signals.json").read_text(encoding="utf-8"))
@@ -102,7 +98,6 @@ def test_ocs_entity_lookup_roundtrip(ocs_artifacts: Path) -> None:
     assert result["count"] >= 1
     assert result["rows"][0]["class_name"] == class_name
 
-
 def test_ocs_facts_maps_to(ocs_artifacts: Path) -> None:
     """Deviation: facts.jsonl dual-emit missing MAPS_TO on real OCS run."""
     facts = ocs_artifacts / "facts.jsonl"
@@ -115,7 +110,6 @@ def test_ocs_facts_maps_to(ocs_artifacts: Path) -> None:
     )
     assert result["count"] >= 1
     assert all(r.get("predicate") == "MAPS_TO" for r in result["rows"])
-
 
 def test_ocs_context_packet_envelope(ocs_artifacts: Path, ocs_repo: Path) -> None:
     """Deviation: context_packet fails or empties on real OCS run-dir."""
@@ -133,7 +127,6 @@ def test_ocs_context_packet_envelope(ocs_artifacts: Path, ocs_repo: Path) -> Non
     # freshness labels present when repo_path set
     labeled = pkt["primaryContext"] + pkt["relatedContext"]
     assert any(i.get("freshness") in ("live", "fresh_indexed", "stale", "unknown") for i in labeled)
-
 
 def test_ocs_cli_context_packet(ocs_artifacts: Path) -> None:
     """Deviation: CLI context-packet cannot load OCS artifact dir."""
@@ -160,7 +153,6 @@ def test_ocs_cli_context_packet(ocs_artifacts: Path) -> None:
     assert payload["kind"] == "context-packet"
     assert payload["empty"] is False
 
-
 def test_ocs_mcp_context_packet(ocs_artifacts: Path) -> None:
     """Deviation: MCP dispatch cannot serve OCS run-dir."""
     out = dispatch_tool(
@@ -174,7 +166,6 @@ def test_ocs_mcp_context_packet(ocs_artifacts: Path) -> None:
     assert out["kind"] == "context-packet"
     assert out["empty"] is False
 
-
 def test_ocs_dependents_nonzero_when_references_present(ocs_artifacts: Path) -> None:
     """Deviation: dependents returns nothing on import-rich OCS signals."""
     result = run_query(
@@ -185,7 +176,6 @@ def test_ocs_dependents_nonzero_when_references_present(ocs_artifacts: Path) -> 
     # OCS has thousands of references — expect some resolved arcs
     assert result["count"] >= 1
     assert all(r.get("confidence") in ("exact", "package-fanout") for r in result["rows"])
-
 
 def test_ocs_pointer_file_resolves(ocs_repo: Path) -> None:
     """Deviation: local-runs/real-repo.path ignored for query lane."""

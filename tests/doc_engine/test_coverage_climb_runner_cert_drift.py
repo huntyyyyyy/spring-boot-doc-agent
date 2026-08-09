@@ -24,6 +24,8 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_gate_and_subprocess_status_helpers() -> None:
     assert phase_support._gate_status_from_runner_status("OK") == "ok"
     assert phase_support._gate_status_from_runner_status("SKIPPED") == "skipped"
@@ -31,7 +33,6 @@ def test_gate_and_subprocess_status_helpers() -> None:
     assert phase_support._classify_subprocess_status(0, gate=True) == "OK"
     assert phase_support._classify_subprocess_status(1, gate=True) == "FAIL"
     assert phase_support._classify_subprocess_status(1, gate=False) == "NONZERO"
-
 
 def test_reconfigure_stdio_handles_missing_and_errors(monkeypatch) -> None:
     class _NoReconfigure:
@@ -44,7 +45,6 @@ def test_reconfigure_stdio_handles_missing_and_errors(monkeypatch) -> None:
     monkeypatch.setattr(sys, "stdout", _NoReconfigure())
     monkeypatch.setattr(sys, "stderr", _Boom())
     phase_support._reconfigure_stdio_utf8()
-
 
 def test_runner_record_gate_and_abort(tmp_path: Path) -> None:
     log = phase_support.Log(tmp_path / "run.log")
@@ -59,7 +59,6 @@ def test_runner_record_gate_and_abort(tmp_path: Path) -> None:
         assert runner_obj.aborted is True
     finally:
         log.close()
-
 
 def test_runner_spawn_error_and_timeout(tmp_path: Path, monkeypatch) -> None:
     log = phase_support.Log(tmp_path / "run.log")
@@ -93,7 +92,6 @@ def test_runner_spawn_error_and_timeout(tmp_path: Path, monkeypatch) -> None:
     finally:
         log.close()
 
-
 def test_runner_mock_success_and_error(tmp_path: Path) -> None:
     log = phase_support.Log(tmp_path / "run.log")
     try:
@@ -105,7 +103,6 @@ def test_runner_mock_success_and_error(tmp_path: Path) -> None:
         assert runner_obj.mock("m3", lambda: "never") is None
     finally:
         log.close()
-
 
 def test_spawn_step_process_file_not_found(tmp_path: Path, monkeypatch) -> None:
     log = phase_support.Log(tmp_path / "run.log")
@@ -134,7 +131,6 @@ def test_spawn_step_process_file_not_found(tmp_path: Path, monkeypatch) -> None:
     finally:
         log.close()
 
-
 def test_record_pipeline_stage_results() -> None:
     runner_obj = SimpleNamespace(results=[], aborted=False)
 
@@ -150,7 +146,6 @@ def test_record_pipeline_stage_results() -> None:
     assert runner_obj.results[0][1] == "OK"
     assert runner_obj.results[1][1] == "FAIL"
     assert runner_obj.aborted is True
-
 
 def test_certification_helpers(tmp_path: Path, monkeypatch) -> None:
     log = phase_support.Log(tmp_path / "run.log")
@@ -170,7 +165,6 @@ def test_certification_helpers(tmp_path: Path, monkeypatch) -> None:
         )
     finally:
         log.close()
-
 
 def test_run_drift_check_skip_and_default(tmp_path: Path, monkeypatch) -> None:
     log = phase_support.Log(tmp_path / "run.log")
@@ -194,12 +188,10 @@ def test_run_drift_check_skip_and_default(tmp_path: Path, monkeypatch) -> None:
     finally:
         log.close()
 
-
 def test_quote_and_py_mod() -> None:
     assert phase_support._quote("a b") == '"a b"'
     assert phase_support._quote("ab") == "ab"
     assert phase_support._py_mod("pkg.mod", "--flag")[1:3] == ["-m", "pkg.mod"]
-
 
 def test_artifact_inventory(tmp_path: Path) -> None:
     out = tmp_path / "out"

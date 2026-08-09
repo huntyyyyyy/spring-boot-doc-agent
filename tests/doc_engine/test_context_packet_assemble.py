@@ -24,13 +24,13 @@ from doc_engine.query.rank import (
 )
 from tests.support.context_packet.factories import _write_run_dir
 
+pytestmark = pytest.mark.domain_pipeline
+
 def test_tokenize_splits_on_non_alnum() -> None:
     assert "onboarding" in tokenize("fix /api/onboarding role")
 
-
 def test_bucket_priority_security_beats_references() -> None:
     assert bucket_priority("security") > bucket_priority("references")
-
 
 def test_score_item_boosts_request_overlap() -> None:
     """Deviation: ranking ignores request tokens (Mako packet useless)."""
@@ -49,7 +49,6 @@ def test_score_item_boosts_request_overlap() -> None:
         contested=False,
     )
     assert high > low
-
 
 def test_trim_to_budget_respects_token_proxy() -> None:
     """Deviation: budgetTokens ignored — unbounded primaryContext."""
@@ -73,13 +72,11 @@ def test_trim_to_budget_respects_token_proxy() -> None:
     assert all("row_ref" in k and "payload" not in k for k in kept)
     assert used == sum(estimate_tokens(k) for k in kept)
 
-
 def test_context_packet_budget_trims_primary(tmp_path: Path) -> None:
     run = _write_run_dir(tmp_path)
     pkt = run_context_packet("onboarding", run_dir=run, budget_tokens=80)
     assert pkt["truncated"] is True or pkt["tokensUsed"] <= 80
     assert len(pkt["primaryContext"]) + len(pkt["relatedContext"]) <= 15
-
 
 def test_context_packet_hints_always_present(tmp_path: Path) -> None:
     run = _write_run_dir(tmp_path)
@@ -87,14 +84,12 @@ def test_context_packet_hints_always_present(tmp_path: Path) -> None:
     assert isinstance(pkt["_hints"], list)
     assert len(pkt["_hints"]) >= 1
 
-
 def test_context_packet_corrupt_signals_fail_closed(tmp_path: Path) -> None:
     run = tmp_path / "run"
     run.mkdir()
     (run / "spring_signals.json").write_text("{bad", encoding="utf-8")
     with pytest.raises(QueryError):
         run_context_packet("x", run_dir=run)
-
 
 def test_cli_context_packet(tmp_path: Path) -> None:
     run = _write_run_dir(tmp_path)
@@ -119,7 +114,6 @@ def test_cli_context_packet(tmp_path: Path) -> None:
     payload = json.loads(proc.stdout)
     assert payload["kind"] == "context-packet"
 
-
 def test_mcp_dispatch_context_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     from doc_engine.query.mcp_tools import dispatch_tool
 
@@ -130,7 +124,6 @@ def test_mcp_dispatch_context_packet(tmp_path: Path, monkeypatch: pytest.MonkeyP
         {"request": "onboarding", "run_dir": str(run), "budget_tokens": 2000},
     )
     assert out["kind"] == "context-packet"
-
 
 def test_envelope_schema_check_context_packet(tmp_path: Path) -> None:
     from doc_engine.query.schema_check import validate_envelope

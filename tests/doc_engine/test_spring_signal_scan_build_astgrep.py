@@ -13,6 +13,11 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 from doc_engine.scanning._resolve_lineage import _SQLLINEAGE_AVAILABLE
 from doc_engine.scanning.facts import facts_from_signals
 from doc_engine.tools import spring_signal_scan
+
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 SCRIPT_DIR = SCRIPTS_DIR
 USE_SNAPSHOT = os.environ.get("SPRING_SIGNAL_USE_SNAPSHOT", "").lower() in ("1", "true", "yes")
 SNAPSHOT_SCANNERS = ["filesystem", "ast-grep"]
@@ -94,7 +99,6 @@ class BuildFileClassificationTest(unittest.TestCase):
         files = {e["file"] for entries in result["evidence"].values() for e in entries}
         self.assertFalse([f for f in files if f.startswith("build/")], files)
 
-
 class RespectGitignoreOptInTest(unittest.TestCase):
     """--respect-gitignore is additive-only: a directory not covered by the
     hardcoded EXCLUDED_DIRS floor (unlike vendor/, venv/, etc.) should only
@@ -132,7 +136,6 @@ class RespectGitignoreOptInTest(unittest.TestCase):
         result = spring_signal_scan.scan(self.tmpdir, respect_gitignore=True, scanners=SNAPSHOT_SCANNERS)
         self.assertEqual(result["files_scanned"]["java"], 0)
         self.assertNotIn("Scratch", result["entity_table_map"])
-
 
 class AstGrepFailureIsAnExceptionTest(unittest.TestCase):
     """run_ast_grep() used to call sys.exit(1) on a failing ast-grep.

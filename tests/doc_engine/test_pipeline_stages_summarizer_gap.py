@@ -23,6 +23,11 @@ from doc_engine.tools.pipeline_validators import (
     validate_file_summarizer_entries,
     validate_gap_analyzer_questions,
 )
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 
 class FileSummarizerShapeTest(unittest.TestCase):
@@ -97,7 +102,6 @@ class FileSummarizerShapeTest(unittest.TestCase):
     def test_evidence_what_must_be_non_empty(self):
         problems = validate_file_summarizer_entries([self._entry(evidence=[{"line": 5, "what": "  "}])])
         self.assertTrue(any("non-empty string" in p[1] for p in problems))
-
 
 class GapAnalyzerShapeTest(unittest.TestCase):
     def test_valid_bounded_list_passes(self):

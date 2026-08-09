@@ -21,6 +21,9 @@ from doc_engine.real_fixture import require_real_repo
 from doc_engine.tools import build_cross_group_edges, validate_artifacts
 from doc_engine.tools import partition_repo
 from tests.conftest import FIXTURE_DIR
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = repo_root()
 from tests.support.etl_adversarial.factories import (
     _minimal_signals,
@@ -66,7 +69,6 @@ class TestValidateAllFailClosed:
         code = validate_artifacts.main(["--all", str(tmp_path)])
         assert code == 1
 
-
 class TestStageSpecOutputsComplete:
     """Deviation: capacity/edges/covering absent from stage outputs → silent miss."""
 
@@ -93,7 +95,6 @@ class TestStageSpecOutputsComplete:
         assert idx_gap == idx_scan + 1
         spec = next(s for s in build_stage_specs() if s.name == "gap_probe")
         assert "gap_report/gap_report.json" in spec.outputs
-
 
 class TestPartitionAdversarial:
     """Deviation: partition could emit empty / inconsistent groups unnoticed."""

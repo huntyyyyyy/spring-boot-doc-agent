@@ -20,6 +20,8 @@ from tests.support.pipeline_runner.doc_writers import (
     _write_summaries,
 )
 
+pytestmark = pytest.mark.domain_pipeline
+
 def pipeline_context(tmp_path):
     repo = FIXTURE_DIR
     out = tmp_path / "run"
@@ -37,7 +39,6 @@ def pipeline_context(tmp_path):
         max_tokens=120000,
         log=lambda _msg: None,
     )
-
 
 def test_pipeline_runner_with_fixture_signals_and_mock_generative(pipeline_context):
     """Use committed spring_signals fixture, run partition+edges, mock generative stages."""
@@ -92,7 +93,6 @@ def test_pipeline_runner_with_fixture_signals_and_mock_generative(pipeline_conte
     assert (pipeline_context.out_dir / "interview_answers.json").is_file()
     assert (pipeline_context.docs_dir / "readme.md").is_file()
 
-
 def test_subprocess_stage_runner_records_failure(pipeline_context):
     runner = SubprocessStageRunner()
     result = runner.run(
@@ -100,7 +100,6 @@ def test_subprocess_stage_runner_records_failure(pipeline_context):
         pipeline_context,
     )
     assert not result.success
-
 
 def test_missing_required_output_is_stage_failure_not_crash(pipeline_context):
     """Declared outputs must fail cleanly as StageResult, not raise FileNotFoundError."""
@@ -123,7 +122,6 @@ def test_missing_required_output_is_stage_failure_not_crash(pipeline_context):
     assert result.detail == "missing_required_output"
     assert result.error is not None
     assert "facts.jsonl" in result.error
-
 
 def test_malformed_required_output_is_stage_failure_not_crash(pipeline_context):
     """Schema-invalid declared outputs fail as StageResult, not an uncaught exception."""
@@ -154,7 +152,6 @@ def test_malformed_required_output_is_stage_failure_not_crash(pipeline_context):
     assert result.success is False
     assert result.detail == "invalid_required_output"
     assert result.error is not None
-
 
 def test_end_stage_failure_fails_otherwise_successful_stage(pipeline_context):
     """H3: a failing end-stage must not leave the stage marked success."""

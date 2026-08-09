@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _complete_receipt, _kafka_signals, shutil_which
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class DestructiveFailClosedTest(unittest.TestCase):
     def test_winerror_206_solo_path_raises(self):
         """Deviation: single-path WinError 206 soft-skipped as empty matches."""
@@ -109,7 +113,6 @@ class DestructiveFailClosedTest(unittest.TestCase):
             )
         self.assertFalse(ok)
         self.assertIn("scanner_version", why)
-
 
 class FixtureCliCoveringSmokeTest(unittest.TestCase):
     @classmethod

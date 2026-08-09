@@ -12,6 +12,11 @@ from doc_engine.tools import (
     partition_repo,
     spring_signal_scan,
 )
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 from tests.support.capacity_preflight.fixtures import (
     _edges_data,
@@ -62,7 +67,6 @@ class GenuineDelegationTest(unittest.TestCase):
         )
         self.assertEqual(via_preflight["groups"], direct["groups"])
         self.assertEqual(via_preflight["stats"], direct["stats"])
-
 
 class PathSeparatorTest(unittest.TestCase):
     """compute_preflight() emitted os-native relative paths while everything

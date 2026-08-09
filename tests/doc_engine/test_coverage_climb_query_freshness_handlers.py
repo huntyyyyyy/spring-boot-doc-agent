@@ -21,6 +21,8 @@ from stf.schemas.blockers import BlockerClass
 from stf.validators import lint_tasks as lint_mod
 from tests.stf.conftest import build_minimal_valid_tasks
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_file_signature_and_freshness_helpers(tmp_path: Path) -> None:
     assert packet_mod._normalized_rel_path(r"a\b.java") == "a/b.java"
     assert packet_mod._file_signature_matches(tmp_path / "missing.java", "sig") is False
@@ -36,7 +38,6 @@ def test_file_signature_and_freshness_helpers(tmp_path: Path) -> None:
     )
     assert "A.java" in live
     assert "missing.java" not in live
-
 
 def test_build_freshness_policy_assume_and_drift(tmp_path: Path) -> None:
     policy = packet_mod._build_freshness_policy(
@@ -68,7 +69,6 @@ def test_build_freshness_policy_assume_and_drift(tmp_path: Path) -> None:
     assert drifted.__class__.__name__ == "DriftReportFreshness"
     labeled = packet_mod._label_items(policy, [{"path": "A.java"}, {"path": 1}])
     assert labeled[0]["freshness"] == "unknown"
-
 
 def test_score_partition_and_assemble() -> None:
     scored = packet_mod._score_raw(
@@ -104,7 +104,6 @@ def test_score_partition_and_assemble() -> None:
     assert packet["empty"] is True
     assert packet["kind"] == "context-packet"
 
-
 def test_build_freshness_with_repo(tmp_path: Path) -> None:
     src = tmp_path / "A.java"
     src.write_text("class A {}", encoding="utf-8")
@@ -129,7 +128,6 @@ def test_build_freshness_with_repo(tmp_path: Path) -> None:
     )
     assert policy2.__class__.__name__ == "SignatureFreshness"
 
-
 def test_facts_filters_and_unknown_predicate() -> None:
     rows = [
         {"predicate": "MAPS_TO", "file": "a/b.java", "subject": "Foo", "qualifiers": {"fqcn": "c.Foo"}},
@@ -148,7 +146,6 @@ def test_facts_filters_and_unknown_predicate() -> None:
     assert len(hit) == 1
     assert facts_mod._fqcn_of({"qualifiers": "x"}) == ""
     assert facts_mod.query_facts(rows, predicate="CUSTOM")[0]["predicate"] == "CUSTOM"
-
 
 def test_dependents_want_filters_and_edges() -> None:
     assert dep_mod._normalize_want_file(None) is None

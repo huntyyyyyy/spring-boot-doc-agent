@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _complete_receipt, _kafka_signals
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class CoveringPropertyTest(unittest.TestCase):
     def test_inventory_root_permutation_invariant(self):
         """Deviation: inventory_root depends on dict iteration order."""
@@ -95,7 +99,6 @@ class CoveringPropertyTest(unittest.TestCase):
             proof, file_signatures=sigs, scanner_version="sv",
         )
         self.assertTrue(ok, why)
-
 
 class CoveringContractTest(unittest.TestCase):
     def test_covering_proof_schema_accepts_emitted_proof(self):
@@ -155,7 +158,6 @@ class CoveringContractTest(unittest.TestCase):
         self.assertIn("RECALL_MISS", predicates)
         for row in loaded:
             Fact.model_validate(row)
-
 
 class CoveringWriterFactsIntegrationTest(unittest.TestCase):
     def test_covering_writer_facts_emits_recall_from_partials_meta(self):

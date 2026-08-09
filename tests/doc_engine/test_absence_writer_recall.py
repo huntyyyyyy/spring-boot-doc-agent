@@ -21,6 +21,10 @@ from doc_engine.scanning.gap_probe import (
 )
 from doc_engine.scanning.recall_delta import write_recall_miss_facts
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class AbsenceWriterTest(unittest.TestCase):
     def test_callable_zero_hits_is_absence(self):
         signals = {
@@ -82,7 +86,6 @@ class AbsenceWriterTest(unittest.TestCase):
         messaging = [f for f in facts if f["subject"] == "family:messaging"]
         self.assertEqual(messaging[0]["predicate"], "UNPROVEN")
 
-
 class RecallDeltaTest(unittest.TestCase):
     def test_oracle_minus_native_emits_recall_miss(self):
         signals = {"entity_table_map": {}}
@@ -105,7 +108,6 @@ class RecallDeltaTest(unittest.TestCase):
             oracle_arm="codeql",
         )
         self.assertEqual(facts, [])
-
 
 class GapProbeCoveringGateTest(unittest.TestCase):
     def test_refuses_without_covering(self):

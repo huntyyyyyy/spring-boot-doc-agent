@@ -12,6 +12,8 @@ import pytest
 from doc_engine.ci import coverage_gap_average as cga
 from doc_engine.ci.coverage_report import FileCoverage
 
+pytestmark = pytest.mark.domain_ci_meta
+
 SAMPLE_WITH_EDGES = """\
 <?xml version="1.0" ?>
 <coverage line-rate="0.5" branch-rate="0.5" version="7.0" timestamp="1">
@@ -66,7 +68,6 @@ def test_parse_skips_blank_filename_and_empty_lines(tmp_path: Path) -> None:
     assert "src/low.py" in paths
     assert any(r.branches >= 2 for r in rows)
 
-
 def test_main_refuses_climb_xml_as_inventory(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -79,12 +80,10 @@ def test_main_refuses_climb_xml_as_inventory(
     assert "refusing climb artifact" in err
     assert "coverage.xml" in err
 
-
 def test_empty_report_whole_repo_100() -> None:
     report = cga.build_report([], floor=98.7)
     assert report.whole_repo_cover_pct == 100.0
     assert report.below_floor_cover_pct == 100.0
-
 
 def test_main_success_markdown_and_summary(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
@@ -113,7 +112,6 @@ def test_main_success_markdown_and_summary(
     assert summary.is_file()
     assert "below-floor" in summary.read_text(encoding="utf-8").lower() or "Floor" in summary.read_text(encoding="utf-8")
 
-
 def test_format_markdown_with_below_floor_rows() -> None:
     report = cga.build_report(
         [
@@ -125,7 +123,6 @@ def test_format_markdown_with_below_floor_rows() -> None:
     md = cga.format_markdown(report, worst=2)
     assert "| Cover%" in md
     assert "low.py" in md
-
 
 def test_coverage_gap_main_module(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -141,7 +138,6 @@ def test_coverage_gap_main_module(
         )
     assert exc.value.code == 0
 
-
 def test_print_gap_report_summary_noop_without_env(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -149,7 +145,6 @@ def test_print_gap_report_summary_noop_without_env(
     report = cga.build_report([], floor=98.7)
     args = SimpleNamespace(worst=5, markdown=False, append_github_summary=True)
     cga._print_gap_report(report, args)
-
 
 def test_print_gap_report_appends_summary(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch

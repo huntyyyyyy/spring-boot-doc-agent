@@ -24,6 +24,8 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_prepare_scan_targets_and_reuse(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
     pack = tmp_path / "pack"
@@ -78,7 +80,6 @@ def test_prepare_scan_targets_and_reuse(tmp_path: Path, monkeypatch) -> None:
     )
     assert not created
 
-
 def test_ensure_database_create_path(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
     pack = tmp_path / "pack"
@@ -106,7 +107,6 @@ def test_ensure_database_create_path(tmp_path: Path, monkeypatch) -> None:
         cli_version="2.0",
     )
     assert calls == ["create", "meta"]
-
 
 def test_run_queries_and_cleanup(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
@@ -143,7 +143,6 @@ def test_run_queries_and_cleanup(tmp_path: Path, monkeypatch) -> None:
     runner._cleanup_scan_temps(db, str(tmp), keep_database=False)
     assert not db.exists()
     assert not tmp.exists()
-
 
 def test_scan_with_codeql_uses_results_cache(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))

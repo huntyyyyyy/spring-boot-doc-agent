@@ -9,6 +9,9 @@ import subprocess
 import sys
 from pathlib import Path
 import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ENGINE_PATH = REPO_ROOT / "spring-signals" / "harness" / "check-assertions.py"
 HARNESS_DIR = ENGINE_PATH.parent
@@ -35,7 +38,6 @@ class TestSnapshots:
         write_csv(tmp_path / "out", "A", [row("r", "g")] * 8)
         spec_path = write_spec(tmp_path / "s.json", base_spec(snapshot={"A": {"_rows": 7}}))
         assert run(spec_path, tmp_path / "out") == 1
-
 
 class TestSignals:
     OPS = "org.springframework.kafka.core.KafkaOperations"
@@ -86,7 +88,6 @@ class TestSignals:
         with pytest.raises(SystemExit):
             run(spec_path, tmp_path / "out")
 
-
 class TestKnownDefects:
     def test_defects_printed_never_asserted(self, tmp_path, capsys):
         write_csv(tmp_path / "out", "A", [])
@@ -99,7 +100,6 @@ class TestKnownDefects:
         )
         assert run(spec_path, tmp_path / "out") == 0
         assert "counts 2x upstream" in capsys.readouterr().out
-
 
 class TestRecord:
     def test_record_refused_outside_harness(self, tmp_path):
@@ -151,7 +151,6 @@ class TestRecord:
         finally:
             spec_path.unlink(missing_ok=True)
 
-
 class TestRealExpectations:
     """The run.sh default wave and the shipped specs must agree on query names.
 
@@ -177,7 +176,6 @@ class TestRealExpectations:
         named = ca.spec_queries(spec)
         missing = [q for q in self._default_queries() if q not in named]
         assert not missing, f"{spec_name} does not name default-wave queries: {missing}"
-
 
 class TestEndToEnd:
     def test_subprocess_exit_codes(self, tmp_path):

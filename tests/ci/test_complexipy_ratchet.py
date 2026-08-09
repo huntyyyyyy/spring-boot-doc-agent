@@ -11,6 +11,7 @@ import pytest
 
 from doc_engine.ci import complexipy_ratchet as ratchet
 
+pytestmark = pytest.mark.domain_ci_meta
 
 def test_count_offenders_parses_plain_lines(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(ratchet, "require_venv_script", lambda _n: "complexipy")
@@ -27,7 +28,6 @@ def test_count_offenders_parses_plain_lines(monkeypatch: pytest.MonkeyPatch) -> 
     )
     assert ratchet.count_offenders() == 2
 
-
 def test_load_baseline_schema_and_write(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(ratchet, "checked_path_under_repo", lambda p: Path(p))
     bad = tmp_path / "bad.json"
@@ -41,7 +41,6 @@ def test_load_baseline_schema_and_write(tmp_path: Path, monkeypatch: pytest.Monk
     data = ratchet.load_baseline(good)
     assert data["offender_count"] == 3
     assert data["schema_version"] == ratchet.SCHEMA_VERSION
-
 
 def test_main_update_and_ratchet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(ratchet, "count_offenders", lambda: 2)
@@ -59,7 +58,6 @@ def test_main_update_and_ratchet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 
     monkeypatch.setattr(ratchet, "count_offenders", lambda: 5)
     assert ratchet.main(["--baseline", str(baseline)]) == 1  # rise fails
-
 
 def test_main_missing_baseline(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(ratchet, "count_offenders", lambda: 0)

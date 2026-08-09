@@ -10,6 +10,9 @@ from unittest import mock
 
 from doc_engine.ci import size_ratchet as sr
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class SizeRatchetCompareTest(unittest.TestCase):
     def test_unchanged_offenders_pass(self) -> None:
@@ -97,7 +100,6 @@ class SizeRatchetCompareTest(unittest.TestCase):
             {"b.py": 226},
         )
 
-
 class SizeRatchetMainTest(unittest.TestCase):
     def test_update_writes_baseline(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -121,7 +123,6 @@ class SizeRatchetMainTest(unittest.TestCase):
             self.assertEqual(data["file_loc_soft"], 150)
             self.assertEqual(data["file_offender_count"], 0)
             self.assertEqual(data["fn_offender_count"], 0)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

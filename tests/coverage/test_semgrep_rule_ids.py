@@ -11,6 +11,10 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 import semgrep_rule_coverage as sc
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestRuleIdParsing(unittest.TestCase):
     def test_the_real_rule_file_yields_rules(self) -> None:
         """If this ever returns [], every other check here passes vacuously."""
@@ -32,7 +36,6 @@ class TestRuleIdParsing(unittest.TestCase):
                 "      id: not_a_rule\n",
                 encoding="utf-8")
             self.assertEqual(sc.rule_ids(path), ["bucket__real"])
-
 
 class TestCheckIdNormalization(unittest.TestCase):
     """semgrep prefixes check_id with a cwd-dependent path when a rule file
@@ -57,7 +60,6 @@ class TestCheckIdNormalization(unittest.TestCase):
         self.assertEqual(
             sc._normalize_check_id("architecture_ddia__unbounded_findall_exposed"),
             "architecture_ddia__unbounded_findall_exposed")
-
 
 class TestNonVacuity(unittest.TestCase):
     def test_every_real_rule_fires_on_the_fixture_corpus(self) -> None:

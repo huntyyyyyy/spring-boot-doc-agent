@@ -18,6 +18,10 @@ from doc_engine.scanning.gap_probe import (
 from doc_engine.scanning.symbol import format_type
 from tests.support.gap_probe.report_factory import _report
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 def test_a2_scoring_env_preserves_identity_rates() -> None:
     """A2: scoring-env does not invent identity failure."""
     signals = {
@@ -61,7 +65,6 @@ def test_a2_scoring_env_preserves_identity_rates() -> None:
     assert delta["R_coll"] == 0.0
     assert delta["R_join"] == 0.0
     assert delta["R_lin_mean"] == 0.5
-
 
 def test_a3_collision_only_does_not_force_dialect_lineage_reopen() -> None:
     """A3: collision-only fixture must not set lineage dominant to dialect_or_syntax."""
@@ -112,7 +115,6 @@ def test_a3_collision_only_does_not_force_dialect_lineage_reopen() -> None:
     dominant = report["design_reopen"]["lineage_dominant_stratum"]
     assert dominant is None or dominant.get("reason_class") != "dialect_or_syntax"
 
-
 def test_a4_truncation_loss_monotone_in_b() -> None:
     """A4: B' < B => L(B') >= L(B) on planted must-keep set."""
     failures = [
@@ -133,7 +135,6 @@ def test_a4_truncation_loss_monotone_in_b() -> None:
     assert t_full["L"] <= t_mid["L"] <= t_zero["L"]
     assert t_full["L"] == 0.0
     assert t_zero["L"] == 1.0
-
 
 def test_a5_truncation_slot_typed() -> None:
     """A5: truncation loss lives under measurement.truncation only."""

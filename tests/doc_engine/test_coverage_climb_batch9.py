@@ -11,6 +11,7 @@ from doc_engine.pipeline import live_gates as lg
 from doc_engine.pipeline.compliance import GateRecord
 from doc_engine.tools import build_docs_site as bds
 
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_build_docs_site_main_missing_and_ok(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
@@ -50,7 +51,6 @@ def test_build_docs_site_main_missing_and_ok(
     assert bds.main() == 0
     assert "site built" in capsys.readouterr().out
 
-
 def test_live_gates_prior_stages_and_write(tmp_path: Path) -> None:
     assert lg._load_prior_stages(str(tmp_path)) == []
     cert = tmp_path / "certification.json"
@@ -85,7 +85,6 @@ def test_live_gates_prior_stages_and_write(tmp_path: Path) -> None:
     assert path.is_file()
     data = json.loads(path.read_text(encoding="utf-8"))
     assert data.get("generative_executor") == "live"
-
 
 def test_record_gate_result_ok_and_fail(
     capsys: pytest.CaptureFixture[str],

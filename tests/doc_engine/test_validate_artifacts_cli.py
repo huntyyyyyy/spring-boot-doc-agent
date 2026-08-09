@@ -9,6 +9,7 @@ import pytest
 
 from doc_engine.tools import validate_artifacts as va
 
+pytestmark = pytest.mark.domain_schemas
 
 def test_list_known_artifacts(capsys: pytest.CaptureFixture[str]) -> None:
     assert va.main(["--list"]) == 0
@@ -16,17 +17,14 @@ def test_list_known_artifacts(capsys: pytest.CaptureFixture[str]) -> None:
     assert "spring_signals" in out
     assert "certification" in out
 
-
 def test_require_without_all_errors() -> None:
     with pytest.raises(SystemExit):
         va.main(["--require", "spring_signals"])
-
 
 def test_all_not_a_directory(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     missing = tmp_path / "nope"
     assert va.main(["--all", str(missing)]) == 2
     assert "not a directory" in capsys.readouterr().err
-
 
 def test_envelope_ok_and_non_object(
     tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch,
@@ -52,7 +50,6 @@ def test_envelope_ok_and_non_object(
     assert va.main(["--envelope", "query_result", str(bad)]) == 1
     err = capsys.readouterr().err
     assert "JSON object" in err or "containment" in err or "error:" in err
-
 
 def test_unknown_artifact_and_missing_path(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     assert va.main(["not_a_real_artifact", str(tmp_path / "x.json")]) == 2

@@ -13,6 +13,11 @@ import unittest
 from unittest import mock
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import run_manifest, spring_signal_scan
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 RUN_MANIFEST_CMD = [sys.executable, "-m", "doc_engine.tools.run_manifest"]
 SCHEMA_PATH = os.path.join(SCRIPT_DIR, "schemas", "run_manifest.schema.json")
@@ -45,7 +50,6 @@ class AtomicWriteTest(unittest.TestCase):
             leftovers = [f for f in os.listdir(d) if f != "run_manifest.json"]
             self.assertEqual(leftovers, [], "the failed temp file should have been cleaned up")
 
-
 class GitHelpersTest(unittest.TestCase):
     def test_commit_hash_success(self):
         with mock.patch.object(run_manifest.subprocess, "run",
@@ -74,7 +78,6 @@ class GitHelpersTest(unittest.TestCase):
         with mock.patch.object(run_manifest.subprocess, "run", side_effect=FileNotFoundError("no git")):
             self.assertIsNone(run_manifest.git_is_dirty("/fake/repo"))
 
-
 class InitManifestTest(unittest.TestCase):
     def test_shape_and_defaults(self):
         with mock.patch.object(run_manifest, "git_commit_hash", return_value="deadbeef"), \
@@ -87,7 +90,6 @@ class InitManifestTest(unittest.TestCase):
         self.assertFalse(manifest["target_repo"]["dirty"])
         self.assertTrue(manifest["run_id"].startswith("2023-11-14T22:13:20Z-"))
         self.assertEqual(validate_manifest_shape(manifest), [])
-
 
 class StageLifecycleTest(unittest.TestCase):
     def _blank_manifest(self):
@@ -139,7 +141,6 @@ class StageLifecycleTest(unittest.TestCase):
         self.assertEqual(second["status"], "complete")
         self.assertEqual(second["start_time_ms"], 200)
         self.assertEqual(second["duration_ms"], 200)
-
 
 class FinalizeStatusTest(unittest.TestCase):
     def _manifest_with_stages(self, *statuses):

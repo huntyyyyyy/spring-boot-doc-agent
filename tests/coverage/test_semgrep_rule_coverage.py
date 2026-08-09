@@ -2,3 +2,8 @@
 
 See `test_semgrep_rule_ids.py` and `test_semgrep_rule_ratchets.py`.
 """
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+

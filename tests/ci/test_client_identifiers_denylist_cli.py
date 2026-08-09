@@ -14,6 +14,10 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 import check_no_client_identifiers as gate
 from tests.support.client_identifiers.harness import findings, run_main
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class DenylistPassTest(unittest.TestCase):
     def test_a_name_from_the_checkout_is_caught(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -50,7 +54,6 @@ class DenylistPassTest(unittest.TestCase):
             result: List[str] = []
             gate._denylist_pass("clean payload, no identifiers at all", checkout, result)
             self.assertEqual(result, [])
-
 
 class TrackedTreeDenylistTest(unittest.TestCase):
     """Repo-wide denylist: plant a token outside the denylist file and assert bite."""
@@ -111,7 +114,6 @@ class TrackedTreeDenylistTest(unittest.TestCase):
         code, out, err = run_main(["--tracked-tree"])
         self.assertEqual(code, 0, err)
         self.assertIn("clean tracked tree", out)
-
 
 class CliExitCodeTest(unittest.TestCase):
     def test_a_clean_aggregate_exits_zero(self) -> None:

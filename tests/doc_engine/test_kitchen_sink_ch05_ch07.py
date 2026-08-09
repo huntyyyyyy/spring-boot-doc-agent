@@ -26,6 +26,11 @@ from doc_engine.pipeline.mock_stages import (
 from doc_engine.tools import partition_repo, run_manifest, spring_signal_scan
 from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
 from doc_engine.scanning.covering import verify_covering_proof
+
+import pytest
+
+pytestmark = pytest.mark.domain_integration
+
 SCRIPT_DIR = SCRIPTS_DIR
 PY = sys.executable
 MAX_TOKENS = "2000"
@@ -136,7 +141,6 @@ class Ch05ConvergenceTest(unittest.TestCase):
         self.assertRegex(skipped[HUGE_JAVA], r"^too-large \(\d+ bytes\)$")
         self.assertNotIn(HUGE_JAVA, _grouped(small))
         self.assertIn(HUGE_JAVA, set(_evidence_files(_STATE["signals"])))
-
 
 class Ch07LostUpdateTest(unittest.TestCase):
 

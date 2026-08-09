@@ -12,6 +12,11 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 import mutate
 import mutator_registry
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 _KNOWN_GATE_MUTATOR_NAMES = frozenset({
     "secret-heuristic-stops-unquoting",
     "build-file-guard-loosened",
@@ -81,7 +86,6 @@ class ApplyMutationTest(unittest.TestCase):
         mutate.apply_mutation(self.tmp, self._mutator())
         self.assertEqual((self.tmp / "f.txt").read_text(encoding="utf-8"), "beta alpha\n")
 
-
 class SurvivorDetectionTest(unittest.TestCase):
     """The load-bearing case. A harness that cannot report a survivor emits a
     reassuring score while checking nothing."""
@@ -104,7 +108,6 @@ class SurvivorDetectionTest(unittest.TestCase):
             outcome = mutate.evaluate(real, Path(tmp))
         self.assertEqual(outcome.status, "killed", outcome.detail)
 
-
 class ReportTest(unittest.TestCase):
     def _outcomes(self, *pairs):
         return [mutate.Outcome(n, s, "detail") for n, s in pairs]
@@ -122,7 +125,6 @@ class ReportTest(unittest.TestCase):
         """A drifted anchor is never acceptable: it means the mutator is
         inert, which the baseline must not be able to excuse."""
         self.assertEqual(mutate.report(self._outcomes(("a", "not-applied")), {"a": "known"}), 1)
-
 
 class BaselineTest(unittest.TestCase):
     def setUp(self) -> None:
@@ -148,7 +150,6 @@ class BaselineTest(unittest.TestCase):
 
     def test_a_missing_baseline_accepts_nothing(self) -> None:
         self.assertEqual(mutate.load_baseline(), {})
-
 
 class SandboxIsolationTest(unittest.TestCase):
     """The property that makes this safe to run on every commit."""

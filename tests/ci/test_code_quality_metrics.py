@@ -8,6 +8,11 @@ import tempfile
 import unittest
 from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 import check_code_quality as checker
 from tests.support.code_quality.measure import measure_one
@@ -32,7 +37,6 @@ class ComplexityTest(unittest.TestCase):
     def test_comprehension_filter_counts_beyond_the_comprehension_itself(self):
         functions, _, _ = measure_one("def f(xs):\n    return [x for x in xs if x if x > 1]\n")
         self.assertEqual(functions["mod.py::f"]["complexity"], 4)
-
 
 class NestingDepthTest(unittest.TestCase):
     def test_flat_function_has_depth_zero(self):
@@ -71,7 +75,6 @@ class NestingDepthTest(unittest.TestCase):
         self.assertEqual(functions["mod.py::outer"]["depth"], 0)
         self.assertEqual(functions["mod.py::outer.inner"]["depth"], 2)
 
-
 class QualnameTest(unittest.TestCase):
     def test_method_is_keyed_by_class_and_name(self):
         functions, _, _ = measure_one("class C:\n    def m(self):\n        return 1\n")
@@ -100,7 +103,6 @@ class QualnameTest(unittest.TestCase):
         functions, _, _ = measure_one(source)
         self.assertEqual(functions["mod.py::f"]["complexity"], 3)
         self.assertEqual(functions["mod.py::f"]["depth"], 2)
-
 
 class AnnotationCoverageTest(unittest.TestCase):
     def test_return_annotation_alone_counts_as_annotated(self):

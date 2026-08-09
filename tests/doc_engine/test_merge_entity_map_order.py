@@ -2,6 +2,9 @@
 
 from doc_engine.scanning._merge_signals import merge
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 def test_entity_map_derived_from_merged_evidence_not_empty_default():
     partials = [
@@ -26,7 +29,6 @@ def test_entity_map_derived_from_merged_evidence_not_empty_default():
     assert "Order" in out["entity_table_map"]
     assert out["entity_table_map"]["Order"]["table"] == "orders"
     assert out["entity_table_map"]["Order"]["file"] == "a/Order.java"
-
 
 def test_explicit_maps_merged_via_helper_and_contested():
     partials = [

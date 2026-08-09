@@ -25,6 +25,8 @@ from doc_engine.pipeline.validation import (
 from tests.conftest import FIXTURE_SNAPSHOT_PATH, REPO_ROOT
 from tests.doc_engine.cert_helpers import ok_stages_for
 
+pytestmark = pytest.mark.domain_schemas
+
 def test_fact_closed_world_rejects_unknown_key():
     with pytest.raises(ValidationError):
         Fact.model_validate({
@@ -39,7 +41,6 @@ def test_fact_closed_world_rejects_unknown_key():
             "extra_column": "nope",
         })
 
-
 def test_fact_rejects_line_below_one():
     with pytest.raises(ValidationError):
         Fact.model_validate({
@@ -52,7 +53,6 @@ def test_fact_rejects_line_below_one():
             "rule_id": None,
             "scanner": None,
         })
-
 
 def test_facts_jsonl_file_validates(tmp_path):
     from doc_engine.scanning.facts import facts_from_signals, write_facts_jsonl
@@ -77,13 +77,11 @@ def test_facts_jsonl_file_validates(tmp_path):
     assert isinstance(model, FactsArtifact)
     assert len(model.root) >= 2
 
-
 def test_facts_jsonl_rejects_invalid_line(tmp_path):
     path = tmp_path / "facts.jsonl"
     path.write_text('{"predicate":"X","subject":"s"}\nnot-json\n', encoding="utf-8")
     with pytest.raises(ArtifactValidationError, match="invalid JSON on line 2"):
         validate_artifact_file("facts", path)
-
 
 def test_facts_schema_export_marks_jsonl_encoding():
     schema = export_json_schemas()["facts"]
@@ -93,7 +91,6 @@ def test_facts_schema_export_marks_jsonl_encoding():
         (REPO_ROOT / "scripts" / "schemas" / "facts.schema.json").read_text(encoding="utf-8")
     )
     assert exported["x-doc-engine-encoding"] == "jsonl"
-
 
 def test_certification_schema_file_and_round_trip(tmp_path):
     from doc_engine.pipeline.compliance import (
@@ -117,7 +114,6 @@ def test_certification_schema_file_and_round_trip(tmp_path):
     assert model.completeness_claim == "fold_of_recorded_rows"
     assert (REPO_ROOT / "scripts" / "schemas" / "certification.schema.json").is_file()
 
-
 def test_cross_group_edges_minimal_validates():
     from doc_engine.pipeline.artifacts import CrossGroupEdgesArtifact
 
@@ -129,7 +125,6 @@ def test_cross_group_edges_minimal_validates():
         "groups": {"0": {"outbound": [], "inbound": [], "same_package_outside": []}},
     })
 
-
 def test_gap_questions_rejects_unknown_blocks_file():
     from doc_engine.pipeline.artifacts import GapQuestionsArtifact
 
@@ -140,7 +135,6 @@ def test_gap_questions_rejects_unknown_blocks_file():
             "question": "q",
             "evidence": "A.java:1",
         }])
-
 
 def test_architecture_testing_review_validates_array():
     from doc_engine.pipeline.artifacts import ArchitectureTestingReviewArtifact

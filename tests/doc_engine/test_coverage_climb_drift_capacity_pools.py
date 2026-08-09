@@ -12,6 +12,8 @@ from doc_engine.scanning.support import _codeql_cli as cli_mod
 from doc_engine.tools import capacity_preflight as cap
 from doc_engine.tools import spring_drift_check as drift
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_classify_and_citations_helpers() -> None:
     clf = drift.classify_files(
         {"a.java": "1", "b.java": "2", "c.java": "3"},
@@ -63,7 +65,6 @@ def test_classify_and_citations_helpers() -> None:
     assert report["citations_checked"] == 1
     assert report["schema_version"]
 
-
 def test_load_signals_rejects_old_schema(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -72,7 +73,6 @@ def test_load_signals_rejects_old_schema(
     with pytest.raises(SystemExit) as exc:
         drift.load_signals(str(path))
     assert exc.value.code == 1
-
 
 def test_empty_signatures_and_manifest_validate(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
@@ -100,7 +100,6 @@ def test_empty_signatures_and_manifest_validate(
 
     ctx = SimpleNamespace(file_signatures={"A.java": "sig"})
     assert drift.tier1_scan("/unused", scan_context=ctx) == {"A.java": "sig"}
-
 
 def test_stage4_pool_helpers_and_compare() -> None:
     edges = {"groups": {"g1": {"a": 1}, "g2": {"b": list(range(50))}}}

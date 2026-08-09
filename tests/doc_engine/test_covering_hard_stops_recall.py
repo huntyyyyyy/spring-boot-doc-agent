@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _complete_receipt, _kafka_signals
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class RecallVerdictFalsifiersTest(unittest.TestCase):
     def test_recall_codeql_impl_is_evidentiary(self):
         """Deviation: *Impl CodeQL-only miss labelled STRUCTURAL."""

@@ -22,6 +22,9 @@ from doc_engine.scanning.gap_probe import (
 )
 from doc_engine.scanning.symbol import format_type
 from doc_engine.tools import spring_drift_check
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = repo_root()
 BASELINE = REPO_ROOT / "scripts" / "coverage" / "real_repo_gap_baseline.json"
 from tests.support.real_fixture.adversarial_factories import (
@@ -87,7 +90,6 @@ class TestRealRepoAdversarial:
         )
         # Must not look like a healthy identity drift (status_counts ⊆ {unchanged}).
         assert set(report["status_counts"]) - {"unchanged"}
-
 
 class TestRealWorldFixtureMustRequireCovering:
     """Deviation: real-world AET fixture forced covering_ok=True with no proof."""

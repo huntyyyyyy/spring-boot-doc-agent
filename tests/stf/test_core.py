@@ -16,8 +16,9 @@ from stf.schemas.spec import DataSourceRow, SpecDocument
 from stf.schemas.tasks import LedgerState, TaskBlock, TasksDocument
 from stf.validators.lint_tasks import lint_summary, lint_tasks_document, mutate_tasks
 
-MODES = ("bad-dep", "no-phase", "bad-inventory", "no-acceptance", "bad-blocker", "cycle")
+pytestmark = pytest.mark.domain_stf
 
+MODES = ("bad-dep", "no-phase", "bad-inventory", "no-acceptance", "bad-blocker", "cycle")
 
 def _sample_tasks() -> TasksDocument:
     return TasksDocument(
@@ -52,7 +53,6 @@ def _sample_tasks() -> TasksDocument:
         ],
     )
 
-
 def _sample_spec() -> SpecDocument:
     return SpecDocument(
         target="demo",
@@ -61,19 +61,16 @@ def _sample_spec() -> SpecDocument:
         finding_ids=["C1"],
     )
 
-
 def test_compute_waves_diamond():
     waves = compute_waves({"T0": [], "T1": ["T0"], "T2": ["T0"], "T3": ["T1", "T2"]})
     assert waves[0] == ["T0"]
     assert set(waves[1]) == {"T1", "T2"}
     assert waves[2] == ["T3"]
 
-
 def test_detect_cycle():
     assert detect_cycle({"A": ["B"], "B": ["A"]}) is not None
     with pytest.raises(CycleError):
         compute_waves({"A": ["B"], "B": ["A"]})
-
 
 def test_blast_radius_bfs():
     radius = blast_radius(
@@ -83,18 +80,15 @@ def test_blast_radius_bfs():
     )
     assert radius == ["T1", "T2", "T3"]
 
-
 def test_lint_passes_on_sample():
     summary = lint_summary(lint_tasks_document(_sample_tasks(), _sample_spec()))
     assert summary["ok"]
-
 
 @pytest.mark.parametrize("mode", MODES)
 def test_named_mutants_fail_lint(mode: str):
     mutated = mutate_tasks(_sample_tasks(), mode)
     summary = lint_summary(lint_tasks_document(mutated, _sample_spec()))
     assert not summary["ok"], f"mutant {mode} should fail lint"
-
 
 def test_sod_cannot_self_approve(tmp_path: Path):
     store = TasksStore(tmp_path)
@@ -105,7 +99,6 @@ def test_sod_cannot_self_approve(tmp_path: Path):
     store.mark_done(validation_token=token)
     assert store.load_tasks().ledger == LedgerState.DONE
 
-
 def test_plan_gate_and_waves(tmp_path: Path):
     SpecStore(tmp_path).write_spec(_sample_spec())
     store = TasksStore(tmp_path)
@@ -114,7 +107,6 @@ def test_plan_gate_and_waves(tmp_path: Path):
     assert result["ok"]
     ran = run_waves(store)
     assert "T0" in ran["executed"]
-
 
 def test_ingest_review_headings():
     md = """
@@ -139,14 +131,12 @@ Dict zones in `src/doc_engine/query/providers.py`.
     assert seed.input_kind == "review_remediation"
     assert any(r.id.startswith("INV-C1") for r in seed.inventory)
 
-
 def test_schema_roundtrip(tmp_path: Path):
     store = SpecStore(tmp_path)
     store.write_spec(_sample_spec())
     loaded = store.load_spec()
     assert loaded.target == "demo"
     assert (tmp_path / "SPEC.md").is_file()
-
 
 def test_property_wave_partition_covers_all_tasks():
     # property-style without hypothesis dependency

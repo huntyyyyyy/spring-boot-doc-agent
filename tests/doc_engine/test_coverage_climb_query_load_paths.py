@@ -21,6 +21,8 @@ from stf.schemas.blockers import BlockerClass
 from stf.validators import lint_tasks as lint_mod
 from tests.stf.conftest import build_minimal_valid_tasks
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_require_server_root_env_and_blank(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.delenv("DOC_ENGINE_ROOT", raising=False)
     monkeypatch.delenv("DOC_ENGINE_RUN_DIR", raising=False)
@@ -31,7 +33,6 @@ def test_require_server_root_env_and_blank(monkeypatch: pytest.MonkeyPatch, tmp_
         load_mod.require_server_root()
     monkeypatch.setenv("DOC_ENGINE_ROOT", str(tmp_path))
     assert load_mod.require_server_root() == tmp_path.resolve()
-
 
 def test_resolve_oserror_and_escape(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     with pytest.raises(load_mod.QueryPathError, match="containment root is required"):
@@ -56,7 +57,6 @@ def test_resolve_oserror_and_escape(tmp_path: Path, monkeypatch: pytest.MonkeyPa
     with pytest.raises(load_mod.QueryPathError, match="escapes root"):
         load_mod._resolve(outside, root=tmp_path)
 
-
 def test_read_artifact_nul_and_missing(tmp_path: Path) -> None:
     nul = tmp_path / "bad.json"
     nul.write_bytes(b'{"a":1}\x00')
@@ -66,13 +66,11 @@ def test_read_artifact_nul_and_missing(tmp_path: Path) -> None:
     with pytest.raises(load_mod.QueryMissingError):
         load_mod.load_jsonl(missing, root=tmp_path)
 
-
 def test_jsonl_rejects_non_object_row(tmp_path: Path) -> None:
     path = tmp_path / "rows.jsonl"
     path.write_text("[1]\n", encoding="utf-8")
     with pytest.raises(load_mod.QueryError, match="must be object"):
         load_mod.load_jsonl(path, root=tmp_path)
-
 
 def test_schema_path_unknown_and_missing(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     with pytest.raises(load_mod.QueryError, match="unknown envelope"):
@@ -80,7 +78,6 @@ def test_schema_path_unknown_and_missing(tmp_path: Path, monkeypatch: pytest.Mon
     monkeypatch.setattr(schema_mod, "_SCHEMA_DIR", tmp_path)
     with pytest.raises(load_mod.QueryError, match="schema missing"):
         schema_mod.schema_path("query_result")
-
 
 def test_validate_envelope_kind_mismatches() -> None:
     with pytest.raises(load_mod.QueryError, match="context-packet"):
@@ -90,7 +87,6 @@ def test_validate_envelope_kind_mismatches() -> None:
     with pytest.raises(load_mod.QueryError, match="must be a list"):
         schema_mod._check_kind_specific("query_result", {"rows": {}})
 
-
 def test_list_mcp_tools_and_unknown_kind() -> None:
     names = kinds_mod.list_mcp_tool_names()
     assert "doc_engine_help" in names
@@ -98,12 +94,10 @@ def test_list_mcp_tools_and_unknown_kind() -> None:
     with pytest.raises(KeyError, match="unknown query kind"):
         kinds_mod.get_query_kind_spec("not-a-kind")
 
-
 def test_clamp_budget_edges() -> None:
     assert packet_mod._clamp_budget(None) == packet_mod.DEFAULT_BUDGET_TOKENS
     assert packet_mod._clamp_budget(-5) == 0
     assert packet_mod._clamp_budget(packet_mod.MAX_BUDGET_TOKENS + 99) == packet_mod.MAX_BUDGET_TOKENS
-
 
 def test_resolve_run_missing_and_escape(tmp_path: Path) -> None:
     with pytest.raises(load_mod.QueryMissingError, match="missing run dir"):
@@ -114,7 +108,6 @@ def test_resolve_run_missing_and_escape(tmp_path: Path) -> None:
     other.mkdir()
     with pytest.raises(load_mod.QueryPathError, match="escapes root"):
         packet_mod._resolve_run_under_root(run, other)
-
 
 def test_load_run_artifacts_rejects_non_object(tmp_path: Path) -> None:
     run = tmp_path / "run"

@@ -10,6 +10,7 @@ import pytest
 from doc_engine.pipeline.local_runner_phases import full_finish as ff
 from doc_engine.tools import gap_probe as gp
 
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_gap_probe_validate_and_summary(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
@@ -54,7 +55,6 @@ def test_gap_probe_validate_and_summary(
     captured = capsys.readouterr()
     assert "gap_probe" in captured.err
     assert "Wrote" in captured.out
-
 
 def test_gap_probe_main_paths(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -106,7 +106,6 @@ def test_gap_probe_main_paths(
         )
         == 0
     )
-
 
 def test_phase_full_finish_wires_gates(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     calls: list[str] = []

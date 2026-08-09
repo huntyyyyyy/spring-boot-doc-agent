@@ -24,6 +24,8 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_reraise_scan_error_mapping() -> None:
     from doc_engine.scanning._orchestrator import CoveringProofError
     from doc_engine.scanning.support._codeql_runner import CodeQLError, CodeQLNotFoundError
@@ -45,7 +47,6 @@ def test_reraise_scan_error_mapping() -> None:
     with pytest.raises(RuntimeError, match="passthrough"):
         _from_except(RuntimeError("passthrough"))
 
-
 def test_spring_scan_kwargs_include_context_when_set() -> None:
     ctx = object()
     kwargs = spring_mod._spring_scan_kwargs(
@@ -58,7 +59,6 @@ def test_spring_scan_kwargs_include_context_when_set() -> None:
     assert kwargs["scan_context"] is ctx
     assert kwargs["respect_gitignore"] is True
 
-
 def test_combined_hash_and_scanner_version_stable() -> None:
     scanners = [
         SimpleNamespace(name="a", version_hash=lambda: "1111"),
@@ -67,7 +67,6 @@ def test_combined_hash_and_scanner_version_stable() -> None:
     digest = spring_mod._combined_hash(scanners)
     assert len(digest) == 16
     assert digest == spring_mod._combined_hash(scanners)
-
 
 def test_run_spring_scan_wraps_codeql_error(monkeypatch: pytest.MonkeyPatch) -> None:
     from doc_engine.scanning.support._codeql_runner import CodeQLError
@@ -87,7 +86,6 @@ def test_run_spring_scan_wraps_codeql_error(monkeypatch: pytest.MonkeyPatch) -> 
             db_path=None,
             scan_context=None,
         )
-
 
 def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> None:
     backend = CodeQLBackend()
@@ -109,11 +107,9 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     )
     assert len(backend.version_hash()) == 16
 
-
 def test_codeql_scan_requires_build_command() -> None:
     with pytest.raises(runner.CodeQLError, match="build command"):
         CodeQLBackend().scan("/tmp/repo")
-
 
 def test_codeql_scan_buckets_rows(tmp_path: Path, monkeypatch) -> None:
     repo = tmp_path / "repo"
@@ -149,7 +145,6 @@ def test_codeql_scan_buckets_rows(tmp_path: Path, monkeypatch) -> None:
     assert "api_surface" in result["evidence"]
     assert result["entity_table_map_candidates"]
 
-
 def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -166,7 +161,6 @@ def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
         entity_candidates=entities,
     )
     assert evidence == {}
-
 
 def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch) -> None:
     repo = tmp_path / "repo"
@@ -191,7 +185,6 @@ def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch
     )
     assert entities == {}
     assert evidence == {}
-
 
 def test_explicit_table_preserves_package() -> None:
     entry = CodeQLBackend._explicit_table_map_entry(

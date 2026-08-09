@@ -177,6 +177,10 @@ jobs:
       - name: check_repo_claims.py (state-claim gate)
         run: python3 scripts/ci/check_repo_claims.py
 
+      - name: check_test_domain_markers.py (E-TEST domain BC ratchet)
+        if: matrix.python-version == '3.11'
+        run: python3 -m doc_engine.ci.test_domain_markers_check
+
       # Every ast-grep rule must be able to match something. Measured against
       # a real production Spring service, 10 of 23 rules fired and 13 returned
       # zero -- and nothing here could tell "this codebase has no Kafka" from
@@ -211,14 +215,13 @@ jobs:
         if: matrix.python-version == '3.11'
         run: python3 scripts/ci/check_repo_claims.py --metrics
 
-      # Compatibility cells: correctness only. Measuring coverage on every
-      # interpreter multiplies wall-clock (Hilton CI assurance trade-off) and
-      # invites silent combine of parallel .coverage* shards / stale XML —
-      # the same dilution class as cross-worktree combine. Canonical Cover%
-      # + fail_under lives only on 3.11 below.
-      - name: pytest tests/ (ABI matrix — no coverage)
+      # Compatibility cells: ABI signal only (no coverage). Domain shards run in
+      # job abi-domain-shards (policy T-A); this step is removed so 3.10/3.12 do
+      # not double-pay a full serial suite. 3.11 oracle cov cell below stays the
+      # single coverage.xml writer.
+      - name: pytest ABI note (shards in abi-domain-shards)
         if: matrix.python-version != '3.11'
-        run: pytest tests/ -v --tb=short
+        run: echo "ABI pytest lives in job abi-domain-shards (domain markers)."
 
       - name: pytest tests/ (line coverage ratchet on doc_engine + stf)
         if: matrix.python-version == '3.11'
@@ -530,6 +533,72 @@ jobs:
           doc-engine quality-gates \
             --compare-ref "$COMPARE_REF" \
             --coverage-xml coverage.xml
+
+  # ABI correctness shards (policy T-A). No coverage.xml — never combine with
+  # the 3.11 oracle cell. Domain list must stay aligned with
+  # doc_engine.ci.test_domain_catalog.parallel_shard_markers().
+  abi-domain-shards:
+    name: ABI domain shards (no coverage)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.10", "3.12"]
+        domain:
+          - domain_schemas
+          - domain_stage0
+          - domain_pipeline
+          - domain_compliance
+          - domain_ci_meta
+          - domain_adapters
+          - domain_stf
+          - domain_climb_sensor
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -e .
+      - name: pytest -m ${{ matrix.domain }}
+        run: pytest tests/ -v --tb=short -m ${{ matrix.domain }}
+
+  abi-domain-serial:
+    name: ABI serial domains (no coverage)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -e .
+      - name: pytest serial domain expression
+        run: >
+          pytest tests/ -v --tb=short
+          -m "domain_integration or domain_unclassified or domain_live_optin"
 
   # Soft SonarCloud signal only. Free-plan Quality Gates cannot enforce the
   # custom thresholds this repo needs; hard fail lives in quality-gates above.

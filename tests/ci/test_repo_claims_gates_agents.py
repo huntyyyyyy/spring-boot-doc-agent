@@ -14,6 +14,10 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestCiSuiteCoverage(TreeCase):
     """Check D — refuse scripts/test_*.py revival; discovery covers tests/."""
 
@@ -33,7 +37,6 @@ class TestCiSuiteCoverage(TreeCase):
     def test_ci_exempt_suites_registry_removed(self) -> None:
         """Dead CI_EXEMPT_SUITES must not return — opt-in uses skipUnless."""
         self.assertFalse(hasattr(crc, "CI_EXEMPT_SUITES"))
-
 
 class TestGateHonesty(TreeCase):
     """Check E."""
@@ -69,7 +72,6 @@ class TestGateHonesty(TreeCase):
             "      - name: reporter.py (non-blocking)\n        run: python3 scripts/reporter.py\n",
             encoding="utf-8")
         self.assertEqual(self.run_check(), 0)
-
 
 class TestAgentSearchTooling(TreeCase):
     """Check F. Each test names the one property it defends, and every one
@@ -153,7 +155,6 @@ class TestAgentSearchTooling(TreeCase):
             encoding="utf-8")
         self.assertEqual(self.run_check(), 0)
 
-
 class TestNotContainsPredicate(TreeCase):
     def test_not_contains_both_directions(self) -> None:
         self.write("claude/steering-prompts/02-y-research-prompt.md",
@@ -171,7 +172,6 @@ class TestNotContainsPredicate(TreeCase):
                    "---\nstatus: resolved\n"
                    "verify:\n  - not_contains:scripts/gone.py:Grep\n---\n\nBody.\n")
         self.assertEqual(self.run_check(), 1)
-
 
 class TestUtf8Encoding(TreeCase):
     """Check G — non-UTF-8 markdown must be a Finding, never a traceback."""

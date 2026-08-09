@@ -12,6 +12,9 @@ from check_workflow_yaml import (
     scan_workflow_security,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class WorkflowYamlParseTest(unittest.TestCase):
     def test_committed_workflows_parse(self):
@@ -51,7 +54,6 @@ class WorkflowYamlParseTest(unittest.TestCase):
             path = Path(tmp) / "good.yml"
             path.write_text(good, encoding="utf-8")
             self.assertEqual(check_workflows(Path(tmp)), [])
-
 
 class WorkflowSecurityRampTest(unittest.TestCase):
     def test_script_injection_is_critical(self):
@@ -105,7 +107,6 @@ class WorkflowSecurityRampTest(unittest.TestCase):
             [],
             msg="committed workflows must not fail the severity ramp",
         )
-
 
 if __name__ == "__main__":
     unittest.main()

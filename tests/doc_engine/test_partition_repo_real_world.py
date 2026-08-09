@@ -24,15 +24,17 @@ from doc_engine.real_fixture import real_repo_path
 from doc_engine.tools import partition_repo
 from tests.conftest import SCRIPTS_DIR
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 
 MAX_TOKENS = int(os.environ.get("PARTITION_REPO_REAL_MAX_TOKENS", "2000"))
 
-
 def _real_dir() -> str | None:
     path = real_repo_path()
     return str(path) if path is not None else None
-
 
 @unittest.skipUnless(
     _real_dir(),
@@ -119,7 +121,6 @@ class RealRepoTest(unittest.TestCase):
         expected = max(1, len(text) // partition_repo.CHARS_PER_TOKEN_DENSE)
         actual = dict(self.file_tokens)[dense_sample]
         self.assertEqual(actual, expected)
-
 
 if __name__ == "__main__":
     unittest.main()

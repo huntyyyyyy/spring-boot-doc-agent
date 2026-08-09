@@ -12,6 +12,8 @@ from doc_engine.scanning.support import _codeql_cli as cli_mod
 from doc_engine.tools import capacity_preflight as cap
 from doc_engine.tools import spring_drift_check as drift
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_reject_unsafe_and_resolve_exe(tmp_path: Path) -> None:
     with pytest.raises(runner.CodeQLError, match="non-empty"):
         runner._reject_unsafe_option("")
@@ -23,7 +25,6 @@ def test_reject_unsafe_and_resolve_exe(tmp_path: Path) -> None:
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
     assert runner._resolve_codeql_exe(fake) == fake.resolve()
-
 
 def test_invoke_codeql_rejects_and_timeout(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -42,7 +43,6 @@ def test_invoke_codeql_rejects_and_timeout(
     with pytest.raises(runner.CodeQLError, match="timed out"):
         runner._invoke_codeql(fake, ("--version",), timeout=1)
 
-
 def test_find_codeql_env_and_missing(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.delenv("DOC_ENGINE_CODEQL", raising=False)
     monkeypatch.setattr(cli_mod.shutil, "which", lambda _n: None)
@@ -56,7 +56,6 @@ def test_find_codeql_env_and_missing(monkeypatch: pytest.MonkeyPatch, tmp_path: 
     good.write_text("", encoding="utf-8")
     monkeypatch.setenv("DOC_ENGINE_CODEQL", str(good))
     assert runner.find_codeql() == good
-
 
 def test_cache_metadata_and_results_roundtrip(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -90,7 +89,6 @@ def test_cache_metadata_and_results_roundtrip(
         runner._validate_cached_evidence_rows({"file": "x"})
     with pytest.raises(runner.CodeQLError, match="missing file"):
         runner._validate_cached_evidence_rows([{"line": 1}])
-
 
 def test_prepare_scan_and_cleanup(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
@@ -131,7 +129,6 @@ def test_prepare_scan_and_cleanup(tmp_path: Path, monkeypatch: pytest.MonkeyPatc
     dirs = [".git", "src", "build"]
     runner._prune_hash_walk_dirs(dirs)
     assert dirs == ["src"]
-
 
 def test_ensure_regular_file_and_codeql_version(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch

@@ -5,6 +5,9 @@ from __future__ import annotations
 from stf.eval.scoring import estimate_main_context_peak, score_decompose
 from tests.stf.conftest import build_minimal_valid_spec, build_minimal_valid_tasks
 
+import pytest
+
+pytestmark = pytest.mark.domain_stf
 
 def test_answer_key_auto_score_passes_minimal_decompose() -> None:
     key = {
@@ -16,7 +19,6 @@ def test_answer_key_auto_score_passes_minimal_decompose() -> None:
         build_minimal_valid_tasks(), key, spec=build_minimal_valid_spec()
     )
     assert result["pass"]
-
 
 def test_transcript_metrics_define_peak_main_context_kpi() -> None:
     metrics = estimate_main_context_peak(

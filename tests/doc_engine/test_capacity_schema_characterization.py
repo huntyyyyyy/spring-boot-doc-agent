@@ -10,6 +10,9 @@ from pydantic import ValidationError
 from doc_engine.pipeline.artifacts import ARTIFACT_FILENAMES, ARTIFACT_MODELS
 from doc_engine.pipeline.validation import ArtifactValidationError, validate_artifact_file
 from doc_engine.tools import capacity_preflight
+
+pytestmark = pytest.mark.domain_schemas
+
 STAGE4_METRIC_KINDS = frozenset({
     "partial_proxy_pre_stage4",
     "measured_stage4_inputs",
@@ -76,7 +79,6 @@ def characterization_stage0_report(*, with_schema_version: bool = False) -> dict
         )
     return report
 
-
 def characterization_calibration_report(*, with_schema_version: bool = False) -> dict:
     """Minimal synthetic L2b calibration report matching compute_stage4_calibration."""
     report = {
@@ -106,18 +108,15 @@ def characterization_calibration_report(*, with_schema_version: bool = False) ->
         )
     return report
 
-
 def test_characterization_shared_keys_are_writer_intersection() -> None:
     stage0 = characterization_stage0_report(with_schema_version=False)
     calib = characterization_calibration_report(with_schema_version=False)
     assert set(stage0) & set(calib) == _LEGACY_SHARED_ROOT_KEYS
 
-
 def test_stage4_metric_kind_literal_matches_writer_vocabulary() -> None:
     from doc_engine.pipeline.artifacts import Stage4MetricKind
 
     assert set(get_args(Stage4MetricKind)) == STAGE4_METRIC_KINDS
-
 
 def test_schema_version_required() -> None:
     from doc_engine.pipeline.artifacts import CapacityPreflightReportArtifact
@@ -131,14 +130,12 @@ def test_schema_version_required() -> None:
         characterization_stage0_report(with_schema_version=True)
     )
 
-
 def test_each_known_metric_kind_validates(kind: str) -> None:
     from doc_engine.pipeline.artifacts import CapacityPreflightReportArtifact
 
     report = characterization_stage0_report(with_schema_version=True)
     report["stage4_metric_kind"] = kind
     CapacityPreflightReportArtifact.model_validate(report)
-
 
 def test_unknown_metric_kind_rejected() -> None:
     from doc_engine.pipeline.artifacts import CapacityPreflightReportArtifact
@@ -147,7 +144,6 @@ def test_unknown_metric_kind_rejected() -> None:
     report["stage4_metric_kind"] = "upper_bound"
     with pytest.raises(ValidationError):
         CapacityPreflightReportArtifact.model_validate(report)
-
 
 def test_calibration_mode_validates() -> None:
     from doc_engine.pipeline.artifacts import CapacityPreflightReportArtifact

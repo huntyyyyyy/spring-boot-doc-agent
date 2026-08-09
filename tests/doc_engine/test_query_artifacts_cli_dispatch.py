@@ -13,6 +13,9 @@ from doc_engine.query.handlers import dependents, entity, evidence, facts, route
 from doc_engine.query.load import QueryError, QueryMissingError, QueryPathError, load_json, load_jsonl
 from doc_engine.query.registry import get_query_handler, run_query
 from doc_engine.real_fixture import real_artifacts_dir
+
+pytestmark = pytest.mark.domain_pipeline
+
 FIXTURE_SIGNALS = (
     Path(__file__).resolve().parents[2]
     / "scripts"
@@ -47,20 +50,17 @@ def test_real_artifacts_evidence_stays_capped() -> None:
     assert len(result["rows"]) <= 25
     assert result["truncated"] is True or len(result["rows"]) < 25
 
-
 def test_unknown_evidence_bucket_raises() -> None:
     """Deviation: H3 - typo bucket returns empty success."""
     signals = _signals_doc()
     with pytest.raises(QueryError, match="unknown evidence bucket"):
         evidence.query_evidence(signals, bucket="secuirty")
 
-
 def test_unknown_facts_predicate_raises() -> None:
     """Deviation: H3 - typo predicate returns empty success."""
     rows = _facts_rows()
     with pytest.raises(QueryError, match="unknown facts predicate"):
         facts.query_facts(rows, predicate="MAPS_TOO")
-
 
 def test_redaction_provider_dict_zones_produce_risks() -> None:
     """Deviation: H2 - production {rel_path: [hits]} yields empty risks."""
@@ -85,7 +85,6 @@ def test_redaction_provider_dict_zones_produce_risks() -> None:
     assert items[0]["path"] == "application.yml"
     assert "password" in (items[0]["match"] or "")
 
-
 def test_estimate_tokens_counts_full_emission() -> None:
     """Deviation: C2 - estimate_tokens ignores payload while emission includes it."""
     from doc_engine.query.rank import estimate_tokens, to_emission_item
@@ -106,13 +105,11 @@ def test_estimate_tokens_counts_full_emission() -> None:
     assert estimate_tokens(emission) == len(json.dumps(emission, ensure_ascii=False)) // 4
     assert estimate_tokens({**emission, "payload": fat["payload"]}) > estimate_tokens(emission)
 
-
 def test_assume_indexed_returns_unknown() -> None:
     """Deviation: M1 - AssumeIndexed always claims fresh_indexed."""
     from doc_engine.query.freshness import AssumeIndexed, label_item_path
 
     assert label_item_path(AssumeIndexed(), "does/not/exist.java") == "unknown"
-
 
 def test_partition_budget_never_overshoots() -> None:
     """Deviation: N1 - max(1,...) primary+finding+risk exceeds small budgets."""
@@ -124,7 +121,6 @@ def test_partition_budget_never_overshoots() -> None:
         assert primary >= 0
         assert finding >= 0
         assert risk >= 0
-
 
 def test_apply_nested_cap_truncates_guards() -> None:
     """Deviation: H1 - nested guards unbounded; truncated lies."""

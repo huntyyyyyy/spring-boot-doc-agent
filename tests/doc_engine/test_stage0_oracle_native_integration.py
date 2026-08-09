@@ -16,6 +16,10 @@ from tests.support.stage0_oracle.fixtures import (
     skip_if_no_astgrep,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class NativeVsMultipassTest(unittest.TestCase):
     """Structural proof: native misses transitive, multipass recovers it."""
 
@@ -77,7 +81,6 @@ rule:
 
         # For now, just verify the fixture structure is sound
         self.assertGreater(len(native_handles), 0, "native arm should have at least one match")
-
 
 class IntegrationWithGateTest(unittest.TestCase):
     """Integration: pipe stage0_oracle_compare output through check_no_client_identifiers."""

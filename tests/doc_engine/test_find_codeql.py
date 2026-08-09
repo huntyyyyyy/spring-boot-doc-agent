@@ -7,6 +7,9 @@ from unittest import mock
 
 from doc_engine.scanning.support._codeql_runner import CodeQLNotFoundError, find_codeql
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 class FindCodeqlTest(unittest.TestCase):
     def test_uses_doc_engine_codeql_env(self):
@@ -32,7 +35,6 @@ class FindCodeqlTest(unittest.TestCase):
                     find_codeql()
         self.assertNotIn("Users\\16145", str(ctx.exception))
         self.assertIn("DOC_ENGINE_CODEQL", str(ctx.exception))
-
 
 if __name__ == "__main__":
     unittest.main()

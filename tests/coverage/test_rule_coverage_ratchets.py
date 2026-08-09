@@ -11,6 +11,10 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 import rule_coverage as rc
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestRatchet(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
@@ -82,7 +86,6 @@ class TestRatchet(unittest.TestCase):
         self.assertTrue(problems)
         self.assertTrue(any("json" in p.lower() or "parse" in p.lower()
                             for p in problems), problems)
-
 
 class TestExitCodes(unittest.TestCase):
     """Assert the exit code, not an internal list -- the exit code is what CI

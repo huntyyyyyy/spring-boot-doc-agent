@@ -264,6 +264,34 @@ review concerns ([2310.03673](https://arxiv.org/abs/2310.03673),
 
 **Size remediation.** Prefer files at or under **225 LOC** and functions that fit one screen (~20–50 statements). Soft advisories print above 150 LOC / 20 statements; hard ceilings are file LOC **>225** and function statements >50 under `src/doc_engine`, `src/stf`, **and `tests/`** (`doc-engine size-ratchet`, baseline `scripts/ratchets/size_baseline.json` — never raise offender maps). The same cohesion bar applies to tests: split along fixtures vs cases, domain suites, and concept-named `tests/support/…` packages — not `part2` chops or a `tests/utils` grab-bag. Remediations must be intentional design (SRP / DDD boundaries, ports-adapters, registries) — not mechanical line chops or grab-bag `utils`/`helpers` modules. Separately, `scripts/ci/check_code_quality.py` hard-fails when an existing function's statement count grows or a new function exceeds 50 statements (complexity/depth there remain advisory).
 
+### Test-suite domains (E-TEST / policy T-A)
+
+Every `tests/**/test_*.py` declares exactly one module-level marker:
+
+```python
+import pytest
+pytestmark = pytest.mark.domain_stage0
+```
+
+Catalog SoT: `doc_engine.ci.test_domain_catalog` (Spec
+`docs/design/test-suite-parallel-domains-design-2026-08-08.md`). Ownership
+classifier: `doc_engine.ci.test_domain_rules`. Ratchet:
+
+```bash
+python -m doc_engine.ci.test_domain_markers_check
+```
+
+**Parallel-safe** domains may run as separate ABI CI jobs. **Serial** buckets
+(`domain_integration`, `domain_unclassified`) and **opt-in** (`domain_live_optin`)
+stay on the serial ABI job. The **3.11 oracle** coverage cell remains a single
+`pytest tests/` writer of `coverage.xml` — never shard+combine for the floor.
+Do **not** enable suite-wide pytest-xdist until E-TEST2 spikes say otherwise.
+
+Classification debt mirrors coverage gap-average: floor **98.7**. Modules still
+on `domain_unclassified` are the debt inventory; once reclassified to a named
+BC they **leave that inventory** and are not part of the debt set. Reclassify
+by extending the rule tuple (OCP), not by editing CI expressions by hand.
+
 ### Quality gates (all OS)
 
 One portable entry point — same on Mac, Windows, and Linux (and in CI):

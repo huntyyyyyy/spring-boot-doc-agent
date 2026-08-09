@@ -24,11 +24,12 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_find_codeql_rejects_missing_env_path(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("DOC_ENGINE_CODEQL", str(Path("/no/such/codeql-binary")))
     with pytest.raises(runner.CodeQLNotFoundError, match="not an existing file"):
         runner.find_codeql()
-
 
 def test_resolve_codeql_exe_rejects_directory(tmp_path: Path) -> None:
     d = tmp_path / "not-a-file"
@@ -36,11 +37,9 @@ def test_resolve_codeql_exe_rejects_directory(tmp_path: Path) -> None:
     with pytest.raises(runner.CodeQLError, match="not a file"):
         runner._resolve_codeql_exe(d)
 
-
 def test_reject_unsafe_option_empty() -> None:
     with pytest.raises(runner.CodeQLError, match="non-empty"):
         runner._reject_unsafe_option("")
-
 
 def test_invoke_codeql_timeout_wraps(tmp_path: Path, monkeypatch) -> None:
     fake = tmp_path / "codeql"
@@ -52,7 +51,6 @@ def test_invoke_codeql_timeout_wraps(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr(cli_mod.subprocess, "run", _raise)
     with pytest.raises(runner.CodeQLError, match="timed out"):
         runner._invoke_codeql(fake, ("--version",), timeout=1)
-
 
 def test_codeql_version_nonzero_and_success(tmp_path: Path, monkeypatch) -> None:
     fake = tmp_path / "codeql"
@@ -75,10 +73,8 @@ def test_codeql_version_nonzero_and_success(tmp_path: Path, monkeypatch) -> None
     )
     assert runner.codeql_version(fake) == "2.20.0"
 
-
 def test_version_token_no_digit_after_release() -> None:
     assert runner._version_token_from_line("release only words") is None
-
 
 def test_cache_base_dir_xdg_and_fallback(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
@@ -87,7 +83,6 @@ def test_cache_base_dir_xdg_and_fallback(monkeypatch: pytest.MonkeyPatch, tmp_pa
     monkeypatch.setattr(cache_mod.sys, "platform", "linux")
     monkeypatch.setattr(cache_mod.Path, "home", classmethod(lambda cls: tmp_path / "home"))
     assert runner._cache_base_dir() == tmp_path / "home" / ".cache"
-
 
 def test_hash_one_walk_file_skips_outside_and_oserror(
     tmp_path: Path, monkeypatch
@@ -110,7 +105,6 @@ def test_hash_one_walk_file_skips_outside_and_oserror(
         h, repo, str(repo.resolve()), inside, lambda *_: True
     )
 
-
 def test_cache_metadata_and_validity(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
     repo = tmp_path / "repo"
@@ -130,7 +124,6 @@ def test_cache_metadata_and_validity(tmp_path: Path, monkeypatch) -> None:
     bad = db / "spring_signal_scan_cache.json"
     bad.write_text("{not-json", encoding="utf-8")
     assert runner._cache_metadata(db) is None
-
 
 def test_results_cache_roundtrip_and_corrupt(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
@@ -159,7 +152,6 @@ def test_results_cache_roundtrip_and_corrupt(tmp_path: Path, monkeypatch) -> Non
         is None
     )
 
-
 def test_create_database_and_install_pack_failures(tmp_path: Path, monkeypatch) -> None:
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
@@ -175,7 +167,6 @@ def test_create_database_and_install_pack_failures(tmp_path: Path, monkeypatch) 
     with pytest.raises(runner.CodeQLError, match="pack install failed"):
         runner.install_pack(fake, tmp_path / "pack")
 
-
 def test_run_query_and_decode_failures(tmp_path: Path, monkeypatch) -> None:
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
@@ -188,7 +179,6 @@ def test_run_query_and_decode_failures(tmp_path: Path, monkeypatch) -> None:
         runner.run_query(fake, tmp_path / "db", tmp_path / "q.ql", tmp_path / "out.bqrs")
     with pytest.raises(runner.CodeQLError, match="bqrs decode failed"):
         runner.decode_bqrs(fake, tmp_path / "out.bqrs")
-
 
 def test_decode_bqrs_success(tmp_path: Path, monkeypatch) -> None:
     fake = tmp_path / "codeql"
@@ -206,7 +196,6 @@ def test_decode_bqrs_success(tmp_path: Path, monkeypatch) -> None:
     )
     rows = runner.decode_bqrs(fake, tmp_path / "out.bqrs")
     assert rows == [{"file": "a.java", "col_1": "x"}]
-
 
 def test_run_all_queries_empty_and_merge(tmp_path: Path, monkeypatch) -> None:
     pack = tmp_path / "pack"

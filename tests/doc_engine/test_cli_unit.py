@@ -11,6 +11,7 @@ import pytest
 
 from doc_engine import cli
 
+pytestmark = pytest.mark.domain_pipeline
 
 def _capture_main(monkeypatch: pytest.MonkeyPatch, target: str) -> list[list[str]]:
     """Patch ``target`` main() and return the list of argv lists it receives."""
@@ -23,14 +24,12 @@ def _capture_main(monkeypatch: pytest.MonkeyPatch, target: str) -> list[list[str
     monkeypatch.setattr(target, fake_main)
     return captured
 
-
 def test_without_argparse_separator() -> None:
     assert cli._without_argparse_separator([]) == []
     assert cli._without_argparse_separator(["--", "a", "b"]) == ["a", "b"]
     assert cli._without_argparse_separator(["scan", "repo"]) == ["scan", "repo"]
     # Only a leading ``--`` is stripped; mid-argv separators are left alone.
     assert cli._without_argparse_separator(["query", "--", "x"]) == ["query", "--", "x"]
-
 
 def test_scan_config_overrides(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
@@ -49,7 +48,6 @@ def test_scan_config_overrides(tmp_path: Path) -> None:
     assert config.respect_gitignore is True
     assert config.build_command == "./gradlew"
     assert config.db_path == "/tmp/db"
-
 
 def test_cmd_docs_and_site(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     signals = tmp_path / "signals.json"
@@ -79,7 +77,6 @@ def test_cmd_docs_and_site(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> N
         docs=str(docs_in), out_dir=str(site_dir), site_name="demo",
     )) == 0
 
-
 def test_cmd_scan_codeql_error(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     from doc_engine.scanning.spring import CodeQLScannerError
 
@@ -98,7 +95,6 @@ def test_cmd_scan_codeql_error(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) 
         allow_codeql_build=False,
     ))
     assert rc == 1
-
 
 def test_cmd_pipeline_gates_assembles_argv(monkeypatch: pytest.MonkeyPatch) -> None:
     captured = _capture_main(monkeypatch, "doc_engine.pipeline.live_gates.main")
@@ -119,14 +115,12 @@ def test_cmd_pipeline_gates_assembles_argv(monkeypatch: pytest.MonkeyPatch) -> N
     assert "--strict-citations" in joined
     assert "--no-write-check" in joined
 
-
 def test_cmd_certification_verify_allow_mock(monkeypatch: pytest.MonkeyPatch) -> None:
     captured = _capture_main(monkeypatch, "doc_engine.tools.certification.main")
     assert cli.cmd_certification_verify(SimpleNamespace(
         path="/c.json", allow_mock=True,
     )) == 0
     assert "--allow-mock" in captured[0]
-
 
 def test_cmd_query_strips_separator(monkeypatch: pytest.MonkeyPatch) -> None:
     captured = _capture_main(monkeypatch, "doc_engine.tools.query_artifacts.main")

@@ -14,11 +14,13 @@ from doc_engine.config.repo_trust import (
 from doc_engine.config.settings import Settings
 from doc_engine.pipeline.compliance import ComplianceProfile, resolve_compliance_profile
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 def test_trust_from_flag():
     assert trust_from_flag(False) is RepoConfigTrust.UNTRUSTED
     assert trust_from_flag(True) is RepoConfigTrust.TRUSTED
-
 
 def test_untrusted_strips_build_command_db_path_and_scanners():
     hostile = Settings(
@@ -36,7 +38,6 @@ def test_untrusted_strips_build_command_db_path_and_scanners():
     assert cleaned.sql_dialect == "postgres"
     assert cleaned.compliance_profile == ComplianceProfile.CERTIFIED
 
-
 def test_trusted_preserves_hostile_keys():
     hostile = Settings(
         scanners=["filesystem", "codeql"],
@@ -47,7 +48,6 @@ def test_trusted_preserves_hostile_keys():
     assert kept is hostile
     assert kept.build_command == "gradlew clean compileJava"
     assert kept.compliance_profile == ComplianceProfile.SCAN_ONLY
-
 
 def test_untrusted_yaml_cannot_weaken_profile_without_cli():
     cleaned = sanitize_repo_settings(
@@ -60,7 +60,6 @@ def test_untrusted_yaml_cannot_weaken_profile_without_cli():
     )
     assert profile == ComplianceProfile.CERTIFIED
 
-
 def test_cli_profile_override_still_wins():
     cleaned = sanitize_repo_settings(
         Settings(compliance_profile=ComplianceProfile.CERTIFIED),
@@ -72,7 +71,6 @@ def test_cli_profile_override_still_wins():
     )
     assert profile == ComplianceProfile.SCAN_ONLY
 
-
 def test_operator_build_command_override_after_sanitize():
     cleaned = sanitize_repo_settings(
         Settings(build_command="bash -c echo no"),
@@ -81,13 +79,11 @@ def test_operator_build_command_override_after_sanitize():
     merged = merge_config(cleaned or Settings(), {"build_command": "gradlew clean compileJava"})
     assert merged.build_command == "gradlew clean compileJava"
 
-
 def test_untrusted_clears_extra():
     hostile = Settings(extra={"hooks": "curl evil", "scanners_override": ["codeql"]})
     cleaned = sanitize_repo_settings(hostile, RepoConfigTrust.UNTRUSTED)
     assert cleaned is not None
     assert cleaned.extra == {}
-
 
 def test_codeql_refused_without_allow_flag():
     assert codeql_build_policy_from_flag(False) is CodeQLBuildPolicy.REFUSED
@@ -97,13 +93,11 @@ def test_codeql_refused_without_allow_flag():
     except PermissionError as exc:
         assert "--allow-codeql-build" in str(exc)
 
-
 def test_codeql_allowed_with_flag():
     require_codeql_build_allowed(
         ["filesystem", "codeql"],
         codeql_build_policy_from_flag(True),
     )
-
 
 def test_codeql_gate_noop_without_codeql_scanner():
     require_codeql_build_allowed(

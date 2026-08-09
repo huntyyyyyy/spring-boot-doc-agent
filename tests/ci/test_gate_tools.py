@@ -11,6 +11,9 @@ from unittest import mock
 
 from doc_engine.ci import gate_tools
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class GateToolsTest(unittest.TestCase):
     def test_python_module_command_uses_sys_executable(self) -> None:
@@ -130,7 +133,6 @@ class GateToolsTest(unittest.TestCase):
                     gate_tools.checked_path_under_repo(inside),
                     inside.resolve(),
                 )
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

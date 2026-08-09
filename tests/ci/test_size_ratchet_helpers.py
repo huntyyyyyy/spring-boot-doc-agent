@@ -11,6 +11,7 @@ import pytest
 
 from doc_engine.ci import size_ratchet as sr
 
+pytestmark = pytest.mark.domain_ci_meta
 
 def test_line_count_and_statement_count() -> None:
     assert sr._line_count("") == 0
@@ -36,7 +37,6 @@ def test_line_count_and_statement_count() -> None:
     assert "mod.py::f" in out
     assert "mod.py::C.m" in out
 
-
 def test_hard_soft_and_compare_offenders() -> None:
     files = {"a.py": sr.FILE_LOC_HARD + 1, "b.py": sr.FILE_LOC_SOFT + 1, "c.py": 10}
     assert "a.py" in sr.hard_file_offenders(files)
@@ -56,7 +56,6 @@ def test_hard_soft_and_compare_offenders() -> None:
     issues = sr.compare_offenders("file", {"a.py": 10}, {"a.py": 11, "n.py": 12})
     assert any("grew" in i for i in issues)
     assert any("count rose" in i for i in issues)
-
 
 def test_baseline_roundtrip_and_compare(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sr, "REPO_ROOT", tmp_path)
@@ -80,7 +79,6 @@ def test_baseline_roundtrip_and_compare(tmp_path: Path, monkeypatch: pytest.Monk
     assert issues == []
     grown = sr.compare(loaded, {"big.py": 1100}, {"big.py::f": 60})
     assert grown
-
 
 def test_main_update_missing_and_pass(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]

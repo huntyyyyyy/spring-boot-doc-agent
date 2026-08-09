@@ -6,12 +6,12 @@ import pytest
 
 from doc_engine.core.jsonio import dump_json, load_json
 
+pytestmark = pytest.mark.domain_schemas
 
 def test_round_trip_dict(tmp_path: Path) -> None:
     path = tmp_path / "payload.json"
     dump_json(path, {"a": 1, "nested": {"b": True}})
     assert load_json(path) == {"a": 1, "nested": {"b": True}}
-
 
 def test_dump_json_respects_indent(tmp_path: Path) -> None:
     path = tmp_path / "indented.json"
@@ -19,11 +19,9 @@ def test_dump_json_respects_indent(tmp_path: Path) -> None:
     text = path.read_text(encoding="utf-8")
     assert '{\n "k": "v"\n}' == text
 
-
 def test_load_json_missing_raises(tmp_path: Path) -> None:
     with pytest.raises(FileNotFoundError):
         load_json(tmp_path / "missing.json")
-
 
 def test_load_json_invalid_raises(tmp_path: Path) -> None:
     path = tmp_path / "bad.json"

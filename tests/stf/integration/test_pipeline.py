@@ -13,6 +13,7 @@ from stf.runners.store import SpecStore, TasksStore, write_change_pack
 from stf.schemas.tasks import LedgerState
 from stf.__main__ import main as stf_main
 
+pytestmark = pytest.mark.domain_stf
 
 def test_pr94_review_ingests_into_spec_seed_and_change_pack(tmp_path: Path) -> None:
     review = Path("docs/reviews/9bc7851_PR_94.md")
@@ -30,7 +31,6 @@ def test_pr94_review_ingests_into_spec_seed_and_change_pack(tmp_path: Path) -> N
     )
     assert (change / "delta.json").is_file()
     assert store.load_spec().input_kind == "review_remediation"
-
 
 def test_cli_seed_validate_plan_gate_and_sod(tmp_path: Path) -> None:
     review = Path("docs/reviews/9bc7851_PR_94.md")
@@ -61,7 +61,6 @@ def test_cli_seed_validate_plan_gate_and_sod(tmp_path: Path) -> None:
     token = store.issue_validation_token()
     store.mark_done(validation_token=token)
     assert store.load_tasks().ledger == LedgerState.DONE
-
 
 def test_handoff_checklist_lists_non_t0_tasks(tmp_path: Path) -> None:
     from tests.stf.conftest import write_spec_and_tasks_into

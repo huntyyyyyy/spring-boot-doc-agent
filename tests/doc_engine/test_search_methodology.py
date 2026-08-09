@@ -13,6 +13,9 @@ from pathlib import Path
 
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 class SearchMethodologyBenchmarkTest(unittest.TestCase):
     """Fixture-backed cases that justify the no-grep policy for agents."""
@@ -61,7 +64,6 @@ class SearchMethodologyBenchmarkTest(unittest.TestCase):
                 "tool_input": {"command": "ast-grep run -l java -p '@Entity' ."},
             })["deny"],
         )
-
 
 if __name__ == "__main__":
     unittest.main()

@@ -20,6 +20,10 @@ from doc_engine.scanning.support._codeql_runner import (
 )
 from tests.conftest import FIXTURE_DIR
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class CodeQLScanContextWiringTest(unittest.TestCase):
     def test_repo_content_hash_uses_context_signatures(self):
         repo = Path(FIXTURE_DIR)

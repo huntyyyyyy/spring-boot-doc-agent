@@ -10,6 +10,10 @@ import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import citation_coverage as cc
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 class TestWeakAnchors(unittest.TestCase):
 
     SRC = """package com.example;
@@ -84,7 +88,6 @@ class OwnerController {
                 "[Evidenced — src/OwnerController.java:1].\n")
         self.assertEqual(len(cc.find_weak_anchors(text, self.repo, window=2)), 1)
         self.assertEqual(cc.find_weak_anchors(text, self.repo, window=20), [])
-
 
 class TestCheckDocsAndExit(unittest.TestCase):
 

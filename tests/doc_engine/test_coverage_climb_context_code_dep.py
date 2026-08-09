@@ -11,6 +11,7 @@ import pytest
 from doc_engine.pipeline.local_runner_phases import context as ctx_mod
 from doc_engine.scanning.gap_probe import code_dep as dep
 
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_ensure_citation_pool_and_todos(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     repo = tmp_path / "repo"
@@ -40,7 +41,6 @@ def test_ensure_citation_pool_and_todos(tmp_path: Path, monkeypatch: pytest.Monk
     ctx_mod._ensure_todos(ctx)
     assert ctx.todos == [{"todo": 1}]
     ctx_mod._ensure_todos(ctx)  # early return
-
 
 def test_handlers_and_partition(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     calls: list[str] = []
@@ -98,7 +98,6 @@ def test_handlers_and_partition(monkeypatch: pytest.MonkeyPatch, tmp_path: Path)
     state.skip_signal_scan = False
     ctx_mod._record_reused_signal_scan(state)
 
-
 def test_select_specs_error_and_mock_executor(monkeypatch: pytest.MonkeyPatch) -> None:
     state = SimpleNamespace(
         profile="certified",
@@ -113,7 +112,6 @@ def test_select_specs_error_and_mock_executor(monkeypatch: pytest.MonkeyPatch) -
     assert ctx_mod._select_specs_for_state(state) == 2
     ex = ctx_mod._build_mock_executor(lambda *a, **k: None)
     assert "file_summarize" in ex._handlers
-
 
 def test_phase_build_context_wires_state(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     from doc_engine.pipeline.context import StageKind
@@ -140,7 +138,6 @@ def test_phase_build_context_wires_state(monkeypatch: pytest.MonkeyPatch, tmp_pa
     assert ctx_mod.phase_build_context(state) is None
     assert state.selected_specs == specs
     assert state.deterministic_specs == specs
-
 
 def test_code_dep_family_coverage_and_measure() -> None:
     assert dep._row_text({"match": "a", "rule_id": "r"}, ("match", "rule_id")) == "a r"

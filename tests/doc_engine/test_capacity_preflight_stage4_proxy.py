@@ -12,6 +12,11 @@ from doc_engine.tools import (
     partition_repo,
     spring_signal_scan,
 )
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 from tests.support.capacity_preflight.fixtures import (
     _edges_data,

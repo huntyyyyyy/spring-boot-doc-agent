@@ -14,6 +14,10 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestNoShellExecution(TreeCase):
     """The 2f82971 regression class: markdown must never name anything but a
     key in a dict this file defines."""
@@ -63,7 +67,6 @@ class TestNoShellExecution(TreeCase):
             for element in argv.elts:
                 self.assertIsInstance(element, ast.Constant,
                                       "every argv element must be a literal")
-
 
 class TestReferences(TreeCase):
     """Check B."""
@@ -129,7 +132,6 @@ class TestReferences(TreeCase):
                    "- ~~`scripts/gone.py`~~ — deleted.\n"
                    "- `scripts/also_missing.py` is current.\n")
         self.assertEqual(self.run_check(), 1)
-
 
 class TestVerifyPredicates(TreeCase):
     """Check C."""

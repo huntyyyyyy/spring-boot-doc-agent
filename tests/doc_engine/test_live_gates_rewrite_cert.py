@@ -20,6 +20,10 @@ from doc_engine.tools.certification import verify_certification
 from tests.doc_engine.cert_helpers import ok_det_stages_for, ok_stages_for
 from tests.support.live_gates.fixtures import _live_ok_gates, _plant_weak_docs, _mock_non_citation_gates
 
+import pytest
+
+pytestmark = pytest.mark.domain_compliance
+
 def test_live_gates_rewrites_cert_with_executor_live():
     """Stale mock certified:true must not survive a failing live gates pass."""
     with tempfile.TemporaryDirectory() as tmp:
@@ -71,7 +75,6 @@ def test_live_gates_rewrites_cert_with_executor_live():
         assert not ok
         assert "not certified" in msg
 
-
 def test_live_gates_passing_writes_live_certified(monkeypatch):
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp)
@@ -121,7 +124,6 @@ def test_live_gates_passing_writes_live_certified(monkeypatch):
         assert all("executor" in s for s in data["stages"])
         ok, _ = verify_certification(out / "certification.json")
         assert ok
-
 
 def test_live_gates_strips_mock_generative_and_survives_skipped_poison(monkeypatch):
     """Prior mock generative + skipped rows must not poison a live rewrite."""

@@ -16,6 +16,10 @@ from tests.support.stage0_oracle.fixtures import (
     skip_if_no_astgrep,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class AssignCauseTest(unittest.TestCase):
     """Unit tests for the cause-assignment logic (no ast-grep needed)."""
 
@@ -63,7 +67,6 @@ class AssignCauseTest(unittest.TestCase):
         # For now, we test that the current implementation doesn't violate.
         result = oracle.assign_cause(row, "native")
         self.assertEqual(result, "INTERMEDIATE_BASE_INHERITANCE")
-
 
 class ValidateRowsTest(unittest.TestCase):
     """Unit tests for miss-row schema validation."""
@@ -119,7 +122,6 @@ class ValidateRowsTest(unittest.TestCase):
         # Missing cause triggers both "missing field" and "invalid cause" checks
         self.assertGreaterEqual(len(problems), 1)
         self.assertTrue(any("row 1" in p for p in problems))
-
 
 class ContractViolationTest(unittest.TestCase):
     """Tests for ContractViolation error paths (no ast-grep needed)."""

@@ -16,6 +16,8 @@ from doc_engine.tools import pipeline_validators as pv
 from doc_engine.tools import query_artifacts as qa
 from doc_engine.tools import validate_artifacts as va
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_pipeline_validators_gap_review_and_main(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -58,7 +60,6 @@ def test_pipeline_validators_gap_review_and_main(
     (tmp_path / "summaries.json").write_text(json.dumps([{"file": "x"}]), encoding="utf-8")
     assert pv.main([str(tmp_path)]) == 1
 
-
 def test_secrets_main_and_skip_paths(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -75,7 +76,6 @@ def test_secrets_main_and_skip_paths(
     assert secrets.main() == 1
     monkeypatch.setattr("builtins.open", MagicMock(side_effect=OSError("denied")))
     assert secrets.check([str(clean)]) == {}
-
 
 def test_check_pipeline_output_main_and_ignored(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
@@ -106,7 +106,6 @@ def test_check_pipeline_output_main_and_ignored(
     monkeypatch.setattr("sys.argv", ["check_pipeline_output", str(docs), "--no-write-check"])
     monkeypatch.setattr(cpo, "check_all", lambda *a, **k: [])
     assert cpo.main() == 0
-
 
 def test_validate_artifacts_require_and_all(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]

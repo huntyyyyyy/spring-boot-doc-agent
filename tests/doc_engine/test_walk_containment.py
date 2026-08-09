@@ -8,6 +8,7 @@ import pytest
 from doc_engine.core.context import ScanContext
 from doc_engine.core.walk import is_path_inside_root
 
+pytestmark = pytest.mark.domain_stage0
 
 def test_is_path_inside_root_accepts_nested_file(tmp_path: Path):
     nested = tmp_path / "src" / "A.java"
@@ -15,14 +16,12 @@ def test_is_path_inside_root_accepts_nested_file(tmp_path: Path):
     nested.write_text("class A {}", encoding="utf-8")
     assert is_path_inside_root(str(nested), str(tmp_path)) is True
 
-
 def test_is_path_inside_root_rejects_sibling(tmp_path: Path):
     outside = tmp_path / "secret.env"
     outside.write_text("AWS_SECRET=1\n", encoding="utf-8")
     repo = tmp_path / "repo"
     repo.mkdir()
     assert is_path_inside_root(str(outside), str(repo)) is False
-
 
 @pytest.mark.skipif(not hasattr(os, "symlink"), reason="symlinks unavailable")
 def test_scan_context_skips_escaping_file_symlink(tmp_path: Path):
@@ -41,7 +40,6 @@ def test_scan_context_skips_escaping_file_symlink(tmp_path: Path):
     assert "ok.txt" in ctx.file_signatures
     assert "leaked.env" not in ctx.file_signatures
     assert all(e.rel_path != "leaked.env" for e in ctx.non_java_files)
-
 
 @pytest.mark.skipif(not hasattr(os, "symlink"), reason="symlinks unavailable")
 def test_partition_dfs_skips_escaping_file_symlink(tmp_path: Path):

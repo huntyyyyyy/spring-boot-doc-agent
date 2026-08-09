@@ -12,6 +12,7 @@ from doc_engine.scanning._scanner_codeql import CodeQLBackend
 from doc_engine.scanning.support import _codeql_runner as runner
 from doc_engine.scanning.support import _codeql_cache as cache_mod
 
+pytestmark = pytest.mark.domain_stage0
 
 def test_version_token_from_release_line():
     assert runner._version_token_from_line(
@@ -19,16 +20,13 @@ def test_version_token_from_release_line():
     ) == "2.26.0"
     assert runner._version_token_from_line("no version here") is None
 
-
 def test_parse_codeql_version_stdout_first_release_wins():
     stdout = "banner\nCodeQL command-line toolchain release 2.15.1.\ntrailer\n"
     assert runner._parse_codeql_version_stdout(stdout) == "2.15.1"
 
-
 def test_parse_codeql_version_stdout_raises_when_unparseable():
     with pytest.raises(runner.CodeQLError, match="could not parse"):
         runner._parse_codeql_version_stdout("CodeQL is ready\n")
-
 
 def test_repo_content_hash_walk_includes_java_and_build_files(tmp_path: Path):
     (tmp_path / "src").mkdir()
@@ -44,7 +42,6 @@ def test_repo_content_hash_walk_includes_java_and_build_files(tmp_path: Path):
     (tmp_path / "readme.md").write_text("changed", encoding="utf-8")
     assert runner._repo_content_hash(tmp_path) == digest
 
-
 def test_rows_from_bqrs_json_uses_column_names_and_synthetics():
     raw = {
         "#select": {
@@ -58,11 +55,9 @@ def test_rows_from_bqrs_json_uses_column_names_and_synthetics():
         {"file": "b.java", "col_1": "y"},
     ]
 
-
 def test_validated_build_command_wraps_build_command_error():
     with pytest.raises(runner.CodeQLError):
         runner._validated_build_command("")
-
 
 def test_evidence_entry_raw_query_fields():
     entry = CodeQLBackend._evidence_entry_from_codeql_row(
@@ -74,7 +69,6 @@ def test_evidence_entry_raw_query_fields():
     assert entry["query_kind"] == "native"
     assert entry["query"] == "SELECT 1"
     assert entry["file"] == "src/Q.java"
-
 
 def test_evidence_entry_repository_falls_back_to_entity_name(monkeypatch):
     monkeypatch.setattr(
@@ -89,7 +83,6 @@ def test_evidence_entry_repository_falls_back_to_entity_name(monkeypatch):
     )
     assert entry["repository"] == "FooRepo"
     assert entry["entity"] == "Foo"
-
 
 def test_entity_map_entry_inferred_and_explicit_table():
     inferred = CodeQLBackend._entity_map_entry(
@@ -119,7 +112,6 @@ def test_entity_map_entry_inferred_and_explicit_table():
     assert explicit_entry["table"] == "bars"
     assert explicit_entry["table_name_source"] == "explicit"
 
-
 def test_entity_map_entry_rejects_empty_inferred_class_name():
     assert (
         CodeQLBackend._entity_map_entry(
@@ -133,7 +125,6 @@ def test_entity_map_entry_rejects_empty_inferred_class_name():
         is None
     )
 
-
 def test_acked_java_paths_prefer_scan_context():
     ctx = SimpleNamespace(
         java_files=[
@@ -146,7 +137,6 @@ def test_acked_java_paths_prefer_scan_context():
         "b/B.java",
     ]
     assert CodeQLBackend._acked_java_paths(None, ["z/Z.java"]) == ["z/Z.java"]
-
 
 def test_covering_receipt_complete_when_acked_matches(monkeypatch):
     backend = CodeQLBackend()
@@ -171,7 +161,6 @@ def test_covering_receipt_complete_when_acked_matches(monkeypatch):
     assert receipt["status"] == "complete"
     assert receipt["acked_subset_root"] == receipt["expected_subset_root"]
 
-
 def test_covering_receipt_fails_closed_on_mismatch(monkeypatch):
     backend = CodeQLBackend()
     monkeypatch.setattr(backend, "version_hash", lambda: "abcd1234efgh5678")
@@ -193,7 +182,6 @@ def test_covering_receipt_fails_closed_on_mismatch(monkeypatch):
     )
     with pytest.raises(runner.CodeQLError, match="acked java subset"):
         backend._covering_receipt_for_scan(ctx)
-
 
 def test_load_cached_scan_rows_skips_without_version(monkeypatch):
     monkeypatch.setattr(cache_mod, "_load_results_cache", MagicMock(return_value=[{"file": "x"}]))

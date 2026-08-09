@@ -10,6 +10,9 @@ from pydantic import ValidationError
 from doc_engine.pipeline.artifacts import ARTIFACT_FILENAMES, ARTIFACT_MODELS
 from doc_engine.pipeline.validation import ArtifactValidationError, validate_artifact_file
 from doc_engine.tools import capacity_preflight
+
+pytestmark = pytest.mark.domain_schemas
+
 STAGE4_METRIC_KINDS = frozenset({
     "partial_proxy_pre_stage4",
     "measured_stage4_inputs",
@@ -42,7 +45,6 @@ def test_round_trip_preserves_required_identity() -> None:
     assert dumped["stage4_metric_kind"] == "partial_proxy_pre_stage4"
     assert dumped["stage4_return_payloads_estimated"] is False
 
-
 def test_compute_preflight_emits_schema_version() -> None:
     groups = {
         "repo_path": "/fake/repo",
@@ -67,7 +69,6 @@ def test_compute_preflight_emits_schema_version() -> None:
         "schema_version", "num_groups", "stage_fanout", "edge_join_stats",
     }
 
-
 def test_compute_stage4_calibration_emits_schema_version() -> None:
     report = capacity_preflight.compute_stage4_calibration(
         "/fake/repo",
@@ -80,14 +81,12 @@ def test_compute_stage4_calibration_emits_schema_version() -> None:
     assert report["mode"] == "stage4_calibration"
     assert report["stage4_metric_kind"] == "measured_stage4_inputs"
 
-
 def test_capacity_preflight_report_registered() -> None:
     assert "capacity_preflight_report" in ARTIFACT_MODELS
     assert (
         ARTIFACT_FILENAMES["capacity_preflight_report"]
         == "capacity_preflight_report.json"
     )
-
 
 def test_validate_artifact_file_accepts_fixture(tmp_path: Path) -> None:
     path = tmp_path / "capacity_preflight_report.json"
@@ -100,7 +99,6 @@ def test_validate_artifact_file_accepts_fixture(tmp_path: Path) -> None:
         capacity_preflight.CAPACITY_PREFLIGHT_REPORT_SCHEMA_VERSION
     )
 
-
 def test_validate_artifact_file_rejects_bad_metric_kind(tmp_path: Path) -> None:
     report = characterization_stage0_report(with_schema_version=True)
     report["stage4_metric_kind"] = "bogus"
@@ -108,7 +106,6 @@ def test_validate_artifact_file_rejects_bad_metric_kind(tmp_path: Path) -> None:
     path.write_text(json.dumps(report), encoding="utf-8")
     with pytest.raises(ArtifactValidationError):
         validate_artifact_file("capacity_preflight_report", path)
-
 
 def test_exported_schema_file_committed() -> None:
     from tests.conftest import REPO_ROOT

@@ -27,6 +27,10 @@ from doc_engine.pipeline.stages import build_stage_specs
 from tests.conftest import FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from tests.doc_engine.cert_helpers import ok_stages_for
 
+import pytest
+
+pytestmark = pytest.mark.domain_compliance
+
 class ResolveProfileTest(unittest.TestCase):
     def test_default_is_certified(self):
         args = Namespace(compliance_profile=None, deterministic_only=False)
@@ -63,7 +67,6 @@ class ResolveProfileTest(unittest.TestCase):
             ComplianceProfile.DETERMINISTIC_ONLY,
         )
 
-
 class LoadConfigTest(unittest.TestCase):
     def test_yaml_round_trip_compliance_profile(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -81,7 +84,6 @@ class LoadConfigTest(unittest.TestCase):
                 json.dump({"compliance_profile": "not_a_profile"}, f)
             with self.assertRaises(ValidationError):
                 load_repo_config(tmp)
-
 
 class StagesForProfileTest(unittest.TestCase):
     def test_scan_only_stage_names(self):
@@ -126,7 +128,6 @@ class StagesForProfileTest(unittest.TestCase):
                 build_stage_specs(),
                 until_stage="not_a_real_stage",
             )
-
 
 class GatesRequiredForProfileTest(unittest.TestCase):
     def test_scan_only_gate_id(self):

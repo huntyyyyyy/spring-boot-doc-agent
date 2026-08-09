@@ -13,6 +13,11 @@ import unittest
 from unittest import mock
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import run_manifest, spring_signal_scan
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 RUN_MANIFEST_CMD = [sys.executable, "-m", "doc_engine.tools.run_manifest"]
 SCHEMA_PATH = os.path.join(SCRIPT_DIR, "schemas", "run_manifest.schema.json")
@@ -43,7 +48,6 @@ class FileSignaturesTest(unittest.TestCase):
     def test_no_signals_file_and_no_repo_path_returns_empty(self):
         self.assertEqual(run_manifest.load_file_signatures(), {})
 
-
 class EvidenceTagCountsTest(unittest.TestCase):
     def test_counts_remapped_and_only_known_files_read(self):
         with tempfile.TemporaryDirectory() as d:
@@ -61,7 +65,6 @@ class EvidenceTagCountsTest(unittest.TestCase):
 
         self.assertEqual(set(result.keys()), {"readme.md"})
         self.assertEqual(result["readme.md"], {"Evidenced": 1, "Confirmed": 1, "Unknown": 1, "PerExistingDocs": 0})
-
 
 class InterviewParseTest(unittest.TestCase):
     def test_well_formed_list(self):
@@ -98,7 +101,6 @@ class InterviewParseTest(unittest.TestCase):
             result = run_manifest.parse_interview_file(path)
         self.assertEqual(result["asked"], 1)
         self.assertEqual(result["answered"], 1)
-
 
 class CapacityPreflightTieInTest(unittest.TestCase):
     def test_all_six_real_keys_map_and_architect_sums(self):
@@ -145,7 +147,6 @@ class CapacityPreflightTieInTest(unittest.TestCase):
         self.assertEqual(result["predicted_fanout_by_manifest_stage"], {})
         self.assertIn("stage5_future_stage", stderr.getvalue())
         self.assertIn("no known mapping", stderr.getvalue())
-
 
 class CLIRoundTripTest(unittest.TestCase):
     """Drives the actual script as a subprocess, since this is the surface

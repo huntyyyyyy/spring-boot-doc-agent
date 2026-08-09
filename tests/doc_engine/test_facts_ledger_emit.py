@@ -13,6 +13,8 @@ from doc_engine.scanning.facts import (
 )
 from doc_engine.scanning.symbol import SymbolError, parse
 
+pytestmark = pytest.mark.domain_stage0
+
 def test_write_rejects_bare_maps_to_subject(tmp_path: Path) -> None:
     """Deviation: write_facts_jsonl accepts MAPS_TO with simple-name subject."""
     bad = [
@@ -29,7 +31,6 @@ def test_write_rejects_bare_maps_to_subject(tmp_path: Path) -> None:
     ]
     with pytest.raises(SymbolError, match="claim-symbol"):
         write_facts_jsonl(tmp_path / "facts.jsonl", bad)
-
 
 def test_jsonl_round_trip_preserves_symbol_subjects(tmp_path: Path) -> None:
     """Deviation: write/load corrupts MAPS_TO identity fields."""
@@ -66,7 +67,6 @@ def test_jsonl_round_trip_preserves_symbol_subjects(tmp_path: Path) -> None:
     assert loaded == facts
     maps = [f for f in loaded if f["predicate"] == "MAPS_TO"]
     assert parse(maps[0]["subject"]).fqcn == "com.example.A"
-
 
 def test_fact_emit_counts_by_predicate_and_contested_status() -> None:
     """Deviation: emit counters mis-count MAPS_TO vs evidence (identity strings irrelevant)."""

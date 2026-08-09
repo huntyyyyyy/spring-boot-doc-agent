@@ -14,10 +14,13 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestCleanTree(TreeCase):
     def test_clean_tree_passes(self) -> None:
         self.assertEqual(self.run_check(), 0)
-
 
 class TestDerivedBlocks(TreeCase):
     """Check A."""

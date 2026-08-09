@@ -21,6 +21,10 @@ from doc_engine.scanning.gap_probe import (
 )
 from doc_engine.scanning.recall_delta import write_recall_miss_facts
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class CoveringProofTest(unittest.TestCase):
     def test_inventory_root_stable(self):
         sigs = {"a.java": "aaa", "b.yml": "bbb"}
@@ -64,7 +68,6 @@ class CoveringProofTest(unittest.TestCase):
         )
         self.assertFalse(ok2)
         self.assertIn("acked_subset_root", why2)
-
 
 class CoveringWriteRoundTripTest(unittest.TestCase):
     def test_write_covering_proof(self):

@@ -18,6 +18,10 @@ from doc_engine.scanning.gap_probe import (
 from doc_engine.scanning.symbol import format_type
 from tests.support.gap_probe.report_factory import _report
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 def test_contested_map_raises_r_coll() -> None:
     """Deviation: contested collision not reflected in R_coll."""
     clean = {
@@ -63,7 +67,6 @@ def test_contested_map_raises_r_coll() -> None:
     assert r_bad == 1.0
     assert r_bad > r_clean
 
-
 def test_bare_maps_to_subject_lowers_r_sym() -> None:
     """Deviation: illegal MAPS_TO subjects still scored as perfect R_sym."""
     good_facts = [
@@ -97,7 +100,6 @@ def test_bare_maps_to_subject_lowers_r_sym() -> None:
     assert measure_r_sym(good_facts)["rate"] == 1.0
     assert measure_r_sym(bad_facts)["rate"] == 0.0
 
-
 def test_null_query_stratum_isolated() -> None:
     """Deviation: null-query rows mixed into native available rate (callable env)."""
     signals = {
@@ -128,7 +130,6 @@ def test_null_query_stratum_isolated() -> None:
     assert lin["strata"]["native"]["rate"] == 1.0
     assert lin["mean_rate"] == 1.0  # null_query excluded from callable mean
     assert lin["failure_taxonomy"].get("null_query") == 1
-
 
 def test_a1_callable_vs_pooled_moves_r_lin() -> None:
     """A1: scoring-env changes R_lin mean when null_query rows exist."""

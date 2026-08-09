@@ -20,6 +20,10 @@ from doc_engine.scanning.support._codeql_runner import (
 )
 from tests.conftest import FIXTURE_DIR
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class AstGrepScanContextChunkEquivTest(unittest.TestCase):
     def test_chunked_matches_equivalent_to_single_invocation(self):
             """Path-list vs artificially-budgeted batches: same concatenated matches."""

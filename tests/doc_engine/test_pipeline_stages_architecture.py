@@ -23,6 +23,11 @@ from doc_engine.tools.pipeline_validators import (
     validate_file_summarizer_entries,
     validate_gap_analyzer_questions,
 )
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 
 class ArchitectureTestingReviewShapeTest(unittest.TestCase):
@@ -92,7 +97,6 @@ class ArchitectureTestingReviewShapeTest(unittest.TestCase):
         problems = validate_architecture_testing_review_findings(findings, max_findings=60)
         self.assertTrue(any("sanity ceiling" in p[1] for p in problems))
 
-
 class Stage5ArchitectureTestingReviewGateTest(unittest.TestCase):
     """B4 — malformed architecture_testing_review.json must fail run_stage5_gate."""
 
@@ -135,7 +139,6 @@ class Stage5ArchitectureTestingReviewGateTest(unittest.TestCase):
             failures = run_stage5_gate(tmp, tmp)
             self.assertTrue(any("JSON array" in f for f in failures), failures)
 
-
 class ArchitectureTraceabilityTest(unittest.TestCase):
     def test_known_node_labels_trace(self):
         mermaid = (
@@ -157,7 +160,6 @@ class ArchitectureTraceabilityTest(unittest.TestCase):
         known_names = {"InvoiceController.java", "InvoiceRepository.java", "Invoice.java"}
         untraceable = find_untraceable_nodes(mermaid, known_names)
         self.assertEqual(untraceable, ["Billing Orchestration Service"])
-
 
 class RealArtifactsOptInTest(unittest.TestCase):
     """Opt-in pass against a real completed pipeline run's actual output,

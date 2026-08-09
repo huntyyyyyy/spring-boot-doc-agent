@@ -11,6 +11,9 @@ from doc_engine.query.rank import (
     truncate_nested_lists_that_exceed_cap,
 )
 
+import pytest
+
+pytestmark = pytest.mark.domain_stf
 
 def test_budget_shares_always_sum_exactly_to_requested_budget() -> None:
     for budget in range(0, 64):
@@ -19,7 +22,6 @@ def test_budget_shares_always_sum_exactly_to_requested_budget() -> None:
         assert primary >= 0
         assert finding >= 0
         assert risk >= 0
-
 
 def test_wave_partition_covers_every_task_exactly_once() -> None:
     graphs = [
@@ -34,7 +36,6 @@ def test_wave_partition_covers_every_task_exactly_once() -> None:
         for wave in waves:
             for task_id in wave:
                 assert all(dep not in wave for dep in graph[task_id])
-
 
 def test_trim_never_reports_tokens_used_below_serialized_emission_cost() -> None:
     items = [
@@ -59,14 +60,12 @@ def test_trim_never_reports_tokens_used_below_serialized_emission_cost() -> None
         if not truncated:
             assert tokens_used <= budget
 
-
 def test_nested_list_cap_truncates_guards_but_preserves_object_shape() -> None:
     payload = {"guards": [{"i": i} for i in range(120)], "ok": True}
     capped, did_truncate = truncate_nested_lists_that_exceed_cap(payload, max_list_length=50)
     assert did_truncate
     assert len(capped["guards"]) == 50
     assert capped["ok"] is True
-
 
 def test_emission_item_drops_bulky_payload_in_favor_of_row_ref() -> None:
     emission = replace_bulky_payload_with_row_ref_pointer(

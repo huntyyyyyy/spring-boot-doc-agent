@@ -14,6 +14,10 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestRealRepoKeys(unittest.TestCase):
     """Against the actual tree. These are the assertions that would notice
 the checker having quietly stopped looking at anything."""

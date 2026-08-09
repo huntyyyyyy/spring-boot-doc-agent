@@ -3,3 +3,8 @@
 See `test_metamorphic_formatting.py` and `test_metamorphic_churn.py`,
 plus harness helpers under `tests/support/metamorphic/`.
 """
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+

@@ -16,6 +16,7 @@ from doc_engine.pipeline.local_runner_phases import generative as gen_mod
 from doc_engine.pipeline.local_runner_phases.state import LocalRunState
 from doc_engine.tools import build_docs_site as site_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_load_jsonl_skips_blank_and_rejects_bad(tmp_path: Path) -> None:
     path = tmp_path / "facts.jsonl"
@@ -23,18 +24,15 @@ def test_load_jsonl_skips_blank_and_rejects_bad(tmp_path: Path) -> None:
     with pytest.raises(val_mod.ArtifactValidationError, match="invalid JSON"):
         val_mod.load_jsonl_objects(path)
 
-
 def test_validate_artifact_data_unknown_and_bad() -> None:
     with pytest.raises(KeyError, match="unknown artifact"):
         val_mod.validate_artifact_data("nope", {})
     with pytest.raises(val_mod.ArtifactValidationError):
         val_mod.validate_artifact_data("spring_signals", {"not": "valid"})
 
-
 def test_missing_required_unknown_key(tmp_path: Path) -> None:
     with pytest.raises(KeyError, match="unknown artifact"):
         val_mod.missing_required_artifacts(tmp_path, ["not_a_real_artifact"])
-
 
 def test_gap_report_helpers(tmp_path: Path) -> None:
     bad = tmp_path / "gap.json"
@@ -55,14 +53,12 @@ def test_gap_report_helpers(tmp_path: Path) -> None:
     with pytest.raises(val_mod.ArtifactValidationError, match="uncertainty"):
         val_mod._require_gap_uncertainty(path, {})
 
-
 def test_require_gap_probe_missing_report(tmp_path: Path) -> None:
     from doc_engine.pipeline.artifacts import ARTIFACT_FILENAMES
 
     (tmp_path / ARTIFACT_FILENAMES["spring_signals"]).write_text("{}", encoding="utf-8")
     with pytest.raises(val_mod.ArtifactValidationError, match="gap probe"):
         val_mod.require_gap_probe_artifact(tmp_path)
-
 
 def test_build_docs_site_helpers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     assert site_mod._find_mkdocs_yml().name == "mkdocs.yml"
@@ -98,7 +94,6 @@ def test_build_docs_site_helpers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     with pytest.raises(RuntimeError, match="mkdocs build failed"):
         site_mod._run_mkdocs(work, tmp_path / "out")
 
-
 def test_build_docs_site_main_missing_docs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -108,7 +103,6 @@ def test_build_docs_site_main_missing_docs(
     )
     assert site_mod.main() == 1
     assert "docs-dir not found" in capsys.readouterr().err
-
 
 def test_note_existing_readme_and_generative_abort(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -160,14 +154,12 @@ def test_note_existing_readme_and_generative_abort(
     finally:
         run_log.close()
 
-
 def test_fail_missing_live_gates_records_failures() -> None:
     gates: list[GateRecord] = []
     failures: list[str] = []
     live_gates_mod._fail_missing_live_gates(gates, failures)
     assert failures
     assert all(g.status == "fail" for g in gates)
-
 
 def test_live_gates_main_defaults_docs(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     captured = {}

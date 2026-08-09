@@ -29,10 +29,13 @@ from pathlib import Path
 from unittest import mock
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_adapters
+
 sys.path.insert(0, str(REPO_ROOT / "adapters" / "claude" / "hooks"))
 
 import require_hardened_tests as gate  # noqa: E402
-
 
 def decide(command: str, tool: str = "Bash") -> str:
     """Run the hook end to end and return whatever it printed."""
@@ -42,7 +45,6 @@ def decide(command: str, tool: str = "Bash") -> str:
          mock.patch.object(sys, "stdout", captured):
         gate.main([])
     return captured.getvalue()
-
 
 class CommitDetectionTest(unittest.TestCase):
     def test_recognises_a_commit(self) -> None:
@@ -60,7 +62,6 @@ class CommitDetectionTest(unittest.TestCase):
         boundary is what keeps this from denying unrelated work."""
         self.assertFalse(gate.is_commit("git show commitish"))
         self.assertFalse(gate.is_commit("cat notes/commit-message.txt"))
-
 
 class MissingTestSuiteTest(unittest.TestCase):
     def test_a_deleted_script_does_not_require_a_suite(self) -> None:
@@ -119,7 +120,6 @@ class MissingTestSuiteTest(unittest.TestCase):
     def test_files_outside_scripts_and_hooks_are_ignored(self) -> None:
         self.assertEqual(gate.missing_test_suites(["CLAUDE.md"]), [])
 
-
 class UnwiredSuiteTest(unittest.TestCase):
     def test_scripts_test_wrapper_revival_is_reported(self) -> None:
         problems = gate.unwired_suites(["scripts/test_not_in_ci_at_all.py"])
@@ -128,7 +128,6 @@ class UnwiredSuiteTest(unittest.TestCase):
 
     def test_a_suite_under_tests_passes(self) -> None:
         self.assertEqual(gate.unwired_suites(["tests/ratchets/test_set_delta.py"]), [])
-
 
 class PassesThroughTest(unittest.TestCase):
     """A hook that denies too much gets disabled, and a disabled hook enforces
@@ -144,7 +143,6 @@ class PassesThroughTest(unittest.TestCase):
         """Against the real repo. If this ever denies on a clean tree, the
         hook is broken in the direction that stops all work."""
         self.assertEqual(decide("git commit -m 'x'"), "")
-
 
 class DeniesTest(unittest.TestCase):
     def test_a_finding_produces_a_deny_decision(self) -> None:
@@ -165,7 +163,6 @@ class DeniesTest(unittest.TestCase):
         reason = gate.build_reason(["x"]).lower()
         self.assertIn("do not weaken", reason)
 
-
 class FailOpenTest(unittest.TestCase):
     def test_unparseable_input_does_not_block(self) -> None:
         captured = io.StringIO()
@@ -177,7 +174,6 @@ class FailOpenTest(unittest.TestCase):
     def test_an_internal_error_does_not_block(self) -> None:
         with mock.patch.object(gate, "findings", side_effect=RuntimeError("boom")):
             self.assertEqual(decide("git commit -m x"), "")
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

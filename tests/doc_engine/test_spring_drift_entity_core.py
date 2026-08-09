@@ -12,6 +12,11 @@ import tempfile
 import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import spring_drift_check, spring_signal_scan
+
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 SCRIPT_DIR = SCRIPTS_DIR
 FIXTURE_JAVA_PREFIX = "src/main/java/com/example/billing/"
 DRIFT_CHECK_CMD = [sys.executable, "-m", "doc_engine.tools.spring_drift_check"]

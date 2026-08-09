@@ -4,6 +4,9 @@ import unittest
 
 from doc_engine.scanning.build_command import BuildCommandError, validate_build_command
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 class BuildCommandValidationTest(unittest.TestCase):
     def test_accepts_gradlew(self):
@@ -76,7 +79,6 @@ class BuildCommandValidationTest(unittest.TestCase):
     def test_rejects_gradle_user_home_flag(self):
         with self.assertRaises(BuildCommandError):
             validate_build_command("gradle --gradle-user-home=/tmp/evil clean")
-
 
 if __name__ == "__main__":
     unittest.main()

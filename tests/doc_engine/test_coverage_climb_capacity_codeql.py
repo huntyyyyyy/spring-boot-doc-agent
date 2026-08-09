@@ -14,6 +14,7 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 from doc_engine.tools import capacity_preflight as cap
 
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_maybe_write_report_and_warnings(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
@@ -40,14 +41,12 @@ def test_maybe_write_report_and_warnings(
     cap._print_l2b_summary(report)
     assert "capacity-preflight" in capsys.readouterr().out
 
-
 def test_load_optional_json(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     assert cap._load_optional_json(None) is None
     path = tmp_path / "a.json"
     path.write_text('{"k":1}', encoding="utf-8")
     monkeypatch.setattr(cap, "checked_path", lambda p, want=None: Path(p))
     assert cap._load_optional_json(str(path)) == {"k": 1}
-
 
 def test_print_stage0_summary(capsys: pytest.CaptureFixture[str]) -> None:
     report = {
@@ -66,7 +65,6 @@ def test_print_stage0_summary(capsys: pytest.CaptureFixture[str]) -> None:
     assert "2 groups" in out
     assert "3x" in out
 
-
 def test_main_bad_repo(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
     from doc_engine.paths import PathValidationError
 
@@ -83,7 +81,6 @@ def test_main_bad_repo(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
         cap.main()
     assert exc.value.code == 1
     assert "error" in capsys.readouterr().err.lower()
-
 
 def test_main_l2b_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     repo = tmp_path / "repo"
@@ -107,7 +104,6 @@ def test_main_l2b_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     )
     cap.main()
 
-
 def test_hash_from_scan_context_and_refuse_symlink(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -127,12 +123,10 @@ def test_hash_from_scan_context_and_refuse_symlink(
         with pytest.raises(runner.CodeQLError, match="symlink"):
             runner._refuse_symlink_cache_path(link)
 
-
 def test_validate_one_cached_row_and_non_dict() -> None:
     with pytest.raises(runner.CodeQLError):
         runner._validate_one_cached_row(0, "x")
     assert runner._validate_one_cached_row(0, {"file": "a.java"})["file"] == "a.java"
-
 
 def test_scan_with_codeql_full_path_mocked(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch

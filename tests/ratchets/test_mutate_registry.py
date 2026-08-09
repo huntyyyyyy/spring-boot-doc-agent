@@ -12,6 +12,11 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 import mutate
 import mutator_registry
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 _KNOWN_GATE_MUTATOR_NAMES = frozenset({
     "secret-heuristic-stops-unquoting",
     "build-file-guard-loosened",
@@ -64,7 +69,6 @@ class RegistryLoadTest(unittest.TestCase):
         mutator_registry.register_source(lambda: (bad,))
         with self.assertRaises(ValueError):
             mutator_registry.load_registry()
-
 
 class RegistryAnchorsTest(unittest.TestCase):
     """Every mutator must still find its anchor in the real tree."""

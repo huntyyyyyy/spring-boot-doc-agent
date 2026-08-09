@@ -13,6 +13,9 @@ from doc_engine.ci import complexipy_ratchet as ratchet
 from doc_engine.ci import coverage_gap_average as cga
 from doc_engine.ci import gate_tools
 from doc_engine.ci import quality_gates as qg
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SAMPLE_WITH_EDGES = """\
 <?xml version="1.0" ?>
 <coverage line-rate="0.5" branch-rate="0.5" version="7.0" timestamp="1">
@@ -56,11 +59,9 @@ def test_jscpd_skips_nonfile_native_then_wrapper(
     cmd = gate_tools.jscpd_command("--x")
     assert cmd[0] == "/bin/node"
 
-
 def test_require_venv_script_delegates(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(gate_tools, "require_on_path", lambda n: f"/bin/{n}")
     assert gate_tools.require_venv_script("complexipy") == "/bin/complexipy"
-
 
 def test_arch_token_variants(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(gate_tools.platform, "machine", lambda: "AMD64")
@@ -70,14 +71,12 @@ def test_arch_token_variants(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(gate_tools.platform, "machine", lambda: "riscv64")
     assert gate_tools._arch_token() == "riscv64"
 
-
 def test_jscpd_native_candidates_windows_x64(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setattr(gate_tools, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(gate_tools.platform, "machine", lambda: "x86_64")
     monkeypatch.setattr(gate_tools.platform, "system", lambda: "Windows")
     cands = gate_tools._jscpd_native_candidates()
     assert any("windows-x64" in str(c) for c in cands)
-
 
 def test_jscpd_command_native_and_missing(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -93,12 +92,10 @@ def test_jscpd_command_native_and_missing(
     with pytest.raises(SystemExit):
         gate_tools.jscpd_command("--help")
 
-
 def test_python_module_command() -> None:
     cmd = gate_tools.python_module_command("pkg.mod", "--flag")
     assert cmd[:3] == [sys.executable, "-m", "pkg.mod"]
     assert cmd[-1] == "--flag"
-
 
 def test_run_prints_and_returns(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
     monkeypatch.setattr(
@@ -108,7 +105,6 @@ def test_run_prints_and_returns(monkeypatch: pytest.MonkeyPatch, capsys) -> None
     )
     assert qg._run(["echo", "hi"], label="demo") == 7
     assert "demo" in capsys.readouterr().out
-
 
 def test_changed_python_filters(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setattr(qg, "REPO_ROOT", tmp_path)
@@ -123,7 +119,6 @@ def test_changed_python_filters(monkeypatch: pytest.MonkeyPatch, tmp_path: Path)
     )
     assert qg.changed_python_under_packages("HEAD~1") == ["src/doc_engine/a.py"]
 
-
 def test_gate_cognitive_complexity(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         "doc_engine.ci.gate_tools.require_on_path",
@@ -132,13 +127,11 @@ def test_gate_cognitive_complexity(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(qg, "_run", lambda cmd, label: 0)
     assert qg.gate_cognitive_complexity() == 0
 
-
 def test_baseline_offender_ceiling_bad_json(tmp_path: Path) -> None:
     path = tmp_path / "b.json"
     path.write_text("{", encoding="utf-8")
     assert qg.baseline_offender_ceiling(path) is None
     assert qg.baseline_offender_ceiling(tmp_path / "absent.json") is None
-
 
 def test_main_with_coverage_and_exit_codes(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setattr(qg, "REPO_ROOT", tmp_path)

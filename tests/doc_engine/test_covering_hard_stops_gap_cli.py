@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _complete_receipt, _kafka_signals
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class GapProbeS1S3CliTest(unittest.TestCase):
     def test_run_gap_probe_missing_covering_raises(self):
             """Deviation: gap_probe scores S2 without covering_proof sibling."""

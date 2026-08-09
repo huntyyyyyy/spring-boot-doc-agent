@@ -9,6 +9,7 @@ import pytest
 from stf.__main__ import main as stf_main
 from tests.stf.conftest import write_spec_and_tasks_into
 
+pytestmark = pytest.mark.domain_stf
 
 def test_plan_gate_exception_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     write_spec_and_tasks_into(tmp_path)
@@ -18,7 +19,6 @@ def test_plan_gate_exception_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatc
 
     monkeypatch.setattr("stf.__main__.plan_gate", boom)
     assert stf_main(["plan-gate", "--target-dir", str(tmp_path)]) == 1
-
 
 def test_reviewer_token_mark_done_and_forged(tmp_path: Path) -> None:
     write_spec_and_tasks_into(tmp_path)
@@ -30,7 +30,6 @@ def test_reviewer_token_mark_done_and_forged(tmp_path: Path) -> None:
 
     token = TasksStore(tmp_path).issue_validation_token()
     assert stf_main(["mark-done", "--target-dir", str(tmp_path), "--token", token]) == 0
-
 
 def test_handoff_checklist_and_dry_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     write_spec_and_tasks_into(tmp_path)
@@ -55,7 +54,6 @@ def test_handoff_checklist_and_dry_run(tmp_path: Path, monkeypatch: pytest.Monke
     )
     assert stf_main(["handoff-gh", "--target-dir", str(tmp_path)]) == 0
 
-
 def test_constitution_and_mutate(tmp_path: Path) -> None:
     write_spec_and_tasks_into(tmp_path)
     out = tmp_path / "constitution.md"
@@ -77,7 +75,6 @@ def test_constitution_and_mutate(tmp_path: Path) -> None:
     # Mutants are expected to fail lint → CLI returns 0 when lint_ok is False.
     assert stf_main(["mutate", "--target-dir", str(tmp_path), "--mode", "no-acceptance"]) == 0
 
-
 def test_verify_gate_success_and_error(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         "stf.__main__.verify_gate",
@@ -90,7 +87,6 @@ def test_verify_gate_success_and_error(monkeypatch: pytest.MonkeyPatch) -> None:
 
     monkeypatch.setattr("stf.__main__.verify_gate", boom)
     assert stf_main(["verify-gate", "--cmd", "true"]) == 1
-
 
 def test_implement_with_mocked_waves(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     write_spec_and_tasks_into(tmp_path)

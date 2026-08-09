@@ -22,6 +22,9 @@ from doc_engine.scanning.gap_probe import (
 )
 from doc_engine.scanning.symbol import format_type
 from doc_engine.tools import spring_drift_check
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = repo_root()
 BASELINE = REPO_ROOT / "scripts" / "coverage" / "real_repo_gap_baseline.json"
 from tests.support.real_fixture.adversarial_factories import (
@@ -81,7 +84,6 @@ class TestCoveringVerifiedLie:
                 covering_why="adversarial",
             )
 
-
 class TestJoinIncompleteEmptyDenom:
     """Deviation: wiping entity_table_map left join_incomplete=False (rate None)."""
 
@@ -114,7 +116,6 @@ class TestJoinIncompleteEmptyDenom:
         assert report["rates"]["R_join"]["rate"] == 1.0
         assert report["design_reopen"]["join_incomplete"] is False
 
-
 class TestBaselineBandsNotVacuous:
     """Deviation: R_lin∈[0,1] and U_max=1 accepted any measurement."""
 
@@ -128,7 +129,6 @@ class TestBaselineBandsNotVacuous:
         exp = data["expected"]
         assert bands["R_lin_mean_min"] <= exp["R_lin_mean"] <= bands["R_lin_mean_max"]
         assert exp["U"] <= bands["U_max"]
-
 
 class TestContestedRaisesColl:
     """Deviation: identity_rates_healthy could ignore small R_coll if only >0 checks."""
@@ -163,7 +163,6 @@ class TestContestedRaisesColl:
         assert block["rate"] == 1.0
         report, _ = build_gap_report(signals, [], covering_ok=True, covering_why="")
         assert report["design_reopen"]["path_a_to_symbols"] is True
-
 
 class TestForgedCoveringProof:
     """Deviation: mismatched acked_subset_root must not verify."""

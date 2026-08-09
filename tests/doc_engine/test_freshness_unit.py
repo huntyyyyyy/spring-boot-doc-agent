@@ -21,12 +21,12 @@ from doc_engine.query.freshness import (
 )
 from doc_engine.query.load import QueryError
 
+pytestmark = pytest.mark.domain_pipeline
 
 def test_unknown_policy_and_empty_rel() -> None:
     policy = UnknownFreshnessWhenNoRepo()
     assert policy.freshness_for(None) == "unknown"
     assert policy.freshness_for("") == "unknown"
-
 
 def test_signature_freshness_matrix(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     repo = tmp_path / "repo"
@@ -63,7 +63,6 @@ def test_signature_freshness_matrix(tmp_path: Path, monkeypatch: pytest.MonkeyPa
     )
     assert policy.freshness_for("a.java") == "unknown"
 
-
 def test_drift_overlay_and_label_item_path(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -85,7 +84,6 @@ def test_drift_overlay_and_label_item_path(tmp_path: Path) -> None:
     bad = BadPolicy()
     with pytest.raises(QueryError, match="illegal freshness"):
         label_item_path(bad, "a.java")
-
 
 def test_stale_paths_from_drift_report() -> None:
     paths = stale_paths_from_drift_report(

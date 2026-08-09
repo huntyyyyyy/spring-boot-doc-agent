@@ -18,6 +18,8 @@ from doc_engine.tools.certification import load_certification, verify_certificat
 from tests.doc_engine.cert_helpers import ok_stages_for
 from tests.support.certification.verify_fixtures import _ok_gates_for, _write_incomplete
 
+pytestmark = pytest.mark.domain_compliance
+
 def test_verify_certified_true():
     with tempfile.TemporaryDirectory() as tmp:
         report = build_certification_report(
@@ -33,7 +35,6 @@ def test_verify_certified_true():
         ok, msg = verify_certification(path)
         assert ok
         assert "OK" in msg
-
 
 def test_verify_not_certified():
     with tempfile.TemporaryDirectory() as tmp:
@@ -60,12 +61,10 @@ def test_verify_not_certified():
         assert "not certified" in msg
         assert "certification schema" not in msg
 
-
 def test_verify_missing_file():
     ok, msg = verify_certification(Path("/nonexistent/certification.json"))
     assert not ok
     assert "not found" in msg
-
 
 def test_load_certification_invalid_json():
     with tempfile.TemporaryDirectory() as tmp:
@@ -73,7 +72,6 @@ def test_load_certification_invalid_json():
         path.write_text("{not json", encoding="utf-8")
         with pytest.raises(json.JSONDecodeError):
             load_certification(path)
-
 
 def test_builder_round_trip_load_accepts_full_report():
     with tempfile.TemporaryDirectory() as tmp:
@@ -92,7 +90,6 @@ def test_builder_round_trip_load_accepts_full_report():
         assert data["repo_path"] == "/repo"
         assert data["compliance_profile"] == "scan_only"
         assert SCAN_ONLY_GATE_ID in data["profile_gate_ids"]
-
 
 def test_verify_certification_script_main():
     from doc_engine.tools.certification import main
@@ -125,7 +122,6 @@ def test_verify_certification_script_main():
         )
         write_certification_json(tmp, bad_report)
         assert main([str(path)]) == 1
-
 
 def test_verify_refold_matches_honest_report():
     with tempfile.TemporaryDirectory() as tmp:

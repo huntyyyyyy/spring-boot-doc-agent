@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _absence_stamp_pairs, _assert_absence_stamps_match_writer, _complete_receipt, _kafka_signals
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class CallableAbsenceFalsifiersTestContinued(unittest.TestCase):
     def test_shared_bucket_rule_id_is_not_foreign_family_presence(self):
             """Deviation: any observability rule_id counted as redis/actuator hits."""

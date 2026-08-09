@@ -20,6 +20,10 @@ from doc_engine.scanning.support._codeql_runner import (
 )
 from tests.conftest import FIXTURE_DIR
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class ChunkPathsForArgvTest(unittest.TestCase):
     def test_single_chunk_when_under_budget(self):
         base = ["ast-grep", "scan"]

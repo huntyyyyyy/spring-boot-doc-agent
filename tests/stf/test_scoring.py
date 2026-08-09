@@ -6,6 +6,9 @@ from stf.schemas.tasks import TaskBlock, TasksDocument
 from stf.eval.scoring import load_answer_key
 from pathlib import Path
 
+import pytest
+
+pytestmark = pytest.mark.domain_stf
 
 def test_score_decompose_pass():
     key = {

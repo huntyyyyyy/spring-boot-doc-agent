@@ -14,6 +14,10 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestMirrorDebt(unittest.TestCase):
     """Prompts 00-06 have a canonical copy in the Claude project; editing one
     creates an obligation no CLI session can discharge. This turns that

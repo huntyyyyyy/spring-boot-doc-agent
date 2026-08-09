@@ -9,6 +9,9 @@ import subprocess
 import sys
 from pathlib import Path
 import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ENGINE_PATH = REPO_ROOT / "spring-signals" / "harness" / "check-assertions.py"
 HARNESS_DIR = ENGINE_PATH.parent
@@ -52,7 +55,6 @@ class TestSpecLoading:
         with pytest.raises(SystemExit):
             ca.main(["--out", str(tmp_path / "out" / ".." / "out"), "--expectations", str(spec_path)])
 
-
 class TestQueryNameHygiene:
     @pytest.mark.parametrize(
         "bad",
@@ -71,7 +73,6 @@ class TestQueryNameHygiene:
         write_csv(tmp_path / "out", good, [])
         spec_path = write_spec(tmp_path / "s.json", base_spec(asserted={good: {"_rows": 0}}))
         assert run(spec_path, tmp_path / "out") == 0
-
 
 class TestAssertedExact:
     def test_asserted_exact_passes(self, tmp_path):
@@ -105,7 +106,6 @@ class TestAssertedExact:
         with pytest.raises(SystemExit):
             run(spec_path, tmp_path / "out")
 
-
 class TestMinimums:
     def test_minimum_passes_at_equality(self, tmp_path):
         write_csv(tmp_path / "out", "A", [row("r", "g")] * 5)
@@ -121,7 +121,6 @@ class TestMinimums:
         write_csv(tmp_path / "out", "A", [row("r", "g")] * 4)
         spec_path = write_spec(tmp_path / "s.json", base_spec(minimums={"A": {"_rows": 5}}))
         assert run(spec_path, tmp_path / "out") == 1
-
 
 class TestFailClosed:
     def test_missing_csv_fails_not_zero(self, tmp_path):

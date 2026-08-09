@@ -10,6 +10,7 @@ from doc_engine.query import mcp_tools as mcp
 from doc_engine.query.load import QueryError, QueryPathError
 from doc_engine.scanning.gap_probe import lineage as lin
 
+pytestmark = pytest.mark.domain_climb_sensor
 
 def test_pin_path_and_help(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = tmp_path / "root"
@@ -27,7 +28,6 @@ def test_pin_path_and_help(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> N
     assert mcp.dispatch_tool("doc_engine_help")["tools"]
     with pytest.raises(QueryError, match="unknown"):
         mcp.dispatch_tool("no_such_tool")
-
 
 def test_dispatch_query_runners_mocked(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -56,7 +56,6 @@ def test_dispatch_query_runners_mocked(
         "query_route_trace", {"signals": str(signals)}
     )["ok"]
     assert "evidence" in seen and "facts" in seen
-
 
 def test_lineage_reason_and_null_outcome() -> None:
     assert lin._lineage_reason_class(None) == "unavailable_unknown"

@@ -19,10 +19,10 @@ from doc_engine.query.rank import (
 )
 from doc_engine.query.registry import run_query
 
+pytestmark = pytest.mark.domain_pipeline
 
 def test_assume_indexed_returns_unknown_not_fresh_indexed() -> None:
     assert AssumeIndexed().freshness_for("a.java") == "unknown"
-
 
 def test_redaction_provider_expands_dict_shaped_zones() -> None:
     signals = {
@@ -40,7 +40,6 @@ def test_redaction_provider_expands_dict_shaped_zones() -> None:
     assert len(rows) == 1
     assert rows[0]["path"] == "src/Secret.java"
 
-
 def test_unknown_evidence_bucket_raises_not_empty_success() -> None:
     with pytest.raises(QueryError, match="unknown evidence bucket"):
         run_query(
@@ -50,12 +49,10 @@ def test_unknown_evidence_bucket_raises_not_empty_success() -> None:
             bucket="secuirty",
         )
 
-
 def test_query_kind_spec_registry_lists_mcp_tools() -> None:
     names = list_mcp_tool_names()
     assert "query_evidence" in names
     assert get_query_kind_spec("evidence").mcp_tool_name == "query_evidence"
-
 
 def test_tokens_used_matches_serialized_emission_without_payload() -> None:
     item = {
@@ -70,18 +67,15 @@ def test_tokens_used_matches_serialized_emission_without_payload() -> None:
         item
     )
 
-
 def test_budget_partition_never_overshoots_for_tiny_budgets() -> None:
     for b in range(0, 8):
         assert sum(split_budget_into_primary_finding_and_risk_shares(b)) == b
-
 
 def test_mcp_dispatch_requires_server_root(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.delenv("DOC_ENGINE_ROOT", raising=False)
     monkeypatch.delenv("DOC_ENGINE_RUN_DIR", raising=False)
     with pytest.raises(QueryPathError):
         dispatch_tool("query_evidence", {"signals": str(tmp_path / "s.json")})
-
 
 def test_smoke_run_query_evidence_with_root(tmp_path: Path) -> None:
     """Smoke/sanity — happy path still works under mandatory root."""

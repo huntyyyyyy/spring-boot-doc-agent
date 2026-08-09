@@ -21,6 +21,9 @@ from doc_engine.real_fixture import require_real_repo
 from doc_engine.tools import build_cross_group_edges, validate_artifacts
 from doc_engine.tools import partition_repo
 from tests.conftest import FIXTURE_DIR
+
+pytestmark = pytest.mark.domain_stage0
+
 REPO_ROOT = repo_root()
 from tests.support.etl_adversarial.factories import (
     _minimal_signals,

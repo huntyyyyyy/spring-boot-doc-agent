@@ -11,6 +11,10 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 import rule_coverage as rc
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestRuleIdParsing(unittest.TestCase):
     def test_the_real_rule_file_yields_rules(self) -> None:
         """If this ever returns [], every other check here passes vacuously."""
@@ -38,7 +42,6 @@ class TestRuleIdParsing(unittest.TestCase):
             self.assertEqual(rc.rule_ids(path), ["bucket__as_form"])
         self.assertIn("raw_queries__query", rc.rule_ids())
         self.assertGreaterEqual(len(rc.rule_ids()), 29)
-
 
 class TestNonVacuity(unittest.TestCase):
     def test_every_real_rule_fires_on_the_fixture_corpus(self) -> None:
@@ -107,7 +110,6 @@ class TestNonVacuity(unittest.TestCase):
         )
         metamorphic = (SCRIPTS_DIR / "coverage" / "rule_fixtures").resolve()
         self.assertNotEqual(resolved, metamorphic)
-
 
 class TestCommittedBaselineSoR(unittest.TestCase):
     """Hermetic CI witness: committed baseline stamp matches SCHEMA_VERSION

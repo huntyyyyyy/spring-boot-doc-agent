@@ -13,6 +13,8 @@ from doc_engine.scanning.gap_probe import absence_recall as absence
 from doc_engine.tools import semantic_eval_helpers as seh
 from doc_engine.tools import spring_signal_scan as sss
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_tokenize_and_claim_clause() -> None:
     toks = seh._tokenize("The Widget Service is ready for use")
     assert "widget" in toks
@@ -25,7 +27,6 @@ def test_tokenize_and_claim_clause() -> None:
     assert m is not None
     clause = seh._claim_clause(text, m.start())
     assert "Second claim" in clause
-
 
 def test_markdown_names_and_scan_confirmed(tmp_path: Path) -> None:
     docs = tmp_path / "docs"
@@ -51,7 +52,6 @@ def test_markdown_names_and_scan_confirmed(tmp_path: Path) -> None:
     findings = seh._scan_confirmed_docs(str(tmp_path), interview, overlap_threshold=0.99)
     assert "readme.md" in findings or findings == {}
 
-
 def test_resolve_architecture_and_mermaid(tmp_path: Path) -> None:
     assert seh._resolve_architecture_path(str(tmp_path)) is None
     docs = tmp_path / "docs"
@@ -64,7 +64,6 @@ def test_resolve_architecture_and_mermaid(tmp_path: Path) -> None:
     assert seh._resolve_architecture_path(str(tmp_path)).endswith("architecture.md")
     findings = seh._scan_mermaid(str(tmp_path))
     assert isinstance(findings, list)
-
 
 def test_semantic_run_and_main(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
@@ -83,7 +82,6 @@ def test_semantic_run_and_main(
     seh.main()
     assert out.is_file()
     assert "semantic_eval_helpers" in capsys.readouterr().out
-
 
 def test_semantic_main_bad_artifacts(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
     monkeypatch.setattr("sys.argv", ["seh", "/no/such/artifacts"])

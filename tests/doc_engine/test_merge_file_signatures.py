@@ -5,6 +5,9 @@ import unittest
 
 from doc_engine.scanning._merge_signals import _merge_file_signatures
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 class MergeFileSignaturesTest(unittest.TestCase):
     def test_conflict_keeps_first_and_logs_warning(self):
@@ -16,7 +19,6 @@ class MergeFileSignaturesTest(unittest.TestCase):
             merged = _merge_file_signatures(partials)
         self.assertEqual(merged["a.java"], "aaa")
         self.assertTrue(any("file_signatures conflict" in msg for msg in cm.output))
-
 
 if __name__ == "__main__":
     unittest.main()

@@ -9,6 +9,11 @@ import tempfile
 import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import semantic_eval_helpers
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 ANSWERED_ENTRY = {
     "blocks_file": "database", "topic": "write ownership: billing_invoice",
@@ -99,7 +104,6 @@ class UnmatchedConfirmedTagsTest(unittest.TestCase):
         findings = semantic_eval_helpers.find_unmatched_confirmed_tags(text, [ANSWERED_ENTRY])
         self.assertEqual(len(findings), 1)
         self.assertIn("deploys nightly", findings[0]["claim_clause"])
-
 
 class MermaidSyntaxTest(unittest.TestCase):
     def test_well_formed_diagram_passes(self):

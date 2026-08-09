@@ -24,14 +24,16 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 
 import set_delta as sd  # noqa: E402
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 A = sd.Member("A.java", "api_surface__controller", "@RestController")
 B = sd.Member("B.java", "persistence__entity", "@Entity")
 C = sd.Member("A.java", "observability__timed", "@Timed")
 
-
 def s(*members) -> frozenset:
     return frozenset(members)
-
 
 class DeltaTest(unittest.TestCase):
     def test_identical_sets_have_an_empty_delta(self) -> None:
@@ -49,7 +51,6 @@ class DeltaTest(unittest.TestCase):
         self.assertEqual(forward.added, backward.removed)
         self.assertEqual(forward.removed, backward.added)
 
-
 class UnchangedRelationTest(unittest.TestCase):
     def test_permits_nothing(self) -> None:
         residue = sd.classify(sd.delta(s(A), s(A, B)), sd.unchanged())
@@ -57,7 +58,6 @@ class UnchangedRelationTest(unittest.TestCase):
 
     def test_an_empty_delta_leaves_no_residue(self) -> None:
         self.assertTrue(sd.classify(sd.delta(s(A), s(A)), sd.unchanged()).is_empty())
-
 
 class ConfinedToTest(unittest.TestCase):
     def test_movement_inside_the_named_files_is_expected(self) -> None:
@@ -74,7 +74,6 @@ class ConfinedToTest(unittest.TestCase):
         residue = sd.classify(sd.delta(s(A), s(A, B)), sd.confined_to([]))
         self.assertEqual(residue.added, s(B))
 
-
 class ConfinedToRulesTest(unittest.TestCase):
     def test_the_named_rule_may_move(self) -> None:
         residue = sd.classify(sd.delta(s(A), s(A, C)),
@@ -87,7 +86,6 @@ class ConfinedToRulesTest(unittest.TestCase):
                               sd.confined_to_rules(["observability__timed"]))
         self.assertEqual(residue.added, s(B))
 
-
 class GrowsOnlyTest(unittest.TestCase):
     def test_additions_are_expected(self) -> None:
         self.assertTrue(sd.classify(sd.delta(s(A), s(A, B)), sd.grows_only()).is_empty())
@@ -95,7 +93,6 @@ class GrowsOnlyTest(unittest.TestCase):
     def test_a_removal_is_a_regression(self) -> None:
         residue = sd.classify(sd.delta(s(A, B), s(A)), sd.grows_only())
         self.assertEqual(residue.removed, s(B))
-
 
 class RelationsAreNotVacuousTest(unittest.TestCase):
     """The guard on the guards. A relation that permitted everything would
@@ -117,7 +114,6 @@ class RelationsAreNotVacuousTest(unittest.TestCase):
                 self.assertFalse(sd.classify(change, relation).is_empty(),
                                  f"{name} permitted a delta it should have rejected")
 
-
 class ScalingTest(unittest.TestCase):
     def test_exact_doubling_passes(self) -> None:
         before = s(A)
@@ -136,7 +132,6 @@ class ScalingTest(unittest.TestCase):
         self.assertEqual(counts["api_surface__controller"], 1)
         self.assertEqual(counts["observability__timed"], 1)
 
-
 class ResidueDescriptionTest(unittest.TestCase):
     def test_describe_names_file_rule_and_direction(self) -> None:
         residue = sd.classify(sd.delta(s(A), s(A, B)), sd.unchanged())
@@ -145,7 +140,6 @@ class ResidueDescriptionTest(unittest.TestCase):
         self.assertIn("persistence__entity", text)
         self.assertTrue(text.lstrip().startswith("+"), text)
 
-
 class ValidityGateTest(unittest.TestCase):
     def test_a_failed_scan_raises_rather_than_reporting_an_empty_set(self) -> None:
         """A failed scan and a repo with genuinely nothing in it produce the
@@ -153,7 +147,6 @@ class ValidityGateTest(unittest.TestCase):
         confident wrong answer, so it must raise instead."""
         with self.assertRaises(sd.ScanFailed):
             sd.signals_set(Path("no-such-directory-anywhere"))
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

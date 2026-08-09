@@ -14,6 +14,10 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestAffirm(unittest.TestCase):
     """--affirm is what makes the predicate usable. Without it a claim can
     only be re-affirmed by hand-computing a digest, and an unusable check is
@@ -77,7 +81,6 @@ class TestAffirm(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = self._repo(tmp, body)
             self.assertEqual(crc.apply_affirm(root, ["CONSTRAINTS.md"]), [])
-
 
 class TestPredicateRegistry(unittest.TestCase):
     """The registry replaced a startswith() chain that duplicated the prefix

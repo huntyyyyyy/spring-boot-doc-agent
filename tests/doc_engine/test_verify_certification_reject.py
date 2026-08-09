@@ -18,6 +18,8 @@ from doc_engine.tools.certification import load_certification, verify_certificat
 from tests.doc_engine.cert_helpers import ok_stages_for
 from tests.support.certification.verify_fixtures import _ok_gates_for, _write_incomplete
 
+pytestmark = pytest.mark.domain_compliance
+
 def test_pre_schema_incomplete_dicts_fail_schema_gate(payload: dict):
     """Exact HEAD fixture shapes that broke CI after CertificationReport gating."""
     with tempfile.TemporaryDirectory() as tmp:
@@ -31,7 +33,6 @@ def test_pre_schema_incomplete_dicts_fail_schema_gate(payload: dict):
         # Schema path — must not look like a well-formed "not certified" report.
         assert "not certified" not in msg
 
-
 def test_incomplete_cert_fails_schema_gate():
     """Alias kept for discoverability — certified:true alone is not enough."""
     with tempfile.TemporaryDirectory() as tmp:
@@ -43,7 +44,6 @@ def test_incomplete_cert_fails_schema_gate():
         assert not ok
         assert "certification schema" in msg
 
-
 def test_main_rejects_incomplete_certified_true_dict():
     """Regression: main([path]) used to return 0 on {\"certified\": True} alone."""
     from doc_engine.tools.certification import main
@@ -52,7 +52,6 @@ def test_main_rejects_incomplete_certified_true_dict():
         path = Path(tmp) / "certification.json"
         _write_incomplete(path, {"certified": True})
         assert main([str(path)]) == 1
-
 
 def test_verify_rejects_forged_certified_bit():
     """Deviation: stamped certified=true survives when refold fails."""
@@ -76,7 +75,6 @@ def test_verify_rejects_forged_certified_bit():
         ok, msg = verify_certification(path)
         assert not ok
         assert "refold" in msg.lower() or "≠" in msg
-
 
 def test_verify_rejects_certified_with_nonempty_failures():
     """Deviation: certified∧failures≠∅ accepted as coherent."""

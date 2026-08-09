@@ -14,6 +14,7 @@ from stf.schemas.blockers import BlockerClass
 from stf.schemas.tasks import LedgerState
 from tests.stf.conftest import build_minimal_valid_tasks, write_spec_and_tasks_into
 
+pytestmark = pytest.mark.domain_stf
 
 def test_poison_tasks_json_fails_closed(tmp_path: Path) -> None:
     from pydantic import ValidationError
@@ -23,11 +24,9 @@ def test_poison_tasks_json_fails_closed(tmp_path: Path) -> None:
     with pytest.raises(ValidationError):
         store.load_tasks()
 
-
 def test_atomic_write_leaves_no_tmp_files(tmp_path: Path) -> None:
     write_spec_and_tasks_into(tmp_path)
     assert list(tmp_path.glob("*.tmp")) == []
-
 
 def test_open_blocker_stalls_ledger_and_records_blast_radius(tmp_path: Path) -> None:
     write_spec_and_tasks_into(tmp_path)
@@ -43,7 +42,6 @@ def test_open_blocker_stalls_ledger_and_records_blast_radius(tmp_path: Path) -> 
     assert store.load_tasks().ledger == LedgerState.STALL
     assert "T1" in blocker.blast_radius_tasks
 
-
 def test_concurrent_wave_computation_is_deterministic() -> None:
     graph = {"T0": [], "T1": ["T0"], "T2": ["T0"], "T3": ["T1", "T2"]}
 
@@ -53,7 +51,6 @@ def test_concurrent_wave_computation_is_deterministic() -> None:
     with ThreadPoolExecutor(max_workers=8) as pool:
         results = list(pool.map(lambda _: _once(), range(32)))
     assert all(r == results[0] for r in results)
-
 
 def test_run_waves_is_idempotent_when_resuming_past_end(tmp_path: Path) -> None:
     write_spec_and_tasks_into(tmp_path)

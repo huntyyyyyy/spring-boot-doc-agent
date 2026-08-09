@@ -10,6 +10,7 @@ from stf.runners.store import TasksStore
 from stf.schemas.tasks import TaskBlock, TasksDocument
 from stf.validators.lint_tasks import lint_summary, lint_tasks_document
 
+pytestmark = pytest.mark.domain_stf
 
 def test_poison_json_fails_closed(tmp_path: Path):
     from pydantic import ValidationError
@@ -19,7 +20,6 @@ def test_poison_json_fails_closed(tmp_path: Path):
     store = TasksStore(tmp_path)
     with pytest.raises(ValidationError):
         store.load_tasks()
-
 
 def test_mid_write_atomic_replace(tmp_path: Path):
     store = TasksStore(tmp_path)
@@ -42,7 +42,6 @@ def test_mid_write_atomic_replace(tmp_path: Path):
     store.write_tasks(doc)
     assert not list(tmp_path.glob("*.tmp"))
     assert store.load_tasks().target == "x"
-
 
 def test_open_blocker_reentry_checkpoint(tmp_path: Path):
     from stf.runners.implement import append_blocker

@@ -8,6 +8,9 @@ from pathlib import Path
 
 from doc_engine.ci import coverage_gap_average as cga
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 SAMPLE_XML = """\
 <?xml version="1.0" ?>
@@ -42,7 +45,6 @@ SAMPLE_XML = """\
   </packages>
 </coverage>
 """
-
 
 class CoverageGapAverageTest(unittest.TestCase):
     def test_partition_excludes_green_from_gap_average(self) -> None:
@@ -119,7 +121,6 @@ class CoverageGapAverageTest(unittest.TestCase):
             path.write_text(foreign_xml, encoding="utf-8")
             code = cga.main(["--coverage-xml", str(path)])
         self.assertEqual(code, 2)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

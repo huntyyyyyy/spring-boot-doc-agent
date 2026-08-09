@@ -25,6 +25,8 @@ from stf.validators import lint_tasks as lint_mod
 from tests.stf.conftest import build_minimal_valid_spec, build_minimal_valid_tasks
 from tests.support.coverage_climb.tier2_context import _ctx
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_stage0_siblings_errors_and_copy(tmp_path: Path) -> None:
     with pytest.raises(siblings.Stage0SiblingError, match="not found"):
         siblings._load_signals_mapping(tmp_path / "missing.json")
@@ -48,7 +50,6 @@ def test_stage0_siblings_errors_and_copy(tmp_path: Path) -> None:
     assert (out / "facts.jsonl").is_file()
     assert (out / "covering_proof.json").is_file()
 
-
 def test_stage0_siblings_synthesize_when_missing(tmp_path: Path) -> None:
     src = tmp_path / "src"
     src.mkdir()
@@ -59,7 +60,6 @@ def test_stage0_siblings_synthesize_when_missing(tmp_path: Path) -> None:
     assert (out / "facts.jsonl").is_file()
     proof = json.loads((out / "covering_proof.json").read_text(encoding="utf-8"))
     assert proof
-
 
 def test_java_extract_edge_paths(tmp_path: Path) -> None:
     assert jx.first_line_match("") == ""
@@ -74,7 +74,6 @@ def test_java_extract_edge_paths(tmp_path: Path) -> None:
     outside = jx.normalize_repo_path(str(tmp_path / "repo"), str(tmp_path / "other" / "A.java"))
     assert outside.replace("\\", "/").endswith("other/A.java")
 
-
 def test_lint_anchor_and_locate(tmp_path: Path) -> None:
     assert lint_mod._anchor_rel("plain") is None
     assert lint_mod._anchor_rel("src/foo.java") == "src/foo.java"
@@ -85,7 +84,6 @@ def test_lint_anchor_and_locate(tmp_path: Path) -> None:
     t = SimpleNamespace(id="T1", locate="src/foo.java src/missing.py")
     lint_mod._lint_locate_anchors(t, tmp_path, check)
     assert any(r.level == "FAIL" and "missing.py" in r.name for r in results)
-
 
 def test_gap_probe_validate_paths(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     args = SimpleNamespace(
@@ -110,7 +108,6 @@ def test_gap_probe_validate_paths(tmp_path: Path, capsys: pytest.CaptureFixture[
     args.repo = None
     assert gap_probe_mod._validate_input_paths(args) is None
 
-
 def test_gap_probe_main_path_error(tmp_path: Path) -> None:
     rc = gap_probe_mod.main(
         [
@@ -123,7 +120,6 @@ def test_gap_probe_main_path_error(tmp_path: Path) -> None:
         ]
     )
     assert rc == 2
-
 
 def test_verify_gate_dry_and_live() -> None:
     dry = implement_mod.verify_gate(verify_commands=["true", "echo hi"])
@@ -140,14 +136,12 @@ def test_verify_gate_dry_and_live() -> None:
     )
     assert ok["ok"] is True
 
-
 def test_plan_gate_and_finding_coverage() -> None:
     tasks = build_minimal_valid_tasks()
     spec = build_minimal_valid_spec()
     result = implement_mod.plan_gate(tasks, spec)
     assert result["ok"] is True
     assert result["finding_coverage"] is True
-
 
 def test_run_wave_concurrent_and_dry() -> None:
     executed: list[str] = []
@@ -167,7 +161,6 @@ def test_run_wave_concurrent_and_dry() -> None:
     )
     assert sorted(seen) == ["T0", "T1"]
     assert sorted(executed) == ["T0", "T1"]
-
 
 def test_lint_one_origin_empty_skipped() -> None:
     results: list = []

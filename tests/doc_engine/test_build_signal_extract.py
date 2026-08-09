@@ -14,6 +14,9 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.scanning.support import _build_signal_extract as bse
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 class GradlePluginTest(unittest.TestCase):
     def test_groovy_plugin_with_version(self):
@@ -40,7 +43,6 @@ class GradlePluginTest(unittest.TestCase):
         plugins = [r for r in rows if r["rule_id"] == "deployment__build_plugin"]
         self.assertEqual(len(plugins), 1)
         self.assertEqual(plugins[0]["plugin_id"], "org.springframework.boot")
-
 
 class GradleDependencyTest(unittest.TestCase):
     def test_groovy_dependency(self):
@@ -74,14 +76,12 @@ class GradleDependencyTest(unittest.TestCase):
         deps = [r for r in rows if r["rule_id"] == "deployment__build_dependency"]
         self.assertEqual(deps, [])
 
-
 class GradleModuleTest(unittest.TestCase):
     def test_include(self):
         text = "include 'billing'\ninclude(':ledger')\n"
         rows = bse.extract_build_signals("settings.gradle", text)
         mods = [r for r in rows if r["rule_id"] == "deployment__build_module"]
         self.assertEqual({m["module"] for m in mods}, {"billing", "ledger"})
-
 
 class GradleToolchainTest(unittest.TestCase):
     def test_source_compatibility(self):
@@ -91,7 +91,6 @@ class GradleToolchainTest(unittest.TestCase):
         self.assertEqual(len(tcs), 1)
         self.assertEqual(tcs[0]["toolchain_kind"], "sourceCompatibility")
         self.assertEqual(tcs[0]["toolchain_value"], "17")
-
 
 class MavenTest(unittest.TestCase):
     def test_maven_dependency(self):
@@ -116,7 +115,6 @@ class MavenTest(unittest.TestCase):
         self.assertEqual(len(plugins), 1)
         self.assertEqual(plugins[0]["plugin_id"], "org.springframework.boot:spring-boot-maven-plugin")
 
-
 class VersionCatalogTest(unittest.TestCase):
     def test_catalog_version_and_library(self):
         text = ("[versions]\n"
@@ -130,7 +128,6 @@ class VersionCatalogTest(unittest.TestCase):
         self.assertEqual(versions[0]["catalog_key"], "spring-boot")
         self.assertEqual(len(libs), 1)
         self.assertEqual(libs[0]["catalog_key"], "spring-boot-starter")
-
 
 if __name__ == "__main__":
     unittest.main()

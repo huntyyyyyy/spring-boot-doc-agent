@@ -7,6 +7,7 @@ import pytest
 from stf.validators.lint_tasks import lint_summary, lint_tasks_document, mutate_tasks
 from tests.stf.conftest import build_minimal_valid_spec, build_minimal_valid_tasks
 
+pytestmark = pytest.mark.domain_stf
 
 @pytest.mark.parametrize(
     "mode",

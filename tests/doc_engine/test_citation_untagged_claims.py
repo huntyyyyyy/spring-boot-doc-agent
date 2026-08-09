@@ -10,6 +10,10 @@ import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import citation_coverage as cc
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 class TestUntaggedClaims(unittest.TestCase):
 
     def kinds(self, text):

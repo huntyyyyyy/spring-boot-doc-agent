@@ -18,6 +18,8 @@ from doc_engine.pipeline.artifacts import ARTIFACT_FILENAMES, ARTIFACT_MODELS
 from doc_engine.pipeline.validation import ArtifactValidationError, validate_artifact_file
 from doc_engine.tools import spring_drift_check
 
+pytestmark = pytest.mark.domain_schemas
+
 # Eight STATUS_* strings already emitted by spring_drift_check (no inventions).
 DRIFT_STATUSES = frozenset({
     spring_drift_check.STATUS_UNCHANGED,
@@ -40,7 +42,6 @@ _LEGACY_ROOT_KEYS = frozenset({
     "status_counts",
     "results",
 })
-
 
 def characterization_report(*, with_schema_version: bool = False) -> dict:
     """Minimal synthetic report matching today's check_drift shape."""
@@ -72,7 +73,6 @@ def characterization_report(*, with_schema_version: bool = False) -> dict:
         report["schema_version"] = spring_drift_check.DRIFT_REPORT_SCHEMA_VERSION
     return report
 
-
 def test_characterization_fixture_matches_legacy_key_set() -> None:
     report = characterization_report(with_schema_version=False)
     assert set(report) == _LEGACY_ROOT_KEYS
@@ -81,14 +81,12 @@ def test_characterization_fixture_matches_legacy_key_set() -> None:
         "source", "file", "line", "rule_id", "match", "status", "tier",
     }
 
-
 def test_drift_status_literal_matches_writer_constants() -> None:
     from typing import get_args
 
     from doc_engine.pipeline.artifacts import DriftStatus
 
     assert set(get_args(DriftStatus)) == DRIFT_STATUSES
-
 
 def test_schema_version_required() -> None:
     from doc_engine.pipeline.artifacts import DriftReportArtifact
@@ -97,7 +95,6 @@ def test_schema_version_required() -> None:
         DriftReportArtifact.model_validate(characterization_report(with_schema_version=False))
 
     DriftReportArtifact.model_validate(characterization_report(with_schema_version=True))
-
 
 @pytest.mark.parametrize("status", sorted(DRIFT_STATUSES))
 def test_each_known_status_validates(status: str) -> None:
@@ -108,7 +105,6 @@ def test_each_known_status_validates(status: str) -> None:
     report["status_counts"] = {status: 1}
     DriftReportArtifact.model_validate(report)
 
-
 def test_unknown_status_rejected() -> None:
     from doc_engine.pipeline.artifacts import DriftReportArtifact
 
@@ -116,7 +112,6 @@ def test_unknown_status_rejected() -> None:
     report["results"][0]["status"] = "not_a_real_status"
     with pytest.raises(ValidationError):
         DriftReportArtifact.model_validate(report)
-
 
 def test_round_trip_preserves_required_identity() -> None:
     from doc_engine.pipeline.artifacts import DriftReportArtifact
@@ -129,7 +124,6 @@ def test_round_trip_preserves_required_identity() -> None:
     assert dumped["results"][0]["status"] == spring_drift_check.STATUS_UNCHANGED
     assert dumped["results"][0]["file"] == "src/A.java"
     assert dumped["results"][0]["rule_id"] == "web__rest_controller"
-
 
 def test_check_drift_emits_schema_version(tmp_path: Path) -> None:
     """Empty repo + empty signatures → early-exit path; version must ride the dict."""
@@ -145,18 +139,15 @@ def test_check_drift_emits_schema_version(tmp_path: Path) -> None:
     assert report["schema_version"] == spring_drift_check.DRIFT_REPORT_SCHEMA_VERSION
     assert set(report) >= _LEGACY_ROOT_KEYS | {"schema_version"}
 
-
 def test_drift_report_registered() -> None:
     assert "drift_report" in ARTIFACT_MODELS
     assert ARTIFACT_FILENAMES["drift_report"] == "drift_report.json"
-
 
 def test_validate_artifact_file_accepts_fixture(tmp_path: Path) -> None:
     path = tmp_path / "drift_report.json"
     path.write_text(json.dumps(characterization_report(with_schema_version=True)), encoding="utf-8")
     model = validate_artifact_file("drift_report", path)
     assert model.schema_version == spring_drift_check.DRIFT_REPORT_SCHEMA_VERSION
-
 
 def test_validate_artifact_file_rejects_bad_status(tmp_path: Path) -> None:
     report = characterization_report(with_schema_version=True)
@@ -165,7 +156,6 @@ def test_validate_artifact_file_rejects_bad_status(tmp_path: Path) -> None:
     path.write_text(json.dumps(report), encoding="utf-8")
     with pytest.raises(ArtifactValidationError):
         validate_artifact_file("drift_report", path)
-
 
 def test_exported_schema_file_committed() -> None:
     from tests.conftest import REPO_ROOT

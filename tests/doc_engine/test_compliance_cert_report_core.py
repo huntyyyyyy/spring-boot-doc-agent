@@ -27,6 +27,10 @@ from doc_engine.pipeline.stages import build_stage_specs
 from tests.conftest import FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from tests.doc_engine.cert_helpers import ok_stages_for
 
+import pytest
+
+pytestmark = pytest.mark.domain_compliance
+
 class CertificationReportCoreTest(unittest.TestCase):
     def test_all_ok_certified_true(self):
             gates = [

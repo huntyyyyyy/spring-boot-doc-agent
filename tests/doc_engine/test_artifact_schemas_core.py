@@ -25,22 +25,21 @@ from doc_engine.pipeline.validation import (
 from tests.conftest import FIXTURE_SNAPSHOT_PATH, REPO_ROOT
 from tests.doc_engine.cert_helpers import ok_stages_for
 
+pytestmark = pytest.mark.domain_schemas
+
 def spring_signals_path():
     return FIXTURE_SNAPSHOT_PATH
-
 
 def test_spring_signals_fixture_validates(spring_signals_path):
     model = validate_artifact_file("spring_signals", spring_signals_path)
     assert isinstance(model, SpringSignalsArtifact)
     assert model.schema_version >= 2
 
-
 def test_spring_signals_rejects_low_schema_version(spring_signals_path):
     data = json.loads(spring_signals_path.read_text(encoding="utf-8"))
     data["schema_version"] = 1
     with pytest.raises((ValidationError, ArtifactValidationError)):
         SpringSignalsArtifact.model_validate(data)
-
 
 def test_groups_minimal_valid():
     artifact = GroupsArtifact.model_validate({
@@ -55,7 +54,6 @@ def test_groups_minimal_valid():
     })
     assert artifact.num_groups == 1
 
-
 def test_summaries_valid_entry():
     SummariesArtifact.model_validate([{
         "file": "Invoice.java",
@@ -67,7 +65,6 @@ def test_summaries_valid_entry():
         "spring_role": "entity",
         "evidence": [{"line": 10, "what": "entity mapping"}],
     }])
-
 
 def test_summaries_invalid_spring_role():
     with pytest.raises(ValidationError):
@@ -82,7 +79,6 @@ def test_summaries_invalid_spring_role():
             "evidence": [],
         }])
 
-
 def test_interview_answers_from_local_target_repo():
     """Optional live artifact: put interview_answers.json under gitignored target-repo/."""
     path = REPO_ROOT / "target-repo" / "interview_answers.json"
@@ -92,17 +88,14 @@ def test_interview_answers_from_local_target_repo():
     assert isinstance(model, InterviewAnswersArtifact)
     assert len(model.root) > 0
 
-
 def test_validate_artifacts_in_dir_empty(tmp_path):
     assert validate_artifacts_in_dir(tmp_path) == []
-
 
 def test_validate_artifacts_require_missing_fails(tmp_path):
     from doc_engine.tools import validate_artifacts as va
 
     code = va.main(["--all", str(tmp_path), "--require", "spring_signals"])
     assert code == 1
-
 
 def test_validate_artifacts_require_present_passes(tmp_path):
     from doc_engine.scanning.gap_probe import run_gap_probe
@@ -123,7 +116,6 @@ def test_validate_artifacts_require_present_passes(tmp_path):
     )
     code = va.main(["--all", str(tmp_path), "--require", "spring_signals"])
     assert code == 0
-
 
 def test_artifact_filenames_cover_models():
     assert set(ARTIFACT_FILENAMES) == set(ARTIFACT_MODELS)

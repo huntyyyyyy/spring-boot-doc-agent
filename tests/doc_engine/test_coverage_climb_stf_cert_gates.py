@@ -21,6 +21,8 @@ from stf.schemas.blockers import BlockerClass
 from stf.validators import lint_tasks as lint_mod
 from tests.stf.conftest import build_minimal_valid_tasks
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_emit_certification_with_notice_and_failure(tmp_path: Path) -> None:
     log = phase_support.Log(tmp_path / "run.log")
     try:
@@ -44,7 +46,6 @@ def test_emit_certification_with_notice_and_failure(tmp_path: Path) -> None:
         assert "stages:" in summary
     finally:
         log.close()
-
 
 def test_write_certification_finish_uncertified(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -75,7 +76,6 @@ def test_write_certification_finish_uncertified(
     finally:
         log.close()
 
-
 def test_run_drift_with_prior_signals(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     log = phase_support.Log(tmp_path / "run.log")
     try:
@@ -98,7 +98,6 @@ def test_run_drift_with_prior_signals(tmp_path: Path, monkeypatch: pytest.Monkey
     finally:
         log.close()
 
-
 def test_finding_coverage_requires_critical_inv() -> None:
     tasks = build_minimal_valid_tasks()
     spec = SimpleNamespace(finding_ids=["C99", "N2"])
@@ -107,7 +106,6 @@ def test_finding_coverage_requires_critical_inv() -> None:
     tasks.tasks[0].inputs.append({"origin": "INV-C99", "datum": "x"})
     assert implement_mod._finding_coverage(tasks, spec) is True
 
-
 def test_wrapper_command_present(tmp_path: Path) -> None:
     assert spring_mod._wrapper_command(str(tmp_path), "gradlew", "build") is None
     (tmp_path / "gradlew").write_text("#!/bin/sh\n", encoding="utf-8")
@@ -115,7 +113,6 @@ def test_wrapper_command_present(tmp_path: Path) -> None:
     assert cmd is not None and "gradlew" in cmd
     assert spring_mod._first_wrapper_command(str(tmp_path), ("missing", "gradlew"), "g") is not None
     assert spring_mod._first_wrapper_command(str(tmp_path), ("missing",), "g") is None
-
 
 def test_plan_gate_fails_on_lint(monkeypatch: pytest.MonkeyPatch) -> None:
     tasks = build_minimal_valid_tasks()
@@ -132,7 +129,6 @@ def test_plan_gate_fails_on_lint(monkeypatch: pytest.MonkeyPatch) -> None:
     with pytest.raises(implement_mod.PlanGateError, match="plan gate failed"):
         implement_mod.plan_gate(tasks, None)
 
-
 def test_run_waves_and_constitution(tmp_path: Path) -> None:
     store = TasksStore(tmp_path)
     store.write_tasks(build_minimal_valid_tasks())
@@ -147,7 +143,6 @@ def test_run_waves_and_constitution(tmp_path: Path) -> None:
     text = implement_mod.constitution_excerpts(tmp_path, max_chars=100)
     assert "CONSTRAINTS.md" in text and "CLAUDE.md" in text
 
-
 def test_append_blocker_stalls(tmp_path: Path) -> None:
     store = TasksStore(tmp_path)
     store.write_tasks(build_minimal_valid_tasks())
@@ -161,7 +156,6 @@ def test_append_blocker_stalls(tmp_path: Path) -> None:
     )
     assert blocker.id.startswith("B")
     assert store.load_tasks().ledger.value == "stall"
-
 
 def test_mutate_tasks_modes() -> None:
     tasks = build_minimal_valid_tasks()

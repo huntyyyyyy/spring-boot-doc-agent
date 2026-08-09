@@ -20,6 +20,10 @@ from doc_engine.tools.certification import verify_certification
 from tests.doc_engine.cert_helpers import ok_det_stages_for, ok_stages_for
 from tests.support.live_gates.fixtures import _live_ok_gates, _plant_weak_docs, _mock_non_citation_gates
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 def test_certified_profile_fails_live_gates_on_weak_citations(monkeypatch):
     """B3: certified ⇒ strict citations; planted untagged claim fails the gate."""
     with tempfile.TemporaryDirectory() as tmp:
@@ -43,7 +47,6 @@ def test_certified_profile_fails_live_gates_on_weak_citations(monkeypatch):
         data = json.loads((out / "certification.json").read_text(encoding="utf-8"))
         assert data["certified"] is False
         assert any("citation_coverage" in f for f in data["failures"])
-
 
 def test_non_certified_profile_allows_weak_citations_as_worklist(monkeypatch):
     """B3: deterministic_only keeps citation_coverage as a worklist (exit 0)."""
@@ -76,7 +79,6 @@ def test_non_certified_profile_allows_weak_citations_as_worklist(monkeypatch):
         assert code == 0
         data = json.loads((out / "certification.json").read_text(encoding="utf-8"))
         assert data["certified"] is True
-
 
 def test_force_strict_citations_overrides_non_certified_profile(monkeypatch):
     with tempfile.TemporaryDirectory() as tmp:

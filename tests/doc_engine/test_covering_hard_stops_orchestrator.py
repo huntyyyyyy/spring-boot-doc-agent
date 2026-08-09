@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _complete_receipt, _kafka_signals
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class OrchestratorBarrierTest(unittest.TestCase):
     def test_run_scan_missing_receipt_refuses(self):
         """Deviation: scanner without covering_receipt still greens Path A."""

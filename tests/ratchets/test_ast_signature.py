@@ -26,8 +26,11 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 
 import _ast_signature as sig  # noqa: E402
 
-BASE = 'def f(x):\n    """Does a thing."""\n    return x + 1\n'
+import pytest
 
+pytestmark = pytest.mark.domain_ci_meta
+
+BASE = 'def f(x):\n    """Does a thing."""\n    return x + 1\n'
 
 class NormalizationMatrixTest(unittest.TestCase):
     """One test per row of the measured matrix. Together these are the
@@ -78,7 +81,6 @@ class NormalizationMatrixTest(unittest.TestCase):
         self.assertNotEqual(sig.signature_of_source(BASE, "raw"),
                             sig.signature_of_source(spaced, "raw"))
 
-
 class LevelIsPartOfTheDataTest(unittest.TestCase):
     """A digest without its relation is not comparable to anything."""
 
@@ -118,7 +120,6 @@ class LevelIsPartOfTheDataTest(unittest.TestCase):
         self.assertEqual(level, "t1")
         self.assertEqual(len(digest), 64)
 
-
 class RealModuleTest(unittest.TestCase):
     """Against this repo's own files. A toy fixture can satisfy the matrix
     above while proving nothing about the codebase the decision was made for."""
@@ -157,7 +158,6 @@ class RealModuleTest(unittest.TestCase):
         detail: it was t1 until measurement overturned it."""
         self.assertEqual(sig.DEFAULT_LEVEL, "t2")
         self.assertTrue(sig.signature_of_source(BASE).startswith("t2:"))
-
 
 if __name__ == "__main__":
     unittest.main()

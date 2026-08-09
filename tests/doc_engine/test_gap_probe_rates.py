@@ -18,6 +18,10 @@ from doc_engine.scanning.gap_probe import (
 from doc_engine.scanning.symbol import format_type
 from tests.support.gap_probe.report_factory import _report
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 def test_healthy_dual_emit_join_and_sym() -> None:
     """Deviation: healthy Path A + facts emit reports R_join/R_sym < 1."""
     signals = {
@@ -50,7 +54,6 @@ def test_healthy_dual_emit_join_and_sym() -> None:
     assert failures == []
     assert report["rates"]["R_sym"]["callable_denominator"] == 1
 
-
 def test_vacuous_uncertainty_is_null_not_zero() -> None:
     """Deviation: empty dens published U=0.0 as if healthy Stage-0."""
     from doc_engine.scanning.gap_probe import compute_uncertainty
@@ -61,14 +64,12 @@ def test_vacuous_uncertainty_is_null_not_zero() -> None:
     assert block["unproven"] == 3
     assert block["support"] == []
 
-
 def test_vacuous_without_s3_stamps() -> None:
     from doc_engine.scanning.gap_probe import compute_uncertainty
 
     block = compute_uncertainty(None, None, None, None)
     assert block["U"] is None
     assert block["claim"] == "vacuous_no_support"
-
 
 def test_uncertainty_propagates_absence_unproven_counts() -> None:
     from doc_engine.scanning.gap_probe import compute_uncertainty
@@ -81,7 +82,6 @@ def test_uncertainty_propagates_absence_unproven_counts() -> None:
     assert block["unproven"] == 5
     assert block["claim"] == "comparison_index_with_unscored_s3"
 
-
 def test_partial_support_claim() -> None:
     """Deviation: one measured dens + imputed rest still looked like full U."""
     from doc_engine.scanning.gap_probe import compute_uncertainty
@@ -92,13 +92,11 @@ def test_partial_support_claim() -> None:
     assert block["support"] == ["coll"]
     assert set(block["imputed_axes"]) == {"join", "lin", "code"}
 
-
 def test_unscored_s3_outranks_partial_support() -> None:
     from doc_engine.scanning.gap_probe import compute_uncertainty
 
     block = compute_uncertainty(0.0, None, None, None, unproven=1)
     assert block["claim"] == "comparison_index_with_unscored_s3"
-
 
 def test_write_gap_report_roundtrip(tmp_path) -> None:
     """Deviation: gap_report artifacts not written deterministically."""
@@ -118,7 +116,6 @@ def test_write_gap_report_roundtrip(tmp_path) -> None:
     assert len(lines) == 1
     assert '"subject": "User"' in lines[0]
 
-
 def test_rate_registry_keys_match_schema_rates() -> None:
     """OCP registry must expose exactly the closed R_* schema keys."""
     from doc_engine.scanning.gap_probe import RATE_REGISTRY
@@ -132,7 +129,6 @@ def test_rate_registry_keys_match_schema_rates() -> None:
         "R_absence",
         "R_recall",
     )
-
 
 def test_registry_hooks_drive_uncertainty_and_design_reopen() -> None:
     """Assembly hooks are registry-owned; report only adds truncation_alarm."""

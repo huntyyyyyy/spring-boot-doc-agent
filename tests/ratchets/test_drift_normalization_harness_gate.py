@@ -14,6 +14,11 @@ from doc_engine.scanning import _scanner_astgrep as astgrep_backend
 from doc_engine.tools import spring_drift_check, spring_signal_scan
 import drift_match_normalizers as norms
 import java_perturbations as perturb
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 FIXTURES = os.path.join(SCRIPT_DIR, "fixtures", "spring_signals")
 _BILLING = os.path.join("src", "main", "java", "com", "example", "billing")
@@ -81,7 +86,6 @@ class Test00HarnessValidityGate(unittest.TestCase):
             "protecting against nothing and this suite would be overstating "
             "its own rigour")
 
-
 class Test01FormattingMustNotProduceDrift(unittest.TestCase):
     """Arm 1 against the shipped normalizer. These are the properties tier 2
     already holds, and they are pinned so a change to the scanner cannot
@@ -102,7 +106,6 @@ class Test01FormattingMustNotProduceDrift(unittest.TestCase):
         """Distinguishes "the citation moved" from "the citation's line number
         moved" -- tier 2 must only care about the first."""
         self.assertEqual([], self._false_positives("blank_lines"))
-
 
 class Test02TheKnownGap(unittest.TestCase):
     """The one formatting class tier 2 gets wrong today, pinned at its measured

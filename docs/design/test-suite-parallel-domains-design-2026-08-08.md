@@ -144,7 +144,7 @@ See segment **06**. Short form:
 | ID | Ticket | Est | Acceptance |
 | --- | --- | --- | --- |
 | TEST1-1 | Register markers in `pyproject.toml`; document in CONTRIBUTING | 0.5d | `pytest --markers` lists domains; claims paths OK |
-| TEST1-2 | Label ≥80% of `tests/doc_engine` by prefix map; rest explicit unclassified | 1–2d | inventory script or derived count; unclassified ≤ agreed ceiling |
+| TEST1-2 | Classify ``tests/doc_engine`` to **meeting rate ≥98.7** (same floor as Cover%); debt inventory = ``domain_unclassified`` only — once reclassified, a module leaves that inventory (gap-average analogy) | 1–2d | `test_domain_markers_check` prints meeting% and debt count; meeting ≥98.7 |
 | TEST1-3 | CI: parallel jobs for safe domains on ABI cells; serial job for integration/unclassified | 1d | workflow green; wall-clock note in PR |
 | TEST1-4 | Ratchet: new test file without `domain_*` fails check (hermetic) | 0.5d | red test / ci script |
 | TEST1-5 | Keep 3.11 oracle cov as single writer (markers optional for selection only) | 0.5d | still one `coverage.xml`; PathCohesion OK |

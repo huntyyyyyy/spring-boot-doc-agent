@@ -12,6 +12,11 @@ from doc_engine.tools import (
     partition_repo,
     spring_signal_scan,
 )
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 from tests.support.capacity_preflight.fixtures import (
     _edges_data,
@@ -40,7 +45,6 @@ class FanoutArithmeticTest(unittest.TestCase):
             "/fake/repo", groups_data=_groups_data(1), edges=_edges_data(1),
         )
         self.assertEqual(report["total_fanout"], 19)
-
 
 class ThresholdWarningTest(unittest.TestCase):
     def test_no_warnings_under_all_thresholds(self):

@@ -18,6 +18,10 @@ from pathlib import Path
 
 from doc_engine.paths import repo_root
 
+import pytest
+
+pytestmark = pytest.mark.domain_adapters
+
 PLUGIN_ROOT_REF = re.compile(
     r"\$\{CLAUDE_PLUGIN_ROOT\}(/[^\s`\"')]+)"
 )
@@ -32,16 +36,13 @@ ALLOWED_DOC_ENGINE_PREFIXES = (
     "doc-engine pipeline run --help",
 )
 
-
 def _adapter() -> Path:
     return repo_root() / "adapters" / "claude"
-
 
 def _iter_adapter_text_files():
     adapter = _adapter()
     for pattern in ("skills/**/*.md", "agents/**/*.md", "hooks/**/*", "*.md", "plugin.json"):
         yield from adapter.glob(pattern)
-
 
 class ClaudeAdapterPathResolveTest(unittest.TestCase):
     def test_marketplace_points_at_adapters_claude(self):
@@ -115,7 +116,6 @@ class ClaudeAdapterPathResolveTest(unittest.TestCase):
         # pipe-exit lives in .claude/settings.json only — not plugin hooks.json
         self.assertNotIn("check_pipe_exit_code.py", joined)
 
-
 class CliFacadeSmokeTest(unittest.TestCase):
     def _help(self, *args: str) -> subprocess.CompletedProcess:
         return subprocess.run(
@@ -145,7 +145,6 @@ class CliFacadeSmokeTest(unittest.TestCase):
         proc = self._help("scan", "--help")
         self.assertEqual(proc.returncode, 0, proc.stderr)
         self.assertIn("spring_signals.json", proc.stdout)
-
 
 class SkillSourceOfTruthTest(unittest.TestCase):
     """Root skills/ is a synced mirror of adapters/claude/skills product skills."""
@@ -187,7 +186,6 @@ class SkillSourceOfTruthTest(unittest.TestCase):
             tax = base / "document-spring-repo" / "references" / "doc-taxonomy.md"
             self.assertTrue(tax.is_file(), f"missing {tax}")
 
-
 class GitHubActionContractTest(unittest.TestCase):
     def test_root_action_yml_declares_certification_outputs(self):
         text = (repo_root() / "action.yml").read_text(encoding="utf-8")
@@ -201,7 +199,6 @@ class GitHubActionContractTest(unittest.TestCase):
         github_adapter = repo_root() / "adapters" / "github"
         self.assertTrue((github_adapter / "README.md").is_file())
         self.assertFalse((github_adapter / "action.yml").exists())
-
 
 if __name__ == "__main__":
     unittest.main()

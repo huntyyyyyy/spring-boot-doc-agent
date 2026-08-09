@@ -24,6 +24,8 @@ import doc_engine.scanning.support._codeql_cli as cli_mod
 import doc_engine.scanning.support._codeql_database as db_mod
 import doc_engine.scanning.support._codeql_queries as queries_mod
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_detect_build_command_prefers_gradlew(tmp_path: Path) -> None:
     (tmp_path / "gradlew").write_text("#!/bin/sh\n", encoding="utf-8")
     cmd = spring_mod.detect_build_command(str(tmp_path))
@@ -31,13 +33,11 @@ def test_detect_build_command_prefers_gradlew(tmp_path: Path) -> None:
     assert "gradlew" in cmd
     assert "compileJava" in cmd
 
-
 def test_detect_build_command_maven_wrapper(tmp_path: Path) -> None:
     (tmp_path / "mvnw").write_text("#!/bin/sh\n", encoding="utf-8")
     cmd = spring_mod.detect_build_command(str(tmp_path))
     assert cmd is not None
     assert "mvnw" in cmd
-
 
 def test_detect_build_command_gradle_on_path(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -48,7 +48,6 @@ def test_detect_build_command_gradle_on_path(
     assert cmd is not None
     assert "gradle" in cmd
 
-
 def test_detect_build_command_maven_on_path(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -58,10 +57,8 @@ def test_detect_build_command_maven_on_path(
     assert cmd is not None
     assert "mvn" in cmd
 
-
 def test_detect_build_command_returns_none_without_markers(tmp_path: Path) -> None:
     assert spring_mod.detect_build_command(str(tmp_path)) is None
-
 
 def test_prepare_codeql_build_skips_when_codeql_absent(tmp_path: Path) -> None:
     assert (
@@ -69,14 +66,12 @@ def test_prepare_codeql_build_skips_when_codeql_absent(tmp_path: Path) -> None:
         == "gradlew build"
     )
 
-
 def test_prepare_codeql_build_detects_or_raises(tmp_path: Path) -> None:
     with pytest.raises(spring_mod.CodeQLScannerError, match="Could not detect"):
         spring_mod._prepare_codeql_build_command(["codeql"], str(tmp_path), None)
     (tmp_path / "gradlew").write_text("x", encoding="utf-8")
     cmd = spring_mod._prepare_codeql_build_command(["codeql"], str(tmp_path), None)
     assert "gradlew" in cmd
-
 
 def test_prepare_codeql_build_wraps_validation_error(tmp_path: Path) -> None:
     with pytest.raises(spring_mod.CodeQLScannerError):

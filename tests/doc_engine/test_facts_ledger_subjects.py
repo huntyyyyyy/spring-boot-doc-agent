@@ -13,10 +13,11 @@ from doc_engine.scanning.facts import (
 )
 from doc_engine.scanning.symbol import SymbolError, parse
 
+pytestmark = pytest.mark.domain_stage0
+
 def test_facts_path_is_sibling_of_signals_out(tmp_path: Path) -> None:
     out = tmp_path / "run" / "spring_signals.json"
     assert facts_path_for_signals_out(out) == (tmp_path / "run" / "facts.jsonl").resolve()
-
 
 def test_evidence_subject_remains_file_path_not_symbol() -> None:
     """Deviation: evidence rows wrongly use claim-symbols as subjects."""
@@ -42,7 +43,6 @@ def test_evidence_subject_remains_file_path_not_symbol() -> None:
         parse(evidence[0]["subject"])
     # Covering writers stamp UNPROVEN when S1 proof is absent from signals.
     assert any(f.get("predicate") == "UNPROVEN" for f in facts)
-
 
 def test_contested_maps_to_distinct_symbols_and_stable_display() -> None:
     """Deviation: contested MAPS_TO collapses to one subject or loses display_name/fqcn."""
@@ -96,7 +96,6 @@ def test_contested_maps_to_distinct_symbols_and_stable_display() -> None:
     }
     assert {f["object"] for f in maps} == {"a_user", "b_user"}
     assert all(f["qualifiers"].get("status") == "contested" for f in maps)
-
 
 def test_uncontested_maps_to_requires_symbol_and_qualifiers() -> None:
     """Deviation: MAPS_TO emits bare class name or omits display_name/fqcn."""

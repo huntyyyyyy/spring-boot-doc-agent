@@ -8,6 +8,11 @@ import tempfile
 import unittest
 from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 FIXTURES = SCRIPTS_DIR / "coverage" / "rule_fixtures"
 import java_perturbations as perturb
 import set_delta as sd
@@ -66,7 +71,6 @@ class FormattingIsMeaningPreservingTest(CorpusCase):
             "wrap_annotation_args no longer moves the set -- the first-line "
             "match defect appears fixed; see this test's docstring")
 
-
 class EncodingAndLineEndingsTest(CorpusCase):
     """Closes a bound test_drift_normalization states it does not cover:
     'No encoding or line-ending perturbation.'"""
@@ -83,7 +87,6 @@ class EncodingAndLineEndingsTest(CorpusCase):
         for java in repo.glob("*.java"):
             java.write_bytes(b"\xef\xbb\xbf" + java.read_bytes())
         self.assertRelation(repo, sd.unchanged(), "a BOM moved the evidence set")
-
 
 class IrrelevantFileTypesTest(CorpusCase):
     """Adding a file no Java rule can match must not move Java members."""
@@ -106,7 +109,6 @@ class IrrelevantFileTypesTest(CorpusCase):
                                           encoding="utf-8")
         self.assertRelation(repo, sd.confined_to(["Broken.java"]),
                             "an unparseable file disturbed other files")
-
 
 class BuildFileTypeTest(CorpusCase):
     """The .gradle axis.

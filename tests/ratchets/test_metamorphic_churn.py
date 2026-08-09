@@ -8,6 +8,11 @@ import tempfile
 import unittest
 from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
+
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 FIXTURES = SCRIPTS_DIR / "coverage" / "rule_fixtures"
 import java_perturbations as perturb
 import set_delta as sd
@@ -30,7 +35,6 @@ class SingleEditLocalityTest(CorpusCase):
         self.assertRelation(repo, sd.confined_to(["ApiSurface.java"]),
                             "a one-file edit reached other files")
 
-
 class BulkRenameTest(CorpusCase):
     """Locality at scale. A rename moves every member of the renamed file,
     so the relation is confinement to the union of old and new names."""
@@ -44,7 +48,6 @@ class BulkRenameTest(CorpusCase):
             java.rename(new)
         self.assertRelation(repo, sd.confined_to(affected),
                             "a bulk rename moved members of untouched files")
-
 
 class ChurnIsIdempotentTest(CorpusCase):
     """Sustained churn. Applying a meaning-preserving edit k times must land
@@ -65,7 +68,6 @@ class ChurnIsIdempotentTest(CorpusCase):
         self.assertRelation(repo, sd.unchanged(),
                             f"{self.REPEATS} rounds of reindent moved the set")
 
-
 class AppendOnlyGrowthTest(CorpusCase):
     def test_adding_files_only_grows_the_set(self) -> None:
         repo = self.variant()
@@ -76,7 +78,6 @@ class AppendOnlyGrowthTest(CorpusCase):
         self.assertRelation(repo, sd.grows_only(),
                             "adding files removed an existing member")
 
-
 class MassDeletionTest(CorpusCase):
     def test_deleting_files_removes_only_their_members(self) -> None:
         repo = self.variant()
@@ -86,7 +87,6 @@ class MassDeletionTest(CorpusCase):
         self.assertRelation(repo, sd.confined_to(removed),
                             "deleting files disturbed the survivors")
 
-
 class RescanDeterminismTest(CorpusCase):
     """An invariant, not a probe: two scans of an unchanged tree must be
     equal as sets. Stated because directional-tests rule 4 records a
@@ -94,7 +94,6 @@ class RescanDeterminismTest(CorpusCase):
 
     def test_two_scans_of_the_same_tree_agree(self) -> None:
         self.assertEqual(sd.signals_set(BASE), BASE_SET)
-
 
 class DuplicationScalesTest(CorpusCase):
     """Whole-tree duplication must multiply every rule's count by exactly 2."""
@@ -107,7 +106,6 @@ class DuplicationScalesTest(CorpusCase):
             shutil.copy2(java, copy_dir / java.name)
         problems = sd.check_scaling(BASE_SET, sd.signals_set(repo), 2)
         self.assertEqual(problems, [], "\n".join(problems))
-
 
 class HarnessIsNotVacuousTest(CorpusCase):
     """Proves the machinery above can fail. Without this, every assertion in

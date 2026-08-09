@@ -44,6 +44,10 @@ from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
 from tests.support.covering_hard_stops.fixtures import _absence_stamp_pairs, _assert_absence_stamps_match_writer, _complete_receipt, _kafka_signals
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
+
 class CallableAbsenceFalsifiersTest(unittest.TestCase):
     def test_astgrep_receipt_incomplete_forces_unproven(self):
             """Deviation: ABSENCE emitted when rule-pack receipt is incomplete."""

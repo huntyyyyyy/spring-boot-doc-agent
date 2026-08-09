@@ -13,6 +13,8 @@ from doc_engine.scanning.gap_probe import absence_recall as absence
 from doc_engine.tools import semantic_eval_helpers as seh
 from doc_engine.tools import spring_signal_scan as sss
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_run_ast_grep_missing_and_nonzero(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sss.shutil, "which", lambda _b: None)
     with pytest.raises(sss.AstGrepNotFoundError):
@@ -26,7 +28,6 @@ def test_run_ast_grep_missing_and_nonzero(monkeypatch: pytest.MonkeyPatch) -> No
     with pytest.raises(sss.AstGrepError, match="status 2"):
         sss.run_ast_grep("ast-grep", ".")
 
-
 def test_run_ast_grep_bad_json(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sss.shutil, "which", lambda _b: "/bin/ast-grep")
     monkeypatch.setattr(
@@ -36,7 +37,6 @@ def test_run_ast_grep_bad_json(monkeypatch: pytest.MonkeyPatch) -> None:
     )
     with pytest.raises(sss.AstGrepError, match="not valid JSON"):
         sss.run_ast_grep("ast-grep", ".")
-
 
 def test_strip_and_emit_helpers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys) -> None:
     result = {
@@ -73,7 +73,6 @@ def test_strip_and_emit_helpers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
     assert emit["facts_total"] == 1
     sss._print_scan_summary(str(out), cov, facts_path, emit, stripped)
     assert "Wrote" in capsys.readouterr().out
-
 
 def test_spring_signal_scan_main_paths(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -127,7 +126,6 @@ def test_spring_signal_scan_main_paths(
         lambda *a, **k: (_ for _ in ()).throw(sss.CodeQLScannerError("nope")),
     )
     assert sss.main() == 1
-
 
 def test_absence_rate_block_and_measure() -> None:
     zero = absence._absence_rate_block(0, None)
@@ -184,7 +182,6 @@ def test_absence_rate_block_and_measure() -> None:
     )
     assert not absence._astgrep_receipt_complete({"receipts": []})
     assert absence._resolve_covering_path(signals_path=None, covering_path=None) is None
-
 
 def test_receipt_complete_helpers() -> None:
     assert absence._receipt_complete_for_scanner("x", "filesystem") is False

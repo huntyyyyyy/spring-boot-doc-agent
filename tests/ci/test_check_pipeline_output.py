@@ -27,13 +27,15 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 from doc_engine.tools import check_pipeline_output as c
 from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
 
-SCRIPT_DIR = SCRIPTS_DIR
+import pytest
 
+pytestmark = pytest.mark.domain_ci_meta
+
+SCRIPT_DIR = SCRIPTS_DIR
 
 def write_docs(docs_dir, names, body="# Title\n\nA claim. [Unknown — not evidenced in code, not covered in interview]\n"):
     for name in names:
         (docs_dir / f"{name}.md").write_text(body, encoding="utf-8")
-
 
 class FileSetTest(unittest.TestCase):
     def setUp(self):
@@ -67,7 +69,6 @@ class FileSetTest(unittest.TestCase):
         issues = c.check_file_set(self.tmp)
         self.assertTrue(any("glossary.md" in i for i in issues),
                         "the destroyed sibling must be named, not just counted")
-
 
 class TagAndCitationTest(unittest.TestCase):
     def setUp(self):
@@ -104,7 +105,6 @@ class TagAndCitationTest(unittest.TestCase):
         write_docs(self.tmp, ["readme"], "# R\n\nX. [Evidenced — src/Ghost.java:2]\n")
         self.assertEqual(c.check_tags_and_citations(self.tmp, None), [])
 
-
 class PorcelainParseTest(unittest.TestCase):
     def test_plain_paths(self):
         self.assertEqual(c.parse_porcelain("?? docs/readme.md\n M src/A.java\n"),
@@ -118,7 +118,6 @@ class PorcelainParseTest(unittest.TestCase):
 
     def test_blank_lines_ignored(self):
         self.assertEqual(c.parse_porcelain("\n\n"), [])
-
 
 class WriteScopeTest(unittest.TestCase):
     """The structural replacement for doc-writer.md's 'write to exactly the
@@ -167,7 +166,6 @@ class WriteScopeTest(unittest.TestCase):
         finally:
             shutil.rmtree(plain, ignore_errors=True)
 
-
 class ExitCodeTest(unittest.TestCase):
     def test_clean_is_zero(self):
         self.assertEqual(c.exit_code([]), 0)
@@ -177,7 +175,6 @@ class ExitCodeTest(unittest.TestCase):
 
     def test_there_is_no_enforce_toggle(self):
         self.assertFalse(hasattr(c, "ENFORCE"))
-
 
 if __name__ == "__main__":
     unittest.main()

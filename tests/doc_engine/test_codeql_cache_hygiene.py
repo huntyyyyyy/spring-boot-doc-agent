@@ -9,6 +9,7 @@ import pytest
 
 from doc_engine.scanning.support import _codeql_runner as runner
 
+pytestmark = pytest.mark.domain_stage0
 
 def test_cache_dir_under_xdg_and_chmod(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "xdg"))
@@ -17,7 +18,6 @@ def test_cache_dir_under_xdg_and_chmod(tmp_path: Path, monkeypatch):
     assert cache == tmp_path / "xdg" / "doc-engine" / "codeql-cache"
     assert cache.is_dir()
     assert not cache.is_symlink()
-
 
 @pytest.mark.skipif(not hasattr(os, "symlink"), reason="symlinks unavailable")
 def test_cache_dir_refuses_symlink_root(tmp_path: Path, monkeypatch):
@@ -33,7 +33,6 @@ def test_cache_dir_refuses_symlink_root(tmp_path: Path, monkeypatch):
     with pytest.raises(runner.CodeQLError, match="symlink"):
         runner._cache_dir()
 
-
 def test_ensure_regular_file_rejects_symlink(tmp_path: Path):
     target = tmp_path / "payload.json"
     target.write_text("[]", encoding="utf-8")
@@ -47,16 +46,13 @@ def test_ensure_regular_file_rejects_symlink(tmp_path: Path):
     with pytest.raises(runner.CodeQLError, match="non-regular"):
         runner._ensure_regular_file(link)
 
-
 def test_validate_cached_rows_rejects_non_list():
     with pytest.raises(runner.CodeQLError):
         runner._validate_cached_evidence_rows({"file": "a.java"})
 
-
 def test_validate_cached_rows_rejects_missing_file():
     with pytest.raises(runner.CodeQLError):
         runner._validate_cached_evidence_rows([{"line": 1}])
-
 
 def test_cache_key_includes_cli_version(tmp_path: Path):
     repo = tmp_path / "repo"

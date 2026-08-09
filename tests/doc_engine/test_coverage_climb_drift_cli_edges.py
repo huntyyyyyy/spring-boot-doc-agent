@@ -9,6 +9,8 @@ import pytest
 from doc_engine.tools import capacity_preflight as cap
 from doc_engine.tools import spring_drift_check as drift
 
+pytestmark = pytest.mark.domain_climb_sensor
+
 def test_drift_require_path_and_print(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -35,7 +37,6 @@ def test_drift_require_path_and_print(
     }
     drift._print_drift_summary(str(tmp_path / "out.json"), report)
     assert "Citations checked" in capsys.readouterr().out
-
 
 def test_unchanged_fast_path_and_process_stubs() -> None:
     signals = {

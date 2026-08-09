@@ -14,6 +14,10 @@ import check_repo_claims as crc
 from tests.conftest import REPO_ROOT
 from tests.support.repo_claims.tree import TreeCase, build_tree
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestBaseline(TreeCase):
     def test_baseline_absorbs_an_existing_finding_but_not_a_new_one(self) -> None:
         self.write("README.md", "See `scripts/nope.py`.\n")
@@ -57,7 +61,6 @@ class TestBaseline(TreeCase):
         self.write("README.md", "\n\n\n\nSee `scripts/nope.py`.\n")
         after = crc.check_references(self.dir, ["README.md"])[0].fingerprint
         self.assertEqual(before, after)
-
 
 class TestBacktest(unittest.TestCase):
     """Against the real tree, reconstructing defects this repo actually had.
@@ -103,7 +106,6 @@ class TestBacktest(unittest.TestCase):
             "CONSTRAINTS.md",
             lambda t: t + "\n\nThe checker `scripts/verify_llms_docs.py` runs in CI.\n")
         self.assertGreaterEqual(found, 1)
-
 
 class TestUnchangedSince(unittest.TestCase):
     """The stability predicate. It does not assert a claim is true -- nothing

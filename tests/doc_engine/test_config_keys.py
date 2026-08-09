@@ -13,8 +13,11 @@ import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.scanning.support._config_keys import extract_config_keys
 
-SCRIPT_DIR = SCRIPTS_DIR
+import pytest
 
+pytestmark = pytest.mark.domain_pipeline
+
+SCRIPT_DIR = SCRIPTS_DIR
 
 class YamlKeyExtractionTest(unittest.TestCase):
     def test_nested_leaf_keys_get_dotted_paths(self):
@@ -68,7 +71,6 @@ class YamlKeyExtractionTest(unittest.TestCase):
         text = "b: 1\na: 2\n"
         self.assertEqual(extract_config_keys(text, "x.yaml"), ["a", "b"])
 
-
 class PropertiesKeyExtractionTest(unittest.TestCase):
     def test_flat_dotted_keys_extracted_as_is(self):
         text = "spring.datasource.password=hunter2literal\nspring.datasource.url=${DB_URL}\n"
@@ -85,11 +87,9 @@ class PropertiesKeyExtractionTest(unittest.TestCase):
         text = "# a comment\n! another comment style\nserver.port=8080\n"
         self.assertEqual(extract_config_keys(text, "application.properties"), ["server.port"])
 
-
 class UnsupportedFileTypeTest(unittest.TestCase):
     def test_non_yaml_non_properties_file_returns_empty(self):
         self.assertEqual(extract_config_keys("FROM openjdk:17\nENV FOO=bar\n", "Dockerfile"), [])
-
 
 if __name__ == "__main__":
     unittest.main()

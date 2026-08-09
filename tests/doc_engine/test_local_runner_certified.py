@@ -8,6 +8,9 @@ from argparse import Namespace
 
 from tests.conftest import FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_integration
 
 class CertifiedMockIntegrationTest(unittest.TestCase):
     def test_certified_mock_profile_with_fixture_signals(self):
@@ -39,7 +42,6 @@ class CertifiedMockIntegrationTest(unittest.TestCase):
             self.assertTrue(cert["certified"])
             self.assertEqual(cert.get("generative_executor"), "mock")
             self.assertEqual(code, 0)
-
 
 if __name__ == "__main__":
     unittest.main()

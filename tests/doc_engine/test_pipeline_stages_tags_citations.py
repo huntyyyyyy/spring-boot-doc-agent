@@ -23,6 +23,11 @@ from doc_engine.tools.pipeline_validators import (
     validate_file_summarizer_entries,
     validate_gap_analyzer_questions,
 )
+
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 SCRIPT_DIR = SCRIPTS_DIR
 
 class TagFormatTest(unittest.TestCase):
@@ -64,7 +69,6 @@ class TagFormatTest(unittest.TestCase):
         # that limit explicitly rather than silently relying on it.
         self.assertEqual(find_malformed_tags(text), [])
         self.assertEqual(count_tags_by_kind(text)["evidenced"], 0)
-
 
 class EvidencedCitationResolutionTest(unittest.TestCase):
     def test_real_file_and_line_resolves(self):

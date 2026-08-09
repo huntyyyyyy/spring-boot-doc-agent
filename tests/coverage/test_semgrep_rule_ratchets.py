@@ -11,6 +11,10 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 import semgrep_rule_coverage as sc
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 class TestRatchet(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
@@ -60,7 +64,6 @@ class TestRatchet(unittest.TestCase):
         problems = sc.check_ratchet(collections.Counter())
         self.assertTrue(any("counts" in p for p in problems), problems)
 
-
 class TestFpRatchet(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
@@ -105,7 +108,6 @@ class TestFpRatchet(unittest.TestCase):
         sc.FP_BASELINE_FILE = self.real_fp
         sc.NEGATIVE_FIXTURE_DIR = self.real_neg
         self.assertEqual(sc.check_fp_ratchet(), [])
-
 
 class TestExitCodes(unittest.TestCase):
     """Assert the exit code, not an internal list -- the exit code is what CI

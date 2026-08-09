@@ -9,6 +9,9 @@ from stf.runners.store import SpecStore, TasksStore
 from stf.schemas.findings import Finding, FindingSeverity
 from tests.stf.conftest import build_minimal_valid_spec, build_minimal_valid_tasks
 
+import pytest
+
+pytestmark = pytest.mark.domain_stf
 
 def test_spec_and_tasks_round_trip_preserves_schema_version(tmp_path: Path) -> None:
     SpecStore(tmp_path).write_spec(build_minimal_valid_spec())
@@ -19,14 +22,12 @@ def test_spec_and_tasks_round_trip_preserves_schema_version(tmp_path: Path) -> N
     assert tasks.schema_version == 1
     assert (tmp_path / "SPEC.md").is_file()
 
-
 def test_finding_contract_rejects_empty_id() -> None:
     import pytest
     from pydantic import ValidationError
 
     with pytest.raises(ValidationError):
         Finding(id="", severity=FindingSeverity.CRITICAL, title="t", claim="c")
-
 
 def test_pr94_golden_findings_fixture_is_stable_json() -> None:
     path = Path("tests/fixtures/stf/pr94/findings.json")
