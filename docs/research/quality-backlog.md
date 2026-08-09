@@ -230,10 +230,12 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Active:** **E-COH1** — reshape provisional tip modules under cohesion bar (design memo); one stream.  
+**Paused (E-COH1 reshape):** inventory/reshape waits until post-merge gates green under E-HOT.  
+**Active Spec (no product code yet):** **E-HOT0** — post-merge gate repair under cohesion bar ([`process/21-…`](process/21-post-merge-gate-repair-cohesion-2026.md), design [`post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md)); Approve HOT1–HOT12 before E-HOT1 Implement.  
+**After E-HOT1 green:** resume **E-COH1** reshape (one stream).  
 **Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **push while local `pre_pr --full` / oracle cell is red**.
 
 ---
 
@@ -276,10 +278,21 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P17.0 | **E-COH0 Spec:** approve **COH1–COH12** (pause thrash; concept bar; façade≠private warehouse; seam map before moves) | **Approved** (2026-08-09) | design memo `spec_gate: APPROVED E-COH0` |
-| P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Active** | COH2–COH4 on touch; claims green |
+| P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Paused** (until E-HOT1 green) | COH2–COH4 on touch; claims green |
 | P17.2 | **E-COH2:** align reshape with E-TACH1/2 layers + interfaces | After E-TACH0 Approve | `tach check`; public `expose` only |
 
 Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md). Research: modularity/20. **Refuse** mechanical cut-and-paste that only clears LOC/statement gates.
+
+---
+
+## P18 — Post-merge gate repair (COH1 hotfix carve-out)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P18.0 | **E-HOT0 Spec:** approve **HOT1–HOT12** (G2 return/pass; patch-at-use; CQ slash-free scope; local-full before push; no tach-map / no E-STK1) | **Draft** (2026-08-09) | research 21 + design memo `spec_gate` → APPROVED |
+| P18.1 | **E-HOT1 Implement:** F1–F6 repairs only; `pre_pr --full` green before push | After Approve | focused suites + full local gate; finding disposition |
+
+Research: [`docs/research/process/21-post-merge-gate-repair-cohesion-2026.md`](process/21-post-merge-gate-repair-cohesion-2026.md). Design: [`docs/design/post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md). Finding: [`findings/2026-08-09-statement-split-cascade.md`](findings/2026-08-09-statement-split-cascade.md).
 
 ---
 
