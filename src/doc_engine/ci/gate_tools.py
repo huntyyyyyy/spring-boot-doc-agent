@@ -25,6 +25,37 @@ JSCPD_VERSION = "5.0.14"
 # Allows HEAD~N, origin/main, abbreviated SHAs, and @{upstream}-style specs.
 _GIT_REV_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/\-~^@{}]*$")
 
+# (platform.system(), arch_token) → optional native package names under node_modules.
+_JSCPD_NATIVE_PACKAGES: dict[tuple[str, str], tuple[str, ...]] = {
+    ("Windows", "x64"): ("jscpd-windows-x64-msvc",),
+    ("Darwin", "arm64"): ("jscpd-darwin-arm64",),
+    ("Darwin", "x64"): ("jscpd-darwin-x64",),
+    ("Linux", "x64"): ("jscpd-linux-x64-gnu", "jscpd-linux-x64-musl"),
+    ("Linux", "arm64"): ("jscpd-linux-arm64-gnu",),
+}
+
+
+def _git_show_toplevel(cwd: Path) -> Path | None:
+    completed = subprocess.run(
+        ["git", "-C", str(cwd), "rev-parse", "--show-toplevel"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        return None
+    top = completed.stdout.strip()
+    return Path(top) if top else None
+
+
+def _pyproject_doc_engine_root(cwd: Path) -> Path | None:
+    for candidate in (cwd, *cwd.parents):
+        has_pyproject = (candidate / "pyproject.toml").is_file()
+        has_package = (candidate / "src" / "doc_engine").is_dir()
+        if has_pyproject and has_package:
+            return candidate
+    return None
+
 
 def checkout_root(start: Path | None = None) -> Path:
     """Return the git worktree / repo root for the tree under *start* (or cwd).
@@ -33,21 +64,12 @@ def checkout_root(start: Path | None = None) -> Path:
     the installed ``doc_engine`` sources (editable installs + worktrees diverge).
     """
     cwd = (start or Path.cwd()).resolve()
-    completed = subprocess.run(
-        ["git", "-C", str(cwd), "rev-parse", "--show-toplevel"],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if completed.returncode == 0:
-        top = completed.stdout.strip()
-        if top:
-            return Path(top)
-    for candidate in (cwd, *cwd.parents):
-        if (candidate / "pyproject.toml").is_file() and (
-            candidate / "src" / "doc_engine"
-        ).is_dir():
-            return candidate
+    from_git = _git_show_toplevel(cwd)
+    if from_git is not None:
+        return from_git
+    from_markers = _pyproject_doc_engine_root(cwd)
+    if from_markers is not None:
+        return from_markers
     return cwd
 
 
@@ -85,20 +107,39 @@ def checked_path_under_repo(path: Path) -> Path:
     return resolved
 
 
+def _executable_name_aliases(name: str) -> list[str]:
+    names = [name]
+    if os.name == "nt":
+        names.extend((f"{name}.exe", f"{name}.cmd", f"{name}.bat"))
+    return names
+
+
+def _first_existing_executable(base: Path, names: list[str]) -> str | None:
+    for candidate_name in names:
+        candidate = base / candidate_name
+        if candidate.is_file():
+            return str(candidate)
+    return None
+
+
+def _find_next_to_interpreter(name: str) -> str | None:
+    sibling_dir = Path(sys.executable).resolve().parent
+    names = _executable_name_aliases(name)
+    for base in (sibling_dir, sibling_dir / "Scripts"):
+        found = _first_existing_executable(base, names)
+        if found is not None:
+            return found
+    return None
+
+
 def require_on_path(name: str) -> str:
     """Return an absolute executable path for *name*, or exit 2."""
     resolved = shutil.which(name)
     if resolved:
         return resolved
-    sibling_dir = Path(sys.executable).resolve().parent
-    names = [name]
-    if os.name == "nt":
-        names.extend((f"{name}.exe", f"{name}.cmd", f"{name}.bat"))
-    for base in (sibling_dir, sibling_dir / "Scripts"):
-        for candidate_name in names:
-            candidate = base / candidate_name
-            if candidate.is_file():
-                return str(candidate)
+    sibling = _find_next_to_interpreter(name)
+    if sibling:
+        return sibling
     print(
         f"error: {name!r} is not on PATH (install requirements-dev.txt / Node)",
         file=sys.stderr,
@@ -125,23 +166,17 @@ def _arch_token() -> str:
     return machine
 
 
+def _jscpd_native_binary_name(system: str) -> str:
+    return "jscpd.exe" if system == "Windows" else "jscpd"
+
+
 def _jscpd_native_candidates() -> list[Path]:
     """Platform optional-dependency binaries shipped with jscpd@5."""
     arch = _arch_token()
     system = platform.system()
     root = REPO_ROOT / "node_modules"
-    binary = "jscpd.exe" if system == "Windows" else "jscpd"
-    packages: list[str] = []
-    if system == "Windows" and arch == "x64":
-        packages.append("jscpd-windows-x64-msvc")
-    elif system == "Darwin" and arch == "arm64":
-        packages.append("jscpd-darwin-arm64")
-    elif system == "Darwin" and arch == "x64":
-        packages.append("jscpd-darwin-x64")
-    elif system == "Linux" and arch == "x64":
-        packages.extend(("jscpd-linux-x64-gnu", "jscpd-linux-x64-musl"))
-    elif system == "Linux" and arch == "arm64":
-        packages.append("jscpd-linux-arm64-gnu")
+    binary = _jscpd_native_binary_name(system)
+    packages = _JSCPD_NATIVE_PACKAGES.get((system, arch), ())
     return [root / pkg / "bin" / binary for pkg in packages]
 
 

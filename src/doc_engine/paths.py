@@ -7,12 +7,40 @@ still use CLAUDE_PLUGIN_ROOT for agent prompt paths only.
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Callable
 
 from doc_engine.core.walk import is_path_inside_root
 
 
 class PathValidationError(ValueError):
     """CLI/LLM-supplied path failed kind or containment checks."""
+
+
+_KIND_PREDICATES: dict[str, tuple[Callable[[Path], bool], str]] = {
+    "file": (Path.is_file, "not a file"),
+    "dir": (Path.is_dir, "not a directory"),
+}
+
+
+def _reject_dotdot_segments(raw: Path, *, display: str | Path) -> None:
+    if ".." in raw.parts:
+        raise PathValidationError(f"path must not contain '..': {display}")
+
+
+def _resolve_or_validation_error(raw: Path, *, display: str | Path) -> Path:
+    try:
+        return raw.resolve()
+    except OSError as exc:
+        raise PathValidationError(f"cannot resolve path: {display}") from exc
+
+
+def _require_existing_kind(resolved: Path, want: str) -> None:
+    entry = _KIND_PREDICATES.get(want)
+    if entry is None:
+        raise ValueError(f"unknown want={want!r}")
+    predicate, message = entry
+    if not predicate(resolved):
+        raise PathValidationError(f"{message}: {resolved}")
 
 
 def checked_path(path: str | Path, *, want: str) -> Path:
@@ -23,21 +51,20 @@ def checked_path(path: str | Path, *, want: str) -> Path:
     expects for CLI-tainted paths.
     """
     raw = Path(path)
-    if ".." in raw.parts:
-        raise PathValidationError(f"path must not contain '..': {path}")
-    try:
-        resolved = raw.resolve()
-    except OSError as exc:
-        raise PathValidationError(f"cannot resolve path: {path}") from exc
-    if want == "file":
-        if not resolved.is_file():
-            raise PathValidationError(f"not a file: {resolved}")
-    elif want == "dir":
-        if not resolved.is_dir():
-            raise PathValidationError(f"not a directory: {resolved}")
-    else:
-        raise ValueError(f"unknown want={want!r}")
+    _reject_dotdot_segments(raw, display=path)
+    resolved = _resolve_or_validation_error(raw, display=path)
+    _require_existing_kind(resolved, want)
     return resolved
+
+
+def _require_output_parent_and_file_slot(resolved: Path) -> None:
+    parent = resolved.parent
+    if not parent.is_dir():
+        raise PathValidationError(f"output parent is not a directory: {parent}")
+    if resolved.exists() and not resolved.is_file():
+        raise PathValidationError(
+            f"output path exists and is not a file: {resolved}"
+        )
 
 
 def checked_output_path(path: str | Path) -> Path:
@@ -47,18 +74,30 @@ def checked_output_path(path: str | Path) -> Path:
     refuses to overwrite a non-file at the destination.
     """
     raw = Path(path)
-    if ".." in raw.parts:
-        raise PathValidationError(f"path must not contain '..': {path}")
-    try:
-        resolved = raw.resolve()
-    except OSError as exc:
-        raise PathValidationError(f"cannot resolve path: {path}") from exc
-    parent = resolved.parent
-    if not parent.is_dir():
-        raise PathValidationError(f"output parent is not a directory: {parent}")
-    if resolved.exists() and not resolved.is_file():
-        raise PathValidationError(f"output path exists and is not a file: {resolved}")
+    _reject_dotdot_segments(raw, display=path)
+    resolved = _resolve_or_validation_error(raw, display=path)
+    _require_output_parent_and_file_slot(resolved)
     return resolved
+
+
+def _reject_unsafe_join_component(part: str | Path) -> None:
+    component = Path(part)
+    if component.is_absolute() or ".." in component.parts:
+        raise PathValidationError(f"refusing unsafe path component: {part!r}")
+
+
+def _resolve_base_or_raise(base: str | Path) -> Path:
+    try:
+        return Path(base).resolve()
+    except OSError as exc:
+        raise PathValidationError(f"cannot resolve base path: {base}") from exc
+
+
+def _require_inside_base(resolved: Path, base_resolved: Path) -> None:
+    if not is_path_inside_root(str(resolved), str(base_resolved)):
+        raise PathValidationError(
+            f"path escapes base directory {base_resolved}: {resolved}"
+        )
 
 
 def join_under(base: str | Path, *parts: str | Path) -> Path:
@@ -66,23 +105,12 @@ def join_under(base: str | Path, *parts: str | Path) -> Path:
 
     Absolute components are rejected (``os.path.join`` would discard *base*).
     """
-    try:
-        base_resolved = Path(base).resolve()
-    except OSError as exc:
-        raise PathValidationError(f"cannot resolve base path: {base}") from exc
+    base_resolved = _resolve_base_or_raise(base)
     for part in parts:
-        component = Path(part)
-        if component.is_absolute() or ".." in component.parts:
-            raise PathValidationError(f"refusing unsafe path component: {part!r}")
+        _reject_unsafe_join_component(part)
     candidate = base_resolved.joinpath(*parts)
-    try:
-        resolved = candidate.resolve()
-    except OSError as exc:
-        raise PathValidationError(f"cannot resolve path: {candidate}") from exc
-    if not is_path_inside_root(str(resolved), str(base_resolved)):
-        raise PathValidationError(
-            f"path escapes base directory {base_resolved}: {resolved}"
-        )
+    resolved = _resolve_or_validation_error(candidate, display=candidate)
+    _require_inside_base(resolved, base_resolved)
     return resolved
 
 
