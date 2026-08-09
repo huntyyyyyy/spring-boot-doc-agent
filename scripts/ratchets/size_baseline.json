@@ -9,7 +9,7 @@
   "file_loc_soft": 150,
   "fn_stmts_hard": 50,
   "fn_stmts_soft": 20,
-  "file_offender_count": 38,
+  "file_offender_count": 37,
   "fn_offender_count": 0,
   "files": {
     "src/doc_engine/pipeline/certification_fold.py": 242,
@@ -24,7 +24,6 @@
     "src/doc_engine/query/rank.py": 259,
     "src/doc_engine/scanning/_merge_signals.py": 343,
     "src/doc_engine/scanning/_scanner_astgrep.py": 514,
-    "src/doc_engine/scanning/_scanner_codeql.py": 354,
     "src/doc_engine/scanning/_scanner_filesystem.py": 275,
     "src/doc_engine/scanning/absence.py": 251,
     "src/doc_engine/scanning/covering.py": 260,

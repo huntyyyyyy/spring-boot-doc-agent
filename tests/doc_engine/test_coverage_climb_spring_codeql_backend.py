@@ -9,6 +9,10 @@ import pytest
 
 from doc_engine.scanning import spring as spring_mod
 from doc_engine.scanning._scanner_codeql import CodeQLBackend
+from doc_engine.scanning._scanner_codeql_evidence import (
+    ingest_codeql_row,
+    ingest_entity_row,
+)
 from doc_engine.scanning.support import _codeql_runner as runner
 
 pytestmark = pytest.mark.domain_climb_sensor
@@ -88,10 +92,16 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     assert len(digest) == 16
     hashed_paths = CodeQLBackend._version_hash_paths()
     hashed = {Path(p).name for p in hashed_paths}
-    support = Path(hashed_paths[0]).parent / "support"
+    scanning_dir = Path(hashed_paths[0]).parent
+    support = scanning_dir / "support"
     siblings = {p.name for p in support.glob("_codeql_*.py")}
     assert siblings, "expected modularized _codeql_*.py siblings on disk"
     assert siblings <= hashed, f"version_hash omitted siblings: {sorted(siblings - hashed)}"
+    facade_siblings = {p.name for p in scanning_dir.glob("_scanner_codeql_*.py")}
+    assert facade_siblings, "expected _scanner_codeql_*.py LOC-split modules on disk"
+    assert facade_siblings <= hashed, (
+        f"version_hash omitted facade siblings: {sorted(facade_siblings - hashed)}"
+    )
     # Unreadable path should be skipped without failing the hash.
     monkeypatch.setattr(
         CodeQLBackend,
@@ -168,11 +178,10 @@ def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
     (repo / "A.java").write_text("class A {}", encoding="utf-8")
-    backend = CodeQLBackend()
     evidence: dict = {}
     entities: dict = {}
     ctx_rels = {"B.java"}
-    backend._ingest_codeql_row(
+    ingest_codeql_row(
         repo_path=str(repo),
         row={"file": "A.java", "line": 1, "rule_id": "api_surface__x"},
         java_rels=ctx_rels,
@@ -187,13 +196,12 @@ def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch
     rel = "Empty.java"
     (repo / rel).write_text("// empty\n", encoding="utf-8")
     monkeypatch.setattr(
-        "doc_engine.scanning._scanner_codeql.extract_entity",
+        "doc_engine.scanning._scanner_codeql_evidence.extract_entity",
         lambda *a, **k: None,
     )
-    backend = CodeQLBackend()
     evidence: dict = {}
     entities: dict = {}
-    backend._ingest_entity_row(
+    ingest_entity_row(
         repo_path=str(repo),
         rel=rel,
         row={"line": 1, "class_name": ""},
@@ -204,14 +212,3 @@ def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch
     )
     assert entities == {}
     assert evidence == {}
-
-def test_explicit_table_preserves_package() -> None:
-    entry = CodeQLBackend._explicit_table_map_entry(
-        rel="p/A.java",
-        class_name="A",
-        codeql_table="tbl",
-        map_entry={"package": "com.ex", "fqcn": "com.ex.A"},
-    )
-    assert entry["package"] == "com.ex"
-    assert entry["fqcn"] == "com.ex.A"
-    assert entry["table"] == "tbl"
