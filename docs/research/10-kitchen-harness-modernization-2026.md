@@ -1,6 +1,6 @@
 ---
 title: Kitchen harness modernization — setUpModule / run_chain / fixtures (2026)
-status: RESEARCH COMPLETE — Spec gate PENDING E-KH0
+status: SPEC APPROVED E-KH0 — implement E-KH1 vertical slice
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine kitchen-sink domain_integration suite
@@ -16,7 +16,7 @@ do_not:
   - treat Spec Kit / WorkflowEngine as mandatory test runtime
   - suite-wide xdist on shared mutable kitchen _STATE
   - replace chapter fault-injection claims with LLM fixture generators
-spec_gate: PENDING E-KH0 — human approve K1–K12 before fixture migration code
+spec_gate: APPROVED E-KH0 (2026-08-09) — K1–K12 green-light; land E-KH1 on tip
 ---
 
 # Principal memo: kitchen harness vs 2026 test frameworks
@@ -221,13 +221,14 @@ Replace kitchen global `setUpModule`/`_STATE` with pytest-native fixtures and a
 typed read-only artifacts port **without** diluting chapter claims or weakening
 coverage/size/complexipy gates.
 
-### E-KH0 — Spec gate (this memo)
+### E-KH0 — Spec gate (this memo) — **DONE Approve**
 
 | Field | Value |
 | --- | --- |
 | Tickets | Approve **K1–K12** below |
 | Exit | `spec_gate: APPROVED E-KH0` recorded in this file + backlog P9.0 |
 | Invariants | fail_under 98.7; complexipy ≤5; LOC ≤225; no utils bag |
+| Approved | **2026-08-09** (plan Merge→E-KH0→E-KH1) |
 
 **Decisions K1–K12 (propose Approve)**
 
@@ -285,8 +286,8 @@ coverage/size/complexipy gates.
 
 ## 9. Recommended next single stream
 
-1. **Human Approve E-KH0 (K1–K12)** — Spec only.  
-2. Then **E-KH1** one tip.  
+1. **E-KH0 Approve** — **Done** (2026-08-09).  
+2. **E-KH1** one tip (active).  
 3. Do **not** open parallel “revolutionary framework” spikes (Testcontainers, Spec Kit runtime, DI containers).
 
 **Bottom line:** The revolutionary 2026 move for *this* harness is not a new

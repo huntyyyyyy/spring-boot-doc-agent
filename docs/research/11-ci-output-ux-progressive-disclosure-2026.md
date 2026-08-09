@@ -1,6 +1,6 @@
 ---
 title: CI / script output UX — summary-first progressive disclosure (2026)
-status: SPEC APPROVED E-UX0 — implement E-UX1 vertical slice
+status: E-UX0 APPROVED · E-UX1 LANDED (#105, 2026-08-09) — E-UX2 deferred (U6)
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine CI façades + quality-gates
@@ -13,7 +13,7 @@ do_not:
   - introduce rich/emoji dashboards as CI SoT
   - treat LLM log-summarizers as merge proof
   - boil every scripts/ci façade in one tip
-spec_gate: APPROVED E-UX0 (2026-08-09) — human green-light; land E-UX1 on tip
+spec_gate: APPROVED E-UX0 (2026-08-09) — E-UX1 landed on #105
 ---
 
 # Principal memo: CI output UX (summary-first)
