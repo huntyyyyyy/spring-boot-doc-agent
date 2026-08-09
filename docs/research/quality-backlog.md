@@ -229,8 +229,9 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC0 Spec):** DOC1–DOC12 Approve (2026-08-09).  
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
-**Active:** **none** — pick E-CQL1 or E-STK1 next (one stream).  
-**Defer:** E-CQL1 (ready); E-STK1 (ready after E-STK0 Approve); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Active:** **none** — pick E-CQL1, E-STK1, or E-TACH0 Approve next (one stream).  
+**Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
+**Defer:** E-CQL1 (ready); E-STK1 (ready after E-STK0 Approve); E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT.
 
 ---
@@ -243,6 +244,18 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 | P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | Deferred (ready; pick as Active) | context resets; claims green; LOC/complexipy |
 
 Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md) §5.1. **Embody** sensors+ledger+react-doctor pattern; **Spike** headroom/loopx/gh-aw proposer; **Defer** claude-mem; **Refuse** agentmemory dep, context-mode (ELv2), alternate hosts. GH inventory still ≥1k★+14-day push for research SoR.
+
+---
+
+## P16 — Tach dependency-map-as-blueprint (BC layers → depends_on)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P16.0 | **E-TACH0 Spec:** approve **TACH1–TACH10** (deps as primary structure; tach-only fitness; layers then depends_on+interfaces; no sync-as-architecture) | **Draft** (2026-08-09) | research 20 `spec_gate` → APPROVED |
+| P16.1 | **E-TACH1 Implement:** break BC cycles + add `layers` | After Approve; one stream | `tach check` green; one-way BC edges |
+| P16.2 | **E-TACH2 Implement:** `depends_on` + `[[interfaces]]` | After E-TACH1 | undeclared/deep imports fail CI |
+
+Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modularity/20-tach-dependency-blueprint-2026.md) (window **2026-06→08**). **Embody** tach cycles; **Adopt** layers→depends_on+interfaces; **Defer** import-linter dual-gate; **Refuse** pytestarch/grimp (&lt;1k★) and foreign runtimes as deps.
 
 ---
 
