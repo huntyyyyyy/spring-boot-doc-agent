@@ -231,7 +231,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Paused (E-COH1 reshape):** inventory/reshape waits until post-merge gates green under E-HOT.  
-**Active Spec (no product code yet):** **E-HOT0** — post-merge gate repair under cohesion bar ([`process/21-…`](process/21-post-merge-gate-repair-cohesion-2026.md), design [`post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md)); Approve HOT1–HOT12 before E-HOT1 Implement.  
+**Active Spec (no product code yet):** **E-HOT0** — post-merge gate repair under cohesion bar ([`process/21-…`](process/21-post-merge-gate-repair-cohesion-2026.md), design [`post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md)); Approve HOT1–HOT13 before E-HOT1 Implement; stream SoR bar **≥10k★** for *new* external frameworks (HOT13).  
 **After E-HOT1 green:** resume **E-COH1** reshape (one stream).  
 **Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
@@ -289,7 +289,7 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-HOT0 Spec:** approve **HOT1–HOT12** (G2 return/pass; patch-at-use; CQ slash-free scope; local-full before push; no tach-map / no E-STK1) | **Draft** (2026-08-09) | research 21 + design memo `spec_gate` → APPROVED |
+| P18.0 | **E-HOT0 Spec:** approve **HOT1–HOT13** (G2 return/pass; patch-at-use; CQ slash-free scope; local-full before push; no tach-map / no E-STK1; **≥10k★** new external SoR) | **Draft** (2026-08-09) | research 21 + design memo `spec_gate` → APPROVED |
 | P18.1 | **E-HOT1 Implement:** F1–F6 repairs only; `pre_pr --full` green before push | After Approve | focused suites + full local gate; finding disposition |
 
 Research: [`docs/research/process/21-post-merge-gate-repair-cohesion-2026.md`](process/21-post-merge-gate-repair-cohesion-2026.md). Design: [`docs/design/post-merge-gate-repair-design-2026-08-09.md`](../design/post-merge-gate-repair-design-2026-08-09.md). Finding: [`findings/2026-08-09-statement-split-cascade.md`](findings/2026-08-09-statement-split-cascade.md).

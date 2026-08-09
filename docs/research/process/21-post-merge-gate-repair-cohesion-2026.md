@@ -21,7 +21,8 @@ do_not:
   - start full E-STK1 Implement without Active switch (sensors Spec-ready only)
   - push before local `pre_pr --full` / oracle cell green
 spec_gate: DRAFT E-HOT0 (2026-08-09) — HOT1–HOT12 pending Approve
-gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/CHANGELOG)"
+gh_sor_bar: "≥10000★ and pushed_at within research_window (prefer Releases/CHANGELOG); in-repo Confirmed pins exempt from ★ for Embody-continue"
+bar_raise: "2026-08-09 human: raise from ≥1000★ to ≥10000★ (+10k) for external implement SoR on this stream"
 ---
 
 # Principal memo: post-merge gate repair under cohesion + 2026 modularity
@@ -34,6 +35,12 @@ modern modularity frameworks (tach interfaces / ports), and local-CI-first disci
 **Claim tiers:** `[Evidenced]` · `[Confirmed]` · `[Unknown]`.
 
 **Research window:** 2026-06-01 → 2026-08-09.
+
+**GitHub implement SoR bar (this stream):** **≥10,000★** and `pushed_at` in window
+(human raise from the prior ≥1k★ bar — “10k more stars”). Star/push alone never
+implies Adopt. **Exception:** tools already **Confirmed** pinned + CI-gated in this
+repo may continue to **Embody** without clearing 10k★; they cannot be cited as
+*new* external Adopt proof under this bar.
 
 ---
 
@@ -49,7 +56,7 @@ modern modularity frameworks (tach interfaces / ports), and local-CI-first disci
 | Certification `str.value`? | Test patches façade alias; call site binds the **concept module** name. Patch where used (`certification_finish.build_and_write_certification`). Do not teach fold to accept bare strings as primary API. `[Evidenced]` pytest monkeypatch doctrine + `[Confirmed]` tip |
 | Metamorphic wrap ratchet? | Failure message already says defect fixed — **delete ratchet** and fold transform into the invariant loop (test docstring SoT). `[Confirmed]` |
 | Docs path pin? | Prompt live under `docs/process/steering-prompts/` (E-DOC1). Retarget path pin only. `[Confirmed]` |
-| Modern frameworks to Embody? | **tach** interfaces (E-TACH0 draft — do not expand map here); **ports/strategies** already Adopted (E-MOD*); **pytest fixtures / intentional tests** (E-KH / E-LEG); **local pre_pr as merge sensor**. Refuse DI containers, mesh, Spec Kit WorkflowEngine, LLM-as-fail_under. `[Evidenced]` research 12/14/20 |
+| Modern frameworks to Embody? | **≥10k★ SoR:** pytest (~14k), ruff (~49k), semgrep (~16k), Nx patterns (~29k). **tach (~2.8k) fails ★ bar** — continue **Embody** only as in-repo Confirmed pin (cycle gate); do **not** expand `depends_on`/`[[interfaces]]` from ★ claims. Ports/strategies + local `pre_pr` stay. Refuse DI/mesh/Spec Kit/LLM-as-fail_under. `[Evidenced]` + `[Confirmed]` |
 | Push policy? | **Refuse push until local CI-equivalent green** (`pre_pr --full` or oracle 3.11 cell). Remote Actions is witness, not discovery. `[Confirmed]` user mandate |
 
 ---
@@ -116,17 +123,30 @@ Broken paths:
 | Statement hard-scope helper + G6 note | `scripts/ci/check_code_quality.py` `_hard_statement_scope` |
 | Soft fn advisory == hard equality only | `doc_engine.ci.size_ratchet.soft_advisories` |
 
-### 3.2 Modern frameworks / primaries (Evidenced)
+### 3.2 GitHub ★ snapshot (Evidenced, fetched 2026-08-09)
+
+| Repo | ★ | Clears ≥10k★? | Role for E-HOT0 |
+| --- | ---: | --- | --- |
+| [pytest-dev/pytest](https://github.com/pytest-dev/pytest) | 14397 | **Yes** | Monkeypatch / fixtures SoR for F2 + test intentionality |
+| [astral-sh/ruff](https://github.com/astral-sh/ruff) | 49115 | **Yes** | Lint gate already Confirmed |
+| [semgrep/semgrep](https://github.com/semgrep/semgrep) | 16162 | **Yes** | Stage-0 / rules already Confirmed |
+| [nrwl/nx](https://github.com/nrwl/nx) | 29207 | **Yes** | **Pattern only** (module boundaries) — wrong runtime |
+| [github/codeql](https://github.com/github/codeql) | 9923 | **No** (&lt;10k) | Keep as Confirmed in-repo use; not *new* Adopt via ★ |
+| [tach-org/tach](https://github.com/tach-org/tach) | 2786 | **No** | **Confirmed pin only** — not external ★ SoR under raised bar |
+| [seddonym/import-linter](https://github.com/seddonym/import-linter) | 1130 | **No** | Still Defer dual-gate; ★ worse under 10k bar |
+| [HypothesisWorks/hypothesis](https://github.com/HypothesisWorks/hypothesis) | 8856 | **No** | E-QA3 Spike stays Spike; not merge SoR via ★ |
+
+### 3.3 Modern frameworks / primaries (Evidenced)
 
 | Claim | Source | Stance for this product |
 | --- | --- | --- |
-| Patch **where the name is used**, not only where defined | [pytest monkeypatch how-to](https://docs.pytest.org/en/stable/how-to/monkeypatch.html); long-standing import-binding doctrine | **Embody** for F2 |
-| Enforced module edges + **public interfaces** beat folder convention | [tach](https://github.com/tach-org/tach) docs (`depends_on`, `[[interfaces]]`, layers); research 20 | **Embody** tach cycles now; **Defer** depends_on until E-TACH0 Approve |
-| Size/complexity reduction without cohesion → entropy / wrong seams | arXiv [2506.06764](https://arxiv.org/abs/2506.06764) (test-aware complexity); [2402.05559](https://arxiv.org/abs/2402.05559) (CC reduction as optimization — not a gate designer) | **Adopt** “gates verify; do not design” (COH already); refuse auto-extract thrash |
-| Semantic cohesion / task-scoped modularity (agentic SE) | arXiv [2603.15690](https://arxiv.org/abs/2603.15690) | **Adopt** *concept*: group by shared meaning; **Refuse** LSS/MAS runtime rewrite of CLI |
-| Ports + characterization poke surfaces | research 12/14; Feathers seams pattern | **Embody** |
+| Patch **where the name is used**, not only where defined | [pytest monkeypatch](https://docs.pytest.org/en/stable/how-to/monkeypatch.html) (≥10k★ host) | **Embody** for F2 |
+| Enforced module edges + public interfaces | tach docs + research 20; **Nx** (≥10k★) as pattern analogue | **Embody** tach *cycles* as Confirmed pin; **Defer** depends_on/interfaces expansion; steal *patterns* from Nx not Nx runtime |
+| Size/complexity reduction ≠ seam design | arXiv [2506.06764](https://arxiv.org/abs/2506.06764); [2402.05559](https://arxiv.org/abs/2402.05559) | **Adopt** “gates verify; do not design”; refuse auto-extract thrash |
+| Semantic cohesion / task-scoped modularity | arXiv [2603.15690](https://arxiv.org/abs/2603.15690) | **Adopt** concept; **Refuse** LSS/MAS rewrite of CLI |
+| Ports + characterization poke surfaces | research 12/14; pytest characterization culture (≥10k★) | **Embody** |
 
-### 3.3 Unknown (must not invent)
+### 3.4 Unknown (must not invent)
 
 | Item | Why Unknown |
 | --- | --- |
@@ -185,6 +205,7 @@ Broken paths:
 | **HOT10** | Push forbidden until local full gate green; remote CI is witness |
 | **HOT11** | No `tach.toml` depends_on/interfaces expansion in E-HOT1 |
 | **HOT12** | On exit: update finding ledger disposition; set backlog Active back to **E-COH1** reshape (not E-STK1 unless human switches) |
+| **HOT13** | External implement SoR for *new* frameworks/deps on this stream: **≥10,000★** + push in window; in-repo Confirmed pins (tach, CodeQL, …) may Embody-continue without ★; do not cite &lt;10k★ GH as *new* Adopt proof |
 
 ---
 
@@ -232,14 +253,18 @@ Resume **E-COH1** (COH1-1 inventory …) under cohesion bar. Keep E-STK1 / E-TAC
 
 | Stance | Item |
 | --- | --- |
-| **Embody** | Local `pre_pr` before push; G2 explicit dataflow; patch-at-use; tach cycle gate; finding ledger |
-| **Adopt** | HOT epic as COH1 carve-out; CQ slash-free hard scope; delete fixed ratchets; docs path pins |
-| **Defer** | E-STK1 sensors code; E-TACH0 depends_on; soft≠hard statement band; deep E-COH1 reshape until green |
-| **Refuse** | Ceiling raises; utils bags; façade private warehouses; LLM/Cover% as green proof; parallel tip thrash |
+| **Embody** | Local `pre_pr` before push; G2 explicit dataflow; patch-at-use (pytest ≥10k★ doctrine); tach **cycle** gate as Confirmed pin; finding ledger |
+| **Adopt** | HOT epic as COH1 carve-out; CQ slash-free hard scope; delete fixed ratchets; docs path pins; **≥10k★** bar for *new* external SoR (HOT13); Nx-style boundary *patterns* only |
+| **Defer** | E-STK1 sensors code; E-TACH0 depends_on/`[[interfaces]]` (tach fails 10k★ — needs Confirmed+Approve, not ★); soft≠hard statement band; deep E-COH1 reshape until green; global synthesis rewrite of older ≥1k★ memos |
+| **Refuse** | Ceiling raises; utils bags; façade private warehouses; LLM/Cover% as green proof; parallel tip thrash; **new** Adopt of &lt;10k★ GH trees as implement SoR on this stream |
 
 ---
 
 ## 10. Exit
 
-**E-HOT0 remains DRAFT until human Approve of HOT1–HOT12.**
+**E-HOT0 remains DRAFT until human Approve of HOT1–HOT13.**
 No product Implement on this stream until Approve is recorded in this memo + backlog.
+
+**Note on bar raise:** Older memos (E-STK0 / E-TACH0) still say ≥1k★. Raising the
+*repo-wide* default is a synthesis decision — out of scope for E-HOT1 code.
+This stream locks **≥10k★** for its own external SoR (HOT13) immediately on Approve.

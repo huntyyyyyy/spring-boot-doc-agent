@@ -60,8 +60,9 @@ Refuse: LLM as fail_under; sensors rewriting oracle SoT (STK1).
   CQ unit-test scope skew + collapsed soft band + obsolete metamorphic ratchet +
   docs path pin drift. **Research Spec DRAFT:** E-HOT0
   ([`process/21-…`](../process/21-post-merge-gate-repair-cohesion-2026.md),
-  design [`post-merge-gate-repair-design-2026-08-09.md`](../../design/post-merge-gate-repair-design-2026-08-09.md)).
-  **No further product Implement until HOT1–HOT12 Approve.**
+  design [`post-merge-gate-repair-design-2026-08-09.md`](../../design/post-merge-gate-repair-design-2026-08-09.md);
+  SoR bar raised to **≥10k★** for new external Adopt on this stream).
+  **No further product Implement until HOT1–HOT13 Approve.**
 - **Do not:** start full E-STK1 Implement in the same tip as deep E-COH1 without
   an explicit Active switch; more parallel statement/LOC agents; treat
   `ruff --fix` as Verify; push before local full-gate green.
