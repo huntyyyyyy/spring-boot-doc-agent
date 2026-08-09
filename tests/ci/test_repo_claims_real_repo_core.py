@@ -21,8 +21,16 @@ class TestRealRepoCore(unittest.TestCase):
     the checker having quietly stopped looking at anything."""
 
     def test_real_repo_passes(self) -> None:
+        # --root must be the suite's REPO_ROOT so gate mutators that rewrite
+        # CLAUDE.md / agents under a mutate.py sandbox are visible (the
+        # script's own default repo_root() follows the installed package).
         result = subprocess.run(
-            [sys.executable, str(REPO_ROOT / "scripts" / "ci" / "check_repo_claims.py")],
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "ci" / "check_repo_claims.py"),
+                "--root",
+                str(REPO_ROOT),
+            ],
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -46,6 +54,19 @@ class TestRealRepoCore(unittest.TestCase):
             self.assertNotIn(
                 "Grep", crc._declared_tools(path), f"{path.name} declares Grep"
             )
+
+    def test_real_derived_blocks_match_registry(self) -> None:
+        """Backtest for check A. Hermetic TreeCase suites prove stale numbers
+        fail; this aims the same check at the committed tree so a hand-edit of
+        ``<!-- derived: predicate_count -->`` (mutate: derived-count-edited)
+        cannot survive."""
+        markdown = crc.tracked_markdown(REPO_ROOT)
+        findings = crc.check_derived_blocks(REPO_ROOT, markdown)
+        self.assertEqual(
+            findings,
+            [],
+            "; ".join(f"{f.path}:{f.line} {f.message}" for f in findings),
+        )
 
     def test_real_bash_agents_are_scoped_by_settings(self) -> None:
         """Every agent granted Bash must be narrowed by the committed

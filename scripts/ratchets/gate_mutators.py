@@ -70,7 +70,7 @@ def definitions() -> tuple[Mutator, ...]:
         Mutator(
             "agent-regains-grep", "adapters/claude/agents/gap-analyzer.md", "",
             "tools: Read, Glob, Write", "tools: Read, Grep, Glob, Write",
-            "test_check_repo_claims.py",
+            "test_repo_claims_real_repo_core.py",
             "all five agents declared Grep until 0ee4033; check F exists to "
             "stop it coming back"),
         Mutator(
@@ -84,7 +84,7 @@ def definitions() -> tuple[Mutator, ...]:
             "derived-count-edited", "CLAUDE.md", "",
             "<!-- derived: predicate_count -->7<!-- /derived -->",
             "<!-- derived: predicate_count -->6<!-- /derived -->",
-            "test_check_repo_claims.py",
+            "test_repo_claims_real_repo_core.py",
             'CLAUDE.md read "Three forms" for two windows after a fourth and '
             "fifth landed"),
         Mutator(
