@@ -39,39 +39,78 @@ def discover_collection_dirs(repo: Path) -> list[Path]:
     """Directories under discovery roots that directly contain ``test_*.py``."""
     found: set[Path] = set()
     for rel_root in DISCOVERY_ROOTS:
-        root = repo / rel_root
-        if not root.is_dir():
-            continue
-        for module in root.rglob("test_*.py"):
-            if "__pycache__" in module.parts:
-                continue
-            if "support" in module.parts:
-                continue
-            found.add(module.parent.resolve())
+        found.update(_collection_dirs_under(repo / rel_root))
     return sorted(found)
+
+
+def _collection_dirs_under(root: Path) -> set[Path]:
+    if not root.is_dir():
+        return set()
+    found: set[Path] = set()
+    for module in root.rglob("test_*.py"):
+        if _is_discoverable_test_module(module):
+            found.add(module.parent.resolve())
+    return found
+
+
+def _is_discoverable_test_module(module: Path) -> bool:
+    if "__pycache__" in module.parts:
+        return False
+    if "support" in module.parts:
+        return False
+    return True
 
 
 def domain_path_matrix(repo: Path) -> tuple[DomainPathGroup, ...]:
     """Group collection paths by parallel parent marker (file-classified)."""
+    by_marker = _paths_by_parallel_marker(repo)
+    return tuple(_groups_from_marker_paths(by_marker))
+
+
+def _paths_by_parallel_marker(repo: Path) -> dict[str, set[str]]:
     parallel = set(parallel_shard_markers())
     by_marker: dict[str, set[str]] = {marker: set() for marker in parallel}
     for collection_dir in discover_collection_dirs(repo):
-        for module in sorted(collection_dir.glob("test_*.py")):
-            marker = classify_test_path(repo, module)
-            if marker not in parallel:
-                continue
-            rel = collection_dir.relative_to(repo.resolve()).as_posix()
+        _add_collection_to_marker_map(repo, collection_dir, parallel, by_marker)
+    return by_marker
+
+
+def _add_collection_to_marker_map(
+    repo: Path,
+    collection_dir: Path,
+    parallel: set[str],
+    by_marker: dict[str, set[str]],
+) -> None:
+    rel = collection_dir.relative_to(repo.resolve()).as_posix()
+    for module in sorted(collection_dir.glob("test_*.py")):
+        marker = classify_test_path(repo, module)
+        if marker in parallel:
             by_marker[marker].add(rel)
 
+
+def _groups_from_marker_paths(
+    by_marker: dict[str, set[str]],
+) -> list[DomainPathGroup]:
     groups: list[DomainPathGroup] = []
     for marker in parallel_shard_markers():
-        require_domain(marker)
-        paths = tuple(sorted(by_marker[marker]))
-        if not paths:
-            continue
-        shard_id = marker.removeprefix("domain_")
-        groups.append(DomainPathGroup(shard_id=shard_id, marker=marker, paths=paths))
-    return tuple(groups)
+        group = _group_for_marker(marker, by_marker)
+        if group is not None:
+            groups.append(group)
+    return groups
+
+
+def _group_for_marker(
+    marker: str, by_marker: dict[str, set[str]]
+) -> DomainPathGroup | None:
+    require_domain(marker)
+    paths = tuple(sorted(by_marker[marker]))
+    if not paths:
+        return None
+    return DomainPathGroup(
+        shard_id=marker.removeprefix("domain_"),
+        marker=marker,
+        paths=paths,
+    )
 
 
 def paths_for_marker(repo: Path, marker: str) -> tuple[str, ...]:
@@ -102,21 +141,44 @@ def github_matrix_include(repo: Path) -> list[dict[str, str]]:
 
 def orphan_parallel_modules(repo: Path) -> list[str]:
     """Parallel-marked modules whose parent is outside discovered paths."""
+    covered = _covered_collection_paths(repo)
+    parallel = set(parallel_shard_markers())
+    tests_root = repo / "tests"
+    if not tests_root.is_dir():
+        return []
+    return _orphan_rels(repo, tests_root, parallel, covered)
+
+
+def _covered_collection_paths(repo: Path) -> set[str]:
     covered: set[str] = set()
     for group in domain_path_matrix(repo):
         covered.update(group.paths)
-    parallel = set(parallel_shard_markers())
+    return covered
+
+
+def _orphan_rels(
+    repo: Path,
+    tests_root: Path,
+    parallel: set[str],
+    covered: set[str],
+) -> list[str]:
     orphans: list[str] = []
-    tests_root = repo / "tests"
-    if not tests_root.is_dir():
-        return orphans
     for module in tests_root.rglob("test_*.py"):
-        if "__pycache__" in module.parts or "support" in module.parts:
-            continue
-        marker = classify_test_path(repo, module)
-        if marker not in parallel:
-            continue
-        parent = module.parent.resolve().relative_to(repo.resolve()).as_posix()
-        if parent not in covered:
+        if _is_orphan_parallel(repo, module, parallel, covered):
             orphans.append(module.relative_to(repo).as_posix())
     return orphans
+
+
+def _is_orphan_parallel(
+    repo: Path,
+    module: Path,
+    parallel: set[str],
+    covered: set[str],
+) -> bool:
+    if not _is_discoverable_test_module(module):
+        return False
+    marker = classify_test_path(repo, module)
+    if marker not in parallel:
+        return False
+    parent = module.parent.resolve().relative_to(repo.resolve()).as_posix()
+    return parent not in covered
