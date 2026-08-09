@@ -6,32 +6,26 @@ import os
 import re
 import shutil
 import sys
-import unittest
 
 import pytest
 
-from tests.support.kitchen_sink.constants import _STATE
-from tests.support.kitchen_sink.harness import (
-    _copy_docs,
-    _run,
-    setUpModule,
-    tearDownModule,
-)
+from tests.support.kitchen_sink.harness import _run
+from tests.support.kitchen_sink.testcase import KitchenBoundTestCase
 
 pytestmark = pytest.mark.domain_integration
 
 PY = sys.executable
 GITIGNORED_DIR = "generated"
 
-# unittest discovers these names on the module.
-assert setUpModule and tearDownModule
 
+class Ch12PipelineDocsGateTest(KitchenBoundTestCase):
+    """Pipeline-output defects against a docs scratch copy."""
 
-class Ch12PipelineOutputGateTest(unittest.TestCase):
-    """Which pipeline-output defects the Stage-4 gate catches."""
+    @pytest.fixture(autouse=True)
+    def _bind_docs_scratch(self, kitchen_docs_scratch):
+        self._docs_scratch = kitchen_docs_scratch
 
     def _gate(self, docs, *extra):
-        """Copied-docs form — write check off (see stray-write tests for on)."""
         return _run(
             [
                 PY,
@@ -39,7 +33,7 @@ class Ch12PipelineOutputGateTest(unittest.TestCase):
                 "doc_engine.tools.check_pipeline_output",
                 docs,
                 "--target-repo",
-                _STATE["repo"],
+                self.kitchen.repo,
                 "--no-write-check",
                 *extra,
             ]
@@ -47,8 +41,7 @@ class Ch12PipelineOutputGateTest(unittest.TestCase):
 
     def test_three_citation_defects_all_fail_the_gate(self):
         """Three issue classes in one mutated copy / one subprocess."""
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = self._docs_scratch
         path = os.path.join(docs, "database.md")
         text = open(path, encoding="utf-8").read()
         text = text.replace("[Evidenced —", "[Evidenced -", 1)
@@ -68,8 +61,7 @@ class Ch12PipelineOutputGateTest(unittest.TestCase):
         self.assertIn("does not exist under", proc.stderr)
 
     def test_extra_file_in_docs_fails_the_gate(self):
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = self._docs_scratch
         with open(os.path.join(docs, "notes.md"), "w", encoding="utf-8") as handle:
             handle.write("stray\n")
         proc = self._gate(docs)
@@ -77,8 +69,7 @@ class Ch12PipelineOutputGateTest(unittest.TestCase):
         self.assertIn("unexpected file in docs dir", proc.stderr)
 
     def test_duplicate_output_path_shows_up_as_a_missing_name(self):
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = self._docs_scratch
         shutil.copyfile(
             os.path.join(docs, "readme.md"), os.path.join(docs, "glossary.md")
         )
@@ -87,44 +78,67 @@ class Ch12PipelineOutputGateTest(unittest.TestCase):
         self.assertEqual(proc.returncode, 1)
         self.assertIn("missing expected doc: testing.md", proc.stderr)
 
+
+class Ch12PipelineWriteGateTest(KitchenBoundTestCase):
+    """Write-check controls against an isolated repo copy (K4)."""
+
+    @pytest.fixture(autouse=True)
+    def _bind_repo_copy(self, kitchen_repo_copy):
+        self._repo_copy = kitchen_repo_copy
+
+    def _gate_no_write_check(self, docs):
+        return _run(
+            [
+                PY,
+                "-m",
+                "doc_engine.tools.check_pipeline_output",
+                docs,
+                "--target-repo",
+                self.kitchen.repo,
+                "--no-write-check",
+            ]
+        )
+
     def test_stray_write_is_caught_and_no_write_check_removes_the_control(self):
-        stray = os.path.join(_STATE["repo"], "stray-written-by-a-subagent.txt")
+        repo = self._repo_copy
+        docs = os.path.join(repo, "docs")
+        stray = os.path.join(repo, "stray-written-by-a-subagent.txt")
         with open(stray, "w", encoding="utf-8") as handle:
             handle.write("a writer went outside docs/\n")
-        self.addCleanup(lambda: os.path.exists(stray) and os.remove(stray))
         strict = _run(
             [
                 PY,
                 "-m",
                 "doc_engine.tools.check_pipeline_output",
-                _STATE["docs"],
+                docs,
                 "--target-repo",
-                _STATE["repo"],
+                repo,
             ]
         )
         self.assertEqual(strict.returncode, 1)
         self.assertIn("unexpected write outside the docs directory", strict.stderr)
         self.assertEqual(
-            self._gate(_STATE["docs"]).returncode,
+            self._gate_no_write_check(docs).returncode,
             0,
             "--no-write-check should remove exactly this control",
         )
 
     def test_a_stray_write_into_a_gitignored_path_fails_the_gate(self):
-        ignored_dir = os.path.join(_STATE["repo"], GITIGNORED_DIR)
+        repo = self._repo_copy
+        docs = os.path.join(repo, "docs")
+        ignored_dir = os.path.join(repo, GITIGNORED_DIR)
         os.makedirs(ignored_dir, exist_ok=True)
         stray = os.path.join(ignored_dir, "oops.md")
         with open(stray, "w", encoding="utf-8") as handle:
             handle.write("written outside docs/, into a gitignored directory\n")
-        self.addCleanup(lambda: os.path.exists(stray) and os.remove(stray))
         proc = _run(
             [
                 PY,
                 "-m",
                 "doc_engine.tools.check_pipeline_output",
-                _STATE["docs"],
+                docs,
                 "--target-repo",
-                _STATE["repo"],
+                repo,
             ]
         )
         self.assertEqual(

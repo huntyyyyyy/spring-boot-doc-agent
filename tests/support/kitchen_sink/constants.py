@@ -40,4 +40,3 @@ DEEP_JAVA = "deep/" + "/".join(f"l{i:02d}" for i in range(30)) + "/Leaf.java"
 GITIGNORED_DIR = "generated"
 PLANTED_EXCLUDED_DIRS = ["target", "build", "node_modules", "vendor", "venv",
                          "dist", "out", "coverage"]
-_STATE: dict = {}

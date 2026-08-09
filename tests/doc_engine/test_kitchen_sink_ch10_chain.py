@@ -12,9 +12,9 @@ import os
 import tempfile
 
 import pytest
+
 from doc_engine.scanning.covering import verify_covering_proof
 from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
-
 from tests.support.kitchen_sink.constants import PY, SCRIPT_DIR
 from tests.support.kitchen_sink.harness import _grouped, _run
 from tests.support.kitchen_sink.testcase import KitchenBoundTestCase

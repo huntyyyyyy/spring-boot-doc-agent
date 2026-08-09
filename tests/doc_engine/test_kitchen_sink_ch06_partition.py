@@ -6,9 +6,9 @@ import os
 import subprocess
 
 import pytest
+
 from doc_engine.core.excludes import DEFAULT_EXCLUDED_DIRS
 from doc_engine.tools import partition_repo
-
 from tests.support.kitchen_sink.constants import PLANTED_EXCLUDED_DIRS, PY
 from tests.support.kitchen_sink.harness import _evidence_files, _grouped, _has_segment
 from tests.support.kitchen_sink.testcase import KitchenBoundTestCase

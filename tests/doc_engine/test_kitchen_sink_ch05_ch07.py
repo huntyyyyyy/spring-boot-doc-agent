@@ -9,8 +9,8 @@ import tempfile
 from unittest import mock
 
 import pytest
-from doc_engine.tools import run_manifest
 
+from doc_engine.tools import run_manifest
 from tests.support.kitchen_sink.constants import (
     EMPTY_JAVA,
     EMPTY_SHA256,

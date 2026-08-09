@@ -143,7 +143,7 @@ Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-te
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P9.0 | **E-KH0 Spec:** approve **K1–K12** (pytest fixtures SoT; refuse Testcontainers/Spec Kit runtime/DI containers for kitchen) | **Done** (2026-08-09) | research 10 `spec_gate: APPROVED E-KH0` |
-| P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | **Active** after P9.0 | kitchen green; no chapter `setUpModule`; size/complexipy |
+| P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | **Done** (2026-08-09) | kitchen green; no chapter `setUpModule`; size/complexipy |
 | P9.2 | Optional syrupy / Hypothesis — **not** kitchen chapter SoT | Align E-QA3; KH-S2 | spike exit criteria |
 
 Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-harness-modernization-2026.md). Primaries: pytest fixtures docs + DeepWiki pytest/hypothesis/testcontainers; GitHub activity 2026-08-09; arXiv 2601.06615 (Fixturize), 2404.09398 (FlakyDoctor), 2606.04967 (SDD).
@@ -172,6 +172,6 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 **Done (E-QA0–2):** adequacy Spec + sensors + Climb Archive Q2 witness checklist.  
 **Done (E-UX0–1):** UX Spec Approve + quality-gates / step-summary append slice.  
 **Done (E-KH0):** K1–K12 Approve (2026-08-09).  
-**Active tip:** **E-KH1** — `KitchenArtifacts` + session fixtures; drop chapter `setUpModule`/`_STATE`.  
+**Done (E-KH1):** `KitchenArtifacts` + session fixtures; chapters off `setUpModule`/`_STATE` (2026-08-09).  
 **Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT.

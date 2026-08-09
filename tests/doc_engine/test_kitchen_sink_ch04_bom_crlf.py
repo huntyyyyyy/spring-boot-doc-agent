@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import pytest
-from doc_engine.tools import spring_signal_scan
 
+from doc_engine.tools import spring_signal_scan
 from tests.support.kitchen_sink.constants import (
     BOM_YML,
     CRLF_JAVA,

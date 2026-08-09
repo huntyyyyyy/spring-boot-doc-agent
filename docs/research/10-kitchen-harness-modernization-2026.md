@@ -1,6 +1,6 @@
 ---
 title: Kitchen harness modernization — setUpModule / run_chain / fixtures (2026)
-status: SPEC APPROVED E-KH0 — implement E-KH1 vertical slice
+status: E-KH0 APPROVED · E-KH1 LANDED (2026-08-09) — KH-S2 syrupy deferred
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine kitchen-sink domain_integration suite
@@ -16,7 +16,7 @@ do_not:
   - treat Spec Kit / WorkflowEngine as mandatory test runtime
   - suite-wide xdist on shared mutable kitchen _STATE
   - replace chapter fault-injection claims with LLM fixture generators
-spec_gate: APPROVED E-KH0 (2026-08-09) — K1–K12 green-light; land E-KH1 on tip
+spec_gate: APPROVED E-KH0 (2026-08-09) — E-KH1 landed (session fixtures; KH-S1=session)
 ---
 
 # Principal memo: kitchen harness vs 2026 test frameworks
@@ -287,8 +287,9 @@ coverage/size/complexipy gates.
 ## 9. Recommended next single stream
 
 1. **E-KH0 Approve** — **Done** (2026-08-09).  
-2. **E-KH1** one tip (active).  
-3. Do **not** open parallel “revolutionary framework” spikes (Testcontainers, Spec Kit runtime, DI containers).
+2. **E-KH1** — **Done** (session `kitchen` fixture; chapters off `setUpModule`/`_STATE`; wall ~3.7s ≤8s sensor).  
+3. Do **not** open parallel “revolutionary framework” spikes (Testcontainers, Spec Kit runtime, DI containers).  
+4. Optional later: KH-S2 syrupy; E-UX2; E-QA3 Hypothesis on pure helpers.
 
 **Bottom line:** The revolutionary 2026 move for *this* harness is not a new
 framework — it is **using the framework you already run (pytest) as designed**:

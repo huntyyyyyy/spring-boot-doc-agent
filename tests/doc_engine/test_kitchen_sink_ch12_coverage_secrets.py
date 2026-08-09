@@ -7,28 +7,23 @@ import os
 import shutil
 import sys
 import tempfile
-import unittest
 
 import pytest
 
-from tests.support.kitchen_sink.constants import _STATE
-from tests.support.kitchen_sink.harness import (
-    _copy_docs,
-    _miscase_first_tag,
-    _run,
-    setUpModule,
-    tearDownModule,
-)
+from tests.support.kitchen_sink.harness import _miscase_first_tag, _run
+from tests.support.kitchen_sink.testcase import KitchenBoundTestCase
 
 pytestmark = pytest.mark.domain_integration
 
 PY = sys.executable
 
-assert setUpModule and tearDownModule
 
-
-class Ch12CoverageSecretsGateTest(unittest.TestCase):
+class Ch12CoverageSecretsGateTest(KitchenBoundTestCase):
     """Citation-coverage worklist/strict and secrets-check scope limits."""
+
+    @pytest.fixture(autouse=True)
+    def _bind_docs_scratch(self, kitchen_docs_scratch):
+        self._docs_scratch = kitchen_docs_scratch
 
     def _coverage(self, docs, *extra):
         return _run(
@@ -38,7 +33,7 @@ class Ch12CoverageSecretsGateTest(unittest.TestCase):
                 "doc_engine.tools.citation_coverage",
                 docs,
                 "--target-repo",
-                _STATE["repo"],
+                self.kitchen.repo,
                 *extra,
             ]
         )
@@ -47,8 +42,7 @@ class Ch12CoverageSecretsGateTest(unittest.TestCase):
         return _run([PY, "-m", "doc_engine.tools.check_no_secrets_leaked", *paths])
 
     def test_citation_coverage_is_a_worklist_by_default_and_a_gate_under_strict(self):
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = self._docs_scratch
         _miscase_first_tag(self, os.path.join(docs, "database.md"))
         with open(os.path.join(docs, "operations.md"), "a", encoding="utf-8") as handle:
             handle.write(
@@ -63,8 +57,7 @@ class Ch12CoverageSecretsGateTest(unittest.TestCase):
         self.assertIn("untagged_claim", strict.stdout)
 
     def test_planted_credentials_fail_the_secrets_check(self):
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = self._docs_scratch
         with open(
             os.path.join(docs, "configuration.md"), "a", encoding="utf-8"
         ) as handle:

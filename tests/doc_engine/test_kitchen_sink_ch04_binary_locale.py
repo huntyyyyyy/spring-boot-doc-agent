@@ -8,8 +8,8 @@ import shutil
 import tempfile
 
 import pytest
-from doc_engine.tools import partition_repo
 
+from doc_engine.tools import partition_repo
 from tests.support.kitchen_sink.constants import (
     DEEP_JAVA,
     EMPTY_JAVA,
