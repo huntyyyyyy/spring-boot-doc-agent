@@ -4709,7 +4709,7 @@ Files touched: CONTRIBUTING.md, CONSTRAINTS.md, scripts/ci/check_code_quality.py
 
 
 ## 2026-08-09 — E-CI: thin ci.yml + reusable BC workflows + LOC/heredoc SoT
-Commit: 0fb2d78
+Commit: 6a56818
 Tests: check_workflow_yaml OK (LOC/heredoc green); verify_tool_pins OK; pytest tests/ci workflow/size/summary/pins 23/23; check_repo_claims OK; check_code_quality OK; emit_abi_matrix OK
 Assumptions affected:
 - `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — CI installs/verifies pins via `ci.yml` — [Resolved — install in `.github/actions/setup-python-repo`; pin verify in `python-gates.yml` via `scripts/ci/verify_tool_pins.py`; verify predicates retargeted]
