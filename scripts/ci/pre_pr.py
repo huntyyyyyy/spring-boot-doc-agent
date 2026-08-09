@@ -322,10 +322,54 @@ def _facade_poke_surface() -> int:
 
 
 def _pytest() -> int:
-    proc = _run([sys.executable, "-m", "pytest", "tests/", "-q", "--tb=line"])
+    """Run pytest; standard mode may domain-select (E-SEL1); full always whole tree."""
+    force_full = os.environ.get("PRE_PR_PYTEST_FULL", "").strip() in (
+        "1",
+        "true",
+        "TRUE",
+        "yes",
+    )
+    force_full = force_full or os.environ.get("_PRE_PR_MODE", "") in (
+        "full",
+        "actions_outage",
+    )
+    from doc_engine.ci.pytest_domain_select import build_select_plan
+
+    plan = build_select_plan(
+        REPO_ROOT,
+        changed_files_vs_main(),
+        force_full=force_full,
+    )
+    junit = REPO_ROOT / ".git" / "pre-pr-pytest.junit.xml"
+    argv = plan.argv(junitxml=str(junit))
+    print(
+        f"pytest_select: mode={plan.mode} markers={list(plan.markers) or ['(full)']}",
+        flush=True,
+    )
+    proc = _run([sys.executable, "-m", "pytest", *argv])
     sys.stdout.write(proc.stdout)
     sys.stderr.write(proc.stderr)
+    _print_pytest_timing(junit)
     return proc.returncode
+
+
+def _print_pytest_timing(junit: Path) -> None:
+    if not junit.is_file():
+        return
+    try:
+        from doc_engine.ci.suite_timing.duration_records import SuiteTimingReport
+        from doc_engine.ci.suite_timing.junit_duration_parse import parse_junit_durations
+
+        report = SuiteTimingReport.from_records(parse_junit_durations(junit))
+        top = report.slowest(1)
+        node = top[0].node_id if top else "n/a"
+        print(
+            f"pytest_timing: cases={len(report.records)} "
+            f"total_s={report.total_seconds:.1f} slowest={node}",
+            flush=True,
+        )
+    except (OSError, ValueError) as exc:
+        print(f"pytest_timing: skip ({exc})", flush=True)
 
 
 def _mutation_driver() -> int:
@@ -687,6 +731,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     mode = resolve_mode(args)
     status_note = (args.status_url or "").strip() or None
+    os.environ["_PRE_PR_MODE"] = mode
 
     if mode == "actions_outage":
         if os.environ.get("PRE_PR_SKIP", "").strip() in ("1", "true", "TRUE", "yes"):

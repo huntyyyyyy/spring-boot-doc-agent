@@ -15,9 +15,8 @@ from doc_engine.paths import repo_root
 
 pytestmark = pytest.mark.domain_ci_meta
 
-
 def test_domain_path_matrix_groups_by_parallel_marker() -> None:
-    """Matrix rows are the short parallel catalog, paths discovered from dirs."""
+    """Matrix rows are parallel markers; paths are dirs or files (SEL1)."""
     root = repo_root()
     groups = domain_path_matrix(root)
     assert groups
@@ -29,16 +28,14 @@ def test_domain_path_matrix_groups_by_parallel_marker() -> None:
         assert group.shard_id == group.marker.removeprefix("domain_")
         for path in group.paths:
             assert not path.startswith("tests/support")
-            assert (root / path).is_dir()
-
+            target = root / path
+            assert target.is_dir() or target.is_file()
 
 def test_discovery_roots_exclude_support() -> None:
     assert "tests/support" not in DISCOVERY_ROOTS
 
-
 def test_no_orphan_parallel_modules() -> None:
     assert orphan_parallel_modules(repo_root()) == []
-
 
 def test_github_matrix_include_paths_are_space_joined() -> None:
     rows = github_matrix_include(repo_root())
@@ -48,7 +45,6 @@ def test_github_matrix_include_paths_are_space_joined() -> None:
         assert row["paths"]
         for path in row["paths"].split():
             assert path.startswith("tests/")
-
 
 def test_emit_abi_matrix_cartesian() -> None:
     from doc_engine.ci.emit_abi_matrix import build_abi_matrix

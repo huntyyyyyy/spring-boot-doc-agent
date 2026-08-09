@@ -231,6 +231,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Done Spec + Implement:** **E-SEL0 / E-SEL1** — fine ABI file paths + path→domain pre_pr pytest select (2026-08-09).  
 **Done Spec + Implement:** **E-TEL0 / E-TEL1** — mutation_driver regression + local telemetry ETL + G7 (2026-08-09).  
 **Done Spec + Implement:** **E-HOOK0 / E-HOOK1** — pre-push install/chain + local quality-gates; optional Sonar advisory (2026-08-09).  
 **Done Spec + Implement:** **E-KNOB0 / E-KNOB1** — one setpoint owner per concern; no `quality_knobs` god file (2026-08-09).  
@@ -380,6 +381,17 @@ Research: [`docs/research/process/27-local-pre-push-hook-2026.md`](process/27-lo
 | P25.1 | **E-TEL1 Implement:** fix driver import; regression tests; telemetry store; G7 | **Done** (2026-08-09) | `tests/ci/test_mutation_driver_entrypoint.py`; `test_stalker_telemetry.py` |
 
 Research: [`docs/research/process/28-local-stalker-telemetry-etl-2026.md`](process/28-local-stalker-telemetry-etl-2026.md). Design: [`docs/design/local-stalker-telemetry-design-2026-08-09.md`](../design/local-stalker-telemetry-design-2026-08-09.md).
+
+---
+
+## P26 — Domain pytest select + fine ABI shards (local speed that bites)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P26.0 | **E-SEL0 Spec:** approve **SEL1–SEL10** (fine paths; path→domain pre_pr; refuse testmon/oracle xdist) | **Approved** (2026-08-09) | research 29 + design `APPROVED E-SEL0` |
+| P26.1 | **E-SEL1 Implement:** mixed-dir file paths; `pytest_domain_select`; pre_pr wire + junit timing | **Done** (2026-08-09) | `test_pytest_domain_select.py`; climb paths are `.py` files |
+
+Research: [`docs/research/process/29-local-domain-pytest-select-2026.md`](process/29-local-domain-pytest-select-2026.md). Design: [`docs/design/local-domain-pytest-select-design-2026-08-09.md`](../design/local-domain-pytest-select-design-2026-08-09.md).
 
 ---
 

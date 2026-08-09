@@ -81,11 +81,32 @@ def _add_collection_to_marker_map(
     parallel: set[str],
     by_marker: dict[str, set[str]],
 ) -> None:
-    rel = collection_dir.relative_to(repo.resolve()).as_posix()
+    """Add dir path when pure; else per-file paths (mixed-marker dirs — SEL1)."""
+    modules_by_marker = _parallel_modules_by_marker(repo, collection_dir, parallel)
+    if not modules_by_marker:
+        return
+    rel_dir = collection_dir.relative_to(repo.resolve()).as_posix()
+    if len(modules_by_marker) == 1:
+        marker = next(iter(modules_by_marker))
+        by_marker[marker].add(rel_dir)
+        return
+    for marker, modules in modules_by_marker.items():
+        for module in modules:
+            by_marker[marker].add(module.relative_to(repo.resolve()).as_posix())
+
+
+def _parallel_modules_by_marker(
+    repo: Path,
+    collection_dir: Path,
+    parallel: set[str],
+) -> dict[str, list[Path]]:
+    grouped: dict[str, list[Path]] = {}
     for module in sorted(collection_dir.glob("test_*.py")):
         marker = classify_test_path(repo, module)
-        if marker in parallel:
-            by_marker[marker].add(rel)
+        if marker not in parallel:
+            continue
+        grouped.setdefault(marker, []).append(module)
+    return grouped
 
 
 def _groups_from_marker_paths(
@@ -179,6 +200,9 @@ def _is_orphan_parallel(
         return False
     marker = classify_test_path(repo, module)
     if marker not in parallel:
+        return False
+    rel = module.relative_to(repo.resolve()).as_posix()
+    if rel in covered:
         return False
     parent = module.parent.resolve().relative_to(repo.resolve()).as_posix()
     return parent not in covered
