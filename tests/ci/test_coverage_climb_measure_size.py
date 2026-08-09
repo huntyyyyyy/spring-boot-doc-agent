@@ -1,4 +1,8 @@
-"""Coverage climb: coverage_measure_cli + size_measure hermetic edges."""
+"""Coverage climb: coverage_measure_cli + size_measure hermetic edges.
+
+Q2 adequacy witness: mutmut_slice on doc_engine.ci.coverage_measure_cli /
+size_measure (assert refuse-floor / PathCohesion edges).
+"""
 
 from __future__ import annotations
 
@@ -15,7 +19,7 @@ from doc_engine.ci.coverage_artifact_policy import DEFAULT_FLOOR
 from doc_engine.ci.coverage_measure_modes import ClimbMeasureStrategy, OracleMeasureStrategy
 from doc_engine.ci.coverage_path_cohesion import PathCohesionError
 
-pytestmark = pytest.mark.domain_ci_meta
+pytestmark = pytest.mark.domain_climb_sensor
 
 SAMPLE_XML = """\
 <?xml version="1.0" ?>

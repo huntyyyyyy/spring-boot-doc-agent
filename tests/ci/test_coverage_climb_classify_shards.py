@@ -1,4 +1,8 @@
-"""Coverage climb: domain classify + path shards hermetic edges."""
+"""Coverage climb: domain classify + path shards hermetic edges.
+
+Q2 adequacy witness: mutmut_slice on doc_engine.ci.test_domain_classify /
+test_path_shards / emit_abi_matrix (assert discriminative edges, not line touch).
+"""
 
 from __future__ import annotations
 
@@ -15,7 +19,7 @@ from doc_engine.ci.test_domain_rules import (
     FilenamePrefixRule,
 )
 
-pytestmark = pytest.mark.domain_ci_meta
+pytestmark = pytest.mark.domain_climb_sensor
 
 
 def test_iter_modules_and_declared_markers(tmp_path: Path) -> None:
