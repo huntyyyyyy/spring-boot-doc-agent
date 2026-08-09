@@ -534,25 +534,68 @@ jobs:
             --compare-ref "$COMPARE_REF" \
             --coverage-xml coverage.xml
 
-  # ABI correctness shards (policy T-A). No coverage.xml — never combine with
-  # the 3.11 oracle cell. Domain list must stay aligned with
-  # doc_engine.ci.test_domain_catalog.parallel_shard_markers().
+  # ABI path matrix (policy T-A + E-TEST3): discover collection dirs, group by
+  # parallel parent domain_* — no hand-maintained path list. Never writes
+  # coverage.xml (oracle 3.11 cell only).
+  abi-domain-matrix:
+    name: ABI domain path matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -e .
+      - id: gen
+        name: Emit domain×paths × python matrix
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          from doc_engine.ci.test_path_shards import github_matrix_include
+          from doc_engine.paths import repo_root
+
+          rows = []
+          for python_version in ("3.10", "3.12"):
+              for row in github_matrix_include(repo_root()):
+                  rows.append(
+                      {
+                          "python-version": python_version,
+                          "id": row["id"],
+                          "marker": row["marker"],
+                          "paths": row["paths"],
+                      }
+                  )
+          if not rows:
+              raise SystemExit("domain_path_matrix produced zero ABI rows")
+          payload = json.dumps({"include": rows}, separators=(",", ":"))
+          output_path = os.environ["GITHUB_OUTPUT"]
+          with open(output_path, "a", encoding="utf-8") as handle:
+              handle.write("matrix<<EOF\n")
+              handle.write(payload)
+              handle.write("\nEOF\n")
+          print(json.dumps({"include": rows}, indent=2))
+          PY
+
   abi-domain-shards:
-    name: ABI domain shards (no coverage)
+    name: ABI ${{ matrix.id }} (${{ matrix.python-version }})
+    needs: abi-domain-matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
-      matrix:
-        python-version: ["3.10", "3.12"]
-        domain:
-          - domain_schemas
-          - domain_stage0
-          - domain_pipeline
-          - domain_compliance
-          - domain_ci_meta
-          - domain_adapters
-          - domain_stf
-          - domain_climb_sensor
+      matrix: ${{ fromJSON(needs.abi-domain-matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -569,8 +612,8 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
           pip install -e .
-      - name: pytest -m ${{ matrix.domain }}
-        run: pytest tests/ -v --tb=short -m ${{ matrix.domain }}
+      - name: pytest ${{ matrix.paths }} -m ${{ matrix.marker }}
+        run: pytest ${{ matrix.paths }} -v --tb=short -m ${{ matrix.marker }}
 
   abi-domain-serial:
     name: ABI serial domains (no coverage)

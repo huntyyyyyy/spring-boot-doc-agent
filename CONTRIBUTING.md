@@ -292,6 +292,14 @@ on `domain_unclassified` are the debt inventory; once reclassified to a named
 BC they **leave that inventory** and are not part of the debt set. Reclassify
 by extending the rule tuple (OCP), not by editing CI expressions by hand.
 
+**ABI path matrix (E-TEST3).** Collection directories under fat/package roots
+are discovered and **grouped by parent** `domain_*` marker
+(`doc_engine.ci.test_path_shards.domain_path_matrix`). The CI matrix stays
+short (one row per parallel domain); each job runs `pytest <paths…> -m
+<marker>`. `tests/support/` is a shared helper kernel and is never a shard
+root. Prefer placing new tests in concept subfolders under those roots as the
+tree folderizes — do not hand-edit path lists in the workflow.
+
 ### Quality gates (all OS)
 
 One portable entry point — same on Mac, Windows, and Linux (and in CI):

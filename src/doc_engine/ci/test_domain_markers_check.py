@@ -18,6 +18,7 @@ from doc_engine.ci.test_domain_classify import (
     iter_test_modules,
 )
 from doc_engine.ci.test_domain_inventory import build_doc_engine_inventory
+from doc_engine.ci.test_path_shards import domain_path_matrix, orphan_parallel_modules
 from doc_engine.paths import repo_root
 
 USAGE = """\
@@ -78,6 +79,13 @@ def run_check(
                 repo, path, require_classifier_match=require_classifier_match
             )
         )
+    for orphan in orphan_parallel_modules(repo):
+        issues.append(
+            f"{orphan}: parallel module outside discovered domain path matrix"
+        )
+    groups = domain_path_matrix(repo)
+    if not groups:
+        issues.append("domain_path_matrix produced zero parallel groups")
     inventory = build_doc_engine_inventory(repo)
     if not inventory.meets_floor:
         issues.append(
@@ -104,6 +112,10 @@ def run_check(
         f"OK: tests/doc_engine meeting={len(inventory.meeting)}/"
         f"{inventory.total} ({inventory.meeting_pct:.3f}% >= {inventory.floor:g}%); "
         f"debt={len(inventory.debt)} (unclassified only)"
+    )
+    print(
+        f"OK: domain path matrix {len(groups)} parallel groups "
+        f"({sum(len(group.paths) for group in groups)} collection dirs)"
     )
     return 0
 

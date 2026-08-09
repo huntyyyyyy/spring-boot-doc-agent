@@ -10,6 +10,9 @@ from pydantic import ValidationError
 from doc_engine.pipeline.artifacts import ARTIFACT_FILENAMES, ARTIFACT_MODELS
 from doc_engine.pipeline.validation import ArtifactValidationError, validate_artifact_file
 from doc_engine.tools import capacity_preflight
+from tests.support.capacity_preflight.characterization import (
+    characterization_stage0_report,
+)
 
 pytestmark = pytest.mark.domain_schemas
 

@@ -27,6 +27,7 @@ from tests.doc_engine.cert_helpers import ok_stages_for
 
 pytestmark = pytest.mark.domain_schemas
 
+@pytest.fixture
 def spring_signals_path():
     return FIXTURE_SNAPSHOT_PATH
 

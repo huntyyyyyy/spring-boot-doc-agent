@@ -20,6 +20,25 @@ from tests.support.certification.verify_fixtures import _ok_gates_for, _write_in
 
 pytestmark = pytest.mark.domain_compliance
 
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"certified": True},
+        {"certified": True, "compliance_profile": "scan_only"},
+        {
+            "certified": False,
+            "compliance_profile": "certified",
+            "failures": ["gate:artifact_contract"],
+        },
+        {"certified": False},
+    ],
+    ids=[
+        "certified_true_only",
+        "certified_true_scan_only_profile",
+        "not_certified_with_failures_only",
+        "certified_false_only",
+    ],
+)
 def test_pre_schema_incomplete_dicts_fail_schema_gate(payload: dict):
     """Exact HEAD fixture shapes that broke CI after CertificationReport gating."""
     with tempfile.TemporaryDirectory() as tmp:

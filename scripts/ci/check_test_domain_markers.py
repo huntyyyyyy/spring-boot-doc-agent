@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Shim: domain marker ratchet — prefer module entry below.
 
+Run with:
+    python3 scripts/ci/check_test_domain_markers.py
+    # preferred:
     python -m doc_engine.ci.test_domain_markers_check
 """
 
