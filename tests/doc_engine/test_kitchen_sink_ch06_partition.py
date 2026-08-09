@@ -1,97 +1,25 @@
-"""Cohesive suite from tests/doc_engine/test_enterprise_kitchen_sink.py: Ch06PartitioningTest."""
+"""Kitchen-sink Ch06 partitioning."""
 
 from __future__ import annotations
 
-import datetime
-import json
 import os
-import re
-import shutil
 import subprocess
-import sys
-import tempfile
-import unittest
-from unittest import mock
-from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
-from doc_engine.core.excludes import DEFAULT_EXCLUDED_DIRS
-from doc_engine.pipeline.mock_stages import (
-    find_existing_readme,
-    load_citations,
-    mock_architecture,
-    mock_docs,
-    mock_file_summaries,
-    mock_gap_and_interview,
-    sweep_todos,
-)
-from doc_engine.tools import partition_repo, run_manifest, spring_signal_scan
-from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
-from doc_engine.scanning.covering import verify_covering_proof
 
 import pytest
 
+from doc_engine.core.excludes import DEFAULT_EXCLUDED_DIRS
+from doc_engine.tools import partition_repo
+from tests.support.kitchen_sink.constants import PLANTED_EXCLUDED_DIRS, PY
+from tests.support.kitchen_sink.harness import _evidence_files, _grouped, _has_segment
+from tests.support.kitchen_sink.testcase import KitchenBoundTestCase
+
 pytestmark = pytest.mark.domain_integration
 
-SCRIPT_DIR = SCRIPTS_DIR
-PY = sys.executable
-MAX_TOKENS = "2000"
-SMALL_FILE_BYTES = "4096"
-EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-BILLING = "services/billing-service/src/main/java/com/acme/billing"
-LEDGER = "services/ledger-service/src/main/java/com/acme/ledger"
-LEGACY = "services/legacy-batch/src/main/java/com/acme/legacy"
-RES = "services/billing-service/src/main/resources"
-TWO_ENTITIES = f"{BILLING}/TwoEntities.java"
-MIXED_ENTITIES = f"{BILLING}/MixedEntities.java"
-NESTED_ENTITY = f"{BILLING}/NestedEntity.java"
-DUP_BILLING = f"{BILLING}/Invoice.java"
-DUP_LEDGER = f"{LEDGER}/Invoice.java"
-UNICODE_QUERY = f"{LEDGER}/LedgerRepository.java"
-HUGE_JAVA = f"{LEGACY}/Huge.java"
-EMPTY_JAVA = f"{LEGACY}/Empty.java"
-LATIN1_JAVA = f"{LEGACY}/Latin1.java"
-NUL_JAVA = f"{LEGACY}/NulInside.java"
-CRLF_JAVA = f"{LEGACY}/Crlf.java"
-BOM_YML = f"{RES}/application-prod.yml"
-NOBOM_YML = f"{RES}/application-nobom.yml"
-PLACEHOLDER_YML = f"{RES}/application.yml"
-SECRETS_YML = f"{RES}/application-secrets.yml"
-MULTI_SEG_YML = f"{RES}/application-dev-local.yml"
-CRLF_PROPS = f"{RES}/application-legacy.properties"
-LF_PROPS = f"{RES}/application-lfprops.properties"
-EMPTY_YML = f"{RES}/application-empty.yml"
-SPACE_PATH = "docs and notes/guide.md"
-UNICODE_DIR_JAVA = "módulo-común/src/main/java/com/acme/uni/UniController.java"
-DEEP_JAVA = "deep/" + "/".join(f"l{i:02d}" for i in range(30)) + "/Leaf.java"
-GITIGNORED_DIR = "generated"
-PLANTED_EXCLUDED_DIRS = ["target", "build", "node_modules", "vendor", "venv",
-                         "dist", "out", "coverage"]
-from tests.support.kitchen_sink.writers import (
-    _controller,
-    _entity,
-    _service,
-    _w,
-    _wb,
-)
-from tests.support.kitchen_sink.repo_builder import build_enterprise_repo
-from tests.support.kitchen_sink.constants import _STATE
-from tests.support.kitchen_sink.harness import (
-    _copy_docs,
-    _evidence_files,
-    _grouped,
-    _has_segment,
-    _kitchen_sink_real_repo,
-    _miscase_first_tag,
-    _git,
-    _run,
-    run_chain,
-    setUpModule,
-    tearDownModule,
-)
 
-class Ch06PartitioningTest(unittest.TestCase):
+class Ch06PartitioningTest(KitchenBoundTestCase):
 
     def setUp(self):
-        self.groups = _STATE["groups"]
+        self.groups = self.kitchen.groups
         self.max_tokens = self.groups["max_tokens_per_group"]
 
     def _membership(self):
@@ -112,15 +40,19 @@ class Ch06PartitioningTest(unittest.TestCase):
         """The invariant that must hold regardless of the cascade above:
         overlap may duplicate, but it must never drop."""
         skipped = {s["file"] for s in self.groups["skipped"]}
-        repo = _STATE["repo"]
+        repo = self.kitchen.repo
         # dfs_file_list yields absolute paths; groups.json carries them
         # relative and forward-slashed. docs/ is excluded because the run
         # wrote it *after* partitioning.
-        walked = {os.path.relpath(w, repo).replace(os.sep, "/")
-                  for w in partition_repo.dfs_file_list(
-                      repo, DEFAULT_EXCLUDED_DIRS,
-                      partition_repo.DEFAULT_EXCLUDED_EXTS,
-                      partition_repo.DEFAULT_EXCLUDED_FILES)}
+        walked = {
+            os.path.relpath(w, repo).replace(os.sep, "/")
+            for w in partition_repo.dfs_file_list(
+                repo,
+                DEFAULT_EXCLUDED_DIRS,
+                partition_repo.DEFAULT_EXCLUDED_EXTS,
+                partition_repo.DEFAULT_EXCLUDED_FILES,
+            )
+        }
         walked = {w for w in walked if not w.startswith("docs/")}
         self.assertEqual(walked - set(self._membership()) - skipped, set())
 
@@ -161,13 +93,21 @@ class Ch06PartitioningTest(unittest.TestCase):
             "    seen = {f for grp in g for f, _ in grp}\n"
             "    assert seen == {f for f, _ in ft}, mt\n"
             "print('OK')\n"
-        ) % (_STATE["repo"],)
+        ) % (self.kitchen.repo,)
         try:
-            proc = subprocess.run([PY, "-c", probe], capture_output=True, text=True,
-                                  encoding="utf-8", errors="replace", timeout=120)
+            proc = subprocess.run(
+                [PY, "-c", probe],
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=120,
+            )
         except subprocess.TimeoutExpired:
-            self.fail("build_groups did not terminate — the zero-progress guard "
-                      "regressed (see this test's docstring)")
+            self.fail(
+                "build_groups did not terminate — the zero-progress guard "
+                "regressed (see this test's docstring)"
+            )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         self.assertIn("OK", proc.stdout)
 
@@ -177,7 +117,11 @@ class Ch06PartitioningTest(unittest.TestCase):
                 total = 0
                 for rel in g["files"]:
                     tokens, reason = partition_repo.estimate_tokens(
-                        os.path.join(_STATE["repo"], rel.replace("/", os.sep)), 2_000_000)
+                        os.path.join(
+                            self.kitchen.repo, rel.replace("/", os.sep)
+                        ),
+                        2_000_000,
+                    )
                     self.assertIsNone(reason)
                     total += tokens
                 self.assertEqual(g["est_tokens"], total)
@@ -200,15 +144,22 @@ class Ch06PartitioningTest(unittest.TestCase):
         'outbound/Client.java'. This is also the first assertion anywhere in
         this repo that excluded dirs stay out of groups.json."""
         grouped = _grouped(self.groups)
-        cited = set(_evidence_files(_STATE["signals"]))
-        signed = set(_STATE["signals"]["file_signatures"])
-        entities = {v["file"] for v in _STATE["signals"]["entity_table_map"].values()}
+        cited = set(_evidence_files(self.kitchen.signals))
+        signed = set(self.kitchen.signals["file_signatures"])
+        entities = {
+            v["file"] for v in self.kitchen.signals["entity_table_map"].values()
+        }
         for d in PLANTED_EXCLUDED_DIRS:
-            for collection, label in ((grouped, "groups"), (cited, "evidence"),
-                                      (signed, "file_signatures"),
-                                      (entities, "entity_table_map")):
+            for collection, label in (
+                (grouped, "groups"),
+                (cited, "evidence"),
+                (signed, "file_signatures"),
+                (entities, "entity_table_map"),
+            ):
                 with self.subTest(excluded=d, where=label):
-                    self.assertEqual([f for f in collection if _has_segment(f, d)], [])
+                    self.assertEqual(
+                        [f for f in collection if _has_segment(f, d)], []
+                    )
 
     def test_group_file_lists_are_dfs_preorder_not_sorted(self):
         """A deliberate inverse assertion. dfs_file_list emits a directory's
@@ -216,6 +167,9 @@ class Ch06PartitioningTest(unittest.TestCase):
         file precedes everything nested regardless of lexicographic order.
         Asserting sortedness here would assert a falsehood; this documents the
         contract and fails loudly if someone "fixes" the ordering."""
-        unsorted = [g["id"] for g in self.groups["groups"]
-                    if g["files"] != sorted(g["files"])]
+        unsorted = [
+            g["id"]
+            for g in self.groups["groups"]
+            if g["files"] != sorted(g["files"])
+        ]
         self.assertTrue(unsorted, "no group was DFS-ordered — fixture shape changed")

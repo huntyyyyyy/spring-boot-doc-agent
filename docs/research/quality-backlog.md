@@ -142,8 +142,8 @@ Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-te
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P9.0 | **E-KH0 Spec:** approve **K1–K12** (pytest fixtures SoT; refuse Testcontainers/Spec Kit runtime/DI containers for kitchen) | **Pending human Approve** | research 10 `spec_gate: APPROVED E-KH0` |
-| P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | Adopt after P9.0 | kitchen green; no chapter `setUpModule`; size/complexipy |
+| P9.0 | **E-KH0 Spec:** approve **K1–K12** (pytest fixtures SoT; refuse Testcontainers/Spec Kit runtime/DI containers for kitchen) | **Done** (2026-08-09) | research 10 `spec_gate: APPROVED E-KH0` |
+| P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | **Done** (2026-08-09) | kitchen green; no chapter `setUpModule`; size/complexipy |
 | P9.2 | Optional syrupy / Hypothesis — **not** kitchen chapter SoT | Align E-QA3; KH-S2 | spike exit criteria |
 
 Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-harness-modernization-2026.md). Primaries: pytest fixtures docs + DeepWiki pytest/hypothesis/testcontainers; GitHub activity 2026-08-09; arXiv 2601.06615 (Fixturize), 2404.09398 (FlakyDoctor), 2606.04967 (SDD).
@@ -155,7 +155,7 @@ Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P10.0 | **E-UX0 Spec:** approve **U1–U7** (summary-first; groups; shared append; refuse rich/LLM) | **Approved 2026-08-09** | research 11 `spec_gate: APPROVED E-UX0` |
-| P10.1 | **E-UX1:** quality-gates markdown rollup + `::group::` + coverage/gap → `github_step_summary` | Adopt after P10.0 | step summary has gate table; no overwrite; size/complexipy |
+| P10.1 | **E-UX1:** quality-gates markdown rollup + `::group::` + coverage/gap → `github_step_summary` | **Done** (#105, 2026-08-09) | step summary has gate table; no overwrite; size/complexipy |
 | P10.2 | **E-UX2:** claims / code_quality headline + `<details>` | Later | optional |
 
 Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci-output-ux-progressive-disclosure-2026.md).
@@ -168,8 +168,10 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 **Done (E-TEST0–1):** domain markers + ABI shards.  
 **Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
 **Done (E-RUN0–1):** suite-stalking sensors Spec + D1/D2/D17.  
-**Active tip:** oracle stabilize (#105) to **98.7** (necessary floor).  
+**Done (#105):** oracle stabilize to **98.7** (necessary floor) + E-UX1 summary-first UX.  
 **Done (E-QA0–2):** adequacy Spec + sensors + Climb Archive Q2 witness checklist.  
-**Active:** **E-UX1** (quality-gates UX slice) after E-UX0 Approve.  
-**Spec pending:** **E-KH0** (K1–K12) — kitchen fixtures/ports; do not implement E-KH1 until Approve.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT.
+**Done (E-UX0–1):** UX Spec Approve + quality-gates / step-summary append slice.  
+**Done (E-KH0):** K1–K12 Approve (2026-08-09).  
+**Done (E-KH1):** `KitchenArtifacts` + session fixtures; chapters off `setUpModule`/`_STATE` (2026-08-09).  
+**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT.
