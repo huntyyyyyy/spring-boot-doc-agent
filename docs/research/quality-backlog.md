@@ -50,13 +50,13 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 
 ---
 
-## P3 — Process / agent hygiene (can parallel *docs only* with P1)
+## P3 — Process / agent hygiene — DONE E-CM2
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P3.1 | Agent prompts / steering: climb ≠ floor; remesure oracle only on salient triggers | Adopt **17**, **26** | prompt/docs review |
-| P3.2 | Encode SDD one-stream in wave1 PR template / CONTRIBUTING note | Adopt **21** | human process |
-| P3.3 | Explicit refuse: ungated CONSTRAINTS/baseline rewrite; LLM-judge as fail_under | Refuse **19**, **20** | claims / review |
+| P3.1 | Agent prompts / steering: climb ≠ floor; remesure oracle only on salient triggers | Adopt **17**, **26** | CONTRIBUTING saliency cadence |
+| P3.2 | Encode SDD one-stream in wave1 PR template / CONTRIBUTING note | Adopt **21** | CONTRIBUTING + `.github/pull_request_template.md` |
+| P3.3 | Explicit refuse: ungated CONSTRAINTS/baseline rewrite; LLM-judge as fail_under | Refuse **19**, **20** | CONTRIBUTING refuse table + Rust memo link |
 
 ---
 
@@ -67,7 +67,7 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 | P4.1 | Climb targeting hysteresis (dead-band file re-pick) | Adopt **27** | Advisory only |
 | P4.2 | xdist on climb | Refuse v1 / defer **8** | After modes stable |
 | P4.3 | Carbon-aware CI scheduling | Optional **23**, **31** | Never block oracle work |
-| P4.4 | Profiled Rust helper (not default) | Refuse unless profiled **22** | Cross-link Rust memo |
+| P4.4 | Profiled Rust helper (not default) | Refuse unless profiled **22** | Linked from CONTRIBUTING / design index |
 | P4.5 | Simple CI/agent remesure rate caps | Adopt if storms persist **28** | Before any PID |
 
 ---
@@ -87,7 +87,8 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 
 ## Suggested next single stream
 
-**Done (E-CM0):** P1.1–P1.3 — decisions **1–31** Approved; policy **16-A**
-(`coverage.climb.xml`); design memo status APPROVED.  
-**Now:** P2.1–P2.5 dual-mode (E-CM1), with P0 size splits first if ratchet fails.  
-**Never:** dual-mode + LOC campaign + taxonomy docs rewrite in one tip.
+**Done (E-CM0):** Spec approve **1–31** + policy **16-A**.  
+**Done (E-CM1):** Dual-mode measure strategies + climb XML + gap refuse.  
+**Done (E-CM2):** CONTRIBUTING cadence / SDD one-stream / refuse table / Rust link + PR template.  
+**Optional:** E-CM3 spikes only (hysteresis, xdist, rate caps, OCS profile) — not prerequisites.  
+**Never:** reopen fuzzy green or scoped fail_under as floor proof.

@@ -188,9 +188,46 @@ doc-engine coverage-gap-average --coverage-xml coverage.xml --worst 15
 
 `below_floor_cover` is the weighted statement+branch Cover% over the below-floor
 set only; `below_floor_mean_file` is the unweighted mean of those file percents.
-Drive coverage-climb tests at the worst below-floor files first. Remesure oracle
-after a climb batch / before PR / when targeting from a stale XML — not every
-micro-edit (saliency cadence).
+Drive coverage-climb tests at the worst below-floor files first.
+
+### Oracle remesure cadence (saliency)
+
+Full-suite oracle is expensive. Remesure `coverage.xml` only on **salient**
+triggers (decisions **5** / **26**), not every micro-edit:
+
+1. After a climb batch that changed production or test code you intend to merge
+2. Before opening / updating a PR that touches Cover% SoT or below-floor files
+3. When gap inventory is empty, clearly stale, or was built from another checkout
+4. After rebasing onto a tip that changed measured packages
+
+Between those triggers, use `--mode climb --scope <pkg>` for local feedback.
+Climb exit codes mirror pytest health; they never encode the repo floor.
+
+### Spec-driven delivery (one stream)
+
+For coverage SoT / dual-mode / gate changes: **Spec → Implement → Verify →
+Archive** with **one active tip writer** on the wave1 branch that owns
+`MeasureRun` / PathCohesion (decision **21**). Do not open parallel SoT-forking
+side branches or force-push tip thrash to “recover” a race. Prefer OpenSpec-style
+deltas; do not adopt Spec Kit WorkflowEngine as a mandatory runtime.
+
+### Hard refuse (coverage / quality SoT)
+
+These are merge-policy refusals, not style preferences (synthesis Embody/Adopt/
+Refuse + decisions **19–20**, **25**, **29**):
+
+| Refuse | Why |
+| --- | --- |
+| Scoped climb Cover% as proof of whole-repo **98.7** | Different pytest-cov predicate |
+| LLM-as-judge / advisory sensors as `fail_under` substitute | Sensors ≠ boolean merge SoT |
+| Fuzzy / PID / “confidence of green” on the oracle floor | Hard predicates stay hard |
+| Cross-worktree `coverage combine` or promoting `coverage.climb.xml` to SoR | Dual-write / path dilution |
+| Ungated rewrite of `CONSTRAINTS.md`, coverage baselines, or `fail_under` | Needs human + claims/ratchet |
+| In-tree Rust / WASM hot path by default | See [rust-stack-fit memo](docs/design/rust-stack-fit-memo-2026-08-08.md) — profiled exception only |
+
+Only CONTRIBUTING / CI hard gates are merge SoT. Climb Cover%, gap-average,
+LLM-judge, Recall@K, and carbon metrics are **sensors** — never silent
+promotions.
 
 ## In-repo quality gates
 

@@ -14,18 +14,17 @@ from __future__ import annotations
 
 import json
 import shutil
-import subprocess
 import sys
 import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from doc_engine.scanning.build_command import BuildCommandError, validate_build_command
 import doc_engine.scanning.support._codeql_cache as cache
 import doc_engine.scanning.support._codeql_cache_keys as cache_keys
 import doc_engine.scanning.support._codeql_cli as cli
 import doc_engine.scanning.support._codeql_database as database
 import doc_engine.scanning.support._codeql_queries as queries
+from doc_engine.scanning.build_command import BuildCommandError, validate_build_command
 
 # Stable facade surface (tests and scanners import from this module).
 CodeQLError = cli.CodeQLError

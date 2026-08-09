@@ -13,6 +13,7 @@ from doc_engine.core.timeouts import tool_timeout_seconds
 from doc_engine.scanning.support import _codeql_cli as cli
 from doc_engine.scanning.support._codeql_cli import CodeQLError
 
+
 def discover_queries(pack_dir: Path) -> List[Path]:
     """Return all .ql files in the pack directory, sorted."""
     return sorted(pack_dir.glob("*.ql"))

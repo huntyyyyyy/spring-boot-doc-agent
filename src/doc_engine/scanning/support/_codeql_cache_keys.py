@@ -44,10 +44,10 @@ def _hash_from_scan_context(scan_context: Any) -> str:
 def _is_codeql_walk_filename(name: str) -> bool:
     return name.endswith(".java") or _is_codeql_hash_file(name)
 
-def _prune_hash_walk_dirs(dirs: List[str]) -> None:
+def _prune_hash_walk_dirs(dirs: list[str]) -> None:
     dirs[:] = [d for d in dirs if d not in _HASH_EXCLUDED_DIRS]
 
-def _matching_walk_paths(walk_root: str, files: List[str]):
+def _matching_walk_paths(walk_root: str, files: list[str]):
     for name in sorted(files):
         if _is_codeql_walk_filename(name):
             yield Path(walk_root) / name

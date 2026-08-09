@@ -13,6 +13,7 @@ from typing import Optional
 
 from doc_engine.core.timeouts import tool_timeout_seconds
 
+
 class CodeQLError(RuntimeError):
     """Any CodeQL CLI failure that should not silently kill the process."""
 

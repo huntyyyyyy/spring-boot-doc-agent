@@ -12,8 +12,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from doc_engine.paths import PathValidationError, join_under
-from doc_engine.scanning.support._codeql_cli import CodeQLError
 from doc_engine.scanning.support._codeql_cache_keys import _cache_key
+from doc_engine.scanning.support._codeql_cli import CodeQLError
+
 
 def _cache_base_dir() -> Path:
     xdg = os.environ.get("XDG_CACHE_HOME")
