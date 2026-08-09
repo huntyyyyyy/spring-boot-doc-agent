@@ -228,8 +228,20 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-CQL0 Spec):** CQ1–CQ9 Approve (2026-08-09).  
 **Done (E-DOC0 Spec):** DOC1–DOC12 Approve (2026-08-09).  
 **Active:** **E-DOC1** — research domains + `claude/`→`docs/` + look-first (research 18); one stream.  
-**Defer:** E-CQL1 (next after E-DOC1 Archive); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`.
+**Spec draft (not Active tip):** **E-STK0** — watch/stalker agents without context bloat ([`process/19-…`](process/19-watch-stalker-agents-context-lean-2026.md)); Approve STK1–STK10 before Implement.  
+**Defer:** E-CQL1 (next after E-DOC1 Archive); E-STK1 (after E-STK0 Approve); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT.
+
+---
+
+## P15 — Watch / stalker agents (findings → research → refactor, context-lean)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Draft** (2026-08-09) | research 19 `spec_gate` → APPROVED |
+| P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | After Approve; one stream | context resets; claims green; LOC/complexipy |
+
+Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`](process/19-watch-stalker-agents-context-lean-2026.md). Primaries Jun–Aug 2026: projectmem 2606.12329, icat-agent 2606.25514, CompactionRL 2607.05378, RefactorAssist 2608.00924; gh-aw continuous improvement; Focus 2601.07190.
 
 ---
 
