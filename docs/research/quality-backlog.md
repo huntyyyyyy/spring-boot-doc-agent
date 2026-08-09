@@ -434,6 +434,16 @@ Research: [`docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-202
 
 Research: [`docs/research/process/34-text-search-allow-ripgrep-2026.md`](process/34-text-search-allow-ripgrep-2026.md).
 
+---
+
+## P30 — Control-plane closed-loop (evidence-gated gates) — Spec
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P30.0 | **E-CPL0 Spec:** approve **CPL1–CPL12** (receipts; HEAD-bound harness; overall=pass admission; refuse TEE/daemon SoT) | **DRAFT** (2026-08-09) — pending human Approve | research 35 + design `DRAFT E-CPL0` |
+| P30.1 | **E-CPL1 Implement:** CPL-G* fitness + TEL empty-log repair + harness HEAD pin | Deferred | only after E-CPL0 Approve (CPL1-1 tee repair may land under E-TEL0) |
+
+Research: [`docs/research/process/35-control-plane-closed-loop-2026.md`](process/35-control-plane-closed-loop-2026.md). Design: [`docs/design/control-plane-closed-loop-design-2026-08-09.md`](../design/control-plane-closed-loop-design-2026-08-09.md). **Embody** Ford fitness + vacuous-witness fail-closed; **Adopt** Proof-or-Stop/Nidus *semantics*; **Refuse** Nix/TEE/SLSA-L3/daemon tip SoT.
 
 ---
 

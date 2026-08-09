@@ -77,7 +77,7 @@ class TelemetryRun:
         safe = re.sub(r"[^\w.-]+", "_", name)
         log_path = self.suites_dir / f"{safe}.log"
         log_path.write_text(body, encoding="utf-8")
-        excerpt = _error_excerpt(body, exit_code)
+        excerpt = _suite_excerpt(body, exit_code)
         rel = str(log_path.relative_to(self.dir))
         self.index.suites.append(
             SuiteTelemetry(
@@ -108,28 +108,53 @@ class TelemetryRun:
         return path
 
 
-def _is_error_line(line: str) -> bool:
+def _is_signal_line(line: str) -> bool:
     lowered = line.lower()
-    return "error" in lowered or "traceback" in line
+    return any(
+        token in lowered
+        for token in (
+            "error",
+            "traceback",
+            "warning",
+            "advisory",
+            "failed",
+            "fail ",
+            "anchor missing",
+        )
+    )
 
 
-def _error_excerpt(body: str, exit_code: int) -> str:
-    if exit_code == 0 or not body.strip():
+def _suite_excerpt(body: str, exit_code: int) -> str:
+    """Always keep a short signal excerpt — including green runs with warnings.
+
+    Empty body stays empty (caller capture bug). Non-empty bodies always yield
+    either the first signal window or the tail so success still surfaces
+    WARNING/advisory lines that never trip exit_code.
+    """
+    del exit_code  # exit informs callers; excerpting is body-driven
+    if not body.strip():
         return ""
     lines = body.strip().splitlines()
     for idx, line in enumerate(lines):
-        if _is_error_line(line):
-            return "\n".join(lines[idx : idx + 12])[:1200]
-    return "\n".join(lines[-20:])[:1200]
+        if _is_signal_line(line):
+            return "\n".join(lines[idx : idx + 16])[:1600]
+    return "\n".join(lines[-24:])[:1600]
+
+
+# Back-compat alias for imports/tests that still name the fail-only helper.
+def _error_excerpt(body: str, exit_code: int) -> str:
+    return _suite_excerpt(body, exit_code)
 
 
 class _Tee(StringIO):
-    def __init__(self, primary: TextIO) -> None:
+    def __init__(self, primary: TextIO, sink: StringIO) -> None:
         super().__init__()
         self._primary = primary
+        self._sink = sink
 
     def write(self, s: str) -> int:  # type: ignore[override]
         self._primary.write(s)
+        self._sink.write(s)
         return super().write(s)
 
     def flush(self) -> None:
@@ -137,29 +162,23 @@ class _Tee(StringIO):
         super().flush()
 
 
-def _append_tee_buffers(combined: StringIO, out_buf: _Tee, err_buf: _Tee) -> None:
-    combined.write(out_buf.getvalue())
-    err_text = err_buf.getvalue()
-    if not err_text:
-        return
-    if combined.getvalue():
-        combined.write("\n")
-    combined.write(err_text)
-
-
 @contextmanager
 def tee_stdio() -> Iterator[StringIO]:
-    """Tee stdout/stderr to a buffer while still printing live."""
-    out_buf = _Tee(sys.stdout)
-    err_buf = _Tee(sys.stderr)
+    """Tee stdout/stderr into a live buffer while still printing.
+
+    The yielded StringIO is appended on every write so ``getvalue()`` works
+    both inside and after the ``with`` block (pre_pr historically read inside
+    and stored empty suite logs).
+    """
+    combined = StringIO()
+    out_buf = _Tee(sys.stdout, combined)
+    err_buf = _Tee(sys.stderr, combined)
     old_out, old_err = sys.stdout, sys.stderr
     sys.stdout, sys.stderr = out_buf, err_buf
-    combined = StringIO()
     try:
         yield combined
     finally:
         sys.stdout, sys.stderr = old_out, old_err
-        _append_tee_buffers(combined, out_buf, err_buf)
 
 
 def _index_from_symlink(root: Path, latest: Path) -> Path | None:

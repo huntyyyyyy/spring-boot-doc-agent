@@ -114,12 +114,33 @@ def test_tee_stdio_captures_stdout_and_stderr(capsys: pytest.CaptureFixture[str]
     with tee_stdio() as buf:
         print("hello-out")
         print("hello-err", file=sys.stderr)
+        # Live sink: getvalue must work *inside* the with (pre_pr historic bug).
+        assert "hello-out" in buf.getvalue()
     text = buf.getvalue()
     assert "hello-out" in text
     assert "hello-err" in text
     captured = capsys.readouterr()
     assert "hello-out" in captured.out
     assert "hello-err" in captured.err
+
+
+def test_success_run_keeps_warning_excerpt(tmp_path: Path) -> None:
+    """Green suites must still surface WARNING/advisory lines in the excerpt."""
+    run = TelemetryRun(tmp_path, "warnok", "standard")
+    run.record(
+        name="ruff",
+        kind="hard",
+        status="pass",
+        exit_code=0,
+        duration_ms=4,
+        body="ok line\nWARNING deprecated rule X\nstill green\n",
+    )
+    run.flush()
+    data = json.loads((run.dir / "index.json").read_text(encoding="utf-8"))
+    excerpt = data["suites"][0]["error_excerpt"]
+    assert "WARNING deprecated rule X" in excerpt
+    log = (run.dir / "suites" / "ruff.log").read_text(encoding="utf-8")
+    assert "WARNING deprecated rule X" in log
 
 
 def test_g7_unreadable_index(tmp_path: Path) -> None:

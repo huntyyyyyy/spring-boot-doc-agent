@@ -4873,3 +4873,11 @@ Assumptions affected:
 - `CLAUDE.md` / `CONSTRAINTS.md` §10 / `adapters/claude/SEARCH.md` — hard "never text search" / Grep denied — [Resolved — text search allowed; prefer ast-grep for structural citations; check F network half unchanged]
 - `docs/process/steering-prompts/` — no status field assumed Grep deny as deliverable absent — [Still accurate]
 Files touched: adapters/claude/hooks/deny_text_search.py, .claude/settings.json, scripts/ci/check_repo_claims.py, CLAUDE.md, AGENTS.md, CONSTRAINTS.md, SEARCH.md, agent prompts, tests/adapters/test_deny_text_search.py, tests/ci/test_repo_claims_*, docs/research/process/34-text-search-allow-ripgrep-2026.md
+
+## 2026-08-09 — E-CPL0 research + TEL empty-log tee repair
+Commit: uncommitted
+Tests: tests/ci/test_stalker_telemetry.py 9/9 passing; check_repo_claims OK
+Assumptions affected:
+- `docs/research/process/28-local-stalker-telemetry-etl-2026.md` — suite log ETL non-empty bodies — [New info — tip runs still had 0-byte suite logs; live sink + post-with getvalue repair; E-CPL0 Spec DRAFT for standing closed-loop fitness]
+- Steering prompts — no Grep/rg deny revival — [Still accurate]
+Files touched: docs/research/process/35-control-plane-closed-loop-2026.md, docs/design/control-plane-closed-loop-design-2026-08-09.md, docs/research/quality-backlog.md, docs/research/README.md, scripts/ci/pre_pr.py, src/doc_engine/ci/stalker_telemetry/run_store.py, tests/ci/test_stalker_telemetry.py, docs/process/session-log.md

@@ -264,10 +264,10 @@ def require_outage_toolchain() -> int:
 
 def _suite(name: str, kind: str, fn: SuiteFn) -> SuiteResult:
     started = time.perf_counter()
-    body = ""
     with tee_stdio() as buf:
         code = fn()
-        body = buf.getvalue()
+    # Read AFTER tee_stdio finally/live sink — never mid-with on an empty buffer.
+    body = buf.getvalue()
     ms = int((time.perf_counter() - started) * 1000)
     if kind == "advisory":
         status = "advisory"
