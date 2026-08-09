@@ -15,23 +15,22 @@ from doc_engine.pipeline.artifacts import ARTIFACT_MODELS, Fact, JSONL_ARTIFACTS
 from doc_engine.pipeline.validation import validate_artifact_file
 from doc_engine.scanning.facts import facts_from_signals, write_facts_jsonl
 
+pytestmark = pytest.mark.domain_schemas
+
 # Remaining operator / parallel-track artifacts (hand schema).
 # capacity_preflight_report left the unschematized set when slice-5 residual landed.
 _UNSCHEMATIZED = {
     "run_manifest": "parallel hand-schema track",
 }
 
-
 @pytest.mark.parametrize("artifact", sorted(ARTIFACT_MODELS))
 def test_registered_artifact_has_model(artifact: str) -> None:
     assert artifact in ARTIFACT_MODELS
-
 
 @pytest.mark.parametrize("artifact,reason", sorted(_UNSCHEMATIZED.items()))
 def test_unschematized_artifacts_documented(artifact: str, reason: str) -> None:
     assert artifact not in ARTIFACT_MODELS
     assert reason
-
 
 def test_facts_serde_round_trip_contract_projection(tmp_path: Path) -> None:
     """Deviation: closed Fact encode/decode loses required keys or MAPS_TO identity.
@@ -86,11 +85,9 @@ def test_facts_serde_round_trip_contract_projection(tmp_path: Path) -> None:
         ("com", "example", "b"),
     }
 
-
 def test_facts_drop_required_key_rejected() -> None:
     with pytest.raises(ValidationError):
         Fact.model_validate({"subject": "only"})
-
 
 def test_jsonl_encoding_flag() -> None:
     assert "facts" in JSONL_ARTIFACTS

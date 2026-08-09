@@ -17,8 +17,11 @@ from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT
 from doc_engine.scanning.support import _secret_heuristics as h
 from doc_engine.tools import check_no_secrets_leaked as checker
 
-SCRIPT_DIR = SCRIPTS_DIR
+import pytest
 
+pytestmark = pytest.mark.domain_stage0
+
+SCRIPT_DIR = SCRIPTS_DIR
 
 class ScanTextForSecretsTest(unittest.TestCase):
     def _heuristics(self, text):
@@ -90,7 +93,6 @@ class ScanTextForSecretsTest(unittest.TestCase):
         for hit in hits:
             self.assertNotIn(secret_value, str(hit))
 
-
 class CheckNoSecretsLeakedTest(unittest.TestCase):
     def setUp(self):
         self.tmpdir = tempfile.mkdtemp()
@@ -133,7 +135,6 @@ class CheckNoSecretsLeakedTest(unittest.TestCase):
         path = self._write("summaries.json", '{\n  "password": "hunter2literal"\n}')
         findings = checker.check([path])
         self.assertIn(path, findings)
-
 
 if __name__ == "__main__":
     unittest.main()

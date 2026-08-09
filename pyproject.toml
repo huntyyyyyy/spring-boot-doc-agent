@@ -48,10 +48,11 @@ Repository = "https://github.com/example/doc-engine.git"
 
 [project.scripts]
 doc-engine = "doc_engine.cli:main"
+stf = "stf.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["doc_engine*"]
+include = ["doc_engine*", "stf*"]
 
 [tool.setuptools.package-data]
 doc_engine = ["scanning/resources/*.yml"]
@@ -59,3 +60,31 @@ doc_engine = ["scanning/resources/*.yml"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+markers = [
+    "domain_schemas: Artifact schemas, serde, and shape validators",
+    "domain_stage0: Stage-0 signals, covering, gap_probe, facts/ETL",
+    "domain_pipeline: Partition, capacity, pipeline stages, local_runner units",
+    "domain_compliance: Compliance profiles and certification report units",
+    "domain_ci_meta: CI scripts, ratchets, coverage meta tests",
+    "domain_adapters: Adapter package tests",
+    "domain_stf: STF package tests",
+    "domain_climb_sensor: Coverage climb sensor suites (not oracle SoT)",
+    "domain_integration: Kitchen-sink / certified e2e / shared artifact env",
+    "domain_live_optin: Live OCS / real-world scans (skip-gated)",
+    "domain_unclassified: Explicit serial bucket until reclassified (E-TEST T3)",
+]
+
+[tool.coverage.run]
+source = ["doc_engine", "stf"]
+branch = true
+# Relative paths so SonarScanner on GitHub Actions can resolve coverage.xml
+# filenames against the checkout (absolute runner paths do not match).
+relative_files = true
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+# Integer floor of combined statement+branch Cover% on a clean CI run.
+# Aligned with new-code diff-cover (98.7); XML line-rate alone is not the gate.
+fail_under = 98.7
+show_missing = true
+skip_empty = true

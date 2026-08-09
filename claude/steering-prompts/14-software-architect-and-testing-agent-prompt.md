@@ -1,6 +1,6 @@
 ---
 category: Software-architect-and-testing agent (not a research prompt — implementation task)
-status: resolved (2026-07-25) — agents/software-architect-and-testing.md added as a sixth pipeline agent, wired into Stage 3 alongside gap-analyzer; scripts/coverage/spring_semgrep_rules.yml (10 rules) + scripts/coverage/semgrep_rule_fixtures/ + scripts/coverage/semgrep_rule_coverage.py + tests/coverage/test_semgrep_rule_coverage.py added, mirroring the ast-grep ruleset/rule_coverage.py pattern; semgrep~=1.171.0 pinned in requirements.txt and wired into .github/workflows/ci.yml; doc-taxonomy.md, agents/doc-writer.md, capacity_preflight.py, run_manifest.py, and tests/doc_engine/test_pipeline_stages.py updated for the sixth stage. Not yet opened as a PR.
+status: resolved (2026-07-25) — agents/software-architect-and-testing.md added as a sixth pipeline agent, wired into Stage 3 alongside gap-analyzer; scripts/coverage/spring_semgrep_rules.yml (10 rules) + scripts/coverage/semgrep_rule_fixtures/ + scripts/coverage/semgrep_rule_coverage.py + tests/coverage/test_semgrep_rule_coverage.py added, mirroring the ast-grep ruleset/rule_coverage.py pattern; semgrep~=1.171.0 pinned in requirements.txt and wired into .github/workflows/python-gates.yml (called from ci.yml); doc-taxonomy.md, agents/doc-writer.md, capacity_preflight.py, run_manifest.py, and tests/doc_engine/test_pipeline_stages.py updated for the sixth stage. Not yet opened as a PR.
 related: agents/software-architect-and-testing.md, scripts/coverage/spring_semgrep_rules.yml, scripts/coverage/semgrep_rule_coverage.py, skills/document-spring-repo/SKILL.md Stage 3, CONSTRAINTS.md "Runtime prerequisites" item 5, claude/steering-prompts/00-shared-research-standards.md, claude/steering-prompts/10-review-persona-and-standards.md
 verify:
   - path_exists:adapters/claude/agents/software-architect-and-testing.md
@@ -9,7 +9,7 @@ verify:
   - path_exists:scripts/coverage/semgrep_rule_coverage.py
   - path_exists:tests/coverage/test_semgrep_rule_coverage.py
   - contains:requirements.txt:semgrep
-  - contains:.github/workflows/ci.yml:semgrep_rule_coverage.py
+  - contains:.github/workflows/python-gates.yml:semgrep_rule_coverage.py
   - contains:adapters/claude/skills/document-spring-repo/SKILL.md:software-architect-and-testing
   - contains:adapters/claude/skills/document-spring-repo/references/doc-taxonomy.md:arch_test_review
 ---

@@ -1,0 +1,63 @@
+name: ABI domain tests
+
+# Reusable ABI shard workflow (E-TEST / policy T-A). Called from ci.yml so the
+# main workflow stays orchestration-sized. Never writes coverage.xml.
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  abi-domain-matrix:
+    name: ABI domain path matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-python-repo
+        with:
+          python-version: "3.11"
+      - id: gen
+        name: Emit domain×paths × python matrix
+        run: python -m doc_engine.ci.emit_abi_matrix
+
+  abi-domain-shards:
+    name: ABI ${{ matrix.id }} (${{ matrix.python-version }})
+    needs: abi-domain-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix: ${{ fromJSON(needs.abi-domain-matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-python-repo
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: pytest ${{ matrix.paths }} -m ${{ matrix.marker }}
+        run: pytest ${{ matrix.paths }} -v --tb=short -m ${{ matrix.marker }}
+
+  abi-domain-serial:
+    name: ABI serial domains (no coverage)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-python-repo
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: pytest serial domain expression
+        run: >
+          pytest tests/ -v --tb=short
+          -m "domain_integration or domain_unclassified or domain_live_optin"

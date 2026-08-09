@@ -10,6 +10,9 @@ findings (script injection from untrusted contexts, write-all, missing
 permissions, pull_request_target+checkout) hard-fail. Medium unpinned
 `actions/*@vN` tags print as advisory only until a SHA-pin migration.
 
+Policy C3/C4 (``doc_engine.ci.workflow_size``): no inline python heredocs;
+``ci.yml`` ≤200 LOC; any workflow ≤300 LOC (advisory above 225).
+
 Run with:
     python3 scripts/ci/check_workflow_yaml.py
 """
@@ -31,6 +34,11 @@ except ImportError:  # pragma: no cover - CI installs requirements-dev
     )
     raise SystemExit(2) from None
 
+from doc_engine.ci.workflow_size import (
+    check_no_continue_on_error_on_reusable_call,
+    check_no_python_heredocs,
+    check_workflow_loc,
+)
 from doc_engine.paths import repo_root
 
 REPO_ROOT = repo_root()
@@ -227,27 +235,64 @@ def format_finding(finding: SecurityFinding) -> str:
     )
 
 
-def main() -> int:
-    errors = check_workflows()
-    if errors:
-        print("workflow YAML check failed:", file=sys.stderr)
-        for err in errors:
-            print(f"  {err}", file=sys.stderr)
-        return 1
+def _print_failures(header: str, messages: list[str]) -> int:
+    print(header, file=sys.stderr)
+    for msg in messages:
+        print(f"  {msg}", file=sys.stderr)
+    return 1
 
+
+def _loc_heredoc_gate() -> tuple[int | None, list[str]]:
+    """Return (exit_code_or_None, advisory messages) for C3/C4 predicates."""
+    heredoc_errors = check_no_python_heredocs(WORKFLOWS, label_fn=_label)
+    call_errors = check_no_continue_on_error_on_reusable_call(
+        WORKFLOWS, label_fn=_label
+    )
+    loc_hard, loc_advisory = check_workflow_loc(WORKFLOWS, label_fn=_label)
+    for msg in loc_advisory:
+        print(f"advisory: {msg}")
+    hard = heredoc_errors + call_errors + loc_hard
+    if hard:
+        return (
+            _print_failures("workflow size/heredoc check failed:", hard),
+            loc_advisory,
+        )
+    return None, loc_advisory
+
+
+def _security_gate() -> tuple[int | None, list[SecurityFinding]]:
     hard, advisory = collect_security_findings()
     for finding in advisory:
         print(f"advisory: {format_finding(finding)}")
     if hard:
-        print("workflow security check failed (critical/high):", file=sys.stderr)
-        for finding in hard:
-            print(f"  {format_finding(finding)}", file=sys.stderr)
-        return 1
+        return (
+            _print_failures(
+                "workflow security check failed (critical/high):",
+                [format_finding(f) for f in hard],
+            ),
+            advisory,
+        )
+    return None, advisory
+
+
+def main() -> int:
+    errors = check_workflows()
+    if errors:
+        return _print_failures("workflow YAML check failed:", errors)
+
+    loc_rc, loc_advisory = _loc_heredoc_gate()
+    if loc_rc is not None:
+        return loc_rc
+
+    sec_rc, advisory = _security_gate()
+    if sec_rc is not None:
+        return sec_rc
 
     n = len(list(WORKFLOWS.glob("*.yml")) + list(WORKFLOWS.glob("*.yaml")))
     print(
         f"OK: {n} workflow(s) parse; "
-        f"{len(advisory)} medium/low advisory finding(s); 0 critical/high"
+        f"{len(advisory) + len(loc_advisory)} medium/low advisory finding(s); "
+        f"0 critical/high; LOC/heredoc SoT green"
     )
     return 0
 

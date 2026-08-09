@@ -34,7 +34,7 @@ Newest entries at the bottom.
 
 
 
-Commit: uncommitted (this entry documents an incident, not a code change)
+Commit: 065680a (this entry documents an incident, not a code change)
 
 
 
@@ -1274,7 +1274,7 @@ Files touched: CLAUDE.md, claude/steering-prompts/00-shared-research-standards.m
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1338,7 +1338,7 @@ Files touched: claude/steering-prompts/00-shared-research-standards.md, claude/s
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1414,7 +1414,7 @@ Files touched: scripts/verify_llms_docs.py (deleted), scripts/test_verify_llms_d
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1478,7 +1478,7 @@ Files touched: scripts/partition_repo.py, scripts/test_partition_repo.py, claude
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1554,7 +1554,7 @@ Files touched: agents/architect-merge.md, agents/architect-segment.md, agents/do
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1630,7 +1630,7 @@ Files touched: scripts/check_pipeline_output.py, scripts/test_check_pipeline_out
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1718,7 +1718,7 @@ Files touched: scripts/build_cross_group_edges.py, scripts/test_build_cross_grou
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -1830,7 +1830,7 @@ Files touched: agents/file-summarizer.md, agents/gap-analyzer.md, agents/doc-wri
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -1926,7 +1926,7 @@ Context for the next session: this commit is item A1 of `claude/observability-pr
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2006,7 +2006,7 @@ Files touched: scripts/capacity_preflight.py, scripts/test_capacity_preflight.py
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2082,7 +2082,7 @@ Files touched: scripts/test_enterprise_kitchen_sink.py, scripts/partition_repo.p
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2178,7 +2178,7 @@ Files touched: scripts/check_code_quality.py, scripts/test_check_code_quality.py
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2254,7 +2254,7 @@ Files touched: scripts/capacity_preflight.py, scripts/partition_repo.py, scripts
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2346,7 +2346,7 @@ Files touched: CONTRIBUTING.md, scripts/check_code_quality.py, scripts/test_chec
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2454,7 +2454,7 @@ Files touched: scripts/check_repo_claims.py, scripts/test_check_repo_claims.py, 
 
 
 
-Commit: uncommitted at write time ? see `git log` for this entry's commit
+Commit: 065680a at write time ? see `git log` for this entry's commit
 
 
 
@@ -2554,7 +2554,7 @@ Files touched: scripts/_ast_signature.py, scripts/test_ast_signature.py, skills/
 
 
 
-Commit: uncommitted at time of writing
+Commit: 065680a at time of writing
 
 
 
@@ -2630,7 +2630,7 @@ Files touched: scripts/java_perturbations.py, scripts/drift_match_normalizers.py
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -2674,7 +2674,7 @@ Files touched: agents/*.md (all five), .claude/settings.json, hooks/hooks.json, 
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -2746,7 +2746,7 @@ Files touched: scripts/prompt_contracts.py, scripts/test_prompt_contracts.py, sc
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -2798,7 +2798,7 @@ Files touched: agents/software-architect-and-testing.md, agents/doc-writer.md, s
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3002,7 +3002,7 @@ Files touched: scripts/_build_signal_extract.py, scripts/spring_signal_scan.py, 
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3050,7 +3050,7 @@ Files touched: scripts/_codeql_runner.py, scripts/spring_signal_scan.py, scripts
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3098,7 +3098,7 @@ Files touched: scripts/_signal_framework.py, scripts/_orchestrator.py, scripts/_
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3142,7 +3142,7 @@ Files touched: doc_engine/config_loader.py, doc_engine/cli.py, doc_engine/doc-en
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3186,7 +3186,7 @@ Files touched: claude/steering-prompts/02-pluggability-research-prompt.md, MATUR
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3226,7 +3226,7 @@ Files touched: STATUS.md, scripts/run_pipeline_local.py, claude/session-log.md
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3266,7 +3266,7 @@ Files touched: scripts/run_pipeline_local.py, src/doc_engine/scanning/_scanner_a
 
 
 
-Commit: uncommitted (pushing with PR #53)
+Commit: 065680a (pushing with PR #53)
 
 
 
@@ -3306,7 +3306,7 @@ Files touched: requirements.txt, requirements-dev.txt, claude/steering-prompts/0
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3346,7 +3346,7 @@ Files touched: src/doc_engine/pipeline/local_runner.py, src/doc_engine/pipeline/
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3390,7 +3390,7 @@ Files touched: .github/workflows/doc-engine.yml, scripts/partition_repo.py, scri
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3434,7 +3434,7 @@ Files touched: docs/product-architecture.md, adapters/claude/*, src/doc_engine/c
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3478,7 +3478,7 @@ Files touched: scripts/check_repo_claims.py, tests/test_check_repo_claims.py, cl
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3510,7 +3510,7 @@ Files touched: scripts/check_code_quality.py, scripts/code_quality_baseline.json
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3546,7 +3546,7 @@ Files touched: src/doc_engine/tools/*, pipeline/stages.py, live_gates.py, runner
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3578,7 +3578,7 @@ Files touched: scripts/check_workflow_yaml.py, tests/test_check_workflow_yaml.py
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3622,7 +3622,7 @@ Files touched: scripts/ (product shims deleted), src/doc_engine/tools/*, tests/*
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3666,7 +3666,7 @@ Files touched: scripts/test_*.py (deleted), .vs/ (deleted), baseline-reference/ 
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3730,7 +3730,7 @@ Files touched: scripts/mutate.py, tests/test_mutate.py, claude/session-log.md
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3770,7 +3770,7 @@ Files touched: README.md, CLAUDE.md, CONSTRAINTS.md, STATUS.md, MATURITY_ASSESSM
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3798,7 +3798,7 @@ Files touched: CONSTRAINTS.md, README.md, claude/session-log.md
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3826,7 +3826,7 @@ Files touched: docs/guides/operator-pilot.md, docs/guides/principal-adoption.md,
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3858,7 +3858,7 @@ Files touched: claude/research/fact-store-prior-art-corpus-2026-07-30.md, claude
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -3890,7 +3890,7 @@ Files touched: src/doc_engine/scanning/facts.py, src/doc_engine/tools/spring_sig
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4006,7 +4006,7 @@ Files touched: scripts/check_repo_claims.py, scripts/repo_claims_baseline.json, 
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4042,7 +4042,7 @@ Files touched: claude/research/schema-*.md, src/doc_engine/pipeline/artifacts.py
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4074,7 +4074,7 @@ Files touched: src/doc_engine/pipeline/artifacts.py, src/doc_engine/tools/pipeli
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4106,7 +4106,7 @@ Files touched: scripts/** (layout), src/doc_engine/paths.py, tests/conftest.py, 
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4158,7 +4158,7 @@ Files touched: scripts/ci/pre_pr.py, scripts/ci/check_workflow_yaml.py, .githook
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4190,7 +4190,7 @@ Files touched: tests/** (layout + README), scripts/ci/suite_layout.py, scripts/c
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4222,7 +4222,7 @@ Files touched: src/doc_engine/pipeline/compliance.py, tests/doc_engine/test_veri
 
 
 
-Commit: uncommitted
+Commit: 065680a
 
 
 
@@ -4416,7 +4416,7 @@ Files touched: claude/research/ddia-north-star/**, claude/research/coverage-sor-
 
 ## 2026-07-30 ? Relocate DDIA north-star to docs/design; deepen + deviations
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: 13/13 passed (ddia north-star catalog); check_repo_claims OK
 
@@ -4436,7 +4436,7 @@ Files touched: docs/design/**, claude/research/ddia-north-star/README.md (stub),
 
 ## 2026-07-30 ? DDIA thorough campaign waves A?E + L2 capacity upper_bound
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: 39/39 passed (ddia depth+catalog + capacity_preflight Stage4 polarity)
 
@@ -4456,7 +4456,7 @@ Files touched: src/doc_engine/tools/capacity_preflight.py, tests/doc_engine/test
 
 ## 2026-07-30 ? Honesty unblock: partial_proxy + demote hollow + anti-Goodhart depth
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: 44/44 passed (ddia depth+catalog + capacity_preflight Stage4 proxy honesty)
 
@@ -4474,7 +4474,7 @@ Files touched: src/doc_engine/tools/capacity_preflight.py, tests/doc_engine/test
 
 ## 2026-07-30 ? UTF-8 session-log + capacity skill partial_proxy + L2b queue
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: check_repo_claims OK after cp1252?utf-8 rewrite
 
@@ -4492,7 +4492,7 @@ Files touched: claude/session-log.md, claude/research/adoption-blockers-queue-20
 
 ## 2026-07-30 ? Post-merge STATUS/CONSTRAINTS: L2b next; L4 still human
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: n/a (docs)
 
@@ -4512,7 +4512,7 @@ Files touched: STATUS.md, CONSTRAINTS.md, claude/session-log.md
 
 ## 2026-07-30 ? L2b measured_stage4_inputs (measure, do not invent threshold)
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: 28/28 capacity_preflight; 8/8 ddia depth; check_repo_claims OK
 
@@ -4530,7 +4530,7 @@ Files touched: src/doc_engine/tools/capacity_preflight.py, tests/doc_engine/test
 
 ## 2026-07-30 ? L2b follow-up: STATUS honesty + proxy-source precedence
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: 29/29 capacity_preflight
 
@@ -4546,7 +4546,7 @@ Files touched: src/doc_engine/tools/capacity_preflight.py, tests/doc_engine/test
 
 ## 2026-07-30 ? L2b threshold calibration research: retain 80000
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: n/a (research note; no default code change)
 
@@ -4562,7 +4562,7 @@ Files touched: claude/research/l2b-stage4-threshold-calibration-2026-07-30.md, S
 
 ## 2026-07-30 ? Calib note: Review B = Kimi K3 (2607.24653), retain 80k
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: n/a (docs)
 
@@ -4578,7 +4578,7 @@ Files touched: claude/research/l2b-stage4-threshold-calibration-2026-07-30.md, c
 
 ## 2026-07-30 ? L3 claim-symbol entity-identity ADR (research only)
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: n/a (ADR docs)
 
@@ -4594,7 +4594,7 @@ Files touched: claude/research/claim-symbol-entity-identity-adr-2026-07-30.md, S
 
 ## 2026-07-30 ? L3 ADR: FQCN (A), reject dual-read as architecture
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: n/a (docs)
 
@@ -4610,7 +4610,7 @@ Files touched: claude/research/claim-symbol-entity-identity-adr-2026-07-30.md, c
 
 ## 2026-07-30 ? L3 ADR: principal-complete symbol (B), calculated forward risk
 
-Commit: uncommitted
+Commit: 065680a
 
 Tests: n/a (docs)
 
@@ -4623,7 +4623,7 @@ Assumptions affected:
 Files touched: claude/research/claim-symbol-entity-identity-adr-2026-07-30.md, STATUS.md, claude/research/adoption-blockers-queue-2026-07-30.md, claude/session-log.md
 
 ## 2026-07-30 — L3 principal-complete claim-symbol identity (code)
-Commit: uncommitted
+Commit: 065680a
 Tests: focused identity suite 54 passed (+ ScanDeterminism contested); ocs live MAPS_TO=53 bad=0 Path A simple-name keys; full tests/doc_engine not waited (529 tests; prior stalls were Select-Object buffering)
 Assumptions affected:
 - L3 ADR research-only / FQCN backlog open — [Resolved — grammar memo + symbol API + type MAPS_TO emit; FACTS_LEDGER_SCHEMA_VERSION=2; Path A simple-name residual]
@@ -4653,7 +4653,7 @@ Files touched: src/doc_engine/scanning/_scanner_astgrep.py, scripts/ci/check_rep
 
 ## 2026-08-04 — Slim CONSTRAINTS.md to current-state blurbs
 
-Commit: uncommitted
+Commit: 065680a
 Tests: `PYTHONPATH=src python3 scripts/ci/check_repo_claims.py` OK (baseline pruned of 15 obsolete C-missing fingerprints after every remaining bracket claim gained verify:)
 Assumptions affected:
 - `claude/steering-prompts/03-constraints-research-prompt.md` — "a single CONSTRAINTS.md … structured like doc-taxonomy" / current-state catalog — [Resolved — file rewritten in place as status+fact+residual; diary/addenda removed; pointer-only enterprise duplicates dropped; Enterprise items renumbered 1=RBAC, 2=multi-repo, 3=branch protection]
@@ -4692,3 +4692,36 @@ Assumptions affected:
 - Jakarta.qll relocated list as EE-complete vs JDK-retained complement — [New info — javax.transaction.xa was false-positive pending via bare `transaction` slot; split like security.auth; javax.cache added from mappings.adoc]
 - mutation_driver as verified gate — [Resolved — wired non-blocking in ci.yml with ENFORCE=False matching mutate.py]
 Files touched: spring-signals/codeql/packs/spring-signals/Jakarta.qll, JakartaMigrationSanity.{ql,expected}, spring-signals/harness/fixture-repo/fetch-deps.sh, tests/spring_signals/mutation_driver.py, .github/workflows/ci.yml, claude/session-log.md
+
+## 2026-08-08 — Size ratchet: statement growth hard + file/function ceilings
+Commit: 065680a
+Tests: pytest tests/ci/test_check_code_quality.py + test_size_ratchet.py + test_run_quality_gates.py 65/65 (earlier full) / 18/18 focused; complexipy =5 on touched modules; check_repo_claims OK; size-ratchet 0/0 hard offenders
+Assumptions affected:
+- `claude/steering-prompts/13-code-quality-research-prompt.md` — "size/complexity/depth are advisory (schema v4)" — [Resolved — schema v5 hardens statement growth; `doc-engine size-ratchet` hard-fails file LOC >1000 and function statements >50 via `scripts/ratchets/size_baseline.json` in quality-gates; complexity/depth remain advisory here (complexipy owns =5)]
+Files touched: src/doc_engine/ci/size_ratchet.py, quality_gates.py, cli.py, spring_drift_{check,common,tier2}.py, scripts/ci/check_code_quality.py, scripts/ratchets/{code_quality_baseline,size_baseline}.json, CONTRIBUTING.md, CONSTRAINTS.md, tests/ci/*, .github/workflows/ci.yml, claude/steering-prompts/13-*.md, claude/session-log.md
+
+## 2026-08-08 — Size ratchet includes tests/; cohesive test modularization ≤225
+Commit: uncommitted
+Tests: size-ratchet exit 0 (0 test file offenders; 38 src legacy baselined); focused pytest 27/27 (size_ratchet + climb covering/query/build_cmd + support)
+Assumptions affected:
+- `claude/steering-prompts/13-code-quality-research-prompt.md` — size ceilings / package roots — [New info — FILE_LOC_HARD 225; SIZE_ROOTS now src/doc_engine + src/stf + tests/; CONTRIBUTING cohesion bar applies to tests]
+Files touched: CONTRIBUTING.md, CONSTRAINTS.md, scripts/ci/check_code_quality.py, scripts/ratchets/size_baseline.json, scripts/ratchets/code_quality_baseline.json, src/doc_engine/ci/size_*, src/doc_engine/cli*, src/doc_engine/scanning/support/_codeql_*, tests/** modularization, tests/support/**
+
+
+## 2026-08-09 — E-CI: thin ci.yml + reusable BC workflows + LOC/heredoc SoT
+Commit: 6a56818
+Tests: check_workflow_yaml OK (LOC/heredoc green); verify_tool_pins OK; pytest tests/ci workflow/size/summary/pins 23/23; check_repo_claims OK; check_code_quality OK; emit_abi_matrix OK
+Assumptions affected:
+- `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — CI installs/verifies pins via `ci.yml` — [Resolved — install in `.github/actions/setup-python-repo`; pin verify in `python-gates.yml` via `scripts/ci/verify_tool_pins.py`; verify predicates retargeted]
+- `claude/steering-prompts/14-software-architect-and-testing-agent-prompt.md` — `semgrep_rule_coverage.py` wired in `ci.yml` — [Resolved — step lives in `python-gates.yml`; verify predicate retargeted]
+- `CONSTRAINTS.md` Integration item 2 / Runtime item 4 / Known precision item 10 — gate strings in `ci.yml` — [Resolved — prose + verify HTML comments point at `python-gates.yml` / setup action under policy C-A]
+Files touched: .github/workflows/{ci,python-gates,codeql-signals,quality-gates,sonar}.yml, scripts/ci/{verify_tool_pins,coverage_run_summary,check_workflow_yaml}.py, src/doc_engine/ci/workflow_size.py, tests/ci/test_*, CONTRIBUTING.md, CONSTRAINTS.md, docs/research/{07-ci-workflow-modularity,quality-backlog}.md, docs/design/ci-workflow-modularity-design-2026-08-09.md, claude/steering-prompts/{08,14}-*.md, claude/session-log.md
+
+
+## 2026-08-09 — Fix CI: continue-on-error invalid on reusable-workflow caller
+Commit: 88c0653
+Tests: check_workflow_yaml OK; check_code_quality OK; pytest tests/ci workflow_size + check_workflow_yaml 17/17
+Assumptions affected:
+- E-CI sonar soft job — `continue-on-error` on `ci.yml` caller — [Resolved — moved onto `sonar.yml` called job; Actions rejects caller-level continue-on-error with 0-job failure]
+- `check_workflow_yaml` / `workflow_size` — LOC/heredoc only — [New info — hard-fails continue-on-error on reusable-workflow caller jobs]
+Files touched: .github/workflows/{ci,sonar}.yml, src/doc_engine/ci/workflow_size.py, scripts/ci/check_workflow_yaml.py, tests/ci/test_workflow_size.py, CONTRIBUTING.md, claude/session-log.md

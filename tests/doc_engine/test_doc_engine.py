@@ -8,6 +8,10 @@ import tempfile
 import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_pipeline
+
 class ConfigLoaderTest(unittest.TestCase):
     def test_load_json_config(self):
         from doc_engine.config_loader import load_repo_config
@@ -26,7 +30,6 @@ class ConfigLoaderTest(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             self.assertIsNone(load_repo_config(tmp))
-
 
 class EngineSmokeTest(unittest.TestCase):
     def test_scan_filesystem_only(self):
@@ -59,14 +62,12 @@ class EngineSmokeTest(unittest.TestCase):
             self.assertTrue(os.path.isdir(site_path))
             self.assertTrue(any(f.endswith(".html") for f in os.listdir(site_path)))
 
-
 class ScannerFrameworkExportTest(unittest.TestCase):
     def test_scanner_protocols_importable(self):
         from doc_engine.scanner import Scanner, Merger, LineageResolver, get_scanner
 
         scanner = get_scanner("filesystem")
         self.assertEqual(scanner.name, "filesystem")
-
 
 class PipelineCliTest(unittest.TestCase):
     def test_add_run_arguments_registers_repo_path(self):
@@ -89,7 +90,6 @@ class PipelineCliTest(unittest.TestCase):
         add_run_arguments(ap)
         args = ap.parse_args([str(FIXTURE_DIR), "--compliance-profile", "scan_only"])
         self.assertEqual(args.compliance_profile, "scan_only")
-
 
 if __name__ == "__main__":
     unittest.main()

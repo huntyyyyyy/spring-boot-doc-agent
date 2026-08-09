@@ -22,14 +22,16 @@ import unittest
 from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_adapters
+
 sys.path.insert(0, str(REPO_ROOT / "adapters" / "claude" / "hooks"))
 
 import deny_text_search as dts  # noqa: E402
 
-
 def denies(tool: str, command: str = "") -> bool:
     return dts.decide({"tool_name": tool, "tool_input": {"command": command}})["deny"]
-
 
 class TestGrepTool(unittest.TestCase):
     def test_grep_tool_is_denied(self) -> None:
@@ -38,7 +40,6 @@ class TestGrepTool(unittest.TestCase):
     def test_unrelated_tools_pass(self) -> None:
         for tool in ("Read", "Glob", "Write", "Edit"):
             self.assertFalse(denies(tool), tool)
-
 
 class TestAstGrepIsNeverBlocked(unittest.TestCase):
     """The self-defeat guard. Each of these contains the substring 'grep'."""
@@ -55,7 +56,6 @@ class TestAstGrepIsNeverBlocked(unittest.TestCase):
     def test_ast_grep_is_never_blocked(self) -> None:
         for command in self.SANCTIONED:
             self.assertFalse(denies("Bash", command), command)
-
 
 class TestTextSearchIsBlocked(unittest.TestCase):
     BLOCKED = (
@@ -78,7 +78,6 @@ class TestTextSearchIsBlocked(unittest.TestCase):
     def test_unrelated_bash_passes(self) -> None:
         for command in ("python -m unittest", "git status", "ls -la"):
             self.assertFalse(denies("Bash", command), command)
-
 
 class TestHeredocBodiesAreData(unittest.TestCase):
     """Regression. This hook blocked its own author mid-session: a heredoc
@@ -110,7 +109,6 @@ class TestHeredocBodiesAreData(unittest.TestCase):
     def test_an_unquoted_heredoc_tag_is_handled(self) -> None:
         self.assertFalse(denies("Bash", "cat <<EOF\ngrep is a word here\nEOF"))
 
-
 class TestFailOpen(unittest.TestCase):
     def test_unparseable_payload_does_not_block(self) -> None:
         """A hook that cannot read its input must not wedge the session. This
@@ -121,7 +119,6 @@ class TestFailOpen(unittest.TestCase):
     def test_missing_command_key_does_not_block(self) -> None:
         self.assertFalse(dts.decide({"tool_name": "Bash"})["deny"])
 
-
 class TestDenialExplainsTheAlternative(unittest.TestCase):
     def test_reason_names_ast_grep_and_both_traps(self) -> None:
         """A gate that only says 'no' trains the reader to route around it."""
@@ -129,7 +126,6 @@ class TestDenialExplainsTheAlternative(unittest.TestCase):
         self.assertIn("ast-grep", reason)
         self.assertIn("$$$", reason)
         self.assertIn("UNPROVEN", reason)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

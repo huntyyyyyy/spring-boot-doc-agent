@@ -13,12 +13,14 @@ from doc_engine.pipeline.executor import MockStageExecutor
 from doc_engine.pipeline.runner import PipelineRunner
 from doc_engine.pipeline.stages import build_stage_specs
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 def test_signal_scan_declares_facts_jsonl_output() -> None:
     spec = next(s for s in build_stage_specs() if s.name == "signal_scan")
     assert "facts.jsonl" in spec.outputs
     assert "spring_signals.json" in spec.outputs
-
 
 def test_missing_facts_jsonl_is_stage_failure_not_crash(tmp_path) -> None:
     """Declared outputs fail as StageResult — not an uncaught FileNotFoundError."""

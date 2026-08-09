@@ -1,0 +1,26 @@
+name: Setup Python repo
+description: >
+  Install the pinned Python version, cache pip from requirements*.txt, and
+  install this repo editable. Call after actions/checkout.
+
+inputs:
+  python-version:
+    description: CPython version for actions/setup-python
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: pip
+        cache-dependency-path: |
+          requirements.txt
+          requirements-dev.txt
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+        pip install -e .

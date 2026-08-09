@@ -1,11 +1,14 @@
 ---
 category: Code quality / expressiveness — naming, function size, information hiding, domain language
-status: partially resolved (2026-07-29) — mechanical layer landed (`ruff` + `scripts/ci/check_code_quality.py`), then revised: size/complexity/depth are advisory (schema v4); hard gates are annotation coverage + docstring orientation; ruff covers `scripts/` and `src/doc_engine/`. The expressiveness work itself — one stage vocabulary, single-owner tag grammar, a glossary, typed cross-stage artifacts — is scoped below and NOT done. See `claude/session-log.md`.
+status: partially resolved (2026-08-08) — mechanical layer: `ruff` + `check_code_quality.py` (schema v5: statement growth hard; complexity/depth advisory) + `doc-engine size-ratchet` (file LOC >1000 / function statements >50 hard via `scripts/ratchets/size_baseline.json`, wired into quality-gates). Expressiveness work (stage vocabulary, tag grammar, glossary, typed cross-stage artifacts) still NOT done. See `claude/session-log.md`.
 authored: in this repo, not mirrored from the Claude project — no sync obligation (see `00-shared-research-standards.md`'s `07`–`12` rule)
 verify:
   - path_exists:.ruff.toml
   - path_exists:scripts/ci/check_code_quality.py
   - path_exists:scripts/ratchets/code_quality_baseline.json
+  - path_exists:scripts/ratchets/size_baseline.json
+  - path_exists:src/doc_engine/ci/size_ratchet.py
+  - contains:CONTRIBUTING.md:size-ratchet
 ---
 
 # Research + scaffold prompt: code quality and expressiveness

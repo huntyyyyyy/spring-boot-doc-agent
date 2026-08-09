@@ -226,30 +226,32 @@ import os
 import sys
 from collections import Counter
 
-from doc_engine.scanning.support._build_signal_extract import extract_build_signals  # noqa: E402
-from doc_engine.scanning.support._config_keys import extract_config_keys  # noqa: E402
-from doc_engine.tools import spring_signal_scan  # noqa: E402
+from doc_engine.paths import (
+    PathValidationError,
+    checked_output_path,
+    checked_path,
+)
+from doc_engine.tools import spring_drift_common as _drift_common
+from doc_engine.tools import spring_drift_tier2 as _drift_tier2
+from doc_engine.tools import spring_signal_scan
 
-# Every citation ends up with exactly one of these — nothing is ever
-# silently dropped from the report.
-STATUS_UNCHANGED = "unchanged"
-STATUS_CONFIRMED = "confirmed_still_present"
-STATUS_DRIFTED = "drifted"
-STATUS_FILE_DELETED = "file_deleted"
-STATUS_NO_RULE_FALLBACK = "suspected_drift_content_changed_no_rule_to_recheck"
-STATUS_UNKNOWN_NO_SIGNATURE = "unknown_no_prior_signature"
-# The two config-file-specific outcomes below only apply to files
-# spring_signal_scan.py recorded a config_key_sets entry for (schema_version
-# >= 5) — everything else with no rule_id still falls back to
-# STATUS_NO_RULE_FALLBACK above. See _config_keys.py's module docstring for
-# why these two are worth telling apart rather than lumping both under one
-# generic "changed, can't precisely recheck" status.
-STATUS_CONFIG_STRUCTURE_CHANGED = "config_structure_changed"
-STATUS_CONFIG_VALUES_ONLY_CHANGED = "config_values_only_changed_review_needed"
-
-# Wire version for drift_report.json (L5 thin operator schema). Bump only on
-# breaking changes; additive fields keep the same version per rel-schema-outlives-writers.
-DRIFT_REPORT_SCHEMA_VERSION = 1
+# Public / test-facing re-exports (callers import status constants from this module).
+DRIFT_REPORT_SCHEMA_VERSION = _drift_common.DRIFT_REPORT_SCHEMA_VERSION
+STATUS_CONFIG_STRUCTURE_CHANGED = _drift_common.STATUS_CONFIG_STRUCTURE_CHANGED
+STATUS_CONFIG_VALUES_ONLY_CHANGED = _drift_common.STATUS_CONFIG_VALUES_ONLY_CHANGED
+STATUS_CONFIRMED = _drift_common.STATUS_CONFIRMED
+STATUS_DRIFTED = _drift_common.STATUS_DRIFTED
+STATUS_FILE_DELETED = _drift_common.STATUS_FILE_DELETED
+STATUS_NO_RULE_FALLBACK = _drift_common.STATUS_NO_RULE_FALLBACK
+STATUS_UNCHANGED = _drift_common.STATUS_UNCHANGED
+STATUS_UNKNOWN_NO_SIGNATURE = _drift_common.STATUS_UNKNOWN_NO_SIGNATURE
+drift_result = _drift_common.drift_result
+_raw_query_entries_with_resolved_entity = (
+    _drift_tier2._raw_query_entries_with_resolved_entity
+)
+_recheck_config_keys = _drift_tier2._recheck_config_keys
+_reverify_jpql_lineage_provenance = _drift_tier2._reverify_jpql_lineage_provenance
+tier2_recheck_file = _drift_tier2.tier2_recheck_file
 
 
 def load_signals(path):
@@ -267,6 +269,58 @@ def load_signals(path):
         )
         sys.exit(1)
     return data
+
+
+def _reject_manifest(path: str, message: str) -> None:
+    print(f"error: '{path}' {message}", file=sys.stderr)
+    sys.exit(1)
+
+
+def _empty_signatures_are_legitimate(data) -> bool:
+    target_path = data.get("target_repo", {}).get("path")
+    if not target_path or not os.path.isdir(target_path):
+        return False
+    return not any(spring_signal_scan.dfs_walk(target_path))
+
+
+def _validate_manifest_baseline(path: str, data) -> None:
+    if "file_signatures" not in data:
+        _reject_manifest(
+            path,
+            "has no 'file_signatures' field — is this a real "
+            "run_manifest.json (from doc_engine.tools.run_manifest)? Not usable as a "
+            "tier-1 baseline.",
+        )
+    if data.get("status") == "running":
+        _reject_manifest(
+            path,
+            "has status 'running' — its pipeline run was never "
+            "finalized (doc_engine.tools.run_manifest finalize was never called), so "
+            "its file_signatures is likely still the empty placeholder from "
+            "init and would misreport every file in the repo as newly added. "
+            "Point --manifest at a manifest from after finalize, or omit "
+            "--manifest to use spring_signals.json's own baseline instead.",
+        )
+    if data["file_signatures"]:
+        return
+    if _empty_signatures_are_legitimate(data):
+        target_path = data.get("target_repo", {}).get("path")
+        print(
+            f"note: '{path}' has an empty 'file_signatures' map, but its recorded "
+            f"target_repo.path ('{target_path}') genuinely has zero trackable files right "
+            f"now too — treating this as a real empty-repo baseline, not a broken finalize.",
+            file=sys.stderr,
+        )
+        return
+    _reject_manifest(
+        path,
+        "has an empty 'file_signatures' map — finalize was "
+        "called without ever recording any (e.g. no --signals-file and no "
+        "repo to re-hash), so there's no real baseline to compare against. "
+        "Point --manifest at a manifest with a populated file_signatures, "
+        "or omit --manifest to use spring_signals.json's own baseline "
+        "instead.",
+    )
 
 
 def load_manifest(path):
@@ -299,48 +353,34 @@ def load_manifest(path):
     that's checked directly — if the path still exists and a fresh dfs_walk
     of it also finds zero files, the empty map is accepted as a real
     (if unusual) empty-repo baseline rather than rejected."""
-    with open(path) as f:
-        data = json.load(f)
-    if "file_signatures" not in data:
-        print(
-            f"error: '{path}' has no 'file_signatures' field — is this a real "
-            f"run_manifest.json (from doc_engine.tools.run_manifest)? Not usable as a "
-            f"tier-1 baseline.",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-    if data.get("status") == "running":
-        print(
-            f"error: '{path}' has status 'running' — its pipeline run was never "
-            f"finalized (doc_engine.tools.run_manifest finalize was never called), so "
-            f"its file_signatures is likely still the empty placeholder from "
-            f"init and would misreport every file in the repo as newly added. "
-            f"Point --manifest at a manifest from after finalize, or omit "
-            f"--manifest to use spring_signals.json's own baseline instead.",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-    if not data["file_signatures"]:
-        tr_path = data.get("target_repo", {}).get("path")
-        if tr_path and os.path.isdir(tr_path) and not any(spring_signal_scan.dfs_walk(tr_path)):
-            print(
-                f"note: '{path}' has an empty 'file_signatures' map, but its recorded "
-                f"target_repo.path ('{tr_path}') genuinely has zero trackable files right "
-                f"now too — treating this as a real empty-repo baseline, not a broken finalize.",
-                file=sys.stderr,
-            )
-        else:
-            print(
-                f"error: '{path}' has an empty 'file_signatures' map — finalize was "
-                f"called without ever recording any (e.g. no --signals-file and no "
-                f"repo to re-hash), so there's no real baseline to compare against. "
-                f"Point --manifest at a manifest with a populated file_signatures, "
-                f"or omit --manifest to use spring_signals.json's own baseline "
-                f"instead.",
-                file=sys.stderr,
-            )
-            sys.exit(1)
+    path = str(checked_path(path, want="file"))
+    with open(path) as handle:
+        data = json.load(handle)
+    _validate_manifest_baseline(path, data)
     return data
+
+
+def _classify_known_path(rel, old_sig, current_signatures, buckets):
+    if rel not in current_signatures:
+        buckets["deleted"].append(rel)
+        return
+    if current_signatures[rel] != old_sig:
+        buckets["changed"].append(rel)
+        return
+    buckets["unchanged"].append(rel)
+
+
+def classify_files(old_signatures, current_signatures):
+    buckets = {"unchanged": [], "changed": [], "deleted": []}
+    for rel, old_sig in old_signatures.items():
+        _classify_known_path(rel, old_sig, current_signatures, buckets)
+    added = sorted(set(current_signatures) - set(old_signatures))
+    return {
+        "unchanged": sorted(buckets["unchanged"]),
+        "changed": sorted(buckets["changed"]),
+        "deleted": sorted(buckets["deleted"]),
+        "added": added,
+    }
 
 
 def tier1_scan(repo_path, scan_context=None):
@@ -357,27 +397,9 @@ def tier1_scan(repo_path, scan_context=None):
         rel = os.path.relpath(full, repo_path).replace("\\", "/")
         try:
             current[rel] = spring_signal_scan.compute_file_signature(full)
-        except OSError as e:
-            print(f"warning: could not read '{rel}': {e}", file=sys.stderr)
+        except OSError as exc:
+            print(f"warning: could not read '{rel}': {exc}", file=sys.stderr)
     return current
-
-
-def classify_files(old_signatures, current_signatures):
-    unchanged, changed, deleted = [], [], []
-    for rel, old_sig in old_signatures.items():
-        if rel not in current_signatures:
-            deleted.append(rel)
-        elif current_signatures[rel] != old_sig:
-            changed.append(rel)
-        else:
-            unchanged.append(rel)
-    added = [rel for rel in current_signatures if rel not in old_signatures]
-    return {
-        "unchanged": sorted(unchanged),
-        "changed": sorted(changed),
-        "deleted": sorted(deleted),
-        "added": sorted(added),
-    }
 
 
 def all_citations(signals):
@@ -398,481 +420,23 @@ def all_citations(signals):
         yield ("entity_table_map." + class_name, citation)
 
 
-def drift_result(source, citation, status, tier, detail=None):
-    result = {
-        "source": source,
-        "file": citation.get("file"),
-        "line": citation.get("line"),
-        "rule_id": citation.get("rule_id"),
-        "match": citation.get("match"),
-        "status": status,
-        "tier": tier,
-    }
-    if detail:
-        result["detail"] = detail
-    return result
 
-
-def _recheck_entities(fresh_entity_map, group):
-    """group: citations whose rule_id is persistence__entity.
-
-    fresh_entity_map: the current entity_table_map from a fresh
-    spring_signal_scan.scan() of the repo (class_name -> entry).
-
-    Returns (results, fresh_entities): fresh_entities is the class_name ->
-    {"table", "table_name_source"} map used for comparison — exposed to the
-    caller so JPQL lineage provenance (_reverify_jpql_lineage_provenance) can
-    reuse it without a second scan."""
-    fresh_entities = dict(fresh_entity_map) if fresh_entity_map else {}
-
-    results = []
-    for source, citation in group:
-        cname = citation.get("class_name")
-        fresh = fresh_entities.get(cname) if cname else None
-        if fresh is None:
-            detail = (
-                f"class '{cname}' no longer matched by persistence__entity"
-                if cname else "citation has no class_name to re-verify against (unexpected — treating conservatively as drift)"
-            )
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-        elif ("table" in citation and fresh.get("table") != citation.get("table")) or (
-                "table_name_source" in citation and fresh.get("table_name_source") != citation.get("table_name_source")
-        ):
-            detail = f"table mapping changed: {citation.get('table')!r} -> {fresh.get('table')!r}"
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-        else:
-            results.append(drift_result(source, citation, STATUS_CONFIRMED, 2))
-    return results, fresh_entities
-
-
-def _recheck_repositories(fresh_repo_entries, group):
-    """fresh_repo_entries: current persistence__repository evidence entries
-    from a fresh scan. Each entry is expected to carry repository, entity, and
-    id_type fields (spring_signal_scan.py adds them for persistence__repository)."""
-    fresh_repos = {}
-    for entry in fresh_repo_entries:
-        rname = entry.get("repository")
-        if rname:
-            fresh_repos[rname] = entry
-
-    results = []
-    for source, citation in group:
-        rname = citation.get("repository")
-        fresh = fresh_repos.get(rname) if rname else None
-        if fresh is None:
-            detail = (
-                f"repository '{rname}' no longer matched by persistence__repository"
-                if rname else "citation has no repository name to re-verify against (unexpected — treating conservatively as drift)"
-            )
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-        elif fresh.get("entity") != citation.get("entity") or fresh.get("id_type") != citation.get("id_type"):
-            detail = (
-                f"repository type args changed: <{citation.get('entity')}, {citation.get('id_type')}> "
-                f"-> <{fresh.get('entity')}, {fresh.get('id_type')}>"
-            )
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-        else:
-            results.append(drift_result(source, citation, STATUS_CONFIRMED, 2))
-    return results
-
-
-def _recheck_queries(fresh_query_entries, group):
-    """fresh_query_entries: current raw_queries__query evidence entries from a
-    fresh scan. Each entry carries query_kind and query (spring_signal_scan.py
-    extracts both from @Query annotations)."""
-    fresh_counts = Counter()
-    for entry in fresh_query_entries:
-        fresh_counts[(entry.get("query_kind"), entry.get("query"))] += 1
-
-    budget = dict(fresh_counts)
-    results = []
-    for source, citation in group:
-        key = (citation.get("query_kind"), citation.get("query"))
-        if budget.get(key, 0) > 0:
-            budget[key] -= 1
-            results.append(drift_result(source, citation, STATUS_CONFIRMED, 2))
-        else:
-            detail = "no fresh @Query match with the same query text and kind found in this file"
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-    return results
-
-
-def _recheck_generic(fresh_entries, group):
-    """Fallback for every rule type without a specialized extractor. Most
-    of these are single-line annotation matches (api_surface, security,
-    messaging, observability, ...) where the stored `match` field is a
-    meaningful shape comparison, so we compare it against the fresh scan's
-    match values for the same rule in the same file."""
-    fresh_counts = Counter(e.get("match") for e in fresh_entries)
-    budget = dict(fresh_counts)
-    results = []
-    for source, citation in group:
-        key = citation.get("match")
-        if budget.get(key, 0) > 0:
-            budget[key] -= 1
-            results.append(drift_result(source, citation, STATUS_CONFIRMED, 2))
-        else:
-            detail = "no fresh match with the same text found for this rule in this file"
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-    return results
-
-
-def _raw_query_entries_with_resolved_entity(signals):
-    """Single responsibility: yield every raw_queries entry whose JPQL
-    lineage was resolved through an entity (lineage.resolved_via_entity,
-    spring_signal_scan.py schema_version >= 6) — the only citations with a
-    second provenance input beyond their own file. Native-query entries and
-    out-of-scope/unavailable JPQL entries (no resolved_via_entity key at
-    all — see resolve_jpql_to_lineage()) are silently skipped, not an
-    oversight: they have exactly one input (their own file), already
-    covered by the ordinary per-file tier-1/tier-2 loop."""
-    for entry in signals.get("evidence", {}).get("raw_queries", []):
-        lineage = entry.get("lineage")
-        if lineage and lineage.get("resolved_via_entity"):
-            yield entry
-
-
-def _reverify_jpql_lineage_provenance(results, signals, fresh_entity_tables, changed_set, deleted_set):
-    """A JPQL citation's lineage is DERIVED from two inputs, not one: the
-    query text (its own file, already handled by the per-file loop that
-    produced `results`) and the entity->table mapping (a different file,
-    entity_table_map[entity]["file"]). This citation is fresh only if BOTH
-    inputs are unchanged — the same freshness rule every other,
-    single-input citation already follows, just honestly widened for the
-    one citation type that actually has a second input, rather than a
-    special-cased "dependent entity" status. Mutates `results` in place;
-    runs once, after the main per-file loop, so it doesn't depend on
-    whether the query's file or the entity's file happened to be processed
-    first (ast-grep's per-repo match order isn't guaranteed stable either —
-    see spring_signal_scan.py's own JPQL-resolution pass for the same
-    reasoning).
-
-    A "changed" input file is not the only way the second input can go
-    stale: DELETING (or moving, which classify_files() reports as a delete
-    of the old path) the entity's file also invalidates the mapping. So the
-    entity-provenance gate fires for changed_set OR deleted_set — a deleted
-    entity file simply has no fresh scan, so it flows into the fresh-is-None
-    -> DRIFTED branch below with a delete-specific detail. Without this, a
-    JPQL query whose entity class file was deleted would come back
-    "unchanged" with silently stale lineage — the exact miss this whole
-    provenance pass exists to prevent, in its deletion variant.
-
-    fresh_entity_tables: class_name -> fresh {"table", ...} dict, built as
-    a side effect of the main loop's own ast-grep re-run on entity files
-    already in changed_set (see _recheck_entities) — reused here rather
-    than triggering a second ast-grep invocation against the same file. A
-    deleted entity file is never tier-2 rechecked, so it never appears here,
-    which is exactly why fresh-is-None is the correct deletion signal."""
-    results_by_file_line = {(r["file"], r["line"]): r for r in results}
-
-    for entry in _raw_query_entries_with_resolved_entity(signals):
-        entity = entry["lineage"]["resolved_via_entity"]
-        entity_meta = signals.get("entity_table_map", {}).get(entity)
-        if entity_meta is None:
-            continue  # defensive: lineage only sets this when the entity WAS found at scan time
-
-        entity_file = entity_meta.get("file")
-        entity_file_deleted = entity_file in deleted_set
-        if entity_file not in changed_set and not entity_file_deleted:
-            continue  # this citation's second input didn't move — provenance fully unchanged
-
-        result = results_by_file_line.get((entry.get("file"), entry.get("line")))
-        if result is None or result["status"] not in (STATUS_UNCHANGED, STATUS_CONFIRMED):
-            # Re-derive the entity-provenance verdict only for citations whose
-            # OWN-file verdict is both silent about lineage AND still live:
-            #   STATUS_UNCHANGED  — query file untouched (tier 1)
-            #   STATUS_CONFIRMED  — query file changed but its text is intact;
-            #                       _recheck_queries() confirms TEXT presence,
-            #                       which says NOTHING about whether the lineage
-            #                       is still accurate, so it must still be checked
-            # Everything else is left exactly as-is:
-            #   STATUS_DRIFTED       — the own file already produced an
-            #                          authoritative negative (its text changed);
-            #                          more specific, don't clobber it
-            #   STATUS_FILE_DELETED  — the query's OWN file is gone; the whole
-            #                          citation is dead, not just its lineage
-            #   *_NO_SIGNATURE / ... — can't tell; don't invent a verdict
-            # (result is None shouldn't happen — every citation gets one — but
-            # degrade safely rather than KeyError if the two ever disagree.)
-            continue
-
-        fresh = fresh_entity_tables.get(entity)
-        if fresh is None:
-            result["status"] = STATUS_DRIFTED
-            result["tier"] = 2
-            if entity_file_deleted:
-                result["detail"] = (
-                    f"JPQL lineage for this query was resolved via entity '{entity}', whose "
-                    f"defining file ({entity_file}) was deleted — lineage cannot be confirmed"
-                )
-            else:
-                result["detail"] = (
-                    f"JPQL lineage for this query was resolved via entity '{entity}', which "
-                    f"persistence__entity no longer matches in its file ({entity_file}) — lineage cannot be confirmed"
-                )
-        elif fresh.get("table") == entity_meta.get("table"):
-            result["status"] = STATUS_CONFIRMED
-            result["tier"] = 2
-            result["detail"] = (
-                f"own file unchanged; provenance entity '{entity}' ({entity_file}) changed but its "
-                f"table mapping did not, so this query's lineage is still accurate"
-            )
-        else:
-            result["status"] = STATUS_DRIFTED
-            result["tier"] = 2
-            result["detail"] = (
-                f"JPQL lineage for this query was resolved via entity '{entity}', whose table mapping "
-                f"changed in a different file ({entity_file}): {entity_meta.get('table')!r} -> {fresh.get('table')!r}"
-            )
-
-
-def _recheck_config_keys(repo_path, file_rel, old_keys):
-    """Compares a config/deployment file's stored key set (from a prior
-    scan's config_key_sets) against a fresh extraction of the file as it
-    exists now. Returns (status, detail), or None if the file can't be
-    read (caller falls back to the generic no-rule status in that case).
-    """
-    full_path = os.path.join(repo_path, file_rel)
-    try:
-        with open(full_path, encoding="utf-8", errors="ignore") as f:
-            text = f.read()
-    except OSError:
-        return None
-
-    new_keys = set(extract_config_keys(text, os.path.basename(file_rel)))
-    old_keys = set(old_keys)
-
-    if new_keys != old_keys:
-        added = sorted(new_keys - old_keys)
-        removed = sorted(old_keys - new_keys)
-        detail = f"config key set changed: added {added or '[]'}, removed {removed or '[]'}"
-        return STATUS_CONFIG_STRUCTURE_CHANGED, detail
-
-    detail = (
-        "file content changed but the config key set did not — a value changed under an "
-        "unchanged key, worth a human look rather than treating as routine"
-    )
-    return STATUS_CONFIG_VALUES_ONLY_CHANGED, detail
-
-
-def _recheck_build_signals(repo_path, file_rel, group):
-    """Tier-2 for the synthetic build-file rule ids produced by
-    _build_signal_extract.py. Reads the file, re-runs the extractor, and
-    compares by structured identity (plugin_id, coordinate, module,
-    toolchain, catalog key) rather than by raw match text, since the same
-    line can match multiple rules and the match text is not distinctive."""
-    full_path = os.path.join(repo_path, file_rel)
-    try:
-        with open(full_path, encoding="utf-8-sig", errors="replace") as f:
-            text = f.read()
-    except OSError as e:
-        return [
-            drift_result(source, citation, STATUS_DRIFTED, 2,
-                         f"could not read build file for re-verification: {e}")
-            for source, citation in group
-        ]
-
-    fresh = extract_build_signals(file_rel, text)
-
-    def identity(row):
-        rid = row.get("rule_id")
-        if rid == "deployment__build_plugin":
-            return (rid, row.get("plugin_id"), row.get("plugin_version"))
-        if rid == "deployment__build_dependency":
-            coord = row.get("coordinate") or {}
-            return (rid, row.get("configuration"), coord.get("group"), coord.get("name"), coord.get("version"))
-        if rid == "deployment__build_module":
-            return (rid, row.get("module"))
-        if rid == "deployment__build_toolchain":
-            return (rid, row.get("toolchain_kind"), row.get("toolchain_value"))
-        if rid == "deployment__version_catalog":
-            return (rid, row.get("catalog_kind"), row.get("catalog_key"))
-        return (rid, row.get("match"))
-
-    fresh_counts = Counter(identity(r) for r in fresh)
-    budget = dict(fresh_counts)
-    results = []
-    for source, citation in group:
-        key = identity(citation)
-        if budget.get(key, 0) > 0:
-            budget[key] -= 1
-            results.append(drift_result(source, citation, STATUS_CONFIRMED, 2))
-        else:
-            detail = f"no fresh build signal match for {citation.get('rule_id')} identity {key}"
-            results.append(drift_result(source, citation, STATUS_DRIFTED, 2, detail))
-    return results
-
-
-def tier2_recheck_file(repo_path, file_rel, citations_for_file, fresh_evidence_by_file, fresh_entity_map):
-    """citations_for_file: list of (source, citation), all sharing file_rel,
-    all with a rule_id (caller filters out the no-rule_id ones first).
-
-    fresh_evidence_by_file: file_rel -> list of fresh evidence entries from a
-    current spring_signal_scan.scan() of the repo.
-
-    fresh_entity_map: the fresh entity_table_map from the same scan.
-
-    Returns (results, fresh_entity_tables) — the latter is {} unless this
-    file actually has persistence__entity citations, in which case it's
-    _recheck_entities' fresh_entities map passed straight through."""
-    fresh_by_rule = {}
-    for entry in fresh_evidence_by_file.get(file_rel, []):
-        fresh_by_rule.setdefault(entry.get("rule_id"), []).append(entry)
-
-    old_by_rule = {}
-    for source, citation in citations_for_file:
-        old_by_rule.setdefault(citation["rule_id"], []).append((source, citation))
-
-    results = []
-    fresh_entity_tables = {}
-    for rule_id, group in old_by_rule.items():
-        if rule_id.startswith("deployment__build_") or rule_id == "deployment__version_catalog":
-            results += _recheck_build_signals(repo_path, file_rel, group)
-            continue
-        fresh = fresh_by_rule.get(rule_id, [])
-        if rule_id == "persistence__entity":
-            entity_results, fresh_entity_tables = _recheck_entities(fresh_entity_map, group)
-            results += entity_results
-        elif rule_id == "persistence__repository":
-            results += _recheck_repositories(fresh, group)
-        elif rule_id == "raw_queries__query":
-            results += _recheck_queries(fresh, group)
-        else:
-            results += _recheck_generic(fresh, group)
-    return results, fresh_entity_tables
-
-
-def check_drift(repo_path, signals, manifest=None):
-    """manifest: optional run_manifest.json dict (see load_manifest()). When
-    given, its file_signatures is the tier-1 baseline instead of signals' own
-    — signals is still required regardless, for tier-2 evidence/entity_table_map
-    that run_manifest.json never carries."""
+def _baseline_signatures_and_provenance(signals, manifest):
+    """Pick tier-1 signatures + provenance from manifest or signals."""
     if manifest is not None:
-        old_signatures = manifest.get("file_signatures", {})
-        baseline_provenance = {
+        return manifest.get("file_signatures", {}), {
             "source": "run_manifest.json",
             "run_id": manifest.get("run_id"),
             "repo_path": manifest.get("target_repo", {}).get("path"),
             "commit_hash": manifest.get("target_repo", {}).get("commit_hash"),
             "dirty": manifest.get("target_repo", {}).get("dirty"),
         }
-    else:
-        old_signatures = signals.get("file_signatures", {})
-        baseline_provenance = {"source": "spring_signals.json"}
+    return signals.get("file_signatures", {}), {"source": "spring_signals.json"}
 
-    from doc_engine.core.context import ScanContext
 
-    scan_context = ScanContext.build(repo_path)
-    current_signatures = tier1_scan(repo_path, scan_context=scan_context)
-    classification = classify_files(old_signatures, current_signatures)
-    changed_set = set(classification["changed"])
-    deleted_set = set(classification["deleted"])
-    unchanged_set = set(classification["unchanged"])
-
-    # If nothing changed, nothing was added, and nothing was deleted, every
-    # citation is unchanged. Skip the expensive full CodeQL rescan in that
-    # common case.
-    if not changed_set and not deleted_set and not classification["added"]:
-        results = []
-        for source, citation in all_citations(signals):
-            results.append(drift_result(source, citation, STATUS_UNCHANGED, 1))
-        results.sort(key=lambda r: (r["file"] or "", r["line"] or 0, r["source"]))
-        status_counts = Counter(r["status"] for r in results)
-        return {
-            "schema_version": DRIFT_REPORT_SCHEMA_VERSION,
-            "repo_path": os.path.abspath(repo_path),
-            "prior_scan_repo_path": signals.get("repo_path"),
-            "file_signatures_baseline": baseline_provenance,
-            "file_summary": classification,
-            "citations_checked": len(results),
-            "status_counts": dict(status_counts),
-            "results": results,
-        }
-
-    # Fresh Stage 0 scan of the current repo (same scanners as the prior
-    # signals). Tier 2 compares citations against this bag filtered by file;
-    # there is no per-file run_ast_grep() path. CodeQL (when selected) also
-    # needs a whole-project database, so a full scan is the only shape.
-    scanners = signals.get("scanners") or ["filesystem", "ast-grep"]
-    fresh_signals = spring_signal_scan.scan(
-        repo_path,
-        scanners=scanners,
-        scan_context=scan_context,
-    )
-    fresh_evidence_by_file = {}
-    for _bucket_name, entries in fresh_signals.get("evidence", {}).items():
-        for entry in entries:
-            fresh_evidence_by_file.setdefault(entry.get("file", ""), []).append(entry)
-    fresh_entity_map = fresh_signals.get("entity_table_map", {})
-
-    citations_by_file = {}
-    for source, citation in all_citations(signals):
-        citations_by_file.setdefault(citation["file"], []).append((source, citation))
-
-    results = []
-    fresh_entity_tables = {}  # class_name -> fresh table info, accumulated across every changed entity file
-
-    for file_rel in sorted(citations_by_file):
-        citations = citations_by_file[file_rel]
-
-        if file_rel in deleted_set:
-            for source, citation in citations:
-                results.append(drift_result(source, citation, STATUS_FILE_DELETED, 1))
-            continue
-
-        if file_rel in unchanged_set:
-            for source, citation in citations:
-                results.append(drift_result(source, citation, STATUS_UNCHANGED, 1))
-            continue
-
-        if file_rel not in changed_set:
-            # Cited but absent from both the prior scan's file_signatures
-            # and this run's fresh hash set — e.g. a hand-edited JSON, or a
-            # citation whose file signature failed to record in the first
-            # place (see spring_signal_scan.py's OSError handling). Don't
-            # guess either way.
-            for source, citation in citations:
-                results.append(drift_result(
-                    source, citation, STATUS_UNKNOWN_NO_SIGNATURE, 1,
-                    detail="no prior file_signatures entry for this file to compare against",
-                ))
-            continue
-
-        # File content changed since the prior scan (tier 1). Split by
-        # whether there's a rule to precisely recheck against.
-        with_rule = [(s, c) for s, c in citations if c.get("rule_id")]
-        without_rule = [(s, c) for s, c in citations if not c.get("rule_id")]
-
-        old_key_set = signals.get("config_key_sets", {}).get(file_rel)
-        for source, citation in without_rule:
-            outcome = _recheck_config_keys(repo_path, file_rel, old_key_set) if old_key_set is not None else None
-            if outcome is not None:
-                status, detail = outcome
-                results.append(drift_result(source, citation, status, 1, detail))
-            else:
-                results.append(drift_result(
-                    source, citation, STATUS_NO_RULE_FALLBACK, 1,
-                    detail="file content changed and this citation has no rule_id to precisely recheck "
-                           "(filename-based evidence, e.g. config/deployment/migration match)",
-                ))
-
-        if with_rule:
-            file_results, file_fresh_entities = tier2_recheck_file(
-                repo_path, file_rel, with_rule, fresh_evidence_by_file, fresh_entity_map
-            )
-            results += file_results
-            fresh_entity_tables.update(file_fresh_entities)
-
-    # Second provenance input for JPQL-lineage citations only — see
-    # _reverify_jpql_lineage_provenance's own docstring. Deliberately runs
-    # after the per-file loop above finishes, not inside it: it needs
-    # fresh_entity_tables fully populated regardless of whether a query's
-    # own file or its entity's file happened to sort first.
-    _reverify_jpql_lineage_provenance(results, signals, fresh_entity_tables, changed_set, deleted_set)
-
-    results.sort(key=lambda r: (r["file"] or "", r["line"] or 0, r["source"]))
-    status_counts = Counter(r["status"] for r in results)
-
+def _assemble_drift_report(repo_path, signals, baseline_provenance, classification, results):
+    results.sort(key=lambda row: (row["file"] or "", row["line"] or 0, row["source"]))
+    status_counts = Counter(row["status"] for row in results)
     return {
         "schema_version": DRIFT_REPORT_SCHEMA_VERSION,
         "repo_path": os.path.abspath(repo_path),
@@ -883,6 +447,216 @@ def check_drift(repo_path, signals, manifest=None):
         "status_counts": dict(status_counts),
         "results": results,
     }
+
+
+def _unchanged_fast_path_results(signals):
+    return [
+        drift_result(source, citation, STATUS_UNCHANGED, 1)
+        for source, citation in all_citations(signals)
+    ]
+
+
+def _index_fresh_evidence_by_file(fresh_signals):
+    fresh_evidence_by_file = {}
+    for _bucket_name, entries in fresh_signals.get("evidence", {}).items():
+        for entry in entries:
+            fresh_evidence_by_file.setdefault(entry.get("file", ""), []).append(entry)
+    return fresh_evidence_by_file
+
+
+def _group_citations_by_file(signals):
+    citations_by_file = {}
+    for source, citation in all_citations(signals):
+        citations_by_file.setdefault(citation["file"], []).append((source, citation))
+    return citations_by_file
+
+
+def _append_uniform_status(results, citations, status, detail=None):
+    for source, citation in citations:
+        results.append(drift_result(source, citation, status, 1, detail))
+
+
+def _recheck_citations_without_rule(repo_path, file_rel, without_rule, old_key_set, results):
+    for source, citation in without_rule:
+        outcome = (
+            _recheck_config_keys(repo_path, file_rel, old_key_set)
+            if old_key_set is not None
+            else None
+        )
+        if outcome is not None:
+            status, detail = outcome
+            results.append(drift_result(source, citation, status, 1, detail))
+            continue
+        results.append(drift_result(
+            source, citation, STATUS_NO_RULE_FALLBACK, 1,
+            detail=(
+                "file content changed and this citation has no rule_id to precisely recheck "
+                "(filename-based evidence, e.g. config/deployment/migration match)"
+            ),
+        ))
+
+
+def _process_changed_file_citations(
+    repo_path,
+    file_rel,
+    citations,
+    signals,
+    fresh_evidence_by_file,
+    fresh_entity_map,
+    results,
+    fresh_entity_tables,
+):
+    with_rule = [
+        (source, citation) for source, citation in citations if citation.get("rule_id")
+    ]
+    without_rule = [
+        (source, citation) for source, citation in citations if not citation.get("rule_id")
+    ]
+    old_key_set = signals.get("config_key_sets", {}).get(file_rel)
+    _recheck_citations_without_rule(repo_path, file_rel, without_rule, old_key_set, results)
+    if not with_rule:
+        return
+    file_results, file_fresh_entities = tier2_recheck_file(
+        repo_path, file_rel, with_rule, fresh_evidence_by_file, fresh_entity_map
+    )
+    results.extend(file_results)
+    fresh_entity_tables.update(file_fresh_entities)
+
+
+def _process_file_citations(
+    repo_path,
+    file_rel,
+    citations,
+    *,
+    deleted_set,
+    unchanged_set,
+    changed_set,
+    signals,
+    fresh_evidence_by_file,
+    fresh_entity_map,
+    results,
+    fresh_entity_tables,
+):
+    if file_rel in deleted_set:
+        _append_uniform_status(results, citations, STATUS_FILE_DELETED)
+        return
+    if file_rel in unchanged_set:
+        _append_uniform_status(results, citations, STATUS_UNCHANGED)
+        return
+    if file_rel not in changed_set:
+        # Cited but absent from both prior and fresh signature sets.
+        _append_uniform_status(
+            results,
+            citations,
+            STATUS_UNKNOWN_NO_SIGNATURE,
+            detail="no prior file_signatures entry for this file to compare against",
+        )
+        return
+    _process_changed_file_citations(
+        repo_path,
+        file_rel,
+        citations,
+        signals,
+        fresh_evidence_by_file,
+        fresh_entity_map,
+        results,
+        fresh_entity_tables,
+    )
+
+
+def check_drift(repo_path, signals, manifest=None):
+    """manifest: optional run_manifest.json dict (see load_manifest()). When
+    given, its file_signatures is the tier-1 baseline instead of signals' own
+    — signals is still required regardless, for tier-2 evidence/entity_table_map
+    that run_manifest.json never carries."""
+    old_signatures, baseline_provenance = _baseline_signatures_and_provenance(
+        signals, manifest
+    )
+
+    from doc_engine.core.context import ScanContext
+
+    scan_context = ScanContext.build(repo_path)
+    current_signatures = tier1_scan(repo_path, scan_context=scan_context)
+    classification = classify_files(old_signatures, current_signatures)
+    changed_set = set(classification["changed"])
+    deleted_set = set(classification["deleted"])
+    unchanged_set = set(classification["unchanged"])
+
+    # Fast path: nothing moved — skip the expensive full Stage-0 rescan.
+    if not changed_set and not deleted_set and not classification["added"]:
+        return _assemble_drift_report(
+            repo_path,
+            signals,
+            baseline_provenance,
+            classification,
+            _unchanged_fast_path_results(signals),
+        )
+
+    # Fresh Stage 0 scan of the current repo (same scanners as the prior
+    # signals). Tier 2 compares citations against this bag filtered by file.
+    scanners = signals.get("scanners") or ["filesystem", "ast-grep"]
+    fresh_signals = spring_signal_scan.scan(
+        repo_path,
+        scanners=scanners,
+        scan_context=scan_context,
+    )
+    fresh_evidence_by_file = _index_fresh_evidence_by_file(fresh_signals)
+    fresh_entity_map = fresh_signals.get("entity_table_map", {})
+    citations_by_file = _group_citations_by_file(signals)
+
+    results = []
+    fresh_entity_tables = {}
+
+    for file_rel in sorted(citations_by_file):
+        _process_file_citations(
+            repo_path,
+            file_rel,
+            citations_by_file[file_rel],
+            deleted_set=deleted_set,
+            unchanged_set=unchanged_set,
+            changed_set=changed_set,
+            signals=signals,
+            fresh_evidence_by_file=fresh_evidence_by_file,
+            fresh_entity_map=fresh_entity_map,
+            results=results,
+            fresh_entity_tables=fresh_entity_tables,
+        )
+
+    # JPQL-lineage re-verify needs fresh_entity_tables fully populated.
+    _reverify_jpql_lineage_provenance(
+        results, signals, fresh_entity_tables, changed_set, deleted_set
+    )
+    return _assemble_drift_report(
+        repo_path, signals, baseline_provenance, classification, results
+    )
+
+
+def _require_path(path: str, *, expect_dir: bool) -> None:
+    want = "dir" if expect_dir else "file"
+    try:
+        checked_path(path, want=want)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+
+def _validate_drift_cli_paths(args) -> None:
+    _require_path(args.repo_path, expect_dir=True)
+    _require_path(args.signals_path, expect_dir=False)
+    if args.manifest is not None:
+        _require_path(args.manifest, expect_dir=False)
+
+
+def _print_drift_summary(out_path: str, report: dict) -> None:
+    file_summary = report["file_summary"]
+    print(
+        f"Wrote {out_path}. Tier-1 baseline: {report['file_signatures_baseline']['source']}. "
+        f"Citations checked: {report['citations_checked']}. "
+        f"Status counts: {report['status_counts']}. "
+        f"Files: {len(file_summary['unchanged'])} unchanged, {len(file_summary['changed'])} changed, "
+        f"{len(file_summary['deleted'])} deleted, {len(file_summary['added'])} added (added files carry "
+        f"no prior citations, so they're informational only)."
+    )
 
 
 def main():
@@ -898,37 +672,24 @@ def main():
              "for tier-2 evidence run_manifest.json doesn't carry.",
     )
     args = ap.parse_args()
-
-    if not os.path.isdir(args.repo_path):
-        print(f"error: not a directory: {args.repo_path}", file=sys.stderr)
-        sys.exit(1)
-    if not os.path.isfile(args.signals_path):
-        print(f"error: not a file: {args.signals_path}", file=sys.stderr)
-        sys.exit(1)
-    if args.manifest is not None and not os.path.isfile(args.manifest):
-        print(f"error: not a file: {args.manifest}", file=sys.stderr)
-        sys.exit(1)
+    _validate_drift_cli_paths(args)
 
     signals = load_signals(args.signals_path)
     manifest = load_manifest(args.manifest) if args.manifest is not None else None
     try:
         report = check_drift(args.repo_path, signals, manifest=manifest)
-    except spring_signal_scan.CodeQLScannerError as e:
-        print(e, file=sys.stderr)
+    except spring_signal_scan.CodeQLScannerError as exc:
+        print(exc, file=sys.stderr)
         sys.exit(1)
 
-    with open(args.out, "w") as f:
-        json.dump(report, f, indent=2)
-
-    fs = report["file_summary"]
-    print(
-        f"Wrote {args.out}. Tier-1 baseline: {report['file_signatures_baseline']['source']}. "
-        f"Citations checked: {report['citations_checked']}. "
-        f"Status counts: {report['status_counts']}. "
-        f"Files: {len(fs['unchanged'])} unchanged, {len(fs['changed'])} changed, "
-        f"{len(fs['deleted'])} deleted, {len(fs['added'])} added (added files carry "
-        f"no prior citations, so they're informational only)."
-    )
+    try:
+        out_path = checked_output_path(args.out)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(1)
+    with open(out_path, "w") as handle:
+        json.dump(report, handle, indent=2)
+    _print_drift_summary(str(out_path), report)
 
 
 if __name__ == "__main__":

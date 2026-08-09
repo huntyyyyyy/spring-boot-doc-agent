@@ -22,14 +22,16 @@ import unittest
 from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_adapters
+
 sys.path.insert(0, str(REPO_ROOT / "adapters" / "claude" / "hooks"))
 
 import deny_raw_network as drn  # noqa: E402
 
-
 def denies(tool: str, command: str = "") -> bool:
     return drn.decide({"tool_name": tool, "tool_input": {"command": command}})["deny"]
-
 
 class TestNetworkToolsBlocked(unittest.TestCase):
     BLOCKED = (
@@ -48,7 +50,6 @@ class TestNetworkToolsBlocked(unittest.TestCase):
         for command in self.BLOCKED:
             self.assertTrue(denies("Bash", command), command)
 
-
 class TestBareGitIsNeverBlocked(unittest.TestCase):
     """git status/diff/log/ls-files are legitimately allowed via
     .claude/settings.json -- only the clone subcommand is in scope."""
@@ -60,14 +61,12 @@ class TestBareGitIsNeverBlocked(unittest.TestCase):
         for command in self.ALLOWED:
             self.assertFalse(denies("Bash", command), command)
 
-
 class TestGitCloneIsTwoWords(unittest.TestCase):
     def test_git_clone_is_blocked(self) -> None:
         self.assertTrue(denies("Bash", "git clone https://github.com/x/y"))
 
     def test_git_alone_is_not_treated_as_clone(self) -> None:
         self.assertFalse(denies("Bash", "git"))
-
 
 class TestUnrelatedToolsPass(unittest.TestCase):
     def test_webfetch_and_other_tools_pass(self) -> None:
@@ -78,7 +77,6 @@ class TestUnrelatedToolsPass(unittest.TestCase):
         for command in ("python -m unittest", "ast-grep run -l java -p '@X' .",
                         "semgrep scan --config x.yml ."):
             self.assertFalse(denies("Bash", command), command)
-
 
 class TestHeredocBodiesAreData(unittest.TestCase):
     def test_prose_mentioning_curl_inside_a_heredoc_is_not_a_command(self) -> None:
@@ -95,7 +93,6 @@ class TestHeredocBodiesAreData(unittest.TestCase):
         command = "python - <<'PY'\nprint(1)\nPY\ncurl https://x"
         self.assertTrue(denies("Bash", command))
 
-
 class TestFailOpen(unittest.TestCase):
     def test_unparseable_payload_does_not_block(self) -> None:
         self.assertFalse(drn.decide({})["deny"])
@@ -103,13 +100,11 @@ class TestFailOpen(unittest.TestCase):
     def test_missing_command_key_does_not_block(self) -> None:
         self.assertFalse(drn.decide({"tool_name": "Bash"})["deny"])
 
-
 class TestDenialExplainsTheAlternative(unittest.TestCase):
     def test_reason_names_webfetch(self) -> None:
         reason = drn.decide({"tool_name": "Bash",
                              "tool_input": {"command": "curl https://x"}})["reason"]
         self.assertIn("WebFetch", reason)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

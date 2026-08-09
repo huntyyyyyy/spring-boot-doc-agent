@@ -7,6 +7,9 @@ import unittest
 
 import suite_layout
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class SuiteLayoutTest(unittest.TestCase):
     def test_reads_testpaths_from_pyproject(self) -> None:
@@ -54,7 +57,6 @@ class SuiteLayoutTest(unittest.TestCase):
             root = Path(tmp)
             self.assertEqual(suite_layout.suite_roots(root), ["tests"])
             self.assertFalse(suite_layout.uses_pytest_discovery(root))
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1,0 +1,13 @@
+---
+description: Pin Task/explore subagents to Cursor Grok 4.5 High (accuracy over speed)
+alwaysApply: true
+---
+
+# Task / subagent model
+
+When calling the **Task** tool (explore, generalPurpose, shell, or any other subagent):
+
+1. **Always** pass `model: "cursor-grok-4.5-high"` unless the user explicitly names a different model for that Task.
+2. **Do not** use `composer-2.5`, `composer-2.5-fast`, or omit `model` / pass `"fast"` — those either burn the wrong premium pool or trade accuracy for speed.
+3. Prefer a slower, more accurate, better-informed subagent over a faster cheaper one. Token/latency savings are not the goal for Task exploration or analysis.
+4. If a Task call fails with `API usage limit reached`, retry **once** with the same `cursor-grok-4.5-high` pin (do not silently fall back to Composer). If it still fails, tell the user it is a quota/routing issue and stop — do not substitute Composer unless they ask.

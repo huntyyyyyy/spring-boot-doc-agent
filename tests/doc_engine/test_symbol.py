@@ -19,6 +19,8 @@ from doc_engine.scanning.symbol import (
     parse,
 )
 
+pytestmark = pytest.mark.domain_stage0
+
 # Frozen golden from grammar memo §3 — only full-string anchors allowed here.
 GOLDEN_BILLING_USER = "doc-engine spring . com/acme/billing/User#"
 GOLDEN_AUTH_USER = "doc-engine spring . com/acme/auth/User#"
@@ -27,11 +29,9 @@ GOLDEN_INNER = "doc-engine spring . com/acme/Order#Line#"
 GOLDEN_FIELD = "doc-engine spring . com/acme/billing/User#email."
 GOLDEN_METHOD = "doc-engine spring . com/acme/billing/User#getOrders()."
 
-
 def test_grammar_version_pinned() -> None:
     """Deviation: shipping without a grammar version constant."""
     assert SYMBOL_GRAMMAR_VERSION == 1
-
 
 def test_golden_billing_user_matches_memo() -> None:
     """Deviation: type spelling drifts from normative grammar memo §3."""
@@ -42,7 +42,6 @@ def test_golden_billing_user_matches_memo() -> None:
     assert parsed.type_names == ("User",)
     assert display(GOLDEN_BILLING_USER) == "User"
 
-
 def test_collision_packages_yield_unequal_subjects() -> None:
     """Deviation: two packages share one subject for the same simple name."""
     a = format_type("com.acme.billing", "User")
@@ -52,13 +51,11 @@ def test_collision_packages_yield_unequal_subjects() -> None:
     assert a != b
     assert display(a) == display(b) == "User"
 
-
 def test_missing_package_is_unqualified_not_path_invented() -> None:
     """Deviation: inventing namespaces when package is absent."""
     assert format_type(None, "Order") == GOLDEN_UNQUALIFIED_ORDER
     assert format_type("", "Order") == GOLDEN_UNQUALIFIED_ORDER
     assert parse(GOLDEN_UNQUALIFIED_ORDER).namespaces == ()
-
 
 def test_inner_type_nested_hash_not_dollar() -> None:
     """Deviation: Java $ binary names leak into symbols, or inner chain breaks."""
@@ -70,7 +67,6 @@ def test_inner_type_nested_hash_not_dollar() -> None:
     assert display(sym) == "Order.Line"
     assert fqcn_of("com.acme", "Order", inner=("Line",)) == "com.acme.Order.Line"
 
-
 def test_reserved_field_and_method_round_trip() -> None:
     """Deviation: reserved member forms break before any member fact exists."""
     field = format_field("com.acme.billing", "User", "email")
@@ -81,7 +77,6 @@ def test_reserved_field_and_method_round_trip() -> None:
     assert parse(method).kind == "method" and parse(method).member == "getOrders"
     assert display(field) == "User.email"
     assert display(method) == "User.getOrders()"
-
 
 @pytest.mark.parametrize(
     "bad",
@@ -99,7 +94,6 @@ def test_parse_rejects_illegal_identity_tokens(bad: str) -> None:
     """Deviation: bare names / FQCNs / malformed symbols accepted as identity."""
     with pytest.raises(SymbolError):
         parse(bad)
-
 
 def test_format_rejects_non_java_idents() -> None:
     """Deviation: hyphens or junk segments accepted into symbols."""

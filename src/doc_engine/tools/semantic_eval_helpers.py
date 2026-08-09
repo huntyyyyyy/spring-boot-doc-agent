@@ -61,6 +61,14 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
+
+from doc_engine.paths import (
+    PathValidationError,
+    checked_output_path,
+    checked_path,
+    join_under,
+)
 
 CONFIRMED_TAG_RE = re.compile(r"\[Confirmed — interview, ([^\]]+)\]")
 
@@ -90,6 +98,64 @@ def _claim_clause(text, tag_start):
     return pieces[-1] if pieces else prefix
 
 
+def _answered_entry_tokens(interview_answers):
+    answered = [entry for entry in interview_answers if entry.get("status") == "answered"]
+    return [
+        (
+            _tokenize(
+                " ".join(str(entry.get(key, "")) for key in ("topic", "question", "answer"))
+            ),
+            entry,
+        )
+        for entry in answered
+    ]
+
+
+def _best_overlap(clause_tokens, entry_tokens):
+    best_ratio, best_entry = 0.0, None
+    for tokens, entry in entry_tokens:
+        if not tokens:
+            continue
+        overlap = len(clause_tokens & tokens) / len(clause_tokens | tokens)
+        if overlap > best_ratio:
+            best_ratio, best_entry = overlap, entry
+    return best_ratio, best_entry
+
+
+def _empty_clause_finding(tag: str, clause: str) -> dict:
+    return {
+        "tag": tag,
+        "claim_clause": clause.strip(),
+        "best_overlap": 0.0,
+        "closest_entry_topic": None,
+        "reason": "empty or unparseable claim clause preceding the tag",
+    }
+
+
+def _low_overlap_finding(tag: str, clause: str, best_ratio: float, best_entry) -> dict:
+    return {
+        "tag": tag,
+        "claim_clause": clause.strip(),
+        "best_overlap": round(best_ratio, 3),
+        "closest_entry_topic": best_entry.get("topic") if best_entry else None,
+        "reason": (
+            "no interview_answers.json entry closely matches this claim — "
+            "candidate hallucinated Confirmed tag, needs semantic confirmation"
+        ),
+    }
+
+
+def _finding_for_confirmed_tag(match, text, entry_tokens, overlap_threshold):
+    clause = _claim_clause(text, match.start())
+    clause_tokens = _tokenize(clause)
+    if not clause_tokens:
+        return _empty_clause_finding(match.group(0), clause)
+    best_ratio, best_entry = _best_overlap(clause_tokens, entry_tokens)
+    if best_ratio < overlap_threshold:
+        return _low_overlap_finding(match.group(0), clause, best_ratio, best_entry)
+    return None
+
+
 def find_unmatched_confirmed_tags(text, interview_answers, overlap_threshold=DEFAULT_OVERLAP_THRESHOLD):
     """For every [Confirmed — interview, <date>] tag in text, check whether
     its preceding claim clause has meaningful word overlap with any
@@ -99,43 +165,14 @@ def find_unmatched_confirmed_tags(text, interview_answers, overlap_threshold=DEF
     not asserted as a confirmed hallucination by this function alone: a
     genuine paraphrase can score a low overlap too, which is exactly why
     this is a worklist, not a verdict."""
-    answered = [e for e in interview_answers if e.get("status") == "answered"]
-    entry_tokens = [
-        (_tokenize(" ".join(str(e.get(k, "")) for k in ("topic", "question", "answer"))), e)
-        for e in answered
-    ]
-
+    entry_tokens = _answered_entry_tokens(interview_answers)
     findings = []
-    for m in CONFIRMED_TAG_RE.finditer(text):
-        clause = _claim_clause(text, m.start())
-        clause_tokens = _tokenize(clause)
-        if not clause_tokens:
-            findings.append({
-                "tag": m.group(0),
-                "claim_clause": clause.strip(),
-                "best_overlap": 0.0,
-                "closest_entry_topic": None,
-                "reason": "empty or unparseable claim clause preceding the tag",
-            })
-            continue
-
-        best_ratio, best_entry = 0.0, None
-        for tokens, entry in entry_tokens:
-            if not tokens:
-                continue
-            overlap = len(clause_tokens & tokens) / len(clause_tokens | tokens)
-            if overlap > best_ratio:
-                best_ratio, best_entry = overlap, entry
-
-        if best_ratio < overlap_threshold:
-            findings.append({
-                "tag": m.group(0),
-                "claim_clause": clause.strip(),
-                "best_overlap": round(best_ratio, 3),
-                "closest_entry_topic": best_entry.get("topic") if best_entry else None,
-                "reason": "no interview_answers.json entry closely matches this claim — "
-                          "candidate hallucinated Confirmed tag, needs semantic confirmation",
-            })
+    for match in CONFIRMED_TAG_RE.finditer(text):
+        finding = _finding_for_confirmed_tag(
+            match, text, entry_tokens, overlap_threshold
+        )
+        if finding is not None:
+            findings.append(finding)
     return findings
 
 
@@ -176,6 +213,40 @@ def find_undefined_node_refs(mermaid_text):
     return sorted(referenced - declared)
 
 
+def _bracket_balance_findings(mermaid_text):
+    findings = []
+    for open_c, close_c, label in (
+        ("[", "]", "square_brackets"),
+        ("(", ")", "parentheses"),
+        ("{", "}", "braces"),
+    ):
+        opens, closes = mermaid_text.count(open_c), mermaid_text.count(close_c)
+        if opens != closes:
+            findings.append({
+                "type": f"unbalanced_{label}",
+                "detail": f"{opens} '{open_c}' vs {closes} '{close_c}'",
+            })
+    return findings
+
+
+def _subgraph_quote_findings(mermaid_text):
+    findings = []
+    subgraph_count = len(SUBGRAPH_RE.findall(mermaid_text))
+    end_count = len(END_RE.findall(mermaid_text))
+    if subgraph_count != end_count:
+        findings.append({
+            "type": "unbalanced_subgraph_end",
+            "detail": f"{subgraph_count} 'subgraph' vs {end_count} 'end'",
+        })
+    quote_count = mermaid_text.count('"')
+    if quote_count % 2 != 0:
+        findings.append({
+            "type": "unbalanced_quotes",
+            "detail": f"{quote_count} double-quote characters (odd count)",
+        })
+    return findings
+
+
 def check_mermaid_syntax(mermaid_text):
     """Structural (not a full grammar/renderer) checks: bracket/paren/brace
     balance, subgraph/end balance, double-quote balance, and undefined node
@@ -183,36 +254,17 @@ def check_mermaid_syntax(mermaid_text):
     class this exists for (a doc-writer or architect subagent emitting a
     truncated or malformed diagram) without adding a Mermaid-parsing
     dependency this project doesn't otherwise need."""
-    findings = []
-    for open_c, close_c, label in (("[", "]", "square_brackets"), ("(", ")", "parentheses"), ("{", "}", "braces")):
-        opens, closes = mermaid_text.count(open_c), mermaid_text.count(close_c)
-        if opens != closes:
-            findings.append({
-                "type": f"unbalanced_{label}",
-                "detail": f"{opens} '{open_c}' vs {closes} '{close_c}'",
-            })
-
-    subgraph_count, end_count = len(SUBGRAPH_RE.findall(mermaid_text)), len(END_RE.findall(mermaid_text))
-    if subgraph_count != end_count:
-        findings.append({
-            "type": "unbalanced_subgraph_end",
-            "detail": f"{subgraph_count} 'subgraph' vs {end_count} 'end'",
-        })
-
-    quote_count = mermaid_text.count('"')
-    if quote_count % 2 != 0:
-        findings.append({
-            "type": "unbalanced_quotes",
-            "detail": f"{quote_count} double-quote characters (odd count)",
-        })
-
+    findings = _bracket_balance_findings(mermaid_text)
+    findings.extend(_subgraph_quote_findings(mermaid_text))
     undefined_refs = find_undefined_node_refs(mermaid_text)
     if undefined_refs:
         findings.append({
             "type": "undefined_node_ref",
-            "detail": f"referenced in an edge but never labeled anywhere in the diagram: {undefined_refs}",
+            "detail": (
+                "referenced in an edge but never labeled anywhere in the diagram: "
+                f"{undefined_refs}"
+            ),
         })
-
     return findings
 
 
@@ -231,36 +283,74 @@ def _load_interview_answers(artifacts_dir):
         return json.load(f)
 
 
-def run(artifacts_dir, overlap_threshold=DEFAULT_OVERLAP_THRESHOLD):
-    interview_answers = _load_interview_answers(artifacts_dir)
+def _markdown_names(docs_dir: str):
+    names = []
+    for name in sorted(os.listdir(docs_dir)):
+        if not name.endswith(".md"):
+            continue
+        if Path(name).name != name:
+            continue
+        try:
+            join_under(docs_dir, name)
+        except PathValidationError:
+            continue
+        names.append(name)
+    return names
 
+
+def _confirmed_findings_for_doc(docs_dir, name, interview_answers, overlap_threshold):
+    path = join_under(docs_dir, name)
+    with open(path, encoding="utf-8") as handle:
+        text = handle.read()
+    return find_unmatched_confirmed_tags(text, interview_answers, overlap_threshold)
+
+
+def _scan_confirmed_docs(artifacts_dir, interview_answers, overlap_threshold):
     confirmed_findings = {}
-    docs_dir = os.path.join(artifacts_dir, "docs")
-    if os.path.isdir(docs_dir):
-        for name in sorted(os.listdir(docs_dir)):
-            if not name.endswith(".md"):
-                continue
-            with open(os.path.join(docs_dir, name), encoding="utf-8") as f:
-                text = f.read()
-            findings = find_unmatched_confirmed_tags(text, interview_answers, overlap_threshold)
-            if findings:
-                confirmed_findings[name] = findings
+    docs_dir = join_under(artifacts_dir, "docs")
+    if not docs_dir.is_dir():
+        return confirmed_findings
+    for name in _markdown_names(str(docs_dir)):
+        findings = _confirmed_findings_for_doc(
+            str(docs_dir), name, interview_answers, overlap_threshold
+        )
+        if findings:
+            confirmed_findings[name] = findings
+    return confirmed_findings
 
-    mermaid_findings = []
-    arch_path = os.path.join(artifacts_dir, "docs", "architecture.md")
-    if not os.path.isfile(arch_path):
-        arch_path = os.path.join(artifacts_dir, "architecture.md")
-    if os.path.isfile(arch_path):
-        with open(arch_path, encoding="utf-8") as f:
-            arch_text = f.read()
-        mermaid = _extract_mermaid_block(arch_text)
-        if mermaid is not None:
-            mermaid_findings = check_mermaid_syntax(mermaid)
 
+def _resolve_architecture_path(artifacts_dir: str) -> str | None:
+    for parts in (("docs", "architecture.md"), ("architecture.md",)):
+        try:
+            candidate = join_under(artifacts_dir, *parts)
+        except PathValidationError:
+            continue
+        if candidate.is_file():
+            return str(candidate)
+    return None
+
+
+def _scan_mermaid(artifacts_dir: str):
+    arch_path = _resolve_architecture_path(artifacts_dir)
+    if arch_path is None:
+        return []
+    with open(arch_path, encoding="utf-8") as handle:
+        arch_text = handle.read()
+    mermaid = _extract_mermaid_block(arch_text)
+    if mermaid is None:
+        return []
+    return check_mermaid_syntax(mermaid)
+
+
+def run(artifacts_dir, overlap_threshold=DEFAULT_OVERLAP_THRESHOLD):
+    artifacts_dir = str(checked_path(artifacts_dir, want="dir"))
+    interview_answers = _load_interview_answers(artifacts_dir)
     return {
         "artifacts_dir": os.path.abspath(artifacts_dir),
-        "unmatched_confirmed_tags_by_file": confirmed_findings,
-        "mermaid_syntax_findings": mermaid_findings,
+        "unmatched_confirmed_tags_by_file": _scan_confirmed_docs(
+            artifacts_dir, interview_answers, overlap_threshold
+        ),
+        "mermaid_syntax_findings": _scan_mermaid(artifacts_dir),
     }
 
 
@@ -274,14 +364,19 @@ def main():
     ap.add_argument("--out", default=None, help="Optional path to write findings as JSON")
     args = ap.parse_args()
 
-    if not os.path.isdir(args.artifacts_dir):
-        print(f"error: not a directory: {args.artifacts_dir}", file=sys.stderr)
+    try:
+        report = run(args.artifacts_dir, args.overlap_threshold)
+    except PathValidationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    report = run(args.artifacts_dir, args.overlap_threshold)
-
     if args.out:
-        with open(args.out, "w", encoding="utf-8") as f:
+        try:
+            out_path = checked_output_path(args.out)
+        except PathValidationError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            sys.exit(1)
+        with open(out_path, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
 
     total_confirmed = sum(len(v) for v in report["unmatched_confirmed_tags_by_file"].values())

@@ -32,6 +32,9 @@ from doc_engine.tools import doc_tag_utils
 from doc_engine.tools import pipeline_validators as pv
 import prompt_contracts as pc
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
 
 class ContractsMatchTheValidatorsTest(unittest.TestCase):
     """The three assertions this module was written to make."""
@@ -44,7 +47,6 @@ class ContractsMatchTheValidatorsTest(unittest.TestCase):
 
     def test_doc_files_match_the_prompt(self) -> None:
         self.assertEqual(pc.doc_files(), doc_tag_utils.VALID_DOC_FILES)
-
 
 class ParsedValuesAreSaneTest(unittest.TestCase):
     """Guards against a parser that 'succeeds' by matching the wrong thing --
@@ -64,7 +66,6 @@ class ParsedValuesAreSaneTest(unittest.TestCase):
         for name, parser in pc.CONTRACTS.items():
             with self.subTest(contract=name):
                 self.assertTrue(parser(), name)
-
 
 class PromptEditGoesRedTest(unittest.TestCase):
     """The non-vacuity proof. Each case edits a COPY of the prompts and
@@ -123,11 +124,9 @@ class PromptEditGoesRedTest(unittest.TestCase):
         with self.assertRaises(pc.ContractParseError):
             pc.file_summary_keys()
 
-
 class ExitCodeTest(unittest.TestCase):
     def test_main_exits_zero_on_the_real_prompts(self) -> None:
         self.assertEqual(pc.main([]), 0)
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

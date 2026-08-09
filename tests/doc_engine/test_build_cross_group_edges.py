@@ -26,23 +26,23 @@ from pathlib import Path
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 from doc_engine.tools import build_cross_group_edges as b
 
-SCRIPT_DIR = SCRIPTS_DIR
+import pytest
 
+pytestmark = pytest.mark.domain_pipeline
+
+SCRIPT_DIR = SCRIPTS_DIR
 
 def pkg_row(path, package):
     return {"file": path, "line": 1, "match": f"package {package};", "rule_id": "references__package"}
-
 
 def imp_row(path, qualified, static=False):
     kw = "import static " if static else "import "
     return {"file": path, "line": 2, "match": f"{kw}{qualified};", "rule_id": "references__import"}
 
-
 def make(groups, references, repo_path="/repo"):
     groups_data = {"repo_path": repo_path,
                    "groups": [{"id": i, "files": fs, "est_tokens": 1} for i, fs in enumerate(groups)]}
     return b.build_report(groups_data, {"evidence": {"references": references}})
-
 
 class CoverSemanticsTest(unittest.TestCase):
     """partition_repo.py overlaps adjacent groups, so a file can be in two."""
@@ -64,7 +64,6 @@ class CoverSemanticsTest(unittest.TestCase):
         memb = {"u": {0, 1}, "v": {1}, "w": {2}}
         self.assertFalse(b.is_cut(memb, "u", "v"))
         self.assertTrue(b.is_cut(memb, "u", "w"))
-
 
 class JoinKeyTest(unittest.TestCase):
     """Resolve to a type, not a package."""
@@ -94,7 +93,6 @@ class JoinKeyTest(unittest.TestCase):
         self.assertEqual(r["stats"].get("cut_arcs", 0), 0)
         self.assertEqual(r["stats"]["unresolved_imports"], 1)
 
-
 class PrefixShorteningTest(unittest.TestCase):
     """The regression that matters most: a single rsplit drops these
     entirely, silently under-reporting the cut."""
@@ -122,7 +120,6 @@ class PrefixShorteningTest(unittest.TestCase):
         self.assertEqual(b.resolve_targets("a.*", decl, stem), (["a/Foo.java"], "package-fanout"))
         self.assertEqual(b.resolve_targets("nope.Nope", decl, stem), ([], "unresolved"))
 
-
 class CliqueAvoidanceTest(unittest.TestCase):
     """Same-package is an equivalence relation. k files split across two
     groups has O(k^2) cross pairs but only O(k) members to name."""
@@ -149,7 +146,6 @@ class CliqueAvoidanceTest(unittest.TestCase):
         r = make([["a/A.java"], ["z/Z.java"]], [pkg_row("a/A.java", "a"), pkg_row("z/Z.java", "z")])
         self.assertEqual(r["groups"]["0"]["same_package_outside"], [])
 
-
 class DirectionAndDedupTest(unittest.TestCase):
     def test_outbound_and_inbound_are_assigned_to_the_right_groups(self):
         r = make([["z/Z.java"], ["a/Foo.java"]],
@@ -170,7 +166,6 @@ class DirectionAndDedupTest(unittest.TestCase):
         r = make([["z/Z.java"], ["a/Foo.java"]], refs)
         self.assertEqual(r["stats"]["cut_arcs"], 1)
 
-
 class ReportShapeTest(unittest.TestCase):
     def test_declares_a_schema_version(self):
         # Every artifact crossing a stage boundary should say what it is;
@@ -189,7 +184,6 @@ class ReportShapeTest(unittest.TestCase):
         r = make([["a/A.java"]], [])
         self.assertEqual(r["stats"]["rows_shipped"], 0)
         self.assertIsNone(r["stats"]["reduction_factor"])
-
 
 class RealArtifactTest(unittest.TestCase):
     """Runs against a completed Stage-0 output if one is present. Skipped
@@ -216,7 +210,6 @@ class RealArtifactTest(unittest.TestCase):
         groups_data, signals_data = self._artifacts()
         s = b.build_report(groups_data, signals_data)["stats"]
         self.assertGreater(s.get("cut_arcs", 0), 0, "zero arcs on a real repo means the join broke")
-
 
 if __name__ == "__main__":
     unittest.main()

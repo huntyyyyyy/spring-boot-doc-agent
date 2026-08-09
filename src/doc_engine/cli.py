@@ -1,62 +1,46 @@
 """CLI entry point for the doc-engine package."""
 
 import argparse
-import json
 import sys
-from typing import Any, Dict
 
 from doc_engine import Engine
-from doc_engine.config import Config, load_repo_config, merge_config
+from doc_engine.cli_scan_config import scan_config
+from doc_engine.core.jsonio import dump_json, load_json
 from doc_engine.pipeline.local_run import add_run_arguments, run_pipeline
 
 
-def _load_json(path: str) -> Dict[str, Any]:
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
-
-
-def _save_json(path: str, data: Dict[str, Any]) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-
-def _scan_config(repo: str, args: argparse.Namespace) -> Config:
-    base = load_repo_config(repo) or Config()
-    overrides: Dict[str, Any] = {}
-    if args.scanners:
-        overrides["scanners"] = [s.strip() for s in args.scanners.split(",") if s.strip()]
-    if args.sql_dialect != "ansi":
-        overrides["sql_dialect"] = args.sql_dialect
-    if args.respect_gitignore:
-        overrides["respect_gitignore"] = True
-    if args.build_command:
-        overrides["build_command"] = args.build_command
-    if args.db_path:
-        overrides["db_path"] = args.db_path
-    return merge_config(base, overrides)
-
-
 def cmd_scan(args: argparse.Namespace) -> int:
-    config = _scan_config(args.repo, args)
+    config = scan_config(args.repo, args)
     engine = Engine(config)
-    signals = engine.scan(args.repo)
-    _save_json(args.out, signals)
+    try:
+        signals = engine.scan(
+            args.repo,
+            allow_codeql_build=bool(getattr(args, "allow_codeql_build", False)),
+        )
+    except Exception as exc:
+        from doc_engine.scanning.spring import CodeQLScannerError
+
+        if isinstance(exc, CodeQLScannerError):
+            print(f"error: {exc}", file=sys.stderr)
+            return 1
+        raise
+    dump_json(args.out, signals)
     print(f"Wrote signals to {args.out}")
     return 0
 
 
 def cmd_docs(args: argparse.Namespace) -> int:
-    signals = _load_json(args.signals)
-    interview = _load_json(args.interview) if args.interview else {}
+    signals = load_json(args.signals)
+    interview = load_json(args.interview) if args.interview else {}
     engine = Engine()
     bundle = engine.generate_docs(signals, interview_answers=interview)
-    _save_json(args.out, bundle)
+    dump_json(args.out, bundle)
     print(f"Wrote docs bundle to {args.out}")
     return 0
 
 
 def cmd_site(args: argparse.Namespace) -> int:
-    bundle = _load_json(args.docs)
+    bundle = load_json(args.docs)
     engine = Engine()
     site_path = engine.build_site(bundle, out_dir=args.out_dir, site_name=args.site_name)
     print(f"Built site at {site_path}")
@@ -96,101 +80,132 @@ def cmd_certification_verify(args: argparse.Namespace) -> int:
     return cert_main(argv)
 
 
+def cmd_query(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine query <kind> …`` → tools.query_artifacts."""
+    from doc_engine.tools.query_artifacts import main as query_main
+
+    argv = list(getattr(args, "query_argv", None) or [])
+    return query_main(_without_argparse_separator(argv))
+
+
+def cmd_quality_gates(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine quality-gates`` → ci.quality_gates."""
+    from doc_engine.ci.quality_gates import main as quality_gates_main
+
+    argv = ["--compare-ref", args.compare_ref]
+    if args.coverage_xml is not None:
+        argv.extend(["--coverage-xml", str(args.coverage_xml)])
+    if args.skip_coverage:
+        argv.append("--skip-coverage")
+    if args.no_fail_fast:
+        argv.append("--no-fail-fast")
+    return quality_gates_main(argv)
+
+
+def cmd_coverage_gap_average(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine coverage-gap-average``."""
+    from doc_engine.ci.coverage_gap_average import main as gap_main
+
+    argv: list[str] = []
+    if args.coverage_xml is not None:
+        argv.extend(["--coverage-xml", str(args.coverage_xml)])
+    if args.floor is not None:
+        argv.extend(["--floor", str(args.floor)])
+    if args.worst is not None:
+        argv.extend(["--worst", str(args.worst)])
+    if args.markdown:
+        argv.append("--markdown")
+    if args.append_github_summary:
+        argv.append("--append-github-summary")
+    return gap_main(argv)
+
+
+def _coverage_measure_argv(args: argparse.Namespace) -> list[str]:
+    """Build argv for ``coverage_measure_cli.main`` from the thin CLI facade."""
+    argv: list[str] = []
+    if getattr(args, "mode", None):
+        argv.extend(["--mode", str(args.mode)])
+    if getattr(args, "scope", None):
+        argv.extend(["--scope", str(args.scope)])
+    if args.floor is not None:
+        argv.extend(["--floor", str(args.floor)])
+    if args.worst is not None:
+        argv.extend(["--worst", str(args.worst)])
+    if args.skip_pytest:
+        argv.append("--skip-pytest")
+    if args.no_gap_report:
+        argv.append("--no-gap-report")
+    if args.pytest_args:
+        argv.extend(args.pytest_args)
+    return argv
+
+
+def cmd_coverage_measure(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine coverage-measure`` — oracle SoT or climb sensor."""
+    from doc_engine.ci.coverage_measure_cli import main as measure_main
+
+    return measure_main(_coverage_measure_argv(args))
+
+
+def cmd_complexipy_ratchet(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine complexipy-ratchet``."""
+    from doc_engine.ci.complexipy_ratchet import main as ratchet_main
+
+    argv: list[str] = []
+    if args.baseline is not None:
+        argv.extend(["--baseline", str(args.baseline)])
+    if args.update:
+        argv.append("--update")
+    return ratchet_main(argv)
+
+
+def cmd_size_ratchet(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine size-ratchet``."""
+    from doc_engine.ci.size_ratchet import main as size_main
+
+    argv: list[str] = []
+    if args.baseline is not None:
+        argv.extend(["--baseline", str(args.baseline)])
+    if args.update:
+        argv.append("--update")
+    return size_main(argv)
+
+
+def _without_argparse_separator(argv: list[str]) -> list[str]:
+    """Drop a leading ``--`` left over from argparse ``REMAINDER``."""
+    parts = iter(argv)
+    first = next(parts, None)
+    if first is None:
+        return []
+    if first == "--":
+        return list(parts)
+    return [first, *parts]
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Build the top-level ``doc-engine`` argparse tree."""
+    from doc_engine.cli_parsers import build_parser as build_cli_parser
+
+    return build_cli_parser(
+        description=__doc__ or "",
+        cmd_scan=cmd_scan,
+        cmd_docs=cmd_docs,
+        cmd_site=cmd_site,
+        cmd_pipeline_run=cmd_pipeline_run,
+        cmd_pipeline_gates=cmd_pipeline_gates,
+        cmd_certification_verify=cmd_certification_verify,
+        cmd_query=cmd_query,
+        cmd_quality_gates=cmd_quality_gates,
+        cmd_coverage_gap_average=cmd_coverage_gap_average,
+        cmd_coverage_measure=cmd_coverage_measure,
+        cmd_complexipy_ratchet=cmd_complexipy_ratchet,
+        cmd_size_ratchet=cmd_size_ratchet,
+        add_run_arguments=add_run_arguments,
+    )
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(prog="doc-engine", description=__doc__)
-    sub = ap.add_subparsers(dest="command", required=True)
-
-    scan_ap = sub.add_parser("scan", help="Scan a repository and produce signals")
-    scan_ap.add_argument("repo")
-    scan_ap.add_argument(
-        "--out",
-        default="spring_signals.json",
-        help="output path (default: spring_signals.json, same as Stage 0 / python -m doc_engine.tools.spring_signal_scan)",
-    )
-    scan_ap.add_argument(
-        "--scanners",
-        default=None,
-        help="Comma-separated scanner names (overrides .doc-engine.yml)",
-    )
-    scan_ap.add_argument("--sql-dialect", default="ansi")
-    scan_ap.add_argument("--respect-gitignore", action="store_true")
-    scan_ap.add_argument("--build-command", default=None)
-    scan_ap.add_argument("--db-path", default=None)
-    scan_ap.set_defaults(func=cmd_scan)
-
-    docs_ap = sub.add_parser(
-        "docs",
-        help="Placeholder docs bundle from signals (prefer: doc-engine pipeline run)",
-    )
-    docs_ap.add_argument("signals")
-    docs_ap.add_argument("--out", default="docs.json")
-    docs_ap.add_argument("--interview", default=None, help="Path to interview answers JSON")
-    docs_ap.set_defaults(func=cmd_docs)
-
-    site_ap = sub.add_parser("site", help="Build a static site from a docs bundle")
-    site_ap.add_argument("docs")
-    site_ap.add_argument("--out-dir", required=True)
-    site_ap.add_argument("--site-name", default="Documentation")
-    site_ap.set_defaults(func=cmd_site)
-
-    pipeline_ap = sub.add_parser(
-        "pipeline",
-        help="Run the document-spring-repo pipeline (deterministic + optional gates)",
-    )
-    pipeline_sub = pipeline_ap.add_subparsers(dest="pipeline_command", required=True)
-    run_ap = pipeline_sub.add_parser(
-        "run",
-        help="Run locally against one target repo",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="Deterministic stages use the package/scripts toolchain; "
-               "Stages 1–4 are mocked unless you drive generative work via an "
-               "external adapter (Claude, Cursor, etc.). Use --until STAGE to "
-               "truncate the graph from build_stage_specs().",
-    )
-    add_run_arguments(run_ap)
-    run_ap.set_defaults(func=cmd_pipeline_run)
-
-    gates_ap = pipeline_sub.add_parser(
-        "gates",
-        help="Run mechanical gates on an existing run dir after live generative stages",
-    )
-    gates_ap.add_argument("--out-dir", required=True)
-    gates_ap.add_argument("--target-repo", required=True)
-    gates_ap.add_argument("--docs-dir", default=None)
-    gates_ap.add_argument(
-        "--compliance-profile",
-        choices=["scan_only", "deterministic_only", "certified"],
-        default=None,
-        help="compliance profile (default: certified, or .doc-engine.yml). "
-             "certified enables strict citation_coverage.",
-    )
-    gates_ap.add_argument("--strict-citations", action="store_true")
-    gates_ap.add_argument("--no-write-check", action="store_true")
-    gates_ap.set_defaults(func=cmd_pipeline_gates)
-
-    cert_ap = sub.add_parser(
-        "certification",
-        help="Certification gate utilities",
-    )
-    cert_sub = cert_ap.add_subparsers(dest="certification_command", required=True)
-    verify_ap = cert_sub.add_parser(
-        "verify",
-        help="Exit 0 only when certification.json reports certified: true",
-    )
-    verify_ap.add_argument(
-        "path",
-        nargs="?",
-        default="certification.json",
-        help="path to certification.json",
-    )
-    verify_ap.add_argument(
-        "--allow-mock",
-        action="store_true",
-        help="accept generative_executor none/mock (default: require live)",
-    )
-    verify_ap.set_defaults(func=cmd_certification_verify)
-
-    args = ap.parse_args()
+    args = build_parser().parse_args()
     return args.func(args)
 
 

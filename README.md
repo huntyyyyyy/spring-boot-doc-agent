@@ -1,155 +1,105 @@
 # spring-boot-doc-agent
 
-**doc-engine** is a portable orchestrator for documenting Spring Boot repositories — scan, interview, and generate a fixed 14-file documentation set with machine-enforceable `certification.json` gates.
+**doc-engine** documents Spring Boot repositories: deterministic Stage 0 scan, optional interview, and a fixed **fourteen-file** markdown set with machine-checkable `certification.json` gates.
 
-The **Claude Code plugin** (`adapters/claude/`) is an optional adapter for live generative stages. CI and local deterministic runs should use the CLI:
+The Claude Code plugin under [`adapters/claude/`](adapters/claude/) is an optional adapter for live generative stages. Operators and CI should use the CLI.
 
 ```bash
+pip install -r requirements.txt
 pip install -e .
 doc-engine pipeline run /path/to/spring-repo --out-dir pipeline-artifacts
 doc-engine certification verify pipeline-artifacts/certification.json
 ```
 
-See [`docs/product-architecture.md`](docs/product-architecture.md) for kernel vs adapter layout.
-
-**First time on a real Spring repo:** follow [`docs/guides/operator-pilot.md`](docs/guides/operator-pilot.md) (Path A deterministic scan, then Path B full Claude pipeline). **Rolling this out across your org’s services:** [`docs/guides/principal-adoption.md`](docs/guides/principal-adoption.md).
+Architecture (kernel vs adapters): [`docs/product-architecture.md`](docs/product-architecture.md).  
+First real-repo run: [`docs/guides/operator-pilot.md`](docs/guides/operator-pilot.md).  
+Org rollout: [`docs/guides/principal-adoption.md`](docs/guides/principal-adoption.md).
 
 ## Pipeline
 
 ```
-Stage 0  Deterministic scan (no LLM)     python -m doc_engine.tools.spring_signal_scan
-                                           + partition_repo / build_cross_group_edges
-Stage 1  Parallel file summarization      file-summarizer × N groups, concurrent
-Stage 2  Parallel architecture            architect-segment × N groups (concurrent) → architect-merge (single)
-Stage 3  Gap analysis + architecture/     gap-analyzer (single, prepares questions) +
-         testing review + LIVE interview  software-architect-and-testing (single, DDIA/testing findings)
-                                           → orchestrator asks gap-analyzer's questions directly
-Stage 4  Parallel doc generation          doc-writer × 14 files, concurrent
+Stage 0  Deterministic scan (no LLM)     spring_signal_scan + partition_repo + build_cross_group_edges
+Stage 1  Parallel file summarization      file-summarizer × N groups
+Stage 2  Parallel architecture            architect-segment × N → architect-merge
+Stage 3  Gaps + review + interview        gap-analyzer + software-architect-and-testing
+                                           → orchestrator asks gap questions live
+Stage 4  Parallel doc generation          doc-writer × 14 files
 ```
 
-Output: `docs/readme.md` (or `docs/README.md` won't clobber an existing root README), `architecture.md`, `integrations.md`, `authorization.md`, `database.md`, `operations.md`, `observability.md`, `troubleshooting.md`, `configuration.md`, `change_impact.md`, `glossary.md`, `local_development.md`, `testing.md`, `known_limitations.md`.
+Generated set: `readme`, `architecture`, `integrations`, `authorization`, `database`, `operations`, `observability`, `troubleshooting`, `configuration`, `change_impact`, `glossary`, `local_development`, `testing`, `known_limitations` (under the run’s docs dir; root `README.md` is never clobbered).
 
-## Why the interview stage exists
+Claims are tagged **evidenced**, **confirmed**, or **unknown** so gaps stay visible. Taxonomy: [`adapters/claude/skills/document-spring-repo/references/doc-taxonomy.md`](adapters/claude/skills/document-spring-repo/references/doc-taxonomy.md).
 
-Several of the fourteen files ask questions code cannot answer on its own — who else calls your endpoints, whether a table has one writer or several, whether a TODO comment is an accepted shortcut or forgotten debt. `skills/document-spring-repo/references/doc-taxonomy.md` spells out, file by file, where that line sits. The `gap-analyzer` subagent drafts the candidate questions; only the orchestrating conversation (not a subagent) actually asks you, since subagents in Claude Code run to completion and report back — they don't pause mid-task for interactive input.
+## Stage 0 (deterministic scan)
 
-Every generated file tags its claims as **evidenced in code**, **confirmed in interview**, or **unknown** — on purpose, so staleness and gaps stay visible instead of getting smoothed over.
-
-## On the deterministic scan (`python -m doc_engine.tools.spring_signal_scan`)
-
-**Default scanners:** `filesystem` + `ast-grep` (no Java build required). Opt into CodeQL with `--scanners filesystem,codeql` when the CodeQL CLI and a build command are available — see `CONSTRAINTS.md` Runtime prerequisites item 1.
-
-Java structural detection on the default path uses [ast-grep](https://ast-grep.github.io/) (tree-sitter-based AST matching), not regex — see `src/doc_engine/scanning/resources/spring_ast_grep_rules.yml` for the rule set. It's still source-text analysis, not bytecode — no build step or classpath required, at some cost in precision (it won't resolve inherited annotations or interfaces implemented indirectly). See `claude/research/source-text-vs-bytecode-analysis.md` for a deeper comparison against compiled-bytecode/ArchUnit-style analysis. Needs the `ast-grep` binary on `PATH`:
+Default scanners: `filesystem` + `ast-grep` (no Java build). Opt into CodeQL with `--scanners filesystem,codeql` when the CLI and a build command are available — see [`CONSTRAINTS.md`](CONSTRAINTS.md).
 
 ```bash
 pip install -r requirements.txt   # pins ast-grep-cli, sqllineage, pathspec
+python -m doc_engine.tools.spring_signal_scan <repo> --out spring_signals.json
+python -m doc_engine.tools.spring_drift_check <repo> spring_signals.json --out drift_report.json
 ```
 
-That is the pinned path, and the one CI uses. `cargo install ast-grep` and `npm install -g @ast-grep/cli` also work, but they install an unpinned binary outside `requirements.txt` — and if you have already installed `ast-grep` that way, the two can shadow each other on `PATH` and you may not be running the version you think you are. See `claude/tool-quirks.md`'s `ast-grep` PATH-shadowing entry; `ast-grep --version` tells you which one won.
+Rules: `src/doc_engine/scanning/resources/spring_ast_grep_rules.yml`. Fixtures: `scripts/fixtures/spring_signals/`. Target-repo `.doc-engine.yml` is **untrusted by default** (`--trust-repo-config` / `--allow-codeql-build` are explicit opt-ins).
 
-Tested against the fixture repo in `scripts/fixtures/spring_signals/` (run `pytest tests/doc_engine/test_spring_signal_scan.py -v`) — controller, entities (including one with extra annotations stacked on top of `@Entity`/`@Table`, and one with only `@Entity`), repositories (including an `@Repository`-annotated one, and a same-package class that deliberately isn't a repository), a JPQL and a native `@Query`, a multi-line security annotation, `application.yml`, `Dockerfile`. It correctly separates the JPQL query from the native one regardless of argument order, resolves each entity's own table independently (rather than pairing the first `@Table` found in a file with the first class found in the same file, which silently mismatched in any file with more than one entity), and doesn't false-positive `@EntityScan` as `@Entity` — that last one was a real bug in the original regex version, caught by running it against a large production Spring Boot codebase during this rewrite, not just the synthetic fixture.
+## Quality gates and CI
 
-This started as a regex scanner and was rewritten to ast-grep specifically because two of the regex version's precision gaps — multi-line annotations, and treating `@EntityScan` as if it were `@Entity` — turned out to matter on real code, not just in theory. If you want still higher fidelity later (resolved inheritance, annotations picked up via meta-annotations), swapping in an ArchUnit-based scanner (which analyzes compiled bytecode) is a reasonable next upgrade path; the JSON output shape is deliberately simple so that swap wouldn't require touching the rest of the pipeline — the same property that let this swap happen without touching anything downstream of it.
+Contributor policy and the full gate table live in [`CONTRIBUTING.md`](CONTRIBUTING.md). Summary:
 
-**Native-query lineage**: `raw_queries` entries tagged `"query_kind": "native"` now get best-effort source/target table extraction via [SQLLineage](https://sqllineage.io), in a `lineage` field on the entry (`{"available": true, "source_tables": [...], "target_tables": [...]}` on success, `{"available": false, "reason": "..."}` on failure). This is a **soft dependency** — unlike `ast-grep`, a missing `sqllineage` install (`pip install sqllineage`) or a query SQLLineage can't parse (an exotic dialect feature, a Spring SpEL expression like `:#{#tenant}` that isn't real bind-parameter syntax) degrades that one entry's `lineage` field rather than failing the scan. Spring's own `:name`/`?`/`?1` bind-parameter placeholders aren't valid SQL grammar in any dialect either, so they're substituted with a harmless literal before parsing — lineage only needs table-level structure, not the bound values. The dialect defaults to `ansi` (SQLLineage's own generic baseline, since this scanner has no way to know the target database) — pass `--sql-dialect mysql` (or `postgres`, `oracle`, `sqlite`, `tsql`, etc.) to `python -m doc_engine.tools.spring_signal_scan` for better accuracy if you know it. Entries tagged `"query_kind": "jpql"` also get a `lineage` field now, for the bounded common case: a single-entity `FROM <Entity> <alias>` clause (no joins, no association traversal, no JPQL-only functions like `SIZE()`) resolves via `resolve_jpql_to_lineage()`, which looks the entity up in `entity_table_map` (built from `@Entity`/`@Table` scanning), rewrites the query, and hands it to the same SQLLineage path native queries use. No published technique or usable open-source tool exists for general JPQL/HQL-to-SQL lineage translation (verified 2026-07-25 — see `claude/session-log.md`), so anything outside that bounded case (joins, `u.orders.total`-style traversal, `@Entity(name=...)` overrides, polymorphic `FROM`, embedded/composite keys) still degrades to `{"available": false, "reason": "..."}` rather than attempting a guess — see `CONSTRAINTS.md`'s "Known precision tradeoffs" item 2 for the full, current boundary.
-
-## On drift detection (`python -m doc_engine.tools.spring_drift_check`)
-
-Once you have a `spring_signals.json` from a prior scan of a repo, `python -m doc_engine.tools.spring_drift_check` checks whether it's still accurate against the repo's current state: a cheap whole-repo file-signature hash (tier 1) tells you which files changed at all; when anything moved, tier 2 runs **one fresh** `spring_signal_scan.scan()` of the repo (same `scanners` as the prior signals, default `filesystem,ast-grep`) and re-verifies each citation in a changed file against that fresh evidence bag filtered by file/rule — entity/table mapping, repository type args, query text, or annotation shape — rather than flagging every citation in a changed file just because *something* in it moved. Tier 2 is **not** a per-file `ast-grep` subprocess. It exists because a comment fix three lines from a cited annotation shouldn't read as drift on every fact the file happens to also contain.
+| Gate | Hard floor / policy |
+|------|---------------------|
+| Whole-repo Cover% (`doc_engine` + `stf`) | **98.7** (`pyproject.toml` `fail_under`) |
+| New-code coverage | **98.7** via `diff-cover` in `quality-gates` |
+| Duplication (changed Python) | **≤3%** jscpd |
+| Cognitive complexity | **≤5** / function (complexipy offender ratchet) |
+| File size | **≤225 LOC** hard (`doc-engine size-ratchet` on `src/` + `tests/`) |
+| Import cycles | tach `forbid_circular_dependencies` |
+| Package layout | named concepts — **no** `utils/` / grab-bag `helpers` |
 
 ```bash
-python -m doc_engine.tools.spring_signal_scan <repo_path> --out spring_signals.json
-# ... time passes, repo changes ...
-python -m doc_engine.tools.spring_drift_check <repo_path> spring_signals.json --out drift_report.json
-
-# Or, to measure drift against a specific document-spring-repo pipeline run's
-# run_manifest.json instead of the raw scan (its target_repo.commit_hash is a
-# provenance record of exactly what the currently-published docs saw):
-python -m doc_engine.tools.spring_drift_check <repo_path> spring_signals.json \
-    --manifest run_manifest.json --out drift_report.json
+pip install -r requirements-dev.txt && pip install -e .
+npm ci
+doc-engine coverage-measure          # single-tree wipe + pytest-cov + path cohesion + gap-average
+doc-engine quality-gates --compare-ref origin/main
+doc-engine size-ratchet
 ```
 
-`spring_signals.json` is required either way — `run_manifest.json` records `file_signatures` (the tier-1 baseline `--manifest` overrides) but never `evidence`/`entity_table_map`, which tier 2 needs regardless of which baseline is used.
+CI (`.github/workflows/ci.yml`): Python **3.10–3.12** matrix; **only 3.11** runs pytest-cov / `fail_under` / `coverage.xml` upload. SonarCloud is a non-blocking dashboard signal; in-repo `quality-gates` is the SoT.
 
-Tested via `pytest tests/doc_engine/test_spring_drift_check.py -v`, a real integration test suite (real `ast-grep` subprocesses against mutated copies of the same fixture repo `tests/doc_engine/test_spring_signal_scan.py` uses) — see `skills/document-spring-repo/SKILL.md`'s Stage 0 for how to use the report as a pre-flight check before deciding whether a full pipeline re-run is warranted.
+Mutation taxonomies (gate mutators ≠ formatting perturbations ≠ assertion-engine mutants): see CONTRIBUTING — do not conflate with PIT-style SUT mutation.
 
-This is deliberately standalone, not a bug: no LLM calls, no CI wiring, not invoked automatically by the `document-spring-repo` pipeline. You run it by hand, pointing it at a repo and a prior scan, and use its report to decide what (if anything) needs a closer look.
+## Coverage oracle vs climb
 
-## On the architecture/testing review agent (`software-architect-and-testing`)
+- **Oracle / merge gate:** full-suite cohesive `coverage.xml` from one checkout (`doc-engine coverage-measure`), floor **98.7**.
+- **Climb inventory:** `doc-engine coverage-gap-average` reports only files still below the floor.
+- **Scoped / dual-mode measure** (fast inner loop vs full oracle): design-only — see [`docs/design/coverage-measure-modes-design-2026-08-08.md`](docs/design/coverage-measure-modes-design-2026-08-08.md). Not implemented until that memo is confirmed.
 
-Stage 3 also dispatches `software-architect-and-testing` (`adapters/claude/agents/software-architect-and-testing.md`), which reviews the target repo through two books' lenses — [Designing Data-Intensive Applications, 2e](https://dataintensive.net/) (partitioning, replication/consistency, schema evolution, batch/stream processing) and *Effective Software Testing* (Aniche, Manning) (specification-based/boundary gaps, structural gaps, test-double discipline, named test smells) — feeding `architecture.md` and `testing.md` specifically. Its findings are evidenced the ordinary way (a real `path:line`, checked with `ast-grep` or, for the cross-cutting/multi-line patterns ast-grep's single-file matching doesn't reach cleanly, [semgrep](https://semgrep.dev) — see `scripts/coverage/spring_semgrep_rules.yml`, with the same non-vacuity gate `rule_coverage.py` holds the ast-grep ruleset to: `scripts/coverage/semgrep_rule_coverage.py`). When a finding hinges on whether an external library or pattern is a reasonable choice, it does bounded, tiered research (arXiv, GitHub filtered by stars and recent pushes, deepwiki.com as orientation only) rather than trusting memory — see the agent file and `claude/steering-prompts/00-shared-research-standards.md`/`10-review-persona-and-standards.md` for the exact discipline. Needs `semgrep` on `PATH` in addition to `ast-grep` — also pinned in `requirements.txt`.
-
-## Testing the LLM stages
-
-Only the deterministic scripts had test coverage until now. `tests/doc_engine/test_pipeline_stages.py` adds mechanical (not LLM-judge) structural tests for the four LLM stages — file-summarizer, architect-segment/architect-merge, gap-analyzer, doc-writer — checking the required `[Evidenced — ...]`/`[Confirmed — ...]`/`[Unknown — ...]`/`[Per existing docs — ...]` tag grammar, whether `[Evidenced — path:line]` citations actually resolve to real files/lines, each stage's required JSON output shape, and whether architecture-diagram node labels trace back to real file/class names:
-
-```bash
-pytest tests/doc_engine/test_pipeline_stages.py -v
-```
-
-By default it runs against synthetic sample data shaped like each agent's documented output (no LLM calls — subagents can't be driven from a plain Python process outside a live session). Point `PIPELINE_ARTIFACTS_DIR` at a real completed run's output to additionally validate real generated docs, same opt-in pattern as `tests/doc_engine/test_partition_repo_real_world.py`.
-
-## Semantic evaluation and capacity preflight
-
-`tests/doc_engine/test_pipeline_stages.py` (above) only checks the *shape* of the four LLM stages' output — it never judges whether an `[Evidenced]` claim is actually true, or whether a `[Confirmed]` tag is really backed by a real interview answer. `skills/semantic-pipeline-eval/` adds that judgment layer: run it against a completed pipeline's `PIPELINE_ARTIFACTS_DIR` to sample evidenced claims for truthfulness, flag unmatched `[Confirmed]` tags and Mermaid syntax issues (via `python -m doc_engine.tools.semantic_eval_helpers`'s mechanical pre-pass), and check for cross-doc contradictions — see that skill's `SKILL.md` for the full rubric and its two-lane human sign-off (escalated findings, plus a random confidence spot-check over the judge's own `Supported` verdicts).
-
-Separately, `skills/capacity-preflight/` turns this plugin's stated-but-unverified scale assumptions (chars/N token heuristic, uncapped subagent fan-out, the per-group `cross_group_edges.json` slice each Stage-1 dispatch carries) into concrete numbers for one specific target repo before you commit to a full run — `python -m doc_engine.tools.capacity_preflight` imports `partition_repo` / `spring_signal_scan` / `build_cross_group_edges` from `doc_engine` rather than re-estimating from scratch. Use it before pointing the pipeline at a large or unfamiliar repo.
-
-## Pipeline contracts and local orchestration
-
-Inter-stage JSON artifacts (`spring_signals.json`, `groups.json`, `summaries.json`, `interview_answers.json`) have enforced shapes — see `skills/document-spring-repo/SKILL.md` "Data contracts between stages" and `scripts/schemas/`. Validate after each stage boundary:
+## Local orchestration and contracts
 
 ```bash
 python -m doc_engine.tools.validate_artifacts --all <run-directory>
-```
-
-Mechanical summarizer/gap-analyzer shape gates (before doc-writer fan-out in a real run):
-
-```bash
 python -m doc_engine.tools.pipeline_validators <run-directory> --target-repo <repo_path>
+python -m doc_engine.pipeline.local_runner /abs/path/to/spring-repo   # generative stages mocked
 ```
 
-Code-level stage graph and bounded-context map: `src/doc_engine/pipeline/README.md`. End-to-end local run (deterministic stages real, LLM stages mocked):
+Schemas: `scripts/schemas/`. Stage graph: `src/doc_engine/pipeline/README.md`.
 
-```bash
-python -m doc_engine.pipeline.local_runner /abs/path/to/spring-repo
-```
+## Docs map
 
-## Constraints
+| Path | Role |
+|------|------|
+| [`docs/product-architecture.md`](docs/product-architecture.md) | Kernel / adapters / A+C |
+| [`docs/design/`](docs/design/) | Design SoR + dated ADRs (not under `claude/`) |
+| [`docs/guides/`](docs/guides/) | Operator and adoption guides |
+| [`CONSTRAINTS.md`](CONSTRAINTS.md) | Runtime prerequisites and standing limits |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Write-then-verify, gates, size, mutation scopes |
+| [`STATUS.md`](STATUS.md) | Current done/pending snapshot |
+| [`MATURITY_ASSESSMENT.md`](MATURITY_ASSESSMENT.md) | Adoption scorecard |
 
-`CONSTRAINTS.md` at the monorepo root is the single place that collects **doc-engine** and adapter runtime prerequisites, integration gaps, precision tradeoffs, confidentiality rules, and enterprise-readiness gaps (license, CI, RBAC, audit trail, and more) — read it before evaluating this stack beyond your own machine. `MATURITY_ASSESSMENT.md` builds on top of it with an overall maturity scorecard, a drift-from-modern-practice analysis, and an adoption gate checklist — read that one specifically before adopting across an organization.
+## Install notes
 
-## Status and contributing
+**Kernel:** `pip install -r requirements.txt && pip install -e .`  
+**Claude adapter (optional):** install via the marketplace entry that points at `adapters/claude/` — see [`docs/guides/operator-pilot.md`](docs/guides/operator-pilot.md).  
+Example target config: [`docs/examples/.doc-engine.yml`](docs/examples/.doc-engine.yml).
 
-`STATUS.md` is a single, in-place-edited snapshot of what's done vs. pending on **doc-engine** and this monorepo's scaffolding, and the next concrete action — read it before picking up any of `claude/steering-prompts/`. Product skills SoT is [`adapters/claude/skills/`](adapters/claude/skills/) (root [`skills/`](skills/) is a mirror — see [`skills/README.md`](skills/README.md)). `CONTRIBUTING.md` has this repo's write-then-verify rule for anything written through a device bridge, remote tool, or a prior session's unverified claim about repo state. `claude/llms/README.md` indexes this repo's own PR history, one file per PR, each pairing a summary with deterministic `git`/`grep` commands to verify its claims directly instead of trusting the prose. `claude/tool-quirks.md` (see [`adapters/claude/skills/tool-quirks/SKILL.md`](adapters/claude/skills/tool-quirks/SKILL.md)) is a separate index for odd behavior in the ambient tools/environment this repo is worked in — `gh`, `git`, MCP tools, Windows/Git-Bash quirks — distinct from document-generation logic.
-
-## Install
-
-**Kernel (any IDE / CI):**
-
-```bash
-pip install -r requirements.txt
-pip install -e .
-doc-engine pipeline run <repo_path> --out-dir pipeline-artifacts
-```
-
-Full first-run walkthrough: [`docs/guides/operator-pilot.md`](docs/guides/operator-pilot.md).
-
-**Claude Code adapter (optional — live generative stages + skills):**
-
-```bash
-claude plugin marketplace add ./spring-boot-doc-agent
-claude plugin install spring-boot-doc-agent@spring-boot-doc-agent-marketplace
-```
-
-Marketplace entry installs `adapters/claude/` as `CLAUDE_PLUGIN_ROOT`. Example target-repo config: [`docs/examples/.doc-engine.yml`](docs/examples/.doc-engine.yml).
-
-## Before you use this for real
-
-Start with [`docs/guides/operator-pilot.md`](docs/guides/operator-pilot.md). Then:
-
-1. `adapters/claude/plugin.json` and `.claude-plugin/marketplace.json` both name a real author, and `plugin.json`'s `license` is `"MIT"`, matching the root `LICENSE` file. (`marketplace.json` carries no `license` field of its own — it inherits by reference, since its plugin entry points at `adapters/claude/`.) Confirm both still say what you want before sharing this beyond your own machine.
-2. Read `adapters/claude/skills/document-spring-repo/references/doc-taxonomy.md` once yourself before the first real run — it's the actual spec for what "good" looks like per file, and it's worth knowing what it does and doesn't ask about.
-3. Make sure `ast-grep` is on `PATH` (see above) before the first run — Stage 0 will fail fast with an install pointer if it isn't.
-4. Try it on one real (ideally smaller) service first. All <!-- derived: pipeline_agent_count -->6<!-- /derived --> `adapters/claude/agents/` files are native Claude Code subagent prompts now (not literal text adapted from a paper or another plugin) — `architect-segment`/`architect-merge` still carry forward the source paper's methodology (node-naming fidelity, subgraph aggregation, discrepancy-flagging), just reimplemented rather than copied.
-5. The interview stage will feel slow the first time — that's by design, not a bug. It's the only stage doing something a script fundamentally cannot.
+Before production use: confirm plugin license fields still match root `LICENSE` (MIT), put `ast-grep` on `PATH` from the pinned requirements, and pilot on one smaller service first.

@@ -13,6 +13,9 @@ from doc_engine.pipeline.stages import build_stage_specs
 
 from tests.conftest import FIXTURE_DIR
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 def _minimal_context(out: Path) -> PipelineContext:
     return PipelineContext(
@@ -24,7 +27,6 @@ def _minimal_context(out: Path) -> PipelineContext:
         today="2026-07-29",
         log=lambda *_a, **_k: None,
     )
-
 
 class StageSpecPortabilityTest(unittest.TestCase):
     def test_deterministic_stages_use_package_modules(self):
@@ -45,7 +47,6 @@ class StageSpecPortabilityTest(unittest.TestCase):
             for arg in argv:
                 if arg.endswith(".py"):
                     self.fail(f"{spec.name} still invokes script path: {arg}")
-
 
 class WheelWithoutScriptsSmokeTest(unittest.TestCase):
     """Run deterministic Stage 0 with CWD outside the meta-repo (no scripts/ sibling)."""
@@ -91,7 +92,6 @@ class WheelWithoutScriptsSmokeTest(unittest.TestCase):
             self.assertTrue((out / "groups.json").is_file())
             self.assertTrue((out / "certification.json").is_file())
 
-
 class GenerativeChoreographySoTTest(unittest.TestCase):
     def test_every_generative_stage_names_agents(self):
         from doc_engine.pipeline.stages import generative_choreography
@@ -105,8 +105,10 @@ class GenerativeChoreographySoTTest(unittest.TestCase):
             ["architect-segment", "architect-merge"],
         )
         self.assertTrue(by_name["gap_analysis_interview"]["requires_human_interview"])
+        self.assertIn("facts.jsonl", by_name["gap_analysis_interview"]["inputs"])
+        self.assertIn("spring_signals.json", by_name["gap_analysis_interview"]["inputs"])
         self.assertEqual(by_name["doc_writer"]["agents"], ["doc-writer"])
-
+        self.assertIn("facts.jsonl", by_name["doc_writer"]["inputs"])
 
 if __name__ == "__main__":
     unittest.main()

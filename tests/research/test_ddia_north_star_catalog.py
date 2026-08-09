@@ -12,6 +12,10 @@ from pathlib import Path
 
 from tests.conftest import REPO_ROOT
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 NORTH = REPO_ROOT / "docs" / "design" / "ddia-north-star"
 CATALOG = NORTH / "catalog.json"
 SCHEMA = NORTH / "catalog.schema.json"
@@ -72,10 +76,8 @@ DEVIATION_H2 = [
     "See also",
 ]
 
-
 def _h2_titles(text: str) -> set[str]:
     return set(re.findall(r"^## (.+)$", text, re.MULTILINE))
-
 
 class TestDdiaNorthStarCatalog(unittest.TestCase):
     @classmethod
@@ -216,7 +218,6 @@ class TestDdiaNorthStarCatalog(unittest.TestCase):
         self.assertTrue(stub.is_file())
         stub_text = stub.read_text(encoding="utf-8")
         self.assertIn("docs/design/ddia-north-star", stub_text)
-
 
 if __name__ == "__main__":
     unittest.main()

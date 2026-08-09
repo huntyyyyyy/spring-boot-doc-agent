@@ -19,19 +19,20 @@ import textwrap
 import unittest
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 SCRIPT_DIR = SCRIPTS_DIR
 import check_llms_coverage as c  # noqa: E402
-
 
 def write_doc(tmp_dir, name, text):
     path = pathlib.Path(tmp_dir) / name
     path.write_text(textwrap.dedent(text), encoding="utf-8")
     return path
 
-
 def pr(number, title="x", merged_at="2026-01-01T00:00:00Z"):
     return {"number": number, "title": title, "mergedAt": merged_at}
-
 
 class ParseFrontmatterTest(unittest.TestCase):
     def test_parses_known_fields(self):
@@ -55,7 +56,6 @@ class ParseFrontmatterTest(unittest.TestCase):
         p = write_doc(d, "pr-2.md", "# no frontmatter here\n")
         self.assertEqual(c.parse_frontmatter(p), {})
 
-
 class MostRecentlyMergedTest(unittest.TestCase):
     def test_empty_list_returns_none(self):
         self.assertIsNone(c.most_recently_merged([]))
@@ -70,7 +70,6 @@ class MostRecentlyMergedTest(unittest.TestCase):
             pr(9, merged_at="2026-01-06T00:00:00Z"),
         ]
         self.assertEqual(c.most_recently_merged(merged), 9)
-
 
 class CheckCoverageTest(unittest.TestCase):
     def _llms_dir(self, files):
@@ -202,12 +201,10 @@ class CheckCoverageTest(unittest.TestCase):
         issues = c.check_coverage(merged, llms_dir)
         self.assertEqual(issues, [])
 
-
 class ExitCodeTest(unittest.TestCase):
     def test_findings_never_fail_the_build(self):
         self.assertEqual(c.exit_code([]), 0)
         self.assertEqual(c.exit_code(["something"]), 0)
-
 
 if __name__ == "__main__":
     unittest.main()

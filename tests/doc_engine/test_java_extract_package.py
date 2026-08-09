@@ -4,6 +4,9 @@ from __future__ import annotations
 
 from doc_engine.scanning.java_extract import extract_entity, extract_java_package
 
+import pytest
+
+pytestmark = pytest.mark.domain_stage0
 
 def test_package_comes_from_declaration_not_file_path() -> None:
     """Deviation: inventing package from path `pkg_fake/` when declaration differs."""
@@ -15,7 +18,6 @@ def test_package_comes_from_declaration_not_file_path() -> None:
     assert entry["package"] == "com.example.real"
     assert entry["fqcn"] == "com.example.real.User"
     assert entry["file"] == "pkg_fake/User.java"
-
 
 def test_missing_package_omits_package_key_keeps_simple_fqcn() -> None:
     """Deviation: fabricating a package when declaration is absent."""

@@ -14,6 +14,10 @@ from pathlib import Path
 
 from tests.conftest import REPO_ROOT
 
+import pytest
+
+pytestmark = pytest.mark.domain_ci_meta
+
 NORTH = REPO_ROOT / "docs" / "design" / "ddia-north-star"
 CATALOG = NORTH / "catalog.json"
 BASELINE = NORTH / "operational_count_baseline.json"
@@ -30,7 +34,6 @@ H3_RE = re.compile(r"^### (.+)$", re.MULTILINE)
 # Max pages that may share a Fail-if line for it to count as page-specific.
 FAIL_IF_UNIQUENESS_MAX_PAGES = 5
 
-
 def _section_bodies(text: str) -> dict[str, str]:
     parts = re.split(r"^## (.+)$", text, flags=re.MULTILINE)
     bodies: dict[str, str] = {}
@@ -40,10 +43,8 @@ def _section_bodies(text: str) -> dict[str, str]:
         bodies[title] = body
     return bodies
 
-
 def _fail_if_lines(text: str) -> list[str]:
     return [m.group(1).strip() for m in FAIL_IF_LINE_RE.finditer(text)]
-
 
 class TestDdiaNorthStarDepth(unittest.TestCase):
     @classmethod
@@ -189,7 +190,6 @@ class TestDdiaNorthStarDepth(unittest.TestCase):
             f"operational count {actual} dropped below baseline {floor}; "
             f"update baseline only when intentional",
         )
-
 
 if __name__ == "__main__":
     unittest.main()

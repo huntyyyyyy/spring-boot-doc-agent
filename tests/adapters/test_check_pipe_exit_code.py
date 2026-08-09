@@ -27,14 +27,16 @@ from typing import Dict
 from unittest import mock
 from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
 
+import pytest
+
+pytestmark = pytest.mark.domain_adapters
+
 sys.path.insert(0, str(REPO_ROOT / ".claude" / "hooks"))
 
 import check_pipe_exit_code as gate  # noqa: E402
 
-
 def denies(command: str) -> bool:
     return gate.is_risky(command)
-
 
 def run_hook(payload: Dict[str, object]) -> str:
     """Run main() end to end over a JSON payload and return whatever it
@@ -44,7 +46,6 @@ def run_hook(payload: Dict[str, object]) -> str:
          mock.patch.object(sys, "stdout", captured):
         gate.main()
     return captured.getvalue()
-
 
 BUILD_TOOLS = (
     "gradle build", "./gradlew test", "mvn test", "./mvnw verify",
@@ -56,7 +57,6 @@ MASKING_FILTERS = (
     "tail -30", "head -5", "grep foo", "wc -l", "sed -n 1p", "awk '{print}'",
 )
 
-
 class BuildToolPipedIntoMaskingFilterTest(unittest.TestCase):
     """The core positive case, exhaustive over the documented cross product:
     every recognized build/test tool piped into every recognized
@@ -67,7 +67,6 @@ class BuildToolPipedIntoMaskingFilterTest(unittest.TestCase):
             for filt in MASKING_FILTERS:
                 command = f"{tool} | {filt}"
                 self.assertTrue(denies(command), command)
-
 
 class PythonUnittestRegressionTest(unittest.TestCase):
     """claude/tool-quirks.md (2026-07-26) records this exact miss for real:
@@ -83,7 +82,6 @@ class PythonUnittestRegressionTest(unittest.TestCase):
     def test_bare_python_m_unittest_is_risky(self) -> None:
         self.assertTrue(denies("python3 -m unittest | tail -5"))
 
-
 class EscapeHatchTest(unittest.TestCase):
     def test_pipestatus_suppresses_it(self) -> None:
         self.assertFalse(
@@ -95,7 +93,6 @@ class EscapeHatchTest(unittest.TestCase):
 
     def test_escape_hatch_is_case_insensitive(self) -> None:
         self.assertFalse(denies("gradle build | tail -30 # PipeFail handled"))
-
 
 class NotRiskyTest(unittest.TestCase):
     def test_masking_filter_with_no_build_tool_is_not_risky(self) -> None:
@@ -109,7 +106,6 @@ class NotRiskyTest(unittest.TestCase):
 
     def test_empty_command_is_not_risky(self) -> None:
         self.assertFalse(denies(""))
-
 
 class HeredocBodiesAreDataTest(unittest.TestCase):
     """Regression: this hook blocked its own author writing this exact
@@ -139,7 +135,6 @@ class HeredocBodiesAreDataTest(unittest.TestCase):
         self.assertFalse(denies(
             "cat <<EOF\ngradle build | tail -30 is just an example\nEOF"))
 
-
 class FailSafeTest(unittest.TestCase):
     """A hook that cannot read its input, or sees no command, must not
     block -- the same posture hooks/deny_text_search.py and
@@ -158,7 +153,6 @@ class FailSafeTest(unittest.TestCase):
 
     def test_missing_tool_input_key_does_not_block(self) -> None:
         self.assertEqual(run_hook({"tool_name": "Bash"}), "")
-
 
 class DenialMessageTest(unittest.TestCase):
     """A gate that only says no teaches people to route around it -- the
@@ -180,7 +174,6 @@ class DenialMessageTest(unittest.TestCase):
         self.assertEqual(
             run_hook({"tool_name": "Bash", "tool_input": {"command": "git status"}}),
             "")
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
