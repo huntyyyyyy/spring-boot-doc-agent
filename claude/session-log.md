@@ -4806,3 +4806,11 @@ Assumptions affected:
 - `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`spring_drift_check.py` gained optional `--manifest`" — [New info — `--manifest` CLI flag now lives in `spring_drift_cli.py`; façade `spring_drift_check` re-exports `main`; verify predicate updated]
 - `CONSTRAINTS.md` Integration gaps item 3 / Known precision item 6 — path needles for `--manifest` / partition overlap comments — [Resolved — verify paths retargeted to `spring_drift_cli.py` / `partition_repo_groups.py` after vertical split]
 Files touched: CONSTRAINTS.md, claude/steering-prompts/04-analytics-logging-research-prompt.md, src/doc_engine/tools/capacity_preflight*.py, spring_drift_*.py, partition_repo*.py, scripts/ratchets/size_baseline.json, docs/research/12-*, quality-backlog.md
+
+## 2026-08-09 — E-MOD3 tools wave 2 (run_manifest / citation_coverage)
+Commit: uncommitted
+Tests: climb run_manifest + citation + live_gates citations + ports + ci run_manifest suites passing (scoped); complexipy 0; size baseline ratcheted (file offenders 30)
+Assumptions affected:
+- `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`path_exists:src/doc_engine/tools/run_manifest.py`" — [Still accurate — thin façade path retained; concept modules `run_manifest_*` hold io/stages/finalize/cli]
+- E-MOD2 Stage-0 tool façades playbook — [New info — same façade + Protocol + late-import DIP applied to analytics `run_manifest` and `citation_coverage`]
+Files touched: docs/research/13-tools-wave2-modularity-2026.md, docs/research/12-*, quality-backlog.md, src/doc_engine/tools/run_manifest*.py, citation_coverage*.py, tests/doc_engine/test_tools_wave2_ports.py, scripts/ratchets/size_baseline.json, claude/session-log.md
