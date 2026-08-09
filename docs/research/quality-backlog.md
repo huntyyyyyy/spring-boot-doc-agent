@@ -234,10 +234,11 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
 **Docs Spec Approved:** **E-STACK0** — stack rescope under ≥10k★ (Backstage scoped: corp IDP supported; CLI runtime Refuse).  
 **Active Spec draft:** **E-CGQ0** — codegen-quality dimensions + remedy-mechanism depth ([`process/24-…`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md)); Approve **CGQ1–CGQ10**.  
+**Spec draft (paired vehicle):** **E-GND0** — tip-grounding MCP ([`process/25-…`](process/25-tip-grounding-mcp-2026.md)); Approve **GND1–GND10**; **E-GND1 Implement** after CGQ0+GND0 Approve (refuse codegen host).  
 **Spec draft (paired):** **E-SOL0** — concern→solution vocabulary ([`process/23-…`](process/23-concern-to-solution-remedies-2026.md)); Approve **SOL1–SOL12** (SOL12 = vocabulary until CGQ depth). Catalog companion landed; depth fitness = section presence only.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1) before depends_on Approve.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready — after CGQ3); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs that only cite DDIA page ids or bare remedy labels without depth-row cite (SOL1 / CGQ3)**; **Embody new fitness from catalog ids before E-CGQ0 Approve (CGQ2/CGQ6)**.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs that only cite DDIA page ids or bare remedy labels without depth-row cite (SOL1 / CGQ3)**; **Embody new fitness from catalog ids before E-CGQ0 Approve (CGQ2/CGQ6)**; **MCP `generate_code` / apply_patch as tip writer (GND3)**.
 
 ---
 
@@ -330,6 +331,17 @@ Research: [`docs/research/process/23-concern-to-solution-remedies-2026.md`](proc
 | P21.1 | E-COH1 / E-STK1 Activate only with CGQ3 Accept rows | After Approve | Spec tables cite process/24 §2 |
 
 Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md). Design: [`docs/design/codegen-quality-dimensions-design-2026-08-09.md`](../design/codegen-quality-dimensions-design-2026-08-09.md).
+
+---
+
+## P22 — Tip-grounding MCP (extend Stage-0 query isolation)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P22.0 | **E-GND0 Spec:** approve **GND1–GND10** (tip probe/depth/accept/witness tools; reuse ADR S-STF-E; refuse generate/apply; fail-closed receipt; Implement after CGQ0) | **Draft** (2026-08-09) | research 25 + design → APPROVED |
+| P22.1 | **E-GND1 Implement:** tip tools + receipt hook | After E-CGQ0 + E-GND0 Approve | isolation tests; size/complexipy; no write tools |
+
+Research: [`docs/research/process/25-tip-grounding-mcp-2026.md`](process/25-tip-grounding-mcp-2026.md). Design: [`docs/design/tip-grounding-mcp-design-2026-08-09.md`](../design/tip-grounding-mcp-design-2026-08-09.md).
 
 ---
 

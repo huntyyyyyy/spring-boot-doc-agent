@@ -8,6 +8,7 @@ product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
   - docs/research/process/23-concern-to-solution-remedies-2026.md
   - docs/design/ddia-north-star/meta/effective-remedies.md
+  - docs/research/process/25-tip-grounding-mcp-2026.md
   - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
   - docs/research/process/14-facade-poke-research-hooks-2026.md
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
@@ -218,6 +219,7 @@ Exit: human Approve CGQ1–CGQ10; backlog P21.0 → Approved.
 
 | Epic | Uses | Notes |
 | --- | --- | --- |
+| **E-GND0** | CGQ4, CGQ5 | Tip-grounding MCP Spec ([`process/25`](25-tip-grounding-mcp-2026.md)); Implement after this epic Approve |
 | **E-COH1** | CGQ3, CGQ4, characterization depth §2.3 | Reshape only with net + probe |
 | **E-STK1** | CGQ3, §2.5, fitness depth §2.1 | G1–G6 sensors as fitness |
 | **E-SOL0 Approve** | CGQ6 | Vocabulary + depth together |
