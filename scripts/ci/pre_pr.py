@@ -356,11 +356,12 @@ def _pytest() -> int:
 def _print_pytest_timing(junit: Path) -> None:
     if not junit.is_file():
         return
-    try:
-        from doc_engine.ci.suite_timing.duration_records import SuiteTimingReport
-        from doc_engine.ci.suite_timing.junit_duration_parse import parse_junit_durations
+    from xml.etree.ElementTree import ParseError
 
-        report = SuiteTimingReport.from_records(parse_junit_durations(junit))
+    from doc_engine.ci.suite_timing.junit_duration_parse import parse_junit_durations
+
+    try:
+        report = parse_junit_durations(junit)
         top = report.slowest(1)
         node = top[0].node_id if top else "n/a"
         print(
@@ -368,7 +369,7 @@ def _print_pytest_timing(junit: Path) -> None:
             f"total_s={report.total_seconds:.1f} slowest={node}",
             flush=True,
         )
-    except (OSError, ValueError) as exc:
+    except (OSError, ValueError, ParseError) as exc:
         print(f"pytest_timing: skip ({exc})", flush=True)
 
 
