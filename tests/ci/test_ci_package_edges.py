@@ -48,11 +48,15 @@ def test_main_missing_and_bad_xml(tmp_path: Path, capsys: pytest.CaptureFixture[
     bad.write_text("<<<", encoding="utf-8")
     assert cga.main(["--coverage-xml", str(bad)]) == 2
 
-def test_append_github_summary(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_append_gap_markdown(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     summary = tmp_path / "summary.md"
     monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
-    cga._append_github_summary("hello")
-    assert "hello" in summary.read_text(encoding="utf-8")
+    rows = [cga.FileCoverage("src/a.py", 10, 0, 2, 0)]
+    report = cga.build_report(rows, floor=50.0)
+    cga._append_gap_markdown(report, worst=5)
+    body = summary.read_text(encoding="utf-8")
+    assert "Coverage gap-average" in body
+    assert "Floor: **50%**" in body
 
 def test_validate_git_rev_rejects_unsafe() -> None:
     with pytest.raises(SystemExit):

@@ -29,13 +29,14 @@ CODEQL="${CODEQL:-codeql}"
 EXPECTATIONS="${EXPECTATIONS:-$HERE/expectations/ocs-api-service.json}"
 
 # Workspace packs resolve via codeql-workspace.yml (cwd=$CODEQL_ROOT). Only
-# EXTRA_PACKS needs --additional-packs (offline java-all); --no-strict-mode
-# acknowledges intentional local/bundle resolution for locked deps.
-ADDITIONAL_ARGS=()
+# EXTRA_PACKS needs --additional-packs (offline java-all). --no-strict-mode is
+# pack-install-only (query run/compile reject it).
+PACK_INSTALL_ARGS=(--no-strict-mode)
+QUERY_ARGS=()
 if [[ -n "${EXTRA_PACKS:-}" ]]; then
-  ADDITIONAL_ARGS+=(--additional-packs="$EXTRA_PACKS")
+  PACK_INSTALL_ARGS+=(--additional-packs="$EXTRA_PACKS")
+  QUERY_ARGS+=(--additional-packs="$EXTRA_PACKS")
 fi
-ADDITIONAL_ARGS+=(--no-strict-mode)
 
 # Wave 1 only. References/Security/Observability/Testing still emit the legacy
 # 3-column schema and are excluded on purpose. Override QUERIES to run a subset.
@@ -55,14 +56,14 @@ mkdir -p "$OUT"
 # CodeQL-vs-ast-grep timing.
 (
   cd "$CODEQL_ROOT"
-  "$CODEQL" pack install "${ADDITIONAL_ARGS[@]}" packs/spring-signals >/dev/null
+  "$CODEQL" pack install "${PACK_INSTALL_ARGS[@]}" packs/spring-signals >/dev/null
 )
 export CODEQL_COMPILATION_CACHE="${CODEQL_COMPILATION_CACHE:-$OUT/.compcache}"
 mkdir -p "$CODEQL_COMPILATION_CACHE"
 (
   cd "$CODEQL_ROOT"
   "$CODEQL" query compile --ram=16384 \
-    "${ADDITIONAL_ARGS[@]}" \
+    "${QUERY_ARGS[@]}" \
     --compilation-cache="$CODEQL_COMPILATION_CACHE" \
     packs/spring-signals >/dev/null
 )
@@ -73,7 +74,7 @@ for q in "${WAVE1[@]}"; do
     cd "$CODEQL_ROOT"
     "$CODEQL" query run --ram=16384 \
       --database="$DB" \
-      "${ADDITIONAL_ARGS[@]}" \
+      "${QUERY_ARGS[@]}" \
       --compilation-cache="$CODEQL_COMPILATION_CACHE" \
       --output="$OUT/$q.bqrs" \
       "packs/spring-signals/$q.ql" >/dev/null
