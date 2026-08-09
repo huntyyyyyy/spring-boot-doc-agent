@@ -230,15 +230,17 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Active:** **E-COH1** reshape — **paused** until **E-CGQ0** Approve + CGQ3 Accept rows (characterization depth + structural probe); must not Spec from DDIA/remedy labels alone.  
+**Active:** **E-COH1** reshape — unpaused after E-STK1 G1–G6 sensors; CGQ3 Accept rows required (Concern→Remedy→Depth→Witness).  
+**Done Implement:** **E-STK1** — G1–G6 advisory sensors + ledger writer + `pre_pr` wire (2026-08-09).  
 **Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
+**Paused/Defer next:** cycle-focus rotator / LLM ranker (STK3) — not required for G1–G6 Accept.  
 **Docs Spec Approved:** **E-STACK0** — stack rescope under ≥10k★ (Backstage scoped: corp IDP supported; CLI runtime Refuse).  
-**Active Spec draft:** **E-CGQ0** — codegen-quality dimensions + remedy-mechanism depth ([`process/24-…`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md)); Approve **CGQ1–CGQ10**.  
-**Spec draft (paired vehicle):** **E-GND0** — tip-grounding MCP ([`process/25-…`](process/25-tip-grounding-mcp-2026.md)); Approve **GND1–GND10**; **E-GND1 Implement** after CGQ0+GND0 Approve (refuse codegen host).  
-**Spec draft (paired):** **E-SOL0** — concern→solution vocabulary ([`process/23-…`](process/23-concern-to-solution-remedies-2026.md)); Approve **SOL1–SOL12** (SOL12 = vocabulary until CGQ depth). Catalog companion landed; depth fitness = section presence only.  
-**Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1) before depends_on Approve.  
-**Defer:** E-CQL1 (ready); E-STK1 (ready — after CGQ3); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT** (corp IDP + optional catalog metadata OK); ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs that only cite DDIA page ids or bare remedy labels without depth-row cite (SOL1 / CGQ3)**; **Embody new fitness from catalog ids before E-CGQ0 Approve (CGQ2/CGQ6)**; **MCP `generate_code` / apply_patch as tip writer (GND3)**.
+**Spec Approved:** **E-CGQ0** — CGQ1–CGQ10; probe via process/tools until E-GND.  
+**Spec draft (parked):** **E-SOL0** — vocabulary landed; not tip-blocking.  
+**Spec draft (demoted — later):** **E-GND0** — tip-grounding MCP; after E-COH1 has a green slice.  
+**Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1).  
+**Defer:** E-CQL1; E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**.
 
 ---
 
@@ -247,7 +249,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P15.0 | **E-STK0 Spec:** approve **STK1–STK10** (sensor-first ledger; rotating focus; chat reset; no oracle dilution) | **Approved** (2026-08-09) | research 19 `spec_gate: APPROVED E-STK0` |
-| P15.1 | **E-STK1 Implement:** finding schema + cycle CLI/hook + backlog presenter | Deferred (ready; pick as Active) | context resets; claims green; LOC/complexipy; **first sensors G1–G6** (below) |
+| P15.1 | **E-STK1 Implement:** G1–G6 sensors + ledger writer + `pre_pr` advisory | **Done** (2026-08-09) | `stalker_scan --no-ledger`; tests/ci/test_stalker_sensors.py; complexipy ≤5 |
 
 **E-STK1 acceptance sensors** (from incident ledger [`findings/2026-08-09-statement-split-cascade.md`](findings/2026-08-09-statement-split-cascade.md); Spec delta only until Active):
 
@@ -327,8 +329,8 @@ Research: [`docs/research/process/23-concern-to-solution-remedies-2026.md`](proc
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P21.0 | **E-CGQ0 Spec:** approve **CGQ1–CGQ10** (pre-generation controls; depth rows before Embody; Accept Concern→Remedy→Depth→Witness; structural probe; independent Verify; E-SOL0 vocabulary Amend) | **Draft** (2026-08-09) — **Active Spec draft** | research 24 + design → APPROVED |
-| P21.1 | E-COH1 / E-STK1 Activate only with CGQ3 Accept rows | After Approve | Spec tables cite process/24 §2 |
+| P21.0 | **E-CGQ0 Spec:** approve **CGQ1–CGQ10** (pre-generation controls; depth rows; Accept Concern→Remedy→Depth→Witness; process probe until E-GND) | **Approved** (2026-08-09, velocity stamp) | research 24 + design `APPROVED E-CGQ0` |
+| P21.1 | E-COH1 / E-STK1 Activate only with CGQ3 Accept rows | **Satisfied for E-STK1** (2026-08-09) | Active tip cites CGQ3; E-COH1 still paused |
 
 Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md`](process/24-codegen-quality-dimensions-mechanism-depth-2026.md). Design: [`docs/design/codegen-quality-dimensions-design-2026-08-09.md`](../design/codegen-quality-dimensions-design-2026-08-09.md).
 
@@ -338,8 +340,8 @@ Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P22.0 | **E-GND0 Spec:** approve **GND1–GND10** (tip probe/depth/accept/witness tools; reuse ADR S-STF-E; refuse generate/apply; fail-closed receipt; Implement after CGQ0) | **Draft** (2026-08-09) | research 25 + design → APPROVED |
-| P22.1 | **E-GND1 Implement:** tip tools + receipt hook | After E-CGQ0 + E-GND0 Approve | isolation tests; size/complexipy; no write tools |
+| P22.0 | **E-GND0 Spec:** approve **GND1–GND10** (tip MCP grounding) | **Draft — demoted** (2026-08-09); after E-STK1 green | research 25 + design → APPROVED |
+| P22.1 | **E-GND1 Implement:** tip tools + receipt hook | **Defer** until after E-STK1 (+ preferably E-COH1 slice) | isolation tests; no write tools |
 
 Research: [`docs/research/process/25-tip-grounding-mcp-2026.md`](process/25-tip-grounding-mcp-2026.md). Design: [`docs/design/tip-grounding-mcp-design-2026-08-09.md`](../design/tip-grounding-mcp-design-2026-08-09.md).
 

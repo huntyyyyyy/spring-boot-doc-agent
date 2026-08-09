@@ -1,6 +1,6 @@
 ---
 title: E-CGQ0 — Codegen-quality dimensions + remedy-mechanism depth
-status: DRAFT Spec — pending Approve of CGQ1–CGQ10
+status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10; tip-grounding MCP vehicle Explicit Defer (E-GND)
 research date: 2026-08-09
 research_window: 2026-06-01 → 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
@@ -19,8 +19,8 @@ do_not:
   - treat Cover% or LLM-as-judge as generation or structural proof
   - adopt Spec Kit WorkflowEngine / Sonar / dual arch linters as SoT
   - raise fail_under / LOC / complexipy ceilings
-  - implement E-COH1 / E-STK1 without CGQ3 Accept rows
-spec_gate: DRAFT E-CGQ0 (2026-08-09) — CGQ1–CGQ10 pending Approve
+  - implement E-GND1 before E-STK1 green cycle
+spec_gate: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
 gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue"
 critique: >
   Human 2026-08-09: (1) remedy labels without theory/math/algo/DS/ETL → vague
@@ -228,5 +228,6 @@ Exit: human Approve CGQ1–CGQ10; backlog P21.0 → Approved.
 
 ## 8. Exit
 
-**E-CGQ0 DRAFT** until human Approve of CGQ1–CGQ10.
-No Implement of new generation preflight machinery in this pass — research + Spec only.
+**E-CGQ0 APPROVED** (2026-08-09, velocity stamp).
+CGQ4 structural probe / CGQ5 independent Verify: **process + existing tools** until E-GND1.
+Active Implement tip after Approve: **E-STK1** (not E-GND1).

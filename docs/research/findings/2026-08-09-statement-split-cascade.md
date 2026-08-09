@@ -1,6 +1,6 @@
 ---
 title: Finding — statement-split thrash → cascading CI red (2026-08-09)
-status: open
+status: closed — E-STK1 G1–G6 sensors Embodied (2026-08-09)
 kind: process_incident
 date: 2026-08-09
 tip_at_detection: 7fcb387
@@ -9,7 +9,8 @@ related:
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
   - docs/research/quality-backlog.md
   - docs/design/concept-split-cohesion-design-2026-08-09.md
-backlog: P15.1 (E-STK1 sensors G1–G6), P17.1 (E-COH1 repair under cohesion bar)
+  - src/doc_engine/ci/stalker_sensors/
+backlog: P15.1 Done (E-STK1); P17.1 E-COH1 Active next
 ---
 
 # Finding ledger: mechanical statement-split cascade

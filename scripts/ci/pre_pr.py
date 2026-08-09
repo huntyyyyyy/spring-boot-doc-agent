@@ -554,6 +554,16 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
             ("test_domain_markers", "hard", _domain_markers),
             ("facade_poke_surface", "hard", _facade_poke_surface),
             (
+                "stalker_sensors",
+                "advisory",
+                _py_script(
+                    "scripts",
+                    "ci",
+                    "stalker_scan.py",
+                    extra_args=["--no-ledger"],
+                ),
+            ),
+            (
                 "rule_coverage",
                 "hard",
                 _py_script("scripts", "coverage", "rule_coverage.py"),

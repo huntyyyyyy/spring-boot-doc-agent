@@ -1,6 +1,6 @@
 ---
 category: Codegen-quality dimensions + remedy-mechanism depth
-status: DRAFT — SPEC GATE E-CGQ0 pending Approve of CGQ1–CGQ10
+status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 related:
@@ -9,40 +9,41 @@ related:
   - docs/design/ddia-north-star/meta/effective-remedies.md
   - docs/research/quality-backlog.md
 do_not:
-  - Implement new fitness / preflight machinery before Approve
+  - Accept Specs that only cite DDIA page ids or bare remedy labels
   - treat Cover% or LLM-judge as generation proof
-  - Activate E-COH1 / E-STK1 without CGQ3 Accept rows
-spec_gate: DRAFT E-CGQ0 (2026-08-09) — CGQ1–CGQ10 pending Approve
+  - Implement E-GND1 before E-STK1 green cycle
+spec_gate: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
 ---
 
 # Design memo: E-CGQ0 Spec gate
 
-> **DRAFT — awaiting Approve of CGQ1–CGQ10.**
+> **APPROVED E-CGQ0 (2026-08-09).**
 >
 > Research: [`docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md`](../research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md).
+>
+> Velocity note: tip-grounding MCP (**E-GND0**) demoted; CGQ4/CGQ5 use process + existing tools until after E-STK1.
 
 | Field | Value |
 | --- | --- |
-| Problem | Remedy/DDIA labels + post-hoc CI are too vague a start for agent codegen; missing pre-generation dimensions |
-| Fix | Mechanism depth rows; Spec Accept Concern→Remedy→Depth→Witness; structural probe; independent Verify |
-| Amend | E-SOL0 catalog ids = vocabulary until depth Approve (CGQ6) |
-| Downstream | E-COH1 / E-STK1 require CGQ3 Accept rows |
+| Problem | Remedy/DDIA labels + post-hoc CI are too vague a start for agent codegen |
+| Fix | Mechanism depth rows; Spec Accept Concern→Remedy→Depth→Witness; process probe/Verify |
+| Downstream | E-STK1 Active; E-COH1 paused; E-GND1 Deferred |
 
-## Decisions (pending Approve)
+## Decisions (Approved)
 
 | ID | Decision |
 | --- | --- |
 | **CGQ1** | Pre-generation controls first-class; post-hoc CI necessary≠sufficient |
 | **CGQ2** | Depth rows before Embody of new fitness / ETL / characterization |
 | **CGQ3** | Accept: Concern → Remedy → Depth cite → Witness → Explicit Defer |
-| **CGQ4** | Structural grounding probe required for design-shaped Impl |
+| **CGQ4** | Structural grounding probe required for design-shaped Impl (process/tools until E-GND) |
 | **CGQ5** | Independent Verify vs Spec; LLM-judge ≠ SoT |
-| **CGQ6** | E-SOL0 remedies catalog = vocabulary until depth Approve |
-| **CGQ7** | E-COH1 / E-STK1 Active only with CGQ3 rows |
+| **CGQ6** | E-SOL0 remedies catalog = vocabulary until depth cite |
+| **CGQ7** | E-COH1 / E-STK1 Active only with CGQ3 Accept rows |
 | **CGQ8** | Refuse Spec Kit runtime / Sonar·LLM floors / dual linters / ceiling raises |
 | **CGQ9** | ≥10k★ bar; Confirmed vehicles host mechanisms |
 | **CGQ10** | Design-shaped research memos need depth subsections or Explicit Defer |
 
 ## Exit
 
-On Approve: stamp `APPROVED E-CGQ0`; backlog P21.0; bind E-COH1/E-STK1 to CGQ3.
+Stamp complete. Next tip: **E-STK1**. Do not start E-GND1 until E-STK1 green.
