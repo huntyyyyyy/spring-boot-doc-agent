@@ -86,14 +86,9 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     )
     digest = backend.version_hash()
     assert len(digest) == 16
-    hashed = {Path(p).name for p in CodeQLBackend._version_hash_paths()}
-    siblings = {
-        p.name
-        for p in (Path(__file__).resolve().parents[2]
-                  / "src/doc_engine/scanning/support").glob("_codeql_*.py")
-    }
-    # Prefer package-relative discovery so the assert survives install layout.
-    support = Path(CodeQLBackend._version_hash_paths()[0]).parent / "support"
+    hashed_paths = CodeQLBackend._version_hash_paths()
+    hashed = {Path(p).name for p in hashed_paths}
+    support = Path(hashed_paths[0]).parent / "support"
     siblings = {p.name for p in support.glob("_codeql_*.py")}
     assert siblings, "expected modularized _codeql_*.py siblings on disk"
     assert siblings <= hashed, f"version_hash omitted siblings: {sorted(siblings - hashed)}"
