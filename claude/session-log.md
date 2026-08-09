@@ -4808,7 +4808,7 @@ Assumptions affected:
 Files touched: CONSTRAINTS.md, claude/steering-prompts/04-analytics-logging-research-prompt.md, src/doc_engine/tools/capacity_preflight*.py, spring_drift_*.py, partition_repo*.py, scripts/ratchets/size_baseline.json, docs/research/12-*, quality-backlog.md
 
 ## 2026-08-09 — E-SCAN1 AstGrepBackend → scanning/astgrep/
-Commit: 0ef386e
+Commit: b2a6a23
 Tests: 20/20 structure+basic+chunk+destructive+climb edges; claims OK; poke OK; complexipy ≤5; size baseline 30 file offenders (astgrep+spring off hard list)
 Assumptions affected:
 - `docs/research/16-scan1-astgrep-modularity-2026.md` SCAN1-A–J — [Resolved — package + façade + structure tests + LEG8 monkeypatch + AstGrepRunner landed]
