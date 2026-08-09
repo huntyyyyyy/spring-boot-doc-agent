@@ -77,6 +77,6 @@ class TestDerivedBlocks(TreeCase):
     def test_derived_block_is_checked_in_historical_files_too(self) -> None:
         """Check B is scoped to current-state docs; check A is not. A number
         is a claim about now no matter which file it sits in."""
-        self.write("claude/session-log.md",
+        self.write("docs/process/session-log.md",
                    "Ran <!-- derived: test_suite_count -->77<!-- /derived --> suites.\n")
         self.assertEqual(self.run_check(), 1)

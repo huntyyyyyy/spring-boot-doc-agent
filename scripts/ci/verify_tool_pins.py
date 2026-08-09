@@ -2,7 +2,7 @@
 """Fail closed when PATH binaries diverge from requirements.txt pins.
 
 Presence on PATH is not enough: a differently versioned system install can
-shadow the venv pin (see claude/tool-quirks.md). Reads major.minor from the
+shadow the venv pin (see docs/process/tool-quirks.md). Reads major.minor from the
 requirements pin and from ``--version`` output; mismatches exit 1.
 
 Usage:

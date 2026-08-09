@@ -12,9 +12,9 @@ to be pasted — no history, no prior findings, no summary of what happened befo
 
 ```
 Read, in this order, before doing anything else:
-  claude/steering-prompts/00-shared-research-standards.md
-  claude/steering-prompts/10-review-persona-and-standards.md
-  claude/steering-prompts/11-context-traversal-protocol.md
+  docs/process/steering-prompts/00-shared-research-standards.md
+  docs/process/steering-prompts/10-review-persona-and-standards.md
+  docs/process/steering-prompts/11-context-traversal-protocol.md
 
 Then read the current state, and nothing beyond it unless traversal leads you there:
   STATUS.md
@@ -32,7 +32,7 @@ Write your output to [OUTPUT PATH] incrementally as you go — do not hold findi
 write at the end. Follow the §B contract below.
 
 Do not: summarize this conversation into the output; re-derive anything already recorded in
-claude/session-log.md or claude/tool-quirks.md; read more than 10 files before writing your first
+docs/process/session-log.md or claude/tool-quirks.md; read more than 10 files before writing your first
 finding; or expand scope beyond TASK. If you find something important but out of scope, record it
 under "Adjacent findings" and keep going.
 ```
@@ -53,10 +53,10 @@ transcript.
 5. **Open frontier** — unexpanded nodes with scores, so the next session resumes mid-traversal.
 6. **Bounds applied** — every cap, drop, and skip with counts. If none, say "none."
 7. **What would change this** — the trigger conditions that would invalidate the conclusion. This
-   repo already uses this convention in `claude/10-architecture-maturation-plan.md`; match it.
+   repo already uses this convention in `docs/research/archive/claude-lore/10-architecture-maturation-plan.md`; match it.
 
 Filename convention: `claude/<topic>-<review|research|scoping>-<YYYY-MM-DD>.md`, kebab-case, matching
-the existing `claude/drift-check-manifest-baseline-research-2026-07-25.md` shape.
+the existing `docs/research/archive/claude-lore/drift-check-manifest-baseline-research-2026-07-25.md` shape.
 
 ---
 

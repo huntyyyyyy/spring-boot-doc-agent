@@ -21,7 +21,7 @@ def build_tree(root: Path) -> None:
     (root / "scripts").mkdir()
     (root / "tests").mkdir()
     (root / "skills").mkdir()
-    (root / "claude" / "steering-prompts").mkdir(parents=True)
+    (root / "docs" / "process" / "steering-prompts").mkdir(parents=True)
     (root / ".github" / "workflows").mkdir(parents=True)
 
     (root / "pyproject.toml").write_text(
@@ -38,7 +38,7 @@ def build_tree(root: Path) -> None:
         encoding="utf-8")
     (root / "README.md").write_text(
         "See `scripts/widget.py` and `do_a_thing()`.\n", encoding="utf-8")
-    (root / "claude" / "steering-prompts" / "01-x-research-prompt.md").write_text(
+    (root / "docs" / "process" / "steering-prompts" / "01-x-research-prompt.md").write_text(
         "---\nstatus: resolved\nverify:\n  - path_exists:scripts/widget.py\n---\n\nBody.\n",
         encoding="utf-8")
 
@@ -69,4 +69,6 @@ class TreeCase(unittest.TestCase):
                          "--baseline", str(self.dir / "missing_baseline.json")])
 
     def write(self, rel: str, text: str) -> None:
-        (self.dir / rel).write_text(text, encoding="utf-8")
+        target = self.dir / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")

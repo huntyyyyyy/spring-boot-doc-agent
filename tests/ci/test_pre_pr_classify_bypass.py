@@ -16,7 +16,7 @@ pytestmark = pytest.mark.domain_ci_meta
 class ClassifyPathRiskTest(unittest.TestCase):
     def test_docs_only_is_fast(self):
         self.assertEqual(
-            pre_pr.classify_path_risk(["README.md", "claude/session-log.md"]),
+            pre_pr.classify_path_risk(["README.md", "docs/process/session-log.md"]),
             "fast",
         )
 
@@ -149,7 +149,7 @@ class ResolveModeTest(unittest.TestCase):
         with mock.patch.object(
             pre_pr,
             "changed_files_vs_main",
-            return_value=["README.md", "claude/session-log.md"],
+            return_value=["README.md", "docs/process/session-log.md"],
         ):
             mode = pre_pr.resolve_mode(self._ns(auto=True))
         self.assertEqual(mode, "fast")

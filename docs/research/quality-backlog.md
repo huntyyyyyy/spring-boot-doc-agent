@@ -95,7 +95,7 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 | P5.1 | **E-TEST1:** domain markers + CI shards; serial quarantine; doc_engine meeting ≥**98.7** (debt=`domain_unclassified` only) | **DONE** | marker check + ABI shard jobs |
 | P5.2 | **E-TEST2 (optional):** xdist inside one non-oracle shard only | Defer / spike | flake budget; never oracle combine |
 
-Research: [`docs/research/06-test-suite-bounded-contexts-parallel.md`](06-test-suite-bounded-contexts-parallel.md).
+Research: [`docs/research/modularity/06-test-suite-bounded-contexts-parallel.md`](modularity/06-test-suite-bounded-contexts-parallel.md).
 
 ---
 
@@ -106,7 +106,7 @@ Research: [`docs/research/06-test-suite-bounded-contexts-parallel.md`](06-test-s
 | P6.0 | **E-CI0 Spec:** approve **C1–C6** + policy **C-A** | **DONE** (2026-08-09) | design memo APPROVED |
 | P6.1 | **E-CI1:** reusable workflows + scripts; `ci.yml` ≤200; LOC ratchet | **DONE** (2026-08-09) | `check_workflow_yaml` C4 |
 
-Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modularity.md).
+Research: [`docs/research/ci/07-ci-workflow-modularity.md`](ci/07-ci-workflow-modularity.md).
 
 ---
 
@@ -121,7 +121,7 @@ Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modulari
 | P7.4 | **E-RUN4:** NameRTS-shaped selection + agent card behind `pre_pr` only (**D9/D18**) | Adopt after Spec · never oracle | `pre_pr` receipt |
 | P7.5 | **E-RUN5:** advisory flake/job log triage (**D7/D8**) | Defer | non-blocking artifact |
 
-Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-runners-bottlenecks.md). Prefer **2026** primaries (arXiv 2607/2602/2601/2605/2604; rpytest; OTel CI semconv).
+Research: [`docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md`](coverage-quality/08-rust-test-runners-bottlenecks.md). Prefer **2026** primaries (arXiv 2607/2602/2601/2605/2604; rpytest; OTel CI semconv).
 
 ---
 
@@ -134,7 +134,7 @@ Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-run
 | P8.2 | **E-QA2:** anti-padding Verify — climb packages need kill/metamorphic witness | **Done** (2026-08-09) | CONTRIBUTING Climb Archive / Q2 checklist |
 | P8.3 | **E-QA3:** Hypothesis spike on pure helpers (`suite_timing` / fingerprints) | Spike after E-QA1 | focused suite |
 
-Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-test-adequacy-vs-coverage-inflation-2026.md). Prefer **2026** primaries (2607.22880, 2603.01409, 2604.01799, 2607.02057, 2605.22175, 2604.10126; mutmut; Hypothesis).
+Research: [`docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md`](coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md). Prefer **2026** primaries (2607.22880, 2603.01409, 2604.01799, 2607.02057, 2605.22175, 2604.10126; mutmut; Hypothesis).
 
 ---
 
@@ -146,7 +146,7 @@ Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-te
 | P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | **Done** (2026-08-09) | kitchen green; no chapter `setUpModule`; size/complexipy |
 | P9.2 | Optional syrupy / Hypothesis — **not** kitchen chapter SoT | Align E-QA3; KH-S2 | spike exit criteria |
 
-Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-harness-modernization-2026.md). Primaries: pytest fixtures docs + DeepWiki pytest/hypothesis/testcontainers; GitHub activity 2026-08-09; arXiv 2601.06615 (Fixturize), 2404.09398 (FlakyDoctor), 2606.04967 (SDD).
+Research: [`docs/research/kitchen/10-kitchen-harness-modernization-2026.md`](kitchen/10-kitchen-harness-modernization-2026.md). Primaries: pytest fixtures docs + DeepWiki pytest/hypothesis/testcontainers; GitHub activity 2026-08-09; arXiv 2601.06615 (Fixturize), 2404.09398 (FlakyDoctor), 2606.04967 (SDD).
 
 ---
 
@@ -158,7 +158,7 @@ Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-
 | P10.1 | **E-UX1:** quality-gates markdown rollup + `::group::` + coverage/gap → `github_step_summary` | **Done** (#105, 2026-08-09) | step summary has gate table; no overwrite; size/complexipy |
 | P10.2 | **E-UX2:** claims / code_quality headline + `<details>` | Later | optional |
 
-Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci-output-ux-progressive-disclosure-2026.md).
+Research: [`docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md`](ci/11-ci-output-ux-progressive-disclosure-2026.md).
 
 ---
 
@@ -172,9 +172,9 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 | P11.3 | **E-MOD3:** `run_manifest` + `citation_coverage` wave 2 (ports + façades; MOD-S1) | **Done** (2026-08-09) | files ≤225; climb monkeypatch DIP; `-m` stable |
 | P11.4 | **E-FAC0 / E-RES0 / E-CUR0:** façade poke + design-research + Cursor-native hooks | **Done** (2026-08-09) | poke gate; research hook; `.cursor/hooks.json` |
 
-Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipeline-stage0-modularity-ports-2026.md),
-[`docs/research/13-tools-wave2-modularity-2026.md`](13-tools-wave2-modularity-2026.md),
-[`docs/research/14-facade-poke-research-hooks-2026.md`](14-facade-poke-research-hooks-2026.md).
+Research: [`docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md`](modularity/12-pipeline-stage0-modularity-ports-2026.md),
+[`docs/research/modularity/13-tools-wave2-modularity-2026.md`](modularity/13-tools-wave2-modularity-2026.md),
+[`docs/research/process/14-facade-poke-research-hooks-2026.md`](process/14-facade-poke-research-hooks-2026.md).
 
 ---
 
@@ -191,8 +191,8 @@ work: MOD-S1 + poke + intentionality bar (separate asserts, `monkeypatch`, one-a
 | P12.2 | **E-TOOL4 → E-PIPE1 → E-QUERY1 → E-STF1** | Later (ordered) | same gates; one BC tip at a time |
 | P12.3 | **LEG-S1** (optional): tach vs import-linter measured gap on scanning | Spike / Defer | measured gap or Defer dual-SoT |
 
-Research: [`docs/research/15-legacy-size-remediation-2026-frameworks.md`](15-legacy-size-remediation-2026-frameworks.md),
-[`docs/research/16-scan1-astgrep-modularity-2026.md`](16-scan1-astgrep-modularity-2026.md).
+Research: [`docs/research/process/15-legacy-size-remediation-2026-frameworks.md`](process/15-legacy-size-remediation-2026-frameworks.md),
+[`docs/research/modularity/16-scan1-astgrep-modularity-2026.md`](modularity/16-scan1-astgrep-modularity-2026.md).
 
 ---
 
@@ -203,7 +203,7 @@ Research: [`docs/research/15-legacy-size-remediation-2026-frameworks.md`](15-leg
 | P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Approved** (2026-08-09, merge) | research 17 `spec_gate: APPROVED E-CQL0` |
 | P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Deferred** (after E-DOC1) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
 
-Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql-signals-skip-fingerprint-2026.md).
+Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-codeql-signals-skip-fingerprint-2026.md).
 
 ---
 
@@ -240,4 +240,4 @@ Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql
 | P14.0 | **E-DOC0 Spec:** approve **DOC1–DOC12** (domains ≤2 deep; migrate `claude/` valuables; Cursor hooks look-first; keep adapter) | **Approved** (2026-08-09, merge) | research 18 `spec_gate: APPROVED E-DOC0` |
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Active** | claims green; design writes denied without research-map Read; marketplace intact |
 
-Research: [`docs/research/18-docs-research-taxonomy-claude-consolidation-2026.md`](18-docs-research-taxonomy-claude-consolidation-2026.md).
+Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).

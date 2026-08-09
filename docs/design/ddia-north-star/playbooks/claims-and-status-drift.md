@@ -32,7 +32,7 @@ Keep current-state docs as honest derived views of code SoR; mechanical `verify:
 
 ## Do not
 
-- Rewrite historical `claude/llms/pr-*.md` to modern paths.
+- Rewrite historical `docs/process/pr-verification/pr-*.md` to modern paths.
 - Delete `rule_fixtures/` because coverage moved — metamorphic still owns it.
 - Leave STATUS advertising finished blockers as “next”.
 

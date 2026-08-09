@@ -3,11 +3,11 @@ status: SUPERSEDED — do not use as SoT
 superseded_by:
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/quality-backlog.md
-  - docs/research/01-coverage-oracle-climb-solid.md
-  - docs/research/02-foundational-agentic-se-2026.md
-  - docs/research/03-scientific-dimensions-metrics.md
-  - docs/research/04-implementation-frameworks.md
-  - docs/research/05-dynamics-neuromorphic.md
+  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+  - docs/research/process/02-foundational-agentic-se-2026.md
+  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+  - docs/research/process/04-implementation-frameworks.md
+  - docs/research/process/05-dynamics-neuromorphic.md
 date: 2026-08-08
 note: Historical coordinator dump only. Merge complete on wave1 tip after 5eaac2a.
 ---

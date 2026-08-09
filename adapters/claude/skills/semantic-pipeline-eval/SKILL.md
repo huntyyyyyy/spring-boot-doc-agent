@@ -88,5 +88,5 @@ Write `semantic_eval_report.md` (or emit inline if the user didn't ask for a fil
 
 - No exhaustive claim-checking — sampling only, cost-bounded by design (see Step 2's projection).
 - No automated re-run/gating decision — this produces a report for a human to act on, not a pass/fail gate.
-- No new dependency — no Mermaid-rendering library, no LLM-judge framework, no schema-validation library for `interview_answers.json` (that gap is `claude/steering-prompts/02-pluggability-research-prompt.md`'s, not this skill's to close).
+- No new dependency — no Mermaid-rendering library, no LLM-judge framework, no schema-validation library for `interview_answers.json` (that gap is `docs/process/steering-prompts/02-pluggability-research-prompt.md`'s, not this skill's to close).
 - Does not replace `	ests/test_pipeline_stages.py` — run both; that script should still run on every change to the five agent prompts (and in CI).

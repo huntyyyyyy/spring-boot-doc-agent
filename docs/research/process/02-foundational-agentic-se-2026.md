@@ -6,10 +6,10 @@ status: RESEARCH COMPLETE — segment SoT for taxonomy / layers / Embody·Adopt�
 research date: 2026-08-08
 claim tiers: Evidenced / Confirmed / Unknown
 siblings:
-  - docs/research/01-coverage-oracle-climb-solid.md
-  - docs/research/03-scientific-dimensions-metrics.md
-  - docs/research/04-implementation-frameworks.md
-  - docs/research/05-dynamics-neuromorphic.md
+  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+  - docs/research/process/04-implementation-frameworks.md
+  - docs/research/process/05-dynamics-neuromorphic.md
 related:
   - docs/design/coverage-measure-modes-design-2026-08-08.md
   - docs/agentic-foundational-se-taxonomy-2026-08-08.md

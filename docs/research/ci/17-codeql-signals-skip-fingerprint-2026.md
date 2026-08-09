@@ -5,9 +5,9 @@ research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — CI BC codeql-signals (fixture pack gate)
 related:
-  - docs/research/07-ci-workflow-modularity.md
+  - docs/research/ci/07-ci-workflow-modularity.md
   - docs/design/ci-workflow-modularity-design-2026-08-09.md
-  - docs/research/08-rust-test-runners-bottlenecks.md
+  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/quality-backlog.md
 do_not:

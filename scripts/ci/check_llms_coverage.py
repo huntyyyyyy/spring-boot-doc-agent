@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-check_llms_coverage.py — fails when a merged PR has no claude/llms/pr-N.md,
+check_llms_coverage.py — fails when a merged PR has no docs/process/pr-verification/pr-N.md,
 or when a pr-N.md's frontmatter `state:` says OPEN for a PR that's actually
 merged.
 
 WHY THIS EXISTS
-claude/llms/pr-*.md creation has always been a manual, judgment-heavy step
-(see claude/llms/README.md) — nothing forced it to happen, so it silently
+docs/process/pr-verification/pr-*.md creation has always been a manual, judgment-heavy step
+(see docs/process/pr-verification/README.md) — nothing forced it to happen, so it silently
 didn't: PRs #9-12, #14, and #15 all merged with no corresponding pr-N.md,
 and pr-13.md's frontmatter was left saying `state: OPEN` after PR #13 itself
 merged. verify_llms_docs.py re-verifies commands inside files that already
@@ -27,7 +27,7 @@ PR #17). To break that regress, the single most-recently-merged PR (by
 don't strictly track merge order) is exempt from both checks below. This
 bounds the real requirement to "covered before the *next* PR merges" rather
 than "covered before this PR's own CI run finishes," which is impossible.
-See claude/llms/README.md for the companion convention (write a PR's own
+See docs/process/pr-verification/README.md for the companion convention (write a PR's own
 pr-N.md in the same PR, pinned to its head commit) that makes this
 exemption rarely even necessary in practice.
 
@@ -57,7 +57,7 @@ from doc_engine.paths import repo_root
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = repo_root()
-DEFAULT_LLMS_DIR = REPO_ROOT / "claude" / "llms"
+DEFAULT_LLMS_DIR = REPO_ROOT / "docs" / "process" / "pr-verification"
 
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
 
@@ -120,12 +120,12 @@ def check_coverage(merged_prs: List[dict], llms_dir: Path) -> List[str]:
         title = pr.get("title", "")
         doc = docs.get(number)
         if doc is None:
-            issues.append(f"PR #{number} ({title!r}) is merged but claude/llms/pr-{number}.md is missing")
+            issues.append(f"PR #{number} ({title!r}) is merged but docs/process/pr-verification/pr-{number}.md is missing")
             continue
         state = parse_frontmatter(doc).get("state", "").upper()
         if state and state != "MERGED":
             issues.append(
-                f"claude/llms/pr-{number}.md frontmatter says `state: {state}` "
+                f"docs/process/pr-verification/pr-{number}.md frontmatter says `state: {state}` "
                 f"but PR #{number} is actually merged"
             )
 
@@ -140,7 +140,7 @@ def exit_code(issues: List[str]) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--llms-dir", default=str(DEFAULT_LLMS_DIR),
-                     help="directory containing pr-*.md files (default: claude/llms next to this repo)")
+                     help="directory containing pr-*.md files (default: docs/process/pr-verification next to this repo)")
     args = ap.parse_args()
 
     llms_dir = Path(args.llms_dir)
@@ -159,10 +159,10 @@ def main() -> int:
 
     if not issues:
         grace_note = f" (PR #{exempt_number} exempt as the most-recently-merged, per the grace window)" if exempt_number else ""
-        print(f"OK: all {len(merged_prs)} merged PR(s) have an up-to-date claude/llms/pr-N.md{grace_note}.")
+        print(f"OK: all {len(merged_prs)} merged PR(s) have an up-to-date docs/process/pr-verification/pr-N.md{grace_note}.")
         return 0
 
-    print(f"claude/llms/ coverage check found issues (advisory; never fails CI) "
+    print(f"docs/process/pr-verification/ coverage check found issues (advisory; never fails CI) "
           f"({len(issues)} issue(s)):", file=sys.stderr)
     for issue in issues:
         print(f"  - {issue}", file=sys.stderr)

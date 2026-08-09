@@ -8,13 +8,13 @@ prefer_sources: "2026 primary (arXiv / product docs / OTel semconv); older only 
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 design: docs/design/suite-stalking-sensors-design-2026-08-09.md
 siblings:
-  - docs/research/06-test-suite-bounded-contexts-parallel.md
-  - docs/research/07-ci-workflow-modularity.md
+  - docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
+  - docs/research/ci/07-ci-workflow-modularity.md
   - docs/design/rust-stack-fit-memo-2026-08-08.md
 related:
-  - docs/research/pr-94-followup-oracle-stabilize.md
+  - docs/research/archive/pr-94-followup-oracle-stabilize.md
   - docs/research/quality-backlog.md
-  - docs/research/01-coverage-oracle-climb-solid.md
+  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
 do_not:
   - weaken fail_under=98.7 or replace oracle with runner green
   - suite-wide -n / xdist / rpytest shard of the cov cell without E-TEST2 Spec

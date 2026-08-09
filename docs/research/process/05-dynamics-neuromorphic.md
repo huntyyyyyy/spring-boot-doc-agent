@@ -7,7 +7,7 @@ claim tiers: Evidenced / Confirmed / Unknown
 related:
   - docs/design/coverage-measure-modes-design-2026-08-08.md
   - docs/agentic-foundational-se-taxonomy-2026-08-08.md
-  - docs/research/_wip-coverage-design-audit.md
+  - docs/research/archive/_wip-coverage-design-audit.md
 ---
 
 # Segment 05: Dynamics & neuromorphic metaphors (saliency, hysteresis, SoA, PID)

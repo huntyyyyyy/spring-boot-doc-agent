@@ -89,6 +89,8 @@ spec_gate: APPROVED E-DOC0 (2026-08-09) — DOC1–DOC12
 | [Cursor hooks](https://cursor.com/docs/hooks.md) | `beforeSubmitPrompt`, `preToolUse`, `sessionStart`; project `.cursor/hooks.json`; cloud loads project hooks | Evidenced |
 | Same docs — cloud table | **`sessionStart` / `sessionEnd` not available** on cloud agents | Evidenced |
 | [Third-party hooks](https://cursor.com/docs/reference/third-party-hooks.md) | Claude Code hooks can map into Cursor; prefer native Cursor format for full features | Evidenced |
+| [arXiv:2205.06907](https://arxiv.org/abs/2205.06907) (doc structure / information scent) | Flat ordinal dumps hurt findability; hierarchical domains need shallow depth | Evidenced (orientation for DOC1/DOC10) |
+| [getcursor/docs](https://github.com/getcursor/docs) / Cursor public docs repo | Hooks surface evolves in public docs; pin behavior claims to published hook event names | Evidenced |
 
 ---
 

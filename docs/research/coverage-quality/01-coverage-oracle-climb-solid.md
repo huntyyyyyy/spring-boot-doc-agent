@@ -295,7 +295,7 @@ taxonomy 17–21 as process constraints for the impl PR). Minimum bar:
 code in this commit.
 
 **Sibling coordination:** only this path
-`docs/research/01-coverage-oracle-climb-solid.md` is authored here.
+`docs/research/coverage-quality/01-coverage-oracle-climb-solid.md` is authored here.
 WIP dump / synthesis / taxonomy / design memo updates belong to the
 coordinator after siblings land.
 

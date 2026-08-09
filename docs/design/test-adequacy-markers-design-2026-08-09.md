@@ -5,7 +5,7 @@ research date: 2026-08-09
 approved_policies: Q1-Q8
 implement_now: E-QA1 E-QA2
 claim tiers: Evidenced / Confirmed / Unknown
-research: docs/research/09-test-adequacy-vs-coverage-inflation-2026.md
+research: docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 ---
 
@@ -25,7 +25,7 @@ synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 | Policies | **Q1–Q8** Approved |
 | Implement now | **E-QA1** structural + mutator-survivor + metamorphic sensors · **E-QA2** climb adequacy witness |
 | Defer / refuse this stream | Suite-wide mutmut hard gate · Prompt Coverage as floor · PIT zoo · LLM-judge fail_under · scrap Cover%/E-TEST |
-| Research | [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](../research/09-test-adequacy-vs-coverage-inflation-2026.md) |
+| Research | [`docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md`](../research/09-test-adequacy-vs-coverage-inflation-2026.md) |
 | Backlog | [`docs/research/quality-backlog.md`](../research/quality-backlog.md) P8 |
 
 ---

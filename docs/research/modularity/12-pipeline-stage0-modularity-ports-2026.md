@@ -6,9 +6,9 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — pipeline + Stage-0 tools BCs
 related:
   - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/04-implementation-frameworks.md
+  - docs/research/process/04-implementation-frameworks.md
   - docs/research/quality-backlog.md
-  - docs/research/10-kitchen-harness-modernization-2026.md
+  - docs/research/kitchen/10-kitchen-harness-modernization-2026.md
   - docs/product-architecture.md
 do_not:
   - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
@@ -137,7 +137,7 @@ characterization tests are the oracle.
 | **E-MOD0** | **Done** (2026-08-09) | Spec M1–M12 Approve; this memo + backlog P11 |
 | **E-MOD1** | **Done** (2026-08-09) | `mock_stages` → ≤225 concept modules + Strategy; façade stable; gates green |
 | **E-MOD2** | **Done** (2026-08-09) | `capacity_preflight` → `spring_drift_check` / tier2 → `partition_repo`; CLI behavior unchanged |
-| **E-MOD3** | **Active** — see [`13-tools-wave2-modularity-2026.md`](13-tools-wave2-modularity-2026.md) | `run_manifest` + `citation_coverage` tools wave 2 |
+| **E-MOD3** | **Active** — see [`modularity/13-tools-wave2-modularity-2026.md`](modularity/13-tools-wave2-modularity-2026.md) | `run_manifest` + `citation_coverage` tools wave 2 |
 
 Deferred (not this tip): E-SCAN1, E-UX2, E-QA3 Hypothesis, E-RUN3/4 — backlog only.
 

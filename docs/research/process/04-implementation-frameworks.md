@@ -7,7 +7,7 @@ research date: 2026-08-08
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI / agentic Spring-doc pipeline (doc-engine), not a K8s farm
 related:
-  - docs/research/_wip-coverage-design-audit.md
+  - docs/research/archive/_wip-coverage-design-audit.md
   - docs/agentic-foundational-se-taxonomy-2026-08-08.md
   - docs/design/coverage-measure-modes-design-2026-08-08.md
   - docs/design/rust-stack-fit-memo-2026-08-08.md

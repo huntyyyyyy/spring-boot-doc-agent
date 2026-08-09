@@ -6,9 +6,9 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — agent hooks + CI fitness functions
 related:
   - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/13-tools-wave2-modularity-2026.md
-  - claude/steering-prompts/00-shared-research-standards.md
+  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/modularity/13-tools-wave2-modularity-2026.md
+  - docs/process/steering-prompts/00-shared-research-standards.md
   - .cursor/skills/principal-se-research-epic/SKILL.md
 do_not:
   - treat LLM-judge or Cover% climb as merge SoT for façade correctness

@@ -2,7 +2,7 @@
 """PreToolUse hook: refuse design-shaped commits without research Spec evidence.
 
 Mirrors ``require_hardened_tests`` doctrine: memory failed (E-MOD3), so enforce
-at ``git commit``. Spec: docs/research/14-facade-poke-research-hooks-2026.md
+at ``git commit``. Spec: docs/research/process/14-facade-poke-research-hooks-2026.md
 (RES1–RES3).
 
 Fail open on internal errors; fail closed on a real finding.
@@ -59,8 +59,10 @@ def research_memo_ok(staged: List[str]) -> bool:
     memos = [
         p
         for p in staged
-        if p.replace("\\", "/").startswith("docs/research/") and p.endswith(".md")
+        if "/docs/research/" in f"/{p.replace(chr(92), '/')}" 
+        or p.replace("\\", "/").startswith("docs/research/")
     ]
+    memos = [p for p in memos if p.endswith(".md") and not p.endswith("README.md")]
     if not memos:
         return False
     for rel in memos:

@@ -68,7 +68,7 @@ doc-engine --help
 ast-grep --version
 ```
 
-Both commands must print help or a version number. If `ast-grep` is missing, Stage 0 will fail. Installing `requirements.txt` is the supported way to get the pinned `ast-grep-cli`. If you also installed `ast-grep` via `cargo` or `npm`, those can shadow each other on PATH — run `ast-grep --version` and see [`claude/tool-quirks.md`](../../claude/tool-quirks.md) if versions look wrong.
+Both commands must print help or a version number. If `ast-grep` is missing, Stage 0 will fail. Installing `requirements.txt` is the supported way to get the pinned `ast-grep-cli`. If you also installed `ast-grep` via `cargo` or `npm`, those can shadow each other on PATH — run `ast-grep --version` and see [`docs/process/tool-quirks.md`](../../docs/process/tool-quirks.md) if versions look wrong.
 
 ---
 

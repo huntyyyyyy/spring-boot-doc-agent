@@ -6,10 +6,10 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine kitchen-sink domain_integration suite
 related:
   - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/04-implementation-frameworks.md
-  - docs/research/06-test-suite-bounded-contexts-parallel.md
-  - docs/research/08-rust-test-runners-bottlenecks.md
-  - docs/research/09-test-adequacy-vs-coverage-inflation-2026.md
+  - docs/research/process/04-implementation-frameworks.md
+  - docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
+  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+  - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
   - docs/research/quality-backlog.md
 do_not:
   - weaken fail_under 98.7, complexipy ≤5, LOC ≤225

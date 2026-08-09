@@ -5,7 +5,7 @@ research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — Stage-0 ast-grep scanner backend
 related:
-  - docs/research/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/quality-backlog.md
 do_not:

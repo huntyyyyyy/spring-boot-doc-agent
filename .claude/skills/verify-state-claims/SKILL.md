@@ -1,6 +1,6 @@
 ---
 name: verify-state-claims
-description: Read before writing or editing any claim about this repo's own current state — a count, a `status:` field, a `[Resolved]` tag, a path or symbol reference, or a CI step name. Also read when a session is about to assert that something is done, fixed, absent, or unaffected. Run `python3 scripts/ci/check_repo_claims.py` before the final commit of any session touching scripts/, agents/, or skills/. Covers the failure this repo calls the assume-spiral: a claim gets written, nothing reads it back, and later work compounds it. Distinct from claude/tool-quirks.md (ambient tool behavior) and claude/session-log.md (steering-prompt impact) — this is about the claims themselves.
+description: Read before writing or editing any claim about this repo's own current state — a count, a `status:` field, a `[Resolved]` tag, a path or symbol reference, or a CI step name. Also read when a session is about to assert that something is done, fixed, absent, or unaffected. Run `python3 scripts/ci/check_repo_claims.py` before the final commit of any session touching scripts/, agents/, or skills/. Covers the failure this repo calls the assume-spiral: a claim gets written, nothing reads it back, and later work compounds it. Distinct from docs/process/tool-quirks.md (ambient tool behavior) and docs/process/session-log.md (steering-prompt impact) — this is about the claims themselves.
 ---
 
 # Verifying claims about this repo's own state
@@ -84,7 +84,7 @@ quietly restating the claim.
   `ENFORCE = False`, and its CI step name says "non-blocking" for exactly this reason.
   Check E now enforces that pairing.
 - **Do not trust a tool's success report.** Six of the seven entries in
-  `claude/tool-quirks.md` are this bug: `git clone` printing "Clone succeeded" over a
+  `docs/process/tool-quirks.md` are this bug: `git clone` printing "Clone succeeded" over a
   15-of-49-file checkout, `gh pr list` returning `[]` for a PR that exists, `pip`
   reporting an upgrade a shadowed `PATH` binary ignored. Read the resulting state.
 - **Do not widen a claim during a sweep.** A tidy-up pass once widened "mirrored `01`–`05`"
@@ -106,10 +106,10 @@ caught it on a single run. Name the invariant when one exists.
 
 ## Related, and deliberately separate
 
-- `claude/tool-quirks.md` — ambient tool/environment behavior. Check it *first* when
+- `docs/process/tool-quirks.md` — ambient tool/environment behavior. Check it *first* when
   something looks like a tool bug.
-- `claude/session-log.md` — steering-prompt impact, per `CLAUDE.md`'s trigger.
-- `claude/llms/pr-N.md` — hand-verified, re-runnable PR verification commands.
+- `docs/process/session-log.md` — steering-prompt impact, per `CLAUDE.md`'s trigger.
+- `docs/process/pr-verification/pr-N.md` — hand-verified, re-runnable PR verification commands.
 - `skills/citation-coverage/` — the same discipline applied to *generated* docs rather than
   this repo's own.
 - `branch parked-session-log-validator` — 620 lines and 70 passing tests for a

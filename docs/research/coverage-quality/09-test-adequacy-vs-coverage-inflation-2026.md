@@ -8,9 +8,9 @@ prefer_sources: "2026 primary (arXiv / GitHub / DeepWiki); older only as contras
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 design: docs/design/test-adequacy-markers-design-2026-08-09.md
 siblings:
-  - docs/research/01-coverage-oracle-climb-solid.md
-  - docs/research/03-scientific-dimensions-metrics.md
-  - docs/research/08-rust-test-runners-bottlenecks.md
+  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
 related:
   - docs/research/quality-backlog.md
   - docs/design/coverage-measure-modes-design-2026-08-08.md

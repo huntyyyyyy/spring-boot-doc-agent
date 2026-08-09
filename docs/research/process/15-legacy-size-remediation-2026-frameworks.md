@@ -6,10 +6,10 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — grandfathered LOC debt across scanning/tools/pipeline/query/stf
 related:
   - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/04-implementation-frameworks.md
-  - docs/research/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/13-tools-wave2-modularity-2026.md
-  - docs/research/14-facade-poke-research-hooks-2026.md
+  - docs/research/process/04-implementation-frameworks.md
+  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/modularity/13-tools-wave2-modularity-2026.md
+  - docs/research/process/14-facade-poke-research-hooks-2026.md
   - docs/research/quality-backlog.md
 do_not:
   - weaken fail_under 98.7, complexipy ≤5, or FILE_LOC_HARD 225

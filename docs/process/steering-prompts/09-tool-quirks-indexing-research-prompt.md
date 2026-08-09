@@ -2,13 +2,13 @@
 category: Tool-quirks indexing and retrieval
 status: not started
 verify:
-  - path_exists:claude/tool-quirks.md
-  - path_absent:claude/tool-quirks
+  - path_exists:docs/process/tool-quirks.md
+  - path_absent:docs/process/tool-quirks
 ---
 
-# Research + scaffold prompt: categorizing and indexing claude/tool-quirks.md for efficient routing and retrieval
+# Research + scaffold prompt: categorizing and indexing docs/process/tool-quirks.md for efficient routing and retrieval
 
-Self-contained — read this without assuming any other conversation's context. First read `claude/steering-prompts/00-shared-research-standards.md` for the research bar and methodology every finding here must meet.
+Self-contained — read this without assuming any other conversation's context. First read `docs/process/steering-prompts/00-shared-research-standards.md` for the research bar and methodology every finding here must meet.
 
 ## The gap
 

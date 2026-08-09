@@ -126,7 +126,7 @@ Project design north-star (build / review / refactor / direction at any level): 
 
 Neighbouring prior art, already surveyed — reuse rather than rediscover: Datalog EDB/IDB, CodeQL
 extensional/intensional predicates, Glean raw vs derived predicates, SCIP `Relationship`, Datomic's
-assert/retract dimension. See `claude/10-architecture-maturation-plan.md` §1.6 and the prior-art
+assert/retract dimension. See `docs/research/archive/claude-lore/10-architecture-maturation-plan.md` §1.6 and the prior-art
 investigation.
 
 ---
@@ -135,7 +135,7 @@ investigation.
 
 Same contract as §5: these are surveyed and verified — cite them, do not re-derive them. Full
 research, including what was checked versus assumed, is in
-`claude/testing-security-anchors-2026-07-25.md`. Only Tier A items appear here.
+`docs/research/archive/claude-lore/testing-security-anchors-2026-07-25.md`. Only Tier A items appear here.
 
 **Security — Ross Anderson, *Security Engineering* 3e (Wiley, 2020, 29 chapters).** The security
 analogue of DDIA, and for the same practical reason DDIA earned its place: **the full text is free
