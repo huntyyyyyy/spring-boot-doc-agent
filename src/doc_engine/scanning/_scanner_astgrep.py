@@ -35,12 +35,7 @@ inventory_root_empty = astgrep_covering.inventory_root_empty
 _parse_ast_grep_stdout = astgrep_invoke.parse_ast_grep_stdout
 
 
-def _astgrep_errors():
-    return AstGrepError, AstGrepNotFoundError
-
-
 def _version_hash_paths() -> List[str]:
-    """Hash façade + every ``astgrep/*.py`` sibling + rule file."""
     self_file = Path(__file__).resolve()
     package = self_file.parent / "astgrep"
     paths = [str(self_file), str(RULE_FILE)]
@@ -85,16 +80,6 @@ class AstGrepBackend(ScannerBackend):
     def _invoke_ast_grep(self, cmd: List[str]) -> List[Dict[str, Any]]:
         return astgrep_invoke.invoke_ast_grep(cmd, runner=self._runner)
 
-    def _bisect_oversized_chunk(
-        self,
-        base_argv: List[str],
-        chunk: List[str],
-        char_limit: int,
-    ) -> tuple[List[Dict[str, Any]], int]:
-        return astgrep_invoke.bisect_oversized_chunk(
-            self, base_argv, chunk, char_limit
-        )
-
     def _scan_one_chunk(
         self,
         base_argv: List[str],
@@ -129,6 +114,30 @@ class AstGrepBackend(ScannerBackend):
     def _ingest_ast_grep_match(self, **kwargs: Any) -> None:
         astgrep_ingest.ingest_ast_grep_match(**kwargs)
 
+    def _chunk_java_inventory(
+        self,
+        base_argv: List[str],
+        java_files: list,
+        *,
+        sigs: Dict[str, str],
+        expected_root: str,
+    ):
+        # Claims walker: inventory helper must call _invoke_ast_grep_chunked.
+        from doc_engine.scanning.covering import subset_root
+
+        paths = [entry.full_path for entry in java_files]
+        acked_rels = [entry.rel_path for entry in java_files]
+        matches, batches, bisects = self._invoke_ast_grep_chunked(base_argv, paths)
+        acked_root = subset_root(sigs, acked_rels) if sigs else expected_root
+        receipt = self._covering_receipt(
+            expected_root=expected_root,
+            acked_root=acked_root,
+            covered_count=len(acked_rels),
+            batches=batches,
+            winerror_206_bisects=bisects,
+        )
+        return matches, receipt
+
     def _run_ast_grep(
         self,
         repo_path: str,
@@ -136,8 +145,6 @@ class AstGrepBackend(ScannerBackend):
         *,
         file_signatures: Optional[Dict[str, str]] = None,
     ):
-        # Inventory guard + chunked path stay on the class so
-        # behavior:astgrep_inventory_never_widens_to_repo_root resolves.
         if java_files is None:
             raise AstGrepError(
                 "java_files inventory not supplied; "
@@ -155,18 +162,9 @@ class AstGrepBackend(ScannerBackend):
             return self._empty_java_inventory_result(
                 sigs=sigs, expected_root=expected_root
             )
-        paths = [entry.full_path for entry in java_files]
-        acked_rels = [entry.rel_path for entry in java_files]
-        matches, batches, bisects = self._invoke_ast_grep_chunked(base_argv, paths)
-        acked_root = subset_root(sigs, acked_rels) if sigs else expected_root
-        receipt = self._covering_receipt(
-            expected_root=expected_root,
-            acked_root=acked_root,
-            covered_count=len(acked_rels),
-            batches=batches,
-            winerror_206_bisects=bisects,
+        return self._chunk_java_inventory(
+            base_argv, java_files, sigs=sigs, expected_root=expected_root
         )
-        return matches, receipt
 
     def scan(
         self,
@@ -209,16 +207,7 @@ class AstGrepBackend(ScannerBackend):
 
 
 __all__ = [
-    "AstGrepBackend",
-    "AstGrepError",
-    "AstGrepNotFoundError",
-    "RULE_FILE",
-    "_PATH_LIST_CHAR_LIMIT",
-    "chunk_paths_for_argv",
-    "_enrich_query_entry",
-    "extract_entity",
-    "read_source_lines",
-    "subprocess",
-    "os",
-    "shutil",
+    "AstGrepBackend", "AstGrepError", "AstGrepNotFoundError", "RULE_FILE",
+    "_PATH_LIST_CHAR_LIMIT", "chunk_paths_for_argv", "_enrich_query_entry",
+    "extract_entity", "read_source_lines", "subprocess", "os", "shutil",
 ]
