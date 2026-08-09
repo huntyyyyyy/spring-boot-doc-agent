@@ -55,7 +55,12 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = repo_root()
 SCRIPTS_DIR = scripts_dir()
 DEFAULT_BASELINE = SCRIPTS_DIR / "ratchets" / "code_quality_baseline.json"
-DEFAULT_ROOTS = (SCRIPTS_DIR, REPO_ROOT / "src" / "doc_engine")
+DEFAULT_ROOTS = (
+    SCRIPTS_DIR,
+    REPO_ROOT / "src" / "doc_engine",
+    REPO_ROOT / "src" / "stf",
+    REPO_ROOT / "tests",
+)
 
 # 2: "lines" (raw span) replaced by "statements".
 # 3: adds "docstring_violations".
@@ -218,6 +223,10 @@ def docstring_violation(source: str, relpath: str) -> Optional[str]:
 
 
 def _is_production_module(relpath: str) -> bool:
+    """Annotation denominator excludes tests and ``test_*.py`` modules."""
+    posix = relpath.replace("\\", "/")
+    if posix.startswith("tests/") or "/tests/" in posix:
+        return False
     name = Path(relpath).name
     return not name.startswith("test_")
 
@@ -474,6 +483,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         package = Path(args.package_dir)
         if package.is_dir():
             roots.append(package)
+        for extra in (
+            REPO_ROOT / "src" / "stf",
+            REPO_ROOT / "tests",
+        ):
+            if extra.is_dir() and extra.resolve() not in {r.resolve() for r in roots}:
+                roots.append(extra)
         current = measure_tree(scripts_dir, extra_roots=roots, repo_root=REPO_ROOT)
 
     if args.update:

@@ -10,6 +10,7 @@ import pytest
 
 from doc_engine.scanning._scanner_codeql import CodeQLBackend
 from doc_engine.scanning.support import _codeql_runner as runner
+from doc_engine.scanning.support import _codeql_cache as cache_mod
 
 
 def test_version_token_from_release_line():
@@ -195,7 +196,7 @@ def test_covering_receipt_fails_closed_on_mismatch(monkeypatch):
 
 
 def test_load_cached_scan_rows_skips_without_version(monkeypatch):
-    monkeypatch.setattr(runner, "_load_results_cache", MagicMock(return_value=[{"file": "x"}]))
+    monkeypatch.setattr(cache_mod, "_load_results_cache", MagicMock(return_value=[{"file": "x"}]))
     assert (
         runner._load_cached_scan_rows(
             using_cache=True,
@@ -208,4 +209,4 @@ def test_load_cached_scan_rows_skips_without_version(monkeypatch):
         )
         is None
     )
-    runner._load_results_cache.assert_not_called()
+    cache_mod._load_results_cache.assert_not_called()
