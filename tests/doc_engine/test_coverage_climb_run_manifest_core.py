@@ -95,14 +95,14 @@ def test_interview_preflight_signatures_and_tags(
         yield str(java)
         yield str(tmp_path / "missing.java")
 
-    monkeypatch.setattr(rm.spring_signal_scan, "dfs_walk", fake_walk)
+    monkeypatch.setattr(rm, "dfs_walk", fake_walk)
 
     def fake_sig(path: str) -> str:
         if path.endswith("missing.java"):
             raise OSError("gone")
         return "sig"
 
-    monkeypatch.setattr(rm.spring_signal_scan, "compute_file_signature", fake_sig)
+    monkeypatch.setattr(rm, "compute_file_signature", fake_sig)
     assert rm.load_file_signatures(repo_path=str(tmp_path))["b.java"] == "sig"
     assert "could not read" in capsys.readouterr().err
 
