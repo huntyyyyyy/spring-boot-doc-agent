@@ -201,7 +201,7 @@ Research: [`docs/research/15-legacy-size-remediation-2026-frameworks.md`](15-leg
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Approved** (2026-08-09, merge) | research 17 `spec_gate: APPROVED E-CQL0` |
-| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Active** (unblocked) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
+| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Deferred** (after E-DOC1) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
 
 Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql-signals-skip-fingerprint-2026.md).
 
@@ -226,6 +226,18 @@ Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql
 **Done (E-LEG0):** legacy size-remediation Spec LEG1–LEG10 (2026-08-09).  
 **Done (E-SCAN1 Spec + Implement):** SCAN1-A–J + `scanning/astgrep/` façade (2026-08-09).  
 **Done (E-CQL0 Spec):** CQ1–CQ9 Approve (2026-08-09).  
-**Active:** **E-CQL1** — CodeQL signals fingerprint skip Implement (research 17).  
-**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5 — sensors only when product need bites; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR.
+**Done (E-DOC0 Spec):** DOC1–DOC12 Approve (2026-08-09).  
+**Active:** **E-DOC1** — research domains + `claude/`→`docs/` + look-first (research 18); one stream.  
+**Defer:** E-CQL1 (next after E-DOC1 Archive); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`.
+
+---
+
+## P14 — Docs research taxonomy + claude consolidation + look-first
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P14.0 | **E-DOC0 Spec:** approve **DOC1–DOC12** (domains ≤2 deep; migrate `claude/` valuables; Cursor hooks look-first; keep adapter) | **Approved** (2026-08-09, merge) | research 18 `spec_gate: APPROVED E-DOC0` |
+| P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Active** | claims green; design writes denied without research-map Read; marketplace intact |
+
+Research: [`docs/research/18-docs-research-taxonomy-claude-consolidation-2026.md`](18-docs-research-taxonomy-claude-consolidation-2026.md).
