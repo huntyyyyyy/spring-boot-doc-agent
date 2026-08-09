@@ -178,8 +178,8 @@ Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipel
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P12.0 | **E-SCAN1 Spec:** approve **SCAN1-A–J** (astgrep package; hash paths; runner Protocol; structure tests; LEG8) | **Approved 2026-08-09** | research 16 `spec_gate: APPROVED E-SCAN1` |
-| P12.1 | **E-SCAN1 Implement:** `scanning/astgrep/` + thin `_scanner_astgrep` façade; size `--update` | **Active** (2026-08-09) | LOC ≤225; poke; complexipy ≤5; stage0 suites |
+| P12.0 | **E-SCAN1 Spec:** approve **SCAN1-A–J** (astgrep package; hash paths; runner Protocol; structure tests; LEG8) | **Done** (2026-08-09) | research 16 `spec_gate: APPROVED E-SCAN1` |
+| P12.1 | **E-SCAN1 Implement:** `scanning/astgrep/` + thin `_scanner_astgrep` façade; size `--update` | **Done** (2026-08-09) | LOC ≤225; poke; complexipy ≤5; stage0 suites |
 
 Research: [`docs/research/16-scan1-astgrep-modularity-2026.md`](16-scan1-astgrep-modularity-2026.md).
 
@@ -200,6 +200,6 @@ Research: [`docs/research/16-scan1-astgrep-modularity-2026.md`](16-scan1-astgrep
 **Done (E-MOD1):** `mock_stages` concept modules + `MockStageStrategy` registry (2026-08-09).  
 **Done (E-MOD2):** Stage-0 tool façades — `capacity_preflight` / `spring_drift_check` / `partition_repo` (2026-08-09).  
 **Done (E-SCAN1 Spec):** SCAN1-A–J Approve (2026-08-09).  
-**Active:** **E-SCAN1** — split `_scanner_astgrep` into `scanning/astgrep/` (research 16).  
+**Done (E-SCAN1):** `scanning/astgrep/` + thin `_scanner_astgrep` façade (2026-08-09).  
 **Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5.  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps.

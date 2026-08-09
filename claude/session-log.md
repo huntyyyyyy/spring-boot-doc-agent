@@ -4806,3 +4806,12 @@ Assumptions affected:
 - `claude/steering-prompts/04-analytics-logging-research-prompt.md` — "`spring_drift_check.py` gained optional `--manifest`" — [New info — `--manifest` CLI flag now lives in `spring_drift_cli.py`; façade `spring_drift_check` re-exports `main`; verify predicate updated]
 - `CONSTRAINTS.md` Integration gaps item 3 / Known precision item 6 — path needles for `--manifest` / partition overlap comments — [Resolved — verify paths retargeted to `spring_drift_cli.py` / `partition_repo_groups.py` after vertical split]
 Files touched: CONSTRAINTS.md, claude/steering-prompts/04-analytics-logging-research-prompt.md, src/doc_engine/tools/capacity_preflight*.py, spring_drift_*.py, partition_repo*.py, scripts/ratchets/size_baseline.json, docs/research/12-*, quality-backlog.md
+
+## 2026-08-09 — E-SCAN1 AstGrepBackend → scanning/astgrep/
+Commit: 0ef386e
+Tests: 20/20 structure+basic+chunk+destructive+climb edges; claims OK; poke OK; complexipy ≤5; size baseline 30 file offenders (astgrep+spring off hard list)
+Assumptions affected:
+- `docs/research/16-scan1-astgrep-modularity-2026.md` SCAN1-A–J — [Resolved — package + façade + structure tests + LEG8 monkeypatch + AstGrepRunner landed]
+- `CONSTRAINTS.md` item 14 inventory/chunk needles — [Resolved — verify paths include `scanning/astgrep/argv.py`; behavior predicate still on façade `_run_ast_grep`]
+- Size ratchet `_scanner_astgrep.py` 514 LOC offender — [Resolved — thin façade ≤225; concept modules under `scanning/astgrep/`]
+Files touched: src/doc_engine/scanning/astgrep/*, _scanner_astgrep.py, spring.py, scripts/ci/check_facade_poke_surface.py, scripts/ratchets/size_baseline.json, CONSTRAINTS.md, tests/doc_engine/test_scan_context_astgrep_*, test_covering_hard_stops_destructive.py, docs/research/quality-backlog.md, claude/session-log.md
