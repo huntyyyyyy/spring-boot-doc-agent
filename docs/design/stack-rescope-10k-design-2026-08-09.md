@@ -29,7 +29,7 @@ spec_gate: DRAFT E-STACK0 (2026-08-09) — STACK1–STACK12 pending Approve
 
 ## Verdict
 
-Keep ruff/pytest/ast-grep/semgrep/mkdocs. Keep coverage/tach-cycles/complexipy/CodeQL as Confirmed despite ★. Steal **Nx boundary patterns** for seam maps; re-base E-TACH0 off tach★. Refuse Spec Kit runtime, Sonar-as-floor, dual linters.
+Keep ruff/pytest/ast-grep/semgrep/mkdocs. Keep coverage/tach-cycles/complexipy/CodeQL as Confirmed despite ★. Steal **Nx boundary patterns** for seam maps; re-base E-TACH0 off tach★. Refuse Spec Kit runtime, Sonar-as-floor, dual linters. **Backstage:** support corp IDP; Refuse only as `doc-engine` runtime (optional catalog metadata OK).
 
 ## Exit
 

@@ -186,9 +186,40 @@ Legend: **Improve** = clearer fitness, less thrash, better ecosystem SoR · **Wo
 | --- | --- | --- |
 | OpenSpec-style deltas + living memos | Embody/Adopt | Fits brownfield CLI |
 | Spec Kit (≥126k★) | Adopt *process lessons* only | **Improves** Spec ceremony vocabulary; **Worsens hard** if WorkflowEngine becomes runtime (constitution Refuse) |
-| Backstage / mesh / DI containers | Refuse | ★ irrelevant — wrong product |
+| Backstage / mesh / DI containers | **Scoped Refuse** — see §3.8 | ★ clears bar (~34k); still wrong *as this CLI’s runtime* |
 
-### 3.8 Docs publishing
+### 3.8 Backstage / IDP — scoped Refuse (not a company ban)
+
+**Apprehension addressed (2026-08-09).** Prior memos said “Refuse Backstage” in
+short tables. That was easy to misread as “your company should not adopt
+Backstage.” The intended predicate is narrower.
+
+| Layer | Stance | Why |
+| --- | --- | --- |
+| **Company IDP** (portal for many services) | **Out of scope / support** | Backstage (~34k★, CNCF) is a real ≥10k★ IDP framework `[Evidenced]`. If the company is building a portal, that is platform work — not this repo’s merge SoT. |
+| **Golden Path *concept*** | **Embody** | Documented default-correct CLI: `doc-engine …`, `pre_pr`, quality-gates, claims. Same *idea* Backstage templates encode; we already ship it without a portal `[Confirmed]` segment 04. |
+| **This repo as Backstage *Component*** | **Adopt-optional** | Thin `catalog-info.yaml` + TechDocs link so the corp catalog can discover ownership/docs is fine — metadata consumer, not a runtime dep. |
+| **Backstage *as runtime / required dep* of `doc-engine`** | **Refuse** | Product is a Python CLI + deterministic gates. Pulling React/Node portal, plugin host, or “must open Backstage to run Stage-0” **worsens** hermetic CI, size/complexipy bar, and single-writer SoT `[Confirmed]` constitution + `[Evidenced]` Backstage is a *framework you operate as a product*. |
+| **Scaffolding every fix through Software Templates** | **Refuse for tip repair** | E-HOT1/E-COH1 need code + local gates, not catalog ceremony. |
+
+**Evidence that company Backstage can still be right**
+
+1. **Clears ≥10k★** — `backstage/backstage` ~34054★, push in window (2026-08-09 API). HOT13/STACK1 do **not** bar it as external SoR for *IDP* work.
+2. **Problem it solves** — cognitive load across *many* services; ownership; golden-path *scaffolding* for new services `[Evidenced]` backstage.io + CNCF practice.
+3. **Success condition** — portal on top of working platform; catalog accuracy owned as a product; otherwise trust collapses `[Evidenced]` 2025–2026 IDP writeups (stale `catalog-info` → unused portal).
+
+**Evidence that wiring it *into this CLI* worsens the product**
+
+1. **Category error** — IDP portal ≠ citation/coverage/oracle correctness. Synthesis decision **22** Refuse “Backstage-required IDP” as *measure/product infra* `[Confirmed]`.
+2. **Cost shape** — Backstage is a framework (React + backend + plugins), not a drop-in gate `[Evidenced]`. Operating it as a first-class product needs platform capacity the doc-engine tip does not own.
+3. **Dual SoT risk** — moving “how to verify” from `pre_pr` / CONTRIBUTING into portal plugins creates a second merge predicate agents cannot run hermetically in CI.
+4. **Already have the golden path** — CLI + CONTRIBUTING + reusable workflows `[Confirmed]`. Portal adds discovery for *humans across the company*; it must not become the boolean gate.
+
+**Net:** Support corp Backstage adoption. Do **not** make `doc-engine` depend on Backstage to lint, scan, or certify. Optional: emit/consume catalog metadata so the company portal stays accurate.
+
+---
+
+### 3.9 Docs publishing
 
 | Choice | Stance |
 | --- | --- |
@@ -215,7 +246,7 @@ Pins and gate semantics stay. Hotfix restores contracts under current tools.
 | **STACK7** | complexipy: keep ≤5 Confirmed; Sonar cognitive may be advisory sensor only — never replace boolean complexipy without new Spec |
 | **STACK8** | Steal **Nx boundary + public API** concepts into E-COH1 / E-TACH0 seam maps (patterns, not Nx install) |
 | **STACK9** | Spec Kit / OpenSpec: process Adopt only; WorkflowEngine runtime remains Refuse |
-| **STACK10** | Refuse dual architecture linters; refuse flake8/black reintroduction; refuse DI/mesh/Backstage |
+| **STACK10** | Refuse dual architecture linters; refuse flake8/black reintroduction; refuse DI containers and service mesh **as this CLI’s deps**; **Backstage: Refuse-as-runtime of doc-engine** — company IDP / `catalog-info.yaml` / TechDocs *consumer* integration is **Adopt-optional** (see §3.9), not a ban on corp Backstage |
 | **STACK11** | Hypothesis/mutmut remain Spike/Defer — fail ★ for new merge SoR |
 | **STACK12** | Implement order: **E-HOT1 green → E-STACK0 Approve (docs) → resume E-COH1**; tool rip/replace only under a later epic after green |
 
