@@ -4766,3 +4766,12 @@ Assumptions affected:
 - E-QA2 Climb Archive Q2 — [New info — B4 archives `mutmut_slice` for `doc_engine.tools` drift/manifest (not Arm-1; not scan formatting)]
 - Cover% climb high-miss tools inventory — [Resolved — hermetic `domain_climb_sensor` suites close tier2/check/manifest gaps]
 Files touched: tests/doc_engine/test_coverage_climb_drift_tier2_recheck.py, test_coverage_climb_drift_check_{process,load}.py, test_coverage_climb_run_manifest_{core,cli}.py, CONTRIBUTING.md, claude/session-log.md
+
+## 2026-08-09 — Cover% climb batch B5: Stage-0 scan CodeQL/gap/recall
+Commit: uncommitted
+Tests: 19/19 climb B5 suites passing; LOC≤225 complexipy≤5
+Assumptions affected:
+- E-QA2 Climb Archive Q2 — [New info — B5 archives metamorphic Arm-1 (`tests/ratchets/test_metamorphic_formatting.py` + churn / `HarnessIsNotVacuousTest`) for Stage-0 scan surfaces]
+- Cover% climb scan-related below-floor inventory — [Resolved — hermetic `domain_climb_sensor` suites close `_codeql_*`, `recall_delta`, `gap_probe/{join,symbol_collision}`, residual `symbol`/`facts` gaps]
+Files touched: tests/doc_engine/test_coverage_climb_b5_{codeql_cache,codeql_db_runner,gap_recall,symbol_facts}.py, CONTRIBUTING.md, claude/session-log.md
+

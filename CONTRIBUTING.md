@@ -215,6 +215,7 @@ a defended Spec amendment (Q8).
 | Batch | Package / modules | Witness kind | Note |
 | --- | --- | --- | --- |
 | B4 | `doc_engine.tools` — `spring_drift_tier2`, `spring_drift_check`, `run_manifest` | `mutmut_slice` | Tools/telemetry surface — not scan formatting; Arm-1 not cited |
+| B5 | `doc_engine.scanning` — `_codeql_cache`/`_codeql_database`/`_codeql_runner`, `recall_delta`, `gap_probe/{join,symbol_collision}`, `symbol`/`facts` | metamorphic Arm-1 | Stage-0 scan surfaces — cite `tests/ratchets/test_metamorphic_formatting.py` + churn / `HarnessIsNotVacuousTest` |
 
 ### Oracle remesure cadence (saliency)
 
