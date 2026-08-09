@@ -4719,7 +4719,7 @@ Files touched: .github/workflows/{ci,python-gates,codeql-signals,quality-gates,s
 
 
 ## 2026-08-09 — Fix CI: continue-on-error invalid on reusable-workflow caller
-Commit: uncommitted
+Commit: 88c0653
 Tests: check_workflow_yaml OK; check_code_quality OK; pytest tests/ci workflow_size + check_workflow_yaml 17/17
 Assumptions affected:
 - E-CI sonar soft job — `continue-on-error` on `ci.yml` caller — [Resolved — moved onto `sonar.yml` called job; Actions rejects caller-level continue-on-error with 0-job failure]
