@@ -5,10 +5,11 @@ Usage:
     python -m doc_engine.ci.size_ratchet --update
 
 Hard fail when a new file exceeds FILE_LOC_HARD (225), a baselined file's
-LOC grows, a new function exceeds FN_STMTS_HARD (50), a baselined function's
-statement count grows, or hard-offender counts rise. Soft advisories print
-above FILE_LOC_SOFT (150) / FN_STMTS_SOFT (20). Measurement lives in
-``size_measure``; this module owns policy, baseline persistence, and CLI.
+LOC grows, a new function exceeds FN_STMTS_HARD (20), a baselined function's
+statement count grows, or hard-offender counts rise. Soft advisories print at FILE_LOC_SOFT (150) / FN_STMTS_SOFT (20).
+**No grandfather** of oversized files or functions — offender maps must
+ratchet to empty. Measurement lives in ``size_measure``; this module owns
+policy, baseline persistence, and CLI.
 """
 
 from __future__ import annotations
@@ -24,9 +25,9 @@ from doc_engine.ci.size_measure import PACKAGE_ROOTS, measure_tree
 
 FILE_LOC_HARD = 225
 FILE_LOC_SOFT = 150
-FN_STMTS_HARD = 50
+FN_STMTS_HARD = 20
 FN_STMTS_SOFT = 20
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 DEFAULT_BASELINE = REPO_ROOT / "scripts" / "ratchets" / "size_baseline.json"
 
 
@@ -48,9 +49,10 @@ def soft_advisories(
         if FILE_LOC_SOFT < loc <= FILE_LOC_HARD
     ]
     notes.extend(
-        f"[advisory] function {key} has statements={stmts} (soft>{FN_STMTS_SOFT})"
+        f"[advisory] function {key} has statements={stmts} "
+        f"(at hard ceiling {FN_STMTS_HARD}; prefer smaller)"
         for key, stmts in sorted(functions.items())
-        if FN_STMTS_SOFT < stmts <= FN_STMTS_HARD
+        if stmts == FN_STMTS_HARD
     )
     return notes
 
@@ -153,32 +155,27 @@ def compare(baseline: dict, file_loc: Dict[str, int], functions: Dict[str, int])
     )
 
 
-def main(argv: list[str] | None = None) -> int:
+def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", type=Path, default=DEFAULT_BASELINE)
     parser.add_argument("--update", action="store_true")
-    args = parser.parse_args(argv)
+    return parser.parse_args(argv)
 
-    file_loc, functions = measure_tree()
-    file_off = hard_file_offenders(file_loc)
-    fn_off = hard_fn_offenders(functions)
 
-    if args.update:
-        write_baseline(args.baseline, file_off, fn_off)
+def _run_ratchet_check(
+    baseline_path: Path,
+    file_loc: Dict[str, int],
+    functions: Dict[str, int],
+    file_off: Dict[str, int],
+    fn_off: Dict[str, int],
+) -> int:
+    if not baseline_path.is_file():
         print(
-            f"baseline written: {args.baseline} "
-            f"(files={len(file_off)}, functions={len(fn_off)})"
-        )
-        return 0
-
-    if not args.baseline.is_file():
-        print(
-            f"error: no baseline at {args.baseline}; create one with --update",
+            f"error: no baseline at {baseline_path}; create one with --update",
             file=sys.stderr,
         )
         return 2
-
-    baseline = load_baseline(args.baseline)
+    baseline = load_baseline(baseline_path)
     print(
         f"size ratchet: file_offenders={len(file_off)} "
         f"(ceiling={baseline.get('file_offender_count')}) "
@@ -186,8 +183,7 @@ def main(argv: list[str] | None = None) -> int:
         f"(ceiling={baseline.get('fn_offender_count')}) "
         f"(file_loc_hard={FILE_LOC_HARD}, fn_stmts_hard={FN_STMTS_HARD})"
     )
-    advisories = soft_advisories(file_loc, functions)
-    _print_soft_advisories(advisories)
+    _print_soft_advisories(soft_advisories(file_loc, functions))
     issues = compare(baseline, file_loc, functions)
     if issues:
         _print_issues(issues)
@@ -200,6 +196,21 @@ def main(argv: list[str] | None = None) -> int:
             "re-baseline with --update to ratchet downward"
         )
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = _parse_args(argv)
+    file_loc, functions = measure_tree()
+    file_off = hard_file_offenders(file_loc)
+    fn_off = hard_fn_offenders(functions)
+    if args.update:
+        write_baseline(args.baseline, file_off, fn_off)
+        print(
+            f"baseline written: {args.baseline} "
+            f"(files={len(file_off)}, functions={len(fn_off)})"
+        )
+        return 0
+    return _run_ratchet_check(args.baseline, file_loc, functions, file_off, fn_off)
 
 
 if __name__ == "__main__":

@@ -33,14 +33,8 @@ def _configure_coverage_measure_parser(
     measure_ap.set_defaults(func=cmd_coverage_measure)
 
 
-def add_quality_gate_parsers(
-    sub: Any,
-    *,
-    cmd_quality_gates: Callable[..., int],
-    cmd_coverage_gap_average: Callable[..., int],
-    cmd_coverage_measure: Callable[..., int],
-    cmd_complexipy_ratchet: Callable[..., int],
-    cmd_size_ratchet: Callable[..., int],
+def _add_quality_gates_parser(
+    sub: Any, *, cmd_quality_gates: Callable[..., int]
 ) -> None:
     qg_ap = sub.add_parser(
         "quality-gates",
@@ -71,6 +65,10 @@ def add_quality_gate_parsers(
     )
     qg_ap.set_defaults(func=cmd_quality_gates)
 
+
+def _add_gap_average_parser(
+    sub: Any, *, cmd_coverage_gap_average: Callable[..., int]
+) -> None:
     gap_ap = sub.add_parser(
         "coverage-gap-average",
         help="Report Cover% averaged only over files still below the floor",
@@ -82,17 +80,13 @@ def add_quality_gate_parsers(
     gap_ap.add_argument("--append-github-summary", action="store_true")
     gap_ap.set_defaults(func=cmd_coverage_gap_average)
 
-    measure_ap = sub.add_parser(
-        "coverage-measure",
-        help=(
-            "Clean single-tree coverage measure "
-            "(oracle SoT or climb sensor; policy 16-A)"
-        ),
-    )
-    _configure_coverage_measure_parser(
-        measure_ap, cmd_coverage_measure=cmd_coverage_measure
-    )
 
+def _add_ratchet_parsers(
+    sub: Any,
+    *,
+    cmd_complexipy_ratchet: Callable[..., int],
+    cmd_size_ratchet: Callable[..., int],
+) -> None:
     ratchet_ap = sub.add_parser(
         "complexipy-ratchet",
         help="Ratchet complexipy offender count vs scripts/ratchets baseline",
@@ -108,3 +102,31 @@ def add_quality_gate_parsers(
     size_ap.add_argument("--baseline", default=None)
     size_ap.add_argument("--update", action="store_true")
     size_ap.set_defaults(func=cmd_size_ratchet)
+
+
+def add_quality_gate_parsers(
+    sub: Any,
+    *,
+    cmd_quality_gates: Callable[..., int],
+    cmd_coverage_gap_average: Callable[..., int],
+    cmd_coverage_measure: Callable[..., int],
+    cmd_complexipy_ratchet: Callable[..., int],
+    cmd_size_ratchet: Callable[..., int],
+) -> None:
+    _add_quality_gates_parser(sub, cmd_quality_gates=cmd_quality_gates)
+    _add_gap_average_parser(sub, cmd_coverage_gap_average=cmd_coverage_gap_average)
+    measure_ap = sub.add_parser(
+        "coverage-measure",
+        help=(
+            "Clean single-tree coverage measure "
+            "(oracle SoT or climb sensor; policy 16-A)"
+        ),
+    )
+    _configure_coverage_measure_parser(
+        measure_ap, cmd_coverage_measure=cmd_coverage_measure
+    )
+    _add_ratchet_parsers(
+        sub,
+        cmd_complexipy_ratchet=cmd_complexipy_ratchet,
+        cmd_size_ratchet=cmd_size_ratchet,
+    )

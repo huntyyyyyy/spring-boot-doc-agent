@@ -110,15 +110,7 @@ def _cmd_summary(args):
     print(rm.format_summary(manifest))
 
 
-def _build_arg_parser():
-    from doc_engine.tools import run_manifest as rm
-
-    ap = argparse.ArgumentParser(
-        description=rm.__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    sub = ap.add_subparsers(dest="command", required=True)
-
+def _add_init_and_start(sub):
     p_init = sub.add_parser("init", help="Create a new run_manifest.json for a pipeline run")
     p_init.add_argument("repo_path")
     p_init.add_argument("--out", default="run_manifest.json")
@@ -135,6 +127,8 @@ def _build_arg_parser():
     )
     p_start.add_argument("--now-ms", type=int, default=None, help=argparse.SUPPRESS)
 
+
+def _add_end_stage(sub):
     p_end = sub.add_parser("end-stage", help="Record a stage's end")
     p_end.add_argument("manifest_path")
     p_end.add_argument("stage_name")
@@ -142,6 +136,8 @@ def _build_arg_parser():
     p_end.add_argument("--error", default=None)
     p_end.add_argument("--now-ms", type=int, default=None, help=argparse.SUPPRESS)
 
+
+def _add_finalize_and_summary(sub):
     p_fin = sub.add_parser(
         "finalize", help="Close out a run_manifest.json at the end of a pipeline run"
     )
@@ -176,6 +172,19 @@ def _build_arg_parser():
         "summary", help="Print a human-readable summary of an existing manifest"
     )
     p_sum.add_argument("manifest_path")
+
+
+def _build_arg_parser():
+    from doc_engine.tools import run_manifest as rm
+
+    ap = argparse.ArgumentParser(
+        description=rm.__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    sub = ap.add_subparsers(dest="command", required=True)
+    _add_init_and_start(sub)
+    _add_end_stage(sub)
+    _add_finalize_and_summary(sub)
     return ap
 
 
