@@ -230,8 +230,8 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Paused (E-COH1 reshape):** waits until E-HOT1 green.  
-**Active Implement:** **E-HOT1** — post-merge gate repair (HOT Approved).  
+**Active:** **E-COH1** reshape provisional tip modules (after E-HOT1 Verify green).  
+**Done Implement:** **E-HOT1** — G2 return/pass + AST witness; CQ HOT5; size soft test; cert patch-at-use; docs path; wrap ratchet retained.  
 **Docs Spec Approved:** **E-STACK0** — stack rescope under ≥10k★ (Backstage scoped: corp IDP supported; CLI runtime Refuse).  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1) before depends_on Approve.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2; E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
