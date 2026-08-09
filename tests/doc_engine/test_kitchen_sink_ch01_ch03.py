@@ -1,94 +1,25 @@
-"""Cohesive suite from tests/doc_engine/test_enterprise_kitchen_sink.py: Ch01FaultInjectionTest, Ch03DerivedIndexTest."""
+"""Kitchen-sink Ch01 fault injection + Ch03 derived index."""
 
 from __future__ import annotations
 
-import datetime
-import json
 import os
-import re
-import shutil
-import subprocess
-import sys
-import tempfile
-import unittest
-from unittest import mock
-from tests.conftest import REPO_ROOT, SCRIPTS_DIR, FIXTURE_DIR, FIXTURE_SNAPSHOT_PATH
-from doc_engine.core.excludes import DEFAULT_EXCLUDED_DIRS
-from doc_engine.pipeline.mock_stages import (
-    find_existing_readme,
-    load_citations,
-    mock_architecture,
-    mock_docs,
-    mock_file_summaries,
-    mock_gap_and_interview,
-    sweep_todos,
-)
-from doc_engine.tools import partition_repo, run_manifest, spring_signal_scan
-from doc_engine.tools.doc_tag_utils import VALID_DOC_FILES
-from doc_engine.scanning.covering import verify_covering_proof
 
 import pytest
 
+from tests.support.kitchen_sink.constants import (
+    DUP_BILLING,
+    DUP_LEDGER,
+    NESTED_ENTITY,
+    PY,
+    TWO_ENTITIES,
+)
+from tests.support.kitchen_sink.harness import _miscase_first_tag, _run
+from tests.support.kitchen_sink.testcase import KitchenBoundTestCase
+
 pytestmark = pytest.mark.domain_integration
 
-SCRIPT_DIR = SCRIPTS_DIR
-PY = sys.executable
-MAX_TOKENS = "2000"
-SMALL_FILE_BYTES = "4096"
-EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-BILLING = "services/billing-service/src/main/java/com/acme/billing"
-LEDGER = "services/ledger-service/src/main/java/com/acme/ledger"
-LEGACY = "services/legacy-batch/src/main/java/com/acme/legacy"
-RES = "services/billing-service/src/main/resources"
-TWO_ENTITIES = f"{BILLING}/TwoEntities.java"
-MIXED_ENTITIES = f"{BILLING}/MixedEntities.java"
-NESTED_ENTITY = f"{BILLING}/NestedEntity.java"
-DUP_BILLING = f"{BILLING}/Invoice.java"
-DUP_LEDGER = f"{LEDGER}/Invoice.java"
-UNICODE_QUERY = f"{LEDGER}/LedgerRepository.java"
-HUGE_JAVA = f"{LEGACY}/Huge.java"
-EMPTY_JAVA = f"{LEGACY}/Empty.java"
-LATIN1_JAVA = f"{LEGACY}/Latin1.java"
-NUL_JAVA = f"{LEGACY}/NulInside.java"
-CRLF_JAVA = f"{LEGACY}/Crlf.java"
-BOM_YML = f"{RES}/application-prod.yml"
-NOBOM_YML = f"{RES}/application-nobom.yml"
-PLACEHOLDER_YML = f"{RES}/application.yml"
-SECRETS_YML = f"{RES}/application-secrets.yml"
-MULTI_SEG_YML = f"{RES}/application-dev-local.yml"
-CRLF_PROPS = f"{RES}/application-legacy.properties"
-LF_PROPS = f"{RES}/application-lfprops.properties"
-EMPTY_YML = f"{RES}/application-empty.yml"
-SPACE_PATH = "docs and notes/guide.md"
-UNICODE_DIR_JAVA = "módulo-común/src/main/java/com/acme/uni/UniController.java"
-DEEP_JAVA = "deep/" + "/".join(f"l{i:02d}" for i in range(30)) + "/Leaf.java"
-GITIGNORED_DIR = "generated"
-PLANTED_EXCLUDED_DIRS = ["target", "build", "node_modules", "vendor", "venv",
-                         "dist", "out", "coverage"]
-from tests.support.kitchen_sink.writers import (
-    _controller,
-    _entity,
-    _service,
-    _w,
-    _wb,
-)
-from tests.support.kitchen_sink.repo_builder import build_enterprise_repo
-from tests.support.kitchen_sink.constants import _STATE
-from tests.support.kitchen_sink.harness import (
-    _copy_docs,
-    _evidence_files,
-    _grouped,
-    _has_segment,
-    _kitchen_sink_real_repo,
-    _miscase_first_tag,
-    _git,
-    _run,
-    run_chain,
-    setUpModule,
-    tearDownModule,
-)
 
-class Ch01FaultInjectionTest(unittest.TestCase):
+class Ch01FaultInjectionTest(KitchenBoundTestCase):
     """The suite's thesis.
 
     DDIA Ch.1 distinguishes a fault (a component deviating from spec) from a
@@ -104,50 +35,60 @@ class Ch01FaultInjectionTest(unittest.TestCase):
         # asserts nothing in the repo changed, which the run's own real docs/
         # legitimately violates. The write check gets its own dedicated test
         # in Ch12, against the real in-repo path.
-        return _run([PY, "-m", "doc_engine.tools.check_pipeline_output", docs,
-                     "--target-repo", _STATE["repo"], "--no-write-check", *extra])
+        return _run(
+            [
+                PY,
+                "-m",
+                "doc_engine.tools.check_pipeline_output",
+                docs,
+                "--target-repo",
+                self.kitchen.repo,
+                "--no-write-check",
+                *extra,
+            ]
+        )
 
-    def test_clean_output_passes(self):
+    def test_clean_output_passes(self, kitchen_docs_scratch):
         """The control. Without it every assertion below could pass for the
         wrong reason."""
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = kitchen_docs_scratch
         proc = self._gate(docs)
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 
-    def test_a_missing_doc_becomes_a_process_failure(self):
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+    def test_a_missing_doc_becomes_a_process_failure(self, kitchen_docs_scratch):
+        _scratch, docs = kitchen_docs_scratch
         os.remove(os.path.join(docs, "testing.md"))
         proc = self._gate(docs)
         self.assertEqual(proc.returncode, 1)
         self.assertIn("missing expected doc: testing.md", proc.stderr)
 
-    def test_a_miscased_tag_is_a_fault_that_never_becomes_a_failure(self):
+    def test_a_miscased_tag_is_a_fault_that_never_becomes_a_failure(
+        self, kitchen_docs_scratch
+    ):
         """Deliberately adjacent to the test above: the same magnitude of
         defect, and the gate the pipeline actually blocks on returns 0. A
         lowercase tag word matches neither the valid patterns nor the
         malformed-span detector, so the citation is scored as absent
         everywhere. Fault without failure — the contrast is the point."""
-        scratch, docs = _copy_docs()
-        self.addCleanup(shutil.rmtree, scratch, ignore_errors=True)
+        _scratch, docs = kitchen_docs_scratch
         _miscase_first_tag(self, os.path.join(docs, "database.md"))
         self.assertEqual(self._gate(docs).returncode, 0)
 
     def test_operator_error_exits_two_not_one(self):
         """Exit 2 (the checker could not run) is a different condition from
         exit 1 (the run is bad). A caller that collapses them loses that."""
-        proc = self._gate(os.path.join(_STATE["tmp"], "no-such-dir"))
+        proc = self._gate(os.path.join(self.kitchen.tmp, "no-such-dir"))
         self.assertEqual(proc.returncode, 2)
 
-class Ch03DerivedIndexTest(unittest.TestCase):
+
+class Ch03DerivedIndexTest(KitchenBoundTestCase):
     """entity_table_map is an index over evidence.persistence keyed by bare
     class name — package deliberately excluded, so the key is not unique.
     "Two entities in one file" is an index-build question; the cross-module
     name clash is a key-resolution question."""
 
     def setUp(self):
-        self.signals = _STATE["signals"]
+        self.signals = self.kitchen.signals
         self.mapping = self.signals["entity_table_map"]
 
     def test_two_entities_in_one_file_resolve_to_their_own_tables(self):
@@ -181,12 +122,22 @@ class Ch03DerivedIndexTest(unittest.TestCase):
             {(c["file"], c["table"]) for c in entry["candidates"]},
             {(DUP_BILLING, "billing_invoice"), (DUP_LEDGER, "ledger_invoice")},
         )
-        rows = {r["file"] for r in self.signals["evidence"]["persistence"]
-                if r.get("class_name") == "Invoice"}
-        self.assertEqual(rows, {DUP_BILLING, DUP_LEDGER},
-                         "the index may drop a row; the evidence bucket must not")
-        jpql = [e for e in self.signals["evidence"]["raw_queries"]
-                if e.get("query_kind") == "jpql" and "Invoice" in (e.get("query") or "")]
+        rows = {
+            r["file"]
+            for r in self.signals["evidence"]["persistence"]
+            if r.get("class_name") == "Invoice"
+        }
+        self.assertEqual(
+            rows,
+            {DUP_BILLING, DUP_LEDGER},
+            "the index may drop a row; the evidence bucket must not",
+        )
+        jpql = [
+            e
+            for e in self.signals["evidence"]["raw_queries"]
+            if e.get("query_kind") == "jpql"
+            and "Invoice" in (e.get("query") or "")
+        ]
         self.assertTrue(jpql, "fixture must include JPQL over the contested name")
         for e in jpql:
             self.assertFalse(e["lineage"]["available"], e)
@@ -208,5 +159,10 @@ class Ch03DerivedIndexTest(unittest.TestCase):
         self.assertEqual(keys, sorted(keys))
         for name, entry in self.mapping.items():
             with self.subTest(entity=name):
-                self.assertTrue(os.path.isfile(
-                    os.path.join(_STATE["repo"], entry["file"].replace("/", os.sep))))
+                self.assertTrue(
+                    os.path.isfile(
+                        os.path.join(
+                            self.kitchen.repo, entry["file"].replace("/", os.sep)
+                        )
+                    )
+                )
