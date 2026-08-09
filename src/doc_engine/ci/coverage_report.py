@@ -97,31 +97,40 @@ def _line_branch_totals(lines: list) -> tuple[int, int]:
     return branches, missed_branches
 
 
+def _class_filename(cls: ET.Element) -> str:
+    return cls.attrib.get("filename") or cls.attrib.get("name") or ""
+
+
+def _missed_statement_count(lines: list) -> int:
+    return sum(1 for line in lines if line.attrib.get("hits", "0") == "0")
+
+
+def _file_coverage_from_class(cls: ET.Element) -> FileCoverage | None:
+    """Build one :class:`FileCoverage` row from a Cobertura ``class`` element."""
+    filename = _class_filename(cls)
+    if not filename:
+        return None
+    lines = list(cls.iter("line"))
+    if not lines:
+        return None
+    branches, missed_branches = _line_branch_totals(lines)
+    return FileCoverage(
+        path=filename.replace("\\", "/"),
+        statements=len(lines),
+        missed_statements=_missed_statement_count(lines),
+        branches=branches,
+        missed_branches=missed_branches,
+    )
+
+
 def parse_cobertura_files(coverage_xml: Path) -> list[FileCoverage]:
     """Parse per-file combined Cover% rows from a Cobertura coverage.xml."""
     root = ET.parse(coverage_xml).getroot()
     rows: list[FileCoverage] = []
     for cls in root.iter("class"):
-        filename = cls.attrib.get("filename") or cls.attrib.get("name") or ""
-        if not filename:
-            continue
-        lines = list(cls.iter("line"))
-        if not lines:
-            continue
-        statements = len(lines)
-        missed_statements = sum(
-            1 for line in lines if line.attrib.get("hits", "0") == "0"
-        )
-        branches, missed_branches = _line_branch_totals(lines)
-        rows.append(
-            FileCoverage(
-                path=filename.replace("\\", "/"),
-                statements=statements,
-                missed_statements=missed_statements,
-                branches=branches,
-                missed_branches=missed_branches,
-            )
-        )
+        row = _file_coverage_from_class(cls)
+        if row is not None:
+            rows.append(row)
     return rows
 
 

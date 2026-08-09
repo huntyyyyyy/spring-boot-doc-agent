@@ -120,21 +120,25 @@ def cmd_coverage_gap_average(args: argparse.Namespace) -> int:
     return gap_main(argv)
 
 
+def _extend_optional_flag(argv: list[str], flag: str, value: object | None) -> None:
+    if value is not None:
+        argv.extend([flag, str(value)])
+
+
+def _extend_switch_flag(argv: list[str], flag: str, enabled: bool) -> None:
+    if enabled:
+        argv.append(flag)
+
+
 def _coverage_measure_argv(args: argparse.Namespace) -> list[str]:
     """Build argv for ``coverage_measure_cli.main`` from the thin CLI facade."""
     argv: list[str] = []
-    if getattr(args, "mode", None):
-        argv.extend(["--mode", str(args.mode)])
-    if getattr(args, "scope", None):
-        argv.extend(["--scope", str(args.scope)])
-    if args.floor is not None:
-        argv.extend(["--floor", str(args.floor)])
-    if args.worst is not None:
-        argv.extend(["--worst", str(args.worst)])
-    if args.skip_pytest:
-        argv.append("--skip-pytest")
-    if args.no_gap_report:
-        argv.append("--no-gap-report")
+    _extend_optional_flag(argv, "--mode", getattr(args, "mode", None))
+    _extend_optional_flag(argv, "--scope", getattr(args, "scope", None))
+    _extend_optional_flag(argv, "--floor", args.floor)
+    _extend_optional_flag(argv, "--worst", args.worst)
+    _extend_switch_flag(argv, "--skip-pytest", args.skip_pytest)
+    _extend_switch_flag(argv, "--no-gap-report", args.no_gap_report)
     if args.pytest_args:
         argv.extend(args.pytest_args)
     return argv
