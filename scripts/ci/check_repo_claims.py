@@ -166,7 +166,7 @@ REFERENCE_RE = re.compile(
 OWN_ROOT_FILES = frozenset({
     "CLAUDE.md", "CONSTRAINTS.md", "CONTRIBUTING.md", "README.md", "STATUS.md",
     "AGENTS.md",
-    "MATURITY_ASSESSMENT.md", "IMPLEMENTATION_HANDOFF.md", "LICENSE",
+    "MATURITY_ASSESSMENT.md", "LICENSE",
     "requirements.txt", "requirements-dev.txt", ".ruff.toml", ".gitignore",
 })
 
