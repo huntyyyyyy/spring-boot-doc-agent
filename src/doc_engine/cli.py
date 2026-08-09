@@ -120,10 +120,8 @@ def cmd_coverage_gap_average(args: argparse.Namespace) -> int:
     return gap_main(argv)
 
 
-def cmd_coverage_measure(args: argparse.Namespace) -> int:
-    """Facade: ``doc-engine coverage-measure`` — oracle SoT or climb sensor."""
-    from doc_engine.ci.coverage_measure_cli import main as measure_main
-
+def _coverage_measure_argv(args: argparse.Namespace) -> list[str]:
+    """Build argv for ``coverage_measure_cli.main`` from the thin CLI facade."""
     argv: list[str] = []
     if getattr(args, "mode", None):
         argv.extend(["--mode", str(args.mode)])
@@ -139,7 +137,14 @@ def cmd_coverage_measure(args: argparse.Namespace) -> int:
         argv.append("--no-gap-report")
     if args.pytest_args:
         argv.extend(args.pytest_args)
-    return measure_main(argv)
+    return argv
+
+
+def cmd_coverage_measure(args: argparse.Namespace) -> int:
+    """Facade: ``doc-engine coverage-measure`` — oracle SoT or climb sensor."""
+    from doc_engine.ci.coverage_measure_cli import main as measure_main
+
+    return measure_main(_coverage_measure_argv(args))
 
 
 def cmd_complexipy_ratchet(args: argparse.Namespace) -> int:

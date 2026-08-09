@@ -55,7 +55,7 @@ class MeasureRun:
         strategy: MeasureStrategy | None = None,
     ) -> None:
         self.cwd = (cwd or Path.cwd()).resolve()
-        self.strategy: MeasureStrategy = strategy or OracleMeasureStrategy()
+        self.strategy = strategy or OracleMeasureStrategy()
 
     def wipe_local_artifacts(self) -> list[Path]:
         """Delete cwd-local coverage DB + this mode's XML artifacts only."""

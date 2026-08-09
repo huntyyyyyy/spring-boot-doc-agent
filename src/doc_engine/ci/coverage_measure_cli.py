@@ -1,4 +1,10 @@
-"""CLI for ``coverage-measure`` (oracle SoT vs climb sensor)."""
+"""CLI for ``coverage-measure`` (oracle SoT vs climb sensor).
+
+Usage:
+    python -m doc_engine.ci.coverage_measure_cli
+    python -m doc_engine.ci.coverage_measure_cli --mode climb --scope doc_engine.ci
+    doc-engine coverage-measure [--mode oracle|climb] [--scope PKG]
+"""
 
 from __future__ import annotations
 
