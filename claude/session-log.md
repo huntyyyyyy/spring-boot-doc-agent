@@ -4816,7 +4816,7 @@ Assumptions affected:
 Files touched: docs/research/13-tools-wave2-modularity-2026.md, docs/research/12-*, quality-backlog.md, src/doc_engine/tools/run_manifest*.py, citation_coverage*.py, tests/doc_engine/test_tools_wave2_ports.py, scripts/ratchets/size_baseline.json, claude/session-log.md
 
 ## 2026-08-09 — Debug E-MOD3 CI: façade json DIP + domain markers + pre_pr gap
-Commit: uncommitted
+Commit: 7183f01
 Tests: kitchen Ch07 atomic write + climb run_manifest + ports + markers + pre_pr suites green; full ruff green
 Assumptions affected:
 - Local pre-push mirrors CI hard gates — [New info — `pre_pr` standard now includes `test_domain_markers`; AGENTS.md requires `--auto` before push; tool-quirks documents scoped-pytest false green]
