@@ -138,6 +138,18 @@ Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-te
 
 ---
 
+## P9 — Kitchen harness modernization (fixtures / ports)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P9.0 | **E-KH0 Spec:** approve **K1–K12** (pytest fixtures SoT; refuse Testcontainers/Spec Kit runtime/DI containers for kitchen) | **Pending human Approve** | research 10 `spec_gate: APPROVED E-KH0` |
+| P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | Adopt after P9.0 | kitchen green; no chapter `setUpModule`; size/complexipy |
+| P9.2 | Optional syrupy / Hypothesis — **not** kitchen chapter SoT | Align E-QA3; KH-S2 | spike exit criteria |
+
+Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-harness-modernization-2026.md). Primaries: pytest fixtures docs + DeepWiki pytest/hypothesis/testcontainers; GitHub activity 2026-08-09; arXiv 2601.06615 (Fixturize), 2404.09398 (FlakyDoctor), 2606.04967 (SDD).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
@@ -146,5 +158,5 @@ Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-te
 **Done (E-RUN0–1):** suite-stalking sensors Spec + D1/D2/D17.  
 **Active tip:** oracle stabilize (#105) to **98.7** (necessary floor).  
 **Done (E-QA0–2):** adequacy Spec + sensors + Climb Archive Q2 witness checklist.  
-**Spec done:** **E-QA0** (Q1–Q8). Climb Cover% uplift requires adequacy witness; optional E-RUN2/D15 remains sensor-only.  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists.
+**Spec pending:** **E-KH0** (K1–K12) — kitchen fixtures/ports; do not implement E-KH1 until Approve.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT.
