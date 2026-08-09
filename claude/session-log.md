@@ -4706,3 +4706,13 @@ Tests: size-ratchet exit 0 (0 test file offenders; 38 src legacy baselined); foc
 Assumptions affected:
 - `claude/steering-prompts/13-code-quality-research-prompt.md` — size ceilings / package roots — [New info — FILE_LOC_HARD 225; SIZE_ROOTS now src/doc_engine + src/stf + tests/; CONTRIBUTING cohesion bar applies to tests]
 Files touched: CONTRIBUTING.md, CONSTRAINTS.md, scripts/ci/check_code_quality.py, scripts/ratchets/size_baseline.json, scripts/ratchets/code_quality_baseline.json, src/doc_engine/ci/size_*, src/doc_engine/cli*, src/doc_engine/scanning/support/_codeql_*, tests/** modularization, tests/support/**
+
+
+## 2026-08-09 — E-CI: thin ci.yml + reusable BC workflows + LOC/heredoc SoT
+Commit: 0fb2d78
+Tests: check_workflow_yaml OK (LOC/heredoc green); verify_tool_pins OK; pytest tests/ci workflow/size/summary/pins 23/23; check_repo_claims OK; check_code_quality OK; emit_abi_matrix OK
+Assumptions affected:
+- `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — CI installs/verifies pins via `ci.yml` — [Resolved — install in `.github/actions/setup-python-repo`; pin verify in `python-gates.yml` via `scripts/ci/verify_tool_pins.py`; verify predicates retargeted]
+- `claude/steering-prompts/14-software-architect-and-testing-agent-prompt.md` — `semgrep_rule_coverage.py` wired in `ci.yml` — [Resolved — step lives in `python-gates.yml`; verify predicate retargeted]
+- `CONSTRAINTS.md` Integration item 2 / Runtime item 4 / Known precision item 10 — gate strings in `ci.yml` — [Resolved — prose + verify HTML comments point at `python-gates.yml` / setup action under policy C-A]
+Files touched: .github/workflows/{ci,python-gates,codeql-signals,quality-gates,sonar}.yml, scripts/ci/{verify_tool_pins,coverage_run_summary,check_workflow_yaml}.py, src/doc_engine/ci/workflow_size.py, tests/ci/test_*, CONTRIBUTING.md, CONSTRAINTS.md, docs/research/{07-ci-workflow-modularity,quality-backlog}.md, docs/design/ci-workflow-modularity-design-2026-08-09.md, claude/steering-prompts/{08,14}-*.md, claude/session-log.md

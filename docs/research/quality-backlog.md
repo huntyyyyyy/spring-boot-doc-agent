@@ -99,10 +99,21 @@ Research: [`docs/research/06-test-suite-bounded-contexts-parallel.md`](06-test-s
 
 ---
 
+## P6 — CI workflow modularity
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P6.0 | **E-CI0 Spec:** approve **C1–C6** + policy **C-A** | **DONE** (2026-08-09) | design memo APPROVED |
+| P6.1 | **E-CI1:** reusable workflows + scripts; `ci.yml` ≤200; LOC ratchet | **DONE** (2026-08-09) | `check_workflow_yaml` C4 |
+
+Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modularity.md).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
-**Done (E-TEST0):** Spec approve **T1–T18** + policy **T-A**.  
-**Done (E-TEST1):** domain markers + ABI shards + doc_engine meeting ≥**98.7** (debt=`domain_unclassified` only).  
-**Next:** optional E-TEST2 spikes (in-shard xdist) or other backlog — not prerequisites.  
-**Never:** suite-wide xdist before shards; fuzzy green; scoped fail_under as floor proof.
+**Done (E-TEST0–1):** domain markers + ABI shards.  
+**Done (E-CI0):** Spec approve **C1–C6** + policy **C-A**.  
+**Done (E-CI1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
+**Never:** suite-wide xdist before shards; fuzzy green; Spec Kit WorkflowEngine as CI runtime.

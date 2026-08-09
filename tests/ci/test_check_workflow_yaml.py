@@ -6,13 +6,18 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import pytest
 from check_workflow_yaml import (
     check_workflows,
     collect_security_findings,
     scan_workflow_security,
 )
 
-import pytest
+from doc_engine.ci.workflow_size import (
+    CI_CALLER_MAX_LOC,
+    check_no_python_heredocs,
+    check_workflow_loc,
+)
 
 pytestmark = pytest.mark.domain_ci_meta
 
@@ -107,6 +112,34 @@ class WorkflowSecurityRampTest(unittest.TestCase):
             [],
             msg="committed workflows must not fail the severity ramp",
         )
+
+
+class WorkflowSizeSoTTest(unittest.TestCase):
+    def test_committed_workflows_pass_loc_and_heredoc(self):
+        from check_workflow_yaml import WORKFLOWS, _label
+
+        heredoc = check_no_python_heredocs(WORKFLOWS, label_fn=_label)
+        hard, _adv = check_workflow_loc(WORKFLOWS, label_fn=_label)
+        self.assertEqual(heredoc, [])
+        self.assertEqual(hard, [])
+
+    def test_fat_ci_yml_hard_fails(self):
+        fat = "\n".join(f"# pad {i}" for i in range(CI_CALLER_MAX_LOC + 5))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "ci.yml").write_text(fat + "\n", encoding="utf-8")
+            hard, _adv = check_workflow_loc(root, label_fn=lambda p: p.name)
+        self.assertTrue(any("ci.yml" in e for e in hard))
+
+    def test_python_heredoc_hard_fails(self):
+        text = "name: x\non: [push]\njobs:\n  t:\n    runs-on: ubuntu-latest\n"
+        text += "    steps:\n      - run: |\n          python3 - <<'PY'\n          print(1)\n          PY\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "fat.yml").write_text(text, encoding="utf-8")
+            errors = check_no_python_heredocs(root, label_fn=lambda p: p.name)
+        self.assertTrue(errors)
+
 
 if __name__ == "__main__":
     unittest.main()

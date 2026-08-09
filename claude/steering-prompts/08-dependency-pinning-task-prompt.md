@@ -1,13 +1,13 @@
 ---
 category: Dependency pinning (not a research prompt — implementation task)
-status: [Resolved — 2026-07-28] `requirements.txt` at plugin root pins `ast-grep-cli~=0.45.0`, `sqllineage~=1.5.8`, `pathspec~=1.1.1`, `semgrep~=1.171.0`; `.github/workflows/ci.yml` installs from it and verifies the ast-grep PATH pin. CodeQL CLI remains a standalone binary (not a Python package). See `CONSTRAINTS.md` "Runtime prerequisites" items 1 and 4 and `MATURITY_ASSESSMENT.md` "Dependency reproducibility".
-related: CONSTRAINTS.md "Runtime prerequisites" items 1-4, MATURITY_ASSESSMENT.md "Dependency reproducibility" scorecard row and adoption gate checklist, .github/workflows/ci.yml
+status: [Resolved — 2026-07-28] `requirements.txt` at plugin root pins `ast-grep-cli~=0.45.0`, `sqllineage~=1.5.8`, `pathspec~=1.1.1`, `semgrep~=1.171.0`; `.github/actions/setup-python-repo` installs from it and `python-gates.yml` verifies PATH pins via `scripts/ci/verify_tool_pins.py`. CodeQL CLI remains a standalone binary (not a Python package). See `CONSTRAINTS.md` "Runtime prerequisites" items 1 and 4 and `MATURITY_ASSESSMENT.md` "Dependency reproducibility".
+related: CONSTRAINTS.md "Runtime prerequisites" items 1-4, MATURITY_ASSESSMENT.md "Dependency reproducibility" scorecard row and adoption gate checklist, .github/workflows/python-gates.yml, .github/actions/setup-python-repo/action.yml
 verify:
   - contains:requirements.txt:ast-grep-cli
   - contains:requirements.txt:sqllineage
   - contains:requirements.txt:pathspec
   - contains:requirements.txt:semgrep
-  - contains:.github/workflows/ci.yml:requirements.txt
+  - contains:.github/actions/setup-python-repo/action.yml:requirements.txt
 ---
 
 # Task prompt: pin this plugin's three unpinned third-party dependencies

@@ -1,0 +1,130 @@
+name: Python gates
+
+# Reusable Python gate workflow (E-CI / policy C-A). Called from ci.yml.
+# Owns the ABI install/lint/claims surface and the single 3.11 coverage.xml
+# writer. Never coverage-combine across matrix cells or worktrees.
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup-python-repo
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: check_workflow_yaml.py (GitHub Actions YAML parse + LOC gate)
+        run: python3 scripts/ci/check_workflow_yaml.py
+
+      - name: Verify tool pins on PATH (ast-grep + semgrep)
+        run: python3 scripts/ci/verify_tool_pins.py
+
+      - name: ruff check (lint scripts + src/doc_engine)
+        run: python3 -m ruff check --no-cache scripts/ src/doc_engine/
+
+      - name: check_no_client_identifiers.py (tracked-tree denylist)
+        run: python3 scripts/ci/check_no_client_identifiers.py --tracked-tree
+
+      - name: check_code_quality.py (annotation + docstring + statement size hard; complexity advisory)
+        run: python3 scripts/ci/check_code_quality.py
+
+      - name: check_repo_claims.py (state-claim gate)
+        run: python3 scripts/ci/check_repo_claims.py
+
+      - name: check_test_domain_markers.py (E-TEST domain BC ratchet)
+        if: matrix.python-version == '3.11'
+        run: python3 -m doc_engine.ci.test_domain_markers_check
+
+      - name: rule_coverage.py (rule non-vacuity gate)
+        if: matrix.python-version == '3.11'
+        run: python3 scripts/coverage/rule_coverage.py
+
+      - name: semgrep_rule_coverage.py (non-vacuity + FP ratchet)
+        if: matrix.python-version == '3.11'
+        run: python3 scripts/coverage/semgrep_rule_coverage.py
+
+      - name: claim metrics (reports; never fails)
+        if: matrix.python-version == '3.11'
+        run: python3 scripts/ci/check_repo_claims.py --metrics
+
+      - name: pytest ABI note (shards in abi-domain-shards)
+        if: matrix.python-version != '3.11'
+        run: echo "ABI pytest lives in job abi-domain-shards (domain markers)."
+
+      - name: pytest tests/ (line coverage ratchet on doc_engine + stf)
+        if: matrix.python-version == '3.11'
+        run: |
+          rm -f .coverage .coverage.* coverage.xml
+          pytest tests/ -v --tb=short \
+            --cov=doc_engine --cov=stf \
+            --cov-branch \
+            --cov-report=term-missing \
+            --cov-report=xml \
+            --cov-fail-under=${{ env.COV_FAIL_UNDER }}
+        env:
+          COV_FAIL_UNDER: "98.7"
+
+      - name: Coverage summary + below-floor gap-average
+        if: always() && matrix.python-version == '3.11'
+        run: |
+          python3 scripts/ci/coverage_run_summary.py --github-summary
+          doc-engine coverage-gap-average \
+            --coverage-xml coverage.xml \
+            --floor "${COV_FAIL_UNDER}" \
+            --worst 15 \
+            --append-github-summary
+        env:
+          COV_FAIL_UNDER: "98.7"
+          PYTHON_VERSION: ${{ matrix.python-version }}
+
+      - name: Upload coverage.xml (3.11 canonical)
+        if: matrix.python-version == '3.11' && success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: error
+
+      - name: validate_artifacts.py (spring_signals fixture schema)
+        if: matrix.python-version == '3.11'
+        run: python3 -m doc_engine.tools.validate_artifacts spring_signals scripts/fixtures/spring_signals_fixture_expected.json
+
+      - name: portable Stage 0 (deterministic_only + artifact schema gate)
+        if: matrix.python-version == '3.11'
+        run: |
+          OUT=$(mktemp -d)
+          doc-engine pipeline run scripts/fixtures/spring_signals \
+            --out-dir "$OUT" \
+            --compliance-profile deterministic_only \
+            --skip-drift
+          python3 -m doc_engine.tools.validate_artifacts --all "$OUT" \
+            --require spring_signals,groups,cross_group_edges,capacity_preflight_report,facts,certification
+          test -f "$OUT/certification.json"
+
+      - name: mutate.py (mutation score; reports, non-blocking)
+        if: matrix.python-version == '3.11'
+        run: python3 scripts/ratchets/mutate.py
+
+      - name: spring-signals mutation_driver.py (assertion mutants; non-blocking)
+        if: matrix.python-version == '3.11'
+        run: python3 tests/spring_signals/mutation_driver.py
+
+      - name: "check_llms_coverage.py (advisory: merged PRs without claude/llms/pr-N.md)"
+        if: matrix.python-version == '3.11'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/ci/check_llms_coverage.py

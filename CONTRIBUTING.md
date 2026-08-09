@@ -229,13 +229,32 @@ Only CONTRIBUTING / CI hard gates are merge SoT. Climb Cover%, gap-average,
 LLM-judge, Recall@K, and carbon metrics are **sensors** — never silent
 promotions.
 
+## CI layering (E-CI / policy C-A)
+
+`.github/workflows/ci.yml` is an **orchestration-only caller** (≤200 LOC):
+triggers, permissions, concurrency, and `uses:` edges. Bounded CI contexts live
+in reusable workflows:
+
+| Workflow | Owns |
+| --- | --- |
+| `python-gates.yml` | install/lint/claims/markers/rule coverage + 3.11 `coverage.xml` oracle |
+| `abi-tests.yml` | domain ABI shards (policy T-A; never writes coverage) |
+| `codeql-signals.yml` | CodeQL pack invariants / compile / fixture runtime (+ bundle pin) |
+| `quality-gates.yml` | hard in-repo gates after downloading `coverage-xml` |
+| `sonar.yml` | soft SonarCloud signal (`continue-on-error` on the caller) |
+
+Step bundles stay in-repo under `.github/actions/` (e.g. `setup-python-repo`).
+Gate *logic* stays in `scripts/ci/` / `doc-engine` CLIs — no inline
+`python <<'PY'` heredocs in workflows. `scripts/ci/check_workflow_yaml.py`
+enforces parse/security plus LOC/heredoc SoT (`doc_engine.ci.workflow_size`).
+
 ## In-repo quality gates
 
 SonarCloud **Free** cannot customize Quality Gate thresholds. Policy is enforced
-in GitHub Actions by the `quality-gates` job in `.github/workflows/ci.yml`, which
-runs `doc-engine quality-gates` after the `test` job publishes `coverage-xml`.
-Logic lives in `src/doc_engine/ci/` (installed console CLI); `scripts/ci/` keeps
-thin deprecated shims only.
+in GitHub Actions by the `quality-gates` reusable workflow (called from
+`ci.yml` after `python-gates` publishes `coverage-xml`). Logic lives in
+`src/doc_engine/ci/` (installed console CLI); `scripts/ci/` keeps thin
+deprecated shims only (plus CI meta gates such as `check_workflow_yaml.py`).
 
 ### Evidence table (2026-qualified tools only)
 
