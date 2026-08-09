@@ -1,12 +1,11 @@
-"""Stage 0 scanning package."""
+"""Stage 0 scanning package.
+
+Heavy scanners and sqllineage stay behind ``__getattr__`` / local imports so
+lightweight tool CLIs (secrets heuristics, walk helpers) do not cold-start
+sqlfluff on every ``python -m`` invocation.
+"""
 
 from typing import Any, Dict, List, Optional
-
-from doc_engine.scanning._merge_signals import SpringSignalMerger
-from doc_engine.scanning._orchestrator import run_scan
-from doc_engine.scanning._resolve_lineage import SpringLineageResolver
-from doc_engine.scanning._scanner_registry import get_scanner, resolve_scanner_names
-from doc_engine.scanning.spring import scan
 
 __all__ = [
     "scan",
@@ -17,6 +16,30 @@ __all__ = [
     "SpringSignalMerger",
     "SpringLineageResolver",
 ]
+
+
+def __getattr__(name: str) -> Any:
+    if name == "scan":
+        from doc_engine.scanning.spring import scan
+
+        return scan
+    if name == "run_scan":
+        from doc_engine.scanning._orchestrator import run_scan
+
+        return run_scan
+    if name in ("get_scanner", "resolve_scanner_names"):
+        from doc_engine.scanning import _scanner_registry as registry
+
+        return getattr(registry, name)
+    if name == "SpringSignalMerger":
+        from doc_engine.scanning._merge_signals import SpringSignalMerger
+
+        return SpringSignalMerger
+    if name == "SpringLineageResolver":
+        from doc_engine.scanning._resolve_lineage import SpringLineageResolver
+
+        return SpringLineageResolver
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 def scan_repository(
@@ -30,6 +53,8 @@ def scan_repository(
     allow_codeql_build: bool = False,
 ) -> Dict[str, Any]:
     """Run Stage 0 signal extraction for a Spring Boot repository."""
+    from doc_engine.scanning.spring import scan
+
     return scan(
         repo_path,
         sql_dialect=sql_dialect,
