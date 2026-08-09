@@ -13,20 +13,16 @@ from doc_engine.scanning._resolve_lineage import (
     SpringLineageResolver,
 )
 from doc_engine.scanning._scanner_registry import get_scanner, resolve_scanner_names
+from doc_engine.scanning.astgrep import errors as _astgrep_err
 from doc_engine.scanning.build_command import BuildCommandError, validate_build_command
 from doc_engine.scanning.support._codeql_runner import CodeQLError, CodeQLNotFoundError
+
+AstGrepError = _astgrep_err.AstGrepError
+AstGrepNotFoundError = _astgrep_err.AstGrepNotFoundError
 
 
 class CodeQLScannerError(RuntimeError):
     """Any CodeQL-based scanner failure that should not kill the test process."""
-
-
-class AstGrepError(RuntimeError):
-    """Raised when the ast-grep subprocess fails or returns unparseable output."""
-
-
-class AstGrepNotFoundError(AstGrepError):
-    """Raised when the ast-grep binary cannot be found."""
 
 
 def _wrapper_command(repo_path: str, name: str, goals: str) -> Optional[str]:

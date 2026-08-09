@@ -169,8 +169,30 @@ Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci
 | P11.0 | **E-MOD0 Spec:** approve **M1–M12** (CLI BCs; hexagonal Protocols; vertical slices; refuse DI/`utils`/mesh) | **Done** (2026-08-09) | research 12 `spec_gate: APPROVED E-MOD0` |
 | P11.1 | **E-MOD1:** `mock_stages` split + `MockStageStrategy` Protocol/registry; stable façade; size baseline `--update` (MOD-S1) | **Done** (2026-08-09) | files ≤225; complexipy ≤5; kitchen/pipeline green |
 | P11.2 | **E-MOD2:** `capacity_preflight` then drift/partition | **Done** (2026-08-09) | same gates; CLI flags/outputs stable |
+| P11.3 | **E-MOD3:** `run_manifest` + `citation_coverage` wave 2 (ports + façades; MOD-S1) | **Done** (2026-08-09) | files ≤225; climb monkeypatch DIP; `-m` stable |
+| P11.4 | **E-FAC0 / E-RES0 / E-CUR0:** façade poke + design-research + Cursor-native hooks | **Done** (2026-08-09) | poke gate; research hook; `.cursor/hooks.json` |
 
-Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipeline-stage0-modularity-ports-2026.md).
+Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipeline-stage0-modularity-ports-2026.md),
+[`docs/research/13-tools-wave2-modularity-2026.md`](13-tools-wave2-modularity-2026.md),
+[`docs/research/14-facade-poke-research-hooks-2026.md`](14-facade-poke-research-hooks-2026.md).
+
+---
+
+## P12 — Legacy size-offender remediation (grandfather → zero)
+
+Do **not** leave `size_baseline.json` >225 files forever. Remediations are product
+work: MOD-S1 + poke + intentionality bar (separate asserts, `monkeypatch`, one-act
+`raises`). Never raise `FILE_LOC_HARD` / complexipy.
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P12.0 | **E-LEG0 Spec:** approve **LEG1–LEG10** (debt ledger; 2026 ports/tach/SDD; intentionality; refuse DI/LLM-MAS SoT) | **Approved 2026-08-09** | research 15 `spec_gate: APPROVED E-LEG0` |
+| P12.1 | **E-SCAN1:** scanning vertical modularity (`scanning/astgrep/` + façade) | **Done** (2026-08-09) | size offender ↓; poke; complexipy ≤5; LEG8 on touched tests |
+| P12.2 | **E-TOOL4 → E-PIPE1 → E-QUERY1 → E-STF1** | Later (ordered) | same gates; one BC tip at a time |
+| P12.3 | **LEG-S1** (optional): tach vs import-linter measured gap on scanning | Spike / Defer | measured gap or Defer dual-SoT |
+
+Research: [`docs/research/15-legacy-size-remediation-2026-frameworks.md`](15-legacy-size-remediation-2026-frameworks.md),
+[`docs/research/16-scan1-astgrep-modularity-2026.md`](16-scan1-astgrep-modularity-2026.md).
 
 ---
 
@@ -178,8 +200,8 @@ Research: [`docs/research/12-pipeline-stage0-modularity-ports-2026.md`](12-pipel
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Research complete — awaiting Approve** (2026-08-09) | research 17 `spec_gate: PENDING APPROVE E-CQL0` |
-| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Blocked on P13.0** | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
+| P13.0 | **E-CQL0 Spec:** approve **CQ1–CQ9** (fingerprint skip; job `if:`; refuse paths-on-required / cache-as-SoR / overlay) | **Approved** (2026-08-09, merge) | research 17 `spec_gate: APPROVED E-CQL0` |
+| P13.1 | **E-CQL1 Implement:** `codeql_signals_change_gate.py` + `codeql-signals.yml` gate; align `pre_pr` / CONTRIBUTING | **Active** (unblocked) | expensive jobs skip when corpus unchanged; invariants always; fail-closed |
 
 Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql-signals-skip-fingerprint-2026.md).
 
@@ -199,6 +221,11 @@ Research: [`docs/research/17-codeql-signals-skip-fingerprint-2026.md`](17-codeql
 **Done (E-MOD0):** M1–M12 Spec Approve (2026-08-09).  
 **Done (E-MOD1):** `mock_stages` concept modules + `MockStageStrategy` registry (2026-08-09).  
 **Done (E-MOD2):** Stage-0 tool façades — `capacity_preflight` / `spring_drift_check` / `partition_repo` (2026-08-09).  
-**Active (Spec):** **E-CQL0** — CodeQL signals fingerprint skip (research 17); Implement blocked on Approve.  
-**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; workflow `paths` on required CI; Actions cache as CodeQL merge SoR.
+**Done (E-MOD3):** tools wave 2 — `run_manifest` / `citation_coverage` (2026-08-09).  
+**Done (E-FAC0 / E-RES0):** façade poke gate + design-research hook (2026-08-09).  
+**Done (E-LEG0):** legacy size-remediation Spec LEG1–LEG10 (2026-08-09).  
+**Done (E-SCAN1 Spec + Implement):** SCAN1-A–J + `scanning/astgrep/` façade (2026-08-09).  
+**Done (E-CQL0 Spec):** CQ1–CQ9 Approve (2026-08-09).  
+**Active:** **E-CQL1** — CodeQL signals fingerprint skip Implement (research 17).  
+**Defer:** E-UX2 (U6); E-QA3 Hypothesis spike; E-RUN2 D15 / E-RUN3–5 — sensors only when product need bites; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR.

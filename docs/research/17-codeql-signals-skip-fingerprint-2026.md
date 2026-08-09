@@ -1,6 +1,6 @@
 ---
 title: E-CQL0 — CodeQL signals CI skip / fingerprint (when logic unchanged)
-status: RESEARCH COMPLETE — awaiting Approve E-CQL0 (2026-08-09)
+status: E-CQL0 APPROVED (2026-08-09) — merge Approve of CQ1–CQ9
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — CI BC codeql-signals (fixture pack gate)
@@ -17,7 +17,7 @@ do_not:
   - CodeQL overlay / diff-informed as substitute for traced fixture gate
   - ML CI-skip / RTS as gate; fatten ci.yml; utils/ grab-bag
   - conflate Stage-0 pack (codeql/spring-signals) with CI pack (spring-signals/codeql)
-spec_gate: PENDING APPROVE E-CQL0 — decisions CQ1–CQ9
+spec_gate: APPROVED E-CQL0 (2026-08-09) — CQ1–CQ9
 ---
 
 # Principal memo: skip CodeQL signals runtime when logic unchanged

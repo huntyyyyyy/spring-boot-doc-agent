@@ -62,6 +62,22 @@
       },
       {
         "$comment": [
+          "E-RES0 (2026-08-09): design-shaped commits require research Spec memo",
+          "with arXiv + GitHub evidence (docs/research/14). Separate from",
+          "require_hardened_tests — different failure class (research theater vs",
+          "missing sibling tests)."
+        ],
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"adapters/claude/hooks/require_design_research.py\"",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "$comment": [
           "Added 2026-07-25 after this exact mistake produced two false 'green'",
           "reports in one session: `gradle ... | tail -30` then `echo \"EXIT=$?\"`",
           "reads tail's exit code, not gradle's -- tail always exits 0. Runs on",
