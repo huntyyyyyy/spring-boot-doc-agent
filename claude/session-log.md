@@ -4742,7 +4742,7 @@ Assumptions affected:
 Files touched: tests/doc_engine/test_kitchen_sink_*, test_pipeline_runner_stages.py, test_spring_signal_scan_*, tests/ci/test_domain_marker_cli_coverage.py, CONSTRAINTS.md, claude/session-log.md
 
 ## 2026-08-09 — E-QA1/E-QA2: adequacy sensors + climb Q2 witness checklist
-Commit: 86167e6
+Commit: 6602087
 Tests: pytest tests/ci/test_adequacy_*.py 16/16; ruff OK; complexipy ≤5 on adequacy; size-ratchet exit 0; check_repo_claims OK; check_workflow_yaml OK; oracle argv still fail_under=98.7
 Assumptions affected:
 - E-QA0 design / P8.1–P8.2 Active — [Resolved — `doc_engine.ci.adequacy` + `adequacy_summary.py` wired in python-gates always-summary; CONTRIBUTING Climb Archive Q2; backlog P8.1/P8.2 Done]
