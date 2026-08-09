@@ -112,7 +112,7 @@ rather than upgrading it into a claim about the repo.
 **A8. `[Evidenced]` means directly readable — not "strongly supported."** These
 tag names carry two different meanings in this repo, which is a live hazard
 rather than a hypothetical one. The review layer
-(`claude/steering-prompts/10-review-persona-and-standards.md` and sessions using
+(`docs/process/steering-prompts/10-review-persona-and-standards.md` and sessions using
 it) defines `[Evidenced]` as *"strongly supported, one inference step short of
 executed proof"* and `[Confirmed]` as *"traced in source + verified against the
 tests."* `doc-taxonomy.md` means something stricter and different: `[Evidenced]`

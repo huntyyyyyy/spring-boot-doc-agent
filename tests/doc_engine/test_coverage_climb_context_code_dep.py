@@ -41,43 +41,35 @@ def test_ensure_citation_pool_and_todos(tmp_path: Path, monkeypatch: pytest.Monk
     assert ctx.todos == [{"todo": 1}]
     ctx_mod._ensure_todos(ctx)  # early return
 
-def test_handlers_and_partition(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    calls: list[str] = []
-    ctx = SimpleNamespace(
-        pool=["p"],
-        signals={},
-        repo_path=tmp_path,
-        out_dir=tmp_path,
-        groups=[],
-        edges={},
-        todos=[],
-        today="t",
-        docs_dir=tmp_path / "docs",
-        existing_readme=None,
-    )
-    monkeypatch.setattr(ctx_mod, "_ensure_citation_pool", lambda c: c.pool)
-    monkeypatch.setattr(ctx_mod, "_ensure_todos", lambda c: None)
 
+def _handler_ctx(tmp_path: Path):
+    return SimpleNamespace(
+        pool=["p"], signals={}, repo_path=tmp_path, out_dir=tmp_path,
+        groups=[], edges={}, todos=[], today="t",
+        docs_dir=tmp_path / "docs", existing_readme=None,
+    )
+
+
+def _patch_mock_handlers(monkeypatch, calls):
     def fake_resolve(stage_key, registry=None):
         mapping = {
-            ctx_mod.STAGE_FILE_SUMMARIZE: (
-                lambda *a, **k: calls.append("sum") or "ok"
-            ),
-            ctx_mod.STAGE_ARCHITECT: (
-                lambda *a, **k: calls.append("arch") or "ok"
-            ),
-            ctx_mod.STAGE_GAP_INTERVIEW: (
-                lambda *a, **k: calls.append("gap") or "ok"
-            ),
-            ctx_mod.STAGE_DOC_WRITER: (
-                lambda *a, **k: calls.append("docs") or "ok"
-            ),
+            ctx_mod.STAGE_FILE_SUMMARIZE: (lambda *a, **k: calls.append("sum") or "ok"),
+            ctx_mod.STAGE_ARCHITECT: (lambda *a, **k: calls.append("arch") or "ok"),
+            ctx_mod.STAGE_GAP_INTERVIEW: (lambda *a, **k: calls.append("gap") or "ok"),
+            ctx_mod.STAGE_DOC_WRITER: (lambda *a, **k: calls.append("docs") or "ok"),
         }
         return mapping[stage_key]
-
+    monkeypatch.setattr(ctx_mod, "_ensure_citation_pool", lambda c: c.pool)
+    monkeypatch.setattr(ctx_mod, "_ensure_todos", lambda c: None)
     monkeypatch.setattr(ctx_mod, "resolve_mock_stage", fake_resolve)
     monkeypatch.setattr(ctx_mod, "_read_json", lambda *_a, **_k: {})
     monkeypatch.setattr(ctx_mod, "find_existing_readme", lambda *_a, **_k: None)
+
+
+def test_handlers_invoke_mock_stages(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    calls: list[str] = []
+    ctx = _handler_ctx(tmp_path)
+    _patch_mock_handlers(monkeypatch, calls)
     def log(*_a, **_k):
         return None
     assert ctx_mod._handler_file_summarize(ctx, log) == "ok"
@@ -86,15 +78,16 @@ def test_handlers_and_partition(monkeypatch: pytest.MonkeyPatch, tmp_path: Path)
     assert ctx_mod._handler_doc_writer(ctx, log) == "ok"
     assert set(calls) == {"sum", "arch", "gap", "docs"}
 
-    from doc_engine.pipeline.context import StageKind
 
+def test_partition_and_record_reused_scan() -> None:
+    from doc_engine.pipeline.context import StageKind
+    calls: list[str] = []
     specs = [
         SimpleNamespace(kind=StageKind.DETERMINISTIC, name="d"),
         SimpleNamespace(kind=StageKind.GENERATIVE, name="g"),
     ]
     det, gen = ctx_mod._partition_specs_by_kind(specs)
     assert len(det) == 1 and len(gen) == 1
-
     state = SimpleNamespace(
         skip_signal_scan=True,
         runner=SimpleNamespace(record=lambda *a, **k: calls.append("rec")),
@@ -104,6 +97,7 @@ def test_handlers_and_partition(monkeypatch: pytest.MonkeyPatch, tmp_path: Path)
     assert "rec" in calls
     state.skip_signal_scan = False
     ctx_mod._record_reused_signal_scan(state)
+
 
 def test_select_specs_error_and_mock_executor(monkeypatch: pytest.MonkeyPatch) -> None:
     state = SimpleNamespace(

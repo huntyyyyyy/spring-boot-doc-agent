@@ -36,7 +36,7 @@ install/lint/test/run commands live in `README.md` and
   — it skips markers/poke.
 - Design-shaped / ambiguous research asks: follow skill
   `principal-se-research-epic` and memo
-  [`docs/research/14-facade-poke-research-hooks-2026.md`](docs/research/14-facade-poke-research-hooks-2026.md)
+  [`docs/research/process/14-facade-poke-research-hooks-2026.md`](docs/research/process/14-facade-poke-research-hooks-2026.md)
   (arXiv + active GitHub + DeepWiki Tier C). Commit hook
   `require_design_research` blocks design-shaped commits without a Spec memo.
 - **Agent policy hooks (portable):** project [`.cursor/hooks.json`](.cursor/hooks.json)
@@ -71,4 +71,4 @@ install/lint/test/run commands live in `README.md` and
   `check_pipe_exit_code.py`). Safe pattern: redirect to a file and check the
   tool’s own exit code, e.g.
   `pytest tests/ -q > log.txt 2>&1; RC=$?; tail -n 40 log.txt` (see
-  `claude/tool-quirks.md`).
+  `docs/process/tool-quirks.md`).

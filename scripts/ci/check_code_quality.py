@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 check_code_quality.py — hard gates on annotation coverage, docstring
-orientation, and function *statement* growth; advisory reporting on
+orientation, and function *statement* ceilings; advisory reporting on
 cyclomatic complexity/depth (cognitive complexity is owned by complexipy).
 
 WHY THIS EXISTS
@@ -11,22 +11,19 @@ check_llms_coverage.py, scan freshness by spring_drift_check.py. The code
 itself was enforced by nothing, and it shows in a way that is measurable
 rather than aesthetic.
 
-Schema v5 (2026-08-08) re-hardens *statement* size: growth of an existing
-function's statement count, or a new function above HARD_STATEMENTS (50),
-fails CI. Absolute file LOC / package-root function ceilings also live in
-``doc-engine size-ratchet`` (wired into quality-gates). Complexity/depth in
-this checker stay advisory — complexipy ≤5 is the cognitive SoR.
+Schema v6 (2026-08-09): function statements hard-fail above HARD_STATEMENTS
+(20) for **new and existing** — growth within ≤20 is allowed; **no grandfather**
+of oversized bodies. Absolute file LOC ceilings live in ``doc-engine size-ratchet``.
+Complexity/depth in *this* checker stay advisory; ``complexipy`` ≤5 is the
+cognitive SoR (offender ceiling 0 — no grandfather).
 
-Schema v4 (2026-07-29) had demoted per-function statements/complexity/depth
-to advisory after a monotonic size ratchet taught extract-or `--update`
-theater. v5 keeps complexity/depth advisory but makes statements bite again,
-paired with absolute hard ceilings in the size ratchet so growth past a
-one-screen function cannot hide behind a raised "prior worst."
+Schema v5 (2026-08-08) had re-hardened statement *growth* (any increase) plus
+new functions above 50. v6 replaces that with a flat ≤20 ceiling.
 
 What stays hard here:
   - production type-annotation coverage must not fall
   - runnable modules must orient the reader (Usage/Run with) near the top
-  - function statement count must not grow; new functions ≤ HARD_STATEMENTS
+  - function statements ≤ HARD_STATEMENTS (no oversized grandfather)
 
 WHAT THIS DOES NOT DO
 It does not lint, format, or sort imports — that is ruff's job (.ruff.toml).
@@ -67,8 +64,9 @@ DEFAULT_ROOTS = (
 # 4: size/complexity/depth become advisory; measure scripts/ + src/doc_engine/.
 # 5: statement growth + new functions above HARD_STATEMENTS are hard again;
 #    complexity/depth remain advisory (complexipy owns cognitive ≤5).
-SCHEMA_VERSION = 5
-HARD_STATEMENTS = 50
+# 6: flat statements ≤20 (HARD_STATEMENTS); no oversized grandfather.
+SCHEMA_VERSION = 6
+HARD_STATEMENTS = 20
 SOFT_STATEMENTS = 20
 
 USAGE_RE = re.compile(r"^\s*(usage|run with|run)\s*:", re.IGNORECASE)
@@ -386,27 +384,37 @@ def size_advisories(baseline: Dict[str, object], current: Dict[str, object]) -> 
     return notes
 
 
+def _hard_statement_scope(key: str) -> bool:
+    """Product + tests only; scripts/ tracked in baseline but not hard-failed here.
+
+    size-ratchet owns package roots under ``src/``; scripts statement debt is G6
+    (policy bump without Verify pack) — remediate under E-COH / backlog, not by
+    grandfathering product modules.
+    """
+    return key.startswith("src/") or key.startswith("tests/")
+
+
 def statement_issues(baseline: Dict[str, object], current: Dict[str, object]) -> List[str]:
-    """Hard failures when statement counts grow or new functions exceed HARD."""
+    """Hard failures when in-scope functions exceed HARD_STATEMENTS (flat ceiling)."""
     issues: List[str] = []
-    base_functions: Dict[str, Dict[str, int]] = baseline.get("functions", {})  # type: ignore[assignment]
     cur_functions: Dict[str, Dict[str, int]] = current.get("functions", {})  # type: ignore[assignment]
+    base_functions: Dict[str, Dict[str, int]] = baseline.get("functions", {})  # type: ignore[assignment]
 
     for key in sorted(cur_functions):
-        cur = cur_functions[key]
-        stmts = cur.get("statements", 0)
-        base = base_functions.get(key)
-        if base is None:
-            if stmts > HARD_STATEMENTS:
-                issues.append(
-                    f"new function {key} has statements={stmts}, "
-                    f"above hard ceiling ({HARD_STATEMENTS})"
-                )
+        if not _hard_statement_scope(key):
             continue
-        prior = base.get("statements", 0)
-        if stmts > prior:
+        stmts = cur_functions[key].get("statements", 0)
+        if stmts <= HARD_STATEMENTS:
+            continue
+        if key not in base_functions:
             issues.append(
-                f"{key} grew: statements {prior} -> {stmts}"
+                f"new function {key} has statements={stmts}, "
+                f"above hard ceiling ({HARD_STATEMENTS})"
+            )
+        else:
+            issues.append(
+                f"{key} has statements={stmts}, "
+                f"above hard ceiling ({HARD_STATEMENTS})"
             )
     return issues
 

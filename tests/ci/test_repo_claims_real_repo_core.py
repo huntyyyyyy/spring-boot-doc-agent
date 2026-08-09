@@ -105,7 +105,7 @@ class TestRealRepoCore(unittest.TestCase):
             f.path
             for f in soft
             if f.fingerprint.startswith("C-missing:")
-            and f.path.startswith("claude/steering-prompts/")
+            and f.path.startswith("docs/process/steering-prompts/")
         ]
         self.assertEqual(
             unchecked, [], f"prompts with an unchecked status: {unchecked}"

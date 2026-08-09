@@ -5,7 +5,7 @@ research date: 2026-08-09
 approved_policies: R1-R8
 implement_now: D1 D2 D17
 claim tiers: Evidenced / Confirmed / Unknown
-research: docs/research/08-rust-test-runners-bottlenecks.md
+research: docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 ---
 
@@ -25,7 +25,7 @@ synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 | Policies | **R1–R8** Approved |
 | Implement now | **D1** durations inventory · **D2** plateau attribution · **D17** pre-pytest cascade clarity |
 | Defer / refuse this stream | **D3** rpytest · **D5/D6** oracle shard/`-n` · **D8** LLM flake triage · **D9** NameRTS · **D12** OTel · **D20** in-tree Rust |
-| Research | [`docs/research/08-rust-test-runners-bottlenecks.md`](../research/08-rust-test-runners-bottlenecks.md) |
+| Research | [`docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md`](../research/08-rust-test-runners-bottlenecks.md) |
 | Backlog | [`docs/research/quality-backlog.md`](../research/quality-backlog.md) P7 |
 
 ---

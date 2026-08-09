@@ -27,6 +27,20 @@ PRE_PR_SKIP=1 PRE_PR_SKIP_REASON='short justification here' git push
 
 `PRE_PR_SKIP` alone is rejected. Prefer fixing the failing suite.
 
+## Research look-first (Cursor hooks)
+
+Design-shaped work must open [`docs/research/README.md`](docs/research/README.md)
+before writing Specs or SoT-touching code. Project hooks in `.cursor/hooks.json`:
+
+- `beforeSubmitPrompt` injects the domain map (cloud-safe; do **not** rely on
+  `sessionStart` — it does not run on cloud agents).
+- `preToolUse` on Write/StrReplace/EditNotebook **fail-closed** denies
+  design-shaped paths until a session Read of the map is recorded.
+
+Claude adapter packaging (`adapters/claude/`, `.claude/`, `.claude-plugin/`)
+stays; process lore lives under `docs/process/`. Spec:
+[`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
 ## Write-then-verify: never trust a write tool's success response alone
 
 **Rule:** after any file write made through a device bridge, remote tool, or subagent whose only view of the filesystem is a bridged connection, the very next action is re-reading that file's actual content directly. A "written" response, a byte count, or a reported mtime is not evidence the live file changed — only a direct re-read is.
@@ -34,7 +48,7 @@ PRE_PR_SKIP=1 PRE_PR_SKIP_REASON='short justification here' git push
 **Why this rule exists, not just what it says:** this repo has two confirmed, independent incidents of the same failure shape — trusting a tool's or document's account of state instead of re-verifying it directly:
 
 1. A cloud sandbox session driving this repo through a device-file-bridge tool had that bridge repeatedly report a file as "written" when the live copy on disk hadn't actually changed. Caught only by re-reading the file's actual bytes after a "success" response, and re-discovered more than once because each new session initially trusted the tool's own response instead of checking. The early PR #1 write-then-verify origin story lives in git history, not as a live SoT.
-2. A later, unrelated incident: a memoryless session trusted a handoff document's stale claim about repo state (that certain files were still untracked) rather than checking actual repo state (`git status`, `gh pr view`) directly, and committed files onto the wrong branch as a result. Logged in `claude/session-log.md` (2026-07-23, "Stray scaffolding commit landed on the wrong branch").
+2. A later, unrelated incident: a memoryless session trusted a handoff document's stale claim about repo state (that certain files were still untracked) rather than checking actual repo state (`git status`, `gh pr view`) directly, and committed files onto the wrong branch as a result. Logged in `docs/process/session-log.md` (2026-07-23, "Stray scaffolding commit landed on the wrong branch").
 
 Same root cause both times — trusting a tool's or a document's *report* of state instead of the state itself — different surface (file content vs. git/PR state). The rule below is written broadly enough to cover both.
 
@@ -44,7 +58,7 @@ Same root cause both times — trusting a tool's or a document's *report* of sta
 - Before treating any prior session's, document's, or tool's claim about current repo state as fact — "this file was already fixed," "these files are untracked," "this test suite passes" — re-check it directly (`git status`, a direct file read, an actual test run) rather than building further work on top of an unverified claim. Do not assume a prior session's baseline is already live; diff and confirm first.
 - If you are automating verification (rather than doing it by hand) inside this repo's own Claude Code plugin tooling, the supported mechanism is a `PostToolUse` hook matched against `Write|Edit` (see `code.claude.com/docs/en/hooks` and `plugins-reference`'s hook-matcher documentation) — Claude Code's own docs don't document any built-in guarantee that a write tool's reported success reflects the live file, so a hook is the place to add that guarantee yourself if you need it enforced automatically rather than as a manual checklist step. No such hook exists in this repo as of this writing; this paragraph documents the mechanism, not a claim that it's wired in.
 
-Research note (per `claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md`): a GitHub search for small, well-maintained "write-then-verify" or checksum-confirm utilities turned up nothing genuinely on-point — the closest matches (`teran/checksum`, `nicjansma/checksum-verifier`, and similar) solve a different problem (verifying a *downloaded* file's integrity against a known-good checksum), not "did my own write tool's success response reflect what's actually on disk." Per the shared research standard, finding nothing better than "read the file back after writing it" is itself a valid result — that's the rule stated above, codified as an explicit checklist step rather than left as tribal knowledge.
+Research note (per `docs/process/steering-prompts/05-clarity-delivery-trust-research-prompt.md`): a GitHub search for small, well-maintained "write-then-verify" or checksum-confirm utilities turned up nothing genuinely on-point — the closest matches (`teran/checksum`, `nicjansma/checksum-verifier`, and similar) solve a different problem (verifying a *downloaded* file's integrity against a known-good checksum), not "did my own write tool's success response reflect what's actually on disk." Per the shared research standard, finding nothing better than "read the file back after writing it" is itself a valid result — that's the rule stated above, codified as an explicit checklist step rather than left as tribal knowledge.
 
 ## Module docstrings: reference first, rationale second
 
@@ -298,7 +312,7 @@ review concerns ([2310.03673](https://arxiv.org/abs/2310.03673),
 | New-code coverage ≥ **98.7%** | [diff-cover](https://github.com/Bachmann1234/diff_cover) `~=10.5.0` (+ pytest-cov XML) | 843 | **v10.5.0** (2026-08-08) | 2026-08-08 | Diff line coverage vs compare ref | **hard fail** |
 | Duplication ≤ **3%** | [jscpd](https://github.com/kucherenko/jscpd) `@5.0.14` via local `npm ci` | 5980 | **v5.0.14** (2026-07-27) | 2026-08-07 | Token clone % on **changed** `src/doc_engine` + `src/stf` `.py` | **hard fail** |
 | Complexity ≤ **5** / function | [complexipy](https://github.com/rohaquinlop/complexipy) `~=6.2.0` | 748 | **6.2.0** (2026-07-23) | 2026-08-04 | Cognitive complexity (Campbell/Sonar-inspired; not affiliated with Sonar) | **hard fail** on offender-count ratchet (`scripts/ratchets/complexipy_baseline.json`) until count reaches 0 |
-| File / function size | in-repo `doc-engine size-ratchet` (+ `check_code_quality.py` statement growth) | — | — | — | File LOC hard **>225**; function statements hard **>50** (soft advisory **>150** LOC / **>20** stmts). Prefer files ≤225 LOC and one-screen functions | **hard fail** via `scripts/ratchets/size_baseline.json` (offender maps must not rise/grow); statement *growth* also hard in `check_code_quality.py` |
+| File / function size | in-repo `doc-engine size-ratchet` (+ `check_code_quality.py` statement ceiling) | — | — | — | File LOC hard **>225**; function statements hard **>20**. Prefer files ≤225 LOC and one-screen functions. **No grandfather** of oversized files/functions — split until offender maps are empty | **hard fail** via `scripts/ratchets/size_baseline.json` (offender maps must be empty / must not rise); statements **>20** also hard in `check_code_quality.py` |
 | Import cycles / coupling | [tach](https://github.com/tach-org/tach) `~=0.35.0` | 2785 | **v0.35.0** (2026-05-12) | 2026-06-11 | `forbid_circular_dependencies` (`tach.toml`) | **hard fail** |
 | Soft McCabe backup | [ruff](https://github.com/astral-sh/ruff) C901 (already pinned `~=0.16.0`) | 49k+ | 2026 releases | 2026-08-08 | Cyclomatic (McCabe) — **not** cognitive | optional / not selected in `.ruff.toml` |
 | Security signal | Semgrep + CodeQL (existing CI jobs) | — | — | — | SAST | unchanged hard jobs |
@@ -306,9 +320,10 @@ review concerns ([2310.03673](https://arxiv.org/abs/2310.03673),
 
 **import-linter** also 2026-PASS (PyPI 2.13 uploaded 2026-07-03; push 2026-08-07) but is not wired — tach alone owns the cycle gate.
 
-**Complexity remediation.** Policy target is ≤5 cognitive complexity per function on all of `src/doc_engine` + `src/stf`. While legacy offenders remain, CI hard-fails when the offender *count* rises vs `scripts/ratchets/complexipy_baseline.json` (ratchet downward after each remediation batch; never raise it). Prefer named helpers and early returns over micro-fragmentation; do not weaken the ≤5 threshold.
+**Complexity remediation.** Policy target is ≤5 cognitive complexity per function on all of `src/doc_engine` + `src/stf`. CI hard-fails when the offender *count* is above 0 vs `scripts/ratchets/complexipy_baseline.json` (ceiling stays **0** — never raise it). Prefer named helpers and early returns over micro-fragmentation; do not weaken the ≤5 threshold. Intentional exceptions require a Spec, not a silent baseline bump.
 
-**Size remediation.** Prefer files at or under **225 LOC** and functions that fit one screen (~20–50 statements). Soft advisories print above 150 LOC / 20 statements; hard ceilings are file LOC **>225** and function statements >50 under `src/doc_engine`, `src/stf`, **and `tests/`** (`doc-engine size-ratchet`, baseline `scripts/ratchets/size_baseline.json` — never raise offender maps). Baselined >225 files are **debt**, not permanent exceptions — pay them down via the **E-LEG** program ([`docs/research/15-legacy-size-remediation-2026-frameworks.md`](docs/research/15-legacy-size-remediation-2026-frameworks.md)): MOD-S1 concept splits, façade poke, tach boundaries, and an **intentionality bar** on touched tests (separate asserts for distinct contracts, pytest `monkeypatch` for temporary mods, one act inside `raises`). Remediations must be intentional design (SRP / DDD boundaries, ports-adapters, registries) — not mechanical line chops or grab-bag `utils`/`helpers` modules. Separately, `scripts/ci/check_code_quality.py` hard-fails when an existing function's statement count grows or a new function exceeds 50 statements (complexity/depth there remain advisory) — do **not** pack composite smells to dodge that growth.
+**Size remediation.** Prefer files at or under **225 LOC** and functions at or under **20 statements**. Soft advisories print at 150–225 LOC and at exactly 20 statements; hard ceilings are file LOC **>225** and function statements **>20** under `src/doc_engine`, `src/stf`, **and `tests/`** (`doc-engine size-ratchet`, baseline `scripts/ratchets/size_baseline.json`). **No grandfather** of oversized files or functions — pay debt down to empty offender maps via concept splits (SRP / DDD boundaries, ports-adapters, registries), not mechanical `part2` chops or grab-bag `utils`/`helpers`. Structure splits so **imports match an intended dependency blueprint** ([tach](https://github.com/tach-org/tach) already hard-fails cycles); finer `depends_on` module maps are Spec-gated (keep `tach.toml` cycle gate until a BC map is Approved). See **E-LEG** ([`docs/research/process/15-legacy-size-remediation-2026-frameworks.md`](docs/research/process/15-legacy-size-remediation-2026-frameworks.md)). Separately, `scripts/ci/check_code_quality.py` hard-fails any measured function (including `scripts/` + `tests/`) above **20** statements (cyclomatic complexity/depth there remain advisory; **complexipy** owns cognitive ≤5).
+
 
 ### Test-suite domains (E-TEST / policy T-A)
 
@@ -442,4 +457,4 @@ In-repo Sonar parameters remain in `sonar-project.properties`
 
 ## Current status and steering prompts
 
-See `STATUS.md` for a current-state snapshot of this plugin (what's done, what's pending, next concrete action) and `claude/session-log.md` for the append-only history of commits that affect the assumptions in `claude/steering-prompts/`. `CLAUDE.md` explains when a commit needs a session-log entry.
+See `STATUS.md` for a current-state snapshot of this plugin (what's done, what's pending, next concrete action) and `docs/process/session-log.md` for the append-only history of commits that affect the assumptions in `docs/process/steering-prompts/`. `CLAUDE.md` explains when a commit needs a session-log entry.

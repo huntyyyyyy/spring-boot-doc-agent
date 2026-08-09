@@ -49,4 +49,4 @@ Run a principal-level AD review using the north-star catalog plus prompt 10 evid
 
 ## See also
 
-- `claude/steering-prompts/10-review-persona-and-standards.md`
+- `docs/process/steering-prompts/10-review-persona-and-standards.md`

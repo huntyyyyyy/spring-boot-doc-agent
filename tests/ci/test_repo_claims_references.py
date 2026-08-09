@@ -118,7 +118,7 @@ class TestReferences(TreeCase):
     def test_historical_record_is_not_reference_checked(self) -> None:
         """An append-only log correctly cites files that existed when it was
         written. verify_llms_docs.py was real for 19 PRs."""
-        self.write("claude/session-log.md", "Added `scripts/long_since_deleted.py`.\n")
+        self.write("docs/process/session-log.md", "Added `scripts/long_since_deleted.py`.\n")
         self.assertEqual(self.run_check(), 0)
 
     def test_tombstone_line_is_exempt(self) -> None:
@@ -136,7 +136,7 @@ class TestReferences(TreeCase):
 class TestVerifyPredicates(TreeCase):
     """Check C."""
 
-    PROMPT = "claude/steering-prompts/01-x-research-prompt.md"
+    PROMPT = "docs/process/steering-prompts/01-x-research-prompt.md"
 
     def test_satisfied_predicate_passes(self) -> None:
         self.assertEqual(self.run_check(), 0)

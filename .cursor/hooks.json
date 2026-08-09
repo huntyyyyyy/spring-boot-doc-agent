@@ -1,15 +1,19 @@
 {
   "$comment": [
-    "Project-native Cursor hooks so Claude PreToolUse policies apply in",
-    "Cursor Desktop and Cursor Cloud without relying on optional Claude",
-    "third-party hook import. Policy SoT remains under adapters/claude/hooks/",
-    "and .claude/hooks/; .cursor/hooks/bridge_claude_policy.py only normalizes",
-    "I/O. Cloud loads this file only (not ~/.cursor/hooks.json).",
-    "Docs: https://cursor.com/docs/hooks — beforeShellExecution + preToolUse.",
-    "Shell tool maps to Claude Bash via the bridge; Grep is matched on preToolUse."
+    "Project-native Cursor hooks. Claude PreToolUse policies bridge via",
+    "bridge_claude_policy.py. E-DOC1 adds research-map look-first (DOC7/DOC9):",
+    "beforeSubmitPrompt inject + Read receipt + deny design writes without it.",
+    "Cloud loads this file only (not ~/.cursor/hooks.json).",
+    "Docs: https://cursor.com/docs/hooks — no sessionStart on cloud agents."
   ],
   "version": 1,
   "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "python3 .cursor/hooks/inject_research_map.py",
+        "timeout": 10
+      }
+    ],
     "beforeShellExecution": [
       {
         "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/deny_text_search.py",
@@ -37,6 +41,19 @@
         "command": "python3 .cursor/hooks/bridge_claude_policy.py adapters/claude/hooks/deny_text_search.py",
         "matcher": "Grep",
         "timeout": 15
+      },
+      {
+        "command": "python3 .cursor/hooks/require_research_map_read.py",
+        "matcher": "Write|StrReplace|EditNotebook",
+        "timeout": 15,
+        "failClosed": true
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "python3 .cursor/hooks/record_research_map_read.py",
+        "matcher": "Read",
+        "timeout": 10
       }
     ]
   }

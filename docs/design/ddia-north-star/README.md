@@ -88,4 +88,4 @@ See [meta/enrichment-protocol.md](meta/enrichment-protocol.md). Prefer deepening
 
 ## Relationship to review prompts and `claude/`
 
-[`claude/steering-prompts/10-review-persona-and-standards.md`](../../../claude/steering-prompts/10-review-persona-and-standards.md) anchors DDIA for plugin review. This catalog is the **lookupable** claim set. Session memos under `claude/research/` remain chronological notes; they must **cite** north-star ids rather than restate them. The previous location `claude/research/ddia-north-star/` is a **redirect stub only**.
+[`docs/process/steering-prompts/10-review-persona-and-standards.md`](../../../docs/process/steering-prompts/10-review-persona-and-standards.md) anchors DDIA for plugin review. This catalog is the **lookupable** claim set. Session memos under `claude/research/` remain chronological notes; they must **cite** north-star ids rather than restate them. The previous location `claude/research/ddia-north-star/` is a **redirect stub only**.

@@ -157,7 +157,7 @@ class TestAgentSearchTooling(TreeCase):
 
 class TestNotContainsPredicate(TreeCase):
     def test_not_contains_both_directions(self) -> None:
-        self.write("claude/steering-prompts/02-y-research-prompt.md",
+        self.write("docs/process/steering-prompts/02-y-research-prompt.md",
                    "---\nstatus: resolved\n"
                    "verify:\n  - not_contains:scripts/widget.py:Grep\n---\n\nBody.\n")
         self.assertEqual(self.run_check(), 0)
@@ -168,7 +168,7 @@ class TestNotContainsPredicate(TreeCase):
     def test_not_contains_on_a_missing_file_fails(self) -> None:
         """Vacuous truth would turn a rename into a silent pass -- the exact
         direction prompt 06's status went wrong in."""
-        self.write("claude/steering-prompts/02-y-research-prompt.md",
+        self.write("docs/process/steering-prompts/02-y-research-prompt.md",
                    "---\nstatus: resolved\n"
                    "verify:\n  - not_contains:scripts/gone.py:Grep\n---\n\nBody.\n")
         self.assertEqual(self.run_check(), 1)

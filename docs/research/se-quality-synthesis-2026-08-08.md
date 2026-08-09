@@ -5,13 +5,13 @@ research date: 2026-08-08
 base_sha: 5eaac2ac20fbe2c4aebd2652c64a58defbcc10a7
 claim tiers: Evidenced / Confirmed / Unknown
 sources:
-  - docs/research/01-coverage-oracle-climb-solid.md
-  - docs/research/02-foundational-agentic-se-2026.md
-  - docs/research/03-scientific-dimensions-metrics.md
-  - docs/research/04-implementation-frameworks.md
-  - docs/research/05-dynamics-neuromorphic.md
+  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+  - docs/research/process/02-foundational-agentic-se-2026.md
+  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+  - docs/research/process/04-implementation-frameworks.md
+  - docs/research/process/05-dynamics-neuromorphic.md
 supersedes:
-  - docs/research/_wip-coverage-design-audit.md
+  - docs/research/archive/_wip-coverage-design-audit.md
 related:
   - docs/design/coverage-measure-modes-design-2026-08-08.md
   - docs/research/quality-backlog.md
@@ -269,5 +269,5 @@ See sibling segments for full bibliographies. Primary merges: CoverUp 2403.16218
 
 ## 9. WIP status
 
-`docs/research/_wip-coverage-design-audit.md` is **superseded** by this file + the five
+`docs/research/archive/_wip-coverage-design-audit.md` is **superseded** by this file + the five
 segments. Keep only as historical dump or delete in a follow-up docs commit.

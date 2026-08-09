@@ -1,6 +1,6 @@
 ---
 name: directional-tests
-description: Write tests that defend a named property and are proven able to fail, rather than tests that chase coverage. Use whenever adding or reviewing a test, a gate, a checker, or any assertion in this repo — before writing the test, to pick what it should defend, and after writing it, to prove it can go red. Covers the non-vacuity proof, invariants versus probes, keeping an assertion no wider than its name, asserting exit codes rather than internal issue lists, stating every bound, and wiring a new suite into CI so it actually runs. Distinct from claude/tool-quirks.md (ambient tool oddities) and claude/llms/ (PR verification commands) — this is about whether a test points at anything.
+description: Write tests that defend a named property and are proven able to fail, rather than tests that chase coverage. Use whenever adding or reviewing a test, a gate, a checker, or any assertion in this repo — before writing the test, to pick what it should defend, and after writing it, to prove it can go red. Covers the non-vacuity proof, invariants versus probes, keeping an assertion no wider than its name, asserting exit codes rather than internal issue lists, stating every bound, and wiring a new suite into CI so it actually runs. Distinct from docs/process/tool-quirks.md (ambient tool oddities) and docs/process/pr-verification/ (PR verification commands) — this is about whether a test points at anything.
 ---
 
 # Directional tests
@@ -79,7 +79,7 @@ limit — the bound belongs in the output. Done and truncated are different word
 A non-vacuity proof once reported success without running: `grep -c` printing `0` **exits 1**, which
 short-circuited an `&&` chain, so the retry never executed and the exit code read belonged to `grep`.
 Run proofs from a script file, capture `$?` on the very next line, and never read it through a pipe or
-a chain. See `claude/tool-quirks.md`.
+a chain. See `docs/process/tool-quirks.md`.
 
 ### 9. An unrun test is not a test.
 

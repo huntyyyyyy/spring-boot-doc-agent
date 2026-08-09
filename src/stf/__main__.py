@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from stf.adapters.gh_handoff import handoff_gh, write_handoff_checklist
+from stf.cli_parser import build_parser as _build_stf_parser
 from stf.ingest.review import findings_to_spec_seed, ingest_review_path
 from stf.runners.implement import constitution_excerpts, plan_gate, run_waves, verify_gate
 from stf.runners.store import SpecStore, TasksStore, write_change_pack
@@ -184,66 +185,22 @@ def _cmd_verify_gate(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="stf", description="Spec Task Framework CLI")
-    sub = p.add_subparsers(dest="command", required=True)
-
-    ing = sub.add_parser("ingest-review", help="Review MD → Findings JSON (+ optional SPEC seed)")
-    ing.add_argument("--review", required=True)
-    ing.add_argument("--out", required=True)
-    ing.add_argument("--spec-dir")
-    ing.add_argument("--target", default="pr-94-query-surface")
-    ing.set_defaults(func=_cmd_ingest)
-
-    val = sub.add_parser("validate", help="Lint TASKS.json (+ SPEC.json)")
-    val.add_argument("--target-dir", required=True)
-    val.add_argument("--root", help="fixture root for Locate anchors")
-    val.set_defaults(func=_cmd_validate)
-
-    pg = sub.add_parser("plan-gate", help="SPOQ plan gate before Wave 1")
-    pg.add_argument("--target-dir", required=True)
-    pg.set_defaults(func=_cmd_plan_gate)
-
-    st = sub.add_parser("seed-tasks", help="Seed TASKS.json from SPEC.json")
-    st.add_argument("--target-dir", required=True)
-    st.set_defaults(func=_cmd_seed_tasks)
-
-    imp = sub.add_parser("implement", help="Run topological waves")
-    imp.add_argument("--target-dir", required=True)
-    imp.add_argument("--plan-gate", action="store_true")
-    imp.add_argument("--resume-wave", type=int, default=None)
-    imp.set_defaults(func=_cmd_implement)
-
-    tok = sub.add_parser("reviewer-token", help="Issue 2+N validation token")
-    tok.add_argument("--target-dir", required=True)
-    tok.set_defaults(func=_cmd_reviewer_token)
-
-    done = sub.add_parser("mark-done", help="Mark DONE with Reviewer token")
-    done.add_argument("--target-dir", required=True)
-    done.add_argument("--token", required=True)
-    done.set_defaults(func=_cmd_mark_done)
-
-    ho = sub.add_parser("handoff-gh", help="Create gh issues or checklist")
-    ho.add_argument("--target-dir", required=True)
-    ho.add_argument("--create", action="store_true", help="actually call gh")
-    ho.add_argument("--checklist", help="write markdown checklist path")
-    ho.set_defaults(func=_cmd_handoff)
-
-    con = sub.add_parser("constitution", help="Emit CONSTRAINTS+CLAUDE excerpts")
-    con.add_argument("--repo-root", default=".")
-    con.add_argument("--out", required=True)
-    con.set_defaults(func=_cmd_constitution)
-
-    mut = sub.add_parser("mutate", help="Apply named lint mutant")
-    mut.add_argument("--target-dir", required=True)
-    mut.add_argument("--mode", required=True)
-    mut.add_argument("--out")
-    mut.set_defaults(func=_cmd_mutate)
-
-    vg = sub.add_parser("verify-gate", help="Run verify gate (dry-run if no exec)")
-    vg.add_argument("--cmd", action="append", default=[])
-    vg.set_defaults(func=_cmd_verify_gate)
-
-    return p
+    """Public CLI parser; handlers stay wired in this module."""
+    return _build_stf_parser(
+        commands={
+            "ingest": _cmd_ingest,
+            "validate": _cmd_validate,
+            "plan_gate": _cmd_plan_gate,
+            "seed_tasks": _cmd_seed_tasks,
+            "implement": _cmd_implement,
+            "reviewer_token": _cmd_reviewer_token,
+            "mark_done": _cmd_mark_done,
+            "handoff": _cmd_handoff,
+            "constitution": _cmd_constitution,
+            "mutate": _cmd_mutate,
+            "verify_gate": _cmd_verify_gate,
+        }
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -86,7 +86,7 @@ class TestBacktest(unittest.TestCase):
         sessions to read two prompt files where "neither exists". Its payload
         is one fenced block of bare, un-backticked paths -- both properties
         that an earlier draft of this checker skipped."""
-        rel = "claude/steering-prompts/12-review-session-launcher.md"
+        rel = "docs/process/steering-prompts/12-review-session-launcher.md"
         found = self._flag_count(rel, lambda t: t
                                  .replace("10-review-persona-and-standards.md",
                                           "08-review-persona-and-standards.md")
@@ -95,7 +95,7 @@ class TestBacktest(unittest.TestCase):
         self.assertGreaterEqual(found, 2, "the launcher incident is not caught")
 
     def test_current_launcher_is_clean(self) -> None:
-        rel = "claude/steering-prompts/12-review-session-launcher.md"
+        rel = "docs/process/steering-prompts/12-review-session-launcher.md"
         self.assertEqual(self._flag_count(rel, lambda t: t), 0)
 
     def test_current_state_doc_citing_a_deleted_script_is_caught(self) -> None:

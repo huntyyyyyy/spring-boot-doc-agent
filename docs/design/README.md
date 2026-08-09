@@ -11,5 +11,7 @@ Product and architecture design guidance that is **not** session chronology.
 | [test-suite-parallel-domains-design-2026-08-08.md](test-suite-parallel-domains-design-2026-08-08.md) | Test BCs → CI shards — **APPROVED** Spec gate E-TEST0 (T1–T18, policy T-A) |
 | [suite-stalking-sensors-design-2026-08-09.md](suite-stalking-sensors-design-2026-08-09.md) | Suite-stalking sensors — **APPROVED** Spec gate E-RUN0 (R1–R8; D1/D2/D17) |
 | [test-adequacy-markers-design-2026-08-09.md](test-adequacy-markers-design-2026-08-09.md) | Test adequacy markers — **APPROVED** Spec gate E-QA0 (Q1–Q8; anti-padding) |
+| [ci-workflow-modularity-design-2026-08-09.md](ci-workflow-modularity-design-2026-08-09.md) | CI workflow modularity design |
+| [concept-split-cohesion-design-2026-08-09.md](concept-split-cohesion-design-2026-08-09.md) | Cohesion-first concept splits — **APPROVED** Spec gate E-COH0 (COH1–COH12) |
 
 Dated research and design memos live under **`docs/design/`**, not under `claude/`. Cite north-star `id`s rather than restating them. Older notes may still exist under `claude/research/` until relocated.

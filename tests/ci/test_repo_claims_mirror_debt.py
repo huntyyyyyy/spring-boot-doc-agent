@@ -25,7 +25,7 @@ class TestMirrorDebt(unittest.TestCase):
 
     def _repo(self, tmp):
         root = Path(tmp)
-        prompts = root / "claude" / "steering-prompts"
+        prompts = root / "docs" / "process" / "steering-prompts"
         prompts.mkdir(parents=True)
         for name in ["00-a.md", "01-b.md", "06-c.md", "07-not-mirrored.md",
                      "13-also-not.md"]:
@@ -49,10 +49,10 @@ class TestMirrorDebt(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = self._repo(tmp)
             crc.write_mirror_state(root)
-            edited = root / "claude" / "steering-prompts" / "01-b.md"
+            edited = root / "docs" / "process" / "steering-prompts" / "01-b.md"
             edited.write_text("# 01-b.md\n\nstatus changed\n", encoding="utf-8")
             self.assertEqual(crc.mirror_debt(root),
-                             ["claude/steering-prompts/01-b.md"])
+                             ["docs/process/steering-prompts/01-b.md"])
 
     def test_prompts_above_06_are_not_tracked(self):
         """07+ were authored in this repo and exist nowhere else, so they
@@ -61,7 +61,7 @@ class TestMirrorDebt(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = self._repo(tmp)
             crc.write_mirror_state(root)
-            (root / "claude" / "steering-prompts" / "07-not-mirrored.md").write_text(
+            (root / "docs" / "process" / "steering-prompts" / "07-not-mirrored.md").write_text(
                 "# heavily edited\n", encoding="utf-8")
             self.assertEqual(crc.mirror_debt(root), [])
 
@@ -74,11 +74,11 @@ class TestMirrorDebt(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = self._repo(tmp)
             crc.write_mirror_state(root)
-            prompt = root / "claude" / "steering-prompts" / "01-b.md"
+            prompt = root / "docs" / "process" / "steering-prompts" / "01-b.md"
             prompt.write_text("# 01-b.md\n\nedited\n", encoding="utf-8")
             self.assertEqual(len(crc.mirror_debt(root)), 1)
 
-            crc.apply_affirm(root, ["claude/steering-prompts/01-b.md"])
+            crc.apply_affirm(root, ["docs/process/steering-prompts/01-b.md"])
             self.assertEqual(len(crc.mirror_debt(root)), 1,
                              "--affirm must not clear mirror debt")
 

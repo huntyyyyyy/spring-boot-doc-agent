@@ -88,7 +88,7 @@ def write_baseline(path: Path, offender_count: int) -> None:
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
-def main(argv: list[str] | None = None) -> int:
+def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--baseline",
@@ -101,22 +101,17 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="rewrite baseline from the current offender count",
     )
-    args = parser.parse_args(argv)
+    return parser.parse_args(argv)
 
-    current = count_offenders()
-    if args.update:
-        write_baseline(args.baseline, current)
-        print(f"baseline written: {args.baseline} (offender_count={current})")
-        return 0
 
-    if not args.baseline.is_file():
+def _run_ratchet_check(baseline_path: Path, current: int) -> int:
+    if not baseline_path.is_file():
         print(
-            f"error: no baseline at {args.baseline}; create one with --update",
+            f"error: no baseline at {baseline_path}; create one with --update",
             file=sys.stderr,
         )
         return 2
-
-    baseline = load_baseline(args.baseline)
+    baseline = load_baseline(baseline_path)
     ceiling = int(baseline["offender_count"])
     print(
         f"complexipy ratchet: offenders={current} baseline_ceiling={ceiling} "
@@ -135,6 +130,16 @@ def main(argv: list[str] | None = None) -> int:
             f"re-baseline with --update to ratchet downward"
         )
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = _parse_args(argv)
+    current = count_offenders()
+    if args.update:
+        write_baseline(args.baseline, current)
+        print(f"baseline written: {args.baseline} (offender_count={current})")
+        return 0
+    return _run_ratchet_check(args.baseline, current)
 
 
 if __name__ == "__main__":  # pragma: no cover - CLI entry glue

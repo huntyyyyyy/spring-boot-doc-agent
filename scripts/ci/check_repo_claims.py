@@ -17,11 +17,11 @@ frontmatter and CONSTRAINTS.md's bracket tags today.
 
 WHY THIS EXISTS
 This repo does not have a record-keeping problem. Its record is unusually
-good: an append-only claude/session-log.md, a claude/tool-quirks.md index,
+good: an append-only docs/process/session-log.md, a docs/process/tool-quirks.md index,
 a bracket-tagged CONSTRAINTS.md, and status frontmatter on every steering
 prompt. Every failure below happened anyway, with the record right there.
 
-  - claude/steering-prompts/06-wiredrift-check-task-prompt.md carried
+  - docs/process/steering-prompts/06-wiredrift-check-task-prompt.md carried
     `status: not started` after the work had landed. The session log
     flagged it three separate times (2026-07-25 "Sync STATUS.md...",
     and twice more) before anyone edited the field. Logging caught it
@@ -33,7 +33,7 @@ prompt. Every failure below happened anyway, with the record right there.
   - CONSTRAINTS.md cited verify_llms_docs.py after it was deleted, so
     the file contradicted itself in two places.
 
-The common shape, in the log's own words (claude/session-log.md, the
+The common shape, in the log's own words (docs/process/session-log.md, the
 citation-coverage entry): "every tag form is auditable, and no tag is
 not. Omitting a tag is always the locally cheapest move." Generalized: a
 claim about repo state costs nothing to write and nothing ever reads it
@@ -155,6 +155,7 @@ DERIVED_RE = re.compile(
 # same fact twice" enforceable. Now they agree by construction.
 OWN_PATH_PREFIXES = (
     "scripts/", "tests/", "agents/", "adapters/", "skills/", "claude/",
+    "docs/process/", "docs/research/",
     ".github/", ".claude/", ".claude-plugin/",
 )
 
@@ -173,8 +174,8 @@ OWN_ROOT_FILES = frozenset({
 # Check B runs against current-state documents only, and this scoping is the
 # whole reason it has a usable signal rate.
 #
-# An append-only record -- claude/session-log.md, claude/llms/pr-N.md,
-# claude/tool-quirks.md -- correctly cites files that existed when it was
+# An append-only record -- docs/process/session-log.md, docs/process/pr-verification/pr-N.md,
+# docs/process/tool-quirks.md -- correctly cites files that existed when it was
 # written. verify_llms_docs.py was real for 19 PRs before 2f82971 deleted it,
 # so every historical mention of it is accurate history, not drift. The same
 # holds for the steering-prompt *bodies*, which CLAUDE.md explicitly says are
@@ -187,8 +188,19 @@ OWN_ROOT_FILES = frozenset({
 CURRENT_STATE_ROOT_DOCS = frozenset({
     "CLAUDE.md", "CONSTRAINTS.md", "CONTRIBUTING.md", "README.md",
     "STATUS.md", "MATURITY_ASSESSMENT.md", "AGENTS.md",
+    # Domain map + active backlog are current-state SoR; Spec memos may cite
+    # future deliverables and stay out of check B (DOC1 / E-DOC1).
+    "docs/research/README.md",
+    "docs/research/quality-backlog.md",
+    "docs/research/se-quality-synthesis-2026-08-08.md",
 })
-CURRENT_STATE_PREFIXES = ("skills/", "agents/", "adapters/", ".claude/")
+# docs/process/session-log.md, tool-quirks.md, and pr-verification/ are
+# append-only history (see comment above) — not current-state for check B.
+# Method steering prompts enter via live_method_prompts(), not this prefix.
+# Spec memos under docs/research/<domain>/ cite proposed paths — not check B.
+CURRENT_STATE_PREFIXES = (
+    "skills/", "agents/", "adapters/", ".claude/",
+)
 
 # `pr-N.md`, `<name>.md`, `stage-N/` -- a template, not a path. An isolated
 # capital letter inside the filename is the tell; real names here are either
@@ -368,7 +380,7 @@ def derive_ci_test_steps(root: Path) -> str:
 
 
 def derive_steering_prompt_count(root: Path) -> str:
-    prompts = (root / "claude" / "steering-prompts").glob("[0-9][0-9]-*.md")
+    prompts = (root / "docs" / "process" / "steering-prompts").glob("[0-9][0-9]-*.md")
     return str(len(list(prompts)))
 
 
@@ -593,7 +605,7 @@ def live_method_prompts(root: Path) -> Set[str]:
     "neither exists", and every session it launched started from a broken
     instruction. That is a current-state claim by any reading.
     """
-    prompts = (root / "claude" / "steering-prompts").glob("[0-9][0-9]-*.md")
+    prompts = (root / "docs" / "process" / "steering-prompts").glob("[0-9][0-9]-*.md")
     return {p.relative_to(root).as_posix() for p in prompts
             if "status" not in parse_frontmatter(p.read_text(encoding="utf-8"))}
 
@@ -641,7 +653,7 @@ def resolve_reference(root: Path, token: str) -> Optional[str]:
       - a line anchor (`partition_repo.py:248-257`) -- the path must exist
         and the line must be inside the file, which is the mis-anchored
         citation this repo has already shipped once
-      - a placeholder (`claude/llms/pr-N.md`) -- a template, never resolved
+      - a placeholder (`docs/process/pr-verification/pr-N.md`) -- a template, never resolved
     """
     if PLACEHOLDER_RE.search(token):
         return None
@@ -1288,7 +1300,7 @@ def extract_bracket_tag_claims(root: Path, path: Path) -> List[Claim]:
 
 
 CLAIM_CORPORA: Tuple[Tuple[str, str, object], ...] = (
-    ("steering-prompts", "claude/steering-prompts/[0-9][0-9]-*.md",
+    ("steering-prompts", "docs/process/steering-prompts/[0-9][0-9]-*.md",
      extract_frontmatter_claims),
     ("constraints", "CONSTRAINTS.md", extract_bracket_tag_claims),
 )
@@ -1309,10 +1321,10 @@ def collect_claims(root: Path) -> List[Claim]:
 # Editing one of the first seven creates an obligation to copy the change
 # back, and this session cannot discharge it -- a CLI session has git and no
 # project access, a Cowork session has the reverse. That obligation has been
-# carried in prose in claude/session-log.md, which means it is only as
+# carried in prose in docs/process/session-log.md, which means it is only as
 # reliable as someone reading the log.
-MIRRORED_PROMPT_GLOB = "claude/steering-prompts/0[0-6]-*.md"
-MIRROR_STATE = Path("claude") / "steering-prompts" / "mirror-state.json"
+MIRRORED_PROMPT_GLOB = "docs/process/steering-prompts/0[0-6]-*.md"
+MIRROR_STATE = Path("docs") / "process" / "steering-prompts" / "mirror-state.json"
 
 
 def mirror_debt(root: Path) -> List[str]:
@@ -1340,6 +1352,14 @@ def mirror_debt(root: Path) -> List[str]:
     return stale
 
 
+def _write_mirror_payload(target: Path, payload: dict) -> None:
+    """Create parent dirs then write the mirrored-prompt JSON payload."""
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        json.dumps(payload, indent=2, sort_keys=False) + "\n",
+        encoding="utf-8", newline="\n")
+
+
 def write_mirror_state(root: Path) -> int:
     """Record every mirrored prompt's current signature. Run this *after*
     copying the changes into the Claude project, never instead of it."""
@@ -1355,8 +1375,7 @@ def write_mirror_state(root: Path) -> int:
                      "the project and does not confirm the copies match."),
         "mirrored": recorded,
     }
-    (root / MIRROR_STATE).write_text(
-        json.dumps(payload, indent=2, sort_keys=False) + "\n", encoding="utf-8", newline="\n")
+    _write_mirror_payload(root / MIRROR_STATE, payload)
     return len(recorded)
 
 

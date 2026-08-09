@@ -32,7 +32,7 @@ a human in the loop.
 HEREDOC BODIES ARE DATA, NOT COMMANDS
 --------------------------------------
 This hook blocked its own author writing this exact docstring's *earlier* draft into
-claude/tool-quirks.md via `cat >> file <<'QUIRK' ... QUIRK`: the heredoc body quoted the phrase
+docs/process/tool-quirks.md via `cat >> file <<'QUIRK' ... QUIRK`: the heredoc body quoted the phrase
 "gradle ... | tail" as prose describing the bug, and an unstripped regex read that quotation as
 a live command. hooks/deny_text_search.py already hit and fixed the identical mistake for a
 different matcher ("Treating text as executable is the same category of mistake that got

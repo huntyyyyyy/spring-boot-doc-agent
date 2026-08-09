@@ -5,7 +5,7 @@ research date: 2026-08-09
 approved_decisions: C1-C6
 artifact_policy: C-A
 claim tiers: Evidenced / Confirmed / Unknown
-research: docs/research/07-ci-workflow-modularity.md
+research: docs/research/ci/07-ci-workflow-modularity.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 ---
 
@@ -24,7 +24,7 @@ synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 | --- | --- |
 | Decisions | **C1–C6** Approved |
 | Policy **C** | **C-A** — thin caller + reusable workflows by BC |
-| Research | [`docs/research/07-ci-workflow-modularity.md`](../research/07-ci-workflow-modularity.md) |
+| Research | [`docs/research/ci/07-ci-workflow-modularity.md`](../research/07-ci-workflow-modularity.md) |
 | Backlog | [`docs/research/quality-backlog.md`](../research/quality-backlog.md) |
 
 ---

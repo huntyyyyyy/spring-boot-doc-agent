@@ -41,9 +41,7 @@ def _print_drift_summary(out_path: str, report: dict) -> None:
     )
 
 
-def main():
-    from doc_engine.tools import spring_drift_check as drift
-
+def _build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -65,24 +63,36 @@ def main():
             "run_manifest.json doesn't carry."
         ),
     )
-    args = ap.parse_args()
-    _validate_drift_cli_paths(args)
+    return ap
 
+
+def _compute_drift_report(drift, args) -> dict:
     signals = drift.load_signals(args.signals_path)
     manifest = (
         drift.load_manifest(args.manifest) if args.manifest is not None else None
     )
     try:
-        report = drift.check_drift(args.repo_path, signals, manifest=manifest)
+        return drift.check_drift(args.repo_path, signals, manifest=manifest)
     except drift.spring_signal_scan.CodeQLScannerError as exc:
         print(exc, file=sys.stderr)
         sys.exit(1)
 
+
+def _write_drift_report(drift, out_arg: str, report: dict) -> None:
     try:
-        out_path = drift.checked_output_path(args.out)
+        out_path = drift.checked_output_path(out_arg)
     except drift.PathValidationError as exc:
         print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
     with open(out_path, "w") as handle:
         json.dump(report, handle, indent=2)
     _print_drift_summary(str(out_path), report)
+
+
+def main():
+    from doc_engine.tools import spring_drift_check as drift
+
+    args = _build_parser().parse_args()
+    _validate_drift_cli_paths(args)
+    report = _compute_drift_report(drift, args)
+    _write_drift_report(drift, args.out, report)

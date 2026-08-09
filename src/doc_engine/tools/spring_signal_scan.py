@@ -191,14 +191,16 @@ def _print_scan_summary(
     )
 
 
-def main() -> int:
-    args = _build_parser().parse_args()
+def _validate_repo_path(repo_path: str):
     try:
-        checked_path(args.repo_path, want="dir")
+        checked_path(repo_path, want="dir")
     except PathValidationError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
+    return None
 
+
+def _run_scan(args):
     scanners = args.scanners.split(",") if args.scanners else None
     try:
         result = scan(
@@ -212,14 +214,16 @@ def main() -> int:
         )
     except (CodeQLScannerError, CodeQLNotFoundError, AstGrepError, CoveringProofError) as exc:
         print(exc, file=sys.stderr)
-        return 1
+        return None, 1
+    return result, 0
 
+
+def _write_scan_outputs(result, out_arg: str) -> int:
     try:
-        out_path = checked_output_path(args.out)
+        out_path = checked_output_path(out_arg)
     except PathValidationError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
-
     covering_path = _emit_covering_proof(result, str(out_path))
     # Facts need internal covering keys; Path A JSON must not carry them.
     facts_path, emit = _emit_facts(result, str(out_path))
@@ -228,6 +232,17 @@ def main() -> int:
         json.dump(path_a, handle, indent=2)
     _print_scan_summary(str(out_path), covering_path, facts_path, emit, path_a)
     return 0
+
+
+def main() -> int:
+    args = _build_parser().parse_args()
+    err = _validate_repo_path(args.repo_path)
+    if err is not None:
+        return err
+    result, code = _run_scan(args)
+    if code != 0:
+        return code
+    return _write_scan_outputs(result, args.out)
 
 
 if __name__ == "__main__":

@@ -14,6 +14,7 @@ Follow this skill whenever work is **design-shaped** (new SoT, gates, measure mo
 
 ## SoTs (read first)
 
+- `docs/research/README.md` — **forced entry** domain map (look-first hooks)
 - `docs/research/se-quality-synthesis-2026-08-08.md` — decisions 1–31, Embody/Adopt/Refuse
 - `docs/research/quality-backlog.md` — ordered backlog
 - `docs/design/coverage-measure-modes-design-2026-08-08.md` — dual-mode design
@@ -25,7 +26,7 @@ Follow this skill whenever work is **design-shaped** (new SoT, gates, measure mo
 2. Gather evidence with tiers: **Evidenced** (primary) / **Confirmed** (this repo) / **Unknown**.
 3. Prefer **arXiv + GitHub primary docs + DeepWiki** (cartography only). Mark missing IDs Unknown.
 4. Map findings to **Embody / Adopt / Refuse** for *this* Python CLI product.
-5. Write under `docs/research/` (not `claude/`). Keep modules/docs cohesive.
+5. Write under `docs/research/<domain>/` (see `docs/research/README.md`); not `claude/`. Keep modules/docs cohesive.
 
 ## Phase B — Synthesis + review packet
 

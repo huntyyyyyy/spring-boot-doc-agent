@@ -1,0 +1,12 @@
+{
+  "$comment": "Signatures of the steering prompts that have a canonical copy in the Claude project, as of the last time they were mirrored back. Regenerate with check_repo_claims.py --mirrored AFTER copying the changes across. This records debt; it cannot see the project and does not confirm the copies match.",
+  "mirrored": {
+    "docs/process/steering-prompts/00-shared-research-standards.md": "raw:3521700d103d25b5aabaa8fd42afd4dfba3b6eff2cccb0177a2db3e0ef0d8e62",
+    "docs/process/steering-prompts/01-testability-research-prompt.md": "raw:7dc776088ef68fc383a7518621ba235735c160cb56bbf75b69a1a8fd5c1f494a",
+    "docs/process/steering-prompts/02-pluggability-research-prompt.md": "raw:4fb3f078d1bccb12e2736ce78134b00b8d3fc3b994c121f772e4d0494cd3a70b",
+    "docs/process/steering-prompts/03-constraints-research-prompt.md": "raw:bbde10fa7a65d6b5d9fc4f3c3b9a62429c23d9ae45a034f6c62c871518d37bf8",
+    "docs/process/steering-prompts/04-analytics-logging-research-prompt.md": "raw:4d1e917fc69c33f2fe43053863dfd26a880d984d1be13111ad797eee2d2e307a",
+    "docs/process/steering-prompts/05-clarity-delivery-trust-research-prompt.md": "raw:5e95c0e05f3518cb58692b75d5ef05b18451d4ff266888ac4ef7cb189a75a066",
+    "docs/process/steering-prompts/06-wiredrift-check-task-prompt.md": "raw:8b57fd84b357c29c81a9426325fc32ea6101a06e06b27b8c702788ea5431d315"
+  }
+}

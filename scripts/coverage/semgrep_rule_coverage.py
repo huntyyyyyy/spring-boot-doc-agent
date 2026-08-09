@@ -33,7 +33,7 @@ unrelated cwd with an absolute --config path). Matching by exact equality
 against the raw YAML id would therefore be cwd-dependent and silently break.
 Every rule id in spring_semgrep_rules.yml uses `__` (double underscore,
 never a literal `.`), so `check_id.rsplit(".", 1)[-1]` reliably recovers the
-bare id regardless of that prefix. See claude/tool-quirks.md.
+bare id regardless of that prefix. See docs/process/tool-quirks.md.
 """
 from __future__ import annotations
 
