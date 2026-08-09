@@ -37,8 +37,9 @@ def _setUpModule_prelude():
     GETMAPPING_LINE = _locate_getmapping_line()
     original_extract = java_extract.first_line_match
     original_backend = astgrep_backend.first_line_match
+    return original_extract, original_backend
 
-def _setUpModule_core():
+def _setUpModule_core(original_extract, original_backend):
     try:
         for cand_name, fn in norms.CANDIDATES.items():
             java_extract.first_line_match = fn
@@ -153,8 +154,8 @@ def setUpModule() -> None:
     """Every scenario costs two full scans and a drift check, each of which
     shells out to ast-grep. Run them once here and let the test methods assert
     over the results, rather than re-deriving per method."""
-    _setUpModule_prelude()
-    _setUpModule_core()
+    original_extract, original_backend = _setUpModule_prelude()
+    _setUpModule_core(original_extract, original_backend)
 
 def tearDownModule() -> None:
     if _TMP and os.path.isdir(_TMP):

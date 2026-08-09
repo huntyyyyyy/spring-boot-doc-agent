@@ -31,8 +31,9 @@ def _test_pipeline_runner_with_fixture_signals_and_mock_generative_prelude(pipel
     det_results = det_runner.run(pipeline_context)
     failed = [name for name, r in det_results if not r.success]
     assert not failed, f'deterministic stages failed: {failed}'
+    return generative
 
-def _test_pipeline_runner_with_fixture_signals_and_mock_generative_core(pipeline_context):
+def _test_pipeline_runner_with_fixture_signals_and_mock_generative_core(pipeline_context, generative):
     mock_handlers = {'file_summarize': lambda ctx: _write_summaries(ctx), 'architect': lambda ctx: _write_arch(ctx), 'gap_analysis_interview': lambda ctx: _write_interview(ctx), 'doc_writer': lambda ctx: _write_doc(ctx)}
     gen_runner = PipelineRunner(generative_executor=MockStageExecutor(mock_handlers), stages=generative)
     gen_results = gen_runner.run(pipeline_context)
@@ -53,8 +54,8 @@ def pipeline_context(tmp_path):
 
 def test_pipeline_runner_with_fixture_signals_and_mock_generative(pipeline_context):
     """Use committed spring_signals fixture, run partition+edges, mock generative stages."""
-    _test_pipeline_runner_with_fixture_signals_and_mock_generative_prelude(pipeline_context)
-    _test_pipeline_runner_with_fixture_signals_and_mock_generative_core(pipeline_context)
+    generative = _test_pipeline_runner_with_fixture_signals_and_mock_generative_prelude(pipeline_context)
+    _test_pipeline_runner_with_fixture_signals_and_mock_generative_core(pipeline_context, generative)
 
 def test_subprocess_stage_runner_records_failure(pipeline_context):
     runner = SubprocessStageRunner()

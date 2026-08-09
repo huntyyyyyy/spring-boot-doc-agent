@@ -56,8 +56,7 @@ def test_write_certification_finish_uncertified(
         runner.record("pipeline:s1", "OK", 0.1, "")
         report = SimpleNamespace(certified=False, stages=[])
         monkeypatch.setattr(
-            phase_support,
-            "_build_and_write_certification",
+            "doc_engine.pipeline.local_runner_phases.certification_finish.build_and_write_certification",
             lambda *a, **k: (report, tmp_path / "certification.json"),
         )
         code = phase_support._write_certification_and_finish(

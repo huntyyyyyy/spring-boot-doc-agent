@@ -174,6 +174,14 @@ class RatchetTest(unittest.TestCase):
             (scripts / "mod.py").write_text(self.SIMPLE, encoding="utf-8")
             self.assertEqual(checker.compare(baseline, checker.measure_tree(scripts)), [])
 
+    def test_hard_statement_scope_matrix(self):
+        """HOT5 / E-HOT-R2: slash-free + src/tests hard; scripts/ repo keys soft."""
+        self.assertTrue(checker._hard_statement_scope("mod.py::f"))
+        self.assertTrue(checker._hard_statement_scope("src/doc_engine/x.py::h"))
+        self.assertTrue(checker._hard_statement_scope("tests/ci/t.py::i"))
+        self.assertFalse(checker._hard_statement_scope("scripts/ci/foo.py::f"))
+        self.assertFalse(checker._hard_statement_scope("scripts/foo.py::g"))
+
     def test_an_unparseable_file_is_reported_rather_than_skipped_silently(self):
         """A syntax error must not read as "nothing to measure here." Silent
         truncation reading as completeness is on this repo's own
