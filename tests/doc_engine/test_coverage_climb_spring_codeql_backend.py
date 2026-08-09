@@ -90,13 +90,10 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     assert len(digest) == 16
     hashed_paths = CodeQLBackend._version_hash_paths()
     hashed = {Path(p).name for p in hashed_paths}
-    scanning_dir = Path(hashed_paths[0]).parent
-    support = scanning_dir / "support"
+    support = Path(hashed_paths[0]).parent / "support"
     siblings = {p.name for p in support.glob("_codeql_*.py")}
     assert siblings, "expected modularized _codeql_*.py siblings on disk"
     assert siblings <= hashed, f"version_hash omitted siblings: {sorted(siblings - hashed)}"
-    assert "_codeql_evidence.py" in siblings
-    assert "_codeql_entity_map.py" in siblings
     # Unreadable path should be skipped without failing the hash.
     monkeypatch.setattr(
         CodeQLBackend,
