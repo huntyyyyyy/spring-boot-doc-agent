@@ -139,6 +139,12 @@ class Ch04EncodingTestContinued(unittest.TestCase):
                        for rows in (self.signals.get("evidence") or {}).values()
                        for row in rows]
             blob = "\n".join(matches)
+            # Positive witness: planted UNICODE_QUERY characters must appear.
+            # Absence-of-mojibake alone passes if the query was dropped entirely.
+            self.assertTrue(
+                ("Á" in blob) or ("日本語" in blob) or ("café" in blob),
+                "planted non-ASCII query text missing from evidence matches",
+            )
             self.assertNotIn("Ã", blob, "mojibake in evidence match text")
             self.assertNotIn("�", blob, "replacement chars in evidence match text")
 

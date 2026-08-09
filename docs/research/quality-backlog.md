@@ -110,10 +110,66 @@ Research: [`docs/research/07-ci-workflow-modularity.md`](07-ci-workflow-modulari
 
 ---
 
+## P7 — Suite stalking feature space (2026 research)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P7.0 | **E-RUN0 Spec:** approve **R1–R8** (dimensions D1–D20 map) | **Done** (2026-08-09) | research 08 `spec_gate: APPROVED E-RUN0` + design stub |
+| P7.1 | **E-RUN1:** oracle (+ optional ABI) durations + pre-pytest cascade clarity (**D1/D17**) | **Active** (v1 sensors) | CI log / artifact |
+| P7.2 | **E-RUN2:** plateau map + optional durations ⋈ gap-average (**D2/D15**) | D2 in E-RUN1 presenter; D15 defer | script or summary section |
+| P7.3 | **E-RUN3:** rpytest `--verify-dropin` spike on one `domain_*` (**D3**) | Spike / refuse if &lt;15% or drop-in fail | wall-clock + parity |
+| P7.4 | **E-RUN4:** NameRTS-shaped selection + agent card behind `pre_pr` only (**D9/D18**) | Adopt after Spec · never oracle | `pre_pr` receipt |
+| P7.5 | **E-RUN5:** advisory flake/job log triage (**D7/D8**) | Defer | non-blocking artifact |
+
+Research: [`docs/research/08-rust-test-runners-bottlenecks.md`](08-rust-test-runners-bottlenecks.md). Prefer **2026** primaries (arXiv 2607/2602/2601/2605/2604; rpytest; OTel CI semconv).
+
+---
+
+## P8 — Test adequacy vs coverage inflation (2026 research)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P8.0 | **E-QA0 Spec:** approve **Q1–Q8** (necessary Cover% ≠ sufficient quality) | **Done** (2026-08-09) | research 09 `spec_gate: APPROVED E-QA0` + design stub |
+| P8.1 | **E-QA1:** adequacy sensor ports + CI summary (structural + mutator survivors + metamorphic) | **Done** (2026-08-09) | `adequacy_summary` in python-gates always-summary |
+| P8.2 | **E-QA2:** anti-padding Verify — climb packages need kill/metamorphic witness | **Done** (2026-08-09) | CONTRIBUTING Climb Archive / Q2 checklist |
+| P8.3 | **E-QA3:** Hypothesis spike on pure helpers (`suite_timing` / fingerprints) | Spike after E-QA1 | focused suite |
+
+Research: [`docs/research/09-test-adequacy-vs-coverage-inflation-2026.md`](09-test-adequacy-vs-coverage-inflation-2026.md). Prefer **2026** primaries (2607.22880, 2603.01409, 2604.01799, 2607.02057, 2605.22175, 2604.10126; mutmut; Hypothesis).
+
+---
+
+## P9 — Kitchen harness modernization (fixtures / ports)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P9.0 | **E-KH0 Spec:** approve **K1–K12** (pytest fixtures SoT; refuse Testcontainers/Spec Kit runtime/DI containers for kitchen) | **Pending human Approve** | research 10 `spec_gate: APPROVED E-KH0` |
+| P9.1 | **E-KH1:** `KitchenArtifacts` + session/package fixture; drop chapter `setUpModule`/`_STATE`; scratch copies for faults | Adopt after P9.0 | kitchen green; no chapter `setUpModule`; size/complexipy |
+| P9.2 | Optional syrupy / Hypothesis — **not** kitchen chapter SoT | Align E-QA3; KH-S2 | spike exit criteria |
+
+Research: [`docs/research/10-kitchen-harness-modernization-2026.md`](10-kitchen-harness-modernization-2026.md). Primaries: pytest fixtures docs + DeepWiki pytest/hypothesis/testcontainers; GitHub activity 2026-08-09; arXiv 2601.06615 (Fixturize), 2404.09398 (FlakyDoctor), 2606.04967 (SDD).
+
+---
+
+## P10 — CI / script output UX (summary-first)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P10.0 | **E-UX0 Spec:** approve **U1–U7** (summary-first; groups; shared append; refuse rich/LLM) | **Approved 2026-08-09** | research 11 `spec_gate: APPROVED E-UX0` |
+| P10.1 | **E-UX1:** quality-gates markdown rollup + `::group::` + coverage/gap → `github_step_summary` | Adopt after P10.0 | step summary has gate table; no overwrite; size/complexipy |
+| P10.2 | **E-UX2:** claims / code_quality headline + `<details>` | Later | optional |
+
+Research: [`docs/research/11-ci-output-ux-progressive-disclosure-2026.md`](11-ci-output-ux-progressive-disclosure-2026.md).
+
+---
+
 ## Suggested next single stream
 
 **Done (E-CM0–2):** dual-mode Spec/impl/docs.  
 **Done (E-TEST0–1):** domain markers + ABI shards.  
-**Done (E-CI0):** Spec approve **C1–C6** + policy **C-A**.  
-**Done (E-CI1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
-**Never:** suite-wide xdist before shards; fuzzy green; Spec Kit WorkflowEngine as CI runtime.
+**Done (E-CI0–1):** thin `ci.yml` + reusable BCs + LOC/heredoc SoT.  
+**Done (E-RUN0–1):** suite-stalking sensors Spec + D1/D2/D17.  
+**Active tip:** oracle stabilize (#105) to **98.7** (necessary floor).  
+**Done (E-QA0–2):** adequacy Spec + sensors + Climb Archive Q2 witness checklist.  
+**Active:** **E-UX1** (quality-gates UX slice) after E-UX0 Approve.  
+**Spec pending:** **E-KH0** (K1–K12) — kitchen fixtures/ports; do not implement E-KH1 until Approve.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT.

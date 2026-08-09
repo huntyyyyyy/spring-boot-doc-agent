@@ -17,6 +17,10 @@ SCRIPT_DIR = SCRIPTS_DIR
 RUN_MANIFEST_CMD = [sys.executable, "-m", "doc_engine.tools.run_manifest"]
 SCHEMA_PATH = os.path.join(SCRIPT_DIR, "schemas", "run_manifest.schema.json")
 
+with open(SCHEMA_PATH, encoding="utf-8") as _f:
+    _SCHEMA = json.load(_f)
+
+
 def _fake_completed(returncode=0, stdout="", stderr=""):
     return subprocess.CompletedProcess(args=["git"], returncode=returncode, stdout=stdout, stderr=stderr)
 

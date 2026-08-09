@@ -68,12 +68,13 @@ jobs:
       - name: pytest tests/ (line coverage ratchet on doc_engine + stf)
         if: matrix.python-version == '3.11'
         run: |
-          rm -f .coverage .coverage.* coverage.xml
+          rm -f .coverage .coverage.* coverage.xml pytest-oracle.junit.xml
           pytest tests/ -v --tb=short \
             --cov=doc_engine --cov=stf \
             --cov-branch \
             --cov-report=term-missing \
             --cov-report=xml \
+            --junitxml=pytest-oracle.junit.xml \
             --cov-fail-under=${{ env.COV_FAIL_UNDER }}
         env:
           COV_FAIL_UNDER: "98.7"
@@ -82,6 +83,8 @@ jobs:
         if: always() && matrix.python-version == '3.11'
         run: |
           python3 scripts/ci/coverage_run_summary.py --github-summary
+          python3 scripts/ci/suite_timing_summary.py --github-summary
+          python3 scripts/ci/adequacy_summary.py --github-summary
           doc-engine coverage-gap-average \
             --coverage-xml coverage.xml \
             --floor "${COV_FAIL_UNDER}" \

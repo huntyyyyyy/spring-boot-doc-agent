@@ -2,29 +2,25 @@
 
 from __future__ import annotations
 
-import importlib.util
 import json
 import re
 import subprocess
 import sys
 from pathlib import Path
+
 import pytest
-
-pytestmark = pytest.mark.domain_stage0
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
-ENGINE_PATH = REPO_ROOT / "spring-signals" / "harness" / "check-assertions.py"
-HARNESS_DIR = ENGINE_PATH.parent
-spec = importlib.util.spec_from_file_location("check_assertions", ENGINE_PATH)
-ca = importlib.util.module_from_spec(spec)
-sys.modules["check_assertions"] = ca
 from tests.support.spring_signals.assertion_harness import (
+    HEADER,
+    HARNESS_DIR,
+    ca,
     base_spec,
     row,
     run,
     write_csv,
     write_spec,
 )
+
+pytestmark = pytest.mark.domain_stage0
 
 class TestSpecLoading:
     def test_missing_expectations_file_rejected(self, tmp_path):

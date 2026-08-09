@@ -24,16 +24,19 @@ FAST_MODE = os.environ.get("SPRING_DRIFT_FAST_MODE", "").lower() in ("1", "true"
 from tests.support.spring_drift.scratch import _by_source, _edit, _fixture_build_command, _make_scratch_copy
 
 class JpqlLineageProvenanceTest(unittest.TestCase):
-    """Unit-level tests against _raw_query_entries_with_resolved_entity()
-    and _reverify_jpql_lineage_provenance() directly, with synthetic
-    signals/results dicts — no CodeQL scan, no tempdir. Each function has one
-    job (find the citations with a second provenance input; re-verify that
-    input for citations whose provenance file changed) and is tested in
-    isolation from the real-repo integration scenarios in
-    SpringDriftCheckTest above, which cover the same behavior end-to-end."""
+    """Unit tests for JPQL entity-provenance filter + reverify (synthetic signals)."""
 
     def _signals(self, resolved_via_entity="Invoice", available=True):
-        lineage = {"available": available, "source_tables": ["billing_invoice"], "target_tables": []}
+        # available True: tables + entity stamp; False: reason-only (resolver shape).
+        lineage = (
+            {"available": False, "reason": "out of scope for the bounded JPQL resolver"}
+            if not available
+            else {
+                "available": True,
+                "source_tables": ["billing_invoice"],
+                "target_tables": [],
+            }
+        )
         if available and resolved_via_entity is not None:
             lineage["resolved_via_entity"] = resolved_via_entity
         return {
@@ -70,9 +73,7 @@ class JpqlLineageProvenanceTest(unittest.TestCase):
         self.assertEqual(found, [])
 
     def test_skips_unavailable_jpql_lineage(self):
-        # An out-of-scope JPQL query (join, traversal, ...) has
-        # lineage = {"available": False, "reason": ...} — no
-        # resolved_via_entity key at all, nothing to re-verify.
+        # Real unavailable shape is reason-only (no resolved_via_entity).
         signals = self._signals(available=False)
         found = list(spring_drift_check._raw_query_entries_with_resolved_entity(signals))
         self.assertEqual(found, [])

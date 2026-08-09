@@ -42,15 +42,52 @@ def _foreign_segment(raw: str) -> str | None:
     return match.group(2) if match else None
 
 
+def _candidate_under_root(raw: str, root: Path) -> Path:
+    """Build a path to resolve under *root*.
+
+    Windows drive paths look absolute to :func:`_looks_absolute` but are
+    relative ``pathlib.Path`` objects on POSIX; resolving them would join the
+    checkout (``/repo/C:/Users/...``) and falsely pass cohesion.
+    """
+    if not _looks_absolute(raw):
+        return root / raw
+    candidate = Path(raw)
+    if not candidate.is_absolute():
+        raise ValueError("foreign-os absolute path")
+    return candidate
+
+
 def _resolve_under_root(raw: str, root: Path) -> Path | None:
+    """Return resolved path when *raw* is inside *root*; else None."""
     root_res = root.resolve()
-    candidate = Path(raw) if _looks_absolute(raw) else root_res / raw
     try:
-        resolved = candidate.resolve()
+        resolved = _candidate_under_root(raw, root_res).resolve()
         resolved.relative_to(root_res)
         return resolved
     except (OSError, ValueError):
         return None
+
+
+def _blank_source_path(raw: str) -> bool:
+    return not raw or not str(raw).strip()
+
+
+def _escape_violation_message(raw: str, repo_root: Path, root_name: str) -> str:
+    """Describe why *raw* is not cohesive with *repo_root* (already escaped)."""
+    norm = normalize_source_path(raw)
+    foreign = _foreign_segment(norm)
+    if foreign and foreign != root_name:
+        return f"foreign worktree segment {foreign!r}: {norm}"
+    return f"path escapes repo root {repo_root}: {norm}"
+
+
+def _violation_for_path(raw: str, repo_root: Path, root_name: str) -> str | None:
+    """Return a violation message for *raw*, or None when cohesive / blank."""
+    if _blank_source_path(raw):
+        return None
+    if _resolve_under_root(raw, repo_root) is not None:
+        return None
+    return _escape_violation_message(raw, repo_root, root_name)
 
 
 class PathCohesionGuard:
@@ -64,16 +101,9 @@ class PathCohesionGuard:
         root_name = self.repo_root.name
         out: list[str] = []
         for raw in paths:
-            if not raw or not str(raw).strip():
-                continue
-            norm = normalize_source_path(raw)
-            if _resolve_under_root(raw, self.repo_root) is not None:
-                continue
-            foreign = _foreign_segment(norm)
-            if foreign and foreign != root_name:
-                out.append(f"foreign worktree segment {foreign!r}: {norm}")
-            else:
-                out.append(f"path escapes repo root {self.repo_root}: {norm}")
+            message = _violation_for_path(raw, self.repo_root, root_name)
+            if message is not None:
+                out.append(message)
         return out
 
     def assert_cohesive(self, paths: list[str]) -> None:

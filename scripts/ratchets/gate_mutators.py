@@ -45,7 +45,7 @@ def definitions() -> tuple[Mutator, ...]:
             "src/doc_engine/query/envelope.py", "python",
             "cap = max(0, min(cap, max_limit))",
             "cap = max(0, cap)",
-            "test_query_artifacts.py",
+            "test_query_artifacts_evidence_routes.py",
             "agents rely on hard --limit clamp; removing it dumps unbounded "
             "evidence into context (DDIA backpressure)"),
         Mutator(
@@ -53,7 +53,7 @@ def definitions() -> tuple[Mutator, ...]:
             "src/doc_engine/query/rank.py", "python",
             "tokens_used + cost <= budget",
             "True",
-            "test_context_packet.py",
+            "test_context_packet_assemble.py",
             "context_packet budgetTokens must trim primaryContext; disabling "
             "the guard dumps unbounded packets"),
         Mutator(
@@ -62,7 +62,7 @@ def definitions() -> tuple[Mutator, ...]:
             "return (FreshnessLabel.FRESH_INDEXED if actual == expected "
             "else FreshnessLabel.STALE)",
             "return FreshnessLabel.FRESH_INDEXED",
-            "test_context_packet.py",
+            "test_context_packet_freshness.py",
             "signature mismatch must label stale; always-fresh hides drift"),
 
         # --- literal: see Mutator's docstring for why each cannot be ---------
@@ -70,21 +70,21 @@ def definitions() -> tuple[Mutator, ...]:
         Mutator(
             "agent-regains-grep", "adapters/claude/agents/gap-analyzer.md", "",
             "tools: Read, Glob, Write", "tools: Read, Grep, Glob, Write",
-            "test_check_repo_claims.py",
+            "test_repo_claims_real_repo_core.py",
             "all five agents declared Grep until 0ee4033; check F exists to "
             "stop it coming back"),
         Mutator(
             "rule-loses-its-args-form",
             "src/doc_engine/scanning/resources/spring_ast_grep_rules.yml", "",
             '    - pattern: "@JoinColumn($$$ARGS)"\n', "",
-            "test_rule_coverage.py",
+            "test_rule_coverage_ids.py",
             "a marker pattern and an argument-bearing one are disjoint node "
             "shapes; dropping one silently halves a rule"),
         Mutator(
             "derived-count-edited", "CLAUDE.md", "",
             "<!-- derived: predicate_count -->7<!-- /derived -->",
             "<!-- derived: predicate_count -->6<!-- /derived -->",
-            "test_check_repo_claims.py",
+            "test_repo_claims_real_repo_core.py",
             'CLAUDE.md read "Three forms" for two windows after a fourth and '
             "fifth landed"),
         Mutator(

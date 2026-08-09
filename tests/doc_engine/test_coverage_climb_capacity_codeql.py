@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import MagicMock
 
 import pytest
 
 from doc_engine.scanning.support import _codeql_runner as runner
-import doc_engine.scanning.support._codeql_cli as cli_mod
-import doc_engine.scanning.support._codeql_database as db_mod
 from doc_engine.tools import capacity_preflight as cap
 
 pytestmark = pytest.mark.domain_climb_sensor
@@ -97,12 +93,19 @@ def test_main_l2b_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
         ],
     )
     monkeypatch.setattr(cap, "checked_path", lambda p, want=None: Path(p))
+    calls: list[tuple[str, str]] = []
+
+    def _l2b(args, repo_path):
+        calls.append((str(args.summaries_file), repo_path))
+
+    monkeypatch.setattr(cap, "_run_l2b_calibration", _l2b)
+    stage0: list[bool] = []
     monkeypatch.setattr(
-        cap,
-        "_run_l2b_calibration",
-        lambda args, repo_path: None,
+        cap, "_run_stage0_preflight", lambda *a, **k: stage0.append(True)
     )
-    cap.main()
+    assert cap.main() is None
+    assert calls == [(str(summaries), str(repo))]
+    assert stage0 == [], "summaries-file path must not fall through to stage0"
 
 def test_hash_from_scan_context_and_refuse_symlink(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch

@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
-from doc_engine import cli
+from doc_engine import cli_scan_config
 from doc_engine.config import loader
 from doc_engine.core.context import ScanContext, _ingest_walked_file
 from doc_engine.pipeline.local_runner_phases import support
@@ -30,7 +30,7 @@ import pytest
 pytestmark = pytest.mark.domain_ci_meta
 
 def test_split_scanner_names_strips_and_drops_blanks():
-    assert cli._split_scanner_names(" fs , ,codeql, ") == ["fs", "codeql"]
+    assert cli_scan_config.split_scanner_names(" fs , ,codeql, ") == ["fs", "codeql"]
 
 def test_scan_cli_overrides_respects_flags():
     args = argparse.Namespace(
@@ -40,7 +40,7 @@ def test_scan_cli_overrides_respects_flags():
         build_command="mvn -q",
         db_path="/tmp/db",
     )
-    overrides = cli._scan_cli_overrides(args)
+    overrides = cli_scan_config.scan_cli_overrides(args)
     assert overrides["scanners"] == ["fs", "codeql"]
     assert overrides["sql_dialect"] == "postgres"
     assert overrides["respect_gitignore"] is True

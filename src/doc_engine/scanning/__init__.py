@@ -1,12 +1,15 @@
-"""Stage 0 scanning package."""
+"""Stage 0 scanning package.
 
-from typing import Any, Dict, List, Optional
+Heavy scanners and sqllineage stay behind ``__getattr__`` so lightweight tool
+CLIs do not cold-start sqlfluff. ``scan_repository`` lives in
+``repository_scan`` — this module only dispatches, it does not call
+``__getattr__`` from a wrapper body.
+"""
 
-from doc_engine.scanning._merge_signals import SpringSignalMerger
-from doc_engine.scanning._orchestrator import run_scan
-from doc_engine.scanning._resolve_lineage import SpringLineageResolver
-from doc_engine.scanning._scanner_registry import get_scanner, resolve_scanner_names
-from doc_engine.scanning.spring import scan
+from __future__ import annotations
+
+import importlib
+from typing import Any
 
 __all__ = [
     "scan",
@@ -18,25 +21,30 @@ __all__ = [
     "SpringLineageResolver",
 ]
 
+# Pair of class exports — one branch keeps __getattr__ at complexipy ≤5.
+_CLASS_EXPORTS = {
+    "SpringSignalMerger": "doc_engine.scanning._merge_signals",
+    "SpringLineageResolver": "doc_engine.scanning._resolve_lineage",
+}
 
-def scan_repository(
-    repo_path: str,
-    sql_dialect: str = "ansi",
-    respect_gitignore: bool = False,
-    build_command: Optional[str] = None,
-    db_path: Optional[str] = None,
-    scanners: Optional[List[str]] = None,
-    scan_context: Optional[Any] = None,
-    allow_codeql_build: bool = False,
-) -> Dict[str, Any]:
-    """Run Stage 0 signal extraction for a Spring Boot repository."""
-    return scan(
-        repo_path,
-        sql_dialect=sql_dialect,
-        respect_gitignore=respect_gitignore,
-        build_command=build_command,
-        db_path=db_path,
-        scanners=scanners,
-        scan_context=scan_context,
-        allow_codeql_build=allow_codeql_build,
-    )
+
+def __getattr__(name: str) -> Any:
+    if name == "scan":
+        from doc_engine.scanning.spring import scan
+
+        return scan
+    if name == "scan_repository":
+        from doc_engine.scanning.repository_scan import scan_repository
+
+        return scan_repository
+    if name == "run_scan":
+        from doc_engine.scanning._orchestrator import run_scan
+
+        return run_scan
+    if name in ("get_scanner", "resolve_scanner_names"):
+        from doc_engine.scanning import _scanner_registry as registry
+
+        return getattr(registry, name)
+    if name in _CLASS_EXPORTS:
+        return getattr(importlib.import_module(_CLASS_EXPORTS[name]), name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

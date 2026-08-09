@@ -4701,7 +4701,7 @@ Assumptions affected:
 Files touched: src/doc_engine/ci/size_ratchet.py, quality_gates.py, cli.py, spring_drift_{check,common,tier2}.py, scripts/ci/check_code_quality.py, scripts/ratchets/{code_quality_baseline,size_baseline}.json, CONTRIBUTING.md, CONSTRAINTS.md, tests/ci/*, .github/workflows/ci.yml, claude/steering-prompts/13-*.md, claude/session-log.md
 
 ## 2026-08-08 — Size ratchet includes tests/; cohesive test modularization ≤225
-Commit: uncommitted
+Commit: 229e517
 Tests: size-ratchet exit 0 (0 test file offenders; 38 src legacy baselined); focused pytest 27/27 (size_ratchet + climb covering/query/build_cmd + support)
 Assumptions affected:
 - `claude/steering-prompts/13-code-quality-research-prompt.md` — size ceilings / package roots — [New info — FILE_LOC_HARD 225; SIZE_ROOTS now src/doc_engine + src/stf + tests/; CONTRIBUTING cohesion bar applies to tests]
@@ -4725,3 +4725,75 @@ Assumptions affected:
 - E-CI sonar soft job — `continue-on-error` on `ci.yml` caller — [Resolved — moved onto `sonar.yml` called job; Actions rejects caller-level continue-on-error with 0-job failure]
 - `check_workflow_yaml` / `workflow_size` — LOC/heredoc only — [New info — hard-fails continue-on-error on reusable-workflow caller jobs]
 Files touched: .github/workflows/{ci,sonar}.yml, src/doc_engine/ci/workflow_size.py, scripts/ci/check_workflow_yaml.py, tests/ci/test_workflow_size.py, CONTRIBUTING.md, claude/session-log.md
+
+## 2026-08-09 — E-RUN1: suite-stalking sensors (D1/D2/D17) on oracle cell
+Commit: 641887a
+Tests: pytest tests/ci/test_suite_timing*.py 8/8; ruff OK; check_repo_claims OK; check_workflow_yaml OK; check_code_quality OK; complexipy ≤5 on suite_timing; oracle argv still fail_under=98.7
+Assumptions affected:
+- `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — python-gates owns cov cell — [Still accurate — added `--junitxml` + `suite_timing_summary.py` sensor only; fail_under argv untouched]
+- E-CI C3 / coverage_run_summary pattern — [New info — sibling façade `scripts/ci/suite_timing_summary.py` over `doc_engine.ci.suite_timing`; D17 cascade when coverage.xml missing]
+Files touched: src/doc_engine/ci/suite_timing/*, scripts/ci/suite_timing_summary.py, tests/ci/test_suite_timing*.py, .github/workflows/python-gates.yml, docs/research/{08,quality-backlog}.md, docs/design/suite-stalking-sensors-design-2026-08-09.md, claude/session-log.md
+
+## 2026-08-09 — Oracle tip: pytest green blockers + size splits
+Commit: 947de95
+Tests: pipeline_runner_stages 5/5; domain_marker_cli + suite_timing 20/20; kitchen_sink ch12 9/9; lineage 20/20; size-ratchet exit 0; domain markers OK
+Assumptions affected:
+- `docs/research/pr-94-followup-oracle-stabilize.md` — green 3.11 goal — [New info — tip 3.11 completed: 1 FAIL real_repo missing --allow-mock; 5 ERROR missing @pytest.fixture; Cover% 93%; size offenders split]
+Files touched: tests/doc_engine/test_kitchen_sink_*, test_pipeline_runner_stages.py, test_spring_signal_scan_*, tests/ci/test_domain_marker_cli_coverage.py, CONSTRAINTS.md, claude/session-log.md
+
+## 2026-08-09 — E-QA1/E-QA2: adequacy sensors + climb Q2 witness checklist
+Commit: 6602087
+Tests: pytest tests/ci/test_adequacy_*.py 16/16; ruff OK; complexipy ≤5 on adequacy; size-ratchet exit 0; check_repo_claims OK; check_workflow_yaml OK; oracle argv still fail_under=98.7
+Assumptions affected:
+- E-QA0 design / P8.1–P8.2 Active — [Resolved — `doc_engine.ci.adequacy` + `adequacy_summary.py` wired in python-gates always-summary; CONTRIBUTING Climb Archive Q2; backlog P8.1/P8.2 Done]
+- `claude/steering-prompts/08-dependency-pinning-task-prompt.md` — python-gates owns cov cell — [Still accurate — adequacy sensor only; fail_under argv untouched]
+- Cover% / ENFORCE=False honesty — [Still accurate — sensors echo ENFORCE + floor text; no suite-wide ENFORCE=True]
+Files touched: src/doc_engine/ci/adequacy/*, scripts/ci/adequacy_summary.py, tests/ci/test_adequacy_*.py, .github/workflows/python-gates.yml, CONTRIBUTING.md, docs/research/quality-backlog.md, claude/session-log.md
+
+## 2026-08-09 — Kitchen-sink correctness: restore real-repo opt-in skip
+Commit: 2fccac6
+Tests: kitchen-sink focused 31 passed / 9 skipped (real_repo); domain markers OK; check_repo_claims OK
+Assumptions affected:
+- RealEnterpriseRepoTest opt-in hermetic skip — [Resolved — restored skipUnless; forbid cwd fallback; domain_live_optin classifier; --allow-mock only on configured Spring tree]
+- CONSTRAINTS.md §8 gitignored write blind — [Resolved — product already fixed; claim + verify predicates retargeted to list_ignored_untracked + ch12 fail-path]
+- NestedEntity plant "characterized by the test" — [New info — pinned scavenger quirk: NestedEntityHolder maps to nested_inner today]
+Files touched: tests/doc_engine/test_kitchen_sink_*, src/doc_engine/ci/test_domain_rules.py, CONSTRAINTS.md, deleted test_enterprise_kitchen_sink.py
+
+## 2026-08-09 — Cover% climb batch B4: tools drift/manifest
+Commit: 5a8a129
+Tests: 29/29 climb B4 suites passing; scoped cover spring_drift_tier2 100% / spring_drift_check 100% / run_manifest 97% stmt
+Assumptions affected:
+- E-QA2 Climb Archive Q2 — [New info — B4 archives `mutmut_slice` for `doc_engine.tools` drift/manifest (not Arm-1; not scan formatting)]
+- Cover% climb high-miss tools inventory — [Resolved — hermetic `domain_climb_sensor` suites close tier2/check/manifest gaps]
+Files touched: tests/doc_engine/test_coverage_climb_drift_tier2_recheck.py, test_coverage_climb_drift_check_{process,load}.py, test_coverage_climb_run_manifest_{core,cli}.py, CONTRIBUTING.md, claude/session-log.md
+
+## 2026-08-09 — Cover% climb batch B5: Stage-0 scan CodeQL/gap/recall
+Commit: 1a9c3a0
+Tests: 21/21 climb B5 suites passing; LOC≤225 complexipy≤5; climb sensor cache/runner/recall/collision 100%
+Assumptions affected:
+- E-QA2 Climb Archive Q2 — [New info — B5 archives metamorphic Arm-1 (`tests/ratchets/test_metamorphic_formatting.py` + churn / `HarnessIsNotVacuousTest`) for Stage-0 scan surfaces]
+- Cover% climb scan-related below-floor inventory — [Resolved — hermetic `domain_climb_sensor` suites close `_codeql_*`, `recall_delta`, `gap_probe/{join,symbol_collision}`, residual `symbol`/`facts` gaps]
+Files touched: tests/doc_engine/test_coverage_climb_b5_{codeql_cache,codeql_db,codeql_runner_facade,gap_recall,symbol_facts}.py, CONTRIBUTING.md, claude/session-log.md
+
+## 2026-08-09 — Cover% climb B5 follow-up: LOC split + runner main
+Commit: 2c30c12
+Tests: 21/21 climb B5; complexipy≤5; LOC≤225
+Assumptions affected:
+- E-QA2 Climb Archive Q2 — [Still accurate — Arm-1 witness unchanged]
+Files touched: tests/doc_engine/test_coverage_climb_b5_codeql_{db,runner_facade}.py (deleted codeql_db_runner), claude/session-log.md
+
+## 2026-08-09 — Oracle Cover% closed to 99.04 (fail_under 98.7)
+Commit: 625e03e
+Tests: oracle remesure whole_repo_cover=99.04% (exit 0 on climb branch remesure); kitchen-sink real-repo opt-in restored earlier
+Assumptions affected:
+- Active tip oracle stabilize to 98.7 — [Resolved — tip Cover% 99.04 after B1–B9 climb + kitchen-sink correctness; fail_under argv untouched]
+- E-QA2 Climb Archive Q2 — [Still accurate — climb modules carry mutmut_slice / Arm-1 witnesses; gap-average alone not treated as proof]
+Files touched: tests/doc_engine/test_coverage_climb_b{7,8,9}_*, tests/ci/test_coverage_climb_*, tests/doc_engine/test_kitchen_sink_*, CONSTRAINTS.md, test_domain_rules.py
+
+## 2026-08-09 — Debug chapter+CodeQL after rescope: cache-key fail-closed + climb hygiene
+Commit: 492a7c7
+Tests: codeql invalidation+hygiene+climb 40/40; ch10 10/10; domain markers OK; check_repo_claims OK
+Assumptions affected:
+- CodeQL cache keys after module split — [Resolved — incomplete ScanContext no longer hashes to empty digest; discriminative invalidation tests; climb CodeQL F401 wallpaper cleaned]
+- Kitchen-sink chapter vs CodeQL — [Still accurate — chain pinned filesystem,ast-grep; ch10 asserts codeql absent from covering receipts]
+Files touched: _codeql_cache_keys.py, test_codeql_cache_key_invalidation.py, kitchen_sink chain/ch10, climb codeql ruff hygiene, code_quality_baseline.json

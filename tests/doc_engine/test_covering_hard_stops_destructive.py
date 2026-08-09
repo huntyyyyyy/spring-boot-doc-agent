@@ -42,7 +42,12 @@ from doc_engine.scanning.recall_delta import (
 )
 from doc_engine.scanning.spring import AstGrepError, scan
 from tests.conftest import FIXTURE_DIR, REPO_ROOT
-from tests.support.covering_hard_stops.fixtures import _complete_receipt, _kafka_signals, shutil_which
+from tests.support.covering_hard_stops.fixtures import (
+    _assert_absence_stamps_match_writer,
+    _complete_receipt,
+    _kafka_signals,
+    shutil_which,
+)
 
 import pytest
 

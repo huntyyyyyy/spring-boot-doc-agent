@@ -59,9 +59,13 @@ class TasksStore:
         return tasks
 
     def issue_validation_token(self) -> str:
-        """Reviewer (human/CI) issues token — Implement cannot self-approve."""
+        """Reviewer (human/CI) issues token — Implement cannot self-approve.
+
+        Prefixed so the value never starts with ``-`` (argparse would treat
+        ``--token <dash-value>`` as a missing argument / exit 2).
+        """
         tasks = self.load_tasks()
-        token = secrets.token_urlsafe(16)
+        token = "t" + secrets.token_urlsafe(16)
         tasks.validation_token = token
         self.write_tasks(tasks)
         return token

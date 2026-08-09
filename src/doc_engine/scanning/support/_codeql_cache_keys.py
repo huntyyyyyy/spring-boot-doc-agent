@@ -33,12 +33,34 @@ def _is_codeql_hash_file(rel: str) -> bool:
         or name.endswith(".yaml")
     )
 
-def _hash_from_scan_context(scan_context: Any) -> str:
-    h = hashlib.sha256()
+def _signature_or_missing(file_signatures: dict, rel: str) -> bytes | str:
+    signature = file_signatures.get(rel)
+    if signature is None:
+        return b"\xffMISSING_SIGNATURE"
+    return signature
+
+
+def _scan_context_hash_rels(scan_context: Any) -> list[str]:
     java_rels = {entry.rel_path for entry in scan_context.java_files}
-    for rel in sorted(scan_context.file_signatures):
-        if rel in java_rels or _is_codeql_hash_file(rel):
-            _update_hash_pair(h, rel, scan_context.file_signatures[rel])
+    candidates = set(scan_context.file_signatures) | java_rels
+    return sorted(
+        rel
+        for rel in candidates
+        if rel in java_rels or _is_codeql_hash_file(rel)
+    )
+
+
+def _hash_from_scan_context(scan_context: Any) -> str:
+    """Hash java + build/config signatures from ScanContext.
+
+    A ``java_files`` entry missing from ``file_signatures`` still contributes a
+    fail-closed sentinel so incomplete contexts cannot share the empty digest.
+    """
+    h = hashlib.sha256()
+    for rel in _scan_context_hash_rels(scan_context):
+        _update_hash_pair(
+            h, rel, _signature_or_missing(scan_context.file_signatures, rel)
+        )
     return h.hexdigest()[:32]
 
 def _is_codeql_walk_filename(name: str) -> bool:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import atexit
 import json
 import os
 import shutil
@@ -29,64 +30,103 @@ __all__ = [
     "build_enterprise_repo",
 ]
 
-def setUpModule():
-    if not shutil.which("ast-grep"):
-        raise unittest.SkipTest("ast-grep not on PATH")
-    if not shutil.which("git"):
-        raise unittest.SkipTest("git not on PATH")
-
-    tmp = tempfile.mkdtemp(prefix="kitchensink_")
-    repo = os.path.join(tmp, "repo")
-    out_dir = os.path.join(tmp, "run")
-    os.makedirs(out_dir)
-    build_enterprise_repo(repo)
-
-    # Identity on the command line, never ambient config — a bare commit on a
-    # runner with no configured identity fails.
-    _git(repo, "init", "-q", "-b", "main")
-    _git(repo, "add", "-A")
-    _git(repo, "-c", "user.email=kitchensink@example.invalid",
-         "-c", "user.name=kitchensink", "commit", "-qm", "init")
-
-    steps, snapshots = run_chain(repo, out_dir)
-
-    def load(name):
-        with open(os.path.join(out_dir, name), encoding="utf-8") as f:
-            return json.load(f)
-
-    def load_facts():
-        path = os.path.join(out_dir, "facts.jsonl")
-        if not os.path.isfile(path):
-            return []
-        rows = []
-        with open(path, encoding="utf-8") as f:
-            for line in f:
-                if line.strip():
-                    rows.append(json.loads(line))
-        return rows
-
-    _STATE.update({
-        "tmp": tmp, "repo": repo, "out": out_dir, "steps": steps,
-        "snapshots": snapshots, "docs": os.path.join(repo, "docs"),
-        "signals": load("spring_signals.json"),
-        "covering_proof": load("covering_proof.json"),
-        "facts": load_facts(),
-        "groups": load("groups.json"),
-        "edges": load("cross_group_edges.json"),
-        "manifest": load("run_manifest.json"),
-        "preflight": load("capacity_preflight_report.json"),
-    })
+_ATEXIT_CLEANUP_REGISTERED = False
 
 
-
-def tearDownModule():
-    tmp = _STATE.get("tmp")
+def _cleanup_kitchen_sink_state() -> None:
+    tmp = _STATE.pop("tmp", None)
+    _STATE.clear()
     if tmp and os.path.isdir(tmp):
         # ignore_errors: .git's read-only object files make rmtree fail on
         # Windows, and a leftover temp dir is harmless while a teardown
         # exception is a confusing red run.
         shutil.rmtree(tmp, ignore_errors=True)
 
+
+def _require_kitchen_sink_tools() -> None:
+    if not shutil.which("ast-grep"):
+        raise unittest.SkipTest("ast-grep not on PATH")
+    if not shutil.which("git"):
+        raise unittest.SkipTest("git not on PATH")
+
+
+def _load_kitchen_json(out_dir: str, name: str):
+    with open(os.path.join(out_dir, name), encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def _load_kitchen_facts(out_dir: str):
+    path = os.path.join(out_dir, "facts.jsonl")
+    if not os.path.isfile(path):
+        return []
+    rows = []
+    with open(path, encoding="utf-8") as handle:
+        for line in handle:
+            if line.strip():
+                rows.append(json.loads(line))
+    return rows
+
+
+def _git_init_kitchen_repo(repo: str) -> None:
+    # Identity on the command line, never ambient config — a bare commit on a
+    # runner with no configured identity fails.
+    _git(repo, "init", "-q", "-b", "main")
+    _git(repo, "add", "-A")
+    _git(
+        repo,
+        "-c",
+        "user.email=kitchensink@example.invalid",
+        "-c",
+        "user.name=kitchensink",
+        "commit",
+        "-qm",
+        "init",
+    )
+
+
+def _build_kitchen_sink_state() -> None:
+    """Create the shared enterprise repo + full chain artifacts in ``_STATE``."""
+    global _ATEXIT_CLEANUP_REGISTERED
+    _require_kitchen_sink_tools()
+    tmp = tempfile.mkdtemp(prefix="kitchensink_")
+    repo = os.path.join(tmp, "repo")
+    out_dir = os.path.join(tmp, "run")
+    os.makedirs(out_dir)
+    build_enterprise_repo(repo)
+    _git_init_kitchen_repo(repo)
+    steps, snapshots = run_chain(repo, out_dir)
+    _STATE.update({
+        "tmp": tmp, "repo": repo, "out": out_dir, "steps": steps,
+        "snapshots": snapshots, "docs": os.path.join(repo, "docs"),
+        "signals": _load_kitchen_json(out_dir, "spring_signals.json"),
+        "covering_proof": _load_kitchen_json(out_dir, "covering_proof.json"),
+        "facts": _load_kitchen_facts(out_dir),
+        "groups": _load_kitchen_json(out_dir, "groups.json"),
+        "edges": _load_kitchen_json(out_dir, "cross_group_edges.json"),
+        "manifest": _load_kitchen_json(out_dir, "run_manifest.json"),
+        "preflight": _load_kitchen_json(out_dir, "capacity_preflight_report.json"),
+    })
+    if not _ATEXIT_CLEANUP_REGISTERED:
+        atexit.register(_cleanup_kitchen_sink_state)
+        _ATEXIT_CLEANUP_REGISTERED = True
+
+
+def setUpModule():
+    """Build+chain once; chapter modules share ``_STATE`` for the process.
+
+    Each ``test_kitchen_sink_ch*.py`` re-exports this as its unittest
+    ``setUpModule``. Without sharing, every chapter paid ~15s for the same
+    ``run_chain`` (signal_scan → partition → … → drift).
+    """
+    if _STATE.get("tmp"):
+        return
+    _build_kitchen_sink_state()
+
+
+def tearDownModule():
+    # Shared across kitchen-sink chapter modules; atexit owns the rmtree so a
+    # mid-suite tearDown does not force the next chapter to rebuild (~15s).
+    return
 
 
 def _evidence_files(signals):
@@ -95,17 +135,14 @@ def _evidence_files(signals):
             yield row["file"]
 
 
-
 def _grouped(groups):
     return {f for g in groups["groups"] for f in g["files"]}
-
 
 
 def _copy_docs():
     scratch = tempfile.mkdtemp(prefix="ks_docs_")
     shutil.copytree(_STATE["docs"], os.path.join(scratch, "docs"))
     return scratch, os.path.join(scratch, "docs")
-
 
 
 def _miscase_first_tag(case, path):
@@ -122,12 +159,10 @@ def _miscase_first_tag(case, path):
         f.write(mutated)
 
 
-
 def _has_segment(rel, name):
     """Segment-wise membership. A substring check would call
     'outbound/Client.java' an 'out' directory."""
     return name in rel.split("/")
-
 
 
 def _kitchen_sink_real_repo() -> str | None:
@@ -135,4 +170,3 @@ def _kitchen_sink_real_repo() -> str | None:
 
     path = real_repo_path()
     return str(path) if path is not None else None
-

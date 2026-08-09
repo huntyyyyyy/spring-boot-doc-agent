@@ -7,22 +7,36 @@ entity_table_map produced by the Java scanners.
 """
 
 import re
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from doc_engine.core.protocols import LineageResolver
 
-try:
-    from sqllineage.runner import LineageRunner
-    _SQLLINEAGE_AVAILABLE = True
-except ImportError:
-    _SQLLINEAGE_AVAILABLE = False
+# Tri-state: None = not probed yet. sqllineage → sqlfluff is ~0.4s+; probe only
+# when a lineage call actually needs it (not on every tool CLI import).
+_SQLLINEAGE_AVAILABLE: Optional[bool] = None
+_LineageRunner = None
 
-NAMED_PARAM_RE = re.compile(r"(?<![\w'\"]):(\w+)")
+NAMED_PARAM_RE = re.compile(r"(?<![\w'\']):(\w+)")
 POSITIONAL_PARAM_RE = re.compile(r"\?\d*")
 SQLLINEAGE_DEFAULT_SCHEMA_PREFIX = "<default>."
 JPQL_FROM_RE = re.compile(r"\bFROM\s+(\w+)\s+(?:AS\s+)?(\w+)\b", re.IGNORECASE)
 JPQL_JOIN_RE = re.compile(r"\bJOIN\b", re.IGNORECASE)
 JPQL_FUNCTION_RE = re.compile(r"\b(SIZE|KEY|VALUE|INDEX|TYPE)\s*\(", re.IGNORECASE)
+
+
+def _ensure_sqllineage() -> bool:
+    """Import sqllineage on first lineage call; cache availability."""
+    global _SQLLINEAGE_AVAILABLE, _LineageRunner
+    if _SQLLINEAGE_AVAILABLE is not None:
+        return _SQLLINEAGE_AVAILABLE
+    try:
+        from sqllineage.runner import LineageRunner as _LR
+
+        _LineageRunner = _LR
+        _SQLLINEAGE_AVAILABLE = True
+    except ImportError:
+        _SQLLINEAGE_AVAILABLE = False
+    return _SQLLINEAGE_AVAILABLE
 
 
 def _normalize_bind_params(sql: str) -> str:
@@ -48,7 +62,7 @@ def _lineage_exception_reason(exc: Exception) -> str:
 
 def _run_sqllineage(query_text: str, dialect: str) -> Dict[str, Any]:
     normalized = _normalize_bind_params(query_text)
-    runner = LineageRunner(normalized, dialect=dialect)
+    runner = _LineageRunner(normalized, dialect=dialect)
     return {
         "available": True,
         "source_tables": sorted({_clean_table_name(t) for t in runner.source_tables}),
@@ -58,7 +72,7 @@ def _run_sqllineage(query_text: str, dialect: str) -> Dict[str, Any]:
 
 def extract_sql_lineage(query_text: str, dialect: str = "ansi") -> Dict[str, Any]:
     """Best-effort source/target table extraction for one native SQL query."""
-    if not _SQLLINEAGE_AVAILABLE:
+    if not _ensure_sqllineage():
         return {"available": False, "reason": "sqllineage not installed"}
     try:
         return _run_sqllineage(query_text, dialect)

@@ -1,4 +1,9 @@
-"""Kitchen-sink Ch10 command chain."""
+"""Kitchen-sink Ch10 command chain.
+
+Stage-0 in this chapter uses ``filesystem,ast-grep`` only — CodeQL is
+intentionally out of kitchen-sink scope (optional CLI / live opt-in). Covering
+receipts and ABSENCE/UNPROVEN facts must not claim a CodeQL recall arm.
+"""
 
 from __future__ import annotations
 
@@ -131,6 +136,7 @@ class Ch10CommandChainTest(unittest.TestCase):
         self.assertTrue(ok, why)
         scanners = {r["scanner"] for r in proof["receipts"]}
         self.assertEqual(scanners, {"filesystem", "ast-grep"})
+        self.assertNotIn("codeql", scanners)
         self.assertTrue(all(r["status"] == "complete" for r in proof["receipts"]))
 
     def test_facts_ledger_has_absence_or_unproven_stamps(self):

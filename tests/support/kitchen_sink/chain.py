@@ -1,11 +1,14 @@
-"""Kitchen-sink command-chain runner (manifest → scan → mock stages → gates)."""
+"""Kitchen-sink command-chain runner (manifest → scan → mock stages → gates).
+
+Signal scan argv is pinned to ``filesystem,ast-grep`` (no CodeQL) so chapter
+tests stay hermetic and do not pretend to exercise the CodeQL cache/DB path.
+"""
 
 from __future__ import annotations
 
 import datetime
 import json
 import os
-import subprocess
 
 from doc_engine.pipeline.mock_stages import (
     find_existing_readme,
@@ -17,10 +20,12 @@ from doc_engine.pipeline.mock_stages import (
     sweep_todos,
 )
 from tests.support.kitchen_sink.constants import MAX_TOKENS, PY
+from tests.support.kitchen_sink.tool_invoke import run_argv
+
 
 def _run(argv, **kw):
-    return subprocess.run(argv, capture_output=True, text=True,
-                          encoding="utf-8", errors="replace", **kw)
+    """Prefer in-process tool mains; fall back to subprocess (e.g. git)."""
+    return run_argv(argv, **kw)
 
 
 
@@ -30,12 +35,12 @@ def _git(repo, *args):
 
 
 def run_chain(repo, out_dir):
-    """The documented command series, as real subprocesses.
+    """The documented command series, with per-step exit codes observable.
 
-    Step-by-step rather than delegating to run_pipeline_local.py, so each
-    step's own exit code is observable. The four LLM stages are filled in by
-    calling that script's mock builders in-process — they are the only part of
-    the chain a plain Python process cannot run for real.
+    Invokes each tool's ``main()`` in-process (same argv contract as
+    ``python -m``) so kitchen setup is not dominated by cold-import tax.
+    The four LLM stages are filled by mock builders in-process — they are
+    the only part of the chain a plain Python process cannot run for real.
     """
     steps = {}
     manifest = os.path.join(out_dir, "run_manifest.json")

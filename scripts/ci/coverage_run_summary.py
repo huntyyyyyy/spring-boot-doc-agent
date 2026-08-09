@@ -5,6 +5,9 @@ Replaces inline ``python <<'PY'`` heredocs in workflows (policy C-A / C3).
 Missing coverage.xml is non-fatal for the summary mode (pytest may have
 failed before writing); print-line-rate mode requires the file.
 
+``--print-line-rate`` is stdlib-only so sonar.yml can run it without
+installing the package. ``--github-summary`` imports doc_engine lazily.
+
 Usage:
     python3 scripts/ci/coverage_run_summary.py --github-summary
     python3 scripts/ci/coverage_run_summary.py --print-line-rate
@@ -21,10 +24,30 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+# ``--print-line-rate`` is stdlib-only (sonar.yml has no package install).
+# Import append_markdown_cli lazily in write_github_summary.
+
 
 def _line_rate_pct(coverage_xml: Path) -> float:
     root = ET.parse(coverage_xml).getroot()
     return 100.0 * float(root.attrib.get("line-rate", "0"))
+
+
+def format_coverage_summary_markdown(
+    *,
+    python_version: str,
+    fail_under: str,
+    line_rate: float | None,
+) -> str:
+    """Markdown block for the oracle-cell coverage headline."""
+    if line_rate is None:
+        return "### Line coverage (doc_engine + stf)\n\ncoverage.xml missing\n"
+    return (
+        "### Line coverage (doc_engine + stf)\n\n"
+        f"- Python `{python_version}`: **{line_rate:.2f}%** XML line-rate "
+        f"(fail_under floor {fail_under}% "
+        f"is combined stmt+branch Cover% from pytest-cov)\n"
+    )
 
 
 def write_github_summary(
@@ -34,23 +57,23 @@ def write_github_summary(
     python_version: str,
     fail_under: str,
 ) -> int:
-    if not coverage_xml.is_file():
+    """Append coverage headline to the GitHub step summary (validated path)."""
+    from doc_engine.ci.github_step_summary import append_markdown_cli
+
+    line_rate: float | None = None
+    if coverage_xml.is_file():
+        line_rate = _line_rate_pct(coverage_xml)
+        print(f"xml line-rate={line_rate:.2f}%")
+    else:
         print("coverage.xml missing — pytest may have failed before writing it")
-        summary_path.write_text(
-            "### Line coverage (doc_engine + stf)\n\ncoverage.xml missing\n",
-            encoding="utf-8",
-        )
-        return 0
-    pct = _line_rate_pct(coverage_xml)
-    summary_path.write_text(
-        "### Line coverage (doc_engine + stf)\n\n"
-        f"- Python `{python_version}`: **{pct:.2f}%** XML line-rate "
-        f"(fail_under floor {fail_under}% "
-        f"is combined stmt+branch Cover% from pytest-cov)\n",
-        encoding="utf-8",
+    markdown = format_coverage_summary_markdown(
+        python_version=python_version,
+        fail_under=fail_under,
+        line_rate=line_rate,
     )
-    print(f"xml line-rate={pct:.2f}%")
-    return 0
+    return append_markdown_cli(
+        markdown, summary_path, ok_message="coverage summary appended"
+    )
 
 
 def print_line_rate(coverage_xml: Path) -> int:

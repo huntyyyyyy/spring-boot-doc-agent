@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import MagicMock
+
 import pytest
-from doc_engine.scanning.support import _codeql_runner as runner
+
 from doc_engine.scanning.support import _codeql_cli as cli_mod
-from doc_engine.tools import capacity_preflight as cap
-from doc_engine.tools import spring_drift_check as drift
+from doc_engine.scanning.support import _codeql_runner as runner
 
 pytestmark = pytest.mark.domain_climb_sensor
 

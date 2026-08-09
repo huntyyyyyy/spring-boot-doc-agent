@@ -16,14 +16,16 @@ pytestmark = pytest.mark.domain_ci_meta
 FIXTURES = SCRIPTS_DIR / "coverage" / "rule_fixtures"
 import java_perturbations as perturb
 import set_delta as sd
-_TMP: Path = None
-BASE: Path = None
-BASE_SET = None
-from tests.support.metamorphic.harness import (
-    CorpusCase,
-    setUpModule,
-    tearDownModule,
-)
+from tests.support.metamorphic import harness as meta
+from tests.support.metamorphic.harness import CorpusCase
+
+
+def setUpModule() -> None:
+    meta.setUpModule()
+
+
+def tearDownModule() -> None:
+    meta.tearDownModule()
 
 class SingleEditLocalityTest(CorpusCase):
     def test_one_file_edited_moves_only_that_file(self) -> None:
@@ -93,7 +95,7 @@ class RescanDeterminismTest(CorpusCase):
     re-run-and-diff probe passing against an unfixed scanner."""
 
     def test_two_scans_of_the_same_tree_agree(self) -> None:
-        self.assertEqual(sd.signals_set(BASE), BASE_SET)
+        self.assertEqual(sd.signals_set(meta.BASE), meta.BASE_SET)
 
 class DuplicationScalesTest(CorpusCase):
     """Whole-tree duplication must multiply every rule's count by exactly 2."""
@@ -104,7 +106,7 @@ class DuplicationScalesTest(CorpusCase):
         copy_dir.mkdir()
         for java in list(repo.glob("*.java")):
             shutil.copy2(java, copy_dir / java.name)
-        problems = sd.check_scaling(BASE_SET, sd.signals_set(repo), 2)
+        problems = sd.check_scaling(meta.BASE_SET, sd.signals_set(repo), 2)
         self.assertEqual(problems, [], "\n".join(problems))
 
 class HarnessIsNotVacuousTest(CorpusCase):
@@ -118,9 +120,9 @@ class HarnessIsNotVacuousTest(CorpusCase):
         target.write_text(target.read_text(encoding="utf-8")
                           .replace("@RestController", "@RestController\n@Timed", 1),
                           encoding="utf-8")
-        residue = sd.classify(sd.delta(BASE_SET, sd.signals_set(repo)), sd.unchanged())
+        residue = sd.classify(sd.delta(meta.BASE_SET, sd.signals_set(repo)), sd.unchanged())
         self.assertFalse(residue.is_empty(),
                          "a real added annotation produced no residue")
 
     def test_the_reference_corpus_is_not_empty(self) -> None:
-        self.assertGreater(len(BASE_SET), 10, len(BASE_SET))
+        self.assertGreater(len(meta.BASE_SET), 10, len(meta.BASE_SET))

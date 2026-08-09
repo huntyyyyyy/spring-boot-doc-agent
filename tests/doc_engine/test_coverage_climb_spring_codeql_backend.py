@@ -2,27 +2,16 @@
 
 from __future__ import annotations
 
-import json
-import os
-import subprocess
-import sys
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any, Mapping
-from unittest.mock import MagicMock
+
 import pytest
-from doc_engine.core import excludes as excludes_mod
-from doc_engine.core import timeouts as timeouts_mod
-from doc_engine.pipeline.local_runner_phases import support as phase_support
-from doc_engine.query import kinds as kinds_mod
-from doc_engine.query.protocols import FreshnessPolicy, PacketProvider
+
 from doc_engine.scanning import spring as spring_mod
 from doc_engine.scanning._scanner_codeql import CodeQLBackend
+from doc_engine.scanning.support._codeql_entity_map import record_entity_hit
+from doc_engine.scanning.support._codeql_evidence import project_codeql_row
 from doc_engine.scanning.support import _codeql_runner as runner
-import doc_engine.scanning.support._codeql_cache as cache_mod
-import doc_engine.scanning.support._codeql_cli as cli_mod
-import doc_engine.scanning.support._codeql_database as db_mod
-import doc_engine.scanning.support._codeql_queries as queries_mod
 
 pytestmark = pytest.mark.domain_climb_sensor
 
@@ -99,6 +88,12 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
     )
     digest = backend.version_hash()
     assert len(digest) == 16
+    hashed_paths = CodeQLBackend._version_hash_paths()
+    hashed = {Path(p).name for p in hashed_paths}
+    support = Path(hashed_paths[0]).parent / "support"
+    siblings = {p.name for p in support.glob("_codeql_*.py")}
+    assert siblings, "expected modularized _codeql_*.py siblings on disk"
+    assert siblings <= hashed, f"version_hash omitted siblings: {sorted(siblings - hashed)}"
     # Unreadable path should be skipped without failing the hash.
     monkeypatch.setattr(
         CodeQLBackend,
@@ -106,6 +101,32 @@ def test_codeql_backend_name_and_version_hash(tmp_path: Path, monkeypatch) -> No
         staticmethod(lambda: [str(tmp_path / "missing.bin")]),
     )
     assert len(backend.version_hash()) == 16
+
+
+def test_version_hash_changes_when_codeql_sibling_bytes_change(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Results-cache scanner_version must move when query/cache modules change."""
+    pack = tmp_path / "pack"
+    pack.mkdir()
+    (pack / "q.ql").write_text("// query\n", encoding="utf-8")
+    monkeypatch.setattr(
+        "doc_engine.scanning._scanner_codeql.codeql_pack_dir",
+        lambda: pack,
+    )
+    sibling = tmp_path / "_codeql_queries.py"
+    sibling.write_text("# original\n", encoding="utf-8")
+    scanner = tmp_path / "_scanner_codeql.py"
+    scanner.write_text("# scanner\n", encoding="utf-8")
+
+    def _paths() -> list[str]:
+        return [str(scanner), str(sibling), str(pack / "q.ql")]
+
+    monkeypatch.setattr(CodeQLBackend, "_version_hash_paths", staticmethod(_paths))
+    before = CodeQLBackend().version_hash()
+    sibling.write_text("# mutated query runner\n", encoding="utf-8")
+    after = CodeQLBackend().version_hash()
+    assert before != after
 
 def test_codeql_scan_requires_build_command() -> None:
     with pytest.raises(runner.CodeQLError, match="build command"):
@@ -145,15 +166,14 @@ def test_codeql_scan_buckets_rows(tmp_path: Path, monkeypatch) -> None:
     assert "api_surface" in result["evidence"]
     assert result["entity_table_map_candidates"]
 
-def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
+def test_project_skips_rows_outside_java_scope(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
     (repo / "A.java").write_text("class A {}", encoding="utf-8")
-    backend = CodeQLBackend()
     evidence: dict = {}
     entities: dict = {}
     ctx_rels = {"B.java"}
-    backend._ingest_codeql_row(
+    project_codeql_row(
         repo_path=str(repo),
         row={"file": "A.java", "line": 1, "rule_id": "api_surface__x"},
         java_rels=ctx_rels,
@@ -162,19 +182,18 @@ def test_ingest_skips_rows_outside_java_scope(tmp_path: Path) -> None:
     )
     assert evidence == {}
 
-def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch) -> None:
+def test_entity_hit_without_extractable_class(tmp_path: Path, monkeypatch) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
     rel = "Empty.java"
     (repo / rel).write_text("// empty\n", encoding="utf-8")
     monkeypatch.setattr(
-        "doc_engine.scanning._scanner_codeql.extract_entity",
+        "doc_engine.scanning.support._codeql_entity_map.extract_entity",
         lambda *a, **k: None,
     )
-    backend = CodeQLBackend()
     evidence: dict = {}
     entities: dict = {}
-    backend._ingest_entity_row(
+    record_entity_hit(
         repo_path=str(repo),
         rel=rel,
         row={"line": 1, "class_name": ""},
@@ -185,14 +204,3 @@ def test_ingest_entity_row_without_extractable_class(tmp_path: Path, monkeypatch
     )
     assert entities == {}
     assert evidence == {}
-
-def test_explicit_table_preserves_package() -> None:
-    entry = CodeQLBackend._explicit_table_map_entry(
-        rel="p/A.java",
-        class_name="A",
-        codeql_table="tbl",
-        map_entry={"package": "com.ex", "fqcn": "com.ex.A"},
-    )
-    assert entry["package"] == "com.ex"
-    assert entry["fqcn"] == "com.ex.A"
-    assert entry["table"] == "tbl"

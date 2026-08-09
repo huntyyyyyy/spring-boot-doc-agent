@@ -8,7 +8,12 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from doc_engine.scanning._scanner_codeql import CodeQLBackend
+from doc_engine.scanning._scanner_codeql import CodeQLBackend, _acked_java_paths
+from doc_engine.scanning.support._codeql_entity_map import (
+    entity_map_entry,
+    explicit_table_map_entry,
+)
+from doc_engine.scanning.support._codeql_evidence import evidence_entry_from_codeql_row
 from doc_engine.scanning.support import _codeql_runner as runner
 from doc_engine.scanning.support import _codeql_cache as cache_mod
 
@@ -60,7 +65,7 @@ def test_validated_build_command_wraps_build_command_error():
         runner._validated_build_command("")
 
 def test_evidence_entry_raw_query_fields():
-    entry = CodeQLBackend._evidence_entry_from_codeql_row(
+    entry = evidence_entry_from_codeql_row(
         rel="src/Q.java",
         row={"line": 3, "query_kind": "native", "query_text": "SELECT 1"},
         match_text="@Query(\"SELECT 1\")",
@@ -72,10 +77,10 @@ def test_evidence_entry_raw_query_fields():
 
 def test_evidence_entry_repository_falls_back_to_entity_name(monkeypatch):
     monkeypatch.setattr(
-        "doc_engine.scanning._scanner_codeql.extract_repository",
+        "doc_engine.scanning.support._codeql_evidence.extract_repository",
         lambda _text: {"repository": "FooRepo"},
     )
-    entry = CodeQLBackend._evidence_entry_from_codeql_row(
+    entry = evidence_entry_from_codeql_row(
         rel="src/FooRepo.java",
         row={"line": 1, "entity_name": "Foo"},
         match_text="interface FooRepo",
@@ -85,7 +90,7 @@ def test_evidence_entry_repository_falls_back_to_entity_name(monkeypatch):
     assert entry["entity"] == "Foo"
 
 def test_entity_map_entry_inferred_and_explicit_table():
-    inferred = CodeQLBackend._entity_map_entry(
+    inferred = entity_map_entry(
         rel="src/Bar.java",
         class_name="Bar",
         match_text="@Entity class Bar {}",
@@ -99,7 +104,7 @@ def test_entity_map_entry_inferred_and_explicit_table():
     assert map_entry["table_name_source"] == "inferred-default-naming"
     assert map_entry["table"] == "bar"
 
-    explicit = CodeQLBackend._entity_map_entry(
+    explicit = entity_map_entry(
         rel="src/Bar.java",
         class_name="Bar",
         match_text="@Entity class Bar {}",
@@ -114,7 +119,7 @@ def test_entity_map_entry_inferred_and_explicit_table():
 
 def test_entity_map_entry_rejects_empty_inferred_class_name():
     assert (
-        CodeQLBackend._entity_map_entry(
+        entity_map_entry(
             rel="src/X.java",
             class_name="",
             match_text="",
@@ -125,6 +130,17 @@ def test_entity_map_entry_rejects_empty_inferred_class_name():
         is None
     )
 
+def test_explicit_table_preserves_package() -> None:
+    entry = explicit_table_map_entry(
+        rel="p/A.java",
+        class_name="A",
+        codeql_table="tbl",
+        map_entry={"package": "com.ex", "fqcn": "com.ex.A"},
+    )
+    assert entry["package"] == "com.ex"
+    assert entry["fqcn"] == "com.ex.A"
+    assert entry["table"] == "tbl"
+
 def test_acked_java_paths_prefer_scan_context():
     ctx = SimpleNamespace(
         java_files=[
@@ -132,11 +148,11 @@ def test_acked_java_paths_prefer_scan_context():
             SimpleNamespace(rel_path="a/A.java"),
         ]
     )
-    assert CodeQLBackend._acked_java_paths(ctx, ["z/Z.java"]) == [
+    assert _acked_java_paths(ctx, ["z/Z.java"]) == [
         "a/A.java",
         "b/B.java",
     ]
-    assert CodeQLBackend._acked_java_paths(None, ["z/Z.java"]) == ["z/Z.java"]
+    assert _acked_java_paths(None, ["z/Z.java"]) == ["z/Z.java"]
 
 def test_covering_receipt_complete_when_acked_matches(monkeypatch):
     backend = CodeQLBackend()

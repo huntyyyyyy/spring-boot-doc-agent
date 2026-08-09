@@ -143,10 +143,17 @@ class Ch04EncodingTest(unittest.TestCase):
 
     def test_crlf_java_is_scanned_with_sane_line_numbers(self):
             self.assertIn(CRLF_JAVA, _grouped(self.groups))
-            for rows in (self.signals.get("evidence") or {}).values():
-                for row in rows:
-                    if row["file"] == CRLF_JAVA:
-                        self.assertGreaterEqual(row.get("line", 1), 1)
+            crlf_rows = [
+                row
+                for rows in (self.signals.get("evidence") or {}).values()
+                for row in rows
+                if row["file"] == CRLF_JAVA
+            ]
+            self.assertGreater(
+                len(crlf_rows), 0, f"no evidence rows for planted {CRLF_JAVA}"
+            )
+            for row in crlf_rows:
+                self.assertGreaterEqual(row.get("line", 0), 1)
 
     def test_invalid_utf8_is_included_via_the_latin1_fallback(self):
             """latin-1 accepts every byte, so this is a silent mis-decode by

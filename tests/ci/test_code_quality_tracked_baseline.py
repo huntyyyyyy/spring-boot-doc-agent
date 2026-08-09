@@ -17,6 +17,19 @@ SCRIPT_DIR = SCRIPTS_DIR
 import check_code_quality as checker
 from tests.support.code_quality.measure import measure_one
 
+def _gate_measure_roots(repo: Path) -> list[Path]:
+    """Same roots as ``check_code_quality.main`` (scripts + package + stf + tests)."""
+    return [
+        path
+        for path in (
+            SCRIPT_DIR,
+            repo / "src" / "doc_engine",
+            repo / "src" / "stf",
+            repo / "tests",
+        )
+        if path.is_dir()
+    ]
+
 class TrackedFilesOnlyTest(unittest.TestCase):
     """The baseline is a committed artifact, so it must describe the committed
     tree -- not whatever happens to be sitting in the working directory.
@@ -121,7 +134,7 @@ class CommittedBaselineTest(unittest.TestCase):
         self.assertEqual(baseline.get("schema_version"), checker.SCHEMA_VERSION)
         current = checker.measure_tree(
             SCRIPT_DIR,
-            extra_roots=[SCRIPT_DIR, SCRIPT_DIR.parent / "src" / "doc_engine"],
+            extra_roots=_gate_measure_roots(SCRIPT_DIR.parent),
             repo_root=SCRIPT_DIR.parent,
         )
         issues = checker.compare(baseline, current)

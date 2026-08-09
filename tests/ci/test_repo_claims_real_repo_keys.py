@@ -21,7 +21,7 @@ pytestmark = pytest.mark.domain_ci_meta
 class TestRealRepoKeys(unittest.TestCase):
     """Against the actual tree. These are the assertions that would notice
 the checker having quietly stopped looking at anything."""
-def test_predicates_attach_to_the_claim_that_declares_them(self) -> None:
+    def test_predicates_attach_to_the_claim_that_declares_them(self) -> None:
         """A verify: comment belongs to the tag above it, not to every tag in
         the file -- otherwise one opted-in entry would silently mark the whole
         document as checked."""
@@ -35,7 +35,7 @@ def test_predicates_attach_to_the_claim_that_declares_them(self) -> None:
             self.assertEqual(claims[0].predicates, ())
             self.assertEqual(claims[1].predicates, ("path_absent:gone.txt",))
 
-def test_claim_key_survives_insert_above(self) -> None:
+    def test_claim_key_survives_insert_above(self) -> None:
         """Ordinal keys churned the baseline on every CONSTRAINTS edit; content
         digests must not."""
         with tempfile.TemporaryDirectory() as tmp:
@@ -59,7 +59,7 @@ def test_claim_key_survives_insert_above(self) -> None:
             self.assertEqual(before["Flagged"], after["Flagged"])
             self.assertNotEqual(after["New info"], before["Resolved"])
 
-def test_claim_key_follows_body_not_position_on_reorder(self) -> None:
+    def test_claim_key_follows_body_not_position_on_reorder(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "CONSTRAINTS.md").write_text(
@@ -81,7 +81,7 @@ def test_claim_key_follows_body_not_position_on_reorder(self) -> None:
             self.assertEqual(first["Resolved"], second["Resolved"])
             self.assertEqual(first["Flagged"], second["Flagged"])
 
-def test_claim_key_changes_when_lead_sentence_rewritten(self) -> None:
+    def test_claim_key_changes_when_lead_sentence_rewritten(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "CONSTRAINTS.md").write_text(
@@ -96,7 +96,7 @@ def test_claim_key_changes_when_lead_sentence_rewritten(self) -> None:
                 root, root / "CONSTRAINTS.md")[0].key
             self.assertNotEqual(key1, key2)
 
-def test_claim_key_ignores_verify_comment_text(self) -> None:
+    def test_claim_key_ignores_verify_comment_text(self) -> None:
         """Adding predicates must not reinvent identity."""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -112,7 +112,7 @@ def test_claim_key_ignores_verify_comment_text(self) -> None:
                 root, root / "CONSTRAINTS.md")[0].key
             self.assertEqual(key1, key2)
 
-def test_refuse_revival_tombstone_exempts_absent_glob(self) -> None:
+    def test_refuse_revival_tombstone_exempts_absent_glob(self) -> None:
         """Intentional absence prose must not fail check B on a zero-match glob."""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -121,7 +121,7 @@ def test_refuse_revival_tombstone_exempts_absent_glob(self) -> None:
                 encoding="utf-8")
             self.assertEqual(crc.check_references(root, ["CONSTRAINTS.md"]), [])
 
-def test_live_claim_still_flags_absent_glob(self) -> None:
+    def test_live_claim_still_flags_absent_glob(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "CONSTRAINTS.md").write_text(
@@ -131,19 +131,19 @@ def test_live_claim_still_flags_absent_glob(self) -> None:
             self.assertTrue(any("scripts/test_*.py" in f.message for f in findings),
                             findings)
 
-def test_the_checker_actually_inspects_files(self) -> None:
+    def test_the_checker_actually_inspects_files(self) -> None:
         """Non-vacuity against the real tree: if tracked_markdown() ever
         returned nothing, every markdown check would report clean forever."""
         self.assertGreater(len(crc.tracked_markdown(REPO_ROOT)), 20)
 
-def test_every_derivation_key_is_computable(self) -> None:
+    def test_every_derivation_key_is_computable(self) -> None:
         for key, fn in crc.DERIVATIONS.items():
             with self.subTest(key=key):
                 value = fn(REPO_ROOT)
                 self.assertTrue(value.isdigit() and int(value) > 0,
                                 f"{key} produced {value!r}")
 
-def test_codeql_rule_count_matches_rule_coverage_denominator(self) -> None:
+    def test_codeql_rule_count_matches_rule_coverage_denominator(self) -> None:
         """Denominator SoR is the CodeQL pack — both `=` and `as rule_id` forms."""
         import sys
         coverage_dir = str(REPO_ROOT / "scripts" / "coverage")

@@ -28,10 +28,21 @@ pytestmark = pytest.mark.domain_stage0
 REPO_ROOT = repo_root()
 BASELINE = REPO_ROOT / "scripts" / "coverage" / "real_repo_gap_baseline.json"
 from tests.support.real_fixture.adversarial_factories import (
+    _minimal_signals,
     _real_artifacts_available,
-    real_artifacts_bundle,
+    real_artifacts_bundle as _load_real_artifacts_bundle,
 )
 
+
+@pytest.fixture(scope="module")
+def real_artifacts_bundle() -> tuple[dict, list, Path]:
+    return _load_real_artifacts_bundle()
+
+
+@pytest.mark.skipif(
+    not _real_artifacts_available(),
+    reason="DOC_ENGINE_REAL_ARTIFACTS_DIR unset — opt-in adversarial real-repo lane",
+)
 class TestRealRepoAdversarial:
     """Opt-in attacks against a local mid-size Spring dump + checkout."""
 

@@ -34,8 +34,11 @@ def test_classify_dir_and_filename_rules(tmp_path: Path) -> None:
     climb.parent.mkdir(parents=True)
     climb.write_text("def test_a():\n    pass\n", encoding="utf-8")
     assert classify_test_path(repo, climb) == "domain_climb_sensor"
+    ci_climb = repo / "tests" / "ci" / "test_coverage_climb_b3_domains.py"
+    ci_climb.parent.mkdir(parents=True)
+    ci_climb.write_text("def test_a():\n    pass\n", encoding="utf-8")
+    assert classify_test_path(repo, ci_climb) == "domain_climb_sensor"
     ci = repo / "tests" / "ci" / "test_size_ratchet.py"
-    ci.parent.mkdir(parents=True)
     ci.write_text("def test_a():\n    pass\n", encoding="utf-8")
     assert classify_test_path(repo, ci) == "domain_ci_meta"
 

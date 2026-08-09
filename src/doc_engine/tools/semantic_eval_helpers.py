@@ -283,19 +283,18 @@ def _load_interview_answers(artifacts_dir):
         return json.load(f)
 
 
+def _is_safe_markdown_basename(docs_dir: str, name: str) -> bool:
+    if not name.endswith(".md") or Path(name).name != name:
+        return False
+    try:
+        join_under(docs_dir, name)
+    except PathValidationError:
+        return False
+    return True
+
+
 def _markdown_names(docs_dir: str):
-    names = []
-    for name in sorted(os.listdir(docs_dir)):
-        if not name.endswith(".md"):
-            continue
-        if Path(name).name != name:
-            continue
-        try:
-            join_under(docs_dir, name)
-        except PathValidationError:
-            continue
-        names.append(name)
-    return names
+    return [n for n in sorted(os.listdir(docs_dir)) if _is_safe_markdown_basename(docs_dir, n)]
 
 
 def _confirmed_findings_for_doc(docs_dir, name, interview_answers, overlap_threshold):

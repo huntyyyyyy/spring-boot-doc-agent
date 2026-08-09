@@ -84,8 +84,10 @@ class FallbackUnclassified:
         return "domain_unclassified"
 
 
-# Specific → general. Dir rules before loose filename contains.
+# Specific → general. Climb filename prefix beats dir ownership so
+# tests/ci/test_coverage_climb_* stay domain_climb_sensor (not ci_meta).
 CLASSIFICATION_RULES: tuple[ClassificationRule, ...] = (
+    FilenamePrefixRule("test_coverage_climb_", "domain_climb_sensor"),
     DirPrefixRule("tests/ci", "domain_ci_meta"),
     DirPrefixRule("tests/ratchets", "domain_ci_meta"),
     DirPrefixRule("tests/coverage", "domain_ci_meta"),
@@ -95,10 +97,11 @@ CLASSIFICATION_RULES: tuple[ClassificationRule, ...] = (
     DirPrefixRule("tests/research", "domain_ci_meta"),
     DirPrefixRule("tests/fixtures", "domain_ci_meta"),
     FilenameContainsRule("ocs_real_world", "domain_live_optin"),
+    # Real-repo kitchen-sink lane is opt-in (skipUnless); do not serial-ABI it.
+    FilenameContainsRule("kitchen_sink_real_repo", "domain_live_optin"),
     FilenamePrefixRule("test_kitchen_sink", "domain_integration"),
     FilenamePrefixRule("test_enterprise_kitchen", "domain_integration"),
     FilenamePrefixRule("test_local_runner_certified", "domain_integration"),
-    FilenamePrefixRule("test_coverage_climb_", "domain_climb_sensor"),
     FilenamePrefixRule("test_artifact_", "domain_schemas"),
     FilenameContainsRule("schema", "domain_schemas", under="tests/doc_engine"),
     FilenamePrefixRule("test_gap_probe", "domain_stage0"),

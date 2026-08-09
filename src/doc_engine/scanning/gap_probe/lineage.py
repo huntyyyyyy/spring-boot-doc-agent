@@ -18,7 +18,6 @@ def _reason_mentions(reason: str, *needles: str) -> bool:
     lowered = reason.lower()
     return any(needle in reason or needle in lowered for needle in needles)
 
-
 def _lineage_reason_class(reason: Optional[str]) -> str:
     if not reason:
         return "unavailable_unknown"
@@ -30,9 +29,8 @@ def _lineage_reason_class(reason: Optional[str]) -> str:
         return "entity_lookup"
     return "unavailable_other"
 
-
 def _dominant_failure_stratum(lin: Mapping[str, Any]) -> Optional[Dict[str, Any]]:
-    """Pick the mode failure_taxonomy reason for design_reopen (callable R_lin)."""
+    """Mode failure_taxonomy reason for design_reopen (callable R_lin)."""
     taxonomy = {
         reason: count
         for reason, count in (lin.get("failure_taxonomy") or {}).items()
@@ -44,7 +42,6 @@ def _dominant_failure_stratum(lin: Mapping[str, Any]) -> Optional[Dict[str, Any]
         return None
     reason, count = max(taxonomy.items(), key=lambda item: item[1])
     return {"reason_class": reason, "count": count}
-
 
 def _null_query_outcome(
     row: Mapping[str, Any],
@@ -63,7 +60,6 @@ def _null_query_outcome(
     # Pooled folds uncallable rows into native as failed trials.
     stratum = "native" if scoring_env == SCORING_ENV_POOLED else "null_query"
     return stratum, False, failure, "null_query"
-
 
 def _unavailable_lineage_failure(
     row: Mapping[str, Any],
@@ -86,20 +82,24 @@ def _unavailable_lineage_failure(
     }
     return failure, reason_class
 
+def _effective_lineage_available(lineage: Mapping[str, Any], query_kind: str) -> bool:
+    """R_lin success: available, and JPQL also requires resolved_via_entity."""
+    if not lineage.get("available"):
+        return False
+    if query_kind == "jpql" and not lineage.get("resolved_via_entity"):
+        return False
+    return True
 
 def _lineage_row_outcome(
     row: Mapping[str, Any],
     *,
     scoring_env: ScoringEnv | str,
 ) -> tuple[str, bool, Optional[Dict[str, Any]], Optional[str]]:
-    """Classify one raw_queries row for R_lin.
-
-    Returns (stratum, available, failure_or_None, taxonomy_key_or_None).
-    """
+    """Classify one raw_queries row for R_lin (stratum, available, failure, tax)."""
     query = row.get("query")
     query_kind = str(row.get("query_kind") or "other")
     lineage = row.get("lineage") if isinstance(row.get("lineage"), Mapping) else {}
-    available = bool(lineage.get("available"))
+    available = _effective_lineage_available(lineage, query_kind)
 
     if query is None:
         return _null_query_outcome(row, query_kind=query_kind, scoring_env=scoring_env)
@@ -115,12 +115,10 @@ def _lineage_row_outcome(
     )
     return stratum, False, failure, reason_class
 
-
 def _raw_query_rows(signals: Mapping[str, Any]) -> List[Any]:
     evidence = signals.get("evidence") or {}
     rows = evidence.get("raw_queries") if isinstance(evidence, Mapping) else None
     return rows if isinstance(rows, list) else []
-
 
 def _bump_stratum_counts(
     strata: Dict[str, Dict[str, int]],
@@ -132,7 +130,6 @@ def _bump_stratum_counts(
     slot["total"] += 1
     if available:
         slot["available"] += 1
-
 
 def _apply_lineage_row(
     row: Any,
@@ -153,7 +150,6 @@ def _apply_lineage_row(
     if failure is not None:
         failures.append(failure)
 
-
 def _accumulate_lineage_trials(
     rows: Sequence[Any],
     *,
@@ -172,7 +168,6 @@ def _accumulate_lineage_trials(
         )
     return strata, failures, taxonomy
 
-
 def _mean_slots_for_scoring_env(
     strata: Mapping[str, Dict[str, int]],
     scoring_env: ScoringEnv | str,
@@ -184,7 +179,6 @@ def _mean_slots_for_scoring_env(
         }
     return strata
 
-
 def _strata_rate_blocks(
     strata: Mapping[str, Dict[str, int]],
 ) -> Dict[str, Any]:
@@ -192,7 +186,6 @@ def _strata_rate_blocks(
         stratum_name: _rate_block(slot["available"], slot["total"])
         for stratum_name, slot in sorted(strata.items())
     }
-
 
 def measure_r_lin(
     signals: Mapping[str, Any],

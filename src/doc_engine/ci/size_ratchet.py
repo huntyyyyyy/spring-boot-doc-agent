@@ -67,12 +67,34 @@ def compare_offenders(
             f"{kind} hard-offender count rose {len(baseline)} -> {len(current)}"
         )
     for key, value in sorted(current.items()):
-        prior = baseline.get(key)
-        if prior is None:
-            issues.append(f"new {kind} offender {key}={value}")
-        elif value > prior:
-            issues.append(f"{kind} offender grew: {key} {prior} -> {value}")
+        delta = _offender_delta(kind, key, baseline.get(key), value)
+        if delta is not None:
+            issues.append(delta)
     return issues
+
+
+def _offender_delta(kind: str, key: str, prior: int | None, value: int) -> str | None:
+    if prior is None:
+        return f"new {kind} offender {key}={value}"
+    if value > prior:
+        return f"{kind} offender grew: {key} {prior} -> {value}"
+    return None
+
+
+def _print_soft_advisories(advisories: List[str]) -> None:
+    if not advisories:
+        return
+    print(f"size soft advisories ({len(advisories)}):")
+    for note in advisories[:40]:
+        print(f"  {note}")
+    if len(advisories) > 40:
+        print(f"  … {len(advisories) - 40} more")
+
+
+def _print_issues(issues: List[str]) -> None:
+    print(f"size ratchet failed ({len(issues)} issue(s)):", file=sys.stderr)
+    for issue in issues:
+        print(f"  - {issue}", file=sys.stderr)
 
 
 def build_baseline_payload(
@@ -165,17 +187,10 @@ def main(argv: list[str] | None = None) -> int:
         f"(file_loc_hard={FILE_LOC_HARD}, fn_stmts_hard={FN_STMTS_HARD})"
     )
     advisories = soft_advisories(file_loc, functions)
-    if advisories:
-        print(f"size soft advisories ({len(advisories)}):")
-        for note in advisories[:40]:
-            print(f"  {note}")
-        if len(advisories) > 40:
-            print(f"  … {len(advisories) - 40} more")
+    _print_soft_advisories(advisories)
     issues = compare(baseline, file_loc, functions)
     if issues:
-        print(f"size ratchet failed ({len(issues)} issue(s)):", file=sys.stderr)
-        for issue in issues:
-            print(f"  - {issue}", file=sys.stderr)
+        _print_issues(issues)
         return 1
     if len(file_off) < int(baseline.get("file_offender_count", 0)) or len(
         fn_off

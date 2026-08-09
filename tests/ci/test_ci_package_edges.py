@@ -10,16 +10,18 @@ from unittest.mock import MagicMock
 import pytest
 
 from doc_engine.ci import coverage_gap_average as cga
+from doc_engine.ci import coverage_report as cov_report
 from doc_engine.ci import gate_tools
+from doc_engine.ci import quality_gate_checks as qgc
 from doc_engine.ci import quality_gates as qg
 
 pytestmark = pytest.mark.domain_ci_meta
 
 def test_parse_condition_coverage_edges() -> None:
-    assert cga._parse_condition_coverage(None) == (0, 0)
-    assert cga._parse_condition_coverage("no-paren") == (0, 0)
-    assert cga._parse_condition_coverage("50% (1/2)") == (1, 2)
-    assert cga._parse_condition_coverage("bad (x/y)") == (0, 0)
+    assert cov_report._parse_condition_coverage(None) == (0, 0)
+    assert cov_report._parse_condition_coverage("no-paren") == (0, 0)
+    assert cov_report._parse_condition_coverage("50% (1/2)") == (1, 2)
+    assert cov_report._parse_condition_coverage("bad (x/y)") == (0, 0)
 
 def test_file_coverage_empty_measurable() -> None:
     row = cga.FileCoverage("x.py", 0, 0, 0, 0)
@@ -46,11 +48,15 @@ def test_main_missing_and_bad_xml(tmp_path: Path, capsys: pytest.CaptureFixture[
     bad.write_text("<<<", encoding="utf-8")
     assert cga.main(["--coverage-xml", str(bad)]) == 2
 
-def test_append_github_summary(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_append_gap_markdown(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     summary = tmp_path / "summary.md"
     monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
-    cga._append_github_summary("hello")
-    assert "hello" in summary.read_text(encoding="utf-8")
+    rows = [cga.FileCoverage("src/a.py", 10, 0, 2, 0)]
+    report = cga.build_report(rows, floor=50.0)
+    cga._append_gap_markdown(report, worst=5)
+    body = summary.read_text(encoding="utf-8")
+    assert "Coverage gap-average" in body
+    assert "Floor: **50%**" in body
 
 def test_validate_git_rev_rejects_unsafe() -> None:
     with pytest.raises(SystemExit):
@@ -90,18 +96,18 @@ def test_gate_new_code_coverage_missing_xml(tmp_path: Path) -> None:
     assert qg.gate_new_code_coverage("origin/main", tmp_path / "no.xml") == 2
 
 def test_gate_duplication_skip_paths(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(qg, "changed_python_under_packages", lambda _ref: [])
-    assert qg.gate_duplication("origin/main") == 0
+    monkeypatch.setattr(qgc, "changed_python_under_packages", lambda _ref: [])
+    assert qgc.gate_duplication("origin/main") == 0
     monkeypatch.setattr(
-        qg, "changed_python_under_packages", lambda _ref: ["src/doc_engine/a.py"]
+        qgc, "changed_python_under_packages", lambda _ref: ["src/doc_engine/a.py"]
     )
-    assert qg.gate_duplication("origin/main") == 0
+    assert qgc.gate_duplication("origin/main") == 0
 
 def test_changed_python_git_failure(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
-        qg.subprocess,
+        qgc.subprocess,
         "run",
         lambda *a, **k: MagicMock(returncode=1, stdout="", stderr="boom"),
     )
     with pytest.raises(SystemExit):
-        qg.changed_python_under_packages("origin/main")
+        qgc.changed_python_under_packages("origin/main")

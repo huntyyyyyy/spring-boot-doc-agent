@@ -16,14 +16,16 @@ pytestmark = pytest.mark.domain_ci_meta
 FIXTURES = SCRIPTS_DIR / "coverage" / "rule_fixtures"
 import java_perturbations as perturb
 import set_delta as sd
-_TMP: Path = None
-BASE: Path = None
-BASE_SET = None
-from tests.support.metamorphic.harness import (
-    CorpusCase,
-    setUpModule,
-    tearDownModule,
-)
+from tests.support.metamorphic import harness as meta
+from tests.support.metamorphic.harness import CorpusCase
+
+
+def setUpModule() -> None:
+    meta.setUpModule()
+
+
+def tearDownModule() -> None:
+    meta.tearDownModule()
 
 class FormattingIsMeaningPreservingTest(CorpusCase):
     """Every FORMATTING_ONLY transform must leave the set untouched -- except
@@ -64,7 +66,7 @@ class FormattingIsMeaningPreservingTest(CorpusCase):
         it to keep passing.
         """
         residue = sd.classify(
-            sd.delta(BASE_SET, sd.signals_set(self._apply(self.KNOWN_MOVES_THE_SET))),
+            sd.delta(meta.BASE_SET, sd.signals_set(self._apply(self.KNOWN_MOVES_THE_SET))),
             sd.unchanged())
         self.assertFalse(
             residue.is_empty(),
@@ -142,7 +144,7 @@ class BuildFileTypeTest(CorpusCase):
         repo = self.variant()
         (repo / "build.gradle").write_text("@RestController\n@Entity\n",
                                            encoding="utf-8")
-        added = sd.delta(BASE_SET, sd.signals_set(repo)).added
+        added = sd.delta(meta.BASE_SET, sd.signals_set(repo)).added
         for member in added:
             self.assertNotIn("__", member.rule_id,
                              f"a .gradle file produced a structural rule hit: {member}")

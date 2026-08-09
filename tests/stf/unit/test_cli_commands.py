@@ -31,6 +31,18 @@ def test_reviewer_token_mark_done_and_forged(tmp_path: Path) -> None:
     token = TasksStore(tmp_path).issue_validation_token()
     assert stf_main(["mark-done", "--target-dir", str(tmp_path), "--token", token]) == 0
 
+
+def test_issue_validation_token_never_starts_with_dash(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    write_spec_and_tasks_into(tmp_path)
+    from stf.runners import store as store_mod
+    from stf.runners.store import TasksStore
+
+    monkeypatch.setattr(store_mod.secrets, "token_urlsafe", lambda _n: "-leadingDashTok")
+    token = TasksStore(tmp_path).issue_validation_token()
+    assert token == "t-leadingDashTok"
+
 def test_handoff_checklist_and_dry_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     write_spec_and_tasks_into(tmp_path)
     checklist = tmp_path / "HANDOFF.md"

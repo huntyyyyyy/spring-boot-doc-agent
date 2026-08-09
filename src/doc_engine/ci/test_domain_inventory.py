@@ -39,22 +39,41 @@ class DocEngineDomainInventory:
 
 def build_doc_engine_inventory(repo: Path) -> DocEngineDomainInventory:
     """Classify doc_engine tests; debt = still ``domain_unclassified``."""
-    modules = [
-        path
-        for path in iter_test_modules(repo)
-        if "doc_engine" in path.parts
-    ]
-    meeting: list[Path] = []
-    debt: list[Path] = []
-    for path in modules:
-        marker = classify_test_path(repo, path)
-        if marker == UNCLASSIFIED_MARKER:
-            debt.append(path)
-        else:
-            meeting.append(path)
+    modules = _doc_engine_test_modules(repo)
+    meeting, debt = _partition_by_unclassified(repo, modules)
     return DocEngineDomainInventory(
         floor=DOC_ENGINE_MEETING_FLOOR,
         total=len(modules),
         meeting=tuple(meeting),
         debt=tuple(debt),
     )
+
+
+def _doc_engine_test_modules(repo: Path) -> list[Path]:
+    return [
+        path
+        for path in iter_test_modules(repo)
+        if "doc_engine" in path.parts
+    ]
+
+
+def _partition_by_unclassified(
+    repo: Path, modules: list[Path]
+) -> tuple[list[Path], list[Path]]:
+    meeting: list[Path] = []
+    debt: list[Path] = []
+    for path in modules:
+        _append_meeting_or_debt(repo, path, meeting, debt)
+    return meeting, debt
+
+
+def _append_meeting_or_debt(
+    repo: Path,
+    path: Path,
+    meeting: list[Path],
+    debt: list[Path],
+) -> None:
+    if classify_test_path(repo, path) == UNCLASSIFIED_MARKER:
+        debt.append(path)
+        return
+    meeting.append(path)

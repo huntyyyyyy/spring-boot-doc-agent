@@ -52,10 +52,16 @@ def create_database(
         )
 
 def install_pack(codeql_path: Path, pack_dir: Path) -> None:
-    """Install the QL pack dependencies (codeql/java-all, etc.)."""
+    """Install the QL pack dependencies (codeql/java-all, etc.).
+
+    ``--no-strict-mode`` is intentional: locked deps match the pinned CodeQL
+    bundle qlpacks. Strict mode would warn that those dist packs were found
+    via local resolution (labeled ``--additional-packs``).
+    """
     proc = cli._invoke_codeql(
         codeql_path,
         ("pack", "install"),
+        "--no-strict-mode",
         str(pack_dir),
         timeout=tool_timeout_seconds(),
     )

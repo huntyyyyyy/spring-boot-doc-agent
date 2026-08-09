@@ -86,10 +86,8 @@ import time
 from datetime import datetime, timezone
 
 from doc_engine.core.jsonio import load_json as _read_json
-from doc_engine.tools import (
-    doc_tag_utils,  # noqa: E402
-    spring_signal_scan,  # noqa: E402
-)
+from doc_engine.core.walk import compute_file_signature, dfs_walk
+from doc_engine.tools import doc_tag_utils  # noqa: E402
 
 # ML Metadata's Execution.last_known_state enum vocabulary, reused verbatim
 # rather than inventing a bespoke one (see the research doc's design notes).
@@ -264,10 +262,10 @@ def load_file_signatures(signals_file=None, repo_path=None):
     if not repo_path:
         return {}
     sigs = {}
-    for full in spring_signal_scan.dfs_walk(repo_path):
+    for full in dfs_walk(repo_path):
         rel = os.path.relpath(full, repo_path).replace("\\", "/")
         try:
-            sigs[rel] = spring_signal_scan.compute_file_signature(full)
+            sigs[rel] = compute_file_signature(full)
         except OSError as e:
             print(f"warning: could not read '{rel}' to compute its content signature: {e}", file=sys.stderr)
     return sigs

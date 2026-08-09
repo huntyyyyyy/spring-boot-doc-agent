@@ -28,9 +28,7 @@ CONFIRMING = ("confirmed_still_present", "unchanged")
 CONTROLLER_BASENAME = "InvoiceController.java"
 LEDGER_BASENAME = "PaymentLedger.java"
 SEMANTIC_TOUCHED = frozenset({CONTROLLER_BASENAME, LEDGER_BASENAME})
-_TMP: Optional[str] = None
-OUTCOMES: Dict[str, "Outcome"] = {}
-GETMAPPING_LINE: Optional[int] = None
+from tests.support.drift_normalization import harness as dn
 from tests.support.drift_normalization.harness import (
     Outcome,
     _apply_to_java,
@@ -40,16 +38,23 @@ from tests.support.drift_normalization.harness import (
     _report_basename,
     _run_scenario,
     _semantic_edits,
-    setUpModule,
-    tearDownModule,
 )
+from tests.ratchets.test_drift_normalization_harness_gate import Test02TheKnownGap
+
+
+def setUpModule() -> None:
+    dn.setUpModule()
+
+
+def tearDownModule() -> None:
+    dn.tearDownModule()
 
 class Test03SemanticChangesMustBeCaught(unittest.TestCase):
     """Arm 2. Without this class, every assertion above could be satisfied by a
     checker that confirms everything."""
 
     def _graded(self, cand: str) -> List[dict]:
-        outcome = OUTCOMES[f"{cand}/semantic"]
+        outcome = dn.OUTCOMES[f"{cand}/semantic"]
         self.assertTrue(outcome.valid,
                         "the semantic edits changed the citation count, so they "
                         "are not comparable to the formatting arm")
@@ -63,7 +68,7 @@ class Test03SemanticChangesMustBeCaught(unittest.TestCase):
         grade the checker against a restatement of its own comparison."""
         return (
             (_report_basename(r["file"]) == CONTROLLER_BASENAME
-             and r["line"] == GETMAPPING_LINE)
+             and r["line"] == dn.GETMAPPING_LINE)
             or r["source"] == "entity_table_map.PaymentLedger"
         )
 
@@ -99,7 +104,7 @@ class Test04NormalizerCandidates(unittest.TestCase):
     def _false_positives(self, cand: str) -> int:
         total = 0
         for p_name in perturb.FORMATTING_ONLY:
-            outcome = OUTCOMES[f"{cand}/{p_name}"]
+            outcome = dn.OUTCOMES[f"{cand}/{p_name}"]
             self.assertTrue(outcome.valid, f"{cand}/{p_name} failed the validity gate")
             total += len(outcome.drifted())
         return total
@@ -126,7 +131,7 @@ class Test04NormalizerCandidates(unittest.TestCase):
         anything -- it has stopped working."""
         for cand in norms.CANDIDATES:
             with self.subTest(normalizer=cand):
-                outcome = OUTCOMES[f"{cand}/semantic"]
+                outcome = dn.OUTCOMES[f"{cand}/semantic"]
                 graded = [
                     r for r in outcome.report["results"]
                     if _report_basename(r["file"]) in SEMANTIC_TOUCHED
