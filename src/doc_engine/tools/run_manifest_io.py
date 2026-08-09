@@ -6,7 +6,6 @@ tests can monkeypatch the public module surface.
 
 from __future__ import annotations
 
-import json
 import sys
 import tempfile
 import time
@@ -32,7 +31,7 @@ def _write_json_atomic(path, data):
     )
     try:
         with rm.os.fdopen(fd, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+            rm.json.dump(data, f, indent=2)
         rm.os.replace(tmp_path, path)
     except BaseException:
         try:

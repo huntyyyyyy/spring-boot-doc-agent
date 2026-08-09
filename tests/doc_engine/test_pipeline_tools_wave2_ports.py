@@ -1,4 +1,8 @@
-"""Ports for E-MOD3 tools wave 2 (run_manifest / citation_coverage)."""
+"""Ports for E-MOD3 tools wave 2 (run_manifest / citation_coverage).
+
+Filename prefix ``test_pipeline_`` keeps this module classifier-aligned with
+``domain_pipeline`` (see ``test_domain_rules.FilenamePrefixRule``).
+"""
 
 from __future__ import annotations
 

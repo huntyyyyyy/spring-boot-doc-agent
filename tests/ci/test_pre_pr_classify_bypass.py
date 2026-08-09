@@ -100,12 +100,14 @@ class BuildSuitesTest(unittest.TestCase):
     def test_fast_skips_pytest(self):
         names = [n for n, _, _ in pre_pr.build_suites("fast")]
         self.assertNotIn("pytest", names)
+        self.assertNotIn("test_domain_markers", names)
         self.assertIn("check_repo_claims", names)
         self.assertIn("ruff", names)
 
     def test_standard_includes_pytest_not_stage0(self):
         names = [n for n, _, _ in pre_pr.build_suites("standard")]
         self.assertIn("pytest", names)
+        self.assertIn("test_domain_markers", names)
         self.assertNotIn("stage0_portable", names)
         self.assertNotIn("mutate_advisory", names)
 

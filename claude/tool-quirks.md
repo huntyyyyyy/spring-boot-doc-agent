@@ -383,3 +383,12 @@ Symptom 1: duplication gate used `npx --yes jscpd@5.0.14` (network flakiness; Wi
 Symptom 2: importing `doc_engine.paths.repo_root()` from a worktree follows the editable-install source tree, so a worktree-local `node_modules/jscpd` is invisible and the runner reports jscpd missing.
 Symptom 3: printing `≤` in gate labels raises `UnicodeEncodeError` on Windows cp1252 consoles.
 Resolution: pin `jscpd@5.0.14` in `package.json` / `package-lock.json`; CI and local both `npm ci` then `python3 scripts/ci/run_quality_gates.py`; prefer native `node_modules/jscpd-*/bin/jscpd[.exe]` else `node …/run-jscpd.js`; invoke `diff-cover`/`tach` via `sys.executable -m`; derive gate `REPO_ROOT` from `Path(__file__).parents[2]`; keep console labels ASCII (`<=`). See CONTRIBUTING.md "Quality gates (all OS)".
+
+---
+
+## 2026-08-09 — Agent scoped pytest looked green while CI python-gates / ABI serial failed (ruff I001 + domain markers + façade `json`)
+Tools/commands involved: `python -m ruff check scripts/ src/doc_engine/`, `python -m doc_engine.ci.test_domain_markers_check`, `scripts/ci/pre_pr.py`, kitchen `test_kitchen_sink_ch05_ch07.py`, `doc_engine.tools.run_manifest` façade after E-MOD3 split
+Status: [Resolved — product + local gate gap]
+Symptom: PR #108 failed remote after local climb/citation/ci `run_manifest` suites passed. Failures were (1) ruff I001 on façade import blocks, (2) `test_tools_wave2_ports.py` marked `domain_pipeline` while classifier expected `domain_unclassified` (3.11-only step; 3.12 cancelled via fail-fast), (3) ABI serial kitchen Ch07 `AttributeError: run_manifest has no attribute 'json'` because `_write_json_atomic` no longer used façade-bound `json.dump` after the vertical split.
+Cause: agent loop ran a **pytest subset** + size/complexipy/claims, not the CI hard surface. `pre_pr.py --fast` also skipped domain markers; even `--standard` historically omitted `test_domain_markers_check` despite CI running it on 3.11. Thin-façade DIP must re-export every name characterization/kitchen patches (`os`, `subprocess`, `dfs_walk`, `compute_file_signature`, `_read_json`, **`json`**).
+Resolution: rename ports test to `test_pipeline_tools_wave2_ports.py`; re-export `json` + `rm.json.dump` in io; add `test_domain_markers` hard suite to `pre_pr` standard/full/outage. Before push on src/tools splits: `python3 scripts/ci/pre_pr.py --auto` (or at least full ruff + domain markers + kitchen domains that poke the façade).

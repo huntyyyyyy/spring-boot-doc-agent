@@ -291,6 +291,16 @@ def _ruff() -> int:
     return proc.returncode
 
 
+def _domain_markers() -> int:
+    """Mirror python-gates.yml 3.11 domain-marker ratchet (not in --fast)."""
+    proc = _run(
+        [sys.executable, "-m", "doc_engine.ci.test_domain_markers_check"]
+    )
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
 def _pytest() -> int:
     proc = _run([sys.executable, "-m", "pytest", "tests/", "-q", "--tb=line"])
     sys.stdout.write(proc.stdout)
@@ -536,6 +546,7 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
                     extra_args=["--tracked-tree"],
                 ),
             ),
+            ("test_domain_markers", "hard", _domain_markers),
             (
                 "rule_coverage",
                 "hard",

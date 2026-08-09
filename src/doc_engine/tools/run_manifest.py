@@ -22,6 +22,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 
@@ -131,6 +132,7 @@ __all__ = [
     "format_summary",
     "git_commit_hash",
     "git_is_dirty",
+    "json",
     "load_file_signatures",
     "main",
     "make_run_id",
