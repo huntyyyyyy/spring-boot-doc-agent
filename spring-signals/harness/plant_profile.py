@@ -46,6 +46,35 @@ def normalize_plant(raw: Optional[str]) -> str:
     return value
 
 
+def _env_checkout_paths() -> list[Path]:
+    out: list[Path] = []
+    for key in (OCS_REPO_ENV, REAL_REPO_ENV):
+        raw = os.environ.get(key, "").strip()
+        if raw:
+            out.append(Path(raw))
+    return out
+
+
+def _pointer_checkout_path(repo_root: Path) -> Optional[Path]:
+    pointer = repo_root / REAL_REPO_PATH_FILE
+    if not pointer.is_file():
+        return None
+    for line in pointer.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if stripped and not stripped.startswith("#"):
+            return Path(stripped)
+    return None
+
+
+def _candidate_paths(repo_root: Path) -> list[Path]:
+    """Configured OCS checkout paths (env first, then gitignored pointer)."""
+    out = _env_checkout_paths()
+    pointed = _pointer_checkout_path(repo_root)
+    if pointed is not None:
+        out.append(pointed)
+    return out
+
+
 def _first_existing(candidates: list[Optional[Path]]) -> Optional[Path]:
     for path in candidates:
         if path is None:
@@ -58,19 +87,21 @@ def _first_existing(candidates: list[Optional[Path]]) -> Optional[Path]:
 
 def resolve_ocs_checkout(repo_root: Path) -> Optional[Path]:
     """Env wins, then gitignored pointer file (same doctrine as real_fixture)."""
-    env_paths: list[Optional[Path]] = []
-    for key in (OCS_REPO_ENV, REAL_REPO_ENV):
-        raw = os.environ.get(key, "").strip()
-        env_paths.append(Path(raw) if raw else None)
-    pointer = repo_root / REAL_REPO_PATH_FILE
-    file_path: Optional[Path] = None
-    if pointer.is_file():
-        for line in pointer.read_text(encoding="utf-8").splitlines():
-            stripped = line.strip()
-            if stripped and not stripped.startswith("#"):
-                file_path = Path(stripped)
-                break
-    return _first_existing([*env_paths, file_path])
+    return _first_existing(list(_candidate_paths(repo_root)))
+
+
+def _missing_checkout_reason(repo_root: Path) -> str:
+    configured = _candidate_paths(repo_root)
+    if not configured:
+        return (
+            "ocs plant needs a checkout: set DOC_ENGINE_REAL_REPO or "
+            "SPRING_SIGNALS_OCS_REPO, or local-runs/real-repo.path"
+        )
+    shown = ", ".join(repr(str(path)) for path in configured)
+    return (
+        "ocs plant checkout configured but not a directory on this machine: "
+        f"{shown} — fix the path, or sync the tree onto this host"
+    )
 
 
 def artifactory_present() -> bool:
@@ -97,10 +128,7 @@ def preflight(repo_root: Path, plant: Optional[str] = None) -> PlantPreflight:
         return PlantPreflight(
             plant=chosen,
             ok=False,
-            reason=(
-                "ocs plant needs a checkout: set DOC_ENGINE_REAL_REPO or "
-                "SPRING_SIGNALS_OCS_REPO, or local-runs/real-repo.path"
-            ),
+            reason=_missing_checkout_reason(repo_root),
             has_artifactory=has_arti,
             expectations_rel="harness/expectations/ocs-api-service.json",
         )
@@ -127,22 +155,10 @@ def preflight(repo_root: Path, plant: Optional[str] = None) -> PlantPreflight:
     )
 
 
-def main(argv: Optional[list[str]] = None) -> int:
-    import argparse
+def _emit_result(result: PlantPreflight, *, as_json: bool) -> None:
     import json
-    import sys
 
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--plant", default=None)
-    parser.add_argument(
-        "--root",
-        type=Path,
-        default=Path(__file__).resolve().parents[2],
-    )
-    parser.add_argument("--json", action="store_true")
-    args = parser.parse_args(argv)
-    result = preflight(args.root.resolve(), args.plant)
-    if args.json:
+    if as_json:
         print(
             json.dumps(
                 {
@@ -157,12 +173,28 @@ def main(argv: Optional[list[str]] = None) -> int:
                 sort_keys=True,
             )
         )
-    else:
-        status = "ok" if result.ok else "blocked"
-        print(f"plant={result.plant} status={status}")
-        print(f"reason: {result.reason}")
-        if result.checkout is not None:
-            print(f"checkout: {result.checkout}")
+        return
+    status = "ok" if result.ok else "blocked"
+    print(f"plant={result.plant} status={status}")
+    print(f"reason: {result.reason}")
+    if result.checkout is not None:
+        print(f"checkout: {result.checkout}")
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--plant", default=None)
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=Path(__file__).resolve().parents[2],
+    )
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args(argv)
+    result = preflight(args.root.resolve(), args.plant)
+    _emit_result(result, as_json=args.json)
     return 0 if result.ok else 2
 
 
