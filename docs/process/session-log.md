@@ -4850,7 +4850,7 @@ Assumptions affected:
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
 ## 2026-08-10 — E-REPO1-A: nest semantic_eval + docs_site; prune dead mkdocs finder
-Commit: uncommitted
+Commit: b99aa0d
 Tests: 46 nest-related pytest green; claims OK; CQ OK; facade poke OK; size OK; complexipy ≤5 on new pkgs
 Assumptions affected:
 - First tools nest waits on cycle-break — [Resolved — nested `doc_engine.semantic_eval` + `doc_engine.docs_site`; tools `-m` shims]
