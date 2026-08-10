@@ -1,5 +1,5 @@
 ---
-description: Repo constitution — polyglot planning + RAG corpus; no product code yet
+description: Repo constitution — planning corpus; cold agents follow bootstrap; no product code yet
 alwaysApply: true
 ---
 
@@ -8,24 +8,32 @@ alwaysApply: true
 You are in a **planning + RAG corpus** for a verified polyglot architecture
 product. Progressive disclosure is part of the product.
 
+## Cold start
+
+If this session has no prior context: read `AGENT_BOOTSTRAP.md` and
+`STATUS.md` before any other file. Use Skill `cold-start`.
+
 ## Identity
 
 - **Working draft** under ISO/IEC/IEEE 29148-shaped RE, SEI ATAM QAS,
   Nygard ADRs, and C4. Draft *content* is fine; skipping the *form* is not.
-- **Polyglot-first:** Rust, WASM, SQLite, Go, Ruby, Clojure, TypeScript,
-  Python as peer, C/Zig when earned — not a Python-majority product.
-- **`research/` is evidence for RAG and humans** — retrieve it; do not
-  always-load it; do not discard it as fluff.
+- **Must spine:** graph + locks + receipts + Unknown — not embeddings-as-SoR,
+  not LLM-as-verify-witness.
+- **Polyglot-first as options:** languages are peers under
+  `07-system-design/options/` — not a pre-approved monorepo scaffold.
+- **`research/` is evidence** — retrieve one pack; do not always-load.
 
 ## Gates
 
-- No product code until `CONTRIBUTING.md` checklist is green (ADR-0008).
+- No product code until `00-governance/dor-dod/DEFINITION_OF_READY.md` is green
+  and `12-delivery/no-code-gate/` agrees.
 - Must NFRs need six-part QAS before influencing Design.
-- Constraints ≠ requirements (`docs/constraints/`).
+- Constraints ≠ requirements; open `blocks_code` OQs block codegen.
 - C4 structural claims cite ADR IDs.
 - Unknown > wrong; claim tiers Evidenced / Confirmed / Unknown.
+- Science substrates: locked transfers only (`11-science-transfer/`).
 
 ## Context budget
 
-Always-on rules ≤2. Path scope = MDC `globs` + nest MDCs. Depth = Skills.
-Open `docs/DOMAIN_MAP.md` before broad exploration.
+Always-on rules ≤2. Path scope = MDC `globs`. Depth = Skills.
+Prefer `PRECODE_MAP.md` / `00/`–`12/` over legacy `docs/` + `nests/`.

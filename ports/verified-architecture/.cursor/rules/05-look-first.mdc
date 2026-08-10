@@ -5,9 +5,11 @@ alwaysApply: false
 
 # Look-first
 
-1. Read `PRECODE_MAP.md`, then `docs/DOMAIN_MAP.md`.
-2. Requirements → `docs/requirements/` + `docs/constraints/`.
-3. Architecture → `docs/adr/` + matching `research/` pack.
-4. Language BC → `nests/<bc>/` and that nest’s `nest.mdc`.
-5. RAG catalog → `research/INDEX.md`.
-6. Prefer primary memos over chat memory; keep claim tiers honest.
+0. No chat context? → `AGENT_BOOTSTRAP.md` + `STATUS.md` (Skill `cold-start`).
+1. Read `PRECODE_MAP.md` (`00/`–`12/`), then legacy `docs/DOMAIN_MAP.md` if needed.
+2. Requirements → `03-requirements/` (+ legacy `docs/requirements/` until promoted).
+3. Constraints / OQs → `04-constraints/`.
+4. Architecture → `07-system-design/` (+ legacy `docs/adr/`).
+5. Languages → `07-system-design/options/` (not tip scaffolds).
+6. RAG catalog → `research/INDEX.md` (one pack).
+7. Prefer primary memos over chat memory; keep claim tiers honest.
