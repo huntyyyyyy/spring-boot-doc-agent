@@ -87,6 +87,8 @@ from doc_engine.semantic_eval.scan import (
     scan_mermaid as _scan_mermaid,
 )
 
+# Public entry + climb-stable constants only. Underscore aliases stay importable
+# for monkeypatch but must not appear in __all__ (check_public_surface).
 __all__ = [
     "CONFIRMED_TAG_RE",
     "DEFAULT_OVERLAP_THRESHOLD",
@@ -104,23 +106,6 @@ __all__ = [
     "checked_output_path",
     "checked_path",
     "join_under",
-    "_answered_entry_tokens",
-    "_best_overlap",
-    "_claim_clause",
-    "_empty_clause_finding",
-    "_finding_for_confirmed_tag",
-    "_low_overlap_finding",
-    "_tokenize",
-    "_bracket_balance_findings",
-    "_extract_mermaid_block",
-    "_subgraph_quote_findings",
-    "_confirmed_findings_for_doc",
-    "_is_safe_markdown_basename",
-    "_load_interview_answers",
-    "_markdown_names",
-    "_resolve_architecture_path",
-    "_scan_confirmed_docs",
-    "_scan_mermaid",
 ]
 
 if __name__ == "__main__":
