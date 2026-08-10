@@ -4958,7 +4958,7 @@ Assumptions affected:
 Files touched: process/20-rag-*, 39-cli-operator-*, 42-problem-first-*, coverage-quality/42-ds-mlops-*
 
 ## 2026-08-10 — Merge PR #118 (dynamics / physical computing) into combined tip
-Commit: uncommitted
+Commit: 5d6b485
 Tests: not run (docs merge + backlog renumber)
 Assumptions affected:
 - Parallel open PR #118 vs umbrella #119 — [Resolved — folded; E-DYN1 backlog as **P38** (tip P20 already Concern→solution)]
