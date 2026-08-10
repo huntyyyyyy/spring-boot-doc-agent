@@ -306,3 +306,15 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
+---
+
+## P19 — Agent context hygiene (huge markdown / working set)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P19.0 | **E-CTX0 Spec:** approve **CTX1–CTX26** (working set; ★ discernment; **algorithm-first build/orchestrate**; mask≻token-prune≻viral MCP) | **Draft** (2026-08-10) | research **26+27+28** → APPROVED |
+| P19.1 | **E-CTX1 Implement:** tip-brief + `ObservationMaskPolicy` port (Complexity Trap / AGORA floor) + AGENTS blurb | After Approve | claims; complexipy≤5; CTX-S1 |
+| P19.2 | **CTX-S1/S2** token measure + optional StarScout/heuristic audit | Spike | numbers + integrity flags |
+
+Research: [`26`](process/26-agent-context-markdown-bloat-2026.md) · [`27`](process/27-agent-context-repo-discernment-2026.md) · [`28`](process/28-agent-context-algorithm-first-2026.md). **Embody** algorithm+Accept; **Adopt** observation/step masking we own; **Refuse** ★-products, token-prune of actions, CompactionRL-as-SoT, summary-as-SoR.

@@ -4858,3 +4858,36 @@ Assumptions affected:
 - Root `skills/` delete this tip — [Still accurate — equality gate retained; README marks retire]
 Files touched: src/doc_engine/semantic_eval/*, src/doc_engine/docs_site/*, tools shims, tools_bc_inventory.json, DOMAIN_MAP.md, memo 25, quality-backlog, code_quality_baseline.json, check_facade_poke_surface.py, skills/README.md, session-log
 
+## 2026-08-10 — E-CTX0 draft: agent context / markdown bloat research
+Commit: 5d74cea
+Tests: not run (docs-only Spec draft)
+Assumptions affected:
+- Bigger windows fix dumping research markdown into tips — [New info — Liu arXiv:2307.03172 U-curve; refuse as structural fix]
+- LLM-summary always better than dropping old observations — [New info — Complexity Trap arXiv:2508.21433: masking ≈ summary]
+Files touched: docs/research/process/26-agent-context-markdown-bloat-2026.md, docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md
+
+## 2026-08-10 — E-CTX0 deepdive: models + GH star-inflation discernment
+Commit: 745f158
+Tests: not run (docs-only); GitHub API metrics fetched 2026-08-10
+Assumptions affected:
+- ★≥1k + recent push ⇒ safe research/implement SoR — [New info — He et al. arXiv:2412.13459; AI/LLM repos are fake-star targets; amend bar to filter+discernment]
+- Low-★ repos cannot be algorithm SoR — [Resolved — Complexity Trap 17★ JetBrains paper preferred over viral MCP ★ for mask vs summary]
+- E-STK0 memory shortlist ★ confidence — [New info — claude-mem/headroom/rtk hyper ★/day; magic-context LOW_FORK; re-score in memo 27]
+Files touched: docs/research/process/27-*, 26-* (cross-link), README, quality-backlog P19, session-log
+
+## 2026-08-10 — E-CTX0 algorithm-first: build/orchestrate from theory
+Commit: 2b7d5b8
+Tests: not run (docs-only Spec amend)
+Assumptions affected:
+- Quality comes from adopting high-★ memory products — [Resolved — doctrine: named algorithm + Accept predicate; self-orchestrated ports (memo 28)]
+- Token-level prompt compressors are fine for coding agents — [New info — AGORA arXiv:2605.26596: action-grammar destruction; refuse on trajectories]
+- First build target unclear — [Resolved — observation/step masking + always-keep floor; MemGPT/CAT/Liu as laws not runtimes]
+Files touched: docs/research/process/28-*, 26-* verdict, README, quality-backlog P19, session-log
+
+## 2026-08-10 — Combine E-REPO + E-CTX0 tips into one PR
+Commit: uncommitted
+Tests: not run (merge tip)
+Assumptions affected:
+- Parallel PRs #114/#115/#116 for same agent arc — [Resolved — single branch `cursor/repo-and-context-combined-83d2` supersedes]
+Files touched: merge of nest + context-hygiene research
+
