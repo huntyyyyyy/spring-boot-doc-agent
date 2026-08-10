@@ -118,7 +118,7 @@ Assumptions affected:
 Files touched: .cursor/rules/*, .cursor/skills/{principal-se-research-epic,cross-domain-isomorphism}/SKILL.md, AGENTS.md, DOMAIN_MAP.md, docs/research/process/47-*.md, docs/research/quality-backlog.md, docs/research/README.md, docs/process/session-log.md
 
 ## 2026-08-10 — E-LOG0 nest session-log with LOC pack + content slugs
-Commit: uncommitted
+Commit: 4dd46784
 Tests: 5/5 test_pack_session_log; claims OK
 Assumptions affected:
 - `docs/process/session-log.md` monolith is fine to keep growing — [Resolved — nested `session-log/`; greedy ≤225 packs; date-first `__slug` names from lead title]
