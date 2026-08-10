@@ -4885,7 +4885,7 @@ Assumptions affected:
 Files touched: docs/research/process/28-*, 26-* verdict, README, quality-backlog P19, session-log
 
 ## 2026-08-10 — Combine E-REPO + E-CTX0 tips into one PR
-Commit: uncommitted
+Commit: 55209a7
 Tests: not run (merge tip)
 Assumptions affected:
 - Parallel PRs #114/#115/#116 for same agent arc — [Resolved — single branch `cursor/repo-and-context-combined-83d2` supersedes]
