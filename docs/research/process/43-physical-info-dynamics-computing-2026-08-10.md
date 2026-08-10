@@ -8,6 +8,7 @@ supersedes_partial: docs/research/process/05-dynamics-neuromorphic.md
 related:
   - docs/research/process/05-dynamics-neuromorphic.md
   - docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
+  - docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md
   - docs/research/process/21-physical-unconventional-computing-2026.md
   - docs/research/process/20-theory-domains-problem-first-gates-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
