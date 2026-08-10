@@ -48,20 +48,24 @@ GitHub metadata snapshot: **2026-08-10** via `gh api` `[Evidenced]`.
 
 | Result | Detail |
 | --- | --- |
-| **Exact EA-Graph algorithm** | **0 found.** Code search hits are arXiv scrapers or **unrelated** 2019 image-segmentation “EA-Graph”. `[Evidenced]` |
-| **Proof-or-Stop named engine** | Paper claims open-source instantiation. Org `Proof-or-Stop` on GitHub contains only `Proof-or-Stop/.github` (0 stars, profile stub). No public engine repository resolvable under that org. `uncfreak1255-code/loopspine` (0 stars) is **not** accepted as genuine without provenance. **Gap.** |
-| **Adjacent (digest-bound attestations — related class, not the same algorithm)** | See table below — **Adopt patterns**, do not pretend they *are* EA-Graph |
+| **Exact EA-Graph algorithm** | **0 public GitHub products.** Code search hits are scrapers or unrelated homonyms. Authors published **Zenodo study artifacts** (Digital Object Identifiers 10.5281/zenodo.21797349, 10.5281/zenodo.21797353) — testbed/research record, **not** a maintained product implementing claim withdrawal. `[Evidenced]` |
+| **Proof-or-Stop named engine** | Org `Proof-or-Stop` profile states public code **being prepared**; no engine repository yet. `uncfreak1255-code/loopspine` fails anti-bogus (not paper org). **Gap.** |
+| **Adjacent kin papers (June–July 2026)** | *CAVA* (2607.13716), *Proof-Carrying Agent Actions* (2606.04104) — action certificates / canonical action identity; **no public reference implementations found**. Crypto certificates-of-validity (2606.23768) is proposal-tier — **Refuse** as merge substrate. |
+| **Adjacent (digest-bound attestations — related class, not the same algorithm)** | See table — **Adopt patterns**, do not pretend they *are* EA-Graph |
 
 | Repository | Stars / pushed | Why genuine | Algorithm utilized | Fit |
 | --- | --- | --- | --- | --- |
-| `in-toto/in-toto` | ~1026 / 2026-08-05 | Official supply-chain project; Actions present | Link steps to materials/products (attestations) | **Adopt** receipt shape ideas |
+| `in-toto/in-toto` | ~1026 / 2026-08-05 | Official; Continuous Integration | Content-digest–bound step claims | **Adopt** honesty shape |
 | `in-toto/attestation` | ~363 / 2026-08-04 | Spec sibling | Attestation vocabulary | **Adopt** |
-| `sigstore/cosign` | ~6199 / 2026-08-10 | Sigstore; active | Sign/verify artifacts | **Adopt** signing, not claim withdrawal |
-| `slsa-framework/slsa` | ~1907 / 2026-08-09 | Framework home | Provenance levels | **Adopt** freshness/provenance language |
-| `sigstore/fulcio` | ~866 / 2026-08-10 | Certificate authority for Sigstore | Identity-bound signing | **Could** |
-| `anchore/syft` | ~9374 / 2026-08-10 | SBOM generator; active | Content inventory digests | **Could** plant hashing |
+| `in-toto/witness` | ~544 / 2026-08-10 | Policy verify over digests | Receipt bundles around commands | **Adopt** pattern |
+| `sigstore/cosign` | ~6199 / 2026-08-10 | Sigstore; active | Sign/verify subject digests | **Adopt** signing pattern; **Defer** as merge gate |
+| `slsa-framework/slsa-verifier` | ~344 / 2026-08-07 | Official verifier | Provenance vs digests | **Adopt** honesty |
+| `gittuf/gittuf` | ~646 / 2026-08-10 | Git policy + attestations | Content-addressed security refs | **Adopt** analogy; **Refuse** as control plane |
+| `guacsec/guac` | ~1524 / 2026-08-10 | Graph of attestations | Queryable supply-chain graph | **Could** cartography; **Refuse** as citation System of Record |
+| `sigstore/rekor` | ~1189 / 2026-08-10 | Transparency log | Append-only receipts | **Could** local append-only idea |
+| `actions/attest-build-provenance` | ~1013 / 2026-08-06 | GitHub official | Build provenance for releases | **Adopt** release path only |
 
-**Genuine gap:** we elevated artifact-anchored claim memory to Must spine **without** five (or even one) field implementations of *that* withdrawal/`unprovable` machine. Adjacent attestation repos are necessary but **not sufficient**. Mark as **Pilot / invent under Spike**, not silent Adopt.
+**Genuine gap:** elevate claim memory as **Pilot / invent under Spike** (Embody `unprovable` + evidence≠freshness), not silent industry Adopt. Adjacent attestation repos are necessary but **not sufficient**.
 
 ---
 
