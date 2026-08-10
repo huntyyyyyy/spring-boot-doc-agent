@@ -4848,3 +4848,11 @@ Assumptions affected:
 - Research look-first was soft skill only — [Resolved — `.cursor/hooks.json` inject + Read receipt + fail-closed design writes; `docs/research/README.md` domain map]
 - `claude/` as process SoR — [Resolved — tombstone + archive under `docs/research/archive/claude-lore/`; adapter packaging kept]
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
+
+## 2026-08-10 — E-CTX0 draft: agent context / markdown bloat research
+Commit: uncommitted
+Tests: not run (docs-only Spec draft)
+Assumptions affected:
+- Bigger windows fix dumping research markdown into tips — [New info — Liu arXiv:2307.03172 U-curve; refuse as structural fix]
+- LLM-summary always better than dropping old observations — [New info — Complexity Trap arXiv:2508.21433: masking ≈ summary]
+Files touched: docs/research/process/26-agent-context-markdown-bloat-2026.md, docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md

@@ -291,3 +291,15 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
+---
+
+## P19 — Agent context hygiene (huge markdown / working set)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P19.0 | **E-CTX0 Spec:** approve **CTX1–CTX10** (working set ≠ warehouse; section reads; mask≻LLM-summary of SoR; refuse MemGPT runtime) | **Draft** (2026-08-10) | research 26 `spec_gate` → APPROVED |
+| P19.1 | **E-CTX1 Implement:** AGENTS/CONTRIBUTING 5-line working-set rule + optional memo LOC soft check | After Approve | claims green; tips cite § not whole packets |
+| P19.2 | **CTX-S1** measure token cost full-memo vs section Read | Spike | go/no-go numbers |
+
+Research: [`docs/research/process/26-agent-context-markdown-bloat-2026.md`](process/26-agent-context-markdown-bloat-2026.md). **Embody** Liu U-curve + DOC map doors; **Adopt** Complexity-Trap masking finding; **Refuse** MemGPT as merge dep / summary-as-SoR.
