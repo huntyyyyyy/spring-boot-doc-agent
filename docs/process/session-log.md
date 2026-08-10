@@ -4850,7 +4850,7 @@ Assumptions affected:
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
 ## 2026-08-10 — E-CTX0 draft: agent context / markdown bloat research
-Commit: uncommitted
+Commit: 5d74cea
 Tests: not run (docs-only Spec draft)
 Assumptions affected:
 - Bigger windows fix dumping research markdown into tips — [New info — Liu arXiv:2307.03172 U-curve; refuse as structural fix]
