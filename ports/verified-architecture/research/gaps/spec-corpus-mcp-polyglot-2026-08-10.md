@@ -84,8 +84,8 @@ Extism ★~5.7k, wazero ★~6.3k.
 
 | Language / runtime | Spec / corpus MCP (now–Spike) | Product verify MCP (later) | Tier for Spec MCP |
 | --- | --- | --- | --- |
-| **TypeScript** | Cursor/IDE stdio host ergonomics; ADR-0010 presentation | Product MCP presentation | **Could** host shell; TOOL9 preferred Python tip |
-| **Python** | Natural tip host (existing adapter + ICD JSON Schema validate with draft schemas) | Peer ACI only | **Pilot / Adopt pattern** for Spec MCP v0 |
+| **TypeScript** | Cursor/IDE stdio; ADR-0010 MCP presentation | Product MCP presentation | **Working hypothesis (Draft)** for Spec host — independent of tip Python |
+| Python | Natural tip host (existing adapter + ICD JSON Schema validate with draft schemas) | Peer ACI only | **Could** (tip convenience — **not** earned Why) |
 | **Rust** | Fast path: schema validate, frontmatter index, content-addressed corpus digest | Engine + wasmtime host (ADR-0007) | **Could** library behind Python/TS; **Refuse** day-one polyglot host |
 | **WASM / Wasmtime / Extism** | Optional **sandboxed markdown/schema reader** plugin (deny net) — niche | LockCheck guest (ADR-0004); isolation ≠ proof | **Could** after thin Spec MCP works; **Refuse** as Spec MCP requirement |
 | **Go** | `corpus_version` / fsnotify invalidate Spec snapshot handle | Watch/reindex chassis (ADR-0009) | **Could** sidecar for handle freshness |
@@ -118,16 +118,35 @@ verify. Excellent “train on unfinished contracts” without false-green receip
 
 ## 4. Architecture options (scored as sensors)
 
-| Option | Why | What | Who | How | When | Where | Verdict |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **A. Thin Python Spec MCP** (extend tip pattern) | 2 | 2 | 2 | 2 | 2 | 2 | **Working hypothesis** for Spike |
-| B. Thin TypeScript-only Spec MCP | 2 | 1 | 1 | 2 | 2 | 1 | **Could** (Cursor stdio ergonomics); peer lean — fights TOOL9 “no Node tip dep” unless facade-only |
-| C. Rust core + thin TS/Python facade | 2 | 2 | 1 | 1 | 1 | 1 | **Could** after A proves tools |
-| D. WASM guest readers day one | 1 | 1 | 0 | 0 | 0 | 0 | **Refuse** v0 |
-| E. Full polyglot Spec MCP (all lanes) | 0 | 0 | 0 | 0 | 0 | 0 | **Refuse** (FREEZE + shallow risk) |
-| F. Product verify MCP now | 0 | 0 | 0 | 0 | 0 | 0 | **Refuse** until deepen-3 |
+**Honesty correction (user challenge, accepted):** earlier “Python host” reasoning
+was largely **self-referential** — tip already has `adapters/mcp` + TOOL9 “steal
+TS into Python,” so the agent preferred Python. That is **not** an earned
+product decision; it is tip convenience. Treat host language as **re-openable**.
 
-### Suggested tool set (Spec MCP v0 — read-only)
+| Option | Independent why (ignore tip accident) | Tip convenience | Verdict |
+| --- | --- | --- | --- |
+| **A. TypeScript stdio Spec MCP** | Cursor/IDE MCP ecosystem; ADR-0010 already names TS for MCP *presentation*; JSON Schema tooling strong | Medium (new tip dep vs TOOL9) | **Working hypothesis (Draft)** — better *product-shaped* Spec host |
+| **B. Python stdio Spec MCP** | Fast ICD JSON validate; exists on tip | **High — circular if sole reason** | **Could** for throwaway Spike only; **do not** cite “we wrote it” as Why |
+| **C. Rust stdio Spec MCP** | Official rust-sdk; digest/schema; matches future engine lane | Low tip ergonomics today | **Could** / strong if Spec MCP should share engine DNA |
+| **D. Rust core + thin TS facade** | Separation: presentation vs corpus digest | More moving parts | **Could** after one host proves tools |
+| **E. WASM as Spec MCP host** | Wrong job — sandbox guest ≠ host; no earned realtime-server Spec | — | **Refuse** as host |
+| **F. WASM sandbox for agent-generated tool probes** | User idea: spin capability-limited guests to test agent tooling | Separate Spike | **Could** (not Spec MCP v0) |
+| **G. Full polyglot Spec MCP day one** | Prestige | — | **Refuse** |
+| **H. Product verify MCP now** | — | — | **Refuse** until deepen-3 |
+
+### Independent decision vectors (host language)
+
+| Vector | Fair content |
+| --- | --- |
+| **Why** | Cut dump/hallucination with typed Spec tools — not to bless tip Python |
+| **What** | Read-only tools + stamps; `2026-07-28` or explicit legacy ADR; size caps |
+| **Who** | Tip agents + human; maintainers must not be trapped by agent-written stack |
+| **How** | stdio into Cursor `mcp.json`; optional later Rust digest crate |
+| **When** | Optional Spike after/in parallel with deepen-3 — not Must |
+| **Where** | New package under tip or port `packages/spec-mcp/` — **not** `packages/mcp-server` verify |
+
+**Rejected reasoning:** “Choose Python because this session/adapters already used Python.”
+
 
 | Tool | Returns | Trains |
 | --- | --- | --- |
@@ -210,8 +229,9 @@ Align with E-GND0: **Refuse** codegen / write tools on this server.
 
 ## 9. One-line recommendation
 
-**Yes — a thin read-only Spec MCP is the right place to “train” without
-repo-dump hallucination; add Rust (schema/digest) and maybe Go (corpus
-snapshot) as libraries/sidecars after Python v0 works. Keep WASM LockCheck and
-full polyglot for the product verify surface later — do not bolt them onto Spec
-MCP day one.**
+**Yes — a thin read-only Spec MCP can train contracts without repo-dump
+hallucination.** Host language is **re-opened**: do not pick Python because the
+agent already wrote Python; prefer an independent score (TypeScript presentation
+vs Rust engine DNA). WASM is **not** the Spec host — it remains a **Could**
+sandbox for agent-generated tool probes / later LockCheck. Product verify MCP
+stays Refuse until deepen-3.

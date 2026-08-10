@@ -13,7 +13,7 @@ LockCheck in this Spike.
 
 | Field | Content |
 | --- | --- |
-| Host | Python stdio (tip pattern); document protocol pin vs legacy Stage-0 |
+| Host | TypeScript or Rust stdio preferred as *independent* hypothesis; Python only if Spike explicitly accepts tip convenience (not “we wrote it”) |
 | Tools | `spec_status`, `spec_assumption`, `spec_icd`, `spec_decision`, `spec_gap` |
 | Keep | Agent uses tools for FREEZE/deepen-3; forged handle reject plant |
 | Drop | Tools are unbounded `cat`; or product verify sneaks in |
