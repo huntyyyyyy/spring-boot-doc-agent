@@ -22,12 +22,14 @@ WHAT IT CHECKS, AND WHY ONLY THESE
 
 Speed is a correctness property here: a gate slow enough to resent is a gate
 people route around. The full suite takes about two minutes, so it is NOT run.
-These four are all fast, and each maps to a failure this repo has actually had:
+These are all fast, and each maps to a failure this repo has actually had:
 
   1. a staged scripts/*.py with no test_<module>.py under tests/  -- code added untested
   2. a staged test_*.py outside pyproject testpaths         -- wrapper revival
   3. check_repo_claims.py                             -- a claim nothing reads back
   4. check_code_quality.py                            -- a silent complexity ratchet break
+  5. control-plane staged without non-vacuous receipt witness -- empty suite logs
+     still counted as "observed" (E-TEL / E-CPL0)
 
 FAIL OPEN ON ERROR, CLOSED ON A FINDING
 
@@ -57,6 +59,7 @@ for _entry in scripts_meta_path_entries():
         sys.path.insert(0, _entry)
 
 import suite_layout  # noqa: E402
+from nonvacuous_receipt_witness import missing_nonvacuous_witness  # noqa: E402
 
 SKILL = "directional-tests"
 
@@ -173,9 +176,12 @@ def findings() -> List[str]:
     if not staged:
         return []
     deleted = staged_deletions()
-    return (missing_test_suites(staged, deletions=deleted)
-            + unwired_suites(staged, deletions=deleted)
-            + failing_gates())
+    return (
+        missing_test_suites(staged, deletions=deleted)
+        + unwired_suites(staged, deletions=deleted)
+        + missing_nonvacuous_witness(REPO_ROOT, staged, deletions=deleted)
+        + failing_gates()
+    )
 
 
 def build_reason(problems: List[str]) -> str:

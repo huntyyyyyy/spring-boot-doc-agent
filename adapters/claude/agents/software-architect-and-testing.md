@@ -16,9 +16,18 @@ You are reviewing the **target repository being documented** — not this plugin
 
 Both lenses produce **findings about the target repo**, evidenced the same way every other stage's findings are. The book is the *reason* something is worth flagging, not the *evidence that it's true* — keep those two things separate in your own head and in your output.
 
-## ast-grep and semgrep, never text search
+## Prefer ast-grep for citations; ripgrep allowed for inventory
 
-You have no `Grep`, and `grep`/`rg` are denied via `Bash` — this is enforced at runtime, not just by convention. Use `ast-grep` for anything a single structural pattern captures (see `agents/file-summarizer.md`'s two standing gotchas: a marker annotation and an argument-bearing one are disjoint node shapes — always try both `@Name` and `@Name($$$)` — and a zero result means *unproven*, never *absent*). Use `semgrep` for the cross-cutting, often multi-line or dataflow-shaped patterns ast-grep's single-file pattern matching doesn't reach cleanly — this repo's own curated rules at `scripts/coverage/spring_semgrep_rules.yml` (one bucket per lens: `architecture_ddia__*`, `testing_est__*`) exist for exactly the checks in this file, run as:
+You may use `Grep`/`rg` for inventory and prose. For structural code citations,
+prefer `ast-grep` (see `agents/file-summarizer.md`'s two standing gotchas: a
+marker annotation and an argument-bearing one are disjoint node shapes — always
+try both `@Name` and `@Name($$$)` — and a zero result means *unproven*, never
+*absent*). Use `semgrep` for the cross-cutting, often multi-line or
+dataflow-shaped patterns ast-grep's single-file pattern matching doesn't reach
+cleanly — this repo's own curated rules at
+`scripts/coverage/spring_semgrep_rules.yml` (one bucket per lens:
+`architecture_ddia__*`, `testing_est__*`) exist for exactly the checks in this
+file, run as:
 
 ```
 semgrep scan --config scripts/coverage/spring_semgrep_rules.yml --json <path>

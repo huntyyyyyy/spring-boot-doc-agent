@@ -31,8 +31,9 @@ def _test_duplicate_class_name_is_contested_with_lowest_path_identity_prelude(se
     self.assertTrue(entry['file'].startswith('pkg_a'), entry['file'])
     self.assertEqual(entry['status'], 'contested')
     self.assertEqual({(c['file'], c['table']) for c in entry['candidates']}, {('pkg_a/User.java', 'a_user'), ('pkg_b/User.java', 'b_user')})
+    return tmp, result, entry, parse
 
-def _test_duplicate_class_name_is_contested_with_lowest_path_identity_core(self):
+def _test_duplicate_class_name_is_contested_with_lowest_path_identity_core(self, tmp, result, entry, parse):
     self.assertEqual({c.get('package') for c in entry['candidates']}, {'com.example.pkg_a', 'com.example.pkg_b'})
     again = spring_signal_scan.scan(tmp, scanners=SNAPSHOT_SCANNERS)['entity_table_map']['User']
     self.assertEqual(entry, again)
@@ -69,8 +70,8 @@ class ScanDeterminismTest(unittest.TestCase):
         Deviations: map rekeyed to FQCN; facts collapse to one subject; package
         invented from path instead of `package` declaration; lineage guesses.
         """
-        _test_duplicate_class_name_is_contested_with_lowest_path_identity_prelude(self)
-        _test_duplicate_class_name_is_contested_with_lowest_path_identity_core(self)
+        tmp, result, entry, parse = _test_duplicate_class_name_is_contested_with_lowest_path_identity_prelude(self)
+        _test_duplicate_class_name_is_contested_with_lowest_path_identity_core(self, tmp, result, entry, parse)
 
 class ReferencesBucketTest(unittest.TestCase):
     """references__import / references__package (spring_ast_grep_rules.yml)

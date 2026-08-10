@@ -7,7 +7,27 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 import pytest
-from doc_engine.pipeline.local_runner_phases import support as phase_support
+from doc_engine.pipeline.local_runner_phases.artifact_inventory import (
+    artifact_inventory,
+)
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    certification_failure_summary,
+    emit_certification_outcome,
+    write_certification_and_finish,
+)
+from doc_engine.pipeline.local_runner_phases.drift_check_phase import run_drift_check
+from doc_engine.pipeline.local_runner_phases.runner import Runner
+from doc_engine.pipeline.local_runner_phases.runner_argv import py_mod
+from doc_engine.pipeline.local_runner_phases.runner_log import (
+    Log,
+    reconfigure_stdio_utf8,
+)
+from doc_engine.pipeline.local_runner_phases.stage_recording import (
+    classify_subprocess_status,
+    gate_status_from_runner_status,
+    quote,
+    record_pipeline_stage_results,
+)
 from doc_engine.query import kinds as kinds_mod
 from doc_engine.query import load as load_mod
 from doc_engine.query import packet as packet_mod
@@ -24,25 +44,25 @@ from tests.stf.conftest import build_minimal_valid_tasks
 pytestmark = pytest.mark.domain_climb_sensor
 
 def test_emit_certification_with_notice_and_failure(tmp_path: Path) -> None:
-    log = phase_support.Log(tmp_path / "run.log")
+    log = Log(tmp_path / "run.log")
     try:
-        runner = phase_support.Runner(log, keep_going=False)
+        runner = Runner(log, keep_going=False)
         runner.record("pipeline:s1", "FAIL", 0.0, "boom")
         report = SimpleNamespace(
             certified=False,
             stages=[SimpleNamespace(name="s1", status="fail")],
         )
-        phase_support._emit_certification_outcome(
+        emit_certification_outcome(
             log, runner, report, success_lines=["ok"], notice_lines=None
         )
-        phase_support._emit_certification_outcome(
+        emit_certification_outcome(
             log,
             runner,
             SimpleNamespace(certified=True, stages=[]),
             success_lines=["done"],
             notice_lines=["note"],
         )
-        summary = phase_support._certification_failure_summary(runner, report)
+        summary = certification_failure_summary(runner, report)
         assert "stages:" in summary
     finally:
         log.close()
@@ -50,17 +70,16 @@ def test_emit_certification_with_notice_and_failure(tmp_path: Path) -> None:
 def test_write_certification_finish_uncertified(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    log = phase_support.Log(tmp_path / "run.log")
+    log = Log(tmp_path / "run.log")
     try:
-        runner = phase_support.Runner(log, keep_going=False)
+        runner = Runner(log, keep_going=False)
         runner.record("pipeline:s1", "OK", 0.1, "")
         report = SimpleNamespace(certified=False, stages=[])
         monkeypatch.setattr(
-            phase_support,
-            "_build_and_write_certification",
+            "doc_engine.pipeline.local_runner_phases.certification_finish.build_and_write_certification",
             lambda *a, **k: (report, tmp_path / "certification.json"),
         )
-        code = phase_support._write_certification_and_finish(
+        code = write_certification_and_finish(
             log,
             runner,
             "certified",
@@ -77,9 +96,9 @@ def test_write_certification_finish_uncertified(
         log.close()
 
 def test_run_drift_with_prior_signals(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    log = phase_support.Log(tmp_path / "run.log")
+    log = Log(tmp_path / "run.log")
     try:
-        runner = phase_support.Runner(log, keep_going=True)
+        runner = Runner(log, keep_going=True)
         called: list[Any] = []
 
         def _capture(label, argv, **_k):
@@ -90,7 +109,7 @@ def test_run_drift_with_prior_signals(tmp_path: Path, monkeypatch: pytest.Monkey
         prior = tmp_path / "prior.json"
         prior.write_text("{}", encoding="utf-8")
         args = SimpleNamespace(skip_drift=False, prior_signals=str(prior))
-        phase_support._run_drift_check(
+        run_drift_check(
             log, runner, str(tmp_path), str(tmp_path / "m.json"), str(tmp_path), args, str(tmp_path / "sig.json")
         )
         assert called and called[0][0] == "spring_drift_check"

@@ -1,0 +1,67 @@
+# Campaign-only ast-grep floors for ocs-api-service (E-OCS0 OCS6).
+# Not part of Stage-0 rule_coverage denominator — wave-1 ids live here until
+# E-AST0 vocabulary Approve migrates spring_ast_grep_rules.yml.
+#
+# Marker type BookBasedRepository is client-campaign-specific (see CAMPAIGN.md).
+
+---
+id: api_surface__controller
+language: java
+message: "Spring web controller stereotype"
+rule:
+  any:
+    - pattern: "@RestController"
+    - pattern: "@Controller"
+---
+id: api_surface__path_prefix
+language: java
+message: "Class-level @RequestMapping path prefix (excludes method-level)"
+# Must match CodeQL ApiSurface.ql path_prefix (class owner only). A bare
+# inside:class_declaration + stopBy:end also hits method @RequestMapping and
+# inflated live floors 35→45 — that predicate would fail the OCS plant assert.
+rule:
+  all:
+    - any:
+        - pattern: "@RequestMapping"
+        - pattern: "@RequestMapping($$$ARGS)"
+    - inside:
+        any:
+          - kind: class_declaration
+          - kind: interface_declaration
+        stopBy: end
+    - not:
+        inside:
+          kind: method_declaration
+          stopBy: end
+---
+id: api_surface__endpoint
+language: java
+message: "Method-level Spring MVC shortcut mapping"
+rule:
+  any:
+    - pattern: "@GetMapping"
+    - pattern: "@GetMapping($$$ARGS)"
+    - pattern: "@PostMapping"
+    - pattern: "@PostMapping($$$ARGS)"
+    - pattern: "@PutMapping"
+    - pattern: "@PutMapping($$$ARGS)"
+    - pattern: "@PatchMapping"
+    - pattern: "@PatchMapping($$$ARGS)"
+    - pattern: "@DeleteMapping"
+    - pattern: "@DeleteMapping($$$ARGS)"
+  inside:
+    kind: method_declaration
+    stopBy: end
+---
+id: persistence__repository_marker
+language: java
+message: "Interface extends BookBasedRepository marker"
+rule:
+  kind: interface_declaration
+  has:
+    kind: extends_interfaces
+    stopBy: end
+    has:
+      kind: type_identifier
+      regex: "^BookBasedRepository$"
+      stopBy: end

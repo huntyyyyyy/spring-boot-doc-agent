@@ -7,7 +7,7 @@ from pathlib import Path
 
 from doc_engine.paths import repo_root
 from doc_engine.pipeline import gates
-from doc_engine.pipeline.local_runner_phases.support import _py_mod
+from doc_engine.pipeline.local_runner_phases.runner_argv import py_mod
 
 REPO_ROOT = str(repo_root())
 
@@ -30,7 +30,7 @@ def run_validate_artifact_gates(runner, out_dir: str, repo_path: str) -> None:
 
 
 def run_check_pipeline_output_gate(log, runner, args, docs_dir: str, repo_path: str) -> None:
-    gate_argv = _py_mod(
+    gate_argv = py_mod(
         "doc_engine.tools.check_pipeline_output",
         docs_dir,
         "--target-repo",
@@ -53,7 +53,7 @@ def run_check_pipeline_output_gate(log, runner, args, docs_dir: str, repo_path: 
 def run_citation_and_secrets_gates(
     runner, docs_dir: str, repo_path: str, out_dir: str, *, strict: bool
 ) -> None:
-    cc_argv = _py_mod(
+    cc_argv = py_mod(
         "doc_engine.tools.citation_coverage",
         docs_dir,
         "--target-repo",
@@ -69,7 +69,7 @@ def run_citation_and_secrets_gates(
     )
     runner.run(
         "check_no_secrets_leaked",
-        _py_mod(
+        py_mod(
             "doc_engine.tools.check_no_secrets_leaked",
             os.path.join(out_dir, "summaries.json"),
             docs_dir,
@@ -117,7 +117,7 @@ def run_pipeline_stages_real_suite(
 def run_finalize_manifest(runner, state, docs_dir: str, out_dir: str) -> None:
     runner.run(
         "run_manifest finalize",
-        _py_mod(
+        py_mod(
             "doc_engine.tools.run_manifest",
             "finalize",
             state.manifest,
@@ -133,5 +133,5 @@ def run_finalize_manifest(runner, state, docs_dir: str, out_dir: str) -> None:
     )
     runner.run(
         "run_manifest summary",
-        _py_mod("doc_engine.tools.run_manifest", "summary", state.manifest),
+        py_mod("doc_engine.tools.run_manifest", "summary", state.manifest),
     )

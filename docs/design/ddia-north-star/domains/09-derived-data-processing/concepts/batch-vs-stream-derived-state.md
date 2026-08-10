@@ -6,8 +6,8 @@ tags: [batch, stream, etl, event-log, immutability]
 epub_anchors:
   - { chapter: 11, title: "Serving Derived Data" }
   - { chapter: 12, title: "State, Streams, and Immutability" }
-related: [materialized-views-and-caches, sor-vs-derived, trust-but-verify-and-auditability, rel-batch-feeds-serving, domain-derived-data-processing]
-last_refined: 2026-07-30
+related: [materialized-views-and-caches, sor-vs-derived, trust-but-verify-and-auditability, rel-batch-feeds-serving, domain-derived-data-processing, effective-remedies]
+last_refined: 2026-08-09
 path: domains/09-derived-data-processing/concepts/batch-vs-stream-derived-state.md
 
 ---
@@ -58,6 +58,13 @@ Batch derives large views when freshness can lag; streams keep views continuousl
 ## Anti-patterns seen
 
 - Inventing a client-named recall baseline instead of hermetic FP fixtures (L1).
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` with stage-then-load/swap for serving views.
+- **Embodied:** batch CI fixtures vs live generative stages; certification derived.
+- **Accept:** batch jobs never write live SoR “for convenience.”
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

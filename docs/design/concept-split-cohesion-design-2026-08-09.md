@@ -131,3 +131,25 @@ After E-TACH0 Approve: layers then depends_on+interfaces using COH seam maps.
 ## 7. Exit
 
 **E-COH0 Approved (2026-08-09).** Next Active: **E-COH1** reshape provisional tip modules under COH2–COH4. E-TACH0 remains Spec draft until separately Approved.
+
+---
+
+## Appendix A — COH1-1 inventory (2026-08-09) + public-surface slice
+
+Research: [`modularity/21-coh1-public-surface-fitness-2026.md`](../research/modularity/21-coh1-public-surface-fitness-2026.md).
+
+| Rank | Path | Smell | This slice |
+| ---: | --- | --- | --- |
+| 1 | `local_runner_phases/support.py` | Private `__all__` warehouse + residual name | **Deleted**; callers → concept modules |
+| 2 | `tools/semantic_eval_helpers.py` | Residual `helpers` + private warehouse | Public shim; new `semantic_eval.py` façade |
+| 3 | `inventory_drift.py` | Residual bin (3 concepts) | Split → `runner_argv` / `artifact_inventory` / `drift_check_phase` |
+| 4 | `registry_hooks_basic.py` | Residual `basic` | **Deferred** (next COH1-2) |
+| 5 | MOD tool façades (`run_manifest`, …) | Private `__all__` | Deferred; fitness list expandable |
+
+### CGQ3 Accept (slice shipped)
+
+| Concern | Remedy | Depth | Witness |
+| --- | --- | --- | --- |
+| façade dual-write / private re-export | fitness-function (SOL2) + characterization (SOL5) | process/24 §2.1 / §2.3 | `check_public_surface` hard in `pre_pr`; `tests/ci/test_public_surface_policy.py` |
+
+**Spec gate for this slice:** APPROVED for Implement under Active E-COH1 (Embody tach/Nx public-interface *pattern*; Defer tach.toml `[[interfaces]]` until E-TACH0).

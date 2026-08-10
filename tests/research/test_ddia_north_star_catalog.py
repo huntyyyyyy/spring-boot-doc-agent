@@ -204,7 +204,8 @@ class TestDdiaNorthStarCatalog(unittest.TestCase):
         """
         prompt = (
             REPO_ROOT
-            / "claude"
+            / "docs"
+            / "process"
             / "steering-prompts"
             / "10-review-persona-and-standards.md"
         )

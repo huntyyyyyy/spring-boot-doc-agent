@@ -32,3 +32,4 @@ Open [catalog.json](catalog.json) and filter by `kind` / `completeness`. INDEX l
 2. Own a local concept before promoting domains 08 / 10
 3. New deviations in the same change as the divergence
 4. Promote domain 06 / lite concepts when concurrent writers or consensus actually bite
+5. When deepening an operational concept/relationship/playbook: refresh `## Effective remedies` against [meta/effective-remedies.md](meta/effective-remedies.md) (SOL11) — diagnosis-only pages are incomplete

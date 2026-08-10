@@ -7,11 +7,13 @@ from typing import Optional
 
 from doc_engine.pipeline import gates
 from doc_engine.pipeline.compliance import ComplianceProfile
-from doc_engine.pipeline.local_runner_phases.state import LocalRunState
-from doc_engine.pipeline.local_runner_phases.support import (
-    _artifact_inventory,
-    _write_certification_and_finish,
+from doc_engine.pipeline.local_runner_phases.artifact_inventory import (
+    artifact_inventory,
 )
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    write_certification_and_finish,
+)
+from doc_engine.pipeline.local_runner_phases.state import LocalRunState
 from doc_engine.pipeline.mock_stages import _read_json, load_citations
 
 
@@ -52,8 +54,8 @@ def _finish_scan_only(state: LocalRunState) -> int:
         gate=True,
         gate_id="validate_artifacts_spring_signals",
     )
-    _artifact_inventory(log, state.out_dir)
-    return _write_certification_and_finish(
+    artifact_inventory(log, state.out_dir)
+    return write_certification_and_finish(
         log,
         runner,
         state.profile,

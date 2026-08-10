@@ -5,11 +5,13 @@ from __future__ import annotations
 from typing import Optional
 
 from doc_engine.pipeline.executor import MockStageExecutor
-from doc_engine.pipeline.local_runner_phases.state import LocalRunState
-from doc_engine.pipeline.local_runner_phases.support import (
-    _record_pipeline_stage_results,
-    _write_certification_and_finish,
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    write_certification_and_finish,
 )
+from doc_engine.pipeline.local_runner_phases.stage_recording import (
+    record_pipeline_stage_results,
+)
+from doc_engine.pipeline.local_runner_phases.state import LocalRunState
 from doc_engine.pipeline.runner import PipelineRunner
 
 
@@ -24,12 +26,12 @@ def phase_stage0(state: LocalRunState) -> Optional[int]:
         generative_executor=MockStageExecutor({}),
         stages=state.deterministic_specs,
     )
-    _record_pipeline_stage_results(
+    record_pipeline_stage_results(
         runner, det_runner.run(state.pipeline_ctx), ok_status="OK"
     )
 
     if runner.aborted:
-        return _write_certification_and_finish(
+        return write_certification_and_finish(
             log,
             runner,
             state.profile,

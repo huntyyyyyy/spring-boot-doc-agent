@@ -3,8 +3,8 @@ id: rel-conflict-vs-recompute
 kind: relationship
 completeness: operational
 tags: [relationship, conflict, lww]
-related: [replication-lag-and-lww, sor-vs-derived, rel-sor-feeds-views]
-last_refined: 2026-07-30
+related: [replication-lag-and-lww, sor-vs-derived, rel-sor-feeds-views, effective-remedies]
+last_refined: 2026-08-09
 path: domains/03-replication-and-conflicts/relationships/conflict-vs-recompute.md
 
 ---
@@ -48,6 +48,12 @@ LWW loses information and teaches the wrong SoR; recompute preserves the definit
 ## Repo path witness
 
 - [Repo] `domains/03-replication-and-conflicts/relationships/conflict-vs-recompute.md`
+
+## Effective remedies
+
+- **Primary:** prefer **recompute from SoR** over conflict merge (`single-write-derive`).
+- **Accept:** if merge is required, name fold rule — LWW needs deviation.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

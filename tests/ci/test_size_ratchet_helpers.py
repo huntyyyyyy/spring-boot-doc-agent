@@ -44,13 +44,16 @@ def test_hard_soft_and_compare_offenders() -> None:
     assert "b.py" not in sr.hard_file_offenders(files)
     fns = {
         "a.py::big": sr.FN_STMTS_HARD + 1,
-        "a.py::mid": sr.FN_STMTS_SOFT + 1,
+        "a.py::at_ceiling": sr.FN_STMTS_HARD,
         "a.py::tiny": 1,
     }
     assert "a.py::big" in sr.hard_fn_offenders(fns)
+    assert "a.py::at_ceiling" not in sr.hard_fn_offenders(fns)
     notes = sr.soft_advisories(files, fns)
     assert any("b.py" in n for n in notes)
-    assert any("mid" in n for n in notes)
+    # FN_STMTS_SOFT == HARD: fn advisories fire only at exact ceiling.
+    assert any("at_ceiling" in n for n in notes)
+    assert not any("big" in n for n in notes)
     assert sr._offender_delta("file", "x.py", None, 9) is not None
     assert sr._offender_delta("file", "x.py", 3, 4) is not None
     assert sr._offender_delta("file", "x.py", 4, 4) is None

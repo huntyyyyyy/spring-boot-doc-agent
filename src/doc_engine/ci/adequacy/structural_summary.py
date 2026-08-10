@@ -16,8 +16,9 @@ from doc_engine.ci.adequacy.criterion_ports import (
     SLICE_KIND_STRUCTURAL,
     AdequacySlice,
 )
+from doc_engine.ci.coverage_artifact_policy import DEFAULT_FLOOR
 
-DEFAULT_FLOOR_ECHO: str = "98.7"
+DEFAULT_FLOOR_ECHO: str = f"{DEFAULT_FLOOR:g}"
 
 
 def _line_rate_pct(coverage_xml: Path) -> float:

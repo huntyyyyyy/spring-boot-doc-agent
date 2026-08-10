@@ -46,8 +46,9 @@ def _test_live_scan_then_gap_probe_prelude(self, tmp_path: Path):
     assert covering.is_file()
     gap_out = tmp_path / 'gap'
     report = run_gap_probe(out_signals, facts_path, gap_out, covering_path=covering)
+    return report
 
-def _test_live_scan_then_gap_probe_core(self, tmp_path: Path):
+def _test_live_scan_then_gap_probe_core(self, tmp_path: Path, report):
     assert report['schema_version'] == GAP_PROBE_SCHEMA_VERSION
     assert report['s1_covering']['verified'] is True
     assert report['rates']['R_sym']['rate'] == 1.0
@@ -145,5 +146,5 @@ class TestOcsLiveScanAet:
     """Re-scan the canonical real Spring checkout then run gap_probe (slow)."""
 
     def test_live_scan_then_gap_probe(self, tmp_path: Path) -> None:
-        _test_live_scan_then_gap_probe_prelude(self, tmp_path)
-        _test_live_scan_then_gap_probe_core(self, tmp_path)
+        report = _test_live_scan_then_gap_probe_prelude(self, tmp_path)
+        _test_live_scan_then_gap_probe_core(self, tmp_path, report)

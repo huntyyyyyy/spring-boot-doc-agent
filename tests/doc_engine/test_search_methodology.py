@@ -52,12 +52,18 @@ class SearchMethodologyBenchmarkTest(unittest.TestCase):
         self.assertIn("@EntityScan", text)
         self.assertIn("must NOT be picked up", text)
 
-    def test_deny_text_search_blocks_grep_tool(self) -> None:
+    def test_deny_text_search_allows_grep_and_ast_grep(self) -> None:
         hooks = REPO_ROOT / "adapters" / "claude" / "hooks"
         sys.path.insert(0, str(hooks))
         import deny_text_search as dts  # noqa: E402
 
-        self.assertTrue(dts.decide({"tool_name": "Grep"})["deny"])
+        self.assertFalse(dts.decide({"tool_name": "Grep"})["deny"])
+        self.assertFalse(
+            dts.decide({
+                "tool_name": "Bash",
+                "tool_input": {"command": "rg -n Entity src"},
+            })["deny"],
+        )
         self.assertFalse(
             dts.decide({
                 "tool_name": "Bash",

@@ -116,9 +116,9 @@ def test_phase_full_finish_docs_in_target_inventory(
     monkeypatch.setattr(
         ff.gates, "run_pipeline_validators", lambda *a, **k: ("OK", "OK")
     )
-    monkeypatch.setattr(ff, "_run_drift_check", lambda *a, **k: None)
-    monkeypatch.setattr(ff, "_artifact_inventory", lambda *a, **k: None)
-    monkeypatch.setattr(ff, "_write_certification_and_finish", lambda *a, **k: 0)
+    monkeypatch.setattr(ff, "run_drift_check", lambda *a, **k: None)
+    monkeypatch.setattr(ff, "artifact_inventory", lambda *a, **k: None)
+    monkeypatch.setattr(ff, "write_certification_and_finish", lambda *a, **k: 0)
 
     assert ff.phase_full_finish(state) == 0
     assert any("fourteen docs" in c for c in calls)

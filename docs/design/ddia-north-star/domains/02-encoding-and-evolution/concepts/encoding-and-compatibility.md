@@ -6,8 +6,8 @@ tags: [encoding, json, schema, rpc, compatibility]
 epub_anchors:
   - { chapter: 5, title: "The Merits of Schemas" }
   - { chapter: 5, title: "Modes of Dataflow" }
-related: [schema-evolution-and-data-outlives-code]
-last_refined: 2026-07-30
+related: [schema-evolution-and-data-outlives-code, effective-remedies]
+last_refined: 2026-08-09
 path: domains/02-encoding-and-evolution/concepts/encoding-and-compatibility.md
 
 ---
@@ -59,6 +59,13 @@ Shared schemas make multi-writer/multi-reader evolution tractable; schemaless co
 ## Anti-patterns seen
 
 - Review helper existed while Stage 5 omitted it (B4 closed).
+
+## Effective remedies
+
+- **Primary:** `fitness-function` on schema/compatibility predicates + additive evolution.
+- **Embodied:** claim fingerprints content-stable; baselines carry `schema_version`.
+- **Accept:** breaking readers requires Explicit Defer or dual-read window — not silent rename.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

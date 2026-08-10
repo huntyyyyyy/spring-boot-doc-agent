@@ -17,29 +17,44 @@ This tree is repo meta only:
 ## Principal-engineer pre-PR gate
 
 Local fail-closed orchestrator (CI remains merge-time second line). Git cannot
-intercept `gh pr create`; push is the choke point.
+intercept `gh pr create`; push (including force-push) is the choke point via
+`.githooks/pre-push`.
 
 ```bash
-# one-time per clone
-git config core.hooksPath .githooks
+# one-time per clone (sets hooksPath or chains into Cursor agent-hooks)
+python3 scripts/ci/install_git_hooks.py
+python3 scripts/ci/install_git_hooks.py --check
 
 python3 scripts/ci/pre_pr.py --auto            # default from .githooks/pre-push
 python3 scripts/ci/pre_pr.py --fast            # tier 0 + claims
-python3 scripts/ci/pre_pr.py --full            # + Stage-0 + advisory mutate/metrics
+python3 scripts/ci/pre_pr.py --full            # + Stage-0 + advisory mutate/metrics/sonar
 python3 scripts/ci/pre_pr.py --actions-outage  # CI parity when Actions is down
+PRE_PR_MODE=full git push                      # tip override without editing the hook
 ```
 
 | Mode | Hard suites |
 |------|-------------|
 | `--fast` | workflow YAML (+ security severity ramp), tool-doctor, ruff, repo_claims |
-| `--auto` / default | docs-only → fast; otherwise **standard** CI hard tiers (quality, coverage, pytest) |
-| `--full` | all hard + portable Stage-0 + advisory mutate/metrics (+ mutation_driver when present) |
+| `--auto` / default | docs-only → fast; otherwise **standard** (quality checkers, pytest, **in-repo quality-gates** with `--skip-coverage`) |
+| `--full` | all hard + portable Stage-0 + advisory mutate/metrics + optional local Sonar |
 | `--actions-outage` | `--full` + CodeQL invariants/compile/QL tests/fixture runtime + `certification verify --allow-mock` (scan_only + certified) |
+
+`in_repo_quality_gates` runs `doc-engine quality-gates --compare-ref … --skip-coverage`
+so complexipy / size / jscpd / tach fail **locally** without needing remote CI or a
+fresh Cover% oracle XML (oracle remesure stays the 3.11 CI cell / explicit remesure).
+Override base with `PRE_PR_COMPARE_REF=origin/main`.
+
+Local SonarQube (advisory): [`scripts/ci/sonar-local/README.md`](ci/sonar-local/README.md).
+Modern approach choices (husky / lefthook / pre-commit / act ★ table):
+[`docs/research/process/27-local-pre-push-hook-2026.md`](../docs/research/process/27-local-pre-push-hook-2026.md).
+Local suite telemetry (ETL under `.git/pre-pr-telemetry/`; debugger CLI):
+`python3 scripts/ci/stalker_telemetry.py show --failures-only`
+([`process/28`](../docs/research/process/28-local-stalker-telemetry-etl-2026.md)).
 
 Receipt: `.git/pre-pr-receipt.json` (schema 2: optional `attestation` /
 `github_status_note` for outage mode). Bypass (logged): `PRE_PR_SKIP=1` **and**
 `PRE_PR_SKIP_REASON='…'` (≥8 chars) → `.git/pre-pr-bypass.log`. Bypass is
-**refused** under `--actions-outage`.
+**refused** under `--actions-outage`. Tip practice refuses `git push --no-verify`.
 
 `check_workflow_yaml.py` hard-fails critical/high Actions footguns (script
 injection, write-all, missing permissions, third-party unpinned tags);
@@ -86,3 +101,17 @@ python3 scripts/ratchets/mutate.py
 Baselines for the CI checkers live in `ratchets/`; coverage baselines stay beside the coverage runners. Path helpers: `doc_engine.paths.scripts_dir()` / `scripts_meta_path_entries()`.
 
 Suites mirror this taxonomy under [`tests/`](../tests/README.md) (`ci/`, `ratchets/`, `coverage/`, `doc_engine/`, `adapters/`). Discovery is recursive via `suite_layout.suite_paths`.
+
+## Local grading pack (Windows / IntelliJ)
+
+Do **not** run `docs/process/local-grading-pack.md` via the Markdown play button.
+Use `scripts/ci/run_local_grading_pack.cmd` (Git Bash) or the `.sh` on Linux:
+
+```text
+# Git Bash:
+./scripts/ci/run_local_grading_pack.sh doctor
+# cmd / IntelliJ Batch (not: python ...cmd):
+scripts\ci\run_local_grading_pack.cmd doctor
+```
+
+Logs: `local-runs/logs/`. Checklist: `docs/process/local-grading-pack.md`.

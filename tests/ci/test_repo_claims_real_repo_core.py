@@ -42,18 +42,25 @@ class TestRealRepoCore(unittest.TestCase):
             f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}",
         )
 
-    def test_no_real_agent_declares_grep(self) -> None:
-        """The backtest for check F. The fixture tests prove the check can
-        fire; this proves it is aimed at the real tree, where all five agents
-        declared `tools: Read, Grep, Glob, Write` before this change."""
+    def test_real_agents_may_declare_grep(self) -> None:
+        """After the ripgrep allow lift, Grep in tools: is not forbidden.
+        This backtest only asserts check F still aims at real agent files."""
         agents = crc._agent_definitions(REPO_ROOT)
         self.assertTrue(
             agents, "no agent definitions found — check F is aimed at nothing"
         )
+        # Soft prefer: none required to declare Grep; declaring it must not
+        # trip FORBIDDEN_AGENT_TOOL (empty string).
+        self.assertEqual(crc.FORBIDDEN_AGENT_TOOL, "")
         for path in agents:
-            self.assertNotIn(
-                "Grep", crc._declared_tools(path), f"{path.name} declares Grep"
-            )
+            tools = crc._declared_tools(path)
+            if "Grep" in tools:
+                findings = [
+                    f
+                    for f in crc.check_agent_search_tooling(REPO_ROOT)
+                    if f.fingerprint.startswith("F:grep:")
+                ]
+                self.assertEqual(findings, [], f"{path.name} Grep still forbidden")
 
     def test_real_derived_blocks_match_registry(self) -> None:
         """Backtest for check A. Hermetic TreeCase suites prove stale numbers
@@ -88,10 +95,15 @@ class TestRealRepoCore(unittest.TestCase):
                 ),
                 f"{bash_agents} declare Bash with no scoped allow entry",
             )
-            for required in crc.TEXT_SEARCH_DENIES:
-                self.assertIn(required, permissions.get("deny", []))
             for required in crc.NETWORK_EGRESS_DENIES:
                 self.assertIn(required, permissions.get("deny", []))
+            for forbidden in ("Bash(grep:*)", "Bash(rg:*)", "Grep"):
+                self.assertNotIn(
+                    forbidden,
+                    permissions.get("deny", []),
+                    "text-search deny must stay lifted",
+                )
+            self.assertEqual(crc.TEXT_SEARCH_DENIES, ())
 
     def test_every_steering_prompt_with_a_status_has_predicates(self) -> None:
         """Scoped to the steering-prompt corpus, which is what this test's

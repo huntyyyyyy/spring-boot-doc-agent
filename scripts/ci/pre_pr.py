@@ -36,9 +36,13 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Callable, List, Optional, Sequence, Tuple
 
+from pre_pr_quality_gates_suite import quality_gates_argv
+
+from doc_engine.ci.stalker_telemetry.run_store import TelemetryRun, tee_stdio
 from doc_engine.paths import repo_root
 
 REPO_ROOT = repo_root()
+_TELEMETRY: TelemetryRun | None = None
 RECEIPT_PATH = REPO_ROOT / ".git" / "pre-pr-receipt.json"
 BYPASS_LOG = REPO_ROOT / ".git" / "pre-pr-bypass.log"
 # schema 2 adds attestation + github_status_note for actions-outage receipts.
@@ -52,6 +56,7 @@ CODE_PATH_PREFIXES = (
     "adapters/",
     "hooks/",
     ".claude/",
+    "spring-signals/",
     "pyproject.toml",
     "requirements.txt",
     "requirements-dev.txt",
@@ -259,14 +264,39 @@ def require_outage_toolchain() -> int:
 
 def _suite(name: str, kind: str, fn: SuiteFn) -> SuiteResult:
     started = time.perf_counter()
-    code = fn()
+    with tee_stdio() as buf:
+        code = fn()
+    # Read AFTER tee_stdio finally/live sink — never mid-with on an empty buffer.
+    body = buf.getvalue()
     ms = int((time.perf_counter() - started) * 1000)
     if kind == "advisory":
-        status = "advisory" if code == 0 else "advisory"
-        # Advisory never fails the gate; still record non-zero as detail.
-        return SuiteResult(name, status, ms, kind, detail=f"exit={code}")
-    status = "pass" if code == 0 else "fail"
-    return SuiteResult(name, status, ms, kind, detail=f"exit={code}")
+        status = "advisory"
+        detail = f"exit={code}"
+    elif code != 0:
+        status = "fail"
+        detail = f"exit={code}"
+    elif not body.strip():
+        # Vacuous observation: exit 0 with empty tee is not a receipt (E-CPL/TEL).
+        status = "fail"
+        detail = "exit=0 empty_telemetry"
+        print(
+            f"error: hard suite {name!r} produced empty telemetry "
+            f"(exit 0); treating as fail — exit-only is not observation",
+            file=sys.stderr,
+        )
+    else:
+        status = "pass"
+        detail = f"exit={code}"
+    if _TELEMETRY is not None:
+        _TELEMETRY.record(
+            name=name,
+            kind=kind,
+            status=status,
+            exit_code=int(code),
+            duration_ms=ms,
+            body=body,
+        )
+    return SuiteResult(name, status, ms, kind, detail=detail)
 
 
 def _py_script(*rel: str, extra_args: Optional[Sequence[str]] = None) -> SuiteFn:
@@ -306,8 +336,86 @@ def _facade_poke_surface() -> int:
     return _py_script("scripts", "ci", "check_facade_poke_surface.py")()
 
 
+def _public_surface() -> int:
+    """E-COH1: curated façades must not export private ``_`` names / residual bins."""
+    return _py_script("scripts", "ci", "check_public_surface.py")()
+
+
+def _oracle_coverage() -> int:
+    """Whole-repo Cover% SoT (same fail_under as CI 3.11). E-HOOK2."""
+    os.environ["_PRE_PR_ORACLE_RAN"] = "1"
+    print("oracle_coverage: remesuring via coverage-measure (fail_under floor)", flush=True)
+    proc = _run([sys.executable, "-m", "doc_engine.ci.coverage_measure_cli"])
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
 def _pytest() -> int:
-    proc = _run([sys.executable, "-m", "pytest", "tests/", "-q", "--tb=line"])
+    """Run pytest; standard mode may domain-select (E-SEL1); full always whole tree."""
+    force_full = os.environ.get("PRE_PR_PYTEST_FULL", "").strip() in (
+        "1",
+        "true",
+        "TRUE",
+        "yes",
+    )
+    force_full = force_full or os.environ.get("_PRE_PR_MODE", "") in (
+        "full",
+        "actions_outage",
+    )
+    from doc_engine.ci.pytest_domain_select import build_select_plan
+
+    plan = build_select_plan(
+        REPO_ROOT,
+        changed_files_vs_main(),
+        force_full=force_full,
+    )
+    junit = REPO_ROOT / ".git" / "pre-pr-pytest.junit.xml"
+    argv = plan.argv(junitxml=str(junit))
+    print(
+        f"pytest_select: mode={plan.mode} markers={list(plan.markers) or ['(full)']}",
+        flush=True,
+    )
+    proc = _run([sys.executable, "-m", "pytest", *argv])
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    _print_pytest_timing(junit)
+    return proc.returncode
+
+
+def _print_pytest_timing(junit: Path) -> None:
+    if not junit.is_file():
+        return
+    from xml.etree.ElementTree import ParseError
+
+    from doc_engine.ci.suite_timing.junit_duration_parse import parse_junit_durations
+
+    try:
+        report = parse_junit_durations(junit)
+        top = report.slowest(1)
+        node = top[0].node_id if top else "n/a"
+        print(
+            f"pytest_timing: cases={len(report.records)} "
+            f"total_s={report.total_seconds:.1f} slowest={node}",
+            flush=True,
+        )
+    except (OSError, ValueError, ParseError) as exc:
+        print(f"pytest_timing: skip ({exc})", flush=True)
+
+
+def _mutation_driver() -> int:
+    """Assertion-engine mutants — same entry as python-gates (module form)."""
+    proc = _run([sys.executable, "-m", "tests.spring_signals.mutation_driver"])
+    sys.stdout.write(proc.stdout)
+    sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
+def _in_repo_quality_gates() -> int:
+    """Local hard gate: size/complexipy/jscpd/tach; Cover% when oracle remesured."""
+    skip_coverage = os.environ.get("_PRE_PR_ORACLE_RAN", "").strip() != "1"
+    argv = quality_gates_argv(REPO_ROOT, skip_coverage=skip_coverage)
+    proc = _run(_doc_engine_cmd(*argv))
     sys.stdout.write(proc.stdout)
     sys.stderr.write(proc.stderr)
     return proc.returncode
@@ -469,13 +577,7 @@ def _append_full_extras(hard: List[Tuple[str, str, SuiteFn]]) -> None:
     )
     mutation_driver = REPO_ROOT / "tests" / "spring_signals" / "mutation_driver.py"
     if mutation_driver.is_file():
-        hard.append(
-            (
-                "mutation_driver_advisory",
-                "advisory",
-                _py_script("tests", "spring_signals", "mutation_driver.py"),
-            )
-        )
+        hard.append(("mutation_driver", "hard", _mutation_driver))
 
     def claims_metrics() -> int:
         proc = _run(
@@ -553,6 +655,22 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
             ),
             ("test_domain_markers", "hard", _domain_markers),
             ("facade_poke_surface", "hard", _facade_poke_surface),
+            ("public_surface", "hard", _public_surface),
+            (
+                "stalker_sensors",
+                "advisory",
+                _py_script(
+                    "scripts",
+                    "ci",
+                    "stalker_scan.py",
+                    extra_args=["--no-ledger"],
+                ),
+            ),
+            (
+                "vacuous_tests",
+                "hard",
+                _py_script("scripts", "ci", "vacuous_test_gate.py"),
+            ),
             (
                 "rule_coverage",
                 "hard",
@@ -563,11 +681,24 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
                 "hard",
                 _py_script("scripts", "coverage", "semgrep_rule_coverage.py"),
             ),
-            ("pytest", "hard", _pytest),
         ]
     )
+    from doc_engine.ci.oracle_push_policy import should_remesure_oracle
+
+    if should_remesure_oracle(mode, changed_files_vs_main()):
+        hard.append(("oracle_coverage", "hard", _oracle_coverage))
+    else:
+        hard.append(("pytest", "hard", _pytest))
+    hard.append(("in_repo_quality_gates", "hard", _in_repo_quality_gates))
     if mode in ("full", "actions_outage"):
         _append_full_extras(hard)
+        hard.append(
+            (
+                "sonar_local_advisory",
+                "advisory",
+                _py_script("scripts", "ci", "sonar_local_advisory.py"),
+            )
+        )
     if mode == "actions_outage":
         _append_outage_lanes(hard)
     return hard
@@ -643,6 +774,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     mode = resolve_mode(args)
     status_note = (args.status_url or "").strip() or None
+    os.environ["_PRE_PR_MODE"] = mode
 
     if mode == "actions_outage":
         if os.environ.get("PRE_PR_SKIP", "").strip() in ("1", "true", "TRUE", "yes"):
@@ -672,15 +804,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"receipt: {RECEIPT_PATH}")
         return 0
 
+    global _TELEMETRY
+    _TELEMETRY = TelemetryRun(REPO_ROOT, receipt.git_sha, mode)
     results: List[SuiteResult] = []
     failed = False
-    for name, kind, fn in build_suites(mode):
-        print(f"\n--- {name} ({kind}) ---")
-        result = _suite(name, kind, fn)
-        results.append(result)
-        if kind == "hard" and result.status == "fail":
-            failed = True
-            break
+    try:
+        for name, kind, fn in build_suites(mode):
+            print(f"\n--- {name} ({kind}) ---")
+            result = _suite(name, kind, fn)
+            results.append(result)
+            if kind == "hard" and result.status == "fail":
+                failed = True
+                break
+    finally:
+        tel_path = _TELEMETRY.flush()
+        _TELEMETRY = None
+        print(f"telemetry: {tel_path}")
 
     receipt.suites = results
     receipt.overall = "fail" if failed else "pass"

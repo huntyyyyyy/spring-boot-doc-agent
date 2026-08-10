@@ -4849,6 +4849,56 @@ Assumptions affected:
 - `claude/` as process SoR — [Resolved — tombstone + archive under `docs/research/archive/claude-lore/`; adapter packaging kept]
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
+## 2026-08-09 — E-COH1 public-surface fitness + residual-bin reshape
+Commit: 36bd64b6
+Tests: 131 focused passed; complexipy 0 offenders; claims OK; public_surface hard in pre_pr
+Assumptions affected:
+- MOD-S1 provisional façades may re-export private `_` indefinitely — [Resolved — `check_public_surface` hard in `pre_pr`; `support.py`/`inventory_drift.py` deleted; `semantic_eval` public façade]
+- Cohesion Accept was LOC-only — [Still accurate bar; [New info — CGQ3 Accept + fitness witness for public `__all__`]]
+Files touched: public_surface_policy.py, check_public_surface.py, pre_pr.py, local_runner_phases/*, semantic_eval*.py, tests/ci/test_public_surface_policy.py, modularity/21-*, concept-split design appendix, quality-backlog, session-log
+
+## 2026-08-09 — E-HOOK2/E-CQL1/E-TEL2: local oracle + CodeQL fingerprint + path parity
+Commit: a1314d17
+Tests: 34 focused ci passed; complexipy 0; claims OK
+Assumptions affected:
+- HOOK6 local push skips Cover% oracle — [Resolved — `oracle_coverage` hard remesure when src/tests change; quality-gates reads coverage.xml]
+- CodeQL signals always wipe+rebuild — [Resolved — fingerprint gate skips compile/runtime when corpus unchanged; wipe remains on dirty path]
+- Stalker only G1–G7 tip hygiene — [New info — G8–G10 path-parity sensors for oracle/CodeQL/suite map]
+Files touched: oracle_push_policy.py, pre_pr.py, codeql_signals_change_gate.py, codeql-signals.yml, stalker_path_parity/*, process/30–31, quality-backlog, session-log
+
+## 2026-08-09 — E-SEARCH0: allow ripgrep / Grep; keep network deny + ast-grep prefer
+Commit: 4ca8b551
+Tests: adapters deny_text_search + bridge + check F suites (pending run in same commit)
+Assumptions affected:
+- `CLAUDE.md` / `CONSTRAINTS.md` §10 / `adapters/claude/SEARCH.md` — hard "never text search" / Grep denied — [Resolved — text search allowed; prefer ast-grep for structural citations; check F network half unchanged]
+- `docs/process/steering-prompts/` — no status field assumed Grep deny as deliverable absent — [Still accurate]
+Files touched: adapters/claude/hooks/deny_text_search.py, .claude/settings.json, scripts/ci/check_repo_claims.py, CLAUDE.md, AGENTS.md, CONSTRAINTS.md, SEARCH.md, agent prompts, tests/adapters/test_deny_text_search.py, tests/ci/test_repo_claims_*, docs/research/process/34-text-search-allow-ripgrep-2026.md
+
+## 2026-08-09 — E-CPL0 research + TEL empty-log tee repair
+Commit: uncommitted
+Tests: tests/ci/test_stalker_telemetry.py 9/9 passing; check_repo_claims OK
+Assumptions affected:
+- `docs/research/process/28-local-stalker-telemetry-etl-2026.md` — suite log ETL non-empty bodies — [New info — tip runs still had 0-byte suite logs; live sink + post-with getvalue repair; E-CPL0 Spec DRAFT for standing closed-loop fitness]
+- Steering prompts — no Grep/rg deny revival — [Still accurate]
+Files touched: docs/research/process/35-control-plane-closed-loop-2026.md, docs/design/control-plane-closed-loop-design-2026-08-09.md, docs/research/quality-backlog.md, docs/research/README.md, scripts/ci/pre_pr.py, src/doc_engine/ci/stalker_telemetry/run_store.py, tests/ci/test_stalker_telemetry.py, docs/process/session-log.md
+
+
+## 2026-08-09 — Non-vacuous receipt hook on test writes
+Commit: uncommitted
+Tests: test_nonvacuous_receipt_witness + test_inject_nonvacuous_test_witness + hardened 39 passing
+Assumptions affected:
+- E-TEL / E-CPL0 — empty telemetry counted as observed — [Resolved — postToolUse inject on tests/** + commit-time witness markers on control-plane stage]
+Files touched: .cursor/hooks/inject_nonvacuous_test_witness.py, .cursor/hooks.json, adapters/claude/hooks/nonvacuous_receipt_witness.py, adapters/claude/hooks/require_hardened_tests.py, tests/adapters/test_nonvacuous_receipt_witness.py, tests/ci/test_inject_nonvacuous_test_witness.py, docs/design/control-plane-closed-loop-design-2026-08-09.md
+
+
+## 2026-08-10 — Empty-telemetry fail-closed + CodeQL skip corpus fix
+Commit: uncommitted
+Tests: stalker/oracle/nonvacuity suites green; gate run_expensive=false vs origin/main
+Assumptions affected:
+- E-TEL / E-CPL — empty suite log still overall=pass — [Resolved — hard suite empty tee → fail]
+- E-CQL1 — fingerprint skip — [New info — Path.glob(**) yielded dirs only so corpus was near-empty; rglob fix; workflow YAML removed from corpus; single expensive job]
+- Adequacy sensors as proof tests are non-vacuous — [Still accurate — advisory only; new AST check-free ratchet for tests/ci+adapters]
+Files touched: scripts/ci/pre_pr.py, scripts/ci/codeql_signals_change_gate.py, .github/workflows/codeql-signals.yml, tests/ci/test_*, adapters/claude/hooks/nonvacuous_receipt_witness.py, docs/research/ci/17-*.md
 ## 2026-08-10 — E-REPO1-A: nest semantic_eval + docs_site; prune dead mkdocs finder
 Commit: b99aa0d
 Tests: 46 nest-related pytest green; claims OK; CQ OK; facade poke OK; size OK; complexipy ≤5 on new pkgs
@@ -4890,4 +4940,13 @@ Tests: not run (merge tip)
 Assumptions affected:
 - Parallel PRs #114/#115/#116 for same agent arc — [Resolved — single branch `cursor/repo-and-context-combined-83d2` supersedes]
 Files touched: merge of nest + context-hygiene research
+
+## 2026-08-10 — Merge PR #113 (local-ci-gate-fix) into combined REPO+CTX tip
+Commit: uncommitted
+Tests: not run (merge conflict resolution only)
+Assumptions affected:
+- `docs/research/README.md` — domain map paths (`modularity/` vs `bounded-contexts/`) — [Resolved — combined map uses `bounded-contexts/`; keeps agent context 26–28; folds #113 cold-BC / Rust / stage0 rows]
+- `docs/research/quality-backlog.md` — Active tip + P-rows — [Resolved — kept #113 P-rows + REPO/CTX sections; Active tip notes combined tip]
+- semantic_eval nest vs #113 tools façade — [Still accurate — package BC + tools shims + thin `tools/semantic_eval.py`]
+Files touched: docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md, docs/research/bounded-contexts/*, src/doc_engine/tools/semantic_eval*.py
 

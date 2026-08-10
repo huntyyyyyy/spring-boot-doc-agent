@@ -1,0 +1,55 @@
+# Vacuous Python test shapes (ast-grep 0.45 — Rust engine).
+# Part of the hybrid vacuity gate with vacuous(crate) + rg triage + telemetry.
+#
+# id: vacuous__<kind>  (stable for ledger learning)
+# Quote patterns that contain ':' — bare YAML treats them as mappings.
+
+---
+id: vacuous__assert_true
+language: python
+message: "Vacuous assert True — cannot fail closed"
+rule:
+  pattern: assert True
+---
+id: vacuous__assert_true_message
+language: python
+message: "Vacuous assert True with message — still cannot fail closed"
+rule:
+  pattern: assert True, $$$
+---
+id: vacuous__test_pass_only
+language: python
+message: "test_* body is only pass — Cover% theater"
+rule:
+  kind: function_definition
+  regex: "def test_"
+  all:
+    - has:
+        pattern: pass
+        stopBy: end
+    - not:
+        has:
+          any:
+            - pattern: assert $X
+            - pattern: assert $X, $$$
+            - pattern: $M.assert_$N($$$)
+            - pattern: pytest.raises($$$)
+            - pattern: "with pytest.raises($$$):"
+          stopBy: end
+---
+id: vacuous__test_ellipsis_only
+language: python
+message: "test_* body is only ellipsis — Cover% theater"
+rule:
+  kind: function_definition
+  regex: "def test_"
+  all:
+    - has:
+        pattern: "..."
+        stopBy: end
+    - not:
+        has:
+          any:
+            - pattern: assert $X
+            - pattern: assert $X, $$$
+          stopBy: end

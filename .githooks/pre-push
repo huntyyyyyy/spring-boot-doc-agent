@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
-# Principal-engineer pre-push gate. Enable once per clone:
-#   git config core.hooksPath .githooks
+# Principal-engineer pre-push gate (runs on push AND force-push unless --no-verify).
 #
-# Runs scripts/ci/pre_pr.py --auto (path-risk routing). Override:
-#   PRE_PR_SKIP=1 PRE_PR_SKIP_REASON='hotfix explanation…' git push
+# Enable / repair once per clone (or after Cursor overrides hooksPath):
+#   python3 scripts/ci/install_git_hooks.py
+#
+# Default: pre_pr --auto. Tip override: PRE_PR_MODE=full git push
+# Bypass (logged): PRE_PR_SKIP=1 PRE_PR_SKIP_REASON='hotfix explanation…' git push
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
-if command -v python >/dev/null 2>&1; then
+if [[ -x "$ROOT/.venv/bin/python" ]]; then
+  PY="$ROOT/.venv/bin/python"
+elif command -v python >/dev/null 2>&1; then
   PY=python
 elif command -v python3 >/dev/null 2>&1; then
   PY=python3
@@ -15,4 +19,15 @@ else
   echo "pre-push: python not found on PATH" >&2
   exit 1
 fi
-exec "$PY" scripts/ci/pre_pr.py --auto
+MODE_FLAG=(--auto)
+case "${PRE_PR_MODE:-}" in
+  full) MODE_FLAG=(--full) ;;
+  fast) MODE_FLAG=(--fast) ;;
+  actions_outage|outage) MODE_FLAG=(--actions-outage) ;;
+  auto|"") MODE_FLAG=(--auto) ;;
+  *)
+    echo "pre-push: unknown PRE_PR_MODE=${PRE_PR_MODE}" >&2
+    exit 2
+    ;;
+esac
+exec "$PY" scripts/ci/pre_pr.py "${MODE_FLAG[@]}"

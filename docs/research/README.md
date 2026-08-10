@@ -6,14 +6,14 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 
 | Domain | Path | Use when |
 | --- | --- | --- |
-| **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md) | Active stream; Embody/Adopt/Refuse merge of foundational segments |
+| **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md), [`cold-product-bc-research-map-2026-08-10.md`](cold-product-bc-research-map-2026-08-10.md), [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md), [`cold-bc-dimensional-mental-map-2026-08-10.md`](cold-bc-dimensional-mental-map-2026-08-10.md) | Active stream; Embody/Adopt/Refuse; cold BC portfolio; D1–D6 taxonomy; dimensional lattice; **polyglot toolkit BFS → [`process/39-…`](process/39-polyglot-cli-toolkit-bfs-2026-08-10.md)** |
 | **findings/** | [`findings/`](findings/) | Stalker ledger entries (STK2) — compact events + gap IDs; not chat dumps |
-| **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, dynamics, façade/research hooks, legacy remediation Spec, docs taxonomy, **watch/stalker agents**, **agent context (26–28: bloat · ★ discernment · algorithm-first build)** |
-| **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking |
+| **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, dynamics, façade/research hooks, legacy remediation Spec, docs taxonomy, **watch/stalker agents**, **agent context (26–28: bloat · ★ discernment · algorithm-first build)**, **control-plane closed-loop (E-CPL0)**, **operator/agent surface CLI+MCP+retrieval (E-OAS0)**, **CLI DX/a11y/dual-sinks**, **polyglot BFS (E-POLY0/0b)**, **language excellence domains→subdomains (E-LANG0)** |
+| **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking; **Rust toolscape + release scans (Harn/Nimbus/noprop)** |
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |
-| **bounded-contexts/** | [`bounded-contexts/`](bounded-contexts/) | Product BC seams: Stage-0 ports, test-suite BCs, tools waves, AstGrepBackend split, **tach dependency blueprint**, **DDD repo-structure packet E-REPO0 (21–24)** + **E-REPO1-A first nest (25)** — formerly misnamed `modularity/` |
-| **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs (migrated from `claude/research/`) |
+| **bounded-contexts/** | [`bounded-contexts/`](bounded-contexts/) | Product BC seams: Stage-0 ports, test-suite BCs, tools waves, AstGrepBackend split, **tach dependency blueprint**, **DDD repo-structure packet E-REPO0 (21–24)** + **E-REPO1-A first nest (25)** + **E-COH1 public-surface fitness (21-coh1)** + **certification-fold phase runner** — formerly misnamed `modularity/` |
+| **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs; **tailored ast-grep packs (E-AST0)**; **D1 query (E-QUERY0)**; **D2–D3 cert+facts**; **D4–D6 join/drift/CLI**; fact-store next-phase seeds |
 | **archive/** | [`archive/`](archive/) | Superseded WIP, receipts, [`claude-lore/`](archive/claude-lore/) — **not** Spec SoT |
 
 ## Rules (DOC1 / DOC10)

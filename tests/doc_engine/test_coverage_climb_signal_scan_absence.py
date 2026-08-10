@@ -8,7 +8,7 @@ import pytest
 from doc_engine import paths as paths_mod
 from doc_engine.paths import PathValidationError
 from doc_engine.scanning.gap_probe import absence_recall as absence
-from doc_engine.tools import semantic_eval_helpers as seh
+from doc_engine.tools import semantic_eval as seh
 from doc_engine.tools import spring_signal_scan as sss
 pytestmark = pytest.mark.domain_climb_sensor
 

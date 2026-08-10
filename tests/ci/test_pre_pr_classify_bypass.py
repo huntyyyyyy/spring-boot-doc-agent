@@ -105,19 +105,43 @@ class BuildSuitesTest(unittest.TestCase):
         self.assertIn("ruff", names)
 
     def test_standard_includes_pytest_not_stage0(self):
-        names = [n for n, _, _ in pre_pr.build_suites("standard")]
+        os.environ["PRE_PR_SKIP_ORACLE"] = "1"
+        try:
+            names = [n for n, _, _ in pre_pr.build_suites("standard")]
+        finally:
+            os.environ.pop("PRE_PR_SKIP_ORACLE", None)
         self.assertIn("pytest", names)
+        self.assertIn("in_repo_quality_gates", names)
         self.assertIn("test_domain_markers", names)
         self.assertIn("facade_poke_surface", names)
+        self.assertIn("public_surface", names)
         self.assertNotIn("stage0_portable", names)
         self.assertNotIn("mutate_advisory", names)
 
+    def test_standard_oracle_when_forced(self):
+        os.environ["PRE_PR_FORCE_ORACLE"] = "1"
+        try:
+            names = [n for n, _, _ in pre_pr.build_suites("standard")]
+        finally:
+            os.environ.pop("PRE_PR_FORCE_ORACLE", None)
+        self.assertIn("oracle_coverage", names)
+        self.assertNotIn("pytest", names)
+
     def test_full_includes_advisory_mutate(self):
-        names = [n for n, _, _ in pre_pr.build_suites("full")]
+        os.environ["PRE_PR_SKIP_ORACLE"] = "1"
+        try:
+            names = [n for n, _, _ in pre_pr.build_suites("full")]
+        finally:
+            os.environ.pop("PRE_PR_SKIP_ORACLE", None)
         self.assertIn("pytest", names)
+        self.assertIn("in_repo_quality_gates", names)
+        self.assertIn("sonar_local_advisory", names)
         self.assertIn("mutate_advisory", names)
+        self.assertIn("mutation_driver", names)
         self.assertIn("stage0_portable", names)
         self.assertNotIn("codeql_invariants", names)
+        kinds = {n: k for n, k, _ in pre_pr.build_suites("full")}
+        self.assertEqual(kinds["mutation_driver"], "hard")
 
     def test_actions_outage_includes_codeql_and_certify(self):
         names = [n for n, _, _ in pre_pr.build_suites("actions_outage")]

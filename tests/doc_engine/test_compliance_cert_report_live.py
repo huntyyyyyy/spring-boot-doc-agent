@@ -166,14 +166,17 @@ class CertificationReportLiveTest(unittest.TestCase):
 
 class FinishMessagingTest(unittest.TestCase):
     def test_success_lines_only_when_certified(self):
-        from doc_engine.pipeline.local_runner import Log, Runner, _write_certification_and_finish
+        from doc_engine.pipeline.local_runner import Log, Runner
+        from doc_engine.pipeline.local_runner_phases.certification_finish import (
+            write_certification_and_finish,
+        )
 
         with tempfile.TemporaryDirectory() as tmp:
             log_path = os.path.join(tmp, "run.log")
             log = Log(log_path)
             runner = Runner(log, keep_going=False)
             runner.record("pipeline:doc_writer", "FAIL", 0.0, "mock failed")
-            code = _write_certification_and_finish(
+            code = write_certification_and_finish(
                 log,
                 runner,
                 ComplianceProfile.CERTIFIED,

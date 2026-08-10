@@ -3,8 +3,8 @@ id: refactor-sequencing
 kind: playbook
 completeness: operational
 tags: [refactor, sequencing, blast-radius]
-related: [maintainability-operability-evolvability, schema-evolution-and-data-outlives-code, coverage-gates]
-last_refined: 2026-07-30
+related: [maintainability-operability-evolvability, schema-evolution-and-data-outlives-code, coverage-gates, effective-remedies]
+last_refined: 2026-08-09
 path: playbooks/refactor-sequencing.md
 
 ---
@@ -40,6 +40,13 @@ Sequence refactors so each step is reversible, verifiable, and does not mint a n
 
 - Order: north-star under `docs/design/` → L1 FP ratchet (**done**) → **L2** capacity Stage-4 SoR align (`rel-sor-feeds-views`, `claims-and-status-drift`) → L6 coverage baseline hygiene / L5 drift schema; L4 branch protection stays parallel human; L3 claim-symbol stays later.
 - Cite `refactor-sequencing` + the queue item’s DDIA card ids in the PR body.
+
+## Effective remedies
+
+- **Primary:** `characterization-net` → one seam → structural `fitness-function` verify (SOL5).
+- **Companion:** `sensor-ledger-spec` for recurring classes (SOL6 / E-STK1).
+- **Accept:** reshape epic names characterization suite + seam map before moves.
+- **Catalog:** [meta/effective-remedies.md](../meta/effective-remedies.md).
 
 ## See also
 

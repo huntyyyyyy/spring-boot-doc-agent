@@ -1,6 +1,6 @@
 ---
 title: Finding — statement-split thrash → cascading CI red (2026-08-09)
-status: open
+status: closed — E-STK1 G1–G6 sensors Embodied (2026-08-09)
 kind: process_incident
 date: 2026-08-09
 tip_at_detection: 7fcb387
@@ -9,7 +9,8 @@ related:
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
   - docs/research/quality-backlog.md
   - docs/design/concept-split-cohesion-design-2026-08-09.md
-backlog: P15.1 (E-STK1 sensors G1–G6), P17.1 (E-COH1 repair under cohesion bar)
+  - src/doc_engine/ci/stalker_sensors/
+backlog: P15.1 Done (E-STK1); P17.1 E-COH1 Active next
 ---
 
 # Finding ledger: mechanical statement-split cascade
@@ -55,6 +56,24 @@ Refuse: LLM as fail_under; sensors rewriting oracle SoT (STK1).
   `src/` + `tests/` only (aligns with size-ratchet package roots). Remaining
   `scripts/**` functions above 20 stay measured in the baseline as open debt —
   remediable under E-COH / a dedicated stream, not silent grandfather of product.
+- **Post-merge (2026-08-09):** tip `#112` merged to `main` with remaining red.
+  Local inventory still shows **4 G2 prelude/core leaks** + façade patch miss +
+  CQ unit-test scope skew + collapsed soft band + obsolete metamorphic ratchet +
+  docs path pin drift. **Research Spec DRAFT:** E-HOT0
+  ([`process/21-…`](../process/21-post-merge-gate-repair-cohesion-2026.md),
+  design [`post-merge-gate-repair-design-2026-08-09.md`](../../design/post-merge-gate-repair-design-2026-08-09.md);
+  SoR bar raised to **≥10k★** for new external Adopt on this stream).
+  **Stack rescope DRAFT:** E-STACK0
+  ([`process/22-…`](../process/22-stack-rescope-10k-star-bar-2026.md)) —
+  keep ≥10k pins; Confirmed exempt; Nx patterns for boundaries; no tool swap
+  before E-HOT1 green.
+  **No further product Implement until HOT1–HOT13 Approve** (STACK Approve is docs-parallel).
+-   **E-HOT1 (2026-08-09):** Spike receipts
+  [`2026-08-09-e-hot-r1-r4-spike-receipts.md`](2026-08-09-e-hot-r1-r4-spike-receipts.md);
+  G2 return/pass + AST witness; CQ HOT5 slash-free scope; size soft-band test;
+  cert patch-at-use; docs path pin. Metamorphic wrap ratchet **retained** (defect
+  still moves set). **Verify:** `pre_pr --full` overall=pass. Disposition: **closed**.
+  Next Active: **E-COH1** reshape.
 - **Do not:** start full E-STK1 Implement in the same tip as deep E-COH1 without
   an explicit Active switch; more parallel statement/LOC agents; treat
-  `ruff --fix` as Verify.
+  `ruff --fix` as Verify; push before local full-gate green.

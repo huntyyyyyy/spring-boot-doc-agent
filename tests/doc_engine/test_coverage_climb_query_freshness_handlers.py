@@ -7,7 +7,6 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 import pytest
-from doc_engine.pipeline.local_runner_phases import support as phase_support
 from doc_engine.query import kinds as kinds_mod
 from doc_engine.query import load as load_mod
 from doc_engine.query import packet as packet_mod

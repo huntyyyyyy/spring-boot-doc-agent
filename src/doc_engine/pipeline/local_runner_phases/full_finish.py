@@ -4,6 +4,13 @@ from __future__ import annotations
 
 from doc_engine.paths import repo_root
 from doc_engine.pipeline import gates
+from doc_engine.pipeline.local_runner_phases.artifact_inventory import (
+    artifact_inventory,
+)
+from doc_engine.pipeline.local_runner_phases.certification_finish import (
+    write_certification_and_finish,
+)
+from doc_engine.pipeline.local_runner_phases.drift_check_phase import run_drift_check
 from doc_engine.pipeline.local_runner_phases.full_finish_gates import (
     run_check_pipeline_output_gate,
     run_citation_and_secrets_gates,
@@ -12,22 +19,17 @@ from doc_engine.pipeline.local_runner_phases.full_finish_gates import (
     run_validate_artifact_gates,
 )
 from doc_engine.pipeline.local_runner_phases.state import LocalRunState
-from doc_engine.pipeline.local_runner_phases.support import (
-    _artifact_inventory,
-    _run_drift_check,
-    _write_certification_and_finish,
-)
 
 # Climb tests monkeypatch these on the façade module.
 REPO_ROOT = str(repo_root())
 
 __all__ = [
     "REPO_ROOT",
+    "artifact_inventory",
     "gates",
     "phase_full_finish",
-    "_artifact_inventory",
-    "_run_drift_check",
-    "_write_certification_and_finish",
+    "run_drift_check",
+    "write_certification_and_finish",
 ]
 
 
@@ -55,15 +57,15 @@ def phase_full_finish(state: LocalRunState) -> int:
 
     log.rule("FINALIZE (real)")
     run_finalize_manifest(runner, state, docs_dir, out_dir)
-    _run_drift_check(
+    run_drift_check(
         log, runner, repo_path, state.manifest, out_dir, args, state.signals_path
     )
-    _artifact_inventory(log, out_dir)
+    artifact_inventory(log, out_dir)
     if args.docs_in_target_repo:
         log("")
         log(f"  plus the fourteen docs written into {docs_dir}")
 
-    return _write_certification_and_finish(
+    return write_certification_and_finish(
         log,
         runner,
         state.profile,

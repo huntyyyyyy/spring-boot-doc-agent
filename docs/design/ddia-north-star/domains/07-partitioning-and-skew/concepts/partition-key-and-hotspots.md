@@ -6,8 +6,8 @@ tags: [partition, skew, hotspot, key]
 epub_anchors:
   - { chapter: 7, title: "Partitioning of Key-Value Data" }
   - { chapter: 7, title: "Partitioning and Replication" }
-related: [secondary-indexes-cross-partition, rel-partition-bounds-fanout, maintainability-operability-evolvability, ch07]
-last_refined: 2026-07-30
+related: [secondary-indexes-cross-partition, rel-partition-bounds-fanout, maintainability-operability-evolvability, ch07, effective-remedies]
+last_refined: 2026-08-09
 path: domains/07-partitioning-and-skew/concepts/partition-key-and-hotspots.md
 
 ---
@@ -57,6 +57,13 @@ The partition key decides which shard owns a record; a bad key creates permanent
 ## Anti-patterns seen
 
 - Preflight that measured only Stage-1 after cross-group edges landed, under-stating Stage-4 load (adoption L2).
+
+## Effective remedies
+
+- **Primary:** `fitness-function` on measured bounds + refuse threshold band-aids.
+- **Embodied:** Stage-1 slice stats vs Stage-4 upper_bound honesty; no broadcast reintroduction.
+- **Accept:** hotspots fixed by key/design change or Explicit Defer — not silent warn-threshold raises.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

@@ -3,8 +3,8 @@ id: rel-partition-bounds-fanout
 kind: relationship
 completeness: operational
 tags: [relationship, partition, fanout, capacity]
-related: [partition-key-and-hotspots, secondary-indexes-cross-partition, claims-and-status-drift, ch07]
-last_refined: 2026-07-30
+related: [partition-key-and-hotspots, secondary-indexes-cross-partition, claims-and-status-drift, ch07, effective-remedies]
+last_refined: 2026-08-09
 path: domains/07-partitioning-and-skew/relationships/partition-bounds-fanout.md
 
 ---
@@ -60,6 +60,12 @@ Measuring only Stage-1 after partitioned edges under-states Stage-4. Raising `--
 ## Repo path witness
 
 - [Repo] `src/doc_engine/tools/capacity_preflight.py`
+
+## Effective remedies
+
+- **Primary:** `fitness-function` on measured Stage-1/Stage-4 bounds + `sensor-ledger-spec` for hotspot classes — fix keys/design, not warn thresholds alone.
+- **Accept:** bound changes cite measurement SoR and Explicit Defer if relaxing.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 

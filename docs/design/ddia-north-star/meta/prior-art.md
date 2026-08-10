@@ -2,7 +2,7 @@
 
 Evidence log for external patterns considered while building this north-star and related gates. Not a scrape of deepwiki.com (Tier C). Prefer primary sources (papers, repo READMEs, RFCs).
 
-**Last refined:** 2026-07-30.
+**Last refined:** 2026-08-09.
 
 ## How to read
 
@@ -41,6 +41,18 @@ Add a row when a wave cites arXiv / GitHub / standards. Do not invent citations.
 | Source | Took | Declined | Why |
 |--------|------|----------|-----|
 | Separate precision (FP ratchet) vs recall baselines | `dev-fp-ratchet-separate-from-recall`; hermetic negatives | Inventing client-named recall corpora | No licensed corpus; would fake confidence |
+
+## Concern → remedy mechanisms (Wave SOL / 2026-08-09)
+
+| Source | Took | Declined | Why |
+|--------|------|----------|-----|
+| Ford evolutionary architecture / fitness functions; ArchUnit-style rules-as-tests | `fitness-function` mechanism; G2 AST witness; tach cycles; depth gate | Shipping ArchUnit/Java or dual architecture linters | Wrong stack; pytest fitness already bites |
+| Outbox / CDC single-write + derive; arXiv 2608.00501 | `single-write-derive`; policy **16-A** oracle vs climb | Treating every log as a message bus | Pattern transfer to artifacts/APIs only |
+| Feathers characterization tests; 2026 agent-refactor practice | `characterization-net` before E-COH reshape | “Fix while extracting” without a net | Agents amplify blast radius |
+| Mutmut / metamorphic adequacy / E-QA SMS·MC | `adequacy-witness` as gate witness class | Mutation or Cover% as fail_under substitute | Cover% necessary≠sufficient |
+| E-STK0 / react-doctor stalker pattern | `sensor-ledger-spec` | Watch agent as silent tip fixer | Spec gate stays human |
+
+Research SoR: `docs/research/process/23-concern-to-solution-remedies-2026.md`. Catalog companion: [effective-remedies.md](effective-remedies.md).
 
 ## Intentionally not researched yet
 

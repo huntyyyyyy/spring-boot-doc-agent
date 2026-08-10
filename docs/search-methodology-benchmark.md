@@ -13,13 +13,14 @@ Recorded expectations for `tests/doc_engine/test_search_methodology.py`. The goa
 | Java sources present | Glob / filesystem | At least one `.java` file under fixture |
 | Argument-bearing annotations | `ast-grep -p '@Table($$$)'` or `@Entity($$$)` | Non-empty match set on fixture |
 | `@EntityScan` regression doc | `Misc.java` prose guard | Documents regex false-positive; scanner uses ast-grep rules |
-| Claude hook policy | `deny_text_search.decide(Grep)` | Denied |
+| Claude hook policy | `deny_text_search.decide(Grep)` | **Allowed** (no-op allow; prefer ast-grep soft guidance) |
 | ast-grep via Bash | `deny_text_search.decide(Bash, ast-grep ...)` | Allowed |
+| ripgrep via Bash | `deny_text_search.decide(Bash, rg ...)` | Allowed |
 
 ## Agent playbook
 
-See [`adapters/claude/SEARCH.md`](../adapters/claude/SEARCH.md) — artifact query first when Stage-0 outputs exist, then ast-grep for live structural claims.
+See [`adapters/claude/SEARCH.md`](../adapters/claude/SEARCH.md) — artifact query first when Stage-0 outputs exist, then ast-grep for live structural claims; `rg` OK for inventory/prose.
 
-## Why not grep
+## Why prefer ast-grep over grep for citations
 
-Text grep matches `@Entity` inside comments/strings and cannot distinguish `@EntityScan` from `@Entity` reliably — see README drift section and `CONSTRAINTS.md` precision tradeoffs.
+Text grep matches `@Entity` inside comments/strings and cannot distinguish `@EntityScan` from `@Entity` reliably — see README drift section and `CONSTRAINTS.md` precision tradeoffs. Ripgrep remains useful for inventory; re-verify structural claims with ast-grep before citing.

@@ -6,8 +6,8 @@ tags: [replication, lww, conflict, lag]
 epub_anchors:
   - { chapter: 6, title: "Last write wins (discarding concurrent writes)" }
   - { chapter: 6, title: "Problems with Replication Lag" }
-related: [sor-vs-derived, consistency-and-consensus-lite, choosing-sor-vs-view]
-last_refined: 2026-07-30
+related: [sor-vs-derived, consistency-and-consensus-lite, choosing-sor-vs-view, effective-remedies]
+last_refined: 2026-08-09
 path: domains/03-replication-and-conflicts/concepts/replication-lag-and-lww.md
 
 ---
@@ -60,6 +60,13 @@ Async copies introduce lag anomalies; resolving conflicts by “latest timestamp
 ## Anti-patterns seen
 
 - Pre-B2.5 live cert merge stamped `generative_executor: live` without deriving stages.
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` — eliminate dual write; fold from facts, never silent LWW.
+- **Embodied:** certification fold (B2.5); one tip writer.
+- **Accept:** concurrent writers need an explicit fold rule or a single SoR — LWW is Refuse for integrity domains.
+- **Research:** SOL3 in `docs/research/process/23-concern-to-solution-remedies-2026.md`.
 
 ## See also
 

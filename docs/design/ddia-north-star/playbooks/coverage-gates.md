@@ -3,8 +3,8 @@ id: coverage-gates
 kind: playbook
 completeness: operational
 tags: [coverage, semgrep, ratchet, fixtures]
-related: [materialized-views-and-caches, trust-but-verify-and-auditability, batch-vs-stream-derived-state]
-last_refined: 2026-07-30
+related: [materialized-views-and-caches, trust-but-verify-and-auditability, batch-vs-stream-derived-state, effective-remedies]
+last_refined: 2026-08-09
 path: playbooks/coverage-gates.md
 
 ---
@@ -41,6 +41,13 @@ Keep three measurements separate over one ruleset so CI stays hermetic and polar
 
 - Semgrep: `semgrep_rule_fixtures/` + `semgrep_rule_fixtures_negative/` + `semgrep_rule_fp_baseline.json`.
 - Stage-0 vocabulary coverage: `rule_coverage.py` + `scripts/fixtures/spring_signals/` (CodeQL denominator).
+
+## Effective remedies
+
+- **Primary:** `adequacy-witness` with **separated polarities**; Cover% necessary≠sufficient (SOL4).
+- **Embodied:** positive fixtures, FP baseline, metamorphic corpus, mutmut advisory.
+- **Accept:** rule/gate change ships matching witness; never invent client corpora as SoR.
+- **Research:** `docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md`.
 
 ## See also
 

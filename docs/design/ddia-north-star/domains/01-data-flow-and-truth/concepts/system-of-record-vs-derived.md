@@ -5,8 +5,8 @@ completeness: operational
 tags: [sor, derived, redundancy, cache, index]
 epub_anchors:
   - { chapter: 1, fragment: sec_introduction_derived, title: "Systems of Record and Derived Data" }
-related: [materialized-views-and-caches, trust-but-verify-and-auditability, choosing-sor-vs-view, rel-sor-feeds-views, dev-certification-derived-view, dev-coverage-denominator-codeql]
-last_refined: 2026-07-30
+related: [materialized-views-and-caches, trust-but-verify-and-auditability, choosing-sor-vs-view, rel-sor-feeds-views, dev-certification-derived-view, dev-coverage-denominator-codeql, effective-remedies]
+last_refined: 2026-08-09
 path: domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
 
 ---
@@ -59,6 +59,13 @@ The system of record holds each fact once as the canonical source; derived data 
 
 - `rule_coverage` docs claimed `rule_fixtures/` while runtime reads `scripts/fixtures/spring_signals/` + CodeQL ids.
 - STATUS “Next engineering” lagging after B1–B5 landed on the queue.
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` — one authoritative writer; views recompute ([meta/effective-remedies.md](../../../meta/effective-remedies.md)).
+- **Embodied:** oracle `coverage.xml` vs climb XML (**16-A**); certification as derived fold.
+- **Accept:** Spec names SoR|derived for each new artifact; refuse a second authoritative API.
+- **Research:** `docs/research/process/23-concern-to-solution-remedies-2026.md` (SOL3).
 
 ## See also
 

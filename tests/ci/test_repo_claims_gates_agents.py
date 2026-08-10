@@ -74,12 +74,9 @@ class TestGateHonesty(TreeCase):
         self.assertEqual(self.run_check(), 0)
 
 class TestAgentSearchTooling(TreeCase):
-    """Check F. Each test names the one property it defends, and every one
-    is run in both directions -- the arrangement that passes and the single
-    mutation that must turn it red."""
+    """Check F. Bash stays scoped; network denies required; text search OK."""
 
     SCOPED = ["Bash(ast-grep run:*)"]
-    DENIES = ["Bash(grep:*)", "Bash(rg:*)"]
     NETWORK = ["Bash(curl:*)", "Bash(wget:*)", "Bash(git clone:*)"]
 
     def agent(self, name: str, tools: str) -> None:
@@ -100,54 +97,50 @@ class TestAgentSearchTooling(TreeCase):
         self.agent("writer.md", "Read, Glob, Write")
         self.assertEqual(self.run_check(), 0)
 
-    def test_an_agent_declaring_grep_fails(self) -> None:
+    def test_an_agent_declaring_grep_passes(self) -> None:
+        """Grep tool is allowed after the 2026-08-09 ripgrep allow lift."""
         self.agent("writer.md", "Read, Grep, Glob, Write")
-        self.assertEqual(self.run_check(), 1)
+        self.assertEqual(self.run_check(), 0)
 
     def test_scoped_bash_grant_passes(self) -> None:
         self.agent("writer.md", "Read, Glob, Write, Bash")
-        self.settings(self.SCOPED, self.DENIES + self.NETWORK)
+        self.settings(self.SCOPED, self.NETWORK)
         self.assertEqual(self.run_check(), 0)
 
     def test_bash_without_a_scoped_allowlist_entry_fails(self) -> None:
         """A subagent's tools: field cannot scope Bash, so settings.json is
         the only thing standing between `Bash` and a general shell."""
         self.agent("writer.md", "Read, Glob, Write, Bash")
-        self.settings(["Bash(git status:*)"], self.DENIES + self.NETWORK)
+        self.settings(["Bash(git status:*)"], self.NETWORK)
         self.assertEqual(self.run_check(), 1)
 
-    def test_bash_without_text_search_denies_fails(self) -> None:
-        """Removing the Grep tool buys nothing if the same agent can shell
-        out to grep instead."""
+    def test_bash_without_text_search_denies_still_passes(self) -> None:
+        """TEXT_SEARCH_DENIES is empty — missing grep/rg denies is not a fail."""
         self.agent("writer.md", "Read, Glob, Write, Bash")
         self.settings(self.SCOPED, self.NETWORK)
-        self.assertEqual(self.run_check(), 1)
+        self.assertEqual(self.run_check(), 0)
+        self.assertEqual(crc.TEXT_SEARCH_DENIES, ())
 
     def test_bash_without_network_denies_fails(self) -> None:
-        """Grep/rg denied is not enough on its own -- an agent with Bash and
-        WebFetch can still reach the network directly instead of through
-        WebFetch."""
+        """Network egress denies remain mandatory when Bash is granted."""
         self.agent("writer.md", "Read, Glob, Write, Bash")
-        self.settings(self.SCOPED, self.DENIES)  # grep/rg present, network absent
+        self.settings(self.SCOPED, [])  # network absent
         self.assertEqual(self.run_check(), 1)
 
-    def test_scoped_bash_grant_with_full_denies_passes(self) -> None:
+    def test_scoped_bash_grant_with_network_denies_passes(self) -> None:
         self.agent("writer.md", "Read, Glob, Write, Bash")
-        self.settings(self.SCOPED, self.DENIES + self.NETWORK)
+        self.settings(self.SCOPED, self.NETWORK)
         self.assertEqual(self.run_check(), 0)
 
-    def test_a_dot_claude_agent_is_checked_too(self) -> None:
+    def test_a_dot_claude_agent_with_grep_passes(self) -> None:
         folder = self.dir / ".claude" / "agents"
         folder.mkdir(parents=True)
         (folder / "local.md").write_text(
             "---\nname: local\ndescription: d\ntools: Read, Grep\n---\n\nBody.\n",
             encoding="utf-8")
-        self.assertEqual(self.run_check(), 1)
+        self.assertEqual(self.run_check(), 0)
 
     def test_grep_in_prose_is_not_a_violation(self) -> None:
-        """The check reads the frontmatter tools: field, not the body. An
-        agent may legitimately mention the word while describing input it
-        was handed -- gap-analyzer.md does exactly that."""
         self.agent("writer.md", "Read, Glob, Write")
         (self.dir / "agents" / "writer.md").write_text(
             "---\nname: writer\ndescription: d\ntools: Read, Glob, Write\n---\n\n"

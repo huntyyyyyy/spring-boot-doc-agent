@@ -385,12 +385,17 @@ def size_advisories(baseline: Dict[str, object], current: Dict[str, object]) -> 
 
 
 def _hard_statement_scope(key: str) -> bool:
-    """Product + tests only; scripts/ tracked in baseline but not hard-failed here.
+    """Hard-fail product, tests, and slash-free unit-measure keys.
 
-    size-ratchet owns package roots under ``src/``; scripts statement debt is G6
-    (policy bump without Verify pack) — remediate under E-COH / backlog, not by
-    grandfathering product modules.
+    Repo-relative ``scripts/`` keys stay measured (G6 debt) but are not
+    hard-failed here — size-ratchet owns ``src/`` package roots; scripts
+    remediation is a separate stream, not silent product grandfathering.
+    Flat keys (``mod.py::f``) come from scripts-only / unit ``measure_tree``
+    and must exercise the ceiling (HOT5).
     """
+    path_key = key.split("::", 1)[0]
+    if "/" not in path_key:
+        return True
     return key.startswith("src/") or key.startswith("tests/")
 
 

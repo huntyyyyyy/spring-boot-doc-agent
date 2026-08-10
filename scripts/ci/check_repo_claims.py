@@ -11,7 +11,7 @@ Usage:
 
 Checks: derived blocks recompute, verify: predicates hold, references resolve,
 every test suite is wired into CI, no CI step is named as a gate it cannot fail,
-agents cannot regain Grep/raw network via Bash, and tracked markdown is UTF-8.
+agents keep Bash scoped and cannot raw-network via Bash, and tracked markdown is UTF-8.
 Claims are read from a registry of corpora (CLAIM_CORPORA) -- steering-prompt
 frontmatter and CONSTRAINTS.md's bracket tags today.
 
@@ -69,7 +69,7 @@ WHAT IS CHECKED
   C verify: predicates       — a steering prompt's status vs. decidable facts
   D CI suite coverage        — a test suite that CI never runs
   E gates that can fail      — an ENFORCE=False script named as if it blocks
-  F agent search / network   — Grep tool or raw curl/wget/git-clone via Bash
+  F agent Bash scope / network — scoped ast-grep allow + curl/wget/git-clone deny
   G UTF-8 text contract      — tracked markdown must be valid UTF-8 (no crash)
 
 WHAT IS NOT CHECKED, DELIBERATELY
@@ -1581,23 +1581,19 @@ def check_gate_honesty(root: Path) -> List[Finding]:
 
 
 # --------------------------------------------------------------------------
-# Check F -- agents search structurally and reach the network only through
-# sanctioned tools, and the Bash grant that lets them stays scoped
+# Check F -- Bash grants stay scoped to ast-grep; network only via WebFetch
 # --------------------------------------------------------------------------
 
-# The tool name an agent must not declare, and the allowlist prefix that keeps
-# a Bash grant from being a general shell. Literals, not configuration: a
-# document may select among behaviours defined here, never supply one.
-FORBIDDEN_AGENT_TOOL = "Grep"
+# Text search (Grep / rg / grep) is allowed (2026-08-09). Prefer ast-grep for
+# structural code citations (soft guidance). Empty tuple = no settings deny
+# required for text searchers. Network egress denials remain mandatory.
+FORBIDDEN_AGENT_TOOL = ""  # empty: Grep tool may be declared
 SCOPED_BASH_PREFIX = "Bash(ast-grep"
-TEXT_SEARCH_DENIES = ("Bash(grep:*)", "Bash(rg:*)")
+TEXT_SEARCH_DENIES: tuple[str, ...] = ()
 
-# Network egress analog of TEXT_SEARCH_DENIES: reaching the outside world via
-# a raw shell command instead of the WebFetch tool bypasses the same
-# tiering/citation discipline that mandating ast-grep over grep protects on
-# the search side. `git clone` is denied by subcommand, not bare `git` --
-# `Bash(git status:*)`/`diff`/`log`/`ls-files` are already legitimately
-# allowed in .claude/settings.json and must keep working.
+# Reaching the outside world via a raw shell command instead of WebFetch
+# bypasses tiering/citation discipline. `git clone` is denied by subcommand,
+# not bare `git` -- status/diff/log/ls-files stay allowed in settings.json.
 NETWORK_EGRESS_DENIES = ("Bash(curl:*)", "Bash(wget:*)", "Bash(git clone:*)")
 
 
@@ -1623,20 +1619,19 @@ def _declared_tools(path: Path) -> List[str]:
 
 
 def check_agent_search_tooling(root: Path) -> List[Finding]:
-    """Agents must search structurally (ast-grep), not textually, and must
-    reach the network only through WebFetch, not a raw shell command.
+    """Bash grants stay scoped; network egress only through WebFetch.
 
-    Two failure modes, because they are genuinely different. An agent that
-    declares Grep is searching text, which matches inside strings and comments
-    and is how a citation ends up anchored to a line that does not support the
-    claim. An agent that declares Bash without a scoped allowlist entry has a
-    general shell instead -- and a subagent's `tools:` field accepts bare tool
-    names only, so settings.json is the ONLY place that scoping can live. The
-    network case is the same shape one layer out: an agent with both Bash and
-    WebFetch (software-architect-and-testing is the only one today) can fetch
-    a third party (arXiv, GitHub, deepwiki.com) via curl/wget/git clone
-    instead of WebFetch, bypassing the tiering/citation discipline that tool
-    is meant to enforce."""
+    Text search (Grep / rg) is allowed. Soft guidance still prefers ast-grep
+    for structural code citations (CLAUDE.md / SEARCH.md). Check F enforces:
+
+    1. Agents that declare Bash must have a scoped ``Bash(ast-grep…)`` allow
+       entry in settings.json (subagent ``tools:`` cannot express the scope).
+    2. When any agent declares Bash, ``NETWORK_EGRESS_DENIES`` must be present
+       so curl/wget/git-clone cannot bypass WebFetch.
+
+    ``TEXT_SEARCH_DENIES`` is empty after the 2026-08-09 allow lift; the loop
+    remains so a future hard-deny can be re-selected without reshaping the
+    checker. ``FORBIDDEN_AGENT_TOOL`` empty means Grep may be declared."""
     findings: List[Finding] = []
     settings_path = root / ".claude" / "settings.json"
     try:
@@ -1651,13 +1646,11 @@ def check_agent_search_tooling(root: Path) -> List[Finding]:
     for path in _agent_definitions(root):
         rel = path.relative_to(root).as_posix()
         tools = _declared_tools(path)
-        if FORBIDDEN_AGENT_TOOL in tools:
+        if FORBIDDEN_AGENT_TOOL and FORBIDDEN_AGENT_TOOL in tools:
             findings.append(Finding(
                 "F", rel, 1,
-                f"declares the {FORBIDDEN_AGENT_TOOL} tool. Agents search "
-                f"structurally: drop it and use ast-grep via a scoped Bash "
-                f"grant. Text search matches inside strings and comments, "
-                f"which mis-anchors citations.",
+                f"declares the {FORBIDDEN_AGENT_TOOL} tool (forbidden by "
+                f"FORBIDDEN_AGENT_TOOL).",
                 f"F:grep:{path.name}"))
         if "Bash" in tools and not has_scoped_ast_grep:
             findings.append(Finding(
@@ -1673,9 +1666,7 @@ def check_agent_search_tooling(root: Path) -> List[Finding]:
             if required not in deny:
                 findings.append(Finding(
                     "F", ".claude/settings.json", 1,
-                    f"an agent declares Bash but {required!r} is not denied. "
-                    f"Removing the Grep tool accomplishes nothing if the same "
-                    f"agent can shell out to text search instead.",
+                    f"an agent declares Bash but {required!r} is not denied.",
                     f"F:missing-deny:{required}"))
         for required in NETWORK_EGRESS_DENIES:
             if required not in deny:
@@ -1685,8 +1676,7 @@ def check_agent_search_tooling(root: Path) -> List[Finding]:
                     f"An agent with both Bash and WebFetch (today, only "
                     f"software-architect-and-testing) can reach the network "
                     f"through a raw shell command instead, bypassing "
-                    f"WebFetch's tiering/citation discipline the same way an "
-                    f"unscoped Bash bypasses the ast-grep mandate.",
+                    f"WebFetch's tiering/citation discipline.",
                     f"F:missing-deny:{required}"))
     return findings
 

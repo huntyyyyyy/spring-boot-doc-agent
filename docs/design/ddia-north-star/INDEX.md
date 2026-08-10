@@ -1,14 +1,15 @@
 # INDEX — multi-axis router
 
-Load [README.md](README.md) first. Prefer a **domain**, then one page. Cite its `id`. Check [deviations/](deviations/) when departing from Core claims.
+Load [README.md](README.md) first. Prefer a **domain**, then one page. Cite its `id` **and** a remedy from [meta/effective-remedies.md](meta/effective-remedies.md). Check [deviations/](deviations/) when departing from Core claims.
 
 ## By level (start here if unsure)
 
 | Level | Start |
 |-------|--------|
 | Product / direction | [README.md](README.md) + [meta/usage-levels.md](meta/usage-levels.md) |
+| Concern → **remedy** | [meta/effective-remedies.md](meta/effective-remedies.md) (required for Spec Accept) |
 | Domain | [domains/](domains/) (`01`…`10`) |
-| Subdomain / concept | domain README → one `concepts/` page |
+| Subdomain / concept | domain README → one `concepts/` page → its **Effective remedies** |
 | Relationship | domain `relationships/` or playbook |
 | Control / gate | [playbooks/](playbooks/) |
 | Upstream diagnosis | [deviations/](deviations/) + `rel-conflict-vs-recompute` |

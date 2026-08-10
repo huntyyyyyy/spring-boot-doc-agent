@@ -51,19 +51,11 @@ class FormattingIsMeaningPreservingTest(CorpusCase):
                                     f"{name} moved the evidence set")
 
     def test_wrapping_annotation_args_still_moves_the_set(self) -> None:
-        """A ratchet on a known defect, asserted in the direction that is
-        true today so it fails in BOTH directions.
+        """Ratchet on a known first-line match defect (CONSTRAINTS known tradeoff).
 
-        CONSTRAINTS.md's "Known precision tradeoffs" records this as flagged
-        and unresolved: the stored `match` is only the matched node's first
-        line, so splitting `@GetMapping("/x")` across lines leaves
-        `@GetMapping(` behind and the member no longer compares equal. This
-        suite reproduced it independently, from the scanner side rather than
-        the drift-comparator side.
-
-        **If this test starts failing, the defect was fixed.** Delete it and
-        fold wrap_annotation_args back into the loop above -- do not adjust
-        it to keep passing.
+        Asserted so it fails in both directions: empty residue means the defect
+        was fixed — then delete this test and fold wrap_annotation_args into
+        the loop above (HOT7). Confirmed 2026-08-09: still moves the set.
         """
         residue = sd.classify(
             sd.delta(meta.BASE_SET, sd.signals_set(self._apply(self.KNOWN_MOVES_THE_SET))),

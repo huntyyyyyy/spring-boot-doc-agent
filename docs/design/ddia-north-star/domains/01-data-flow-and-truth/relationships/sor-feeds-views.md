@@ -3,8 +3,8 @@ id: rel-sor-feeds-views
 kind: relationship
 completeness: operational
 tags: [relationship, sor, derived]
-related: [sor-vs-derived, materialized-views-and-caches, choosing-sor-vs-view, dev-certification-derived-view]
-last_refined: 2026-07-30
+related: [sor-vs-derived, materialized-views-and-caches, choosing-sor-vs-view, dev-certification-derived-view, effective-remedies]
+last_refined: 2026-08-09
 path: domains/01-data-flow-and-truth/relationships/sor-feeds-views.md
 
 ---
@@ -50,6 +50,12 @@ Dual writers create silent drift; LWW hides which fact was true (`replication-la
 ## Repo path witness
 
 - [Repo] `domains/01-data-flow-and-truth/relationships/sor-feeds-views.md`
+
+## Effective remedies
+
+- **Primary:** `single-write-derive` — edge SoR→view is unidirectional.
+- **Accept:** view PR names SoR inputs + rebuild command; reverse write is Refuse.
+- **Catalog:** [meta/effective-remedies.md](../../../meta/effective-remedies.md).
 
 ## See also
 
