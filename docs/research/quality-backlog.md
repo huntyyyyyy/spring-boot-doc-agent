@@ -552,3 +552,6 @@ Research: [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md)�
 
 Research: [`26`](process/26-agent-context-markdown-bloat-2026.md) · [`27`](process/27-agent-context-repo-discernment-2026.md) · [`28`](process/28-agent-context-algorithm-first-2026.md). **Embody** algorithm+Accept; **Adopt** observation/step masking we own; **Refuse** ★-products, token-prune of actions, CompactionRL-as-SoT, summary-as-SoR.
 
+
+
+<!-- combined: includes #117 RAG/DS/CLI research -->

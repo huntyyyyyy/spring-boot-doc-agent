@@ -10,7 +10,7 @@ related:
   - docs/research/process/04-implementation-frameworks.md
   - docs/research/process/28-local-stalker-telemetry-etl-2026.md
   - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+  - docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/process/local-grading-pack.md
   - src/doc_engine/query/mcp_tools.py

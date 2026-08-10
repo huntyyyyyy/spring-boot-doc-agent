@@ -5,6 +5,8 @@ research date: 2026-08-10
 claim tiers: Evidenced / Confirmed / Unknown
 related:
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+  - docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
   - docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
   - docs/research/process/25-tip-grounding-mcp-2026.md
   - docs/process/local-grading-pack.md
@@ -24,7 +26,9 @@ spec_gate: DRAFT E-OAS0 (2026-08-10) — OAS1–OAS16 pending Approve
 
 > **DRAFT — awaiting Approve of OAS1–OAS16.**
 >
-> Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`](../research/process/37-operator-agent-surface-cli-mcp-rag-2026.md).
+> Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`](../research/process/37-operator-agent-surface-cli-mcp-rag-2026.md);
+> problem inventory [`39-…`](../research/process/39-cli-operator-problem-classes-2026-08-10.md);
+> DX/a11y pads [`38-…`](../research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md).
 
 | Field | Value |
 | --- | --- |
