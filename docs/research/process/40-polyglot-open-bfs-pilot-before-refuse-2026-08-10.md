@@ -6,6 +6,7 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Python 3.10+ CLI doc-engine (Stage-0 · MCP · later RAG)
 related:
   - docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
+  - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
   - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
   - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
