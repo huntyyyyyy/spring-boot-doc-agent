@@ -28,11 +28,11 @@ Whole words — `GLOSSARY.md`.
 | D6 | System of Record matrix Accepted | `sor-derived-matrix.md` | **PARTIAL** | Draft; OQ-02 blocks |
 | D7 | Ports + Interface Control Document stubs Accepted | `PORTS.md`, `icd/*` | **PARTIAL** | Schemas drafted; no Accept; stability Spikes missing |
 | D8 | C4 Context + Container current | `07-system-design/c4/C4-BRIEF-CONFIDENCE.md` (+ legacy `docs/c4/`) | **PARTIAL** | Draft + confidence scores; not human Accepted |
-| D8b | Model Context Protocol transport requirements gathered | `icd/mcp-tools.md` + shallow deep-dive | **PARTIAL** | `2026-07-28` stateless/Streamable HTTP now noted; JSON Schemas/fixtures still missing |
+| D8b | Model Context Protocol transport requirements gathered | `icd/mcp-tools.md` + `decisions/mcp-decision-matrix.md` + shallow deep-dive | **PARTIAL** | Six-vector matrix + usage cases UC-MCP-01…08; JSON Schemas/fixtures still missing |
 | D9 | Architecture Decision Records / brief Accepted | `ARCHITECTURE_BRIEF.md` | **PARTIAL** | Draft; leaders table needs refresh after D0 audit |
 | D10 | Receipt schema Accepted + Spike on freshness keys | `icd/receipt.schema.json` | **PARTIAL** | Draft; OQ-05; Proof-or-Stop public engine **not found** as a genuine repo |
 | D10b | Artifact-anchored claim specification + schema Accepted | `claim-memory/`, `ea-graph-claims.schema.json` | **PARTIAL** + **research gap** | Spec text exists; **zero genuine public implementations of this algorithm** found; Pilot/Spike required before “Must implement” can be honest |
-| D10c | Stateful Tool-Enabled Agentic Deployment constraints in Model Context Protocol Interface Control Document | `stead/`, `mcp-tools.md` | **PARTIAL** + **research gap** | ST-1…5 + `2026-07-28` transport amended; still no equivariance-wrapper field Adopt; schemas/fixtures missing |
+| D10c | Stateful Tool-Enabled Agentic Deployment constraints in Model Context Protocol Interface Control Document | `stead/`, `mcp-tools.md`, `mcp-decision-matrix.md` | **PARTIAL** + **research gap** | ST-1…5 + handles + reject classes in matrix; equivariance wrap Spike; schemas/fixtures missing |
 | D11 | Verification and Validation Accept methods + real plants | `vv-plan/` | **PARTIAL** | Fixture *names* only; no plants; no measured Accept |
 | D12 | Human wave Approve | `signoff/SIGNOFF_LOG.md` | **FAIL** | All rows pending |
 

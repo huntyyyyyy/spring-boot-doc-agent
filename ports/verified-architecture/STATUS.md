@@ -32,9 +32,10 @@ Definition of Ready row **D0 = FAIL**.
 
 ## Single next task
 
-1. Close MCP ICD against `2026-07-28` (handles, headers, reject codes) — in progress in `icd/mcp-tools.md`.
+1. MCP: decision matrix + ICD usage cases landed (`decisions/mcp-decision-matrix.md`, ADR-0011) — still need per-tool JSON Schema + snapshot-mint tool named.
 2. Add `lock-ir.schema.json` + receipt tamper enum + claim Pilot charter.
 3. Continue Skill `paper-digest` on Must papers; do not mark research PASS early.
+4. Fill Decision Matrices for lock Intermediate Representation and receipts when those schemas land (same standard).
 
 ## Do not do next
 

@@ -14,3 +14,7 @@ Status vocabulary: Proposed · Accepted · Deprecated · Superseded (by ADR-xxxx
 
 C4 diagrams **must cite** ADR IDs for structural choices. Without them, diagrams
 are sketches only.
+
+For load-bearing tool / procurement / protocol choices, pair the ADR with a
+filled **Decision Matrix** (`docs/standards/decision-framework.md`) so usage
+cases, code loci, and rejected alternatives are explicit — not assertion-only.

@@ -28,6 +28,7 @@ appear in *file paths* only; in running text, expand them.
 | command-line interface | CLI |
 | Architecture Tradeoff Analysis Method | ATAM |
 | Architecture Decision Record | ADR |
+| Decision Matrix / Selection Taxonomy / Decision Framework | bare “matrix” without saying which |
 | First-Order Computation Tree Logic | FO-CTL |
 | Stateful Tool-Enabled Agentic Deployment | STEAD |
 | Artifact-Anchored Verification Memory (paper title *EA-Graph*) | EA-Graph alone |

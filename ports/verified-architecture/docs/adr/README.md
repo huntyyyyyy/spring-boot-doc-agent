@@ -20,3 +20,6 @@ Nygard format. Polyglot-scoped — no Python-majority engine assumption.
 | [ADR-0008](adr-0008-c4-before-code.md) | C4 + ADRs before product code | Proposed |
 | [ADR-0009](adr-0009-go-chassis-daemon.md) | Go owns watch/reindex chassis | Proposed |
 | [ADR-0010](adr-0010-typescript-ide-mcp.md) | TypeScript owns IDE/MCP presentation | Proposed |
+| [ADR-0011](adr-0011-mcp-protocol-and-tool-surface.md) | MCP `2026-07-28` + primitive tools | Proposed |
+
+Decision matrices (six-vector Selection Taxonomy): `07-system-design/decisions/`.

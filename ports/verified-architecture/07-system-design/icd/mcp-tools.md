@@ -1,62 +1,107 @@
 ---
-title: MCP / CLI tools ICD — primitives + STEAD + 2026-07-28 transport
-status: DRAFT — STALE vs MCP 2026-07-28 until amended
+title: MCP / CLI tools ICD — primitives, STEAD, 2026-07-28, usage cases
+status: DRAFT
 date: '2026-08-10'
+decision_matrix: 07-system-design/decisions/mcp-decision-matrix.md
+adr: docs/adr/adr-0011-mcp-protocol-and-tool-surface.md
 evidence:
   - arXiv:2608.03609
   - arXiv:2607.08028
-  - arXiv:2606.13663
   - https://blog.modelcontextprotocol.io/posts/2026-07-28/
 ---
 
 # ICD-MCP — primitive tools (wave-1)
 
-HyperTool-style composition blocks = **Could** later. MVP exposes **primitives**
-with schemas; harness is code-owned (Contracts 2607.08028).
+HyperTool-style composition = **Could** later. Minimum viable product exposes
+**primitives** with schemas; harness is code-owned (Contracts arXiv:2607.08028).
 
-## Transport requirement (NEW — was missing)
+**Decision record:** `decisions/mcp-decision-matrix.md` (what/when/how/who/where/why
++ usage cases + rejected alternatives). Do not edit tool semantics here without
+updating that matrix.
 
-**Normative remote dialect:** Model Context Protocol specification **`2026-07-28`**.
+## Transport (normative)
 
-| Requirement | Detail |
-| --- | --- |
-| Stateless core | No `initialize` handshake; no `Mcp-Session-Id` (SEP-2575, SEP-2567) |
-| Per-request `_meta` | Protocol version, client info, client capabilities on every call |
-| Streamable HTTP headers | `MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name` required; reject mismatch |
-| Discovery | Optional `server/discover` (not handshake) |
-| Application state | **Explicit handles as tool arguments** (`snapshot_id`, `lock_set_id`, …) — never hidden transport session |
-| List caching | Honor `ttlMs` / `cacheScope` on list/read results when present |
-| Deprecated | Roots, Sampling, Logging; legacy HTTP+SSE — do not design new features on them |
+**Remote dialect:** Model Context Protocol **`2026-07-28`**.
 
-Local **stdio** remains valid for IDE-embedded servers; behavior must still be
-**session-free at the protocol layer** (handles in args).
+| Requirement | Detail | Why over alternative |
+| --- | --- | --- |
+| Stateless core | No `initialize`; no `Mcp-Session-Id` | Session middleware breaks load-balanced hosts (SEP-2575/2567) |
+| Per-request `_meta` | Version, clientInfo, capabilities | Replaces handshake |
+| Streamable HTTP headers | `MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name` required | Gateway routing; reject mismatch |
+| Discovery | Optional `server/discover` | Not a session bootstrap |
+| Application state | Handles as **tool arguments** | Explicit > hidden transport state |
+| List caching | `ttlMs` / `cacheScope` when present | Tools are fixed → cacheable |
+| Deprecated | Roots, Sampling, Logging; legacy HTTP+SSE | Do not design new features on them |
 
-See `research/gaps/shallow-approvals-deep-dive-2026-08-10.md`.
+Local **stdio** remains the MVP transport for IDE-embedded servers; still
+**session-free** at the protocol layer.
 
 ## STEAD constraints (normative)
 
 See `08-verification/stead/STEAD_CONSTRAINTS.md` ST-1…5.
 
-- Entity parameters (`bean_id`, `symbol`, `edge_id`, `claim_id`, `file`) MUST
-  match ids present in the current snapshot or the call is rejected.
-- No free-text “bean name from the model” parameters.
-- Handles (`snapshot_id`, …) MUST be minted by prior tool results, not invented.
+- Entity parameters MUST be ids from the current snapshot — not free-text names.
+- Handles MUST be minted by prior tool results, not invented by the model.
 
 ## Tools
 
-| Tool | Args (typed) | Effect checkpoint |
+| Tool | Args (typed) | Effect checkpoint | Primary usage |
+| --- | --- | --- | --- |
+| `verify` | `target_root: path`, `lock_set_id: id` | receipt written; exit reflects result | UC-MCP-03 |
+| `resolve` | `injection_site_id: id`, `snapshot_id: id` | resolve_result; Unknown allowed | UC-MCP-02 |
+| `claim_withdraw` | `snapshot_id: id` | dispositions[] | UC-MCP-04 |
+| `locks_list` | `snapshot_id: id` (optional) | returns lock ids from git System of Record | UC-MCP-01 |
+
+### Planned code map (Implement later — Spec binding now)
+
+| Layer | Planned path | Port / role |
 | --- | --- | --- |
-| `verify` | `target_root: path`, `lock_set_id: id` | receipt written; exit code reflects result |
-| `resolve` | `injection_site_id: id`, `snapshot_id: id` | resolve_result schema; Unknown allowed |
-| `claim_withdraw` | `snapshot_id: id` | dispositions[] returned |
-| `locks_list` | `snapshot_id: id` (optional scope) | returns lock ids from git SoR |
+| MCP presentation | `packages/mcp-server/src/tools/*.ts` | ADR-0010 TypeScript |
+| Transport stdio | `packages/mcp-server/src/transport/stdio.ts` | UC-MCP-05 |
+| Transport HTTP | `packages/mcp-server/src/transport/streamable_http.ts` | UC-MCP-06 |
+| Reject harness | `packages/mcp-server/src/harness/reject.ts` | ST-5; UC-MCP-07 |
+| Engine | `crates/engine/` (Pilot) | `LockCheck`, `Resolver`, `ReceiptWriter`, `ClaimMemory` |
+| Schemas | `07-system-design/icd/*.schema.json` → copied into package at build | Single dialect |
+
+Until those packages exist, **this Interface Control Document + decision matrix
+are the System of Record** for tool behavior. Agents must not invent a second
+tool list in prompts.
+
+## Usage cases (summary)
+
+Full table: `decisions/mcp-decision-matrix.md`.
+
+| ID | One-line |
+| --- | --- |
+| UC-MCP-01 | IDE: list locks then verify → receipt path |
+| UC-MCP-02 | Agent: resolve one injection site with snapshot handle |
+| UC-MCP-03 | Agent: verify; only harness writes receipt |
+| UC-MCP-04 | After edit: claim withdraw → unprovable allowed |
+| UC-MCP-05 | CI: same tools over stdio |
+| UC-MCP-06 | Optional remote: Streamable HTTP headers |
+| UC-MCP-07 | Invented handle → reject |
+| UC-MCP-08 | Governance: audit matrix + ADR |
 
 ## Reject classes (harness)
 
-unknown_id · stale_receipt · llm_witness_forbidden · schema_invalid ·
-header_body_mismatch · unknown_handle · protocol_version_unsupported
+unknown_id · unknown_handle · expired_handle · stale_receipt ·
+llm_witness_forbidden · schema_invalid · header_body_mismatch ·
+protocol_version_unsupported · equivariance_reject (when wrap ships)
+
+## Chosen vs rejected (short)
+
+| Chosen | Rejected | Why |
+| --- | --- | --- |
+| Primitives + handles | Mega “architecture” tools | Effect checkpoints stay visible |
+| `2026-07-28` | Sessionful pre-July dialect | Normative Spec; concurrent hosts |
+| Typed entity ids | Free-text bean names | ST-1 / ST-5 failure mode |
+| Harness decides | Model stamps pass | Contracts / Aria-shaped loop |
+| stdio MVP + optional HTTP | Org SaaS session store | Local-first product shape |
 
 ## Still missing before Implement
 
-Per-tool JSON Schema files; effect-checkpoint fixtures; auth story if remote;
-migration note if any client still speaks pre-`2026-07-28`.
+- [ ] Per-tool JSON Schema 2020-12 files under `icd/mcp/`  
+- [ ] Effect-checkpoint fixtures (filesystem receipt postcondition)  
+- [ ] Explicit snapshot-mint tool (or document how `snapshot_id` is born)  
+- [ ] Auth story if remote HTTP ships  
+- [ ] Migration note if any client still speaks pre-`2026-07-28`

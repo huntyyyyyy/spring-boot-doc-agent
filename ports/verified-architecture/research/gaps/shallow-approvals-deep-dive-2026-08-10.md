@@ -266,7 +266,7 @@ Also still thin: DynamicMCPBench public code; Proof-or-Stop public engine; EA-Gr
 | G-R2 | Receipts | Offline tamper Accept suite | Verification and Validation |
 | G-E1 | Claim memory | Evidence enum + DISP vs claim disposition + completeness | D10b / QAS-N-07 |
 | G-E2 | Claim memory | Pilot invent Spike (0 public impls) | Honest Must |
-| G-M1 | Model Context Protocol | ICD already amended for `2026-07-28`; still need per-tool JSON Schema + handle inventory | D7 / D10c |
+| G-M1 | Model Context Protocol | Decision matrix + ICD usage cases landed; still need per-tool JSON Schema + snapshot-mint tool | D7 / D10c |
 | G-M2 | Model Context Protocol | Effect checkpoints / fixtures | Implement |
 | G-C1 | C4 | Accept Context+Container with MVP subset | D8 |
 | G-L1 | Lock Intermediate Representation | `lock-ir.schema.json` + fidelity matrix + no agent `update-todo` | open question 04 |
