@@ -573,6 +573,12 @@ entries:
   status: RESEARCH COMPLETE — Spec Draft (no kernel rewrite until Approve)
   date: '2026-08-10'
   epic: E-LIE0
+  related_count: 8
+- path: docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
+  title: E-LIE0 adversarial SE review — DDIA · SOLID · patterns · polyglot slate
+  status: RESEARCH COMPLETE — Spec companion (feeds E-LIE0 Design; no Implement)
+  date: '2026-08-10'
+  epic: E-LIE0
   related_count: 7
 - path: docs/research/quality-backlog.md
   title: Quality backlog — Active tip + queues

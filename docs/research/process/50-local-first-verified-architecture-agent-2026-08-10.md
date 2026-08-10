@@ -12,6 +12,7 @@ related:
   - docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
   - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
   - docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
+  - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
   - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
   - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
   - docs/research/quality-backlog.md
