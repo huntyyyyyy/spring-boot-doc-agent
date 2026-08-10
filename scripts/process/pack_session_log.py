@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Pack session-log history into ≤TARGET line shards with dated content slugs."""
+"""Pack session-log history into ≤TARGET line shards with dated content slugs.
+
+Run: ``python3 scripts/process/pack_session_log.py``
+(``--from-git HEAD:docs/process/session-log.md``, ``--index-only``, ``--dry-run``).
+"""
 
 from __future__ import annotations
 

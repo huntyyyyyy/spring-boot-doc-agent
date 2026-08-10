@@ -1,4 +1,7 @@
-"""Unit tests for session-log LOC packer (no nest rewrite)."""
+"""Unit tests for session-log LOC packer (no nest rewrite).
+
+Run: ``python3 -m pytest tests/ci/test_pack_session_log.py -q``.
+"""
 
 from __future__ import annotations
 
