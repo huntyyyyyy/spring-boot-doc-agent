@@ -468,7 +468,20 @@ Research: [`docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md`](st
 | P33.2 | `remeasure_ocs_floors.py` + campaign `astgrep_ocs_floors.yml` | **Done** (2026-08-10) | dry-run default; `--write` opt-in; `test_remeasure_ocs_floors.py` |
 | P33.3 | Live remeasure on operator checkout (Windows/VPN) | **In progress** | grading pack `docs/process/local-grading-pack.md` |
 | P33.4 | Align campaign ast-grep `path_prefix` with CodeQL class-level predicate; keep plant floor **35** (revert false 45) | **Done** (2026-08-10) | rule `not inside method_declaration`; expectations note |
-| P33.5 | Full `run-plant.sh ocs` + OpenAPI join + Messaging=0 evidence | Operator | P3/P4/D6 in grading pack |
+| P33.5 | Full `run-plant.sh ocs` + OpenAPI join + Messaging=0 evidence | Operator | P3 blocked until venv + Artifactory (see P34 live grade) |
+
+---
+
+## P34 — Operator/agent surface (CLI grade + MCP + structured retrieval) — Spec
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P34.0 | **E-OAS0 Spec:** approve **OAS1–OAS14** (RunContext ports; dual sinks; doctor fail-closed; Typer grade-only; Refuse rich/OTel/embedding SoTs; Embody Stage-0 packets) | **DRAFT** (2026-08-10) — pending human Approve | research `process/37-operator-agent-surface-cli-mcp-rag-2026.md` + design stub |
+| P34.1 | **E-OAS1 Implement:** grade surface (context + JSONL receipt + remediation) | Deferred | only after E-OAS0 Approve |
+| P34.2 | **E-OAS2** MCP parity envelopes / stderr structured events | Deferred | after OAS1; MCP SDK pin still Deferred (GND9) |
+| P34.3 | **E-OAS3** retrieval eval harness (campaign) | Optional | never embedding citation SoT |
+
+Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`](process/37-operator-agent-surface-cli-mcp-rag-2026.md). Design: [`docs/design/operator-agent-surface-design-2026-08-10.md`](../design/operator-agent-surface-design-2026-08-10.md). Related: E-UX0, E-GND0 (separate DRAFT), E-OCS0. **Embody** RunContext + dual sinks + Stage-0 packets; **Adopt** clig.dev + actionable errors + Typer-for-grade-only; **Refuse** rich CI SoT / OTel tip SoT / embedding citation SoT / MCP codegen.
 
 ---
 
