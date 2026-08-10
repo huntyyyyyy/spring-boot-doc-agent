@@ -232,9 +232,9 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** — reshape provisional tip modules under cohesion bar (design memo); one stream.  
 **Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
-**Spec draft (not Active tip):** **E-REPO0** — DDD repo-structure packet ([`21`](modularity/21-ddd-repository-structure-options-2026.md)+[`22`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md)+[`23`](modularity/23-ddd-repo-structure-capability-backcast-2026.md)); Approve REPO1–REPO20; capability horizons H0–H3; Possibilities 1–10 with pros/cons.  
-**Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-REPO1 (after E-REPO0 Approve; must not block H1 Stage-4 calibration); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**; **multi-package workspace before H3 multi-repo product Spec**.
+**Spec draft (not Active tip):** **E-REPO0** — packet [`21`](modularity/21-ddd-repository-structure-options-2026.md)–[`24`](modularity/24-ddd-repo-structure-landing-gaps-2026.md); Approve REPO1–REPO24; **landing gaps**: Wave 1 blocked on `pipeline`↔`scanning` cycle; DOMAIN_MAP without claims = not Done.  
+**Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-REPO1 (after E-REPO0 Approve; must not block H1 Stage-4 calibration; no tools/ big-bang); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**; **multi-package workspace before H3 multi-repo product Spec**; **structure “Done” via DOMAIN_MAP without inventory/claims/cycle-break**.
 
 ---
 
@@ -276,11 +276,11 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**: destinations + capability backcast + **landing gaps**; Wave 1 blocked on cycle-break; DOMAIN_MAP needs claims bite) | **Draft** (2026-08-10) | research 21–24 `spec_gate` → APPROVED |
-| P18.1 | **E-REPO1 Implement:** inventory+claims → cycle-break/façades (w/ E-COH1) → one tools cluster + invoke shim → tach layer/interface | After Approve; do **not** big-bang `tools/` or root | inventory count; one-way edges; `-m` shim; `tach check`; poke |
+| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**: destinations + capability backcast + **landing gaps**; Wave 1 blocked on cycle-break; DOMAIN_MAP needs claims bite) | **Draft** (research); **Wave 0 shipped 2026-08-10** | `DOMAIN_MAP.md` + `tools_bc_inventory.json` + `behavior:tools_bc_inventory_covers_modules` |
+| P18.1 | **E-REPO1 Implement:** cycle-break/façades (w/ E-COH1) → one tools cluster + invoke shim → tach layer/interface | After Approve; inventory already Done | one-way edges; `-m` shim; `tach check`; poke |
 | P18.2 | Spikes **REPO-S1–S5** + gap deliverables (PairSmell method, shim policy, Accept template) | Spike | go/no-go + schemas |
 
-Research: [`21`](modularity/21-ddd-repository-structure-options-2026.md) · [`22`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](modularity/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](modularity/24-ddd-repo-structure-landing-gaps-2026.md).
+Research: [`21`](modularity/21-ddd-repository-structure-options-2026.md) · [`22`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](modularity/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](modularity/24-ddd-repo-structure-landing-gaps-2026.md). **Orientation SoT:** [`DOMAIN_MAP.md`](../../DOMAIN_MAP.md).
 
 ---
 

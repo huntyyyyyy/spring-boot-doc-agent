@@ -1,0 +1,628 @@
+{
+  "schema_version": 1,
+  "purpose": "Wave-0 tools\u2192BC inventory (E-REPO0). Every src/doc_engine/tools/*.py except __init__.py must appear. CI fails on orphan or stale rows.",
+  "so_t": "DOMAIN_MAP.md + this file; physical moves blocked until pipeline\u2194scanning cycle-break (memo 24).",
+  "stable_invoke_policy": "doc_engine.tools.<mod> invoke remains green across moves via shim/fa\u00e7ade unless a deprecation Spec says otherwise.",
+  "entries": [
+    {
+      "module": "build_cross_group_edges.py",
+      "import_path": "doc_engine.tools.build_cross_group_edges",
+      "invoke": "python -m doc_engine.tools.build_cross_group_edges",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "build_docs_site.py",
+      "import_path": "doc_engine.tools.build_docs_site",
+      "invoke": "python -m doc_engine.tools.build_docs_site",
+      "target_bc": "docs_site",
+      "stage_dialect": "s_docs",
+      "truth_class": "product",
+      "note": "docs site helpers",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight.py",
+      "import_path": "doc_engine.tools.capacity_preflight",
+      "invoke": "python -m doc_engine.tools.capacity_preflight",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_calibration.py",
+      "import_path": "doc_engine.tools.capacity_preflight_calibration",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_calibration",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_cli.py",
+      "import_path": "doc_engine.tools.capacity_preflight_cli",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_cli",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_compute.py",
+      "import_path": "doc_engine.tools.capacity_preflight_compute",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_compute",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_constants.py",
+      "import_path": "doc_engine.tools.capacity_preflight_constants",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_constants",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_groups.py",
+      "import_path": "doc_engine.tools.capacity_preflight_groups",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_groups",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_ports.py",
+      "import_path": "doc_engine.tools.capacity_preflight_ports",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_ports",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "capacity_preflight_stage4.py",
+      "import_path": "doc_engine.tools.capacity_preflight_stage4",
+      "invoke": "python -m doc_engine.tools.capacity_preflight_stage4",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "certification.py",
+      "import_path": "doc_engine.tools.certification",
+      "invoke": "python -m doc_engine.tools.certification",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "check_no_secrets_leaked.py",
+      "import_path": "doc_engine.tools.check_no_secrets_leaked",
+      "invoke": "python -m doc_engine.tools.check_no_secrets_leaked",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "check_pipeline_output.py",
+      "import_path": "doc_engine.tools.check_pipeline_output",
+      "invoke": "python -m doc_engine.tools.check_pipeline_output",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage.py",
+      "import_path": "doc_engine.tools.citation_coverage",
+      "invoke": "python -m doc_engine.tools.citation_coverage",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage_anchors.py",
+      "import_path": "doc_engine.tools.citation_coverage_anchors",
+      "invoke": "python -m doc_engine.tools.citation_coverage_anchors",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage_claims.py",
+      "import_path": "doc_engine.tools.citation_coverage_claims",
+      "invoke": "python -m doc_engine.tools.citation_coverage_claims",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage_cli.py",
+      "import_path": "doc_engine.tools.citation_coverage_cli",
+      "invoke": "python -m doc_engine.tools.citation_coverage_cli",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage_constants.py",
+      "import_path": "doc_engine.tools.citation_coverage_constants",
+      "invoke": "python -m doc_engine.tools.citation_coverage_constants",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage_ports.py",
+      "import_path": "doc_engine.tools.citation_coverage_ports",
+      "invoke": "python -m doc_engine.tools.citation_coverage_ports",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "citation_coverage_report.py",
+      "import_path": "doc_engine.tools.citation_coverage_report",
+      "invoke": "python -m doc_engine.tools.citation_coverage_report",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "cross_group_cli.py",
+      "import_path": "doc_engine.tools.cross_group_cli",
+      "invoke": "python -m doc_engine.tools.cross_group_cli",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "cross_group_emit.py",
+      "import_path": "doc_engine.tools.cross_group_emit",
+      "invoke": "python -m doc_engine.tools.cross_group_emit",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "cross_group_resolve.py",
+      "import_path": "doc_engine.tools.cross_group_resolve",
+      "invoke": "python -m doc_engine.tools.cross_group_resolve",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "doc_tag_utils.py",
+      "import_path": "doc_engine.tools.doc_tag_utils",
+      "invoke": "python -m doc_engine.tools.doc_tag_utils",
+      "target_bc": "docs_site",
+      "stage_dialect": "s_docs",
+      "truth_class": "product",
+      "note": "docs site helpers",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "gap_probe.py",
+      "import_path": "doc_engine.tools.gap_probe",
+      "invoke": "python -m doc_engine.tools.gap_probe",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "Stage-0 signals / covering / gap",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo.py",
+      "import_path": "doc_engine.tools.partition_repo",
+      "invoke": "python -m doc_engine.tools.partition_repo",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo_cli.py",
+      "import_path": "doc_engine.tools.partition_repo_cli",
+      "invoke": "python -m doc_engine.tools.partition_repo_cli",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo_constants.py",
+      "import_path": "doc_engine.tools.partition_repo_constants",
+      "invoke": "python -m doc_engine.tools.partition_repo_constants",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo_groups.py",
+      "import_path": "doc_engine.tools.partition_repo_groups",
+      "invoke": "python -m doc_engine.tools.partition_repo_groups",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo_ports.py",
+      "import_path": "doc_engine.tools.partition_repo_ports",
+      "invoke": "python -m doc_engine.tools.partition_repo_ports",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo_tokens.py",
+      "import_path": "doc_engine.tools.partition_repo_tokens",
+      "invoke": "python -m doc_engine.tools.partition_repo_tokens",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "partition_repo_walk.py",
+      "import_path": "doc_engine.tools.partition_repo_walk",
+      "invoke": "python -m doc_engine.tools.partition_repo_walk",
+      "target_bc": "partition_capacity",
+      "stage_dialect": "s1_partition",
+      "truth_class": "product",
+      "note": "partition, edges, capacity preflight",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "pipeline_validators.py",
+      "import_path": "doc_engine.tools.pipeline_validators",
+      "invoke": "python -m doc_engine.tools.pipeline_validators",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "query_artifacts.py",
+      "import_path": "doc_engine.tools.query_artifacts",
+      "invoke": "python -m doc_engine.tools.query_artifacts",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "sensor",
+      "note": "eval/query helpers over scan artifacts",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "query_artifacts_parsers.py",
+      "import_path": "doc_engine.tools.query_artifacts_parsers",
+      "invoke": "python -m doc_engine.tools.query_artifacts_parsers",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "sensor",
+      "note": "eval/query helpers over scan artifacts",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest.py",
+      "import_path": "doc_engine.tools.run_manifest",
+      "invoke": "python -m doc_engine.tools.run_manifest",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_cli.py",
+      "import_path": "doc_engine.tools.run_manifest_cli",
+      "invoke": "python -m doc_engine.tools.run_manifest_cli",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_constants.py",
+      "import_path": "doc_engine.tools.run_manifest_constants",
+      "invoke": "python -m doc_engine.tools.run_manifest_constants",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_finalize.py",
+      "import_path": "doc_engine.tools.run_manifest_finalize",
+      "invoke": "python -m doc_engine.tools.run_manifest_finalize",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_interview.py",
+      "import_path": "doc_engine.tools.run_manifest_interview",
+      "invoke": "python -m doc_engine.tools.run_manifest_interview",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_io.py",
+      "import_path": "doc_engine.tools.run_manifest_io",
+      "invoke": "python -m doc_engine.tools.run_manifest_io",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_ports.py",
+      "import_path": "doc_engine.tools.run_manifest_ports",
+      "invoke": "python -m doc_engine.tools.run_manifest_ports",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_stages.py",
+      "import_path": "doc_engine.tools.run_manifest_stages",
+      "invoke": "python -m doc_engine.tools.run_manifest_stages",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "run_manifest_summary.py",
+      "import_path": "doc_engine.tools.run_manifest_summary",
+      "invoke": "python -m doc_engine.tools.run_manifest_summary",
+      "target_bc": "pipeline_meta",
+      "stage_dialect": "s_manifest",
+      "truth_class": "product",
+      "note": "run telemetry",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "semantic_eval_confirmed.py",
+      "import_path": "doc_engine.tools.semantic_eval_confirmed",
+      "invoke": "python -m doc_engine.tools.semantic_eval_confirmed",
+      "target_bc": "semantic_eval",
+      "stage_dialect": "none",
+      "truth_class": "sensor",
+      "note": "LLM-judge helpers (not oracle floor)",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "semantic_eval_helpers.py",
+      "import_path": "doc_engine.tools.semantic_eval_helpers",
+      "invoke": "python -m doc_engine.tools.semantic_eval_helpers",
+      "target_bc": "semantic_eval",
+      "stage_dialect": "none",
+      "truth_class": "sensor",
+      "note": "LLM-judge helpers (not oracle floor)",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "semantic_eval_mermaid.py",
+      "import_path": "doc_engine.tools.semantic_eval_mermaid",
+      "invoke": "python -m doc_engine.tools.semantic_eval_mermaid",
+      "target_bc": "semantic_eval",
+      "stage_dialect": "none",
+      "truth_class": "sensor",
+      "note": "LLM-judge helpers (not oracle floor)",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "semantic_eval_scan.py",
+      "import_path": "doc_engine.tools.semantic_eval_scan",
+      "invoke": "python -m doc_engine.tools.semantic_eval_scan",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "sensor",
+      "note": "eval/query helpers over scan artifacts",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_check.py",
+      "import_path": "doc_engine.tools.spring_drift_check",
+      "invoke": "python -m doc_engine.tools.spring_drift_check",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_cli.py",
+      "import_path": "doc_engine.tools.spring_drift_cli",
+      "invoke": "python -m doc_engine.tools.spring_drift_cli",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_common.py",
+      "import_path": "doc_engine.tools.spring_drift_common",
+      "invoke": "python -m doc_engine.tools.spring_drift_common",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_jpql.py",
+      "import_path": "doc_engine.tools.spring_drift_jpql",
+      "invoke": "python -m doc_engine.tools.spring_drift_jpql",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_load.py",
+      "import_path": "doc_engine.tools.spring_drift_load",
+      "invoke": "python -m doc_engine.tools.spring_drift_load",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_orchestrate.py",
+      "import_path": "doc_engine.tools.spring_drift_orchestrate",
+      "invoke": "python -m doc_engine.tools.spring_drift_orchestrate",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_ports.py",
+      "import_path": "doc_engine.tools.spring_drift_ports",
+      "invoke": "python -m doc_engine.tools.spring_drift_ports",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_process.py",
+      "import_path": "doc_engine.tools.spring_drift_process",
+      "invoke": "python -m doc_engine.tools.spring_drift_process",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_tier1.py",
+      "import_path": "doc_engine.tools.spring_drift_tier1",
+      "invoke": "python -m doc_engine.tools.spring_drift_tier1",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_tier2.py",
+      "import_path": "doc_engine.tools.spring_drift_tier2",
+      "invoke": "python -m doc_engine.tools.spring_drift_tier2",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_tier2_build.py",
+      "import_path": "doc_engine.tools.spring_drift_tier2_build",
+      "invoke": "python -m doc_engine.tools.spring_drift_tier2_build",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_drift_tier2_rules.py",
+      "import_path": "doc_engine.tools.spring_drift_tier2_rules",
+      "invoke": "python -m doc_engine.tools.spring_drift_tier2_rules",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "drift stays with Stage-0 signatures",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "spring_signal_scan.py",
+      "import_path": "doc_engine.tools.spring_signal_scan",
+      "invoke": "python -m doc_engine.tools.spring_signal_scan",
+      "target_bc": "scanning",
+      "stage_dialect": "s0_signals",
+      "truth_class": "product",
+      "note": "Stage-0 signals / covering / gap",
+      "move_status": "stay_until_cycle_break"
+    },
+    {
+      "module": "validate_artifacts.py",
+      "import_path": "doc_engine.tools.validate_artifacts",
+      "invoke": "python -m doc_engine.tools.validate_artifacts",
+      "target_bc": "compliance_gates",
+      "stage_dialect": "s_gates",
+      "truth_class": "product",
+      "note": "gates / cert / validators",
+      "move_status": "stay_until_cycle_break"
+    }
+  ]
+}

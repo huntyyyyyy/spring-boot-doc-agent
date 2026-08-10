@@ -36,6 +36,8 @@ Last updated: 2026-08-03.
 
 ## Next concrete action
 
+**Orientation (multi-session):** [`DOMAIN_MAP.md`](DOMAIN_MAP.md) + [`docs/research/quality-backlog.md`](docs/research/quality-backlog.md). Wave 0 map/inventory shipped; do not mass-rename packages for agent clarity.
+
 Packaging / A+C / portable-kernel arc is **paused** on `main` (through PR #58 / suite-layout follow-ons). Do not open another packaging mega-PR.
 
 **Phase 1 dual-emit landed (this arc):** Stage 0 writes `facts.jsonl` beside `spring_signals.json` ([`docs/research/archive/claude-lore/research/facts-ledger-schema-2026-07-30.md`](docs/research/archive/claude-lore/research/facts-ledger-schema-2026-07-30.md); memo [`fact-store-phase1-decision-memo-2026-07-30.md`](docs/research/archive/claude-lore/research/fact-store-phase1-decision-memo-2026-07-30.md)). Evidence + contested multi-`MAPS_TO`; emit counters on stdout/stderr; maps unchanged; **not** a certification-required artifact. **Do not treat** [`docs/research/archive/claude-lore/10-architecture-maturation-plan.md`](docs/research/archive/claude-lore/10-architecture-maturation-plan.md) §0–1 or the JPA survey as executable specs for further Phase 1 dump work.

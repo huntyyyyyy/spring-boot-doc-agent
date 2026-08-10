@@ -34,7 +34,7 @@ This amend is the adversarial landing list. Claim tiers as usual.
 | Concern | Answer |
 | --- | --- |
 | Will “Wave 1 deep BC + tach” land if ordered tomorrow? | **No.** `pipeline`↔`scanning` mutual imports and `tools`→{pipeline,query,scanning} fan-in still exist. `[Confirmed]` tip AST inventory; E-COH0 / TACH4 already say depends_on cannot land first. |
-| Will Wave 0 (DOMAIN_MAP) look green but not prove structure? | **Yes risk.** A markdown map has **no CI predicate** today; without `check_repo_claims` / poke hooks it is documentation theater. |
+| Will Wave 0 (DOMAIN_MAP) look green but not prove structure? | **Mitigated 2026-08-10:** inventory + `behavior:tools_bc_inventory_covers_modules` + CONSTRAINTS verify. Map still ≠ physical restructure Done. |
 | Biggest silent fail mode? | Move files, keep barrel re-exports, tests still import deep paths → **façade cosplay**; size/cov pass; modularity does not. |
 | What *can* land soon with real tests? | Cycle-break ports (E-COH1/E-TACH prep), façade poke expansion, tools→BC **inventory JSON** with claims, domain markers (already E-TEST) — not root renames. |
 

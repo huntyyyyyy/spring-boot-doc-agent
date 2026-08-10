@@ -167,7 +167,7 @@ REFERENCE_RE = re.compile(
 OWN_ROOT_FILES = frozenset({
     "CLAUDE.md", "CONSTRAINTS.md", "CONTRIBUTING.md", "README.md", "STATUS.md",
     "AGENTS.md",
-    "MATURITY_ASSESSMENT.md", "LICENSE",
+    "MATURITY_ASSESSMENT.md", "LICENSE", "DOMAIN_MAP.md",
     "requirements.txt", "requirements-dev.txt", ".ruff.toml", ".gitignore",
 })
 
@@ -187,7 +187,7 @@ OWN_ROOT_FILES = frozenset({
 # squeamishness, it is that the two kinds of text make different claims.
 CURRENT_STATE_ROOT_DOCS = frozenset({
     "CLAUDE.md", "CONSTRAINTS.md", "CONTRIBUTING.md", "README.md",
-    "STATUS.md", "MATURITY_ASSESSMENT.md", "AGENTS.md",
+    "STATUS.md", "MATURITY_ASSESSMENT.md", "AGENTS.md", "DOMAIN_MAP.md",
     # Domain map + active backlog are current-state SoR; Spec memos may cite
     # future deliverables and stay out of check B (DOC1 / E-DOC1).
     "docs/research/README.md",
@@ -870,6 +870,13 @@ def _eval_called_by(root: Path, operand: str) -> Tuple[bool, str]:
     )
 
 
+def _behavior_tools_bc_inventory_covers_modules(root: Path) -> Tuple[bool, str]:
+    """Every ``src/doc_engine/tools/*.py`` appears in tools_bc_inventory.json."""
+    from tools_bc_inventory_gate import check_tools_bc_inventory
+
+    return check_tools_bc_inventory(root)
+
+
 def _behavior_signal_scan_declares_facts_jsonl(root: Path) -> Tuple[bool, str]:
     """Stage graph lists facts.jsonl on signal_scan (dual-emit contract)."""
     stages_path = root / "src" / "doc_engine" / "pipeline" / "stages.py"
@@ -1094,6 +1101,7 @@ BEHAVIOR_CHECKS: Dict[str, Callable[[Path], Tuple[bool, str]]] = {
     "astgrep_inventory_never_widens_to_repo_root": (
         _behavior_astgrep_inventory_never_widens_to_repo_root
     ),
+    "tools_bc_inventory_covers_modules": _behavior_tools_bc_inventory_covers_modules,
 }
 
 

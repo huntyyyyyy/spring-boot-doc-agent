@@ -12,8 +12,10 @@ doc-engine certification verify pipeline-artifacts/certification.json
 ```
 
 Architecture (kernel vs adapters): [`docs/product-architecture.md`](docs/product-architecture.md).  
+**Orientation for agents/humans (Wave 0):** [`DOMAIN_MAP.md`](DOMAIN_MAP.md) — BCs, truth classes, task order, refuse list; machine inventory [`docs/design/tools_bc_inventory.json`](docs/design/tools_bc_inventory.json).  
 First real-repo run: [`docs/guides/operator-pilot.md`](docs/guides/operator-pilot.md).  
 Org rollout: [`docs/guides/principal-adoption.md`](docs/guides/principal-adoption.md).
+Engineering backlog (Active tip): [`docs/research/quality-backlog.md`](docs/research/quality-backlog.md).
 
 ## Pipeline
 

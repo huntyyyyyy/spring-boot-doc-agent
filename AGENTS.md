@@ -5,6 +5,11 @@ search mandate, state-claim gates), read `CLAUDE.md` first — it is the source 
 truth and applies to every session. This file is a thin Cursor Cloud ingest
 layer (gotchas + pointers), not a second SoT for recipes or counts.
 
+**Cross-session orientation:** start at [`DOMAIN_MAP.md`](DOMAIN_MAP.md) (code BCs,
+truth classes, refuse list, task order) and
+[`docs/research/quality-backlog.md`](docs/research/quality-backlog.md) (Active tip).
+Do not invent a parallel tip or mass-rename packages for “LLM clarity.”
+
 ## Cursor Cloud specific instructions
 
 This is a **Python 3.10+ CLI/SDK** (`doc-engine`). There is no web server or

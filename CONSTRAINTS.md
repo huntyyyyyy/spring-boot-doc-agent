@@ -70,6 +70,10 @@ Kinds: Runtime prerequisites · Integration gaps · Known precision tradeoffs ·
 
 3. **Standing rule** — external research must not send target-repo identifiers outbound. Frame queries around general tech/patterns, never real class/table/business names or `redaction_zones` contents. Enforcement: agent prompt discipline + Bash raw-network deny (`deny_raw_network.py` + check F). Residual: content of `WebFetch` queries is not mechanically checked against an identifier list.
 
+## Repository orientation (multi-session)
+
+1. **[Resolved]** Cross-session BC / truth-class map + tools inventory are current-state SoR. <!-- verify: path_exists:DOMAIN_MAP.md; path_exists:docs/design/tools_bc_inventory.json; contains:README.md:DOMAIN_MAP.md; contains:AGENTS.md:DOMAIN_MAP.md; behavior:tools_bc_inventory_covers_modules; path_exists:tests/ci/test_tools_bc_inventory.py --> Root `DOMAIN_MAP.md` states destination BCs, truth classes, task order, and refuse list. `docs/design/tools_bc_inventory.json` lists every `src/doc_engine/tools/*.py` (except `__init__.py`); CI fails on orphan/stale rows. Residual: physical BC moves still blocked on cycle-break (E-REPO memo 24); map is orientation, not a completed restructure.
+
 ## Enterprise-readiness gaps
 
 Audit posture for use beyond a single operator. Pointer-only “see Runtime/Integration item N” duplicates (license, pinning, “see telemetry above”) are omitted — those entries remain above.

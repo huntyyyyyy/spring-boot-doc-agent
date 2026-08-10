@@ -2,6 +2,8 @@
 
 This repository ships **doc-engine** — a portable orchestrator for documenting Spring Boot repositories — not a Claude-plugin-shaped monolith.
 
+**Cross-session map (Wave 0):** [`DOMAIN_MAP.md`](../DOMAIN_MAP.md) names target BCs, truth classes (SoR/derived/sensor), refuse list, and task order. Machine inventory of `doc_engine.tools` modules: [`design/tools_bc_inventory.json`](design/tools_bc_inventory.json). Physical package moves stay Spec-gated (E-REPO0 / memo 24).
+
 ## Locked design: A+C hybrid
 
 | Axis | Choice |
