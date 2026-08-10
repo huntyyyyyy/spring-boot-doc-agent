@@ -4848,3 +4848,13 @@ Assumptions affected:
 - Research look-first was soft skill only — [Resolved — `.cursor/hooks.json` inject + Read receipt + fail-closed design writes; `docs/research/README.md` domain map]
 - `claude/` as process SoR — [Resolved — tombstone + archive under `docs/research/archive/claude-lore/`; adapter packaging kept]
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
+
+## 2026-08-10 — E-REPO Wave 0: DOMAIN_MAP + tools BC inventory (claims-gated)
+Commit: 6c2c92d
+Tests: 17/17 inventory+claims registry; claims OK; markers OK; ruff OK
+Assumptions affected:
+- Multi-session agents lacked a durable code-BC map — [Resolved — root `DOMAIN_MAP.md` + `docs/design/tools_bc_inventory.json`; `behavior:tools_bc_inventory_covers_modules`]
+- E-REPO0 “DOMAIN_MAP without claims = not Done” (memo 24 / REPO22) — [Resolved — CONSTRAINTS verify + pytest set-equality; physical moves still blocked]
+- Steering prompts assumed orientation only via CLAUDE/STATUS — [New info — README/AGENTS/STATUS point at DOMAIN_MAP; quality-backlog P18 Wave 0 shipped]
+Files touched: DOMAIN_MAP.md, docs/design/tools_bc_inventory.json, scripts/ci/tools_bc_inventory_gate.py, scripts/ci/check_repo_claims.py, tests/ci/test_tools_bc_inventory.py, CONSTRAINTS.md, README.md, AGENTS.md, STATUS.md, docs/product-architecture.md, docs/research/quality-backlog.md, docs/process/session-log.md
+
