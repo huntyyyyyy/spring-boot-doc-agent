@@ -7,7 +7,7 @@ product: Python CLI doc-engine kitchen-sink domain_integration suite
 related:
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/process/04-implementation-frameworks.md
-  - docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
+  - docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
   - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
   - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
   - docs/research/quality-backlog.md

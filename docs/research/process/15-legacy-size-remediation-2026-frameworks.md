@@ -7,8 +7,8 @@ product: Python CLI doc-engine — grandfathered LOC debt across scanning/tools/
 related:
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/process/04-implementation-frameworks.md
-  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/modularity/13-tools-wave2-modularity-2026.md
+  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md
   - docs/research/process/14-facade-poke-research-hooks-2026.md
   - docs/research/quality-backlog.md
 do_not:

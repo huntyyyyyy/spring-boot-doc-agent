@@ -6,8 +6,8 @@ research_window: product SoT as of tip (STATUS / maturity / adoption / backlog)
 claim tiers: Evidenced / Confirmed / Unknown
 product: doc-engine — portable Spring-doc pipeline + adapters + meta quality monorepo
 parent:
-  - docs/research/modularity/21-ddd-repository-structure-options-2026.md
-  - docs/research/modularity/22-ddd-repo-structure-quality-deepdive-2026.md
+  - docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
+  - docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
 sources_of_future:
   - STATUS.md
   - MATURITY_ASSESSMENT.md

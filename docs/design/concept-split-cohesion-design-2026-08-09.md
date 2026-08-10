@@ -4,10 +4,10 @@ status: APPROVED — SPEC GATE E-COH0 (2026-08-09) — merge Approve of COH1–C
 research date: 2026-08-09
 claim tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
+  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
   - docs/research/process/15-legacy-size-remediation-2026-frameworks.md
-  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/modularity/16-scan1-astgrep-modularity-2026.md
+  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
   - docs/research/quality-backlog.md
   - tach.toml
 do_not:
@@ -32,7 +32,7 @@ spec_gate: APPROVED E-COH0 (2026-08-09) — COH1–COH12
 | Field | Value |
 | --- | --- |
 | Decisions | **COH1–COH12** Approved |
-| Research SoT | [`modularity/20-tach-dependency-blueprint-2026.md`](../research/modularity/20-tach-dependency-blueprint-2026.md) (Jun–Aug 2026) |
+| Research SoT | [`bounded-contexts/20-tach-dependency-blueprint-2026.md`](../research/bounded-contexts/20-tach-dependency-blueprint-2026.md) (Jun–Aug 2026) |
 | Prior Spec | E-LEG0 / E-MOD* / E-SCAN1 / E-TACH0 (draft) |
 | Branch / PR | `cursor/e-doc1-research-taxonomy-61f3` / [#112](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/112) |
 | Backlog | P17.0 Approved; P17.1 E-COH1 Active |

@@ -101,7 +101,7 @@ class ResearchDomainLayoutTest(unittest.TestCase):
             "coverage-quality",
             "ci",
             "kitchen",
-            "modularity",
+            "bounded-contexts",
             "stage0",
             "archive",
         ):

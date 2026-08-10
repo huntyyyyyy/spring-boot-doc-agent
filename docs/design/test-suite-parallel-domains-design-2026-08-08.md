@@ -5,7 +5,7 @@ research date: 2026-08-08
 approved_decisions: T1-T18
 artifact_policy: T-A
 claim tiers: Evidenced / Confirmed / Unknown
-research: docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
+research: docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 ---
 
@@ -26,7 +26,7 @@ synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 | Decisions | **T1–T18** Approved |
 | Policy **T** | **T-A** — CI marker/path shards **before** in-process xdist |
 | Branch / PR | `wave1-gates-untrusted-tree-hygiene` / [#94](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/94) |
-| Research | [`docs/research/modularity/06-test-suite-bounded-contexts-parallel.md`](../research/06-test-suite-bounded-contexts-parallel.md) |
+| Research | [`docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md`](../research/06-test-suite-bounded-contexts-parallel.md) |
 | Backlog | [`docs/research/quality-backlog.md`](../research/quality-backlog.md) |
 
 ---

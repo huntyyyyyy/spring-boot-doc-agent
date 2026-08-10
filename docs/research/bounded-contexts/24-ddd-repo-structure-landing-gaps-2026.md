@@ -4,12 +4,12 @@ status: DRAFT amend — honest landing risks for packet 21+22+23
 research date: 2026-08-10
 claim tiers: Evidenced / Confirmed / Unknown
 parent:
-  - docs/research/modularity/21-ddd-repository-structure-options-2026.md
-  - docs/research/modularity/22-ddd-repo-structure-quality-deepdive-2026.md
-  - docs/research/modularity/23-ddd-repo-structure-capability-backcast-2026.md
+  - docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
+  - docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
+  - docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
 related:
   - docs/design/concept-split-cohesion-design-2026-08-09.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
+  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
   - tach.toml
 do_not:
   - treat DOMAIN_MAP.md alone as “structure done”
@@ -26,6 +26,10 @@ what **actually has to pass** in Implement → Verify, and several recommended m
 “later.”
 
 This amend is the adversarial landing list. Claim tiers as usual.
+
+**Wave 0.5 (2026-08-10):** research domain renamed `modularity/` → `bounded-contexts/`;
+`DOMAIN_MAP` §4 lists nest/collapse candidates (tools→BC, dual skills). Physical
+`src/` dissolve still blocked by cycles below.
 
 ---
 

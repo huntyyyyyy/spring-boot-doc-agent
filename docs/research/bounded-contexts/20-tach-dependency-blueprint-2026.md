@@ -8,8 +8,8 @@ product: Python CLI modular monolith (`doc_engine` + `stf`) — tach already cyc
 related:
   - tach.toml
   - docs/research/process/15-legacy-size-remediation-2026-frameworks.md
-  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/modularity/16-scan1-astgrep-modularity-2026.md
+  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - CONTRIBUTING.md
 do_not:

@@ -95,7 +95,7 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 | P5.1 | **E-TEST1:** domain markers + CI shards; serial quarantine; doc_engine meeting ≥**98.7** (debt=`domain_unclassified` only) | **DONE** | marker check + ABI shard jobs |
 | P5.2 | **E-TEST2 (optional):** xdist inside one non-oracle shard only | Defer / spike | flake budget; never oracle combine |
 
-Research: [`docs/research/modularity/06-test-suite-bounded-contexts-parallel.md`](modularity/06-test-suite-bounded-contexts-parallel.md).
+Research: [`docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md`](bounded-contexts/06-test-suite-bounded-contexts-parallel.md).
 
 ---
 
@@ -172,8 +172,8 @@ Research: [`docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md`](ci
 | P11.3 | **E-MOD3:** `run_manifest` + `citation_coverage` wave 2 (ports + façades; MOD-S1) | **Done** (2026-08-09) | files ≤225; climb monkeypatch DIP; `-m` stable |
 | P11.4 | **E-FAC0 / E-RES0 / E-CUR0:** façade poke + design-research + Cursor-native hooks | **Done** (2026-08-09) | poke gate; research hook; `.cursor/hooks.json` |
 
-Research: [`docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md`](modularity/12-pipeline-stage0-modularity-ports-2026.md),
-[`docs/research/modularity/13-tools-wave2-modularity-2026.md`](modularity/13-tools-wave2-modularity-2026.md),
+Research: [`docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md`](bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md),
+[`docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md`](bounded-contexts/13-tools-wave2-modularity-2026.md),
 [`docs/research/process/14-facade-poke-research-hooks-2026.md`](process/14-facade-poke-research-hooks-2026.md).
 
 ---
@@ -192,7 +192,7 @@ work: MOD-S1 + poke + intentionality bar (separate asserts, `monkeypatch`, one-a
 | P12.3 | **LEG-S1** (optional): tach vs import-linter measured gap on scanning | Spike / Defer | measured gap or Defer dual-SoT |
 
 Research: [`docs/research/process/15-legacy-size-remediation-2026-frameworks.md`](process/15-legacy-size-remediation-2026-frameworks.md),
-[`docs/research/modularity/16-scan1-astgrep-modularity-2026.md`](modularity/16-scan1-astgrep-modularity-2026.md).
+[`docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md`](bounded-contexts/16-scan1-astgrep-modularity-2026.md).
 
 ---
 
@@ -231,10 +231,10 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** — reshape provisional tip modules under cohesion bar (design memo); one stream.  
-**Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
-**Spec draft (not Active tip):** **E-REPO0** — packet [`21`](modularity/21-ddd-repository-structure-options-2026.md)–[`24`](modularity/24-ddd-repo-structure-landing-gaps-2026.md); Approve REPO1–REPO24; **landing gaps**: Wave 1 blocked on `pipeline`↔`scanning` cycle; DOMAIN_MAP without claims = not Done.  
-**Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-REPO1 (after E-REPO0 Approve; must not block H1 Stage-4 calibration; no tools/ big-bang); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**; **multi-package workspace before H3 multi-repo product Spec**; **structure “Done” via DOMAIN_MAP without inventory/claims/cycle-break**.
+**Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`bounded-contexts/20-…`](bounded-contexts/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
+**Spec draft (not Active tip):** **E-REPO0** — packet [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md)–[`24`](bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md); Approve REPO1–REPO24; Wave 0 + 0.5 orientation shipped (`DOMAIN_MAP` + `bounded-contexts/` rename); Wave 1 still blocked on `pipeline`↔`scanning` cycle.  
+**Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-REPO1 (after E-REPO0 Approve; must not block H1 Stage-4 calibration; **one tools→BC cluster + shim**, not big-bang); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**; **multi-package workspace before H3 multi-repo product Spec**; **structure “Done” via DOMAIN_MAP without inventory/claims/cycle-break**; **keeping research domain names that say process (`modularity`) instead of product BCs**.
 
 ---
 
@@ -268,7 +268,7 @@ Research: [`docs/research/process/19-watch-stalker-agents-context-lean-2026.md`]
 | P16.1 | **E-TACH1 Implement:** break BC cycles + add `layers` | After Approve; one stream | `tach check` green; one-way BC edges |
 | P16.2 | **E-TACH2 Implement:** `depends_on` + `[[interfaces]]` | After E-TACH1 | undeclared/deep imports fail CI |
 
-Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modularity/20-tach-dependency-blueprint-2026.md) (window **2026-06→08**). **Embody** tach cycles; **Adopt** layers→depends_on+interfaces; **Defer** import-linter dual-gate; **Refuse** pytestarch/grimp (&lt;1k★) and foreign runtimes as deps.
+Research: [`docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md`](bounded-contexts/20-tach-dependency-blueprint-2026.md) (window **2026-06→08**). **Embody** tach cycles; **Adopt** layers→depends_on+interfaces; **Defer** import-linter dual-gate; **Refuse** pytestarch/grimp (&lt;1k★) and foreign runtimes as deps.
 
 ---
 
@@ -276,11 +276,11 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**: destinations + capability backcast + **landing gaps**; Wave 1 blocked on cycle-break; DOMAIN_MAP needs claims bite) | **Draft** (research); **Wave 0 shipped 2026-08-10** | `DOMAIN_MAP.md` + `tools_bc_inventory.json` + `behavior:tools_bc_inventory_covers_modules` |
-| P18.1 | **E-REPO1 Implement:** cycle-break/façades (w/ E-COH1) → one tools cluster + invoke shim → tach layer/interface | After Approve; inventory already Done | one-way edges; `-m` shim; `tach check`; poke |
-| P18.2 | Spikes **REPO-S1–S5** + gap deliverables (PairSmell method, shim policy, Accept template) | Spike | go/no-go + schemas |
+| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**; Wave 1 blocked on cycle-break; claims-gated DOMAIN_MAP) | **Draft** (research); **Wave 0 + 0.5** (map + `bounded-contexts/` rename) | `DOMAIN_MAP.md` + inventory + `behavior:tools_bc_inventory_covers_modules` |
+| P18.1 | **E-REPO1 Implement:** cycle-break → **nest one tools cluster into its BC** + `-m` shim → tach layers/interfaces | After Approve; inventory Done | one-way edges; shim; `tach check`; poke |
+| P18.2 | Spikes **REPO-S1–S5** + nest dual `skills/` under adapter SoT (retire Spec) | Spike | go/no-go + schemas |
 
-Research: [`21`](modularity/21-ddd-repository-structure-options-2026.md) · [`22`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](modularity/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](modularity/24-ddd-repo-structure-landing-gaps-2026.md). **Orientation SoT:** [`DOMAIN_MAP.md`](../../DOMAIN_MAP.md).
+Research: [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md) · [`22`](bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md). **Orientation SoT:** [`DOMAIN_MAP.md`](../../DOMAIN_MAP.md).
 
 ---
 
@@ -292,7 +292,7 @@ Research: [`21`](modularity/21-ddd-repository-structure-options-2026.md) · [`22
 | P17.1 | **E-COH1 Implement:** reshape provisional tip modules under COH bar | **Active** | COH2–COH4 on touch; claims green |
 | P17.2 | **E-COH2:** align reshape with E-TACH1/2 layers + interfaces | After E-TACH0 Approve | `tach check`; public `expose` only |
 
-Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md). Research: modularity/20. **Refuse** mechanical cut-and-paste that only clears LOC/statement gates.
+Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md). Research: [`bounded-contexts/20`](bounded-contexts/20-tach-dependency-blueprint-2026.md). **Refuse** mechanical cut-and-paste that only clears LOC/statement gates.
 
 ---
 

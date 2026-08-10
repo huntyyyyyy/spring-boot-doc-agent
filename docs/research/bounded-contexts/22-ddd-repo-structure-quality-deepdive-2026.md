@@ -5,12 +5,12 @@ research date: 2026-08-10
 research_window: 2024-11-01 → 2026-08-10
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + meta CI + agent adapters
-parent: docs/research/modularity/21-ddd-repository-structure-options-2026.md
+parent: docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
 related:
-  - docs/research/modularity/23-ddd-repo-structure-capability-backcast-2026.md
+  - docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/process/04-implementation-frameworks.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
+  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/
   - docs/design/ddia-north-star/domains/05-maintainability-and-change/
   - docs/product-architecture.md

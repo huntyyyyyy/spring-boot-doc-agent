@@ -8,7 +8,7 @@ prefer_sources: "2026 primary (arXiv / product docs / OTel semconv); older only 
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 design: docs/design/suite-stalking-sensors-design-2026-08-09.md
 siblings:
-  - docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
+  - docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
   - docs/research/ci/07-ci-workflow-modularity.md
   - docs/design/rust-stack-fit-memo-2026-08-08.md
 related:

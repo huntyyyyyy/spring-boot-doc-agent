@@ -6,11 +6,11 @@ research_window: 2026-01-01 → 2026-08-10
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + meta CI/adapters monorepo
 related:
-  - docs/research/modularity/22-ddd-repo-structure-quality-deepdive-2026.md
+  - docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
   - docs/product-architecture.md
-  - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
+  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+  - docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
+  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/design/ddia-north-star/domains/05-maintainability-and-change/
   - tach.toml
@@ -38,6 +38,7 @@ strategic DDD (bounded contexts + enforced edges) — without poorly copying
 layouts**, ranks them for *this* product, and Spec-gates a preferred path.
 
 **Deep companions (required read for Approve):**  
+Research domain path: `docs/research/bounded-contexts/` (renamed from `modularity/` — process jargon → product BC language).
 - [`22-ddd-repo-structure-quality-deepdive-2026.md`](22-ddd-repo-structure-quality-deepdive-2026.md) — quality axes + unusual G–P  
 - [`23-ddd-repo-structure-capability-backcast-2026.md`](23-ddd-repo-structure-capability-backcast-2026.md) — **future-capability roadmap + solid possibilities with pros/cons**  
 - [`24-ddd-repo-structure-landing-gaps-2026.md`](24-ddd-repo-structure-landing-gaps-2026.md) — **what will not land at Implement/Test (cycles, shims, fake-green)**  

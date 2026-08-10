@@ -12,7 +12,7 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 | **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking |
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |
-| **modularity/** | [`modularity/`](modularity/) | Stage-0 ports, test-suite BCs, tools wave 2, AstGrepBackend split, **tach dependency blueprint**, **DDD repo-structure packet E-REPO0 (21–24: options · quality · capability · landing gaps)** |
+| **bounded-contexts/** | [`bounded-contexts/`](bounded-contexts/) | Product BC seams: Stage-0 ports, test-suite BCs, tools waves, AstGrepBackend split, **tach dependency blueprint**, **DDD repo-structure packet E-REPO0 (21–24)** — formerly misnamed `modularity/` |
 | **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs (migrated from `claude/research/`) |
 | **archive/** | [`archive/`](archive/) | Superseded WIP, receipts, [`claude-lore/`](archive/claude-lore/) — **not** Spec SoT |
 
