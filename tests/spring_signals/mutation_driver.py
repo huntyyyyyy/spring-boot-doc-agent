@@ -7,7 +7,10 @@ PIT-class Java SUT mutation. See CONTRIBUTING.md “Mutation-scope taxonomies.�
 
 Applies each named mutant to the engine in place, runs the test suite,
 verifies the mutant is killed, and restores the pristine source. Run from the
-repo root:  python tests/spring_signals/mutation_driver.py
+repo root:  python -m tests.spring_signals.mutation_driver
+
+``--import-only`` exits after path bootstrap + ``mutation_loop`` import (fast
+entrypoint probe; does not run the kill loop). Full kills stay in CI / pre_pr.
 
 ENFORCE = False -- see the CI step name, which says "non-blocking". Survivors
 are reported but do not fail the job until a threshold is defended. A missing
@@ -83,16 +86,25 @@ MUTANTS = [
 ]
 
 
-def main() -> int:
-    # Script execution puts ``tests/spring_signals/`` on ``sys.path[0]``, not the
+def bootstrap_repo_root_on_sys_path() -> None:
+    # Script argv puts ``tests/spring_signals/`` on ``sys.path[0]``, not the
     # repo root — so ``from tests.…`` fails unless we bootstrap (CI remote red).
     root = str(REPO_ROOT)
     if root not in sys.path:
         sys.path.insert(0, root)
+
+
+def main(argv: list[str] | None = None) -> int:
+    bootstrap_repo_root_on_sys_path()
+    args = list(sys.argv[1:] if argv is None else argv)
     from tests.spring_signals.mutation_loop import (
         apply_and_collect_survivors,
         exit_for_survivors,
     )
+
+    if args == ["--import-only"]:
+        print("import-ok")
+        return 0
 
     pristine = ENGINE.read_text(encoding="utf-8")
     result = apply_and_collect_survivors(ENGINE, pristine, MUTANTS, REPO_ROOT)

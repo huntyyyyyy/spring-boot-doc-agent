@@ -4973,3 +4973,11 @@ Assumptions affected:
 - Start next chat at backlog P0 — [Resolved — P0 is conditional size hygiene; Active tip is land #119 then E-COH1]
 Files touched: docs/research/quality-backlog.md, docs/research/archive/quality-backlog-ticket-ledger-2026-08-10.md, docs/research/README.md, docs/process/session-log.md, docs/design/tools_bc_inventory.json
 
+
+## 2026-08-10 — Fast mutation_driver entrypoint probe (no kill loop in pytest)
+Commit: a46221fd
+Tests: 12/12 `test_mutation_driver_entrypoint` + `test_local_grading_pack` in 0.19s; claims OK
+Assumptions affected:
+- `tests/ci/test_mutation_driver_entrypoint.py` must run full mutant kills to lock ModuleNotFoundError — [Resolved — `--import-only` bootstrap probe; full kills stay in CI/pre_pr]
+- grading-pack `self-test` should call `doctor` — [Resolved — hygiene-only; doctor remains its own id]
+Files touched: tests/spring_signals/mutation_driver.py, tests/ci/test_mutation_driver_entrypoint.py, scripts/ci/grading_pack_steps.sh, docs/process/session-log.md

@@ -1,8 +1,11 @@
-"""Regression: mutation_driver must run the way CI invokes it (E-TEL / remote red).
+"""Regression: mutation_driver entrypoint bootstrap (E-TEL / remote red).
 
 Remote failed with ModuleNotFoundError: No module named 'tests' when running
 ``python3 tests/spring_signals/mutation_driver.py``. Local pre_pr treated that
 as advisory and stayed green — this suite fails closed on that bug.
+
+Entrypoint probes use ``--import-only`` (bootstrap + import). Full mutant kill
+loops stay in CI / ``pre_pr``, not in these unit tests.
 """
 
 from __future__ import annotations
@@ -19,45 +22,46 @@ pytestmark = pytest.mark.domain_ci_meta
 
 _CI_SCRIPT = Path("tests/spring_signals/mutation_driver.py")
 _MODULE = "tests.spring_signals.mutation_driver"
+_IMPORT_ONLY = "--import-only"
 
 
-def test_mutation_driver_script_entrypoint_no_module_not_found() -> None:
-    """Exact CI argv shape must not crash on ``from tests.spring_signals…``."""
-    root = repo_root()
-    completed = subprocess.run(
-        [sys.executable, str(_CI_SCRIPT)],
-        cwd=root,
+def _run_import_only(argv: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        argv,
+        cwd=repo_root(),
         capture_output=True,
         text=True,
         check=False,
     )
+
+
+def _assert_import_probe(completed: subprocess.CompletedProcess[str]) -> None:
     combined = f"{completed.stdout}\n{completed.stderr}"
     assert "ModuleNotFoundError" not in combined, combined[-2000:]
     assert "No module named 'tests'" not in combined, combined[-2000:]
     assert completed.returncode == 0, combined[-2000:]
+    assert "import-ok" in completed.stdout, combined[-2000:]
 
 
-def test_mutation_driver_module_entrypoint_exits_zero() -> None:
-    root = repo_root()
-    completed = subprocess.run(
-        [sys.executable, "-m", _MODULE],
-        cwd=root,
-        capture_output=True,
-        text=True,
-        check=False,
+def test_mutation_driver_script_entrypoint_no_module_not_found() -> None:
+    """Legacy script argv must bootstrap before ``from tests.spring_signals…``."""
+    _assert_import_probe(
+        _run_import_only([sys.executable, str(_CI_SCRIPT), _IMPORT_ONLY])
     )
-    assert completed.returncode == 0, f"{completed.stdout}\n{completed.stderr}"[-2000:]
 
 
-def test_workflow_and_pre_pr_use_module_or_fixed_script() -> None:
-    """CI must not keep the bare broken script-only pattern without a fix path."""
+def test_mutation_driver_module_entrypoint_imports() -> None:
+    """CI SoT argv (``python -m …``) must import cleanly without the kill loop."""
+    _assert_import_probe(
+        _run_import_only([sys.executable, "-m", _MODULE, _IMPORT_ONLY])
+    )
+
+
+def test_workflow_and_pre_pr_prefer_module_entrypoint() -> None:
+    """CI / pre_pr must use ``-m`` so script-path pollution is not the SoT."""
     root = repo_root()
     workflow = (root / ".github/workflows/python-gates.yml").read_text(encoding="utf-8")
-    assert "mutation_driver" in workflow
-    # Prefer -m; script form is OK only if the regression above stays green.
-    uses_module = "-m tests.spring_signals.mutation_driver" in workflow
-    uses_script = "tests/spring_signals/mutation_driver.py" in workflow
-    assert uses_module or uses_script
+    assert "-m tests.spring_signals.mutation_driver" in workflow
     import pre_pr
 
     names = {name: kind for name, kind, _ in pre_pr.build_suites("full")}

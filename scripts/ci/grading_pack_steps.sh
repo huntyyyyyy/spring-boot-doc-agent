@@ -147,7 +147,8 @@ EOF
 }
 
 cmd_self_test() {
-  # Fast launcher hygiene - also covered by tests/ci/test_local_grading_pack.py
+  # Fast launcher hygiene only (ascii + markdown + list). Doctor is a separate
+  # id - keep it out of self-test so missing OCS pointers do not fail hygiene.
   _activate_venv || return $?
   if ! python - <<'PY'
 from pathlib import Path
@@ -177,6 +178,5 @@ PY
     return 1
   fi
   cmd_list >/dev/null || return $?
-  cmd_doctor || return $?
   echo "self-test ok"
 }
