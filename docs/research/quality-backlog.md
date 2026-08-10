@@ -291,3 +291,16 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
+---
+
+## P34 — Operator/agent surface (E-OAS0) — Spec DRAFT
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P34.0 | **E-OAS0 Spec:** approve **OAS1–OAS16** (RunContext; dual sinks; doctor; Typer grade-only; **human-review floor**; campaign OS×shell matrix; Refuse rich/OTel/embedding SoTs + unattended AI + universal emulator) | **DRAFT** (2026-08-10) — pending human Approve | research `process/37-…` + design stub |
+| P34.1 | **E-OAS1 Implement:** grade surface (context + JSONL receipt + remediation) | Deferred | only after E-OAS0 Approve |
+| P34.2 | Problem-first CLI classes A–J inventory (opaque errors → frameworks-as-responses) | **Done** (research 2026-08-10) | [`process/39-cli-operator-problem-classes-2026-08-10.md`](process/39-cli-operator-problem-classes-2026-08-10.md) |
+| P34.3 | CLI DX / a11y / dual-sink landing pads | **Done** (research 2026-08-10) | [`process/38-cli-dx-a11y-dual-sinks-2026-08-10.md`](process/38-cli-dx-a11y-dual-sinks-2026-08-10.md) |
+
+Research: [`process/37-operator-agent-surface-cli-mcp-rag-2026.md`](process/37-operator-agent-surface-cli-mcp-rag-2026.md), [`process/39-…`](process/39-cli-operator-problem-classes-2026-08-10.md). Design: [`docs/design/operator-agent-surface-design-2026-08-10.md`](../design/operator-agent-surface-design-2026-08-10.md). **Embody** RunContext + dual sinks + Stage-0 packets + **human-review floor**; **Adopt** clig.dev + actionable errors + Typer-for-grade-only + campaign OS×shell; **Refuse** rich CI SoT / OTel tip SoT / embedding citation SoT / MCP codegen / **unattended AI merge** / **universal OS+terminal+phone emulator as CLI SoT**.
