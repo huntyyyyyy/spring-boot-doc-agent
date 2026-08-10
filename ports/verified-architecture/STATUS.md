@@ -8,27 +8,42 @@ last_reviewed: '2026-08-10'
 
 ## Phase
 
-**Spec / gap-fill** — Implement = Refuse.  
-**Port Ready:** YES — see `PORT_READY.md` (export Spec corpus).
+**Specification / gap-fill** — product implementation = Refuse.  
+**Port ready:** YES — see `PORT_READY.md` (export the specification corpus).  
+**Implement ready:** NO.
 
-## Research basis (Jun–Aug 2026)
+Use whole words in all edits — see `GLOSSARY.md`.
 
-`research/papers-2026-may-aug/june-august-2026-port-readiness.md`  
-(Proof-or-Stop, Contracts, Cue-WM, EA-Graph, STEAD, Aria, MAAD, HyperTool, MCPBench)
+## Research basis (June–August 2026)
+
+`research/papers-2026-may-aug/june-august-2026-port-readiness.md`
+
+Papers that shaped readiness (full titles):
+
+- Proof-or-Stop: Don't Trust the Agent, Trust the Evidence
+- From Prompts to Contracts: Harness Engineering for Auditable Enterprise LLM Agents
+- Delivery, Not Storage: Cue-Anchored Working Memory as a Harness Property
+- EA-Graph: Artifact-Anchored Verification Memory for Coding Agents under Upstream Drift
+- Formal Verification of Agentic Systems over Operational Data (Stateful Tool-Enabled Agentic Deployments)
+- Harnessing Code Agents for Automatic Software Verification (Aria)
+- Bridging Requirements and Architecture (multi-agent orchestration)
+- HyperTool; DynamicMCPBench
 
 ## Must spine
 
-Graph + locks ∧ EA-Graph ∧ STEAD ∧ freshness-bound receipts — `VERIFY_STACK.md`.
+Graph + locks **and** artifact-anchored claim memory **and** Stateful
+Tool-Enabled Agentic Deployment tool constraints **and** freshness-bound
+receipts — see `08-verification/VERIFY_STACK.md`.
 
 ## Next tasks after port
 
-1. Human sign BOUNDARY + VERIFY_STACK + wave-1 StRS/SRS in `SIGNOFF_LOG.md`
-2. Spike PIL-LAT-1/2 for QAS-N-01/02 measures (or demote latency from Must)
+1. Human sign `BOUNDARY.md` + `VERIFY_STACK.md` + wave-1 Stakeholder and Software Requirements Specifications in `SIGNOFF_LOG.md`
+2. Spike for Quality Attribute Scenario N-01/N-02 latency measures (or demote latency from Must)
 3. Build fixture plants named in `vv-plan/`
 4. Only then consider Implement Approve
 
 ## Do not do next
 
-- Treat Port Ready as Implement Ready
+- Treat Port ready as Implement ready
 - Shrink Must spine
 - Cargo scaffolds

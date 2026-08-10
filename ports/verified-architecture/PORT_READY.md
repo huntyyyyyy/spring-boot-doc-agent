@@ -6,23 +6,27 @@ date: '2026-08-10'
 
 # Port-ready checklist
 
-**Port** = push this folder as a standalone GitHub/Cursor root for Spec agents.  
-**Implement** = product code — still Refuse until DoR PASS + human W0/W1 Approve.
+**Port** = push this folder as a standalone GitHub/Cursor root for
+specification-phase agents.  
+**Implement** = product code — still Refuse until Definition of Ready PASS
+and human Wave 0 / Wave 1 Approve.
 
-## Port checklist (Spec corpus)
+Whole words required in prose — `GLOSSARY.md`.
+
+## Port checklist (specification corpus)
 
 | # | Item | Status |
 | --- | --- | --- |
-| P1 | Cold-start chain (BOOTSTRAP→STATUS→WALKTHROUGH→STRUCTURE→VERIFY_STACK) | PASS |
-| P2 | Must spine docs: graph∧EA-Graph∧STEAD∧receipts | PASS |
-| P3 | June–Aug 2026 research memo informing readiness | PASS |
-| P4 | Wave-1 StRS/SRS/RTM under `03-requirements/` | PASS (Draft) |
-| P5 | Six-part QAS for privacy/determinism/claims/STEAD; latency Spike-blocked | PASS |
-| P6 | ICD drafts: receipt JSON Schema, claims Schema, mcp-tools, registry SQL | PASS (Draft) |
-| P7 | V&V fixture names + Accept methods | PASS (Draft) |
+| P1 | Cold-start chain (bootstrap → status → walkthrough → structure → verify stack) | PASS |
+| P2 | Must spine docs: graph **and** artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic Deployment constraints **and** receipts | PASS |
+| P3 | June–August 2026 research memo informing readiness | PASS |
+| P4 | Wave-1 Stakeholder Requirements Specification, Software Requirements Specification, Requirements Traceability Matrix under `03-requirements/` | PASS (Draft) |
+| P5 | Quality Attribute Scenarios for privacy, determinism, claims, tool ids; latency Spike-blocked | PASS |
+| P6 | Interface Control Document drafts: receipt JSON Schema, claims Schema, Model Context Protocol tools, registry Structured Query Language notes | PASS (Draft) |
+| P7 | Verification and Validation fixture names + Accept methods | PASS (Draft) |
 | P8 | Sign-off log template (human still must sign) | PASS |
-| P9 | EXPORT.md instructions | PASS |
-| P10 | Legacy `docs/`/`nests/` clearly demoted | PASS |
+| P9 | `EXPORT.md` instructions | PASS |
+| P10 | Legacy `docs/` / `nests/` clearly demoted | PASS |
 
 ## Still not Implement-ready
 

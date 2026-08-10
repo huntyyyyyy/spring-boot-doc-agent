@@ -8,34 +8,37 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # June–August 2026 findings (before port readiness work)
 
-Published timestamps verified via arXiv Atom API (2026-08-10).
+Published timestamps verified via arXiv Atom application programming interface
+(2026-08-10). Whole words in prose — see root `GLOSSARY.md`.
 
 ## Papers that change how we get “ready”
 
-| ID | Paper | Pub | Finding we Embody/Adopt | Port-ready action |
+| ID | Paper (full title) | Published | Finding we Embody/Adopt | Port-ready action |
 | --- | --- | --- | --- | --- |
-| J1 | [Proof-or-Stop 2607.14890](https://arxiv.org/abs/2607.14890) | Jul 16 | “Done” needs **freshness-bound authenticated receipts**, not agent assertion; evidence-gated lifecycle | Receipt schema: bind digests + reject stale; V&V Accept = receipt re-derives |
-| J2 | [Prompts→Contracts 2607.08028](https://arxiv.org/abs/2607.08028) | Jul 9 | **Code-owned harness checks** beat prompts; contracts auditable under model swap | Harness ICD; STEAD ST-* as code-owned; Aria-shaped propose/decide |
-| J3 | [Cue-anchored WM 2607.20972](https://arxiv.org/abs/2607.20972) | Jul 23 | Working memory = **delivery** by harness, not hoping agent stores | Keep ClaimMemory ≠ AgentMemory; cue injection Could later |
-| J4 | [EA-Graph 2608.04278](https://arxiv.org/abs/2608.04278) | Aug 4 | Anchors; evidence⊥freshness; **unprovable** | Already Must — finish ICD + Accept fixture text |
-| J5 | [STEAD 2608.03609](https://arxiv.org/abs/2608.03609) | Aug 4 | Agent+tools FO-CTL undecidable; equivariance | ST-1…5 in MCP ICD; Spike charter |
-| J6 | [Aria 2607.06341](https://arxiv.org/abs/2607.06341) | Jul 7 | Agent + harness; kernel decides | VERIFY_STACK harness loop |
-| J7 | [MAAD 2606.01385](https://arxiv.org/abs/2606.01385) | May 31* | Agents draft RE/arch; Evaluator/ATAM; humans remain | Promote StRS/SRS/QAS; human signoff required |
-| J8 | [HyperTool 2606.13663](https://arxiv.org/abs/2606.13663) | Jun 11 | MCP composition blocks; primitives keep schemas | MCP ICD lists **primitive** tools first; HyperTool = Could |
-| J9 | [DynamicMCPBench 2607.20531](https://arxiv.org/abs/2607.20531) | Jul 10 | Effect-scored MCP tasks; typed checkpoints | V&V: effect checkpoints for verify tools |
+| J1 | [Proof-or-Stop: Don't Trust the Agent, Trust the Evidence](https://arxiv.org/abs/2607.14890) | Jul 16 | “Done” needs **freshness-bound authenticated receipts**, not agent assertion; evidence-gated lifecycle | Receipt schema: bind digests + reject stale; Verification and Validation Accept = receipt re-derives |
+| J2 | [From Prompts to Contracts: Harness Engineering for Auditable Enterprise LLM Agents](https://arxiv.org/abs/2607.08028) | Jul 9 | **Code-owned harness checks** beat prompts; contracts auditable under model swap | Harness Interface Control Document; Stateful Tool-Enabled Agentic Deployment ST-* as code-owned; Aria-shaped propose/decide |
+| J3 | [Delivery, Not Storage: Cue-Anchored Working Memory as a Harness Property for Coding Agents](https://arxiv.org/abs/2607.20972) | Jul 23 | Working memory = **delivery** by harness, not hoping agent stores | Keep ClaimMemory ≠ AgentMemory; cue injection Could later |
+| J4 | [EA-Graph: Artifact-Anchored Verification Memory for Coding Agents under Upstream Drift](https://arxiv.org/abs/2608.04278) | Aug 4 | Anchors; evidence independent of freshness; **unprovable** | Already Must — finish Interface Control Document + Accept fixture text |
+| J5 | [Formal Verification of Agentic Systems over Operational Data](https://arxiv.org/abs/2608.03609) (Stateful Tool-Enabled Agentic Deployments) | Aug 4 | Agent + tools First-Order Computation Tree Logic undecidable; equivariance | ST-1…5 in Model Context Protocol Interface Control Document; Spike charter |
+| J6 | [Harnessing Code Agents for Automatic Software Verification](https://arxiv.org/abs/2607.06341) (Aria) | Jul 7 | Agent + harness; kernel decides | VERIFY_STACK harness loop |
+| J7 | [Bridging Requirements and Architecture: Multi-Agent Orchestration with External Knowledge and Hierarchical Memory](https://arxiv.org/abs/2606.01385) | May 31* | Agents draft requirements engineering / architecture; Evaluator / Architecture Tradeoff Analysis Method; humans remain | Promote Stakeholder and Software Requirements Specifications + Quality Attribute Scenarios; human signoff required |
+| J8 | [HyperTool: Beyond Step-Wise Tool Calls for Tool-Augmented Agents](https://arxiv.org/abs/2606.13663) | Jun 11 | Model Context Protocol composition blocks; primitives keep schemas | Model Context Protocol Interface Control Document lists **primitive** tools first; HyperTool = Could |
+| J9 | [DynamicMCPBench: A Trace-Grounded, Effect-Scored Benchmark for LLM Agents over Live MCP Servers](https://arxiv.org/abs/2607.20531) | Jul 10 | Effect-scored Model Context Protocol tasks; typed checkpoints | Verification and Validation: effect checkpoints for verify tools |
 
-\*Late-May; included as June-adjacent RE/ATAM evidence.
+\*Late-May; included as June-adjacent requirements engineering / Architecture Tradeoff Analysis Method evidence.
 
 ## Explicit refuses reinforced
 
 | Temptation | Paper pressure | Verdict |
 | --- | --- | --- |
-| Prompt-only “be careful with ids” | J2 | Refuse — code-owned checks |
+| Prompt-only “be careful with identifiers” | J2 | Refuse — code-owned checks |
 | Agent says verify done | J1 | Refuse — receipt gate |
 | Collapse claim store into chat memory | J3 | Refuse |
-| Free-text MCP entity args | J5 | Refuse |
-| Latency adjectives without six-part QAS | J7 / ATAM | Refuse Design influence |
+| Free-text Model Context Protocol entity arguments | J5 | Refuse |
+| Latency adjectives without six-part Quality Attribute Scenario | J7 / Architecture Tradeoff Analysis Method | Refuse Design influence |
 
-## Port vs Implement
+## Port versus Implement
 
-These findings make the **planning corpus** ready to export with a coherent Must spine and Accept methods. They do **not** by themselves green DoR human Accept or authorize Cargo.
+These findings make the **planning corpus** ready to export with a coherent
+Must spine and Accept methods. They do **not** by themselves green Definition
+of Ready human Accept or authorize Cargo.

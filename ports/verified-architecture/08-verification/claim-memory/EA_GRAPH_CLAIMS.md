@@ -1,14 +1,18 @@
 ---
-title: EA-Graph claim memory — Spec (adopt 2608.04278)
+title: Artifact-anchored claim memory — specification (adopt 2608.04278)
 status: DRAFT
 date: '2026-08-10'
 arxiv: '2608.04278'
+paper_title: 'EA-Graph: Artifact-Anchored Verification Memory for Coding Agents under Upstream Drift'
 ---
 
-# EA-Graph claim memory (product Spec)
+# Artifact-anchored claim memory (product specification)
 
-We **Adopt** the paper’s model for *verification claims*, not its synthetic
-benchmark worlds as plants.
+We **Adopt** the paper *EA-Graph: Artifact-Anchored Verification Memory for
+Coding Agents under Upstream Drift* for *verification claims*, not its
+synthetic benchmark worlds as plants.
+
+Whole words in prose — see root `GLOSSARY.md`.
 
 ## Objects
 
@@ -20,7 +24,7 @@ benchmark worlds as plants.
 | Meta | Independent `(evidence_strength, freshness)` |
 | Disposition | `unaffected` \| `affected` \| `unprovable` after withdrawal query |
 
-## Withdrawal algorithm (Spec)
+## Withdrawal algorithm (specification)
 
 ```text
 for each stored claim C:
@@ -32,18 +36,12 @@ for each stored claim C:
 
 ## Storage (design)
 
-- Table/collection `claims` beside registry (same SQLite file OK in MVP).
+- Table/collection `claims` beside registry (same SQLite file OK in minimum viable product).
 - Not agent conversational memory (`AgentMemory` port stays separate).
-- Rebuildable from receipts + current files; git does **not** sync claim DB blobs
-  as team SoR (locks in git remain policy SoR).
+- Rebuildable from receipts + current files; git does **not** sync claim database blobs
+  as team System of Record (locks in git remain policy System of Record).
 
-## API sketch (ICD later)
+## Application programming interface sketch (Interface Control Document later)
 
-- `claim_put(claim, anchors[])`
-- `claim_withdraw(repo_snapshot) -> dispositions[]`
-- `claim_get(claim_id)`
-
-## Accept (W1)
-
-Fixture: establish claim on file A; edit A; withdraw → `affected` or
-`unprovable`; never invents a new resolve edge.
+See `07-system-design/icd/ea-graph-claims.schema.json` and
+`receipts/receipt-schema-draft.md`.

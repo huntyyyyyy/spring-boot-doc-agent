@@ -1,16 +1,18 @@
 # Verification
 
-Canonical Must spine: **[VERIFY_STACK.md](VERIFY_STACK.md)**  
-(graph + locks ∧ EA-Graph ∧ STEAD ∧ receipts).
+Must spine (do not shrink):
+
+graph + locks **and** artifact-anchored claim memory **and** Stateful
+Tool-Enabled Agentic Deployment tool constraints **and** freshness-bound
+receipts.
+
+Whole words — see root `GLOSSARY.md`.
 
 | Path | Role |
 | --- | --- |
-| `VERIFY_STACK.md` | Coupled layers diagram + hard rules |
-| `sor-derived-matrix.md` | SoR vs derived |
-| `claim-memory/EA_GRAPH_CLAIMS.md` | EA-Graph Adopt Spec |
-| `stead/STEAD_CONSTRAINTS.md` | Tool-boundary ST-1…5 |
-| `receipts/` | Proof-tour schema |
-| `l1-navigate/` `l2-policy/` `l3-proof/` | Layer notes |
-| `vv-plan/` | Accept fixtures |
-
-See `AGENT_WALKTHROUGH.md` for when agents open this folder.
+| `VERIFY_STACK.md` | Coupled layer diagram + hard rules |
+| `claim-memory/EA_GRAPH_CLAIMS.md` | Artifact-anchored claim memory Adopt specification |
+| `stead/STEAD_CONSTRAINTS.md` | Tool-boundary constraints ST-1…5 |
+| `receipts/` | Receipt schema drafts |
+| `sor-derived-matrix.md` | System of Record versus derived matrix |
+| `vv-plan/` | Verification and Validation fixture names |

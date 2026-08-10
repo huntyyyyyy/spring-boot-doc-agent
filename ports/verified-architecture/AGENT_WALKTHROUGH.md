@@ -9,6 +9,8 @@ audience: [agent, developer]
 Use this when the folder is the **root** of a new GitHub/Cursor project.
 No chat history. Follow the steps; do not breadth-scan the whole tree.
 
+**Language:** whole words in prose — `GLOSSARY.md`.
+
 ## Automatic context (Cursor loads without you asking)
 
 ```text
@@ -30,17 +32,18 @@ Everything else is **on demand** (globs, agent-requested, Skills, or this list).
 flowchart TD
   A[1 AGENT_BOOTSTRAP.md] --> B[2 STATUS.md]
   B --> C[3 AGENT_WALKTHROUGH.md this file]
-  C --> D[4 PRECODE_MAP.md]
-  D --> E[5 DoR DEFINITION_OF_READY.md]
+  C --> GLOSS[3b GLOSSARY.md whole words]
+  GLOSS --> D[4 PRECODE_MAP.md]
+  D --> E[5 Definition of Ready]
   E --> F[6 no-code-gate README]
   F --> G[7 ARCHITECTURE_BRIEF.md]
-  G --> H[8 VERIFY_STACK.md EA-Graph + STEAD + graph]
-  H --> I[9 open OQ-*.md blocks_code]
+  G --> H[8 VERIFY_STACK claim memory + tool constraints + graph]
+  H --> I[9 open questions that block code]
   I --> J{Task needs evidence?}
   J -->|yes| K[Skill rag-retrieve → one pack]
   J -->|no| L[Edit only the STATUS next-task path]
   K --> L
-  L --> M[Update STATUS + OQ status]
+  L --> M[Update STATUS + open-question status]
 ```
 
 | Step | File | Why |
@@ -48,16 +51,18 @@ flowchart TD
 | 1 | `AGENT_BOOTSTRAP.md` | Priming packet / refuses |
 | 2 | `STATUS.md` | Phase + **single next task** |
 | 3 | `AGENT_WALKTHROUGH.md` | This chain + structure visual |
+| 3b | `GLOSSARY.md` | Whole words — expand short labels |
 | 4 | `PRECODE_MAP.md` | Where new files go (`00/`–`12/`) |
-| 5 | `00-governance/dor-dod/DEFINITION_OF_READY.md` | Codegen gate rows |
+| 5 | `00-governance/dor-dod/DEFINITION_OF_READY.md` | Code-generation gate rows |
 | 6 | `12-delivery/no-code-gate/README.md` | Hard Refuse product code |
-| 7 | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape / MVP / leaders |
-| 8 | `08-verification/VERIFY_STACK.md` | **Graph+locks ∧ EA-Graph ∧ STEAD** |
-| 9 | `04-constraints/open-questions/OQ-*.md` | What still blocks |
-| 10 | `PORT_READY.md` + DoR | Spec port vs Implement gate |
+| 7 | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape / minimum viable product / leaders |
+| 8 | `08-verification/VERIFY_STACK.md` | Graph + locks **and** artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic Deployment constraints |
+| 9 | `04-constraints/open-questions/` | What still blocks |
+| 10 | `PORT_READY.md` + Definition of Ready | Specification port versus Implement gate |
 
 **Stop.** Do not open `research/**` wholesale. Do not open `nests/**` unless the
-task is that BC option. Do not open legacy `docs/**` unless promoting into `00/`–`12/`.
+task is that bounded-context option. Do not open legacy `docs/**` unless
+promoting into `00/`–`12/`.
 
 ---
 
@@ -65,24 +70,26 @@ task is that BC option. Do not open legacy `docs/**` unless promoting into `00/`
 
 | If STATUS says… | Open next |
 | --- | --- |
-| Boundary / OQ-01 | `01-vision/problem-frame/BOUNDARY.md` |
-| Receipts / EA-Graph | `08-verification/receipts/` + `claim-memory/` |
-| STEAD / MCP tools | `08-verification/stead/` + `SPIKE-STEAD-equivariance.md` |
-| Ports / ICD | `07-system-design/ports-and-adapters/PORTS.md`, `icd/` |
-| QAS | `03-requirements/qas/` (N-01…N-08) |
-| Port / DoR | `PORT_READY.md` + `00-governance/dor-dod/DEFINITION_OF_READY.md` |
-| Jun–Aug readiness | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` **one file** |
+| Boundary / open question 01 | `01-vision/problem-frame/BOUNDARY.md` |
+| Receipts / artifact-anchored claims | `08-verification/receipts/` + `claim-memory/` |
+| Tool constraints / Model Context Protocol tools | `08-verification/stead/` + `SPIKE-STEAD-equivariance.md` |
+| Ports / Interface Control Document | `07-system-design/ports-and-adapters/PORTS.md`, `icd/` |
+| Quality Attribute Scenarios | `03-requirements/qas/` (N-01…N-08) |
+| Port / Definition of Ready | `PORT_READY.md` + `00-governance/dor-dod/DEFINITION_OF_READY.md` |
+| June–August readiness | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` **one file** |
 | Papers / overturn | `research/adversarial/july-august-2026-overturn-review.md` **one file** |
 
 ---
 
-## Paste prompt for the new repo
+## Paste prompt for the new repository
 
 ```text
-Repo root is this planning corpus. No prior chat.
-Read in order: AGENT_BOOTSTRAP.md → STATUS.md → AGENT_WALKTHROUGH.md.
+Repository root is this planning corpus. No prior chat.
+Use whole words (GLOSSARY.md). No bare acronyms in prose.
+Read in order: AGENT_BOOTSTRAP.md → STATUS.md → AGENT_WALKTHROUGH.md → GLOSSARY.md.
 Obey Skill cold-start. Do not write product code.
-Must spine = graph + locks + EA-Graph claim memory + STEAD tool constraints
-(see 08-verification/VERIFY_STACK.md) — not graph+locks alone.
+Must spine = graph + locks + artifact-anchored claim memory
+  + Stateful Tool-Enabled Agentic Deployment tool constraints
+(see 08-verification/VERIFY_STACK.md) — not graph + locks alone.
 Work the single next task in STATUS.md.
 ```

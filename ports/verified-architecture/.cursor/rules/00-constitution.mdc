@@ -5,35 +5,43 @@ alwaysApply: true
 
 # Verified Architecture — constitution
 
-You are in a **planning + RAG corpus** for a verified polyglot architecture
-product. Progressive disclosure is part of the product.
+You are in a **planning + Retrieval-Augmented Generation corpus** for a
+verified polyglot architecture product. Progressive disclosure is part of
+the product.
+
+**Language:** whole words in prose — expand short labels. See `GLOSSARY.md`.
 
 ## Cold start
 
 No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH.md`
-→ `STRUCTURE.md`. Skill `cold-start`.
+→ `STRUCTURE.md` → `GLOSSARY.md`. Skill `cold-start`.
 
 ## Identity
 
-- **Working draft** under ISO/IEC/IEEE 29148-shaped RE, SEI ATAM QAS,
-  Nygard ADRs, and C4. Draft *content* is fine; skipping the *form* is not.
-- **Must spine:** graph + locks **∧** EA-Graph claim memory **∧** STEAD tool
-  constraints **∧** receipts — `08-verification/VERIFY_STACK.md`.
-  Do **not** shrink to graph+locks alone.
+- **Working draft** under ISO/IEC/IEEE 29148-shaped requirements engineering,
+  Software Engineering Institute Architecture Tradeoff Analysis Method Quality
+  Attribute Scenarios, Nygard Architecture Decision Records, and C4. Draft
+  *content* is fine; skipping the *form* is not.
+- **Must spine:** graph + locks **and** artifact-anchored claim memory **and**
+  Stateful Tool-Enabled Agentic Deployment tool constraints **and** receipts —
+  `08-verification/VERIFY_STACK.md`. Do **not** shrink to graph + locks alone.
 - **Polyglot as options** under `07-system-design/options/`.
 - **`research/` is evidence** — retrieve one pack; never always-load.
 
 ## Gates
 
-- No product code until DoR + no-code-gate green.
-- Must NFRs → six-part QAS before Design.
-- Constraints ≠ requirements; `blocks_code` OQs block codegen.
-- Unknown / **unprovable** > wrong; evidence ≠ freshness.
-- MCP/CLI entity ids typed from stores (STEAD ST-1…5) — no hallucinated handles.
-- RAG/LLM text ∉ witnesses or claim anchors.
-- C4 cites ADR IDs; science = locked transfers only.
+- No product code until Definition of Ready + no-code-gate green.
+- Must non-functional requirements → six-part Quality Attribute Scenario before Design.
+- Constraints are not requirements; open questions marked `blocks_code` block code generation.
+- Unknown / **unprovable** beats wrong; evidence is not freshness.
+- Model Context Protocol / command-line interface entity identifiers typed from
+  stores (Stateful Tool-Enabled Agentic Deployment constraints ST-1…5) — no
+  hallucinated handles.
+- Retrieval-Augmented Generation / large language model text is not a witness
+  or claim anchor.
+- C4 cites Architecture Decision Record identifiers; science = locked transfers only.
 
 ## Context budget
 
-Always-on ≤2. Path scope = MDC globs. Depth = Skills.
+Always-on ≤2. Path scope = Cursor rule globs. Depth = Skills.
 Prefer `00/`–`12/` over legacy `docs/` + `nests/`.

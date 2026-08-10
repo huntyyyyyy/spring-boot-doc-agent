@@ -14,7 +14,8 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 | Pack | Path | Use when |
 | --- | --- | --- |
 | **Architecture brief (principal)** | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape, MVP, math, leaders |
-| **Port readiness (Jun–Aug 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Proof-or-Stop, Contracts, EA-Graph, STEAD → DoR |
+| **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Proof-or-Stop, Contracts, artifact-anchored claim memory, Stateful Tool-Enabled Agentic Deployment → Definition of Ready |
+| **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |
 | **Jul–Aug adversarial** | `research/adversarial/july-august-2026-overturn-review.md` | Did new papers overturn us? |
 | **Leaders / GitHub adoption** | `research/leaders-adoption/` | Who leads vs who ships |
 | **Pre-code BFS taxonomy** | `research/pre-code-bfs/` | Classify domains before AI codegen |

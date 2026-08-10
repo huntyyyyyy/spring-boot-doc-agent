@@ -1,51 +1,56 @@
-# Verified Architecture — planning + RAG corpus
+# Verified Architecture — planning + Retrieval-Augmented Generation corpus
 
 Greenfield **product planning** repository for a verified polyglot system,
-plus a **RAG-oriented research corpus** shaped for both developers and coding
-agents.
+plus a research corpus shaped for both developers and coding agents.
+
+**Language:** use **whole words** in prose — see [`GLOSSARY.md`](GLOSSARY.md).
 
 ## What this is
 
 | Layer | Role |
 | --- | --- |
-| `docs/` | Authoritative product artifacts (requirements, constraints, C4, ADRs) |
-| `research/` | Evidence corpus (claim-tiered) — retrieve, don't always-load |
-| `nests/` | Bounded-context folders with scoped `.mdc` rules |
-| `.cursor/rules/` | Repo-wide MDC activation algebra |
+| `00/`–`12/` | Authoritative specification tree (preferred) |
+| `docs/` | Legacy product artifacts (demoted; promote into `00/`–`12/`) |
+| `research/` | Evidence corpus (claim-tiered) — retrieve, do not always-load |
+| `nests/` | Legacy bounded-context folders (demoted) |
+| `.cursor/rules/` | Repo-wide Cursor rule activation algebra |
 | `.cursor/skills/` | Deep playbooks agents pull on demand |
 | `AGENTS.md` | Thin ingest pointer (not a second rule system) |
 
 ## Product intent (short)
 
 Ship a **polyglot verified architecture** platform: languages are first-class
-peers; verification Musts are graph + locks + receipts; formal methods only
-where earned. This tree is also a **RAG tool surface**: the same Markdown
-corpus is retrieved for agents and developers via MDC modes + Skills + INDEX.
+peers; verification Musts are graph + locks + artifact-anchored claim memory +
+Stateful Tool-Enabled Agentic Deployment tool constraints + receipts; formal
+methods only where earned. This tree is also a **Retrieval-Augmented Generation
+tool surface**: the same Markdown corpus is retrieved for agents and developers
+via Cursor rule modes + Skills + indexes.
 
-## RAG + MDC — how context is loaded
+## How context is loaded
 
 | Mode | When | Use here |
 | --- | --- | --- |
-| `alwaysApply: true` | Rare — constitution + RAG budget | Exactly 2 under `.cursor/rules/` |
-| `globs:` | Path-scoped work | Nest MDCs + `docs/**` / `research/**` |
-| Agent-requested | Agent pulls by description | Look-first, ATAM, polyglot topics |
+| `alwaysApply: true` | Rare — constitution + retrieval budget | Exactly 2 under `.cursor/rules/` |
+| `globs:` | Path-scoped work | Nest rules + `docs/**` / `research/**` |
+| Agent-requested | Agent pulls by description | Look-first, Architecture Tradeoff Analysis Method, polyglot topics |
 | Manual `@rule` | Human attaches | Formal honesty |
 | Skills | On-demand depth | `rag-retrieve`, `promote-claim` |
 
-**Do not** convert the whole research tree into always-on `.mdc`. Theory:
+**Do not** convert the whole research tree into always-on Cursor rules. Theory:
 `research/mdc-devex/`.
 
 ## Start here
 
-**Agents (new repo / no chat):**  
+**Agents (new repository / no chat):**  
 [AGENT_BOOTSTRAP.md](AGENT_BOOTSTRAP.md) → [STATUS.md](STATUS.md) →
 [AGENT_WALKTHROUGH.md](AGENT_WALKTHROUGH.md) → [STRUCTURE.md](STRUCTURE.md) →
+[GLOSSARY.md](GLOSSARY.md) →
 [08-verification/VERIFY_STACK.md](08-verification/VERIFY_STACK.md)
 
 Paste prompt: [HOW_TO_PRIME_AGENTS.md](HOW_TO_PRIME_AGENTS.md).
 
 ## Status
 
-**Port Ready:** YES — [`PORT_READY.md`](PORT_READY.md) (export Spec corpus via [`EXPORT.md`](EXPORT.md)).  
-**Implement Ready:** NO — see [`STATUS.md`](STATUS.md).  
-Research that closed Spec gaps: [`june-august-2026-port-readiness.md`](research/papers-2026-may-aug/june-august-2026-port-readiness.md).
+**Port ready:** YES — [`PORT_READY.md`](PORT_READY.md) (export specification corpus via [`EXPORT.md`](EXPORT.md)).  
+**Implement ready:** NO — see [`STATUS.md`](STATUS.md).  
+Research that closed specification gaps: [`june-august-2026-port-readiness.md`](research/papers-2026-may-aug/june-august-2026-port-readiness.md).

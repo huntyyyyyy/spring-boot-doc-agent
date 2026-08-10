@@ -5,8 +5,10 @@ alwaysApply: false
 
 # Cold start
 
-If you lack prior chat context for this repo:
+If you lack prior chat context for this repository:
 
-1. Read `AGENT_BOOTSTRAP.md` then `STATUS.md`.
+1. Read `AGENT_BOOTSTRAP.md` then `STATUS.md` then `GLOSSARY.md`.
 2. Follow Skill `cold-start`.
-3. Do not generate product code; fill the next FAIL DoR / OQ instead.
+3. Use **whole words** in every edit (no bare acronyms in prose).
+4. Do not generate product code; fill the next FAIL Definition of Ready /
+   open-question row instead.

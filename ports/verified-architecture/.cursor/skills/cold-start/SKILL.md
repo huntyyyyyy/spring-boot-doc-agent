@@ -10,13 +10,15 @@ description: Prime a new agent session with no chat history — bootstrap, walkt
 1. Read `AGENT_BOOTSTRAP.md`.
 2. Read `STATUS.md`.
 3. Read `AGENT_WALKTHROUGH.md` (sequential chain).
-4. Skim `STRUCTURE.md` if orientation needed.
-5. Read `08-verification/VERIFY_STACK.md` — confirm Must spine includes
-   EA-Graph + STEAD, not graph+locks alone.
-6. Skim DoR + no-code-gate; list open `blocks_code` OQs.
-7. Announce: phase, codegen allowed? (**no**), Must spine one-liner, **one**
+4. Read `GLOSSARY.md` — use **whole words** in every edit (no bare acronyms).
+5. Skim `STRUCTURE.md` if orientation needed.
+6. Read `08-verification/VERIFY_STACK.md` — confirm Must spine includes
+   artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic
+   Deployment tool constraints, not graph + locks alone.
+7. Skim Definition of Ready + no-code-gate; list open `blocks_code` open questions.
+8. Announce: phase, code generation allowed? (**no**), Must spine one-liner, **one**
    next task from STATUS.
-8. Do not browse the whole repo.
+9. Do not browse the whole repository.
 
 ## Exit
 

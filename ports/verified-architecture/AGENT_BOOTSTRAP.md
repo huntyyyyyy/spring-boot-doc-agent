@@ -8,31 +8,36 @@ audience: [agent, developer]
 
 You have **no prior conversation**. This file is the priming packet.
 
+**Language rule:** write **whole words** in every edit. Do not leave bare
+acronyms in prose. Expand short path labels on first mention. See `GLOSSARY.md`.
+
 ## Who you are / where you are
 
-You are in a **planning + RAG corpus** for a verified architecture product.
-Progressive disclosure (MDC + Skills + INDEX) is part of the product.
+You are in a **planning + Retrieval-Augmented Generation corpus** for a
+verified architecture product. Progressive disclosure (Cursor rule files +
+Skills + indexes) is part of the product.
 
-**Must spine (do not reduce to graph+locks alone):**
+**Must spine (do not reduce to graph + locks alone):**
 
-1. Virtual dep/DI **graph** + **lock IR**
-2. **EA-Graph claim memory** — anchors, evidence≠freshness, `unprovable`
-3. **STEAD tool constraints** — typed ids, equivariance, no FO-CTL cosplay
-4. **Receipts / proof-tour** — witnesses exclude LLM/RAG text
+1. Virtual dependency / Dependency Injection **graph** + **lock Intermediate Representation**
+2. **Artifact-anchored claim memory** (paper: *EA-Graph: Artifact-Anchored Verification Memory*) — anchors; evidence is not freshness; disposition `unprovable`
+3. **Stateful Tool-Enabled Agentic Deployment tool constraints** (paper: *Formal Verification of Agentic Systems over Operational Data*) — typed identifiers, equivariance, no First-Order Computation Tree Logic cosplay
+4. **Receipts / proof-carrying verification** — witnesses exclude large language model / Retrieval-Augmented Generation text
 5. Aria-shaped harness — agent proposes; verify stack decides
 
 See `08-verification/VERIFY_STACK.md`.
 
-**Not ready:** product language trees / `Cargo.toml` until DoR green.
+**Not ready:** product language trees / `Cargo.toml` until Definition of Ready is green.
 
 ## Open in order — then stop browsing
 
 1. `AGENT_BOOTSTRAP.md` (this file)
 2. `STATUS.md`
 3. `AGENT_WALKTHROUGH.md` — full chain + visuals
-4. `STRUCTURE.md` — repo map
-5. `08-verification/VERIFY_STACK.md` — EA-Graph + STEAD + graph
-6. `PRECODE_MAP.md` → DoR → no-code-gate → open OQs
+4. `STRUCTURE.md` — repository map
+5. `GLOSSARY.md` — whole-words rule
+6. `08-verification/VERIFY_STACK.md` — claim memory + tool constraints + graph
+7. `PRECODE_MAP.md` → Definition of Ready → no-code-gate → open questions
 
 Only then: Skill `rag-retrieve` for **one** research pack if needed.
 
@@ -40,23 +45,23 @@ Only then: Skill `rag-retrieve` for **one** research pack if needed.
 
 | Mode | Value |
 | --- | --- |
-| Phase | **Spec / fill gaps** — not Implement |
+| Phase | **Specification / fill gaps** — not Implement |
 | Allowed | Markdown under `00/`–`12/`, `research/`, `.cursor/` (+ legacy promote) |
-| Forbidden | Product scaffolds; ignoring EA-Graph/STEAD; dumping `research/` |
+| Forbidden | Product scaffolds; ignoring claim memory or tool-id constraints; dumping `research/` |
 | Authority | `00/`–`12/` preferred; `docs/` + `nests/` = legacy |
 
 ## Hard refuses
 
-1. No product codegen until DoR + no-code-gate green.
-2. No RE-MASTER Phi/Lance/Kuzu as Spec.
-3. No bare latency NFRs — six-part QAS only.
-4. Constraints ≠ requirements.
-5. SCIP ≠ Spring DI runtime; Unknown/`unprovable` required.
-6. WASM ≠ mathematical proof.
-7. RAG/LLM text ∉ verify witnesses / claim anchors.
-8. Don’t always-load research.
+1. No product code generation until Definition of Ready + no-code-gate are green.
+2. No RE-MASTER Phi/Lance/Kuzu as specification truth.
+3. No bare latency non-functional requirements — six-part Quality Attribute Scenario only.
+4. Constraints are not requirements.
+5. Source Code Index Protocol is not Spring Dependency Injection runtime; Unknown / `unprovable` required.
+6. WebAssembly is not mathematical proof.
+7. Retrieval-Augmented Generation / large language model text is not a verify witness or claim anchor.
+8. Do not always-load research.
 9. Languages live under `07-system-design/options/`, not tip.
-10. Don’t design MCP tools that accept hallucinated entity ids (STEAD ST-1…5).
+10. Do not design Model Context Protocol tools that accept hallucinated entity identifiers (Stateful Tool-Enabled Agentic Deployment constraints ST-1…5).
 
 ## Skills
 
@@ -64,7 +69,7 @@ Only then: Skill `rag-retrieve` for **one** research pack if needed.
 
 ## Success check
 
-- Phase? Spec/gap-fill  
-- Codegen? **No**  
-- Must spine? Graph+locks **and** EA-Graph **and** STEAD — see VERIFY_STACK  
+- Phase? Specification / gap-fill  
+- Code generation? **No**  
+- Must spine? Graph + locks **and** artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic Deployment constraints — see verify stack  
 - Next file? Whatever `STATUS.md` lists first  
