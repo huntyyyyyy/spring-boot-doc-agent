@@ -232,8 +232,9 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** — reshape provisional tip modules under cohesion bar (design memo); one stream.  
 **Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
+**Research draft (not Active tip):** **E-PROB0 / E-RAG0 / E-DS0 / E-OAS0** — [`process/42-…`](process/42-problem-first-rag-ds-cli-2026-08-10.md); Approve before Implement.
 **Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **embedding citation SoT / RAGAS-as-98.7 / GraphRAG tip runtime without Spec**.
 
 ---
 
@@ -308,3 +309,31 @@ Research: [`docs/research/coverage-quality/42-ds-mlops-problem-first-tooling-202
 **Adopt** contract/lineage/run-identity *patterns* without platform installs.  
 **Refuse** GE/Pandera/Evidently/DVC/MLflow/Feast as required deps; feature store; A/B as CI core; dashboard theater as 98.7.
 
+---
+
+## P18 — Problem-first RAG / data science / CLI (E-PROB0 portfolio)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P18.0 | **E-PROB0 Spec:** approve cross-domain problem→SoT/sensor/adapter map | **Draft** (2026-08-10) | process/42 |
+| P18.0a | **E-RAG0 Spec:** RAG inventory A–G | **Draft** | process/20 |
+| P18.0b | **E-DS0 Spec:** DS/MLOps classes | **Draft** | coverage-quality/42 |
+| P18.0c | **E-OAS0 Spec:** approve OAS1–OAS16 | **Draft** | process/37 + design stub |
+| P18.1 | Dual-sink actionable error spike | After E-OAS0 Approve | human+JSON parity |
+| P18.2 | Optional rank sensor behind honesty label | Spike / refuse if SoT | citation verify structure-only |
+| P18.3 | One tip stream; do not thrash vs E-COH1 | Defer | handoff before Active |
+
+Umbrella: [`process/42-problem-first-rag-ds-cli-2026-08-10.md`](process/42-problem-first-rag-ds-cli-2026-08-10.md).
+
+---
+
+## P34 — Operator/agent surface (E-OAS0) — Spec DRAFT
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P34.0 | **E-OAS0 Spec:** approve OAS1–OAS16 | **DRAFT** (2026-08-10) | process/37 + design stub |
+| P34.1 | **E-OAS1 Implement:** grade surface | Deferred | after Approve |
+| P34.2 | CLI problem classes A–J | **Done** | process/39 |
+| P34.3 | CLI DX / a11y landing pads | **Done** | process/38 |
+
+Design: [`docs/design/operator-agent-surface-design-2026-08-10.md`](../design/operator-agent-surface-design-2026-08-10.md).
