@@ -8,6 +8,9 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # Paper digest framework
 
+**Parent-repo Source of Truth:** `docs/research/method/paper-digest-framework.md`
+(this file is a planning-corpus mirror — keep aligned; parent wins on conflict).
+
 Use this **before** promoting a paper into Must spine, Definition of Ready,
 or Embody/Adopt/Refuse. Title-skim is not enough.
 

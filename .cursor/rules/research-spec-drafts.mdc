@@ -11,6 +11,7 @@ When research or design markdown is in context:
 ## Spec rules
 
 - Future-dev Spec/epic plans require skill **principal-se-research-epic** Bloom ladder **through Create** before generating implementation code.
+- Load-bearing papers need skill **paper-digest** (type key + section map + references walk) — arXiv categories are not paper-type keys; abstract-only is not Understand.
 - Use DeepWiki MCP `ask_question` (`https://mcp.deepwiki.com/mcp`) + primary `llms.txt` — chat-only “I read the docs” is not evidence.
 - Set `bloom_gate: required-through-create` on future-dev memos.
 - Draft Specs stay parked in `quality-backlog.md` until human Approve; do not open parallel Active tips.
@@ -26,4 +27,6 @@ When research or design markdown is in context:
 @docs/research/README.md
 @docs/research/quality-backlog.md
 @.cursor/skills/principal-se-research-epic/SKILL.md
+@.cursor/skills/paper-digest/SKILL.md
+@docs/research/method/paper-digest-framework.md
 @adapters/claude/SEARCH.md
