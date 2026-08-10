@@ -446,6 +446,17 @@
       "move_status": "nestable_after_size_tip"
     },
     {
+      "module": "semantic_eval.py",
+      "import_path": "doc_engine.tools.semantic_eval",
+      "invoke": "python -m doc_engine.tools.semantic_eval",
+      "target_bc": "semantic_eval",
+      "stage_dialect": "none",
+      "truth_class": "sensor",
+      "note": "nested 2026-08-10; public fa\u00e7ade re-export over doc_engine.semantic_eval",
+      "move_status": "nested",
+      "home_package": "doc_engine.semantic_eval"
+    },
+    {
       "module": "semantic_eval_confirmed.py",
       "import_path": "doc_engine.tools.semantic_eval_confirmed",
       "invoke": "python -m doc_engine.tools.semantic_eval_confirmed",
