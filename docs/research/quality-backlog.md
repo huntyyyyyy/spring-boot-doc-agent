@@ -250,7 +250,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Spec draft (demoted — later):** **E-GND0** — tip-grounding MCP; after E-COH1 has a green slice.  
 **Spec draft (not Active tip):** **E-TACH0** — amend ★ justification (P19.1).  
 **Spec draft (not Active tip):** **E-RT0** — realtime architecture/logic assertion envelope (P27.0); research 32.
-**Spec draft (not Active tip):** **E-RUST0** — Rust quality toolscape BFS/DFS (P28.0); research 33. **E-POLY0** — polyglot CLI toolkit BFS (P28.2); process/39.
+**Spec draft (not Active tip):** **E-RUST0** — Rust quality toolscape BFS/DFS (P28.0); research 33. **E-POLY0 / E-POLY0b** — polyglot + open pilot-before-refuse (P28.2–3); process/39–40.
 **Done Spec + Implement:** **E-SEARCH0** — allow ripgrep/Grep; prefer ast-grep for citations (2026-08-09).  
 **Defer:** E-COH2 / E-TACH1–2; E-UX2; E-QA3; E-RUN2–5; **E-GND1**; **E-RT1** until E-RT0 Approve; **E-RUST1** until E-RUST0 Approve.  
 **Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; Testcontainers/Spec Kit WorkflowEngine as kitchen/runtime SoT; Guice-style DI; `utils/` grab-bag; `quality_knobs.py` mega-config; raising LOC/complexipy caps; forever-grandfather without remediation stream; workflow `paths` on required CI; chat-dump research SoT; DDIA-shaped nesting under `docs/research/`; mechanical LOC chops that fail E-COH0; push while local full-gate is red; **Backstage as doc-engine runtime / merge SoT**; ★-wash &lt;10k tools as new Adopt; Sonar/Spec Kit/Nx as boolean or runtime SoT; **Specs without CGQ3 Accept**; **MCP generate_code tip writer**; **parallel Active Spec drafts that pause Implement**; **climb/LTL/RT score as Cover% SoT**; **sibling tip branches for the same PR stream**; **in-tree Rust/WASM-by-default without profiled Spec**.
@@ -422,7 +422,8 @@ Research: [`docs/research/coverage-quality/32-realtime-architecture-assertion-ag
 | P28.0 | **E-RUST0 Spec:** approve **RUST0-1–RUST0-8** (Embody wheels; Adopt sensors; Refuse in-tree rewrite / climb-as-floor) | **DRAFT** (2026-08-09) — pending human Approve | research 33; no implement until Approve |
 | P28.1 | **E-RUST1 Implement** slices | Deferred | only after E-RUST0 Approve + constitution gates |
 | P28.2 | **E-POLY0 Spec:** polyglot CLI toolkit BFS (Rust/WASM/Go/TS/PyO3) — amends E-RUST0; Bloom Create lanes; Spike-only WASM/helpers | **DRAFT** (2026-08-10) — pending human Approve | [`process/39-polyglot-cli-toolkit-bfs-2026-08-10.md`](process/39-polyglot-cli-toolkit-bfs-2026-08-10.md) |
-| P28.3 | **E-POLY1** profiled helper / MCP sidecar / sandbox Spikes | Deferred | only after POLY0-1–10 Approve + measured hotspot |
+| P28.3 | **E-POLY0b Spec:** open marketplace BFS + **Pilot-before-Refuse** doctrine (Ruby, JVM, Elixir, PHP, Datalog, enterprise clusters; ranked pilots w/ keep/drop) | **DRAFT** (2026-08-10) — pending human Approve | [`process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md`](process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md) |
+| P28.4 | **E-POLY1** Spikes from top Pilot-now queue (one tip stream; entry_points / AsciiDoc / Rails SARIF / ArchUnit vocab / …) | Deferred | only after POLY0b Approve + keep/drop exits |
 
 Research: [`docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md`](coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md). Supersedes narrow gaps in research 32.
 

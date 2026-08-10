@@ -11,6 +11,7 @@ related:
   - docs/research/process/04-implementation-frameworks.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
   - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
   - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/quality-backlog.md
@@ -36,8 +37,14 @@ to Bloom **Create** — without making polyglot the merge SoT?
 
 **User frame (this pass).** Dependencies are acceptable **when** arXiv / GitHub /
 DeepWiki show powerful, healthy implementations — as **landing pads** and
-**profiled helpers**, not as fashion. Constitution still binds: no WASM-by-default,
-no in-tree Rust rewrite unless **profiled Spec**, Python remains kernel.
+**profiled helpers**, not as fashion. Constitution still binds: no WASM-by-default
+without profiled Spec, no dual Cover% SoT, Python remains kernel.
+
+**Doctrine update (same day):** Refuse-first softened to **Pilot-before-Refuse**
+in [`process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md`](40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md)
+(E-POLY0b) — includes **Ruby**, JVM/.NET/Elixir/PHP/Datalog, enterprise clusters,
+and ranked pilots with keep/drop exits. This memo 39 remains the Rust/WASM/Go/TS/PyO3
+first-pass inventory.
 
 **Method.** BFS across languages + enhancement clusters; GitHub stars/push +
 arXiv HTTP 200 + DeepWiki Evaluate/Create. Prior: E-RUST0 memo 33 (Rust quality
@@ -53,7 +60,8 @@ marketplace). This memo **widens the marketplace** to polyglot CLI/MCP/LLM.
 | **Adopt-pattern** | TS MCP SDK envelopes; Charm Bubble Tea / ratatui Elm-MVU; clap help semantics; gh `--json`/`--jq`; hashicorp go-plugin / WASI capability *shapes*; LSP/SCIP as understanding **sensors** |
 | **Spike (profiled Spec)** | maturin/PyO3 **helper bin** for measured hotspots; Extism/WASI guest plugins; bubblewrap/Landlock for agent tool isolation; Deno sidecar if TS MCP servers adopted; official MCP SDK pin |
 | **Explicit Defer** | Zig; Lua/Rhai user scripting; Bun/Deno as dual kernel; full wasmtime/wasmer product host |
-| **Refuse** | In-tree Cargo workspace; WASM/Go/Zig as product kernel; WASM as Cover% SoT; Firecracker/Kata/gVisor tip deps; mesh/ECS/Backstage; polyglot monorepo as quality proof; unattended AI merge; embedding citation SoT |
+| **Refuse** (category error — no pilot theater) | Dual Cover%/claims SoT in another language; mesh/ECS/Backstage-as-product; embedding citation SoT; unattended AI merge |
+| **Pilot-before-Refuse** | See E-POLY0b / process/40 for Ruby+full marketplace + keep/drop exits |
 
 **Key reframe vs “deps don’t matter”:** deps are fine for **Embodied engines we
 already consume** and for **Spec-gated helpers** with Acceptances. They are
