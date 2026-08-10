@@ -452,10 +452,21 @@ Research: [`docs/research/process/35-control-plane-closed-loop-2026.md`](process
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P31.0 | **E-AST0 Spec:** approve **AST0-A–H** (three packs; vocabulary B1/B2 lock; OCS overlay campaign-only; vacuity hybrid) | **DRAFT** (2026-08-10) — pending human Approve | research `stage0/astgrep-tailored-packs-fixture-ocs-2026.md` + design stub |
-| P31.1 | **E-AST1 Implement:** vacuity pack hard in `pre_pr` (AST0-E) even before B1/B2 | In flight on tip | `python -m doc_engine.ci.vacuity` exit 0 on tip; planted fixture fails |
-| P31.2 | **E-AST2 Implement:** `sgconfig` + utils + vocabulary B1/B2 + OCS overlay remeasure | Deferred | only after E-AST0 Approve; no OCS merge SoT |
+| P31.1 | **E-AST1 Implement:** vacuity pack hard in `pre_pr` (AST0-E) even before B1/B2 | **Done** (2026-08-10) | `python -m doc_engine.ci.vacuity`; `vacuous_tests` hard suite |
+| P31.2 | **E-AST2 Implement:** `sgconfig` + utils + vocabulary B1/B2 + Stage-0 id migrate | Deferred | only after E-AST0 Approve; no OCS merge SoT |
 
 Research: [`docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md`](stage0/astgrep-tailored-packs-fixture-ocs-2026.md). Design: [`docs/design/astgrep-tailored-packs-design-2026-08-10.md`](../design/astgrep-tailored-packs-design-2026-08-10.md). Related: E-OCS0, E-SCAN1, RULE_ID_MIGRATION. **Embody** relational idioms + dual `@Name`/`@Name($$$)`; **Adopt** `sgconfig`/`utilDirs` + `vacuous` certain; **Refuse** rg-as-SoT / Artifactory CI SoT / in-tree Rust.
+
+---
+
+## P33 — OCS dual plant (E-OCS0/1) — Implement
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P33.0 | **E-OCS0 Spec** OCS1–OCS8 | **Approved** (2026-08-10) | research ci/36 + design |
+| P33.1 | `plant_profile` + `run-plant.sh` fail-closed | **Done** (2026-08-10) | `test_plant_profile.py` |
+| P33.2 | `remeasure_ocs_floors.py` + campaign `astgrep_ocs_floors.yml` | **Done** (2026-08-10) | dry-run default; `--write` opt-in; `test_remeasure_ocs_floors.py` |
+| P33.3 | Live remeasure on operator checkout (Windows/VPN) | Operator | not CI SoT |
 
 ---
 

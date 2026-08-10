@@ -98,6 +98,7 @@ DOC_ENGINE_REAL_ARTIFACTS_DIR=local-runs/real-repo-latest \
 |------|--------|
 | `.github/workflows/ci.yml` | Hermetic fixtures, ratchets, anonymized baselines, mechanical contracts |
 | `scripts/ci/pre_pr.py` real_repo lane | Live/artifact outcomes on `DOC_ENGINE_REAL_REPO` when Stage-0 paths change |
+| `scripts/ci/remeasure_ocs_floors.py` | Offline ast-grep floors vs `ocs-api-service.json` (dry-run default; `--write` opt-in). Needs a resolvable checkout — not CI merge SoT. |
 
 Confidentiality: do not vendor real target source into `scripts/fixtures/`, and
 do not put denylist tokens (see `scripts/ci/client_identifier_denylist.txt`)

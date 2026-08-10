@@ -84,6 +84,18 @@ The ocs-api-service run (needs Artifactory credentials):
       --api-surface out/ApiSurface.csv \
       --openapi src/docs/api/OASv3/ocs-api-service.yaml
 
+Offline floor remeasure (ast-grep only — no Artifactory; E-OCS0 OCS6):
+
+    # pointer or env to a local checkout (never commit the path)
+    echo /path/to/ocs-api-service > local-runs/real-repo.path
+    python3 scripts/ci/remeasure_ocs_floors.py              # dry-run proposal JSON
+    python3 scripts/ci/remeasure_ocs_floors.py --write       # operator-reviewed
+
+Unified plant entry:
+
+    ./harness/run-plant.sh fixture   # CI SoR
+    ./harness/run-plant.sh ocs       # preflight; blocked without checkout/Artifactory
+
 ## Status
 
 `codeql query compile` is green against `codeql/java-all` 9.2.x, and the
