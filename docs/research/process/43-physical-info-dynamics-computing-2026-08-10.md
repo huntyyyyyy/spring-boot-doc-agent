@@ -7,6 +7,8 @@ claim_tiers: Evidenced / Confirmed / Unknown
 supersedes_partial: docs/research/process/05-dynamics-neuromorphic.md
 related:
   - docs/research/process/05-dynamics-neuromorphic.md
+  - docs/research/process/21-physical-unconventional-computing-2026.md
+  - docs/research/process/20-theory-domains-problem-first-gates-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/quality-backlog.md
   - docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
@@ -129,6 +131,10 @@ FIELD EXISTS TO EXPLAIN/CONTROL X
 ---
 
 ## 2. Physical / unconventional computing — problem → substrate → transfer
+
+**Deep scorecards (A–I) with ≥2 primaries + GitHub stars:**
+[`21-physical-unconventional-computing-2026.md`](21-physical-unconventional-computing-2026.md).
+Summary inventory below; do not fork a third tip SoT.
 
 ### 2.1 Inventory
 

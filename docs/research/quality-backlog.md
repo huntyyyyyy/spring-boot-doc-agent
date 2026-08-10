@@ -77,6 +77,7 @@ Do these **before** dual-mode if size ratchet fails on touched modules.
 - Scoped Cover% or LLM-judge as 98.7 proof  
 - PID / fuzzy “confidence of green” on oracle floor  
 - SoA / DOD / ECS / neuromorphic runtime rewrites of `doc_engine`  
+- Physical / unconventional tip SoT (DNA, dissipative CRN, iontronic, Loihi/BrainScaleS, physical RC, analog/Neural-ODE gates, memristor CIM, BZ/RD) — see [`process/21-physical-unconventional-computing-2026.md`](process/21-physical-unconventional-computing-2026.md)  
 - Service mesh, Backstage-required IDP, Argo/Flux product deps  
 - Spec Kit WorkflowEngine as mandatory runtime  
 - Cross-worktree `coverage combine`  
@@ -302,4 +303,4 @@ Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation
 | P20.1 | CONTRIBUTING one-liner: physics metaphors ≠ gate softeners | After Approve | claims path |
 | P20.2 | Physical RC / DNA / ionic / neuromorphic tip deps | **Refuse** | no Implement tickets |
 
-Research: [`process/43-physical-info-dynamics-computing-2026-08-10.md`](process/43-physical-info-dynamics-computing-2026-08-10.md) (deepens [`05`](process/05-dynamics-neuromorphic.md)).
+Research: [`process/43-physical-info-dynamics-computing-2026-08-10.md`](process/43-physical-info-dynamics-computing-2026-08-10.md) (umbrella; deepens [`05`](process/05-dynamics-neuromorphic.md)); substrate A–I [`21`](process/21-physical-unconventional-computing-2026.md); theory A–H [`20`](process/20-theory-domains-problem-first-gates-2026.md).

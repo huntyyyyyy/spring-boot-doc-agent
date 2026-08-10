@@ -8,7 +8,7 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 | --- | --- | --- |
 | **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md) | Active stream; Embody/Adopt/Refuse merge of foundational segments |
 | **findings/** | [`findings/`](findings/) | Stalker ledger entries (STK2) — compact events + gap IDs; not chat dumps |
-| **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, **dynamics** ([`05`](process/05-dynamics-neuromorphic.md), [`43` physical/info/thermo/unconventional](process/43-physical-info-dynamics-computing-2026-08-10.md)), façade/research hooks, legacy remediation, docs taxonomy, stalker agents, problem-first RAG/CLI |
+| **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, **dynamics** ([`05`](process/05-dynamics-neuromorphic.md), [`43` umbrella](process/43-physical-info-dynamics-computing-2026-08-10.md), [`21` physical A–I](process/21-physical-unconventional-computing-2026.md), [`20` theory A–H](process/20-theory-domains-problem-first-gates-2026.md)), façade/research hooks, legacy remediation, docs taxonomy, stalker agents, problem-first RAG/CLI |
 | **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking |
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |
