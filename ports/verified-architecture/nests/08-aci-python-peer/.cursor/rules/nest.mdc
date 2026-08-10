@@ -1,21 +1,19 @@
 ---
-description: Nest context for Python ACI peer — scoped look-first
+description: Nest context for Python peer — path-scoped; do not load other nests
 globs:
   - nests/08-aci-python-peer/**
+  - ports/verified-architecture/nests/08-aci-python-peer/**
 alwaysApply: false
 ---
 
-# Nest: Python ACI peer
+# Nest: Python peer
 
-When working under `nests/08-aci-python-peer/`:
+When files under `nests/08-aci-python-peer/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0001, ADR-0006.
-3. Open research:
-   - `research/polyglot/`
-   - `docs/adr/adr-0001-polyglot-first-product.md`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: Optional orchestration peer — NOT majority engine / NOT product identity
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0001 peer lane.
+3. Owns: Peer ACI only — not automatic Spec MCP Why.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

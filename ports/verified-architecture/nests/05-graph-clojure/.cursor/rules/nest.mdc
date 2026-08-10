@@ -1,21 +1,19 @@
 ---
-description: Nest context for Clojure graph brain — scoped look-first
+description: Nest context for Clojure graph — path-scoped; do not load other nests
 globs:
   - nests/05-graph-clojure/**
+  - ports/verified-architecture/nests/05-graph-clojure/**
 alwaysApply: false
 ---
 
-# Nest: Clojure graph brain
+# Nest: Clojure graph
 
-When working under `nests/05-graph-clojure/`:
+When files under `nests/05-graph-clojure/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0005.
-3. Open research:
-   - `research/polyglot/`
-   - `docs/adr/adr-0005-clojure-graph-brain.md`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: Babashka/Datascript (and optional JVM) queries over EDN export
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0005.
+3. Owns: bb/Datascript queries — not merge oracle.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

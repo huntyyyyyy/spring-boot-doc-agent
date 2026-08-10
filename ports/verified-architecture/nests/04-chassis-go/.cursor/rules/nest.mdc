@@ -1,21 +1,19 @@
 ---
-description: Nest context for Go chassis — scoped look-first
+description: Nest context for Go chassis — path-scoped; do not load other nests
 globs:
   - nests/04-chassis-go/**
+  - ports/verified-architecture/nests/04-chassis-go/**
 alwaysApply: false
 ---
 
 # Nest: Go chassis
 
-When working under `nests/04-chassis-go/`:
+When files under `nests/04-chassis-go/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0009.
-3. Open research:
-   - `research/polyglot/`
-   - `docs/adr/adr-0009-go-chassis-daemon.md`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: Cobra daemon: watch, reindex, freshness stamps
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0009.
+3. Owns: Watch/reindex; optional wazero — not Spec MCP host.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

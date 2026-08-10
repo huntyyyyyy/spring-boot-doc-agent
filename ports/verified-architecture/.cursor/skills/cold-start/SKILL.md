@@ -16,9 +16,11 @@ description: Prime a new agent session with no chat history — bootstrap, walkt
    artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic
    Deployment tool constraints, not graph + locks alone.
 7. Skim Definition of Ready + no-code-gate; list open `blocks_code` open questions.
-8. Announce: phase, code generation allowed? (**no**), Must spine one-liner, **one**
-   next task from STATUS.
-9. Do not browse the whole repository.
+8. Announce: phase, code generation allowed? (**no**), Must spine one-liner,
+   FREEZE/deepen-3 from `STATUS.md`, **one** next task.
+9. Do not browse the whole repository. Do not add Decision Matrices or Adopt
+   verdicts. Prefer Skill `rag-retrieve` for one research pack if needed.
+10. Obey `.cursor/rules/00-constitution.mdc` (circular Why refuse; whole words).
 
 ## Exit
 

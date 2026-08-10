@@ -1,14 +1,14 @@
 ---
-description: Cold-start priming — pull when session lacks prior context or agent seems lost
+description: Cold-start — pull when session lacks prior context or agent seems lost in this port
 alwaysApply: false
 ---
 
 # Cold start
 
-If you lack prior chat context for this repository:
+If you lack prior chat context for this port:
 
-1. Read `AGENT_BOOTSTRAP.md` then `STATUS.md` then `GLOSSARY.md`.
-2. Follow Skill `cold-start`.
-3. Use **whole words** in every edit (no bare acronyms in prose).
-4. Do not generate product code; fill the next FAIL Definition of Ready /
-   open-question row instead.
+1. Read `AGENT_BOOTSTRAP.md` → `STATUS.md` → `GLOSSARY.md`.
+2. Skill `cold-start`.
+3. Whole words in every edit.
+4. No product code; next work = deepen-3 or Definition of Ready FAIL row — not new Adopt matrices.
+5. If in parent monorepo, paths are under `ports/verified-architecture/`.

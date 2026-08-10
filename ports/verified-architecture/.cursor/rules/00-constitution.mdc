@@ -1,47 +1,61 @@
 ---
-description: Repo constitution — planning corpus; VERIFY_STACK Must spine; no product code yet
+description: Verified Architecture constitution — Spec corpus; FREEZE; Must spine; no product code
 alwaysApply: true
 ---
 
 # Verified Architecture — constitution
 
-You are in a **planning + Retrieval-Augmented Generation corpus** for a
-verified polyglot architecture product. Progressive disclosure is part of
-the product.
+Planning + Retrieval-Augmented Generation **corpus** (not a shipped verify
+binary). Progressive disclosure is product behavior.
 
-**Language:** whole words in prose — expand short labels. See `GLOSSARY.md`.
+**Whole words** in prose — `GLOSSARY.md`. No bare short labels in new text.
 
 ## Cold start
 
 No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH.md`
 → `STRUCTURE.md` → `GLOSSARY.md`. Skill `cold-start`.
 
+## Dual surfaces (do not mix System of Record)
+
+| Surface | Job |
+| --- | --- |
+| Verify engine (future) | Graph + locks + receipts on a *target* repo |
+| Planning corpus (this tree) | How we design that engine |
+
+Retrieval-Augmented Generation text is never a verify witness.
+
+## FREEZE + deepen (read `STATUS.md`)
+
+Do **not** add Decision Matrices, Architecture Decision Records, Must entities,
+or math Spikes-as-Must. Deepen **at most three**: receipt β/ρ; claim withdrawal;
+Model Context Protocol **handle lifecycle** only.
+
+Honesty: `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
+
 ## Identity
 
-- **Working draft** under ISO/IEC/IEEE 29148-shaped requirements engineering,
-  Software Engineering Institute Architecture Tradeoff Analysis Method Quality
-  Attribute Scenarios, Nygard Architecture Decision Records, and C4. Draft
-  *content* is fine; skipping the *form* is not.
+- Working **draft form** under requirements engineering + Architecture Tradeoff
+  Analysis Method Quality Attribute Scenarios + Nygard Architecture Decision
+  Records + C4 — skipping the *form* is not allowed.
 - **Must spine:** graph + locks **and** artifact-anchored claim memory **and**
   Stateful Tool-Enabled Agentic Deployment tool constraints **and** receipts —
-  `08-verification/VERIFY_STACK.md`. Do **not** shrink to graph + locks alone.
-- **Polyglot as options** under `07-system-design/options/`.
-- **`research/` is evidence** — retrieve one pack; never always-load.
+  `08-verification/VERIFY_STACK.md`.
+- Exact public engines for claim memory / Proof-or-Stop / equivariance = **0** →
+  **Pilot invent**, not silent industry Adopt.
+- Polyglot lives under `07-system-design/options/` and `nests/` — no tip scaffolds.
+- `research/` is evidence — one pack via INDEX/Skill; never always-load.
 
 ## Gates
 
-- No product code until Definition of Ready + no-code-gate green.
+- No product code until Definition of Ready + no-code-gate green (**0 PASS** now).
 - Must non-functional requirements → six-part Quality Attribute Scenario before Design.
-- Constraints are not requirements; open questions marked `blocks_code` block code generation.
-- Unknown / **unprovable** beats wrong; evidence is not freshness.
-- Model Context Protocol / command-line interface entity identifiers typed from
-  stores (Stateful Tool-Enabled Agentic Deployment constraints ST-1…5) — no
-  hallucinated handles.
-- Retrieval-Augmented Generation / large language model text is not a witness
-  or claim anchor.
-- C4 cites Architecture Decision Record identifiers; science = locked transfers only.
+- `blocks_code` open questions block code generation.
+- Unknown / **unprovable** beats wrong; evidence ≠ freshness.
+- Typed tool identifiers only; no invented handles; no narrative “pass” as receipt.
+- **Refuse circular Why:** do not choose a stack because this agent already wrote it.
+- Working hypothesis ≠ human Accept; score tables are sensors.
 
 ## Context budget
 
-Always-on ≤2. Path scope = Cursor rule globs. Depth = Skills.
-Prefer `00/`–`12/` over legacy `docs/` + `nests/`.
+Always-on ≤2 slim rules. Path scope = Cursor rule **globs**. Depth = **Skills**.
+Prefer `00/`–`12/` over legacy `docs/` when both exist.

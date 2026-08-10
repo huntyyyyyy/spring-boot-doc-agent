@@ -1,13 +1,12 @@
 ---
-description: ATAM QAS and architecture method — pull when writing NFRs, QAS, tactics, or formal bounds
+description: Architecture Tradeoff Analysis Method and Quality Attribute Scenarios — pull for non-functional requirements or latency talk
 alwaysApply: false
 ---
 
-# ATAM / QAS topic
+# Architecture Tradeoff / Quality Attribute Scenario topic
 
-When quality attributes or “NFR adjectives” appear:
-
-1. Expand to six-part QAS before Design influence.
-2. Open `docs/standards/quality-attribute-scenarios.md` and `docs/requirements/qas.md`.
-3. Retrieve `research/atam-formal/` for tactics and formal boundaries.
-4. Constraints stay in `docs/constraints/` — they are not REQs.
+1. Expand adjective non-functional requirements to **six-part** Quality Attribute Scenarios before Design.
+2. Open `docs/standards/quality-attribute-scenarios.md` and `03-requirements/qas/`.
+3. Retrieve **one** pack: `research/atam-formal/` (not the whole tree).
+4. Constraints stay in `04-constraints/` — not requirements.
+5. Math brainstorm Spikes stay **unscheduled** under FREEZE.

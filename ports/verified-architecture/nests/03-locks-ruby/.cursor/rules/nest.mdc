@@ -1,21 +1,19 @@
 ---
-description: Nest context for Ruby lock DX — scoped look-first
+description: Nest context for Ruby locks — path-scoped; do not load other nests
 globs:
   - nests/03-locks-ruby/**
+  - ports/verified-architecture/nests/03-locks-ruby/**
 alwaysApply: false
 ---
 
-# Nest: Ruby lock DX
+# Nest: Ruby locks
 
-When working under `nests/03-locks-ruby/`:
+When files under `nests/03-locks-ruby/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0003.
-3. Open research:
-   - `research/polyglot/`
-   - `docs/adr/adr-0003-packwerk-lock-ir.md`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: Packwerk-shaped package manifests, todo bankruptcy, lock IR UX
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0003.
+3. Owns: Packwerk-shaped lock DX; Intermediate Representation shared.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

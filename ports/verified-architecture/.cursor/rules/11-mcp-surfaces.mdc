@@ -1,0 +1,19 @@
+---
+description: Model Context Protocol — pull when editing MCP ICD, schemas, Spec corpus MCP, or tool hosts
+alwaysApply: false
+---
+
+# Model Context Protocol topic
+
+**Split surfaces:**
+
+| Surface | Action |
+| --- | --- |
+| Product verify tools (`verify` / `resolve` / receipts) | Spec Draft only; **Refuse** Implement until deepen-3 |
+| Spec / corpus read-only MCP | Optional Spike `SPIKE-SPEC-MCP-0` — stamps Draft/FREEZE/`accepted:false` |
+
+1. Wire pin `2026-07-28` is Evidenced; *our* tool semantics = Pilot invent.
+2. Read `07-system-design/icd/mcp-tools.md` + `decisions/mcp-decision-matrix.md`.
+3. Host language is **re-openable** — do not pick Python because tip already used Python.
+4. WebAssembly = sandbox guest Could — **not** Spec MCP host; not proof.
+5. Research: `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md`.

@@ -1,23 +1,19 @@
 ---
-description: Nest context for Rust engine — scoped look-first
+description: Nest context for Rust engine — path-scoped; do not load other nests
 globs:
   - nests/01-engine-rust/**
+  - ports/verified-architecture/nests/01-engine-rust/**
 alwaysApply: false
 ---
 
 # Nest: Rust engine
 
-When working under `nests/01-engine-rust/`:
+When files under `nests/01-engine-rust/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0007, ADR-0004, ADR-0002.
-3. Open research:
-   - `research/layers-of-truth/`
-   - `research/polyglot/`
-   - `research/atam-formal/`
-   - `docs/c4/03-components.md`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: SCIP decode, WiringResolver, LockCheck, receipts, wasmtime host
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0007, ADR-0004.
+3. Owns: Source Code Index Protocol decode, resolve, LockCheck, receipts, wasmtime host.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

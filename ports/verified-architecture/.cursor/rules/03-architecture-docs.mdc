@@ -1,16 +1,20 @@
 ---
-description: Architecture docs — ADRs and C4 must stay consistent; cite ADR IDs
+description: Architecture docs — C4, Architecture Decision Records, decisions, Interface Control Documents
 globs:
   - docs/adr/**
   - docs/c4/**
+  - 07-system-design/**
+  - ports/verified-architecture/docs/adr/**
+  - ports/verified-architecture/docs/c4/**
+  - ports/verified-architecture/07-system-design/**
 alwaysApply: false
 ---
 
 # Architecture docs lens
 
-When editing C4 or ADRs:
-
-1. ADRs are decisions; C4 is structure — C4 cites ADR IDs.
-2. Do not invent containers without an ADR (or mark Proposed + open ADR).
-3. Read `docs/adr/README.md` and `docs/standards/c4-standard.md`.
-4. Cross-check polyglot ownership in `docs/DOMAIN_MAP.md` nests table.
+1. Architecture Decision Records decide; C4 illustrates — diagrams cite decision ids.
+2. Decision Matrices are **Working hypothesis (Draft)** until human Accept + research-depth gate.
+3. Interface Control Documents under `07-system-design/icd/` — schemas before code.
+4. No new containers / languages without an Architecture Decision Record (or mark Proposed).
+5. Read `STATUS.md` FREEZE before adding matrices or decisions.
+6. Cross-check `PRECODE_MAP.md` and options under `07-system-design/options/`.

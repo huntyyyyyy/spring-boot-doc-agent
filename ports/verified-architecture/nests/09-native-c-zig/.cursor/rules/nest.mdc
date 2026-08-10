@@ -1,20 +1,19 @@
 ---
-description: Nest context for C / Zig shims — scoped look-first
+description: Nest context for C / Zig niche — path-scoped; do not load other nests
 globs:
   - nests/09-native-c-zig/**
+  - ports/verified-architecture/nests/09-native-c-zig/**
 alwaysApply: false
 ---
 
-# Nest: C / Zig shims
+# Nest: C / Zig niche
 
-When working under `nests/09-native-c-zig/`:
+When files under `nests/09-native-c-zig/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0001.
-3. Open research:
-   - `research/polyglot/`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: Grammars, amalgamation, earned systems toolkits — Spike keep/drop only
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0001 niches.
+3. Owns: Systems/WebAssembly niches — Refuse Spec MCP day-one.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

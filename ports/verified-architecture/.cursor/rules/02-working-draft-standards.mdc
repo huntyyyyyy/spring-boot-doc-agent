@@ -1,23 +1,31 @@
 ---
-description: Working draft + industry standards when editing docs/standards or requirements
+description: Working draft standards when editing requirements, constraints, governance, or standards
 globs:
   - docs/standards/**
   - docs/requirements/**
   - docs/constraints/**
+  - 00-governance/**
+  - 03-requirements/**
+  - 04-constraints/**
+  - ports/verified-architecture/docs/standards/**
+  - ports/verified-architecture/docs/requirements/**
+  - ports/verified-architecture/docs/constraints/**
+  - ports/verified-architecture/00-governance/**
+  - ports/verified-architecture/03-requirements/**
+  - ports/verified-architecture/04-constraints/**
 alwaysApply: false
 ---
 
 # Working draft under industry standards
 
-Status fields may say Draft/Proposed. That means **content maturity**, not
-“standards optional.”
+Status may say Draft/Proposed (**content** maturity). Standards **form** is required.
 
-| Standard / practice | Binding here |
+| Practice | Binding |
 | --- | --- |
-| ISO/IEC/IEEE 29148-shaped RE | StRS/SRS/RTM shape; implementation-free REQ text |
-| SEI ATAM QAS | Six-part scenarios before NFR→Design |
-| Nygard ADR | Context/Decision/Status/Consequences |
-| C4 | Context+Container before code; cite ADRs |
-| Formal honesty | WASM/Rust trust-boundary ≠ unearned “proved” |
+| ISO/IEC/IEEE 29148-shaped requirements engineering | Stakeholder / Software Requirements shape; implementation-free requirement text |
+| Architecture Tradeoff Analysis Method | Six-part Quality Attribute Scenario before Design influence |
+| Nygard Architecture Decision Record | Context / Decision / Status / Consequences |
+| Decision Framework | Six vectors + usage + locus + rejected alternatives; research-depth gate before Accept |
+| Whole words | `GLOSSARY.md` |
 
-Keep REQ IDs stable; bump `last_reviewed` / status when amending Drafts.
+Do not soft-pass Definition of Ready with schema file counts.

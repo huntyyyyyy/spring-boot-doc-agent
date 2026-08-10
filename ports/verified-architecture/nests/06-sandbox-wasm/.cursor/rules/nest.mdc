@@ -1,21 +1,19 @@
 ---
-description: Nest context for WASM sandbox — scoped look-first
+description: Nest context for WebAssembly sandbox — path-scoped; do not load other nests
 globs:
   - nests/06-sandbox-wasm/**
+  - ports/verified-architecture/nests/06-sandbox-wasm/**
 alwaysApply: false
 ---
 
-# Nest: WASM sandbox
+# Nest: WebAssembly sandbox
 
-When working under `nests/06-sandbox-wasm/`:
+When files under `nests/06-sandbox-wasm/` are in context:
 
-1. Read this nest `README.md`.
-2. Open ADRs: ADR-0004.
-3. Open research:
-   - `research/atam-formal/`
-   - `docs/adr/adr-0004-native-then-wasm-lockcheck.md`
-4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
-   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
-5. Do **not** load every other nest unless integrating across BCs.
-6. Owns: Capability LockCheck guest; fuel/epoch; trust-boundary (not unearned proved)
-7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0004.
+3. Owns: LockCheck guest Could; isolation ≠ proof; not Spec MCP host.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

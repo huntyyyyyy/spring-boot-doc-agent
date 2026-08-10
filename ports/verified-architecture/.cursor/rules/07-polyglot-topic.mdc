@@ -1,11 +1,13 @@
 ---
-description: Polyglot portfolio — pull when choosing languages, nests, or peer vs majority roles
+description: Polyglot portfolio — pull when choosing languages, nests, or peer vs engine roles
 alwaysApply: false
 ---
 
 # Polyglot portfolio topic
 
-1. Product identity is polyglot-first (ADR-0001).
-2. Open `research/polyglot/` and the relevant `nests/<bc>/`.
-3. Python is an optional peer (nest 08), not the majority engine.
-4. WASM/native trust stories need earned formal artifacts — no unearned “proved”.
+1. Polyglot-first identity — Architecture Decision Record ADR-0001 (Proposed).
+2. Open **one** nest README + matching Architecture Decision Record — not all nests.
+3. Python is optional peer (nest 08), not majority engine — and not automatic Spec MCP host.
+4. WebAssembly / Rust trust stories need earned artifacts — no unearned “proved”.
+5. Retrieve `research/polyglot/` only if needed; prefer nest pointer.
+6. FREEZE: no new language-lane Architecture Decision Records without human ask.
