@@ -4858,7 +4858,7 @@ Assumptions affected:
 Files touched: docs/research/process/26-agent-context-markdown-bloat-2026.md, docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md
 
 ## 2026-08-10 — E-CTX0 deepdive: models + GH star-inflation discernment
-Commit: uncommitted
+Commit: 745f158
 Tests: not run (docs-only); GitHub API metrics fetched 2026-08-10
 Assumptions affected:
 - ★≥1k + recent push ⇒ safe research/implement SoR — [New info — He et al. arXiv:2412.13459; AI/LLM repos are fake-star targets; amend bar to filter+discernment]
