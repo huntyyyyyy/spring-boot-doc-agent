@@ -10,6 +10,7 @@ bloom_mcp:
   - llms_txt
 related:
   - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
+  - docs/design/e-lie0-requirements-2026-08-10.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
   - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
   - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
@@ -17,10 +18,12 @@ related:
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/quality-backlog.md
 do_not:
-  - Treat E-LIE0 process/50 as complete Spec without SoR matrix + ports
+  - Treat E-LIE0 process/50 as complete Spec without SoR matrix + ports + RE Approve
   - Ship dual Cover% or dual claims writers under “Rust engine”
   - Equate Packwerk/tach patterns with Spring DI resolve
   - Approve all polyglot crates as tip deps in one PR
+  - Confuse architecture tours with stakeholder requirements
+  - Implement without citing REQ-* from the RE package
 sources:
   deepwiki_ask:
     - sourcegraph/scip-java · Spring DI / incomplete compile limits
@@ -33,6 +36,8 @@ sources:
     - https://github.com/Shopify/packwerk
     - https://github.com/sourcegraph/scip-java
     - https://github.com/leifericf/noumenon
+  web:
+    - https://www.iso.org/standard/72089.html  # ISO/IEC/IEEE 29148 RE
   mcp: https://mcp.deepwiki.com/mcp
 ---
 
@@ -40,15 +45,15 @@ sources:
 
 **Role.** Adversarial principal SE against
 [`process/50`](50-local-first-verified-architecture-agent-2026-08-10.md), using
-**DDIA north-star** (SoR vs derived), **SOLID**, **DRY**, and GoF
-**creational / structural / behavioral** patterns. Goal: completeness of
-**scope**, then a **polyglot research slate** (Ruby · Clojure · Go · WASM ·
-Rust · MDC) that actually levels *this* product — not fashion.
+**requirements engineering** (IEEE 29148-shaped), **DDIA north-star** (SoR vs
+derived), **SOLID**, **DRY**, and GoF **creational / structural / behavioral**
+patterns. Goal: completeness of **scope**, then a **polyglot research slate**.
 
 **Verdict in one line.** E-LIE0’s *pyramid* is directionally right; as a Spec
-it is **incomplete**: missing SoR matrix, ports, failure taxonomy, incremental
-invalidation, and a honest Spring-DI capability envelope. Fix those before
-Cargo.
+it was incomplete without RE. **RE package drafted**
+([`e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md));
+still missing SoR matrix, ports, failure taxonomy, incremental invalidation,
+and an honest Spring-DI capability envelope before Cargo.
 
 ---
 
@@ -61,7 +66,30 @@ Cargo.
 | **3** | Map each Pilot to `pre_pr` / kitchen / OCS without dual oracle |
 | **4** | SOLID/pattern gaps; Embody vs Pilot per language |
 | **5** | §3 adversarial + false-green/red |
-| **6** | ADV-* tickets + research slate §5 — Design blocked until SoR matrix |
+| **6** | ADV-* + **RE-*** tickets + research slate §5 — Design blocked until SoR matrix **and** StRS/SRS/RTM |
+
+---
+
+## 0c. Requirements engineering (IEEE 29148-shaped) `[Evidenced — ISO 29148]`
+
+process/50 remains an **architecture vision + epic sketch**. The **RE SoR** is
+now drafted separately:
+
+**[`docs/design/e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md)**
+— StRS · SRS (MoSCoW) · NFR · RTM · validation vs verification · change control.
+
+| 29148-shaped item | Was (50 only) | Now |
+| --- | --- | --- |
+| **Stakeholders / StRS** | Implicit | Named A-OP…A-OWN in RE §1 |
+| **Mission need** | Slogan | Measurable intent + goals/constraints |
+| **SRS functional** | Tours as features | `REQ-F-01…19` MoSCoW, implementation-free |
+| **NFR** | Casual latency | `REQ-N-01…07` with budgets / observability |
+| **RTM** | None | Need → REQ → port → Accept method |
+| **Validation vs verification** | Collapsed | Separated in RE §4 |
+| **Change control** | Lock sync tour only | RE-4 table |
+
+**Still open:** human **Approve** of the RE draft; Design Spec still needs
+ADV-1…3. process/50 must not reintroduce implementation-bound “requirements.”
 
 ---
 
@@ -139,13 +167,14 @@ rules, registry, and locks — or explicit mapping table (DRY via SoR, not copy)
 
 | Area | process/50 | Needed |
 | --- | --- | --- |
+| **Requirements (StRS/SRS/RTM)** | absent in 50 | **RE package drafted** — Approve open |
 | L1 index | sketched | Adapter + stale policy |
 | L1b Spring wire | sketched | Capability envelope (below) |
 | L2 locks | sketched | **Executable IR** + Packwerk-like packages |
 | L3 SMT | optional | Keep Defer; don’t block v1 |
 | Proof tour | named | JSON schema + step IDs |
-| Ghost | named | Predictor + TTL + privacy |
-| LSP | named | Observer + incremental |
+| Ghost | named | Predictor + TTL + privacy **+ MoSCoW** |
+| LSP | named | Observer + incremental **+ MoSCoW** |
 | Polyglot bell | named | Bridge SoR (OpenAPI) first |
 | Failure taxonomy | weak | Unknown / ambiguous / stale / conflict |
 | Security | WASM only | Supply chain for indexers; fuel limits |
@@ -247,31 +276,37 @@ Not: “WASM proves Spring.”
 
 | ID | Ticket | Acceptance |
 | --- | --- | --- |
+| **RE-1** | StRS — stakeholders, goals, constraints, OpsCon | **Drafted** in `e-lie0-requirements` §1 — Approve open |
+| **RE-2** | SRS — MoSCoW functional + NFR | **Drafted** §2–3 (`REQ-F-*` / `REQ-N-*`) |
+| **RE-3** | RTM — need → REQ → design port → verify | **Drafted** §5 — every Must has Accept method |
+| **RE-4** | Req change control for locks | **Drafted** §6 |
 | **ADV-1** | SoR\|derived matrix for all LIE artifacts | Spec table; single writer each |
 | **ADV-2** | Ports + adapters (`SymbolFact`, `WiringResolver`, `LockCheck`) | ≤225 LOC modules; no god engine |
 | **ADV-3** | Spring capability envelope + Unknown taxonomy | Documented; tests for multi-candidate |
 | **ADV-4** | Executable lock IR (Packwerk-inspired) | MDC/YAML → Check AST; controller→repo demo |
-| **ADV-5** | Chain budget: sg → SCIP → resolve → locks | Latency SLOs; short-circuit rules |
+| **ADV-5** | Chain budget: sg → SCIP → resolve → locks | Latency SLOs from **RE-2 NFR** |
 | **ADV-6** | Proof-tour JSON schema | Step IDs required or fail |
-| **ADV-7** | Research Spikes (non-tip): Packwerk pattern, bb+Datascript query, Cobra daemon, wasmtime LockCheck, scip-java kitchen | Keep/drop each |
-| **ADV-8** | Design Spec only after ADV-1…3 | Gate for Implement |
+| **ADV-7** | Research Spikes (non-tip): Packwerk pattern, bb+Datascript, Cobra, wasmtime, scip-java | Keep/drop each |
+| **ADV-8** | Design Spec only after **RE-1…3** + ADV-1…3 | Gate for Implement |
 
 ---
 
 ## 8. Recommended research order (next level)
 
-1. **ADV-1…3** (paper) — completeness before code.  
-2. **scip-java kitchen Spike** + SymbolFact adapter (Rust or Python).  
-3. **Lock IR** from Packwerk lessons + existing MDC/claims.  
-4. **bb+Datascript** query over exported graph EDN (brain without JVM tax).  
-5. **Cobra daemon** watch → reindex (chassis).  
-6. **wasmtime** wrap LockCheck.  
-7. Ghost / LSP / Z3 only after graph+locks green.
+1. **RE-1…3** — requirements before architecture fashion.  
+2. **ADV-1…3** (paper) — SoR + ports + DI envelope.  
+3. **scip-java kitchen Spike** + SymbolFact adapter.  
+4. **Lock IR** from Packwerk lessons + MDC/claims.  
+5. **bb+Datascript** query over graph EDN.  
+6. **Cobra daemon** watch → reindex.  
+7. **wasmtime** wrap LockCheck.  
+8. Ghost / LSP / Z3 only if MoSCoW Says Must/Should after graph+locks green.
 
 ---
 
 ## 9. Status
 
-Adversarial companion to E-LIE0 **Complete**. process/50 remains Spec Draft;
-**Design incomplete** until ADV-1…3 land. Polyglot slate is **research/Pilot**,
-not tip rewrite.
+Adversarial companion to E-LIE0 **amended**; **RE-1…4 drafted** in
+`docs/design/e-lie0-requirements-2026-08-10.md`. process/50 remains Spec Draft;
+**Design incomplete** until RE **Approve** + ADV-1…3. Polyglot slate is
+**research/Pilot**, not tip rewrite.

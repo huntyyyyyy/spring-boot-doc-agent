@@ -13,6 +13,7 @@ related:
   - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
   - docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
   - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
+  - docs/design/e-lie0-requirements-2026-08-10.md
   - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
   - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
   - docs/research/quality-backlog.md
@@ -23,6 +24,8 @@ do_not:
   - Equate WASM with mathematical proof (Z3/Kani are proof; WASM is sandbox)
   - Mass Cargo/Go/Clojure tip rewrite without Pilot keep/drop
   - Treat Duck.ai chat as Evidenced SoT — inspiration only
+  - Treat this memo as SRS — cite docs/design/e-lie0-requirements-*.md for REQ-*
+
 sources:
   github:
     - https://github.com/sourcegraph/scip-java
@@ -63,6 +66,11 @@ polyglot memos. **No Refuse-by-default** — Pilot-before-cutover.
 
 **v1 Accept (pragmatic):** virtual Spring/dep **graph** + lock checks + proof-tour
 receipts. **Defer** full Z3 bean “proofs.” Keep Python tip until Explicit cutover.
+
+**Requirements SoR:**
+[`docs/design/e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md)
+(StRS / MoSCoW SRS / RTM). Tours below are product sketches; **Must** capabilities
+are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05/06`).
 
 ---
 
@@ -197,21 +205,25 @@ Python remains `coverage.xml` / claims writer until **named cutover Approve**.
 
 ## 7. Create — tickets (Approve before Implement)
 
-| ID | Ticket | Acceptance |
-| --- | --- | --- |
-| **LIE0-1** | Design Spec seam map (modules ≤225) | Ports: Index, Registry, Resolve, LockCheck, Receipt |
-| **LIE0-2** | Spike: scip-java on kitchen/OCS | `index.scip` + symbol counts receipt |
-| **LIE0-3** | Bean registry + ctor/`@Autowired` resolve | Query: bean for type X → impl or Unknown |
-| **LIE0-4** | Cycle + layer-lock check | Catches controller→repo / A→B→A before merge |
-| **LIE0-5** | Proof-tour schema | Steps clickable in markdown/JSON |
-| **LIE0-6** | Optional WASM wrap of LockCheck | Same Accept as in-process |
-| **LIE0-7** | LSP squiggle Spike | One lock live in editor |
-| **LIE0-8** | Polyglot bell Spike | One Java↔TS bridge via OpenAPI or dual SCIP |
+Prereq: RE package Approve (`REQ-*`) + ADV-1…3 from process/51. Each ticket
+traces to RTM rows in the RE file.
+
+| ID | Ticket | REQ trace | Acceptance |
+| --- | --- | --- | --- |
+| **LIE0-1** | Design Spec seam map (modules ≤225) | F-01…09, F-19 | Ports: Index, Registry, Resolve, LockCheck, Receipt |
+| **LIE0-2** | Spike: scip-java on kitchen/OCS | F-10, N-04 | `index.scip` + symbol counts receipt |
+| **LIE0-3** | Bean registry + ctor/`@Autowired` resolve | F-01, F-02, F-07 | Query: bean for type X → impl or Unknown |
+| **LIE0-4** | Cycle + layer-lock check | F-03…05, F-11 | Catches controller→repo / A→B→A before merge |
+| **LIE0-5** | Proof-tour schema | F-06, F-13 | Steps clickable in markdown/JSON |
+| **LIE0-6** | Optional WASM wrap of LockCheck | F-16 Could | Same Accept as in-process |
+| **LIE0-7** | LSP squiggle Spike | F-12 Should | One lock live in editor |
+| **LIE0-8** | Polyglot bell Spike | F-15 Could | One Java↔TS bridge via OpenAPI or dual SCIP |
 
 ---
 
 ## 8. Status
 
-Research **Complete** through Bloom Create (Spec Draft).  
-**Do not** start Cargo monorepo or tip kernel swap until human **Approve** and
-Active tip allows (after E-COH1 / explicit reorder).
+Research **Complete** through Bloom Create (Spec Draft) + **RE draft**.  
+**Do not** start Cargo monorepo or tip kernel swap until RE **Approve**,
+ADV-1…3, Design Spec Approve, and Active tip allows (after E-COH1 / reorder).
+

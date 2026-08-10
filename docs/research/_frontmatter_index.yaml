@@ -42,6 +42,12 @@ entries:
   date: '2026-08-08'
   epic: null
   related_count: 0
+- path: docs/design/e-lie0-requirements-2026-08-10.md
+  title: E-LIE0 Requirements — StRS · SRS (MoSCoW) · NFR · RTM
+  status: DRAFT — RE package (RE-1…3); Design Spec blocked until Approve + ADV-1…3
+  date: '2026-08-10'
+  epic: E-LIE0
+  related_count: 5
 - path: docs/design/local-domain-pytest-select-design-2026-08-09.md
   title: 'Design memo: domain select + fine ABI paths'
   status: APPROVED — SPEC GATE E-SEL0 (2026-08-09) — SEL1–SEL10
@@ -573,13 +579,13 @@ entries:
   status: RESEARCH COMPLETE — Spec Draft (no kernel rewrite until Approve)
   date: '2026-08-10'
   epic: E-LIE0
-  related_count: 8
+  related_count: 9
 - path: docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
   title: E-LIE0 adversarial SE review — DDIA · SOLID · patterns · polyglot slate
   status: RESEARCH COMPLETE — Spec companion (feeds E-LIE0 Design; no Implement)
   date: '2026-08-10'
   epic: E-LIE0
-  related_count: 7
+  related_count: 8
 - path: docs/research/quality-backlog.md
   title: Quality backlog — Active tip + queues
   status: ACTIVE — one stream at a time
