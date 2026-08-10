@@ -11,18 +11,29 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
-PLANT_ENV = "SPRING_SIGNALS_PLANT"
-OCS_REPO_ENV = "SPRING_SIGNALS_OCS_REPO"
-# Same pointer as Stage-0 real-repo lane (never commit the path).
-REAL_REPO_ENV = "DOC_ENGINE_REAL_REPO"
-REAL_REPO_PATH_FILE = Path("local-runs") / "real-repo.path"
+from plant_checkout import missing_checkout_reason, resolve_ocs_checkout
 
+PLANT_ENV = "SPRING_SIGNALS_PLANT"
 ARTIFACTORY_USER_ENV = "artifactory_user"
 ARTIFACTORY_PASSWORD_ENV = "artifactory_password"
 
 PLANT_FIXTURE = "fixture"
 PLANT_OCS = "ocs"
 _VALID = frozenset({PLANT_FIXTURE, PLANT_OCS})
+
+# Re-export for callers that imported resolve from this module.
+__all__ = (
+    "PLANT_ENV",
+    "PLANT_FIXTURE",
+    "PLANT_OCS",
+    "PlantPreflight",
+    "artifactory_present",
+    "exit_code_for",
+    "main",
+    "normalize_plant",
+    "preflight",
+    "resolve_ocs_checkout",
+)
 
 
 @dataclass(frozen=True)
@@ -46,64 +57,6 @@ def normalize_plant(raw: Optional[str]) -> str:
             f"unknown plant {raw!r}; expected {sorted(_VALID)}"
         )
     return value
-
-
-def _env_checkout_paths() -> list[Path]:
-    out: list[Path] = []
-    for key in (OCS_REPO_ENV, REAL_REPO_ENV):
-        raw = os.environ.get(key, "").strip()
-        if raw:
-            out.append(Path(raw))
-    return out
-
-
-def _pointer_checkout_path(repo_root: Path) -> Optional[Path]:
-    pointer = repo_root / REAL_REPO_PATH_FILE
-    if not pointer.is_file():
-        return None
-    for line in pointer.read_text(encoding="utf-8").splitlines():
-        stripped = line.strip()
-        if stripped and not stripped.startswith("#"):
-            return Path(stripped)
-    return None
-
-
-def _candidate_paths(repo_root: Path) -> list[Path]:
-    """Configured OCS checkout paths (env first, then gitignored pointer)."""
-    out = _env_checkout_paths()
-    pointed = _pointer_checkout_path(repo_root)
-    if pointed is not None:
-        out.append(pointed)
-    return out
-
-
-def _first_existing(candidates: list[Optional[Path]]) -> Optional[Path]:
-    for path in candidates:
-        if path is None:
-            continue
-        resolved = path.expanduser()
-        if resolved.is_dir():
-            return resolved.resolve()
-    return None
-
-
-def resolve_ocs_checkout(repo_root: Path) -> Optional[Path]:
-    """Env wins, then gitignored pointer file (same doctrine as real_fixture)."""
-    return _first_existing(list(_candidate_paths(repo_root)))
-
-
-def _missing_checkout_reason(repo_root: Path) -> str:
-    configured = _candidate_paths(repo_root)
-    if not configured:
-        return (
-            "ocs plant needs a checkout: set DOC_ENGINE_REAL_REPO or "
-            "SPRING_SIGNALS_OCS_REPO, or local-runs/real-repo.path"
-        )
-    shown = ", ".join(repr(str(path)) for path in configured)
-    return (
-        "ocs plant checkout configured but not a directory on this machine: "
-        f"{shown} — fix the path, or sync the tree onto this host"
-    )
 
 
 def artifactory_present() -> bool:
@@ -135,7 +88,7 @@ def preflight(repo_root: Path, plant: Optional[str] = None) -> PlantPreflight:
         return PlantPreflight(
             plant=chosen,
             ok=False,
-            reason=_missing_checkout_reason(repo_root),
+            reason=missing_checkout_reason(repo_root),
             has_artifactory=has_arti,
             expectations_rel="harness/expectations/ocs-api-service.json",
             remeasure_ok=False,

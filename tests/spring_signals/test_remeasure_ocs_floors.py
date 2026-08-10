@@ -12,7 +12,6 @@ pytestmark = pytest.mark.domain_stage0
 
 REPO = Path(__file__).resolve().parents[2]
 
-
 def _load_remeasure():
     path = REPO / "scripts" / "ci" / "remeasure_ocs_floors.py"
     spec = importlib.util.spec_from_file_location("remeasure_ocs_floors", path)
@@ -20,7 +19,6 @@ def _load_remeasure():
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
-
 
 def _plant_tree(root: Path) -> Path:
     java = root / "src" / "main" / "java" / "com" / "ex"
@@ -34,6 +32,8 @@ def _plant_tree(root: Path) -> Path:
                 "class Api {",
                 '  @GetMapping("/x") String x() { return ""; }',
                 '  @PostMapping("/y") String y() { return ""; }',
+                # Method-level RequestMapping must NOT inflate path_prefix.
+                '  @RequestMapping("/z") String z() { return ""; }',
                 "}",
                 "",
             ]
@@ -53,7 +53,6 @@ def _plant_tree(root: Path) -> Path:
         encoding="utf-8",
     )
     return root
-
 
 def test_remeasure_dry_run_proposal(tmp_path: Path) -> None:
     mod = _load_remeasure()
@@ -89,7 +88,6 @@ def test_remeasure_dry_run_proposal(tmp_path: Path) -> None:
     data = json.loads(expectations.read_text(encoding="utf-8"))
     # dry-run must not mutate
     assert data["minimums"]["ApiSurface"]["api_surface__endpoint"] == 1
-
 
 def test_remeasure_write_updates_floors(tmp_path: Path, capsys) -> None:
     mod = _load_remeasure()
@@ -137,13 +135,15 @@ def test_remeasure_write_updates_floors(tmp_path: Path, capsys) -> None:
     assert data["minimums"]["ApiSurface"]["api_surface__path_prefix"] == 1
     assert data["minimums"]["Persistence"]["persistence__repository_marker"] == 1
     assert data["minimums"]["ApiSurface"]["_note"] == "keep"
-
+    # Post-write proposal must show aligned minima (no stale pre-write delta).
+    assert out["floors"][2]["rule_id"] == "api_surface__path_prefix"
+    assert out["floors"][2]["minimum"] == 1
+    assert out["floors"][2]["delta"] == 0
 
 def test_remeasure_missing_checkout_exits_2() -> None:
     mod = _load_remeasure()
     rc = mod.main(["--checkout", "/no/such/ocs/checkout"])
     assert rc == 2
-
 
 def test_resolve_astgrep_finds_binary() -> None:
     mod = _load_remeasure()

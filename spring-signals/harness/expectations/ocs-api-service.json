@@ -10,12 +10,12 @@
     "ApiSurface": {
       "api_surface__controller": 49,
       "api_surface__endpoint": 369,
-      "api_surface__path_prefix": 45,
-      "_note": "Floors measured on ocs-api-service (work checkout 2026-08-10, ast-grep campaign rules). Rows only grow as the service grows; a drop below the floor is the @RestController recall regression class. Remeasure: controller=49, endpoint=369, path_prefix=45 (rule counts RequestMapping path forms; prior floor 35 was the older class-level subset). Messaging=0 still expected: no kafka/rabbit/sqs/pulsar/jms on classpath."
+      "api_surface__path_prefix": 35,
+      "_note": "Plant SoR is CodeQL ApiSurface.ql: path_prefix = class-level mapping annotations only (~35 on ocs). Campaign ast-grep floors must use the same predicate (exclude method_declaration). A 2026-08-10 loose remeasure briefly wrote 45 (all @RequestMapping under the class AST) — reverted; that floor would FAIL plant if CodeQL still reports 35. controller=49 / endpoint=369 verified offline. Messaging=0: no kafka/rabbit/sqs/pulsar/jms on classpath."
     },
     "Persistence": {
       "persistence__repository_marker": 8,
-      "_note": "Remeasured 2026-08-10: eight interfaces extend the BookBasedRepository marker (was four on 2026-08-05: Topic, Module, Lesson, Concept). BookBasedRepository itself is an empty marker, not a Spring Data root."
+      "_note": "Remeasured 2026-08-10 via ast-grep (BookBasedRepository extenders): eight interfaces (was four on 2026-08-05: Topic, Module, Lesson, Concept). Aligns with Persistence.ql marker semantics (direct empty first-party marker supertype). Confirm on next CodeQL plant CSV. BookBasedRepository itself is not a Spring Data root."
     },
     "Configuration": {
       "_note": "No ocs expectation yet. Named so the stale-CSV check recognises this run's output as fresh: run.sh's default wave emits ten CSVs, and a CSV the spec does not name is exit 2. Without these entries the default ocs invocation could not complete."

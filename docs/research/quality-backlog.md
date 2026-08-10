@@ -466,7 +466,9 @@ Research: [`docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md`](st
 | P33.0 | **E-OCS0 Spec** OCS1–OCS8 | **Approved** (2026-08-10) | research ci/36 + design |
 | P33.1 | `plant_profile` + `run-plant.sh` fail-closed | **Done** (2026-08-10) | `test_plant_profile.py` |
 | P33.2 | `remeasure_ocs_floors.py` + campaign `astgrep_ocs_floors.yml` | **Done** (2026-08-10) | dry-run default; `--write` opt-in; `test_remeasure_ocs_floors.py` |
-| P33.3 | Live remeasure on operator checkout (Windows/VPN) | Operator | not CI SoT |
+| P33.3 | Live remeasure on operator checkout (Windows/VPN) | **In progress** | grading pack `docs/process/local-grading-pack.md` |
+| P33.4 | Align campaign ast-grep `path_prefix` with CodeQL class-level predicate; keep plant floor **35** (revert false 45) | **Done** (2026-08-10) | rule `not inside method_declaration`; expectations note |
+| P33.5 | Full `run-plant.sh ocs` + OpenAPI join + Messaging=0 evidence | Operator | P3/P4/D6 in grading pack |
 
 ---
 

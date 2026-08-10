@@ -4,6 +4,10 @@
 Default is dry-run: print a proposal JSON. ``--write`` updates numeric
 minimums in the expectations file (operator-reviewed).
 
+Campaign rules in ``astgrep_ocs_floors.yml`` must match CodeQL plant
+predicates (e.g. path_prefix = class-level only). Do not raise plant floors
+from a looser ast-grep match than ApiSurface.ql / Persistence.ql.
+
 Usage:
     python3 scripts/ci/remeasure_ocs_floors.py
     python3 scripts/ci/remeasure_ocs_floors.py --checkout /path/to/tree
@@ -14,88 +18,24 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import shutil
-import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import Optional
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 _HARNESS = REPO_ROOT / "spring-signals" / "harness"
 if str(_HARNESS) not in sys.path:
     sys.path.insert(0, str(_HARNESS))
 
+from ocs_floor_scan import FLOOR_RULES, resolve_astgrep, run_astgrep, scan_roots  # noqa: E402
 from plant_profile import resolve_ocs_checkout  # noqa: E402
 
 RULES = _HARNESS / "astgrep_ocs_floors.yml"
 EXPECTATIONS = _HARNESS / "expectations" / "ocs-api-service.json"
-FLOOR_RULES = (
-    "api_surface__controller",
-    "api_surface__endpoint",
-    "api_surface__path_prefix",
-    "persistence__repository_marker",
-)
 
-
-def _scan_roots(checkout: Path) -> list[Path]:
-    mains = sorted({path.resolve() for path in checkout.glob("**/src/main/java")})
-    if mains:
-        return mains
-    return [checkout.resolve()]
-
-
-def _resolve_astgrep() -> str:
-    """Prefer PATH, then the binary next to this interpreter (venv Scripts)."""
-    found = shutil.which("ast-grep")
-    if found:
-        return found
-    sibling = Path(sys.executable).resolve().parent / (
-        "ast-grep.exe" if os.name == "nt" else "ast-grep"
-    )
-    if sibling.is_file():
-        return str(sibling)
-    raise FileNotFoundError(
-        "ast-grep not found on PATH or next to Python "
-        f"({sys.executable}). Activate .venv or: pip install -r requirements.txt"
-    )
-
-
-def _run_astgrep(roots: Sequence[Path], rules: Path) -> Counter[str]:
-    if not roots:
-        return Counter()
-    completed = subprocess.run(
-        [
-            _resolve_astgrep(),
-            "scan",
-            "-r",
-            str(rules),
-            "--json=compact",
-            *[str(path) for path in roots],
-        ],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if completed.returncode not in (0, 1):
-        raise RuntimeError(
-            (completed.stderr or completed.stdout or "ast-grep failed")[:500]
-        )
-    return _count_rule_ids(completed.stdout)
-
-
-def _count_rule_ids(stdout: str) -> Counter[str]:
-    text = (stdout or "").strip()
-    if not text:
-        return Counter()
-    payload = json.loads(text)
-    rows = payload if isinstance(payload, list) else [payload]
-    return Counter(
-        str(row["ruleId"])
-        for row in rows
-        if isinstance(row, dict) and row.get("ruleId")
-    )
+# Test / Windows PATH shim re-exports.
+_resolve_astgrep = resolve_astgrep
 
 
 def _numeric_minimums(data: dict) -> dict[str, int]:
@@ -206,7 +146,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(f"error: rules missing: {rules}", file=sys.stderr)
         return 2
     try:
-        counts = _run_astgrep(_scan_roots(checkout), rules)
+        counts = run_astgrep(scan_roots(checkout), rules)
     except FileNotFoundError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
@@ -216,6 +156,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     )
     if args.write:
         apply_write(expectations, counts)
+        written = json.loads(expectations.read_text(encoding="utf-8"))
+        proposal = build_proposal(
+            counts, _numeric_minimums(written), checkout=checkout.resolve()
+        )
         proposal["write_applied"] = True
     print(json.dumps(proposal, indent=2, sort_keys=True))
     return 0

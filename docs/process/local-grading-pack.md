@@ -31,7 +31,7 @@ Legend: **SoR** = merge/CI source of record · **Campaign** = OCS opt-in ·
 | ID | Command | Proves | SoR | Capture |
 |----|---------|--------|-----|---------|
 | P1 | `python spring-signals/harness/plant_profile.py --plant ocs --json` | Checkout + Artifactory preflight | Campaign | `logs/p1-plant-profile.log` |
-| P2 | `python scripts/ci/remeasure_ocs_floors.py --checkout "$(cat local-runs/real-repo.path)"` | Offline floors dry-run (deltas 0 after write) | Campaign | `logs/p2-remeasure.json` (stdout is JSON) |
+| P2 | `python scripts/ci/remeasure_ocs_floors.py --checkout "$(cat local-runs/real-repo.path)"` | Offline floors dry-run. Expect **path_prefix ≈ 35** (class-level), not 45. Marker may be 8. | Campaign | `logs/p2-remeasure.json` (stdout is JSON) |
 | P3 | `./spring-signals/harness/run-plant.sh ocs` | Full OCS CodeQL DB + wave-1 CSVs + asserts vs `ocs-api-service.json` | Campaign | `logs/p3-run-plant-ocs.log` + copy `spring-signals/harness/out/*.csv` listing / assertion block |
 | P4 | `python spring-signals/harness/join_openapi.py --api-surface spring-signals/harness/out/ApiSurface.csv --openapi "$(cat local-runs/real-repo.path)/src/docs/api/OASv3/ocs-api-service.yaml"` | ApiSurface ↔ OpenAPI join (path may differ — confirm under OCS `**/OASv3/*.yaml`) | Campaign | `logs/p4-join-openapi.log` |
 
@@ -88,18 +88,25 @@ Pull `origin/main` (or fetch) before H7 so `--compare-ref` resolves.
 
 These close open grading questions; run after P2/P3 when possible.
 
-1. **path_prefix 45 vs older “35 class-level”** — dump matching files:
+1. **path_prefix predicate (CodeQL SoR)** — plant floor is **35** class-level.
+   Tip rules exclude method-level `@RequestMapping`. After `git pull`, remeasure
+   should report ~35, not 45. If you still see 45, you are on the old rule YAML.
 
    ```bash
    ast-grep scan -r spring-signals/harness/astgrep_ocs_floors.yml \
      --filter api_surface__path_prefix \
-     "$(cat local-runs/real-repo.path)" \
+     "$(cat local-runs/real-repo.path)/src/main/java" \
      > local-runs/logs/adv-path-prefix.txt 2>&1
    ```
 
 2. **repository_marker 8** — same with `--filter persistence__repository_marker`.
+   Compare to `Persistence.csv` `persistence__repository_marker` row count after P3.
 
-3. **QL ↔ ast-grep join** — after P3, compare `out/ApiSurface.csv` row counts to P2 floors (controller/endpoint); paste both numbers.
+3. **QL ↔ ast-grep join** — after P3, compare CSV rule_id counts to P2 floors
+   (controller / endpoint / path_prefix / marker); paste both number sets.
+
+4. **Messaging=0** — confirm no kafka/rabbit/sqs/pulsar/jms in OCS Gradle files;
+   plant `Messaging` asserted empty. Paste matching dependency lines or “none”.
 
 ---
 

@@ -15,16 +15,24 @@ rule:
 ---
 id: api_surface__path_prefix
 language: java
-message: "Class-level @RequestMapping path prefix"
+message: "Class-level @RequestMapping path prefix (excludes method-level)"
+# Must match CodeQL ApiSurface.ql path_prefix (class owner only). A bare
+# inside:class_declaration + stopBy:end also hits method @RequestMapping and
+# inflated live floors 35→45 — that predicate would fail the OCS plant assert.
 rule:
-  any:
-    - pattern: "@RequestMapping"
-    - pattern: "@RequestMapping($$$ARGS)"
-  inside:
-    any:
-      - kind: class_declaration
-      - kind: interface_declaration
-    stopBy: end
+  all:
+    - any:
+        - pattern: "@RequestMapping"
+        - pattern: "@RequestMapping($$$ARGS)"
+    - inside:
+        any:
+          - kind: class_declaration
+          - kind: interface_declaration
+        stopBy: end
+    - not:
+        inside:
+          kind: method_declaration
+          stopBy: end
 ---
 id: api_surface__endpoint
 language: java
