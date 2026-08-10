@@ -79,7 +79,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
-| **E-LIE0** | Full polyglot verified agent (Rust·WASM·SQLite·Go·Ruby·Clojure·TS·C·Zig) + ATAM/ADR method | `process/50–55` · [`e-lie0-requirements`](../design/e-lie0-requirements-2026-08-10.md) · [`adr/`](../design/adr/README.md) · **ADR-006** |
+| **E-LIE0** | Full polyglot verified agent + ATAM/ADR + **greenfield port** (`ports/verified-architecture`) | `process/50–56` · [`e-lie0-requirements`](../design/e-lie0-requirements-2026-08-10.md) · [`adr/`](../design/adr/README.md) · [port EXPORT](../../ports/verified-architecture/EXPORT.md) |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 
