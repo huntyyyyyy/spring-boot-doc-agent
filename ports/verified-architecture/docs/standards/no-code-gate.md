@@ -28,4 +28,4 @@ artifacts are marketing.
 
 - Engine crates, daemons, gems, JVM services, WASM binaries as product
 - “Just a spike folder” that becomes the tip without ADR Accept
-- Python-majority scaffolding that re-centers the old doc-engine identity
+- Python-majority scaffolding that re-centers the old product identity

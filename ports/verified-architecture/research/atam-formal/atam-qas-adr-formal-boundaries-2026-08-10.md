@@ -1,22 +1,22 @@
 ---
-title: E-LIE0 architecture method — ATAM QAS · constraints · tactics · ADR · formal boundaries
+title: VA architecture method — ATAM QAS · constraints · tactics · ADR · formal boundaries
 status: RESEARCH COMPLETE — methodology gate before Design/Pilot (amends RE + process/53)
 date: '2026-08-10'
-epic: E-LIE0
+epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
   - deepwiki_ask_question
   - llms_txt
 related:
-  - docs/design/e-lie0-requirements-2026-08-10.md
-  - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
-  - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
-  - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
-  - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
-  - docs/design/adr/README.md
-  - docs/research/quality-backlog.md
-  - .cursor/rules/se-quality-constitution.mdc
+  - docs/requirements/
+
+  - research/adversarial/adversarial-ddia-solid-polyglot-2026-08-10.md
+  - research/adversarial/re-master-adversarial-critique-2026-08-10.md
+  - research/polyglot/pilot-mental-models-polyglot-lanes-2026-08-10.md
+  - docs/adr/README.md
+
+  - .cursor/rules/00-constitution.mdc
 do_not:
   - Let budget adjectives (≤2s) influence Design without a six-part QAS
   - Confuse constraints with requirements
@@ -41,7 +41,7 @@ sources:
 last_reviewed: '2026-08-10'
 ---
 
-# Architecture method for E-LIE0 — QAS before Design
+# Architecture method for VA — QAS before Design
 
 **User correction (accepted).** process/53 restored polyglot mental models but
 still let **assumption-shaped NFRs** (“≤2s warm”) steer Pilot talk. That is not
@@ -65,7 +65,7 @@ Design influence from incomplete NFRs.
 | Level | Evidence |
 | --- | --- |
 | **1** | SEI ATAM TR; Nygard ADR; Wright/Rapide/Darwin survey; RustBelt; Verus; Watt/WasmCert; Iris-MSWasm |
-| **2** | Map QAS → E-LIE0 actors/artifacts (LockCheck, SCIP index, receipt, tip oracle) |
+| **2** | Map QAS → VA actors/artifacts (LockCheck, SCIP index, receipt, tip oracle) |
 | **3** | Concrete QAS for Must NFRs; ADR path `docs/design/adr/` |
 | **4** | Tactics vs tradeoffs (cache↔freshness, WASM↔latency, SQLite↔Datascript) |
 | **5** | False claims: “Wasmtime ⇒ proved”; “C4 stays true without ADR” |
@@ -91,7 +91,7 @@ or Pilot Accept until rewritten.
 ## 2. Quality Attribute Scenario form `[Evidenced — SEI ATAM]`
 
 Six components (stimulus source · stimulus · environment · artifact · response ·
-response measure). Example shape from the user, specialized to E-LIE0:
+response measure). Example shape from the user, specialized to VA:
 
 ### Template
 
@@ -113,12 +113,12 @@ response measure). Example shape from the user, specialized to E-LIE0:
 
 | Field | Value |
 | --- | --- |
-| **Stimulus source** | Agent operator (A-OP) or CLI `lie0 resolve` |
+| **Stimulus source** | Agent operator (A-OP) or CLI `va resolve` |
 | **Stimulus** | Request binding for one injection site / type |
-| **Environment** | Local laptop; **warm** registry+SCIP already loaded; kitchen-scale tree; swap=0 |
+| **Environment** | Local laptop; **warm** registry+SCIP already loaded; corpus-scale tree; swap=0 |
 | **Artifact** | `WiringResolver` + SQLite registry |
 | **Response** | Return impl symbol **or** `Unknown` + reason_code |
-| **Response measure** | Wall p95 ≤ *T* ms over *N*≥30 calls on VS-kitchen harness; record *T* from Spike (do not invent *T* in Design until measured). Fail if any silent pick under multi-candidate. |
+| **Response measure** | Wall p95 ≤ *T* ms over *N*≥30 calls on VS-corpus harness; record *T* from Spike (do not invent *T* in Design until measured). Fail if any silent pick under multi-candidate. |
 
 #### QAS-N-02 — lock check on save path
 
@@ -160,7 +160,7 @@ response measure). Example shape from the user, specialized to E-LIE0:
 
 ## 3. Constraints ≠ requirements `[Evidenced — ATAM / RE practice]`
 
-| Kind | Meaning | E-LIE0 examples |
+| Kind | Meaning | VA examples |
 | --- | --- | --- |
 | **Requirement** | Stakeholder-valued capability/quality (can MoSCoW) | QAS-N-01 latency scenario |
 | **Constraint** | Fixed for this wave; not traded casually | Python tip writes `coverage.xml`; no dual Cover%; Java 17/21 · Boot 3.2/3.3 envelope; local-first default; constitution complexipy/LOC |
@@ -177,7 +177,7 @@ For each QAS, list **candidate tactics**, then mark:
 - **Sensitivity point** — decision that strongly affects one quality  
 - **Tradeoff point** — same decision moves two qualities in opposite directions  
 
-### E-LIE0 starter tradeoff table (must be ADR’d when chosen)
+### VA starter tradeoff table (must be ADR’d when chosen)
 
 | Decision knob | Helps | Hurts | Class |
 | --- | --- | --- | --- |
@@ -264,7 +264,7 @@ artifacts in-tree.
 | --- | --- | --- |
 | **ATAM-1** | Rewrite all Must `REQ-N-*` as QAS-N-* six-part | No Must NFR without measure method; MEASURE-TBD allowed only pre-Spike |
 | **ATAM-2** | Constraints ledger in RE (separate from REQ) | Table committed; constitution rows linked |
-| **ATAM-3** | Utility tree + tradeoff table for E-LIE0 | Sensitivity/tradeoff points named |
+| **ATAM-3** | Utility tree + tradeoff table for VA | Sensitivity/tradeoff points named |
 | **ADR-0** | ADR folder + template + ADR-001…005 proposed | Nygard sections present |
 | **ADL-1** | Connector contract list (ports/roles) | Compatibility obligations in Design Spec |
 | **TLA-1** | Optional TLC model for watch/stamp freshness | Tiny model; invariant “no Accept on stale” or drop |

@@ -1,0 +1,16 @@
+---
+description: Architecture docs — ADRs and C4 must stay consistent; cite ADR IDs
+globs:
+  - docs/adr/**
+  - docs/c4/**
+alwaysApply: false
+---
+
+# Architecture docs lens
+
+When editing C4 or ADRs:
+
+1. ADRs are decisions; C4 is structure — C4 cites ADR IDs.
+2. Do not invent containers without an ADR (or mark Proposed + open ADR).
+3. Read `docs/adr/README.md` and `docs/standards/c4-standard.md`.
+4. Cross-check polyglot ownership in `docs/DOMAIN_MAP.md` nests table.

@@ -2,20 +2,19 @@
 title: Adversarial critique — verified-slice RE-MASTER-001 v0.5.1 (AI rough draft)
 status: RESEARCH COMPLETE — critique of inbound RE draft (not Spec Approve)
 date: '2026-08-10'
-epic: E-LIE0
+epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
   - deepwiki_ask_question
   - llms_txt
 related:
-  - docs/design/e-lie0-requirements-2026-08-10.md
-  - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
-  - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
-  - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
+  - docs/requirements/
+
+  - research/adversarial/adversarial-ddia-solid-polyglot-2026-08-10.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
-  - docs/research/quality-backlog.md
-  - .cursor/rules/se-quality-constitution.mdc
+
+  - .cursor/rules/00-constitution.mdc
 do_not:
   - Treat RE-MASTER-001 as requirements SoR until rewritten implementation-free
   - Pin Phi-3 / any LLM identity into FR text (model choice will change)
@@ -48,7 +47,7 @@ last_reviewed: '2026-08-10'
 (truncated paste; FR-16 incomplete).  
 **Stance.** Useful as a **stimulus corpus** for RE quality. **Not** the
 requirements SoR for this repo. Authoritative RE draft remains
-[`e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md).
+[`docs/requirements-2026-08-10.md`](../../design/docs/requirements-2026-08-10.md).
 
 **One-line verdict.** High theatrical compliance (clause numbers, corpora IDs,
 p95 budgets) wrapping **implementation-bound “requirements,” invented
@@ -63,9 +62,9 @@ conflating **verify** with **RAG+LLM suggest**, and using **LanceDB** where
 | Level | Evidence |
 | --- | --- |
 | **1** | ISO 29148:2018 / DIS Ed3 pages; MCP 2026-07-28 Streamable HTTP + Tasks; DeepWiki Ask (scip-java, wasmtime, kuzu, tree-sitter, lancedb, scip) |
-| **2** | Map draft BR/FR onto E-LIE0 Layers + SoR\|derived + this tip’s claims/coverage |
-| **3** | Show which Accept methods could run on kitchen/OCS vs which need nonexistent VS-* corpora |
-| **4** | Embody / Adopt / Refuse table vs constitution + e-lie0 REQ-* |
+| **2** | Map draft BR/FR onto VA Layers + SoR\|derived + this tip’s claims/coverage |
+| **3** | Show which Accept methods could run on corpus/OCS vs which need nonexistent VS-* corpora |
+| **4** | Embody / Adopt / Refuse table vs constitution + va REQ-* |
 | **5** | Adversarial false-green/red; FN=0 impossibility; Kuzu LB fail |
 | **6** | Critique tickets CRM-* + RE rewrite rules — no Implement from this draft |
 
@@ -75,11 +74,11 @@ conflating **verify** with **RAG+LLM suggest**, and using **LanceDB** where
 
 | Keep | Why | Tier |
 | --- | --- | --- |
-| Separate **local** vs **org-wide** OpsCon | Matches E-LIE0 local-first + optional daemon | Confirmed fit |
+| Separate **local** vs **org-wide** OpsCon | Matches VA local-first + optional daemon | Confirmed fit |
 | Stakeholder SH-01…04 with **measurable proxies** | Better than nameless “users” | Adopt shape |
 | BR-01 pre-push / IDE-time violation surfacing | Aligns REQ-F-05 / F-12 Should | Adopt intent |
 | BR-03 auditable proof artefact | Aligns REQ-F-06 | Adopt intent |
-| Explicit Spring Boot / Java LTS **version envelope** | Good scope fence (absent in e-lie0 RE — add) | Adopt |
+| Explicit Spring Boot / Java LTS **version envelope** | Good scope fence (absent in va RE — add) | Adopt |
 | MCP 2026-07-28 **Streamable HTTP** + `Mcp-Method`/`Mcp-Name` | Normative headers exist `[Evidenced — MCP transports]` | Adopt when Phase-2 MCP |
 | Tasks as **extension** with `tasks/get` | SEP-2663 / ext-tasks `[Evidenced — MCP Tasks]` | Adopt pattern |
 | NFR **reference hardware** concept | Needed for latency claims | Adopt (add Linux CI SKU) |
@@ -114,7 +113,7 @@ pinned tag in FR.
 OpsCon LOCAL MODE steps 4–5 put **RAG + Phi-3** on the critical path of
 `fitness_check` (≤900 ms of the 2000 ms budget). That collapses:
 
-| Concern | Correct layer (E-LIE0) | Draft |
+| Concern | Correct layer (VA) | Draft |
 | --- | --- | --- |
 | Lock violation? | L2 LockCheck (deterministic) | Mixed with LLM |
 | Remediation text | Optional suggest (sensor) | Mandatory FR-07 |
@@ -145,7 +144,7 @@ non-normative invention**. Nearly all FRs marked HIGH via it → MoSCoW theater.
 `VS-corpus-v1`, `VS-bench-v1`, `VS-eval-v1`, `VS-load-v1` are cited with
 hand-labelled FN=0 / FP≤2.30% / MAP@10 ≥ 0.68. **None exist in this repo**
 (`[Confirmed]` absent). Pass criteria referencing them are **unsatisfiable**.
-Until corpora are created with methodology, Accept must bind to kitchen/OCS /
+Until corpora are created with methodology, Accept must bind to corpus/OCS /
 fixture packs we already ship.
 
 ### 2.6 FN = 0 while excluding Spring Magic
@@ -153,7 +152,7 @@ fixture packs we already ship.
 FR-03 demands **zero false negatives** on architecture locks. R-01 simultaneously
 excludes AOP proxies / weaving from AST scope. Those are not edge cases in Spring
 codebases — they are common. FN=0 is **infeasible** under stated exclusions;
-honest Accept is **soundness class + Unknown** (e-lie0 REQ-F-02/F-07; ADV-3).
+honest Accept is **soundness class + Unknown** (va REQ-F-02/F-07; ADV-3).
 
 ---
 
@@ -242,14 +241,14 @@ epics T1–T5 / Phase 2 undefined in-repo.
 | Gap | Draft | Needed here |
 | --- | --- | --- |
 | Tip / CI coverage SoR | Missing | A-CI: no dual `coverage.xml` (constitution) |
-| Agent operator vs IDE developer | Collapsed into SH-01 | A-OP vs A-DEV (e-lie0) |
+| Agent operator vs IDE developer | Collapsed into SH-01 | A-OP vs A-DEV (va) |
 | Target-repo owner cost | Weak | Index rebuild / Unknown > wrong |
 | Validation vs verification | Collapsed into proof tour | Architect validates lock *intent*; tool verifies |
 | Social graph / people nodes | Org-wide KG | Out of scope for v1 Must (Could) |
 
 ---
 
-## 6. Constitution / E-LIE0 collision matrix
+## 6. Constitution / VA collision matrix
 
 | Draft thrust | Stance |
 | --- | --- |
@@ -260,14 +259,14 @@ epics T1–T5 / Phase 2 undefined in-repo.
 | Org-wide Kuzu+Lance MCP Phase 2 | **Park** — Spike; not RE SoR |
 | Backstage deferred | Aligns constitution Refuse as merge SoT |
 | FN=0 Spring locks | **Refuse** — use Unknown taxonomy |
-| VS-* corpora Accept | **Replace** with kitchen/OCS + labeled fixtures when built |
+| VS-* corpora Accept | **Replace** with corpus/OCS + labeled fixtures when built |
 | Priority formula | **Refuse** — use MoSCoW + RTM |
 
 ---
 
 ## 7. Embody / Adopt / Refuse (rewrite rules)
 
-**Embody into e-lie0 RE (next amend):**
+**Embody into va RE (next amend):**
 
 1. Version envelope: Java 17/21 · Spring Boot 3.2/3.3 (or explicit R-03).  
 2. Stakeholder measurable proxies (SH-style).  
@@ -298,7 +297,7 @@ epics T1–T5 / Phase 2 undefined in-repo.
 | ID | Ticket | Acceptance |
 | --- | --- | --- |
 | **CRM-1** | Park inbound draft under `docs/research/inbound/` | Path exists; status DRAFT-AI; not Design SoR |
-| **CRM-2** | Amend e-lie0 RE: version envelope + SH proxies + model-agnostic remediation | REQ rows updated; Phi-* absent from FR |
+| **CRM-2** | Amend va RE: version envelope + SH proxies + model-agnostic remediation | REQ rows updated; Phi-* absent from FR |
 | **CRM-3** | Split verify vs suggest in OpsCon | Must verify = graph+locks+receipt; LLM = Could/Should |
 | **CRM-4** | Replace FN=0 with Unknown/soundness class Accept | Matches ADV-3 |
 | **CRM-5** | Spike note: Kuzu embedded vs shared graph SoR | Keep/drop for BR-04 |
@@ -309,5 +308,5 @@ epics T1–T5 / Phase 2 undefined in-repo.
 ## 9. Status
 
 Critique **Complete**. RE-MASTER-001 is a **rough AI draft** — keep as critique
-fuel; **rewrite** before stakeholder Approve. E-LIE0 RE package remains the
+fuel; **rewrite** before stakeholder Approve. VA RE package remains the
 working SoR until a human-approved merge of Adopt items.

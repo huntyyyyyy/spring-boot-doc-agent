@@ -1,21 +1,15 @@
-# Export to a new GitHub repository
+# Export — create the standalone GitHub repository
 
-This folder is a **self-contained planning repository**: standards, requirements,
-constraints, C4, ADRs, **full research corpus**, and **nested BC packages** with
-MDC for progressive agent context.
+Cloud tokens often cannot `createRepository`. Create an empty private repo in the UI, then:
 
 ```bash
-gh repo create huntyyyyyy/verified-architecture --public \
-  --description "Polyglot verified architecture — RE/ATAM/C4/ADR + research nests (working draft)"
-
-# copy this directory out of spring-boot-doc-agent, then:
-cd verified-architecture
-git init -b main
+cd /path/to/this/tree
+git init
 git add -A
-git commit -m "Planning SoR: ISO/ATAM draft, research corpus, nested MDC BCs"
-git remote add origin git@github.com:huntyyyyyy/verified-architecture.git
+git commit -m "Initial commit: verified architecture planning + RAG corpus"
+git branch -M main
+git remote add origin git@github.com:<org>/<repo>.git
 git push -u origin main
 ```
 
-Cloud agent tokens often cannot `createRepository` — run the create step from
-your account.
+Optional: attach this tree as a Cursor Cloud environment root so agents load `.cursor/rules/` and nest MDCs.

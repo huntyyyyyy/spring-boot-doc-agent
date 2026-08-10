@@ -8,7 +8,7 @@ date: '2026-08-10'
 
 ## Context
 
-Former ADR “Python tip remains coverage writer” encoded **doc-engine history**,
+Former ADR “Python tip remains coverage writer” encoded **legacy tip history**,
 not a polyglot product law. The invariant is **single writer**, not Python.
 
 ## Decision
@@ -20,7 +20,7 @@ Accepted — it is **not** the default identity of this repo.
 
 ## Status
 
-Proposed. **Supersedes** the spring-boot-doc-agent ADR-005 framing for *this*
+Proposed. **Supersedes** the planning workspace ADR-005 framing for *this*
 product.
 
 ## Consequences

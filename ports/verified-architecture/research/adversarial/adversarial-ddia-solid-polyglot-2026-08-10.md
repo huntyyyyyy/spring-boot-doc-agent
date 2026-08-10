@@ -1,24 +1,24 @@
 ---
-title: E-LIE0 adversarial SE review — DDIA · SOLID · patterns · polyglot slate
-status: RESEARCH COMPLETE — Spec companion (feeds E-LIE0 Design; no Implement)
+title: VA adversarial SE review — DDIA · SOLID · patterns · polyglot slate
+status: RESEARCH COMPLETE — Spec companion (feeds VA Design; no Implement)
 date: 2026-08-10
-epic: E-LIE0
+epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
   - deepwiki_ask_question
   - llms_txt
 related:
-  - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
-  - docs/design/e-lie0-requirements-2026-08-10.md
+
+  - docs/requirements/
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
-  - docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
+  - research/polyglot/
+
+  - research/mdc-devex/
   - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+
 do_not:
-  - Treat E-LIE0 process/50 as complete Spec without SoR matrix + ports + RE Approve
+  - Treat VA process/50 as complete Spec without SoR matrix + ports + RE Approve
   - Ship dual Cover% or dual claims writers under “Rust engine”
   - Equate Packwerk/tach patterns with Spring DI resolve
   - Approve all polyglot crates as tip deps in one PR
@@ -41,7 +41,7 @@ sources:
   mcp: https://mcp.deepwiki.com/mcp
 ---
 
-# Adversarial principal-SE review of E-LIE0
+# Adversarial principal-SE review of VA
 
 **Role.** Adversarial principal SE against
 [`process/50`](50-local-first-verified-architecture-agent-2026-08-10.md), using
@@ -49,9 +49,9 @@ sources:
 derived), **SOLID**, **DRY**, and GoF **creational / structural / behavioral**
 patterns. Goal: completeness of **scope**, then a **polyglot research slate**.
 
-**Verdict in one line.** E-LIE0’s *pyramid* is directionally right; as a Spec
+**Verdict in one line.** VA’s *pyramid* is directionally right; as a Spec
 it was incomplete without RE. **RE package drafted**
-([`e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md));
+([`docs/requirements-2026-08-10.md`](../../design/docs/requirements-2026-08-10.md));
 still missing SoR matrix, ports, failure taxonomy, incremental invalidation,
 and an honest Spring-DI capability envelope before Cargo.
 
@@ -62,8 +62,8 @@ and an honest Spring-DI capability envelope before Cargo.
 | Level | Evidence |
 | --- | --- |
 | **1** | DeepWiki Ask: scip-java, tree-sitter, Kani, wasmtime, Babashka, Cobra; Packwerk / Noumenon primary pages |
-| **2** | Restate E-LIE0 in SoR|derived + Stage-0/claims/coverage types |
-| **3** | Map each Pilot to `pre_pr` / kitchen / OCS without dual oracle |
+| **2** | Restate VA in SoR|derived + Stage-0/claims/coverage types |
+| **3** | Map each Pilot to `pre_pr` / corpus / OCS without dual oracle |
 | **4** | SOLID/pattern gaps; Embody vs Pilot per language |
 | **5** | §3 adversarial + false-green/red |
 | **6** | ADV-* + **RE-*** tickets + research slate §5 — Design blocked until SoR matrix **and** StRS/SRS/RTM |
@@ -75,7 +75,7 @@ and an honest Spring-DI capability envelope before Cargo.
 process/50 remains an **architecture vision + epic sketch**. The **RE SoR** is
 now drafted separately:
 
-**[`docs/design/e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md)**
+**[`docs/requirements/`](../../design/docs/requirements-2026-08-10.md)**
 — StRS · SRS (MoSCoW) · NFR · RTM · validation vs verification · change control.
 
 | 29148-shaped item | Was (50 only) | Now |
@@ -112,14 +112,14 @@ ADV-1…3. process/50 must not reintroduce implementation-bound “requirements.
 2. Ghost cache / embeddings used as authority for Cmd+K.  
 3. No deviation filed if static Spring model disagrees with runtime DI.
 
-**Required before Design Approve:** SoR matrix table in LIE0-1 with
+**Required before Design Approve:** SoR matrix table in VA-1 with
 `single-write-derive` for every new artifact (`sor-vs-derived`).
 
 ---
 
 ## 2. SOLID — does the pyramid respect ports?
 
-| Principle | E-LIE0 risk | Remedy |
+| Principle | VA risk | Remedy |
 | --- | --- | --- |
 | **S** | “Rust engine” god object (parse+index+resolve+LSP+prefetch) | Split crates/modules by **one concept** (COH2): `IndexPort`, `Registry`, `Resolve`, `LockCheck`, `Receipt`, `Prefetch` |
 | **O** | Hard-coded Spring rules in engine | Strategy/port: `WiringResolver` with Spring v1; plain-Java later |
@@ -228,7 +228,7 @@ Not: “WASM proves Spring.”
 
 | Tool | Research | Stance |
 | --- | --- | --- |
-| **Cobra** | `doc-engine daemon` / indexer watch / plugin bins | **Pilot** local daemon CLI `[Evidenced — Cobra]` |
+| **Cobra** | `va-daemon` / indexer watch / plugin bins | **Pilot** local daemon CLI `[Evidenced — Cobra]` |
 | **go-plugin / hashicorp** | Optional language sidecars | Pattern from process/48 |
 | **fsnotify** | Lock + source watch → reindex trigger | With Observer |
 
@@ -272,11 +272,11 @@ Not: “WASM proves Spring.”
 
 ---
 
-## 7. Create — ADV tickets (amend E-LIE0)
+## 7. Create — ADV tickets (amend VA)
 
 | ID | Ticket | Acceptance |
 | --- | --- | --- |
-| **RE-1** | StRS — stakeholders, goals, constraints, OpsCon | **Drafted** in `e-lie0-requirements` §1 — Approve open |
+| **RE-1** | StRS — stakeholders, goals, constraints, OpsCon | **Drafted** in `docs/requirements` §1 — Approve open |
 | **RE-2** | SRS — MoSCoW functional + NFR | **Drafted** §2–3 (`REQ-F-*` / `REQ-N-*`) |
 | **RE-3** | RTM — need → REQ → design port → verify | **Drafted** §5 — every Must has Accept method |
 | **RE-4** | Req change control for locks | **Drafted** §6 |
@@ -295,7 +295,7 @@ Not: “WASM proves Spring.”
 
 1. **RE-1…3** — requirements before architecture fashion.  
 2. **ADV-1…3** (paper) — SoR + ports + DI envelope.  
-3. **scip-java kitchen Spike** + SymbolFact adapter.  
+3. **scip-java corpus Spike** + SymbolFact adapter.  
 4. **Lock IR** from Packwerk lessons + MDC/claims.  
 5. **bb+Datascript** query over graph EDN.  
 6. **Cobra daemon** watch → reindex.  
@@ -306,7 +306,7 @@ Not: “WASM proves Spring.”
 
 ## 9. Status
 
-Adversarial companion to E-LIE0 **amended**; **RE-1…4 drafted** in
-`docs/design/e-lie0-requirements-2026-08-10.md`. process/50 remains Spec Draft;
+Adversarial companion to VA **amended**; **RE-1…4 drafted** in
+`docs/requirements/`. process/50 remains Spec Draft;
 **Design incomplete** until RE **Approve** + ADV-1…3. Polyglot slate is
 **research/Pilot**, not tip rewrite.

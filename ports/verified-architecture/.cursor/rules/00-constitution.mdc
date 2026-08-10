@@ -1,20 +1,21 @@
 ---
-description: Repo constitution — working draft, ISO/ATAM/ADR/C4, polyglot, no code yet
+description: Repo constitution — polyglot planning + RAG corpus; no product code yet
 alwaysApply: true
 ---
 
 # Verified Architecture — constitution
 
-You are in the **Verified Architecture Engine planning repository**.
+You are in a **planning + RAG corpus** for a verified polyglot architecture
+product. Progressive disclosure is part of the product.
 
 ## Identity
 
-- **Working draft** following ISO/IEC/IEEE 29148-shaped RE, SEI ATAM QAS,
-  Nygard ADRs, and C4. Draft content is expected; skipping the *form* is not.
-- **Polyglot-first:** Rust, WASM, SQLite, Go, Ruby, Clojure, TypeScript, Python
-  as peer, C/Zig when earned. Not a Python-majority doc-engine.
-- **Research corpus under `research/` is SoR evidence** — use it; do not
-  discard as fluff.
+- **Working draft** under ISO/IEC/IEEE 29148-shaped RE, SEI ATAM QAS,
+  Nygard ADRs, and C4. Draft *content* is fine; skipping the *form* is not.
+- **Polyglot-first:** Rust, WASM, SQLite, Go, Ruby, Clojure, TypeScript,
+  Python as peer, C/Zig when earned — not a Python-majority product.
+- **`research/` is evidence for RAG and humans** — retrieve it; do not
+  always-load it; do not discard it as fluff.
 
 ## Gates
 
@@ -22,8 +23,9 @@ You are in the **Verified Architecture Engine planning repository**.
 - Must NFRs need six-part QAS before influencing Design.
 - Constraints ≠ requirements (`docs/constraints/`).
 - C4 structural claims cite ADR IDs.
+- Unknown > wrong; claim tiers Evidenced / Confirmed / Unknown.
 
-## Look-first
+## Context budget
 
-Open `docs/DOMAIN_MAP.md` before broad exploration. When working under
-`nests/<bc>/`, follow that nest’s `.cursor/rules/nest.mdc` for scoped context.
+Always-on rules ≤2. Path scope = MDC `globs` + nest MDCs. Depth = Skills.
+Open `docs/DOMAIN_MAP.md` before broad exploration.

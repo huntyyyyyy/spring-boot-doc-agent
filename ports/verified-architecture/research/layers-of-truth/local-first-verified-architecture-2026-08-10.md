@@ -1,37 +1,34 @@
 ---
-title: E-LIE0 — Local-first verified architecture agent (Layers of Truth)
+title: VA — Local-first verified architecture agent (Layers of Truth)
 status: RESEARCH COMPLETE — Spec Draft (no kernel rewrite until Approve)
 date: 2026-08-10
-epic: E-LIE0
+epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
   - deepwiki_ask_question
   - llms_txt
 related:
-  - docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
-  - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
-  - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
-  - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
-  - docs/research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md
-  - docs/research/process/55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md
-  - docs/design/e-lie0-requirements-2026-08-10.md
-  - docs/design/adr/README.md
-  - docs/design/adr/adr-006-polyglot-first-monorepo.md
-  - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
-  - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
-  - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
-  - docs/research/quality-backlog.md
-  - .cursor/rules/se-quality-constitution.mdc
+  - research/mdc-devex/
+  - research/polyglot/
+  - research/mdc-devex/
+  - research/adversarial/adversarial-ddia-solid-polyglot-2026-08-10.md
+  - research/adversarial/re-master-adversarial-critique-2026-08-10.md
+  - research/polyglot/pilot-mental-models-polyglot-lanes-2026-08-10.md
+  - research/atam-formal/atam-qas-adr-formal-boundaries-2026-08-10.md
+  - research/polyglot/full-polyglot-product-portfolio-2026-08-10.md
+  - docs/requirements/
+  - docs/adr/README.md
+  - docs/adr/adr-0001-polyglot-first-product.md
+
+  - .cursor/rules/00-constitution.mdc
 do_not:
   - Dual-write coverage.xml from two writers without cutover ADR
   - Claim SCIP alone resolves Spring @Primary/@Qualifier/profiles
   - Equate WASM with mathematical proof (Z3/Kani are proof; WASM is sandbox)
-  - Water product down to Python-only — full polyglot is identity (process/55 · ADR-006)
+  - Water product down to Python-only — full polyglot is identity (ADR-0001)
   - Treat Duck.ai chat as Evidenced SoT — inspiration only
-  - Treat this memo as SRS — cite docs/design/e-lie0-requirements-*.md for REQ-*
+  - Treat this memo as SRS — cite docs/requirements/ for REQ-*
 
 sources:
   github:
@@ -48,9 +45,9 @@ sources:
   mcp: https://mcp.deepwiki.com/mcp
 ---
 
-# E-LIE0 — Local-first verified Spring / architecture agent
+# VA — Local-first verified architecture agent
 
-**Product today:** Python `doc-engine` + Stage-0 ast-grep + claims/MDC + gates.  
+**Product framing:** polyglot verified architecture + RAG/MDC progressive disclosure (planning corpus).  
 **Ambition:** glue **SCIP → local SCM → graph verify → (optional) SMT**, with
 Python (then Rust hot paths) as ACI — more precise than chat-only agents, more
 flexible than a pure verifier.
@@ -75,7 +72,7 @@ polyglot memos. **No Refuse-by-default** — Pilot-before-cutover.
 receipts. **Defer** full Z3 bean “proofs.” Keep Python tip until Explicit cutover.
 
 **Requirements SoR:**
-[`docs/design/e-lie0-requirements-2026-08-10.md`](../../design/e-lie0-requirements-2026-08-10.md)
+[`docs/requirements/`](../../design/docs/requirements-2026-08-10.md)
 (StRS / MoSCoW SRS / RTM). Tours below are product sketches; **Must** capabilities
 are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05/06`).
 
@@ -87,10 +84,10 @@ are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05
 | --- | --- |
 | **1 Remember** | scip-java, tree-sitter, SWE-agent ACI, Z3, Kani, LanceDB, Glean-as-pattern |
 | **2 Understand** | Spring DI ≠ Java symbols; WASM ≠ SMT; sg is fast path inside L1 |
-| **3 Apply** | Pilot: `scip-java index` on kitchen/OCS → SQLite registry → cycle/layer gate |
+| **3 Apply** | Pilot: `scip-java index` on corpus/OCS → SQLite registry → cycle/layer gate |
 | **4 Analyze** | Embody wheels/sg; Pilot Rust analyzer + SCIP; Pattern SWE-agent loop; Defer Z3 |
 | **5 Evaluate** | §6 adversarial |
-| **6 Create** | LIE0 tickets below — Implement blocked until Approve |
+| **6 Create** | VA tickets below — Implement blocked until Approve |
 
 ---
 
@@ -217,14 +214,14 @@ traces to RTM rows in the RE file.
 
 | ID | Ticket | REQ trace | Acceptance |
 | --- | --- | --- | --- |
-| **LIE0-1** | Design Spec seam map (modules ≤225) | F-01…09, F-19 | Ports: Index, Registry, Resolve, LockCheck, Receipt |
-| **LIE0-2** | Spike: scip-java on kitchen/OCS | F-10, N-04 | `index.scip` + symbol counts receipt |
-| **LIE0-3** | Bean registry + ctor/`@Autowired` resolve | F-01, F-02, F-07 | Query: bean for type X → impl or Unknown |
-| **LIE0-4** | Cycle + layer-lock check | F-03…05, F-11 | Catches controller→repo / A→B→A before merge |
-| **LIE0-5** | Proof-tour schema | F-06, F-13 | Steps clickable in markdown/JSON |
-| **LIE0-6** | Optional WASM wrap of LockCheck | F-16 Could | Same Accept as in-process |
-| **LIE0-7** | LSP squiggle Spike | F-12 Should | One lock live in editor |
-| **LIE0-8** | Polyglot bell Spike | F-15 Could | One Java↔TS bridge via OpenAPI or dual SCIP |
+| **VA-1** | Design Spec seam map (modules ≤225) | F-01…09, F-19 | Ports: Index, Registry, Resolve, LockCheck, Receipt |
+| **VA-2** | Spike: scip-java on corpus/OCS | F-10, N-04 | `index.scip` + symbol counts receipt |
+| **VA-3** | Bean registry + ctor/`@Autowired` resolve | F-01, F-02, F-07 | Query: bean for type X → impl or Unknown |
+| **VA-4** | Cycle + layer-lock check | F-03…05, F-11 | Catches controller→repo / A→B→A before merge |
+| **VA-5** | Proof-tour schema | F-06, F-13 | Steps clickable in markdown/JSON |
+| **VA-6** | Optional WASM wrap of LockCheck | F-16 Could | Same Accept as in-process |
+| **VA-7** | LSP squiggle Spike | F-12 Should | One lock live in editor |
+| **VA-8** | Polyglot bell Spike | F-15 Could | One Java↔TS bridge via OpenAPI or dual SCIP |
 
 ---
 
@@ -232,8 +229,8 @@ traces to RTM rows in the RE file.
 
 Research **Complete** through Bloom Create + RE + Pilot depth + ATAM method +
 **full polyglot product stance**
-([`process/55`](55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md) ·
-[ADR-006](../../design/adr/adr-006-polyglot-first-monorepo.md)).  
+([`process/55`](55-va-full-polyglot-product-portfolio-2026-08-10.md) ·
+[ADR-0001](../../design/adr/adr-006-polyglot-first-monorepo.md)).  
 Implement follows **PF-*** / **PIL-*** after RE Approve + tip reorder — Rust,
 WASM, Go, Ruby, Clojure, SQLite, TS, C/Zig as first-class BCs, not demos.
 

@@ -8,7 +8,7 @@ date: '2026-08-10'
 
 ## Context
 
-Prior planning lived beside a Python doc-engine and drifted toward
+Prior planning lived beside a Python product and drifted toward
 “Python tip + sidecars.” Stakeholders require a **full** polyglot product:
 Rust, WASM (+ toolkits), SQLite, Go, Ruby, Clojure, TypeScript, Python as peer,
 C when necessary, Zig when earned.
@@ -27,4 +27,4 @@ Proposed.
 
 Positive: matches stakeholder intent; clear ownership.  
 Negative: wider toolchain; stricter ADR/CI discipline.  
-Rejected: Python-majority doc-engine port as the new tip; demoting Ruby/Clojure/Go to demos.
+Rejected: Python-majority product port as the new tip; demoting Ruby/Clojure/Go to demos.

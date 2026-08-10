@@ -1,24 +1,24 @@
 ---
-title: E-LIE0 / E-POLY — Full polyglot product portfolio (Rust · WASM · SQLite · Go · Ruby · Clojure · TS · C · Zig)
+title: VA / E-POLY — Full polyglot product portfolio (Rust · WASM · SQLite · Go · Ruby · Clojure · TS · C · Zig)
 status: RESEARCH COMPLETE — Spec Draft PRODUCT STANCE (user-directed; amends “sidecar-only” framing)
 date: '2026-08-10'
-epic: E-LIE0
+epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
   - deepwiki_ask_question
   - llms_txt
 related:
-  - docs/design/e-lie0-requirements-2026-08-10.md
-  - docs/design/adr/README.md
-  - docs/design/adr/adr-006-polyglot-first-monorepo.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
-  - docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
-  - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
-  - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
-  - docs/research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md
-  - docs/research/quality-backlog.md
+  - docs/requirements/
+  - docs/adr/README.md
+  - docs/adr/adr-0001-polyglot-first-product.md
+  - research/polyglot/
+
+  - research/mdc-devex/
+
+  - research/polyglot/pilot-mental-models-polyglot-lanes-2026-08-10.md
+  - research/atam-formal/atam-qas-adr-formal-boundaries-2026-08-10.md
+
 do_not:
   - Water this down to “Python tip + optional demos”
   - Dual-write coverage.xml from two languages without cutover ADR
@@ -67,7 +67,7 @@ polyglot does **not** mean vibes or dual Cover%.
 | **3** | Monorepo layout + build matrix + Pilot order |
 | **4** | Transitional oracle writer vs cutover; Zig/C when earned |
 | **5** | Adversarial: supply-chain, dual SoT, formal overclaim |
-| **6** | POLY-FULL tickets + ADR-006 |
+| **6** | POLY-FULL tickets + ADR-0001 |
 
 ---
 
@@ -76,7 +76,7 @@ polyglot does **not** mean vibes or dual Cover%.
 | Question | Answer |
 | --- | --- |
 | Is the product polyglot? | **Yes — by design** |
-| Where does it live? | **This monorepo** (not a greenfield abandon of kitchen/OCS) |
+| Where does it live? | **This monorepo** (not a greenfield abandon of corpus/OCS) |
 | Can Rust own the engine? | **Yes** — first-class `crates/` / engine BC |
 | WASM? | **Yes** — guests + hosts + WIT/component model + Extism/wazero as needed |
 | Ruby / Clojure? | **Yes** — real lock DSL / graph brain BCs, not “pattern essays” |
@@ -91,7 +91,7 @@ polyglot does **not** mean vibes or dual Cover%.
 ## 2. Bounded contexts by language (first-class)
 
 ```text
-crates/lie0-*          Rust     engine: parse, SCIP decode, resolve, lock IR, receipts
+crates/va-*          Rust     engine: parse, SCIP decode, resolve, lock IR, receipts
                        + host for WASM; optional Verus/Kani on pure cores
 wasm/ / guests/        WASM     LockCheck & untrusted packs (capability boundary)
 go/lie0d/              Go       watch / reindex / plugin chassis (Cobra)
@@ -99,7 +99,7 @@ ruby/locks/            Ruby     Packwerk-compatible or Packwerk-shaped DSL tooli
                                (packs Rust impl may assist — still Ruby UX)
 clj/ / bb/             Clojure  Datascript/XTDB-style graph REPL & query services
 sqlite/                SQL      schema + migrations (owned; accessed via rusqlite etc.)
-src/doc_engine/        Python   transitional ACI, Stage-0, claims, coverage writer
+src/product/        Python   transitional ACI, Stage-0, claims, coverage writer
 extensions/ / mcp/     TS       IDE panel, LSP client glue, MCP Streamable HTTP UI
 native/ / c/           C        tree-sitter grammars, sqlite amalgamation, FFI edges
 zig/ (opt)             Zig      alternate WASM/systems toolkit when Spike keeps it
@@ -177,7 +177,7 @@ the **current** oracle/ACI host, not the product ceiling.
 
 | Toolkit | Role |
 | --- | --- |
-| doc-engine ACI | Orchestration, Stage-0, claims |
+| optional ACI peer | Orchestration, Stage-0, claims |
 | pytest / pre_pr / coverage | **Current** merge oracle writer |
 | PyO3 consumers | Call Rust engine |
 
@@ -215,7 +215,7 @@ not forbidden — but not cargo-culted onto the tip without Accept.
 | --- | --- |
 | CON-ORACLE | Exactly **one** merge writer for `coverage.xml` / claims at a time |
 | CON-QAS | NFRs → ATAM QAS before Design (process/54) |
-| CON-ADR | Language BC additions need ADR (see ADR-006) |
+| CON-ADR | Language BC additions need ADR (see ADR-0001) |
 | CON-SIZE | New modules respect LOC/complexipy culture (cohesive crates OK) |
 | CON-PLANT | Kitchen/OCS remain Accept plants |
 
@@ -240,13 +240,13 @@ Python ownership ideology.
 
 | ID | Ticket | Acceptance |
 | --- | --- | --- |
-| **PF-0** | ADR-006 Accepted (product = polyglot monorepo) | Stakeholder Accept |
-| **PF-1** | Cargo workspace skeleton `crates/lie0-*` | Builds in CI job (non-oracle) |
+| **PF-0** | ADR-0001 Accepted (product = polyglot monorepo) | Stakeholder Accept |
+| **PF-1** | Cargo workspace skeleton `crates/va-*` | Builds in CI job (non-oracle) |
 | **PF-2** | Go `lie0d` Cobra skeleton + watch Spike | Stamp file updates |
 | **PF-3** | Ruby lock package project (Packwerk-shaped or Packwerk) | controller→repo demo |
 | **PF-4** | Clojure/bb Datascript REPL on EDN export | 3 queries = SQL goldens |
 | **PF-5** | WASM LockCheck guest + wasmtime host | Parity vs native |
-| **PF-6** | SQLite schema crate + rusqlite | Migrations + kitchen load |
+| **PF-6** | SQLite schema crate + rusqlite | Migrations + corpus load |
 | **PF-7** | TS extension Spike (diagnostics panel) | One lock visible in IDE |
 | **PF-8** | C/Zig Spike backlog | Only when PF-1/5 need ABI/grammar |
 | **PF-9** | CI matrix: rust / go / ruby / bb / wasm **without** dual Cover% | Separate jobs; oracle still single |

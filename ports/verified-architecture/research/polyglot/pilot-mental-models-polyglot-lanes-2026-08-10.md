@@ -1,23 +1,23 @@
 ---
-title: E-LIE0 Pilot depth — mental models · histories · polyglot implementation lanes
+title: VA Pilot depth — mental models · histories · polyglot implementation lanes
 status: RESEARCH COMPLETE — Pilot research gate (before Design Spec / Implement)
 date: '2026-08-10'
-epic: E-LIE0
+epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
   - deepwiki_ask_question
   - llms_txt
 related:
-  - docs/design/e-lie0-requirements-2026-08-10.md
-  - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
-  - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
-  - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
-  - docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
+  - docs/requirements/
+
+  - research/adversarial/adversarial-ddia-solid-polyglot-2026-08-10.md
+  - research/adversarial/re-master-adversarial-critique-2026-08-10.md
+  - research/polyglot/
+
+  - research/mdc-devex/
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
-  - docs/research/quality-backlog.md
+
 do_not:
   - Flatten Pilot to “Python only” and drop Packwerk/bb/Go/SQLite/WASM lanes
   - Treat SCIP transmission as Spring DI resolve
@@ -48,18 +48,18 @@ sources:
 last_reviewed: '2026-08-10'
 ---
 
-# E-LIE0 Pilot depth — why these pieces exist, and how we pilot them *rich*
+# VA Pilot depth — why these pieces exist, and how we pilot them *rich*
 
 **Problem this memo fixes.** Prior chat compressed the Pilot to “thin Python
 slice.” That was correct for **Must verify** (graph + locks + receipt) but
-**wrong** as product framing: the distinctive E-LIE0 feature set is a
+**wrong** as product framing: the distinctive VA feature set is a
 **polyglot orchestra** (Packwerk-shaped locks, SQLite registry, Babashka graph
 brain, Go watch chassis, WASM sandbox) *on top of* the Python tip — doctrine
 already in process/40–41/48/51. Adopt-lists without history and mental models
 are not enough to Design or Implement.
 
 **Gate.** More research *of this depth* was the missing step. This memo is the
-**Pilot research SoR**. Design Spec (LIE0-1 / ADV-1…3) cites it. Implement still
+**Pilot research SoR**. Design Spec (VA-1 / ADV-1…3) cites it. Implement still
 needs RE Approve + one Active-tip reorder.
 
 ---
@@ -70,7 +70,7 @@ needs RE Approve + one Active-tip reorder.
 | --- | --- |
 | **1** | Packwerk README; SCIP DESIGN.md; scip-java index path; Datascript EAV; bb SCI; Cobra hooks; Wasmtime fuel/epoch; Extism PDK |
 | **2** | Map each tool to Layers L1/L1b/L2 + SoR\|derived + tip vs sidecar |
-| **3** | Concrete Spike commands on kitchen/OCS; module seams ≤225; keep/drop |
+| **3** | Concrete Spike commands on corpus/OCS; module seams ≤225; keep/drop |
 | **4** | Why not Neo4j/Kuzu/LanceDB-as-symbols; Extism vs Wasmtime; bb vs JVM Clojure |
 | **5** | False green/red per lane; FN≠0 Packwerk honesty; SCI limits |
 | **6** | PIL-* Spike tickets — rich multi-lane Pilot, not flatten |
@@ -139,7 +139,7 @@ enforcement; Sandi Metz: *knowing who you are raises cost of change*. Packwerk
 **Limitation we inherit.** Packwerk ignores method calls/objects; we ignore
 runtime DI we cannot see → **Unknown**, not silent green.
 
-**Pilot deliverable.** YAML schema + checker against kitchen controller→repo;
+**Pilot deliverable.** YAML schema + checker against corpus controller→repo;
 **no** `gem install packwerk` as tip dep — **Adopt pattern** only. Optional
 read of Rust `packs` later as Pattern.
 
@@ -178,7 +178,7 @@ as production SoR.
 | Datascript | **Yes — query sidecar** | Ephemeral Datalog over exported EDN; not durable merge SoR |
 | Kuzu | **No for LB org-wide** | Embedded; multi-instance RW fails (process/52) |
 | LanceDB | **No for symbols** | Vector sensor; not exact identity |
-| Neo4j | **Defer** | Server tax; overkill for kitchen Pilot |
+| Neo4j | **Defer** | Server tax; overkill for corpus Pilot |
 
 **Mental model.** SQLite holds **facts we assert** after resolve:
 
@@ -223,9 +223,9 @@ this is a real differentiator vs “just another linter.”
 
 | Command | Role |
 | --- | --- |
-| `doc-engine-daemon index` | One-shot / CI index |
-| `doc-engine-daemon watch` | fsnotify → reindex dirty set → touch stamp / notify |
-| `doc-engine-daemon serve-mcp` | Later Phase-2 |
+| `va-daemon index` | One-shot / CI index |
+| `va-daemon watch` | fsnotify → reindex dirty set → touch stamp / notify |
+| `va-daemon serve-mcp` | Later Phase-2 |
 
 Cobra itself is **not** a daemon framework — `Run` holds the loop; supervision
 is OS/`systemd`/dev script. That is fine for Pilot.
@@ -255,7 +255,7 @@ escape — compliance story without equating sandbox to proof.
 
 ### 2.7 Python tip — why it stays `[Confirmed]`
 
-Claims, `coverage.xml`, Stage-0 ast-grep, kitchen harness, agent ACI already
+Claims, `coverage.xml`, Stage-0 ast-grep, corpus harness, agent ACI already
 live here. Constitution: one oracle writer. Polyglot **enhances**; it does not
 replace.
 
@@ -264,7 +264,7 @@ replace.
 ## 3. End-to-end Pilot dataflow (implementation-level)
 
 ```text
-kitchen / OCS Spring tree
+corpus / OCS Spring tree
     │
     ├─(1)─ ast-grep Stage-0 stereotypes          [Embody — already tip]
     ├─(2)─ scip-java index → index.scip          [PIL-SCIP]
@@ -288,15 +288,15 @@ kitchen / OCS Spring tree
 
 | Concept module | Responsibility | Lang |
 | --- | --- | --- |
-| `lie0.index_port` | Load/validate `index.scip` digest | Py |
-| `lie0.symbol_fact` | Normalized symbol DTO | Py |
-| `lie0.registry_sql` | SQLite schema + writers | Py |
-| `lie0.wiring_resolve` | Multi-candidate → Unknown | Py |
-| `lie0.lock_ir` | Parse Packwerk-shaped YAML | Py |
-| `lie0.lock_check` | Evaluate IR vs edges | Py |
-| `lie0.receipt` | Proof-tour schema emit/validate | Py |
-| `lie0.edn_export` | Registry → EDN for bb | Py |
-| `scripts/lie0/graph_repl.bb` | Datascript queries | bb |
+| `va.index_port` | Load/validate `index.scip` digest | Py |
+| `va.symbol_fact` | Normalized symbol DTO | Py |
+| `va.registry_sql` | SQLite schema + writers | Py |
+| `va.wiring_resolve` | Multi-candidate → Unknown | Py |
+| `va.lock_ir` | Parse Packwerk-shaped YAML | Py |
+| `va.lock_check` | Evaluate IR vs edges | Py |
+| `va.receipt` | Proof-tour schema emit/validate | Py |
+| `va.edn_export` | Registry → EDN for bb | Py |
+| `scripts/va/graph_repl.bb` | Datascript queries | bb |
 | `cmd/lie0d/` (optional tree) | Cobra watch daemon | Go |
 | `crates/lie0_lock_guest/` (optional) | WASM LockCheck | Rust→wasm |
 
@@ -324,12 +324,12 @@ These are **Spike exits**, not reasons to freeze.
 
 ## 6. Create — Pilot lane tickets (PIL-*)
 
-Prereq: human **Approve** RE Must + Active tip = E-LIE0 Pilot (or dedicated
+Prereq: human **Approve** RE Must + Active tip = VA Pilot (or dedicated
 Pilot branch after COH1). Each lane has **keep/drop**.
 
 | ID | Lane | Work | Acceptance | Keep/drop |
 | --- | --- | --- | --- | --- |
-| **PIL-SCIP** | SCIP | `scip-java index` on kitchen | `index.scip` + stats receipt; note partial/strict | Drop only if unusable on plants |
+| **PIL-SCIP** | SCIP | `scip-java index` on corpus | `index.scip` + stats receipt; note partial/strict | Drop only if unusable on plants |
 | **PIL-SQL** | SQLite | Schema + load symbols/stereotypes | Query bean-ish rows; rebuild script | Keep if rebuild < documented budget |
 | **PIL-RES** | Resolve | WiringResolver + Unknown | Multi-impl fixture → Unknown; single → impl | Keep if Unknown rate explained |
 | **PIL-LOCK** | Packwerk IR | YAML packages + cycle/layer | controller→repo red; todo file optional | Keep if IR executable (not prose) |
@@ -364,7 +364,7 @@ Order: **SCIP → SQL → RES → LOCK → RCPT** (Must spine), then **BB ∥ GO
 | process/51 | Adversarial + slate |
 | process/52 | RE-MASTER critique |
 | **process/53 (this)** | **Mental models + implementation Pilot lanes** |
-| e-lie0-requirements | REQ SoR |
+| docs/requirements | REQ SoR |
 
-**Still before code:** RE Approve · ADV-1…3 paper · tip reorder to E-LIE0.  
+**Still before code:** RE Approve · ADV-1…3 paper · tip reorder to VA.  
 **Then:** execute PIL-* in this repo — **rich**, not flattened.

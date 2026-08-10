@@ -20,3 +20,4 @@ When working under `nests/01-engine-rust/`:
    ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
 5. Do **not** load every other nest unless integrating across BCs.
 6. Owns: SCIP decode, WiringResolver, LockCheck, receipts, wasmtime host
+7. For long evidence, use Skill `rag-retrieve` + `research/INDEX.md` — do not always-load the corpus.

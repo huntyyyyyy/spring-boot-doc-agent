@@ -1,0 +1,15 @@
+---
+description: Formal honesty — @mention when claiming proof, verification, or WASM/RustBelt trust
+alwaysApply: false
+---
+
+# Formal honesty (manual)
+
+Only attach when discussing proofs or verification claims.
+
+- Language-level literature (RustBelt, Verus, Watt, Iris-MSWasm, TLA+) supports
+  **bounded** trust stories — not blanket “the system is proved.”
+- Verification Musts for this product: graph + locks + receipts (unless an ADR
+  Accepted a stronger artifact).
+- Prefer Unknown over a false “proved” label.
+- Read `research/atam-formal/` before strengthening claims.

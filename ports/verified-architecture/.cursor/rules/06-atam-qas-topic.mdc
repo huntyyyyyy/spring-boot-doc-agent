@@ -1,0 +1,13 @@
+---
+description: ATAM QAS and architecture method — pull when writing NFRs, QAS, tactics, or formal bounds
+alwaysApply: false
+---
+
+# ATAM / QAS topic
+
+When quality attributes or “NFR adjectives” appear:
+
+1. Expand to six-part QAS before Design influence.
+2. Open `docs/standards/quality-attribute-scenarios.md` and `docs/requirements/qas.md`.
+3. Retrieve `research/atam-formal/` for tactics and formal boundaries.
+4. Constraints stay in `docs/constraints/` — they are not REQs.

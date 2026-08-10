@@ -9,7 +9,7 @@ date: '2026-08-10'
 ## Context
 
 This repository exists to finish requirements, constraints, C4, and ADRs before
-coding. Shipping crates early recreates doc-engine drift.
+coding. Shipping crates early recreates product drift.
 
 ## Decision
 

@@ -1,45 +1,47 @@
-# Verified Architecture Engine — planning repository
+# Verified Architecture — planning + RAG corpus
 
-**Working draft.** Requirements · constraints · research · C4 · ADRs.  
-**No product code** until the CONTRIBUTING gate is green.
+Greenfield **product planning** repository for a verified polyglot system,
+plus a **RAG-oriented research corpus** shaped for both developers and coding
+agents.
 
-Follows industry planning practice shaped by **ISO/IEC/IEEE 29148** (RE),
-**SEI ATAM** quality-attribute scenarios, **Nygard ADRs**, and **C4** models.
-Claim tiers: Evidenced / Confirmed / Unknown. This is intentionally a
-**living draft** — statuses are Proposed/Draft until stakeholder Accept.
+## What this is
 
-## How this repo is meant to be used (nested context)
-
-```text
-.cursor/rules/          ← repo-wide MDC (constitution, look-first, draft/ISO)
-docs/                   ← SoR: requirements, constraints, standards, C4, ADRs
-research/               ← full research corpus (keep — this is the value)
-nests/<NN>-<bc>/        ← N nested “next repos”: each has README + .cursor/rules
-                          so agents load only that BC’s context when working there
-```
-
-1. Open [`docs/DOMAIN_MAP.md`](docs/DOMAIN_MAP.md) first (forced entry).  
-2. Load research under `research/` as needed — **do not discard**; it is the
-   evidence base.  
-3. When implementing a BC later, work inside `nests/<bc>/` so nest MDC scopes
-   context to that language/BC while still pointing at shared research/ADRs.
-
-## Polyglot identity
-
-Rust · WASM · SQLite · Go · Ruby · Clojure · TypeScript · Python (peer) · C · Zig (earned).  
-Not a Python-majority doc-engine port. See ADR-0001 + `research/polyglot/`.
-
-## Start reading
-
-| Priority | Path |
+| Layer | Role |
 | --- | --- |
-| Map | [`docs/DOMAIN_MAP.md`](docs/DOMAIN_MAP.md) |
-| Standards | [`docs/standards/`](docs/standards/) |
-| Requirements | [`docs/requirements/`](docs/requirements/) |
-| Constraints | [`docs/constraints/constraints.md`](docs/constraints/constraints.md) |
-| C4 | [`docs/c4/`](docs/c4/) |
-| ADRs | [`docs/adr/`](docs/adr/) |
-| Research | [`research/README.md`](research/README.md) |
-| Nests | [`nests/README.md`](nests/README.md) |
+| `docs/` | Authoritative product artifacts (requirements, constraints, C4, ADRs) |
+| `research/` | Evidence corpus (claim-tiered) — retrieve, don't always-load |
+| `nests/` | Bounded-context folders with scoped `.mdc` rules |
+| `.cursor/rules/` | Repo-wide MDC activation algebra |
+| `.cursor/skills/` | Deep playbooks agents pull on demand |
+| `AGENTS.md` | Thin ingest pointer (not a second rule system) |
 
-Export to a standalone GitHub remote: [`EXPORT.md`](EXPORT.md).
+## Product intent (short)
+
+Ship a **polyglot verified architecture** platform: languages are first-class
+peers; verification Musts are graph + locks + receipts; formal methods only
+where earned. This tree is also a **RAG tool surface**: the same Markdown
+corpus is retrieved for agents and developers via MDC modes + Skills + INDEX.
+
+## RAG + MDC — how context is loaded
+
+| Mode | When | Use here |
+| --- | --- | --- |
+| `alwaysApply: true` | Rare — constitution + RAG budget | Exactly 2 under `.cursor/rules/` |
+| `globs:` | Path-scoped work | Nest MDCs + `docs/**` / `research/**` |
+| Agent-requested | Agent pulls by description | Look-first, ATAM, polyglot topics |
+| Manual `@rule` | Human attaches | Formal honesty |
+| Skills | On-demand depth | `rag-retrieve`, `promote-claim` |
+
+**Do not** convert the whole research tree into always-on `.mdc`. Theory:
+`research/mdc-devex/`.
+
+## Start here
+
+1. [docs/DOMAIN_MAP.md](docs/DOMAIN_MAP.md)
+2. [docs/standards/](docs/standards/) — ISO / ATAM / IEEE-shaped drafts
+3. [docs/requirements/](docs/requirements/) → [constraints](docs/constraints/) → [c4](docs/c4/) → [adr](docs/adr/)
+4. [research/INDEX.md](research/INDEX.md) — corpus map for humans and RAG ingest
+
+## Status
+
+**No product implementation yet.** Planning + corpus only.

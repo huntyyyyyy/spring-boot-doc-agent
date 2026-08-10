@@ -1,0 +1,11 @@
+---
+description: Polyglot portfolio — pull when choosing languages, nests, or peer vs majority roles
+alwaysApply: false
+---
+
+# Polyglot portfolio topic
+
+1. Product identity is polyglot-first (ADR-0001).
+2. Open `research/polyglot/` and the relevant `nests/<bc>/`.
+3. Python is an optional peer (nest 08), not the majority engine.
+4. WASM/native trust stories need earned formal artifacts — no unearned “proved”.

@@ -34,14 +34,16 @@ paths listed for the task. Nest MDC files restate a narrower map.
 | C4 Components (engine) | `docs/c4/03-components.md` |
 | ADRs | `docs/adr/README.md` |
 
-## Research corpus (keep — evidence, not fluff)
+## Research corpus (RAG — evidence, not fluff)
 
 | Domain | Path |
 | --- | --- |
+| Catalog (ingest map) | `research/INDEX.md` |
 | Layers of Truth / vision | `research/layers-of-truth/` |
-| Adversarial + RE-MASTER critique | `research/adversarial/` |
+| Adversarial + RE critique | `research/adversarial/` |
 | Polyglot mental models + portfolio | `research/polyglot/` |
 | ATAM / formal boundaries | `research/atam-formal/` |
+| MDC / DevEx / context | `research/mdc-devex/` |
 | Provenance | `research/PROVENANCE.md` |
 
 ## Nested BCs (progressive context)

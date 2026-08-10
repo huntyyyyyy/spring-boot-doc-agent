@@ -1,6 +1,10 @@
 ---
-description: Working draft + industry standards — do not weaken RE/QAS/ADR form
-alwaysApply: true
+description: Working draft + industry standards when editing docs/standards or requirements
+globs:
+  - docs/standards/**
+  - docs/requirements/**
+  - docs/constraints/**
+alwaysApply: false
 ---
 
 # Working draft under industry standards
@@ -16,4 +20,4 @@ Status fields may say Draft/Proposed. That means **content maturity**, not
 | C4 | Context+Container before code; cite ADRs |
 | Formal honesty | WASM/Rust trust-boundary ≠ unearned “proved” |
 
-When amending Draft REQs, keep IDs stable; bump `last_reviewed` / status.
+Keep REQ IDs stable; bump `last_reviewed` / status when amending Drafts.

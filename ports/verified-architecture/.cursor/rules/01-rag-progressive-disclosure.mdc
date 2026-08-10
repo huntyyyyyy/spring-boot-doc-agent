@@ -1,0 +1,15 @@
+---
+description: RAG progressive disclosure — never dump research always-on; retrieve by nest/INDEX/Skill
+alwaysApply: true
+---
+
+# RAG progressive disclosure
+
+This repo is designed so **agents and developers** load the same corpus
+through different lenses (MDC + RAG + nests) without bloating context.
+
+1. Prefer `research/INDEX.md` + nest `nest.mdc` pointers over pasting memos.
+2. Retrieve topic packs under `research/<pack>/` only for the active task.
+3. Promote into `docs/` only via Skill `promote-claim` (explicit decision).
+4. Do **not** mass-convert `.md` → `.mdc`. Rules activate; Markdown stores.
+5. Evidence: `research/mdc-devex/cursor-mdc-activation-algebra.md`.

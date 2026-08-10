@@ -1,0 +1,13 @@
+---
+description: Look-first domain map — pull when starting design, RE, or exploration without a clear path
+alwaysApply: false
+---
+
+# Look-first
+
+1. Read `docs/DOMAIN_MAP.md`.
+2. Requirements → `docs/requirements/` + `docs/constraints/`.
+3. Architecture → `docs/adr/` + matching `research/` pack.
+4. Language BC → `nests/<bc>/` and that nest’s `nest.mdc`.
+5. RAG catalog → `research/INDEX.md`.
+6. Prefer primary memos over chat memory; keep claim tiers honest.

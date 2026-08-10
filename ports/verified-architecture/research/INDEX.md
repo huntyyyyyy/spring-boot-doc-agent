@@ -1,0 +1,34 @@
+---
+title: Research corpus index
+role: rag-ingest-map
+audience: [developer, agent, rag]
+---
+
+# Research corpus index
+
+Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
++ claim-tier tags from frontmatter when present.
+
+## Topic packs
+
+| Pack | Path | Use when |
+| --- | --- | --- |
+| Layers of Truth / vision | `research/layers-of-truth/` | Product intent, local-first verification story |
+| Adversarial + RE critique | `research/adversarial/` | Threaten Draft REQs; MoSCoW honesty |
+| ATAM / formal | `research/atam-formal/` | QAS, tactics, ADR method, formal bounds |
+| Polyglot portfolio | `research/polyglot/` | Language peers, WASM, mental models |
+| MDC / DevEx / context | `research/mdc-devex/` | Activation algebra; agents + developers |
+| Provenance | `research/PROVENANCE.md` | What this corpus is (no prior-repo identity) |
+
+## Claim tiers
+
+- **Evidenced** — citation supports the claim
+- **Confirmed** — widely accepted or replicated
+- **Unknown** — must not be silently upgraded
+
+## Ingest rules
+
+1. Prefer retrieving from `research/` over dumping into always-on agent context
+2. Promote into `docs/` only via Skill `promote-claim`
+3. Nest MDCs point at *which* pack to retrieve — they do not inline the pack
+4. Never mass-rename corpus Markdown into always-on `.mdc`

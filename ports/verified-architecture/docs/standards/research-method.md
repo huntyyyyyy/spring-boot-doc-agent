@@ -26,5 +26,5 @@ Star counts are cartography, not proof.
 
 ## Provenance
 
-Ported method from spring-boot-doc-agent process/50–55; re-homed here without
+Ported method from planning workspace process/50–55; re-homed here without
 Python-as-kernel assumptions. See `docs/research/provenance.md`.
