@@ -21,3 +21,6 @@ Authoritative classification memo:
 
 Legacy flat `docs/` and `nests/` remain until contents are promoted into this
 tree. Prefer writing new artifacts here.
+
+**Principal architecture brief (shape, leaders, MVP, math):**
+[`07-system-design/ARCHITECTURE_BRIEF.md`](07-system-design/ARCHITECTURE_BRIEF.md)

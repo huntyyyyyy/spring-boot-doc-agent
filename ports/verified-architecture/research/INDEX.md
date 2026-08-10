@@ -13,6 +13,8 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 
 | Pack | Path | Use when |
 | --- | --- | --- |
+| **Architecture brief (principal)** | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape, MVP, math, leaders |
+| **Leaders / GitHub adoption** | `research/leaders-adoption/` | Who leads vs who ships |
 | **Pre-code BFS taxonomy** | `research/pre-code-bfs/` | Classify domains before AI codegen |
 | **Papers May–Aug 2026** | `research/papers-2026-may-aug/` | Cross-domain science + RE evidence |
 | Layers of Truth / vision | `research/layers-of-truth/` | Product intent, local-first verification story |

@@ -24,6 +24,7 @@ If you have no session context, run Skill `cold-start` first.
 
 | Need | Pack |
 | --- | --- |
+| Architecture brief (principal) | `research/leaders-adoption/` + `07-system-design/ARCHITECTURE_BRIEF.md` |
 | Cold taxonomy / RE critique | `research/pre-code-bfs/` |
 | May–Aug 2026 papers | `research/papers-2026-may-aug/` |
 | Vision / Layers of Truth | `research/layers-of-truth/` |

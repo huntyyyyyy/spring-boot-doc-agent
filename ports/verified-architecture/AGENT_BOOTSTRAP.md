@@ -57,7 +57,8 @@ Only then retrieve from `research/INDEX.md` for the **one** pack the task needs.
 ## Correct work loop (until Implement Approve)
 
 ```text
-STATUS.md → pick next OPEN gap
+STATUS.md → ARCHITECTURE_BRIEF.md if shape unclear
+  → pick next OPEN/PARTIAL gap
   → edit only that domain folder under 00–12
   → if research needed: Skill rag-retrieve → one pack
   → close or waive OQ; update STATUS.md
@@ -70,7 +71,7 @@ STATUS.md → pick next OPEN gap
 | --- | --- |
 | `cold-start` | Session start / lost context |
 | `rag-retrieve` | Need evidence from `research/` |
-| `promote-claim` | Research claim → authoritative `docs/` or `00/`–`12/` |
+| `promote-claim` | Research claim → authoritative docs |
 | `fill-wave-gap` | Close a `blocks_code` OQ or write a QAS |
 
 ## Success for a cold agent
@@ -79,5 +80,6 @@ You are primed correctly if you can answer without chat history:
 
 - What phase are we in? → Spec / gap-fill
 - May I write engine code? → **No**
+- What is the product shape? → Local CLI tool; monorepo after Spec (`ARCHITECTURE_BRIEF.md`)
 - Where do new artifacts go? → `00/`–`12/` per `PRECODE_MAP.md`
 - What blocks codegen? → Open OQs + incomplete Must QAS + no-code gate
