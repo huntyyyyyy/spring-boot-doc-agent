@@ -10,10 +10,10 @@ from scripts.process.pack_session_log import (
     README_TEMPLATE,
     STUB,
     TARGET_MAX_LINES,
+    pack_entries,
     parse_entries,
     shard_filename,
     shard_header,
-    pack_entries,
 )
 
 
