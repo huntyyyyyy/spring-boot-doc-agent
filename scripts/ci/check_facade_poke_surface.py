@@ -24,6 +24,7 @@ FACADES: Dict[str, str] = {
     "doc_engine.tools.capacity_preflight": "capacity_preflight",
     "doc_engine.tools.spring_drift_check": "spring_drift_check",
     "doc_engine.tools.partition_repo": "partition_repo",
+    "doc_engine.tools.semantic_eval_helpers": "semantic_eval_helpers",
     "doc_engine.pipeline.mock_stages": "mock_stages",
     "doc_engine.scanning._scanner_astgrep": "_scanner_astgrep",
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": 6,
-  "production_functions": 1938,
-  "production_functions_annotated": 1664,
+  "production_functions": 1945,
+  "production_functions_annotated": 1670,
   "limits_for_new_functions": {
     "statements": 82,
     "complexity": 42,
@@ -15,6 +15,7 @@
     "src/doc_engine/pipeline/live_gates.py": "src/doc_engine/pipeline/live_gates.py: runnable module, but its 12-line docstring never says how to run it",
     "src/doc_engine/pipeline/local_runner.py": "src/doc_engine/pipeline/local_runner.py: 'how to run it' is at docstring line 52; the contract is within 20. Move the Usage block above the rationale.",
     "src/doc_engine/scanning/support/_codeql_runner.py": "src/doc_engine/scanning/support/_codeql_runner.py: runnable module, but its 12-line docstring never says how to run it",
+    "src/doc_engine/tools/semantic_eval_scan.py": "src/doc_engine/tools/semantic_eval_scan.py: runnable module, but its 1-line docstring never says how to run it",
     "src/stf/__main__.py": "src/stf/__main__.py: runnable module, but its 1-line docstring never says how to run it",
     "tests/adapters/test_adapter_layout.py": "tests/adapters/test_adapter_layout.py: runnable module, but its 6-line docstring never says how to run it",
     "tests/ci/test_check_workflow_yaml.py": "tests/ci/test_check_workflow_yaml.py: runnable module, but its 1-line docstring never says how to run it",
@@ -313,6 +314,11 @@
       "statements": 12,
       "complexity": 6,
       "depth": 2
+    },
+    "scripts/ci/check_repo_claims.py::_behavior_tools_bc_inventory_covers_modules": {
+      "statements": 2,
+      "complexity": 1,
+      "depth": 0
     },
     "scripts/ci/check_repo_claims.py::_call_attr_names": {
       "statements": 10,
@@ -978,6 +984,21 @@
       "statements": 12,
       "complexity": 2,
       "depth": 1
+    },
+    "scripts/ci/tools_bc_inventory_gate.py::check_tools_bc_inventory": {
+      "statements": 13,
+      "complexity": 5,
+      "depth": 1
+    },
+    "scripts/ci/tools_bc_inventory_gate.py::inventory_modules": {
+      "statements": 10,
+      "complexity": 5,
+      "depth": 2
+    },
+    "scripts/ci/tools_bc_inventory_gate.py::tools_modules": {
+      "statements": 2,
+      "complexity": 3,
+      "depth": 0
     },
     "scripts/ci/verify_tool_pins.py::_pin_major_minor": {
       "statements": 5,
@@ -3208,6 +3229,46 @@
       "statements": 1,
       "complexity": 1,
       "depth": 0
+    },
+    "src/doc_engine/docs_site/builder.py::_build_nav": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/docs_site/builder.py::_build_site_work": {
+      "statements": 7,
+      "complexity": 1,
+      "depth": 1
+    },
+    "src/doc_engine/docs_site/builder.py::_copy_docs": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/docs_site/builder.py::_parse_docs_site_args": {
+      "statements": 6,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/docs_site/builder.py::_run_mkdocs": {
+      "statements": 5,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/docs_site/builder.py::_write_mkdocs_config": {
+      "statements": 8,
+      "complexity": 4,
+      "depth": 1
+    },
+    "src/doc_engine/docs_site/builder.py::_yaml_nav": {
+      "statements": 5,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/docs_site/builder.py::main": {
+      "statements": 10,
+      "complexity": 3,
+      "depth": 1
     },
     "src/doc_engine/engine.py::Engine.__init__": {
       "statements": 1,
@@ -7604,40 +7665,135 @@
       "complexity": 5,
       "depth": 1
     },
-    "src/doc_engine/tools/build_docs_site.py::_build_nav": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 2
+    "src/doc_engine/semantic_eval/confirmed.py::answered_entry_tokens": {
+      "statements": 2,
+      "complexity": 5,
+      "depth": 0
     },
-    "src/doc_engine/tools/build_docs_site.py::_copy_docs": {
-      "statements": 9,
+    "src/doc_engine/semantic_eval/confirmed.py::best_overlap": {
+      "statements": 8,
       "complexity": 4,
       "depth": 2
     },
-    "src/doc_engine/tools/build_docs_site.py::_find_mkdocs_yml": {
+    "src/doc_engine/semantic_eval/confirmed.py::claim_clause": {
+      "statements": 3,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/confirmed.py::empty_clause_finding": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/confirmed.py::find_unmatched_confirmed_tags": {
+      "statements": 7,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/semantic_eval/confirmed.py::finding_for_confirmed_tag": {
+      "statements": 8,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/semantic_eval/confirmed.py::low_overlap_finding": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/confirmed.py::tokenize": {
+      "statements": 1,
+      "complexity": 4,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/mermaid.py::bracket_balance_findings": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 2
+    },
+    "src/doc_engine/semantic_eval/mermaid.py::check_mermaid_syntax": {
+      "statements": 6,
+      "complexity": 2,
+      "depth": 1
+    },
+    "src/doc_engine/semantic_eval/mermaid.py::extract_mermaid_block": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/mermaid.py::find_undefined_node_refs": {
+      "statements": 6,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/semantic_eval/mermaid.py::subgraph_quote_findings": {
+      "statements": 9,
+      "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/semantic_eval/scan.py::_facade": {
       "statements": 2,
       "complexity": 1,
       "depth": 0
     },
-    "src/doc_engine/tools/build_docs_site.py::_run_mkdocs": {
+    "src/doc_engine/semantic_eval/scan.py::_print_summary": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/scan.py::confirmed_findings_for_doc": {
       "statements": 4,
       "complexity": 2,
       "depth": 1
     },
-    "src/doc_engine/tools/build_docs_site.py::_write_mkdocs_config": {
-      "statements": 8,
+    "src/doc_engine/semantic_eval/scan.py::is_safe_markdown_basename": {
+      "statements": 7,
       "complexity": 4,
       "depth": 1
     },
-    "src/doc_engine/tools/build_docs_site.py::_yaml_nav": {
+    "src/doc_engine/semantic_eval/scan.py::load_interview_answers": {
       "statements": 5,
       "complexity": 3,
+      "depth": 1
+    },
+    "src/doc_engine/semantic_eval/scan.py::main": {
+      "statements": 20,
+      "complexity": 5,
       "depth": 2
     },
-    "src/doc_engine/tools/build_docs_site.py::main": {
-      "statements": 19,
-      "complexity": 2,
+    "src/doc_engine/semantic_eval/scan.py::markdown_names": {
+      "statements": 1,
+      "complexity": 3,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/scan.py::resolve_architecture_path": {
+      "statements": 8,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/semantic_eval/scan.py::run": {
+      "statements": 3,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/semantic_eval/scan.py::scan_confirmed_docs": {
+      "statements": 9,
+      "complexity": 4,
+      "depth": 2
+    },
+    "src/doc_engine/semantic_eval/scan.py::scan_mermaid": {
+      "statements": 9,
+      "complexity": 4,
       "depth": 1
+    },
+    "src/doc_engine/tools/build_docs_site.py::_find_mkdocs_yml": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
+    },
+    "src/doc_engine/tools/build_docs_site.py::main": {
+      "statements": 1,
+      "complexity": 1,
+      "depth": 0
     },
     "src/doc_engine/tools/capacity_preflight_calibration.py::_proxy_pool_from_stage0_report": {
       "statements": 1,
@@ -8843,126 +8999,6 @@
       "statements": 5,
       "complexity": 2,
       "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::answered_entry_tokens": {
-      "statements": 2,
-      "complexity": 5,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::best_overlap": {
-      "statements": 8,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::claim_clause": {
-      "statements": 3,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::empty_clause_finding": {
-      "statements": 1,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::find_unmatched_confirmed_tags": {
-      "statements": 7,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::finding_for_confirmed_tag": {
-      "statements": 8,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::low_overlap_finding": {
-      "statements": 1,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_confirmed.py::tokenize": {
-      "statements": 1,
-      "complexity": 4,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_mermaid.py::bracket_balance_findings": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_mermaid.py::check_mermaid_syntax": {
-      "statements": 6,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_mermaid.py::extract_mermaid_block": {
-      "statements": 2,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_mermaid.py::find_undefined_node_refs": {
-      "statements": 6,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_mermaid.py::subgraph_quote_findings": {
-      "statements": 9,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::_facade": {
-      "statements": 2,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::_print_summary": {
-      "statements": 2,
-      "complexity": 2,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::confirmed_findings_for_doc": {
-      "statements": 4,
-      "complexity": 2,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::is_safe_markdown_basename": {
-      "statements": 7,
-      "complexity": 4,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::load_interview_answers": {
-      "statements": 5,
-      "complexity": 3,
-      "depth": 1
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::main": {
-      "statements": 20,
-      "complexity": 5,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::markdown_names": {
-      "statements": 1,
-      "complexity": 3,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::resolve_architecture_path": {
-      "statements": 8,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::run": {
-      "statements": 3,
-      "complexity": 1,
-      "depth": 0
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::scan_confirmed_docs": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 2
-    },
-    "src/doc_engine/tools/semantic_eval_scan.py::scan_mermaid": {
-      "statements": 9,
-      "complexity": 4,
-      "depth": 1
     },
     "src/doc_engine/tools/spring_drift_cli.py::_build_parser": {
       "statements": 6,
@@ -13377,6 +13413,26 @@
     "tests/ci/test_test_domain_markers.py::test_missing_marker_fails_evaluate": {
       "statements": 7,
       "complexity": 4,
+      "depth": 0
+    },
+    "tests/ci/test_tools_bc_inventory.py::test_domain_map_exists_and_points_at_inventory": {
+      "statements": 5,
+      "complexity": 4,
+      "depth": 0
+    },
+    "tests/ci/test_tools_bc_inventory.py::test_inventory_file_exists": {
+      "statements": 1,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/ci/test_tools_bc_inventory.py::test_tools_bc_inventory_covers_all_modules": {
+      "statements": 2,
+      "complexity": 2,
+      "depth": 0
+    },
+    "tests/ci/test_tools_bc_inventory.py::test_tools_tree_non_empty": {
+      "statements": 1,
+      "complexity": 2,
       "depth": 0
     },
     "tests/ci/test_verify_tool_pins.py::test_main_missing_requirements": {

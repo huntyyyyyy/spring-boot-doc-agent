@@ -4849,11 +4849,12 @@ Assumptions affected:
 - `claude/` as process SoR — [Resolved — tombstone + archive under `docs/research/archive/claude-lore/`; adapter packaging kept]
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
-## 2026-08-10 — E-REPO: correct over-broad tools cycle-break gate
-Commit: 4a58c00
-Tests: claims + inventory set-equality (no schema change to gate)
+## 2026-08-10 — E-REPO1-A: nest semantic_eval + docs_site; prune dead mkdocs finder
+Commit: uncommitted
+Tests: 46 nest-related pytest green; claims OK; CQ OK; facade poke OK; size OK; complexipy ≤5 on new pkgs
 Assumptions affected:
-- Every tools module waits on pipeline↔scanning cycle-break — [Resolved — false; `semantic_eval` / `build_docs_site` are `nestable_now`; scan/gates stay blocked]
-- “Phased out tools” = E-MOD2 façades — [New info — wrong; phase-out is root `skills/` mirror + already-gone scripts aliases; product tools stay]
-Files touched: DOMAIN_MAP.md, docs/design/tools_bc_inventory.json, docs/research/quality-backlog.md, docs/process/session-log.md
+- First tools nest waits on cycle-break — [Resolved — nested `doc_engine.semantic_eval` + `doc_engine.docs_site`; tools `-m` shims]
+- Dead `_find_mkdocs_yml` path — [Resolved — climb-compat stub on shim; logic pruned from builder]
+- Root `skills/` delete this tip — [Still accurate — equality gate retained; README marks retire]
+Files touched: src/doc_engine/semantic_eval/*, src/doc_engine/docs_site/*, tools shims, tools_bc_inventory.json, DOMAIN_MAP.md, memo 25, quality-backlog, code_quality_baseline.json, check_facade_poke_surface.py, skills/README.md, session-log
 

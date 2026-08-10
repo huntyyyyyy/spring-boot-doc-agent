@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "purpose": "Wave-0 tools\u2192BC inventory (E-REPO0). Every src/doc_engine/tools/*.py except __init__.py must appear. CI fails on orphan or stale rows.",
-  "so_t": "DOMAIN_MAP.md + this file. move_status: nestable_now | nestable_after_size_tip | shared_vocab_rehome | stay_until_cycle_break. Cycle-break is NOT required for every cluster.",
+  "so_t": "DOMAIN_MAP.md + this file. move_status includes nested | nestable_now | nestable_after_size_tip | shared_vocab_rehome | stay_until_cycle_break.",
   "stable_invoke_policy": "doc_engine.tools.<mod> invoke remains green across moves via shim/fa\u00e7ade unless a deprecation Spec says otherwise.",
   "entries": [
     {
@@ -21,8 +21,9 @@
       "target_bc": "docs_site",
       "stage_dialect": "s_docs",
       "truth_class": "product",
-      "note": "docs site builder; nestable without cycle-break",
-      "move_status": "nestable_now"
+      "note": "nested 2026-08-10; dead _find_mkdocs_yml pruned",
+      "move_status": "nested",
+      "home_package": "doc_engine.docs_site"
     },
     {
       "module": "capacity_preflight.py",
@@ -451,8 +452,9 @@
       "target_bc": "semantic_eval",
       "stage_dialect": "none",
       "truth_class": "sensor",
-      "note": "LLM-judge helpers (not oracle floor); first-nest candidate (no pipeline\u2194scanning edge)",
-      "move_status": "nestable_now"
+      "note": "nested 2026-08-10; tools shim keeps -m invoke",
+      "move_status": "nested",
+      "home_package": "doc_engine.semantic_eval"
     },
     {
       "module": "semantic_eval_helpers.py",
@@ -461,8 +463,9 @@
       "target_bc": "semantic_eval",
       "stage_dialect": "none",
       "truth_class": "sensor",
-      "note": "LLM-judge helpers (not oracle floor); first-nest candidate (no pipeline\u2194scanning edge)",
-      "move_status": "nestable_now"
+      "note": "nested 2026-08-10; tools shim keeps -m invoke",
+      "move_status": "nested",
+      "home_package": "doc_engine.semantic_eval"
     },
     {
       "module": "semantic_eval_mermaid.py",
@@ -471,18 +474,20 @@
       "target_bc": "semantic_eval",
       "stage_dialect": "none",
       "truth_class": "sensor",
-      "note": "LLM-judge helpers (not oracle floor); first-nest candidate (no pipeline\u2194scanning edge)",
-      "move_status": "nestable_now"
+      "note": "nested 2026-08-10; tools shim keeps -m invoke",
+      "move_status": "nested",
+      "home_package": "doc_engine.semantic_eval"
     },
     {
       "module": "semantic_eval_scan.py",
       "import_path": "doc_engine.tools.semantic_eval_scan",
       "invoke": "python -m doc_engine.tools.semantic_eval_scan",
-      "target_bc": "scanning",
+      "target_bc": "semantic_eval",
       "stage_dialect": "s0_signals",
       "truth_class": "sensor",
-      "note": "eval/query helpers over scan artifacts",
-      "move_status": "stay_until_cycle_break"
+      "note": "nested 2026-08-10; tools shim keeps -m invoke",
+      "move_status": "nested",
+      "home_package": "doc_engine.semantic_eval"
     },
     {
       "module": "spring_drift_check.py",
@@ -625,5 +630,5 @@
       "move_status": "stay_until_cycle_break"
     }
   ],
-  "first_nest_recommendation": "semantic_eval (3 modules) + -m shims"
+  "first_nest_recommendation": "done: semantic_eval + build_docs_site (E-REPO1-A)"
 }

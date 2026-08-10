@@ -1,8 +1,10 @@
-# Root `skills/` mirror
+# Root `skills/` mirror (legacy alias — retire Spec pending)
 
-**Start here for product skills:** [`adapters/claude/skills/`](../adapters/claude/skills/) (system of record).
+**System of record:** [`adapters/claude/skills/`](../adapters/claude/skills/).
 
-Marketplace packaging uses `adapters/claude` (see `.claude-plugin/marketplace.json`). This root tree is a **synced mirror** of the product skills Cursor/local workflows may resolve without the adapter path:
+Marketplace packaging uses `adapters/claude` (see `.claude-plugin/marketplace.json`).
+This root tree remains a **byte-equal synced mirror** of product skills so Cursor/local
+workflows that resolve `skills/…` keep working until an E-REPO retire Spec lands:
 
 - `document-spring-repo` (includes `references/`)
 - `capacity-preflight`
@@ -11,4 +13,9 @@ Marketplace packaging uses `adapters/claude` (see `.claude-plugin/marketplace.js
 
 Adapter-only skills (`directional-tests`, `tool-quirks`) are **not** mirrored here.
 
-Edit the adapter copy first, then sync here (or let CI's skill-SoT hash gate fail until they match). Do not diverge intentionally.
+**Future-facing prune (E-REPO1-A / DOMAIN_MAP §4):** delete this mirror after
+(1) retire Spec Approve, (2) equality-gate rewrite, (3) confirmed resolve-path
+migration. Do **not** diverge intentionally before that — CI still requires
+byte equality (`tests/adapters/test_adapter_layout.py`).
+
+Edit the adapter copy first, then sync here.

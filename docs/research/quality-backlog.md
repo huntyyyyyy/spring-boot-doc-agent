@@ -230,11 +230,12 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-DOC1):** domain map + look-first hooks + `claude/`→`docs/` migrate (2026-08-09).  
 **Done (E-STK0 Spec):** STK1–STK10 Approve (2026-08-09).  
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
-**Active:** **E-COH1** — reshape provisional tip modules under cohesion bar (design memo); one stream.  
-**Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`bounded-contexts/20-…`](bounded-contexts/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
-**Spec draft (not Active tip):** **E-REPO0** — packet [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md)–[`24`](bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md); Approve REPO1–REPO24; Wave 0 + 0.5 orientation shipped (`DOMAIN_MAP` + `bounded-contexts/` rename); Wave 1 still blocked on `pipeline`↔`scanning` cycle.  
-**Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-REPO1 (after E-REPO0 Approve; must not block H1 Stage-4 calibration; **one tools→BC cluster + shim**, not big-bang); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**; **multi-package workspace before H3 multi-repo product Spec**; **structure “Done” via DOMAIN_MAP without inventory/claims/cycle-break**; **keeping research domain names that say process (`modularity`) instead of product BCs**.
+**Paused Active:** **E-COH1** — cohesion reshape (paused while E-REPO1-A lands).  
+**Active:** **E-REPO1-A** — nest `semantic_eval` + `docs_site` ([`25`](bounded-contexts/25-e-repo1-first-nest-prune-2026.md)).  
+**Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`bounded-contexts/20-…`](bounded-contexts/20-tach-dependency-blueprint-2026.md)); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
+**Spec draft (not Active tip):** **E-REPO0** — packet 21–24; Wave 0–0.5 orientation shipped; Implement started as E-REPO1-A.  
+**Defer:** E-CQL1; E-STK1; E-COH1 resume after E-REPO1-A; E-REPO1-B cycle-break nests; E-TACH1–2; root skills retire; E-UX2; E-QA3; E-RUN2–5.  
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**; **multi-package workspace before H3 multi-repo product Spec**; **structure “Done” via DOMAIN_MAP without inventory/claims/cycle-break**; **keeping research domain names that say process (`modularity`) instead of product BCs**; **deleting root `skills/` while equality gate still requires a byte mirror**.
 
 ---
 
@@ -276,11 +277,12 @@ Research: [`docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md`
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**; Wave 1 blocked on cycle-break; claims-gated DOMAIN_MAP) | **Draft** (research); **Wave 0 + 0.5** (map + `bounded-contexts/` rename) | `DOMAIN_MAP.md` + inventory + `behavior:tools_bc_inventory_covers_modules` |
-| P18.1 | **E-REPO1 Implement:** **first nest = `semantic_eval` (or `build_docs_site`)** + `-m` shim — no G-CYCLE; then cycle-break → scanning/gates; then larger `partition_capacity` | After Approve / when Active allows | one-way edges; shim; poke; inventory `move_status` |
-| P18.2 | Spikes **REPO-S1–S5** + **root `skills/` retire Spec** (adapter SoT; equality until delete) | Spike | go/no-go + schemas |
+| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**) | **Draft** research; Wave 0–0.5 orientation shipped | DOMAIN_MAP + inventory + behavior |
+| P18.1 | **E-REPO1-A Implement:** nest `semantic_eval` + `docs_site` + shims (memo **25**) | **This tip** | `-m` shim; pytest; poke; inventory `nested` |
+| P18.2 | **E-REPO1-B:** cycle-break → scanning/gates nests; larger partition | After A merges | one-way edges; tach |
+| P18.3 | Spikes + **root `skills/` retire Spec** | Spike | equality rewrite + go/no-go |
 
-Research: [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md) · [`22`](bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md). **Orientation SoT:** [`DOMAIN_MAP.md`](../../DOMAIN_MAP.md).
+Research: [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md)–[`24`](bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md) · [`25`](bounded-contexts/25-e-repo1-first-nest-prune-2026.md). **Orientation SoT:** [`DOMAIN_MAP.md`](../../DOMAIN_MAP.md).
 
 ---
 
