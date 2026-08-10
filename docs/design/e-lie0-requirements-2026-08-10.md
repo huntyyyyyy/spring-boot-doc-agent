@@ -13,14 +13,17 @@ spec_gate: docs/research/process/50-local-first-verified-architecture-agent-2026
 related:
   - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
   - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
+  - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
+  - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
   - docs/research/quality-backlog.md
   - .cursor/rules/se-quality-constitution.mdc
 do_not:
   - Treat architecture tours (ghost/LSP/Z3) as Must without MoSCoW re-prioritize
-  - Bind REQ IDs to Rust/WASM/LanceDB — those are design choices
+  - Bind REQ IDs to Rust/WASM/LanceDB/Phi-* — those are design choices (model will change)
   - Dual-write coverage.xml or claims from a second kernel
   - Approve Design Spec without every Must REQ having an RTM Accept method
+  - Promote inbound RE-MASTER-001 to SoR without process/52 rewrite rules
 sources:
   web:
     - https://www.iso.org/standard/72089.html
@@ -104,6 +107,23 @@ checked, the system returns a **resolved edge or explicit Unknown**, with a
 - Chat/RAG embeddings as authority for wiring facts  
 - Mesh / Backstage / remote multi-tenant index SaaS  
 - In-tree Rust tip kernel cutover without profiled hotspot + Approve  
+- Org-wide social/C4 knowledge-graph SaaS as v1 Must (inbound BR-02/FR-16 Could)  
+
+### 1.5 Version envelope (Adopted from inbound RE-MASTER critique)
+
+| In-scope (v1 assumption) | Out-of-scope until R-03 reopen |
+| --- | --- |
+| Java **17** and **21** LTS | Other Java language levels |
+| Spring Boot **3.2.x** and **3.3.x** (Pilot plants) | Boot versions outside envelope |
+
+### 1.6 Inbound RE-MASTER disposition
+
+AI draft RE-MASTER-001 is **parked** under `docs/research/inbound/` and
+**critiqued** in `process/52`. Adopt: SH-style measurable proxies, proof-field
+discipline, MCP 2026-07-28 header/Tasks *as Design constraints*, reference
+hardware concept. **Refuse:** Phi-*/Ollama pins in FR, LanceDB-as-symbol-SoR,
+FN=0 under Spring Magic exclusions, invented priority formula, Kuzu LB as
+stated, LLM on Must verify path.
 
 ---
 
@@ -142,6 +162,8 @@ Quality bar: singular, verifiable, **implementation-free**. MoSCoW applies to
 | **REQ-F-14** | The system could prefetch symbol/lock facts for predicted edit regions (ghost) without treating embeddings as SoR. | A-OP |
 | **REQ-F-15** | The system could answer cross-language “what breaks?” via a declared bridge SoR (e.g. OpenAPI) or dual indexes. | A-OP |
 | **REQ-F-16** | The system could sandbox untrusted lock-check plugins under a capability-limited guest. | A-CI |
+| **REQ-F-20** | The system could emit natural-language remediation **suggestions** for a violation via a **configurable local inference provider**, without using model output as a verify witness. | A-OP, A-DEV |
+| **REQ-F-21** | Org-wide architecture query tools (impact / ownership) could exist behind a horizontally scalable API **if** shared state is an explicit SoR (not assumed embedded-DB multi-writer). | A-ARCH, A-OP |
 
 ### 2.4 Won’t (this epic unless MoSCoW reopened)
 
@@ -164,6 +186,8 @@ Quality bar: singular, verifiable, **implementation-free**. MoSCoW applies to
 | **REQ-N-05** | Must | Privacy: ghost/prefetch caches do not exfiltrate source; local-first default. |
 | **REQ-N-06** | Must | Determinism: same inputs (sources digest + locks version) ⇒ same resolve/lock outcomes. |
 | **REQ-N-07** | Should | LSP diagnostic latency feels interactive (budget TBD after REQ-F-12 Spike). |
+| **REQ-N-08** | Should | NFR latency/RSS measurements declare a reference SKU (dev laptop class **and** Linux CI class); swap=0 during published benches. |
+| **REQ-N-09** | Must | Remediation inference (if enabled) is model-agnostic at the REQ layer; swapping models re-runs NFR benches — identity is config, not FR text. |
 
 ---
 
@@ -193,6 +217,8 @@ business intent. RE-4 change control covers lock intent drift.
 | Latency budgets | N-01, N-02, N-07 | Chain budget (ADV-5) | Spike numbers recorded Confirmed |
 | Privacy / local | N-05 | Prefetch design (later) | No network in default Pilot path |
 | Sandbox Could | F-16 | WASM LockCheck (LIE0-6) | Parity suite native vs guest |
+| Suggest ≠ verify | F-20, N-09 | Optional remediation adapter | Receipt witnesses exclude model text |
+| Org-wide query Could | F-21 | Shared-state Spike (CRM-5) | Keep/drop embedded graph assumption |
 | SMT Won’t v1 | F-17 | Defer L3 | Spec text + MoSCoW Won’t |
 | RAG not SoR | F-18 | Ghost labeled derived | Adversarial test: embedding ≠ witness |
 
