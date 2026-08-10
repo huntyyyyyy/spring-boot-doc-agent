@@ -82,7 +82,7 @@ Full possibilities + landing gaps: research packet **21–24** under `docs/resea
 
 | Item | Why |
 | --- | --- |
-| `scripts/verify_llms_docs.py` | RCE defect — `path_absent` in CI |
+| `scripts/verify_llms_docs.py` (deleted — refuse revival) | RCE defect — `path_absent` in CI |
 | Unary `entity_table_map` as SoR | Replaced by facts ledger direction |
 | Packaging mega-PR restart | STATUS: paused complete enough for pilots |
 | Layer-first top `domain/application/infra` | Wrong ubiquitous language (E-MOD M4) |
