@@ -16,18 +16,20 @@ related:
   - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
   - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
   - docs/research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md
+  - docs/research/process/55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md
   - docs/design/adr/README.md
+  - docs/design/adr/adr-006-polyglot-first-monorepo.md
   - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
   - docs/research/quality-backlog.md
   - .cursor/rules/se-quality-constitution.mdc
 do_not:
   - Treat architecture tours (ghost/LSP/Z3) as Must without MoSCoW re-prioritize
-  - Bind REQ IDs to Rust/WASM/LanceDB/Phi-* — those are design choices (model will change)
-  - Dual-write coverage.xml or claims from a second kernel
+  - Bind REQ IDs to a single language — polyglot BCs are first-class (process/55)
+  - Dual-write coverage.xml or claims from two writers without cutover ADR
   - Approve Design Spec without every Must REQ having an RTM Accept method
   - Promote inbound RE-MASTER-001 to SoR without process/52 rewrite rules
-  - Flatten Pilot to Python-only — see process/53 polyglot lanes (Packwerk/bb/Go/SQLite/WASM)
+  - Flatten product to Python-only — see process/55 + ADR-006
   - Let NFR adjectives influence Design without ATAM six-part QAS (process/54)
   - Skip ADRs for architecturally significant choices
   - Label WASM/Rust boxes "proved" without FML artifacts
@@ -290,8 +292,11 @@ capabilities outside this table without amending this file (RE-4).
 
 ## 8. Design notes (non-requirements)
 
-Polyglot mental models: [`process/53`](../research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md).  
-ATAM QAS · constraints · tactics · ADR · formal boundaries:
+**Product identity:** full polyglot monorepo —
+[`process/55`](../research/process/55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md) ·
+[ADR-006](adr/adr-006-polyglot-first-monorepo.md).  
+Mental models: [`process/53`](../research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md).  
+ATAM QAS · constraints · ADR · formal boundaries:
 [`process/54`](../research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md).  
 ADRs: [`docs/design/adr/`](adr/README.md).
 

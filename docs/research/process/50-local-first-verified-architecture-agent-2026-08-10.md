@@ -16,18 +16,20 @@ related:
   - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
   - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
   - docs/research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md
+  - docs/research/process/55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md
   - docs/design/e-lie0-requirements-2026-08-10.md
   - docs/design/adr/README.md
+  - docs/design/adr/adr-006-polyglot-first-monorepo.md
   - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
   - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
   - docs/research/quality-backlog.md
   - .cursor/rules/se-quality-constitution.mdc
 do_not:
-  - Dual-write coverage.xml from a second kernel
+  - Dual-write coverage.xml from two writers without cutover ADR
   - Claim SCIP alone resolves Spring @Primary/@Qualifier/profiles
   - Equate WASM with mathematical proof (Z3/Kani are proof; WASM is sandbox)
-  - Mass Cargo/Go/Clojure tip rewrite without Pilot keep/drop
+  - Water product down to Python-only — full polyglot is identity (process/55 · ADR-006)
   - Treat Duck.ai chat as Evidenced SoT — inspiration only
   - Treat this memo as SRS — cite docs/design/e-lie0-requirements-*.md for REQ-*
 
@@ -228,11 +230,10 @@ traces to RTM rows in the RE file.
 
 ## 8. Status
 
-Research **Complete** through Bloom Create (Spec Draft) + **RE draft** +
-**Pilot depth** ([`process/53`](53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md)
-— Packwerk/SQLite/bb/Go/WASM mental models).  
-**Do not** start Cargo monorepo or tip kernel swap until RE **Approve**,
-ADV-1…3, Design Spec Approve, and Active tip allows. Pilot Implement follows
-**PIL-*** lanes in process/53 (Must spine + rich sidecars), not a flattened
-Python-only rewrite.
+Research **Complete** through Bloom Create + RE + Pilot depth + ATAM method +
+**full polyglot product stance**
+([`process/55`](55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md) ·
+[ADR-006](../../design/adr/adr-006-polyglot-first-monorepo.md)).  
+Implement follows **PF-*** / **PIL-*** after RE Approve + tip reorder — Rust,
+WASM, Go, Ruby, Clojure, SQLite, TS, C/Zig as first-class BCs, not demos.
 

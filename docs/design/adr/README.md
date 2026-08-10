@@ -28,3 +28,4 @@ construction) get an ADR before Implement. Methodology:
 | [ADR-003](adr-003-native-then-wasm-lockcheck.md) | Native LockCheck first; WASM trust boundary | Proposed |
 | [ADR-004](adr-004-bb-datascript-sidecar.md) | bb+Datascript query sidecar | Proposed |
 | [ADR-005](adr-005-python-tip-oracle-writer.md) | Python tip remains coverage/claims writer | Proposed |
+| [ADR-006](adr-006-polyglot-first-monorepo.md) | Polyglot-first monorepo (Rust/WASM/Go/Ruby/Clojure/…) | Proposed |

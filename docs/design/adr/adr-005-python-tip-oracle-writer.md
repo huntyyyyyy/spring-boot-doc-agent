@@ -31,6 +31,8 @@ Proposed.
 
 ## Consequences
 
-Positive: preserves CI SoR; allows rich pilots.  
-Negative: hot paths may need FFI later; cutover is high-ceremony.  
-Rejected: Rust/Go tip rewrite in Pilot; dual Cover% under “engine.”
+Positive: preserves CI SoR during transition; allows rich pilots.  
+Negative: must not be misread as “product = Python only.”  
+**Supersession path:** ADR-006 defines polyglot product identity; a future
+cutover ADR may move the oracle writer off Python.  
+Rejected: Rust/Go tip rewrite *without* cutover ADR; dual Cover% under “engine.”
