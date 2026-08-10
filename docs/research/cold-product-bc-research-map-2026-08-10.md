@@ -164,6 +164,8 @@ without a second assertion engine (OCS2).
 | Adopt | Explicit join contracts (CSV↔YAML↔facts) with human-reviewed floors |
 | Refuse | Artifactory DB as CI SoT; soft-green Messaging/OpenAPI |
 
+**External packet (D4):** `docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md`
+
 ---
 
 ### 3.5 E-TOOL4 slice — Drift + capacity honesty
@@ -177,6 +179,10 @@ without a second assertion engine (OCS2).
 | Embody | Characterization plants before threshold rewrite |
 | Adopt | Documented proxy honesty labels (sensor vs SoT) |
 | Refuse | Capacity numbers as Cover% proof |
+
+**External packet (D5 + brief D6):** same
+`docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md`
+(operator CLI deep Spec remains E-OAS0 / `process/37`).
 
 ---
 
@@ -233,3 +239,4 @@ design Spec Approve before code. Linked seeds:
 
 - [`stage0/query-packet-bc-research-2026-08-10.md`](stage0/query-packet-bc-research-2026-08-10.md)
 - [`modularity/certification-fold-phase-runner-2026-08-10.md`](modularity/certification-fold-phase-runner-2026-08-10.md)
+- [`stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md`](stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md) (E-CQLJ0 / E-TOOL4 / OAS16)
