@@ -2,21 +2,22 @@
 title: DS / analytics / ML-ops tooling — problem-first map for doc-engine
 status: RESEARCH COMPLETE — Spec gate OPEN E-DS0 (no code; Embody/Adopt/Refuse only)
 epic: E-DS0
-date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
-prefer_sources: "arXiv primary + GitHub API star snapshot 2026-08-10 + DeepWiki cartography"
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
+prefer_sources: arXiv primary + GitHub API star snapshot 2026-08-10 + DeepWiki cartography
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 siblings:
-  - docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
-  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
-  - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
+- docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
+- docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+- docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
 related:
-  - docs/research/quality-backlog.md
+- docs/research/quality-backlog.md
 do_not:
-  - install GE/Pandera/Evidently/DVC/MLflow/Feast as product deps without Spec
-  - treat dashboard Cover% / climb Cover% as fail_under proof
-  - weaken fail_under=98.7, complexipy ≤5, or size ≤225
-  - adopt feature-store / A-B platforms as core CLI runtime
+- install GE/Pandera/Evidently/DVC/MLflow/Feast as product deps without Spec
+- treat dashboard Cover% / climb Cover% as fail_under proof
+- weaken fail_under=98.7, complexipy ≤5, or size ≤225
+- adopt feature-store / A-B platforms as core CLI runtime
+last_reviewed: '2026-08-10'
 ---
 
 # Data science / ML-ops tooling (problem-first) → doc-engine

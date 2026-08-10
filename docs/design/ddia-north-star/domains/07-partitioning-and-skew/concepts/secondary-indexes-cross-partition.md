@@ -8,7 +8,6 @@ epub_anchors:
 related: [partition-key-and-hotspots, rel-partition-bounds-fanout, materialized-views-and-caches, ch07, effective-remedies]
 last_refined: 2026-08-09
 path: domains/07-partitioning-and-skew/concepts/secondary-indexes-cross-partition.md
-
 ---
 
 # Secondary indexes and cross-partition queries

@@ -1,29 +1,33 @@
 ---
 title: E-REPO0 amend — future-capability backcast of repository structures
 status: DRAFT Spec companion — pending Approve with memos 21+22 as one packet
-research date: 2026-08-10
+date: '2026-08-10'
 research_window: product SoT as of tip (STATUS / maturity / adoption / backlog)
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: doc-engine — portable Spring-doc pipeline + adapters + meta quality monorepo
 parent:
-  - docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
-  - docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
+- docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
+- docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
 sources_of_future:
-  - STATUS.md
-  - MATURITY_ASSESSMENT.md
-  - docs/product-architecture.md
-  - docs/guides/principal-adoption.md
-  - docs/adoption-hardening.md
-  - docs/research/archive/claude-lore/research/adoption-blockers-queue-2026-07-30.md
-  - docs/research/archive/claude-lore/10-architecture-maturation-plan.md (historical; §0–1 not executable)
-  - docs/research/quality-backlog.md
-  - CONSTRAINTS.md (enterprise gaps)
+- STATUS.md
+- MATURITY_ASSESSMENT.md
+- docs/product-architecture.md
+- docs/guides/principal-adoption.md
+- docs/adoption-hardening.md
+- docs/research/archive/claude-lore/research/adoption-blockers-queue-2026-07-30.md
+- docs/research/archive/claude-lore/10-architecture-maturation-plan.md (historical;
+  §0–1 not executable)
+- docs/research/quality-backlog.md
+- CONSTRAINTS.md (enterprise gaps)
 do_not:
-  - invent a product vision not evidenced in the sources above
-  - treat archived maturation Phase checklists as Active Spec
-  - weaken fail_under 98.7 / complexipy ≤5 / LOC ≤225 / PathCohesion / 16-A
-  - rank layouts without stating which horizon they optimize
-spec_gate: DRAFT E-REPO0 amend (2026-08-10) — capability-backed possibilities; Approve with 21+22
+- invent a product vision not evidenced in the sources above
+- treat archived maturation Phase checklists as Active Spec
+- weaken fail_under 98.7 / complexipy ≤5 / LOC ≤225 / PathCohesion / 16-A
+- rank layouts without stating which horizon they optimize
+spec_gate: DRAFT E-REPO0 amend (2026-08-10) — capability-backed possibilities; Approve
+  with 21+22
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Future-capability backcast: solid structure possibilities

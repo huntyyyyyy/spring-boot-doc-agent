@@ -1,11 +1,14 @@
 ---
 category: Coverage climb / measure feedback-loop architecture
 status: APPROVED — SPEC GATE E-CM0 (2026-08-08)
-research date: 2026-08-08
+date: '2026-08-08'
 approved_decisions: 1-31
 artifact_policy: 16-A
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+title: 'Design memo: climb/measure feedback-loop architecture'
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: climb/measure feedback-loop architecture

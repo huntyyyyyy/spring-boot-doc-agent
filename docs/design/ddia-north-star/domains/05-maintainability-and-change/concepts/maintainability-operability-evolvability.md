@@ -10,7 +10,6 @@ epub_anchors:
 related: [refactor-sequencing, architecture-decision-review, effective-remedies]
 last_refined: 2026-08-09
 path: domains/05-maintainability-and-change/concepts/maintainability-operability-evolvability.md
-
 ---
 
 # Maintainability: operability, simplicity, evolvability

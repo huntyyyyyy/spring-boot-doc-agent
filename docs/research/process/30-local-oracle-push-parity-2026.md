@@ -1,17 +1,18 @@
 ---
 title: E-HOOK2 — Local oracle Cover% on push (parity with remote 3.11)
 status: APPROVED — SPEC GATE E-HOOK2 (2026-08-09)
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-HOOK2
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/local-pre-push-hook-design-2026-08-09.md
-  - docs/research/process/27-local-pre-push-hook-2026.md
-  - docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
+- docs/design/local-pre-push-hook-design-2026-08-09.md
+- docs/research/process/27-local-pre-push-hook-2026.md
+- docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
 do_not:
-  - treat domain-select pytest as 98.7 proof
-  - climb XML as oracle SoR
-  - weaken DEFAULT_FLOOR below 98.7
+- treat domain-select pytest as 98.7 proof
+- climb XML as oracle SoR
+- weaken DEFAULT_FLOOR below 98.7
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: local oracle must bite before remote spend

@@ -1,22 +1,23 @@
 ---
 title: Kitchen harness modernization — setUpModule / run_chain / fixtures (2026)
 status: E-KH0 APPROVED · E-KH1 LANDED (2026-08-09) — KH-S2 syrupy deferred
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine kitchen-sink domain_integration suite
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
-  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
-  - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
-  - docs/research/quality-backlog.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
+- docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+- docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
+- docs/research/quality-backlog.md
 do_not:
-  - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
-  - treat Spec Kit / WorkflowEngine as mandatory test runtime
-  - suite-wide xdist on shared mutable kitchen _STATE
-  - replace chapter fault-injection claims with LLM fixture generators
+- weaken fail_under 98.7, complexipy ≤5, LOC ≤225
+- treat Spec Kit / WorkflowEngine as mandatory test runtime
+- suite-wide xdist on shared mutable kitchen _STATE
+- replace chapter fault-injection claims with LLM fixture generators
 spec_gate: APPROVED E-KH0 (2026-08-09) — E-KH1 landed (session fixtures; KH-S1=session)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: kitchen harness vs 2026 test frameworks

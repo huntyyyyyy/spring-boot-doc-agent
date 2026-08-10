@@ -1,31 +1,33 @@
 ---
 title: E-OAS0 — Operator/agent surface (CLI grade + MCP + structured retrieval)
 status: DRAFT Spec — pending Approve of OAS1–OAS14
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine + thin MCP adapter + future RAG-shaped retrieval
 related:
-  - docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
-  - docs/research/process/25-tip-grounding-mcp-2026.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/process/28-local-stalker-telemetry-etl-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/process/local-grading-pack.md
-  - src/doc_engine/query/mcp_tools.py
-  - adapters/mcp/server.py
-  - scripts/ci/run_local_grading_pack.sh
+- docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
+- docs/research/process/25-tip-grounding-mcp-2026.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/process/28-local-stalker-telemetry-etl-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/process/local-grading-pack.md
+- src/doc_engine/query/mcp_tools.py
+- adapters/mcp/server.py
+- scripts/ci/run_local_grading_pack.sh
 do_not:
-  - implement before Spec Approve
-  - make rich / OTel / embeddings CI or citation SoT
-  - rewrite every scripts/ci façade to Typer in one tip
-  - add MCP write/codegen tools
-  - treat vector RAG as Stage-0 citation replacement
-  - treat MCP/agents as unattended merge authority (human review remains floor)
+- implement before Spec Approve
+- make rich / OTel / embeddings CI or citation SoT
+- rewrite every scripts/ci façade to Typer in one tip
+- add MCP write/codegen tools
+- treat vector RAG as Stage-0 citation replacement
+- treat MCP/agents as unattended merge authority (human review remains floor)
 spec_gate: DRAFT E-OAS0 (2026-08-10) — OAS1–OAS15 pending Approve
-depends_on: E-UX0 (landed); E-GND0 still DRAFT/demoted — this memo does not unblock GND1
-gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue"
+depends_on: E-UX0 (landed); E-GND0 still DRAFT/demoted — this memo does not unblock
+  GND1
+gh_sor_bar: ≥10000★ for new external SoR; Confirmed pins Embody-continue
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: operator/agent surface (CLI ↔ MCP ↔ retrieval)

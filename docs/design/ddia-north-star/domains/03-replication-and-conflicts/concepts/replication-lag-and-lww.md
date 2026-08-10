@@ -9,7 +9,6 @@ epub_anchors:
 related: [sor-vs-derived, consistency-and-consensus-lite, choosing-sor-vs-view, effective-remedies]
 last_refined: 2026-08-09
 path: domains/03-replication-and-conflicts/concepts/replication-lag-and-lww.md
-
 ---
 
 # Replication lag and last-write-wins

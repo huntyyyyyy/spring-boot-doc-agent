@@ -1,19 +1,20 @@
 ---
 title: CI / script output UX — summary-first progressive disclosure (2026)
 status: E-UX0 APPROVED · E-UX1 LANDED (#105, 2026-08-09) — E-UX2 deferred (U6)
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine CI façades + quality-gates
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - src/doc_engine/ci/github_step_summary.py
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- src/doc_engine/ci/github_step_summary.py
 do_not:
-  - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
-  - introduce rich/emoji dashboards as CI SoT
-  - treat LLM log-summarizers as merge proof
-  - boil every scripts/ci façade in one tip
-spec_gate: APPROVED E-UX0 (2026-08-09) — E-UX1 landed on #105
+- weaken fail_under 98.7, complexipy ≤5, LOC ≤225
+- introduce rich/emoji dashboards as CI SoT
+- treat LLM log-summarizers as merge proof
+- boil every scripts/ci façade in one tip
+spec_gate: APPROVED E-UX0 (2026-08-09) — E-UX1 landed on
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: CI output UX (summary-first)

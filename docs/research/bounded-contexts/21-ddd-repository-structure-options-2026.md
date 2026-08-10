@@ -1,28 +1,30 @@
 ---
 title: E-REPO0 — DDD repository structure options (shallow root + fat folders)
-status: DRAFT Spec — options inventory; pending Approve of REPO1–REPO16 (see companion 22)
-research date: 2026-08-10
+status: DRAFT Spec — options inventory; pending Approve of REPO1–REPO16 (see companion
+  22)
+date: '2026-08-10'
 research_window: 2026-01-01 → 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + meta CI/adapters monorepo
 related:
-  - docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
-  - docs/product-architecture.md
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
-  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/design/ddia-north-star/domains/05-maintainability-and-change/
-  - tach.toml
+- docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
+- docs/product-architecture.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
+- docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/design/ddia-north-star/domains/05-maintainability-and-change/
+- tach.toml
 do_not:
-  - big-bang git-mv of tests/ or src/ without Spec Approve + claims rewiring
-  - treat folder rename as modularity (enforce with tach / markers)
-  - introduce utils/ grab-bags or DI containers
-  - adopt Nx / Packwerk / Spring Modulith / Backstage as Python runtimes
-  - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
-  - cross-job coverage combine or PathCohesion breaks while reshaping tests
+- big-bang git-mv of tests/ or src/ without Spec Approve + claims rewiring
+- treat folder rename as modularity (enforce with tach / markers)
+- introduce utils/ grab-bags or DI containers
+- adopt Nx / Packwerk / Spring Modulith / Backstage as Python runtimes
+- weaken fail_under 98.7, complexipy ≤5, LOC ≤225
+- cross-job coverage combine or PathCohesion breaks while reshaping tests
 spec_gate: DRAFT E-REPO0 (2026-08-10) — REPO1–REPO20 pending Approve (21+22+23 packet)
-gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/docs)"
+gh_sor_bar: ≥1000★ and pushed_at within research_window (prefer Releases/docs)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: at least five DDD-shaped repository structures

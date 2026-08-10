@@ -1,20 +1,22 @@
 ---
 title: CLI DX · terminal a11y · dual human/JSON sinks (landing pads)
 status: RESEARCH memo — feeds E-OAS0 / doc-engine grade (no impl)
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
-product: Python CLI doc-engine (+ future RAG/agent retrieval; structure-first citation SoT)
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
+product: Python CLI doc-engine (+ future RAG/agent retrieval; structure-first citation
+  SoT)
 related:
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
-  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
+- docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
-  - implement grade/MCP sinks in this tip
-  - treat rich tables / emoji / progress UI as merge or CI SoT
-  - treat embeddings as citation SoT
+- implement grade/MCP sinks in this tip
+- treat rich tables / emoji / progress UI as merge or CI SoT
+- treat embeddings as citation SoT
 gh_api_stamp: 2026-08-10 (stars + pushed_at via GitHub REST)
+last_reviewed: '2026-08-10'
 ---
 
 # CLI developer experience research — 2026-08-10

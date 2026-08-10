@@ -6,7 +6,6 @@ tags: [claims, status, drift, verify]
 related: [sor-vs-derived, schema-evolution-and-data-outlives-code, maintainability-operability-evolvability, effective-remedies]
 last_refined: 2026-08-09
 path: playbooks/claims-and-status-drift.md
-
 ---
 
 # Playbook: claims and STATUS drift

@@ -1,30 +1,32 @@
 ---
-title: Open polyglot BFS — pilot-before-refuse (Ruby · JVM · .NET · Elixir · Datalog · enterprise)
+title: Open polyglot BFS — pilot-before-refuse (Ruby · JVM · .NET · Elixir · Datalog
+  · enterprise)
 status: ACTIVE research — amends E-POLY0; Spec E-POLY0b DRAFT; no Implement
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python 3.10+ CLI doc-engine (Stage-0 · MCP · later RAG)
 related:
-  - docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
-  - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
+- docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - treat Pilot as license to write coverage.xml / claims / cert SoT
-  - use star counts as architecture proof
-  - replace Python kernel with Ruby/JVM/.NET/Elixir/WASM
-  - unattended AI merge; embedding citation SoT
-  - Implement pilots without named Spike exit (keep/drop)
+- treat Pilot as license to write coverage.xml / claims / cert SoT
+- use star counts as architecture proof
+- replace Python kernel with Ruby/JVM/.NET/Elixir/WASM
+- unattended AI merge; embedding citation SoT
+- Implement pilots without named Spike exit (keep/drop)
 human_review_floor: true
 spec_gate: DRAFT E-POLY0b (2026-08-10) — doctrine + pilot queue; amends E-POLY0
 amends: E-POLY0 · E-RUST0
 stars_as_of: 2026-08-10 (GitHub API)
 arxiv_verified: 2026-08-10 (HTTP 200 sample)
 doctrine: Pilot-before-Refuse (five buckets)
+last_reviewed: '2026-08-10'
 ---
 
 # Open polyglot BFS — throw it on the wall with scorecards (2026-08-10)

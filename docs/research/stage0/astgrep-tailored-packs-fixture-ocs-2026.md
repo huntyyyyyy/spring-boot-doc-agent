@@ -1,24 +1,25 @@
 ---
 title: E-AST0 — Tailored ast-grep packs (fixture Stage-0 + OCS campaign + Python vacuity)
-status: DRAFT — Spec gate E-AST0 (research complete; do not implement pack migration until Approve)
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+status: DRAFT — Spec gate E-AST0 (research complete; do not implement pack migration
+  until Approve)
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine + spring-signals dual plant
 related:
-  - docs/research/ci/36-ocs-dual-plant-profile-2026.md
-  - docs/research/modularity/16-scan1-astgrep-modularity-2026.md
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - docs/research/process/35-control-plane-closed-loop-2026.md
-  - spring-signals/docs/CAMPAIGN.md
-  - spring-signals/docs/RULE_ID_MIGRATION.md
-  - src/doc_engine/scanning/resources/spring_ast_grep_rules.yml
+- docs/research/ci/36-ocs-dual-plant-profile-2026.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- docs/research/process/35-control-plane-closed-loop-2026.md
+- spring-signals/docs/CAMPAIGN.md
+- spring-signals/docs/RULE_ID_MIGRATION.md
+- src/doc_engine/scanning/resources/spring_ast_grep_rules.yml
 do_not:
-  - make Artifactory OCS CodeQL DB the merge SoT
-  - treat bare ripgrep hits as citation/SoT for Spring or vacuity
-  - in-tree Rust rewrite; swap to ast-grep-py
-  - land wave-1 id rename without coordinated fixtures + rule_coverage
-  - soft-green empty OCS floors as "no expectation yet"
+- make Artifactory OCS CodeQL DB the merge SoT
+- treat bare ripgrep hits as citation/SoT for Spring or vacuity
+- in-tree Rust rewrite; swap to ast-grep-py
+- land wave-1 id rename without coordinated fixtures + rule_coverage
+- soft-green empty OCS floors as "no expectation yet"
 spec_gate: DRAFT E-AST0 — AST0-A–H below; Approve before Implement
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: repo- and OCS-tailored ast-grep customizations

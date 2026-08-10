@@ -1,3 +1,12 @@
+---
+title: "Text search allow (ripgrep) \u2014 Spec + Implement receipt"
+status: "legacy \u2014 needs review"
+date: '2026-08-10'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
+freshness: tip-bound
+---
 # Text search allow (ripgrep) — Spec + Implement receipt
 
 **Date:** 2026-08-09  

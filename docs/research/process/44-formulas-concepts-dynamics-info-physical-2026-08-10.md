@@ -1,17 +1,18 @@
 ---
 title: Formulas & concepts — dynamics, information, thermo, physical computing
 status: RESEARCH — mathematical companion to process/43 and process/20-theory
-date: 2026-08-10
+date: '2026-08-10'
 epic_seed: E-DYN1
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
-  - docs/research/process/20-theory-domains-problem-first-gates-2026.md
-  - docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
+- docs/research/process/20-theory-domains-problem-first-gates-2026.md
+- docs/research/process/05-dynamics-neuromorphic.md
 do_not:
-  - use these formulas as fail_under / merge softeners
-  - implement physical substrates from this memo
+- use these formulas as fail_under / merge softeners
+- implement physical substrates from this memo
 spec_gate: DRAFT E-DYN1 — concepts SoR; transfer still metaphor/sensor only
+last_reviewed: '2026-08-10'
 ---
 
 # Formulas & concepts (not just transfer tables)

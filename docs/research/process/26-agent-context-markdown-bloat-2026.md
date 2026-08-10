@@ -1,24 +1,26 @@
 ---
 title: E-CTX0 — Agent context bloat from huge markdown (arXiv + SE mental models)
 status: DRAFT Spec — CTX1–CTX10 pending Approve
-research date: 2026-08-10
+date: '2026-08-10'
 research_window: 2023-01-01 → 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Meta-repo agent hygiene (Cursor/Claude tips) — not doc-engine kernel SoT
 related:
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
-  - docs/research/process/27-agent-context-repo-discernment-2026.md
-  - docs/research/process/28-agent-context-algorithm-first-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
+- docs/research/process/27-agent-context-repo-discernment-2026.md
+- docs/research/process/28-agent-context-algorithm-first-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
-  - paste full research memos into every agent turn
-  - treat million-token windows as “just dump the docs”
-  - treat ★≥1k as automatic Adopt (see memo 27 / fake-star literature)
-  - adopt MemGPT/Letta / complexity-trap *code* as product deps without discernment
-  - replace deterministic SoR (claims, coverage.xml) with LLM summary memory
+- paste full research memos into every agent turn
+- treat million-token windows as “just dump the docs”
+- treat ★≥1k as automatic Adopt (see memo 27 / fake-star literature)
+- adopt MemGPT/Letta / complexity-trap *code* as product deps without discernment
+- replace deterministic SoR (claims, coverage.xml) with LLM summary memory
 spec_gate: DRAFT E-CTX0 (2026-08-10) — CTX1–CTX10 + deepdive CTX11–CTX18 pending Approve
-gh_sor_bar: "≥1000★ + recent push is a filter only; require fork/velocity/institution/paper discernment (memo 27)"
+gh_sor_bar: ≥1000★ + recent push is a filter only; require fork/velocity/institution/paper
+  discernment (memo 27)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: huge markdown vs agent working set

@@ -6,7 +6,6 @@ tags: [review, architecture, adr]
 related: [trust-but-verify-and-auditability, maintainability-operability-evolvability, choosing-sor-vs-view, effective-remedies]
 last_refined: 2026-08-09
 path: playbooks/architecture-decision-review.md
-
 ---
 
 # Playbook: architecture decision review

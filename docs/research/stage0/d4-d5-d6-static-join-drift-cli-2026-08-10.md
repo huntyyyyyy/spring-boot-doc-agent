@@ -1,27 +1,28 @@
 ---
 title: D4/D5/D6 cold BC research — static join · drift/capacity · operator CLI
 status: DRAFT research — Spec seeds for E-CQLJ0 / E-TOOL4 slice / E-OAS16; no Implement
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine + Stage-0 CodeQL/ast-grep + spring-signals dual plant
 related:
-  - docs/research/cold-product-bc-research-map-2026-08-10.md
-  - docs/research/ci/36-ocs-dual-plant-profile-2026.md
-  - docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
-  - src/doc_engine/scanning/_scanner_codeql.py
-  - src/doc_engine/tools/spring_drift_check.py
-  - src/doc_engine/tools/capacity_preflight.py
+- docs/research/cold-product-bc-research-map-2026-08-10.md
+- docs/research/ci/36-ocs-dual-plant-profile-2026.md
+- docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
+- src/doc_engine/scanning/_scanner_codeql.py
+- src/doc_engine/tools/spring_drift_check.py
+- src/doc_engine/tools/capacity_preflight.py
 do_not:
-  - make Artifactory OCS CodeQL DB the merge SoR
-  - dual-write a second assertion engine
-  - treat capacity / Stage-4 proxy / Cover% climb as fail_under 98.7 proof
-  - rich / OTel as CI SoT; unattended AI merge
-  - implement before Spec Approve
+- make Artifactory OCS CodeQL DB the merge SoR
+- dual-write a second assertion engine
+- treat capacity / Stage-4 proxy / Cover% climb as fail_under 98.7 proof
+- rich / OTel as CI SoT; unattended AI merge
+- implement before Spec Approve
 spec_gate: DRAFT — CQLJ / TOOL4 / OAS16 tickets pending Approve
 stars_as_of: 2026-08-10 (GitHub API)
 deepwiki: Evidenced via WebFetch deepwiki.com (cross-domain synthesis in cold-bc-domain-subdomain-taxonomy-2026-08-10.md)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: D4 Static analysis join · D5 Drift & capacity · D6 Operator CLI

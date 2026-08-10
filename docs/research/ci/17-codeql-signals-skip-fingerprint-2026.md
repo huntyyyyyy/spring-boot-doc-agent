@@ -1,23 +1,24 @@
 ---
 title: E-CQL0 — CodeQL signals CI skip / fingerprint (when logic unchanged)
 status: E-CQL0 APPROVED (2026-08-09) — merge Approve of CQ1–CQ9
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — CI BC codeql-signals (fixture pack gate)
 related:
-  - docs/research/ci/07-ci-workflow-modularity.md
-  - docs/design/ci-workflow-modularity-design-2026-08-09.md
-  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/ci/07-ci-workflow-modularity.md
+- docs/design/ci-workflow-modularity-design-2026-08-09.md
+- docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - weaken fail_under 98.7; skip oracle cov cell; fuzzy/PID green
-  - on.pull_request.paths on required CI (Pending forever)
-  - treat actions/cache or restored DB as merge SoR / skip assertions
-  - CodeQL overlay / diff-informed as substitute for traced fixture gate
-  - ML CI-skip / RTS as gate; fatten ci.yml; utils/ grab-bag
-  - conflate Stage-0 pack (codeql/spring-signals) with CI pack (spring-signals/codeql)
+- weaken fail_under 98.7; skip oracle cov cell; fuzzy/PID green
+- on.pull_request.paths on required CI (Pending forever)
+- treat actions/cache or restored DB as merge SoR / skip assertions
+- CodeQL overlay / diff-informed as substitute for traced fixture gate
+- ML CI-skip / RTS as gate; fatten ci.yml; utils/ grab-bag
+- conflate Stage-0 pack (codeql/spring-signals) with CI pack (spring-signals/codeql)
 spec_gate: APPROVED E-CQL0 (2026-08-09) — CQ1–CQ9
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: skip CodeQL signals runtime when logic unchanged

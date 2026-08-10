@@ -1,9 +1,12 @@
 ---
 title: OCS dual-plant profile — Spec (E-OCS0)
 status: APPROVED — SPEC GATE E-OCS0 (2026-08-10)
-date: 2026-08-10
+date: '2026-08-10'
 epic: E-OCS0
 research: docs/research/ci/36-ocs-dual-plant-profile-2026.md
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design Spec: dual plant (fixture + OCS)

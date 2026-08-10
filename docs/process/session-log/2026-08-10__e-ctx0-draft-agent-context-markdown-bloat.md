@@ -152,3 +152,12 @@ Tests: not run (docs Spec Draft); DeepWiki Ask ArchUnit/Livebook/wasmtime/MCP-TS
 Assumptions affected:
 - E-TOOL0 covered only Ruby/Go/Clojure — [Resolved — memo 48 §2 now lists Rust extras, Elixir, JVM, .NET, PHP/Lua, TS/MCP, WASM, OCaml/Datalog, shells/notebooks/policy + TOOL7–12]
 Files touched: docs/research/process/48-*.md, docs/research/quality-backlog.md
+
+## 2026-08-10 — E-MD0 closed markdown frontmatter schemas (corpus C)
+Commit: uncommitted
+Tests: pytest tests/ci/test_md_frontmatter.py 5/5; check_md_frontmatter OK; claims OK
+Assumptions affected:
+- Research/design FM is convention-only / unvalidated — [Resolved — `check_md_frontmatter` hard in pre_pr; kind allowlists; deprecated `claim tiers`→`claim_tiers`]
+- Bloom gate is README prose only — [Resolved — bloom_gate requires bloom_mcp + sources nest keys]
+- No look-first index of memo metadata — [Resolved — `docs/research/_frontmatter_index.yaml`]
+Files touched: scripts/ci/md_frontmatter_*.py, scripts/ci/check_md_frontmatter.py, scripts/ci/pre_pr.py, tests/ci/test_md_frontmatter.py, docs/research/process/49-*.md, docs/design/md-frontmatter-metadata-design-2026-08-10.md, docs/research/** (normalize), docs/research/quality-backlog.md, docs/research/README.md

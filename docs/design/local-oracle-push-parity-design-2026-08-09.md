@@ -3,6 +3,11 @@ category: Local oracle push parity
 status: APPROVED — SPEC GATE E-HOOK2 (2026-08-09)
 research: docs/research/process/30-local-oracle-push-parity-2026.md
 spec_gate: APPROVED E-HOOK2
+title: 'Design: local oracle Cover% on pre_pr'
+date: '2026-08-09'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design: local oracle Cover% on pre_pr

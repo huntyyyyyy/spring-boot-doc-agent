@@ -1,19 +1,19 @@
 ---
-segment: 04
+segment: 4
 title: Implementation frameworks — Embody / Adopt / Refuse
 wave: wave1-cov-climb-a
 status: RESEARCH COMPLETE — sibling segment for synthesis; no code impl
-research date: 2026-08-08
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-08'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI / agentic Spring-doc pipeline (doc-engine), not a K8s farm
 related:
-  - docs/research/archive/_wip-coverage-design-audit.md
-  - docs/agentic-foundational-se-taxonomy-2026-08-08.md
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-  - docs/design/rust-stack-fit-memo-2026-08-08.md
+- docs/research/archive/_wip-coverage-design-audit.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
+- docs/design/rust-stack-fit-memo-2026-08-08.md
 awaiting_merge:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+last_reviewed: '2026-08-10'
 ---
 
 # Segment 04 — Implementation frameworks for this product

@@ -1,25 +1,26 @@
 ---
 title: E-QUERY0 — Query / context-packet BC + MCP isolation (Spec seed)
 status: DRAFT Spec — pending Approve of Q0-1–Q0-10
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Stage-0 typed query + thin MCP
 related:
-  - docs/research/cold-product-bc-research-map-2026-08-10.md
-  - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
-  - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
-  - docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
-  - docs/research/process/25-tip-grounding-mcp-2026.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - src/doc_engine/query/
-  - adapters/mcp/
+- docs/research/cold-product-bc-research-map-2026-08-10.md
+- docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
+- docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
+- docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
+- docs/research/process/25-tip-grounding-mcp-2026.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- src/doc_engine/query/
+- adapters/mcp/
 do_not:
-  - Implement size chops or new MCP tools before Approve
-  - add write/codegen MCP tools
-  - treat packet completeness as Cover% or merge SoR
-  - unattended AI adoption
+- Implement size chops or new MCP tools before Approve
+- add write/codegen MCP tools
+- treat packet completeness as Cover% or merge SoR
+- unattended AI adoption
 spec_gate: DRAFT E-QUERY0 (2026-08-10)
 human_review_floor: true
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: query / packet BC (E-QUERY0)

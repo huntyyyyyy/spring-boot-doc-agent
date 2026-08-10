@@ -1,27 +1,28 @@
 ---
 title: RAG & retrieval systems — problem-first inventory (SoT vs sensor vs adapter)
 status: ACTIVE research packet — Spec seeds DRAFT; no Implement without Approve
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine (Stage-0 structure facts + query/MCP adapters)
 related:
-  - docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
-  - docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
-  - docs/research/archive/claude-lore/research/e1-s2-token-proxy-adr-2026-08-08.md
-  - src/doc_engine/query/
-  - adapters/mcp/
+- docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
+- docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
+- docs/research/archive/claude-lore/research/e1-s2-token-proxy-adr-2026-08-08.md
+- src/doc_engine/query/
+- adapters/mcp/
 do_not:
-  - treat embeddings / vector rank as citation SoT
-  - treat RAGAS/ARES/LLM-judge as merge or certification SoT
-  - treat GraphRAG LLM-extracted KG as Stage-0 fact replacement
-  - unattended AI merge
-  - Implement vector index / CRAG / RAPTOR as tip SoT before Spec Approve
+- treat embeddings / vector rank as citation SoT
+- treat RAGAS/ARES/LLM-judge as merge or certification SoT
+- treat GraphRAG LLM-extracted KG as Stage-0 fact replacement
+- unattended AI merge
+- Implement vector index / CRAG / RAPTOR as tip SoT before Spec Approve
 human_review_floor: true
 epics: E-RAG0 (proposed Spec gate)
 stars_as_of: 2026-08-10 (GitHub API)
+last_reviewed: '2026-08-10'
 ---
 
 # Problem-first RAG inventory → doc-engine Embody / Adopt / Refuse

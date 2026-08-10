@@ -1,18 +1,19 @@
 ---
 title: Quality policy setpoints — central discoverability without god files
 status: APPROVED — SPEC GATE E-KNOB0 (2026-08-09)
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-KNOB0
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/quality-policy-setpoints-design-2026-08-09.md
-  - docs/research/quality-backlog.md
-  - .cursor/rules/se-quality-constitution.mdc
-  - docs/design/concept-split-cohesion-design-2026-08-09.md
+- docs/design/quality-policy-setpoints-design-2026-08-09.md
+- docs/research/quality-backlog.md
+- .cursor/rules/se-quality-constitution.mdc
+- docs/design/concept-split-cohesion-design-2026-08-09.md
 do_not:
-  - dump all thresholds into quality_knobs.py / ci/utils.py
-  - treat sensors (gap-average, stalker, adequacy) as fail_under owners
-  - weaken 98.7 / complexipy ≤5 / LOC ≤225 while consolidating
+- dump all thresholds into quality_knobs.py / ci/utils.py
+- treat sensors (gap-average, stalker, adequacy) as fail_under owners
+- weaken 98.7 / complexipy ≤5 / LOC ≤225 while consolidating
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: quality policy setpoints (E-KNOB0)

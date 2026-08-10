@@ -1,20 +1,22 @@
 ---
 category: Tip-grounding MCP (CGQ probes via isolated read-only tools)
 status: DRAFT — SPEC GATE E-GND0 pending Approve of GND1–GND10
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/25-tip-grounding-mcp-2026.md
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/design/codegen-quality-dimensions-design-2026-08-09.md
-  - src/doc_engine/query/mcp_tools.py
-  - adapters/mcp/server.py
-  - docs/research/quality-backlog.md
+- docs/research/process/25-tip-grounding-mcp-2026.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/design/codegen-quality-dimensions-design-2026-08-09.md
+- src/doc_engine/query/mcp_tools.py
+- adapters/mcp/server.py
+- docs/research/quality-backlog.md
 do_not:
-  - Implement before E-CGQ0 + E-GND0 Approve
-  - add codegen / write / apply_patch tools
+- Implement before E-CGQ0 + E-GND0 Approve
+- add codegen / write / apply_patch tools
 spec_gate: DRAFT E-GND0 (2026-08-09) — GND1–GND10 pending Approve
 depends_on: E-CGQ0 Approve before E-GND1 Implement
+title: 'Design memo: E-GND0 Spec gate'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: E-GND0 Spec gate

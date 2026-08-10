@@ -6,7 +6,6 @@ tags: [refactor, sequencing, blast-radius]
 related: [maintainability-operability-evolvability, schema-evolution-and-data-outlives-code, coverage-gates, effective-remedies]
 last_refined: 2026-08-09
 path: playbooks/refactor-sequencing.md
-
 ---
 
 # Playbook: refactor sequencing

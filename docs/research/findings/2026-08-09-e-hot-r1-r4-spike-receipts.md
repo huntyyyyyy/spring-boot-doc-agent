@@ -2,13 +2,14 @@
 title: E-HOT-R1–R4 spike receipts — gate repair benchmarks (2026-08-09)
 status: complete
 kind: research_spike
-date: 2026-08-09
+date: '2026-08-09'
 related:
-  - docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
-  - docs/research/findings/2026-08-09-statement-split-cascade.md
-  - docs/design/post-merge-gate-repair-design-2026-08-09.md
+- docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
+- docs/research/findings/2026-08-09-statement-split-cascade.md
+- docs/design/post-merge-gate-repair-design-2026-08-09.md
 epics: E-HOT-R1, E-HOT-R2, E-HOT-R3, E-HOT-R4
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
+last_reviewed: '2026-08-10'
 ---
 
 # Spike receipts: E-HOT-R1–R4 (before E-HOT1 Implement)

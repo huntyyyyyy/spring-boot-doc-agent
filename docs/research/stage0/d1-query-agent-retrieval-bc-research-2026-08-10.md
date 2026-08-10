@@ -1,31 +1,32 @@
 ---
 title: D1 Query & agent retrieval (cold BC research)
 status: ACTIVE research packet — Spec seeds DRAFT; no Implement without Approve
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine
 related:
-  - docs/research/stage0/query-packet-bc-research-2026-08-10.md
-  - docs/research/cold-product-bc-research-map-2026-08-10.md
-  - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
-  - docs/research/process/25-tip-grounding-mcp-2026.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
-  - docs/research/archive/claude-lore/research/e1-s2-token-proxy-adr-2026-08-08.md
-  - docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - src/doc_engine/query/
-  - adapters/mcp/
+- docs/research/stage0/query-packet-bc-research-2026-08-10.md
+- docs/research/cold-product-bc-research-map-2026-08-10.md
+- docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
+- docs/research/process/25-tip-grounding-mcp-2026.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
+- docs/research/archive/claude-lore/research/e1-s2-token-proxy-adr-2026-08-08.md
+- docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- src/doc_engine/query/
+- adapters/mcp/
 do_not:
-  - treat embeddings as citation SoT
-  - add MCP write / codegen / apply_patch tools
-  - accept caller-supplied root (confused deputy)
-  - treat packet completeness / Cover% as merge SoR
-  - unattended AI merge
-  - Implement E-QUERY1 size chops or new MCP tools before E-QUERY0 Approve
+- treat embeddings as citation SoT
+- add MCP write / codegen / apply_patch tools
+- accept caller-supplied root (confused deputy)
+- treat packet completeness / Cover% as merge SoR
+- unattended AI merge
+- Implement E-QUERY1 size chops or new MCP tools before E-QUERY0 Approve
 human_review_floor: true
 epics: E-QUERY0
 stars_as_of: 2026-08-10 (GitHub API)
+last_reviewed: '2026-08-10'
 ---
 
 # D1 — Query & agent retrieval (cold BC research packet, 2026-08-10)

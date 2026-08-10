@@ -1,19 +1,20 @@
 ---
 title: Release scan — Harn 0.10.69 · Nimbus 0.2.1 · noprop 0.0.4
 status: RESEARCH COMPLETE — Spec-only stance (no impl tip)
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine (Embody Rust as wheels/CLIs, not in-tree runtime)
 related:
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md
-  - docs/research/ci/36-ocs-dual-plant-profile-2026.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md
+- docs/research/ci/36-ocs-dual-plant-profile-2026.md
 do_not:
-  - add Harn/Nimbus/noprop as product deps or in-tree Cargo workspace
-  - replace Hypothesis / ast-grep / vacuous / client-identifier denylist
-  - treat ★≪10k pre-1.0 agent languages as merge SoT
+- add Harn/Nimbus/noprop as product deps or in-tree Cargo workspace
+- replace Hypothesis / ast-grep / vacuous / client-identifier denylist
+- treat ★≪10k pre-1.0 agent languages as merge SoT
 spec_gate: none required — Refuse / pattern-only; no epic until a product gap opens
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: Harn / Nimbus / noprop release burst (2026-08-10)

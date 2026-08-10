@@ -1,17 +1,19 @@
 ---
 category: Local stalker telemetry ETL / masked suite failures
 status: APPROVED — SPEC GATE E-TEL0 (2026-08-09) — TEL1–TEL10
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/28-local-stalker-telemetry-etl-2026.md
-  - docs/design/local-pre-push-hook-design-2026-08-09.md
-  - docs/design/suite-stalking-sensors-design-2026-08-09.md
+- docs/research/process/28-local-stalker-telemetry-etl-2026.md
+- docs/design/local-pre-push-hook-design-2026-08-09.md
+- docs/design/suite-stalking-sensors-design-2026-08-09.md
 do_not:
-  - put suite logs under docs/research/
-  - weaken advisory→hard for intentional survivor reporting without Spec
-  - treat telemetry as oracle Cover%
+- put suite logs under docs/research/
+- weaken advisory→hard for intentional survivor reporting without Spec
+- treat telemetry as oracle Cover%
 spec_gate: APPROVED E-TEL0 (2026-08-09) — TEL1–TEL10
+title: 'Design memo: local stalker telemetry ETL'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: local stalker telemetry ETL

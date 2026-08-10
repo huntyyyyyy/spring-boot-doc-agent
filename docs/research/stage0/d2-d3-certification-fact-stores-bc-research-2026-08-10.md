@@ -1,21 +1,22 @@
 ---
 title: D2 Certification & attestation + D3 Fact stores & code KGs (cold BC research)
 status: ACTIVE research packet — Spec seeds DRAFT; no Implement without Approve
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine
 related:
-  - docs/design/ddia-north-star/deviations/dev-certification-derived-view.md
-  - docs/research/stage0/claim-symbol-entity-identity-adr-2026-07-30.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/design/ddia-north-star/deviations/dev-certification-derived-view.md
+- docs/research/stage0/claim-symbol-entity-identity-adr-2026-07-30.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - hand-edit or LWW-merge certification.json
-  - treat embeddings as citation SoT
-  - Implement FACT1/CERT1 before Spec Approve
-  - adopt full SLSA product signing as merge gate without human floor
+- hand-edit or LWW-merge certification.json
+- treat embeddings as citation SoT
+- Implement FACT1/CERT1 before Spec Approve
+- adopt full SLSA product signing as merge gate without human floor
 human_review_floor: true
 epics: E-CERT0, E-FACT0
+last_reviewed: '2026-08-10'
 ---
 
 # D2 + D3 cold BC research packet (2026-08-10)

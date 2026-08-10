@@ -1,21 +1,22 @@
 ---
 title: E-REPO0 gap analysis — what will not land at Implement/Test
 status: DRAFT amend — honest landing risks for packet 21+22+23
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 parent:
-  - docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
-  - docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
-  - docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
+- docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
+- docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
+- docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
 related:
-  - docs/design/concept-split-cohesion-design-2026-08-09.md
-  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
-  - tach.toml
+- docs/design/concept-split-cohesion-design-2026-08-09.md
+- docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
+- tach.toml
 do_not:
-  - treat DOMAIN_MAP.md alone as “structure done”
-  - claim tach interfaces landed while pipeline↔scanning cycles remain
-  - use map-only tickets as cover for skipping façade poke / import inventory
+- treat DOMAIN_MAP.md alone as “structure done”
+- claim tach interfaces landed while pipeline↔scanning cycles remain
+- use map-only tickets as cover for skipping façade poke / import inventory
 spec_gate: DRAFT E-REPO0 gap amend (2026-08-10)
+last_reviewed: '2026-08-10'
 ---
 
 # Implementation / test landing gaps (E-REPO0)

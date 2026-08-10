@@ -1,9 +1,11 @@
 ---
 title: Test-suite bounded contexts and parallelization
 status: APPROVED — feeds E-TEST1 Implement (E-TEST0 Spec locked 2026-08-08)
-date: 2026-08-08
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-08'
+claim_tiers: Evidenced / Confirmed / Unknown
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # 06 — Test-suite bounded contexts → parallel shards

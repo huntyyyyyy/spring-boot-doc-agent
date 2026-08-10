@@ -1,3 +1,12 @@
+---
+title: Real-time architecture & logic assertion for coding agents (2026)
+status: "legacy \u2014 needs review"
+date: '2026-08-10'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
+freshness: tip-bound
+---
 # Real-time architecture & logic assertion for coding agents (2026)
 
 **Date:** 2026-08-09  

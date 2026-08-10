@@ -1,17 +1,18 @@
 ---
 title: Local stalker telemetry ETL — suite logs + masked-failure sensor
 status: APPROVED — SPEC GATE E-TEL0 (2026-08-09)
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-TEL0
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/local-stalker-telemetry-design-2026-08-09.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/design/suite-stalking-sensors-design-2026-08-09.md
+- docs/design/local-stalker-telemetry-design-2026-08-09.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/design/suite-stalking-sensors-design-2026-08-09.md
 do_not:
-  - treat telemetry ETL as Cover% / fail_under SoT
-  - dump suite logs into docs/research/findings (keep .git/ local)
-  - leave advisory suites that crash on import as local-green / remote-red
+- treat telemetry ETL as Cover% / fail_under SoT
+- dump suite logs into docs/research/findings (keep .git/ local)
+- leave advisory suites that crash on import as local-green / remote-red
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: local stalker telemetry ETL (E-TEL0)

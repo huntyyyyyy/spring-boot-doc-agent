@@ -618,6 +618,13 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
         )
         hard.append(
             (
+                "check_md_frontmatter",
+                "hard",
+                _py_script("scripts", "ci", "check_md_frontmatter.py"),
+            )
+        )
+        hard.append(
+            (
                 "check_no_client_identifiers",
                 "hard",
                 _py_script(
@@ -642,6 +649,11 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
                 "check_repo_claims",
                 "hard",
                 _py_script("scripts", "ci", "check_repo_claims.py"),
+            ),
+            (
+                "check_md_frontmatter",
+                "hard",
+                _py_script("scripts", "ci", "check_md_frontmatter.py"),
             ),
             (
                 "check_no_client_identifiers",

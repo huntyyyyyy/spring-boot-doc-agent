@@ -1,19 +1,19 @@
 ---
 title: E-COH1 — Public-surface fitness for provisional façades (2026)
 status: APPROVED — Spec delta for Active E-COH1 slice (2026-08-09)
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-COH1
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/concept-split-cohesion-design-2026-08-09.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/process/23-concern-to-solution-remedies-2026.md
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/design/concept-split-cohesion-design-2026-08-09.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/process/23-concern-to-solution-remedies-2026.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
 do_not:
-  - expand tach.toml depends_on/interfaces before E-TACH0 Approve + cycle-break
-  - treat LOC clearance as cohesion Accept
-  - re-introduce support/helpers/inventory_drift residual bins
+- expand tach.toml depends_on/interfaces before E-TACH0 Approve + cycle-break
+- treat LOC clearance as cohesion Accept
+- re-introduce support/helpers/inventory_drift residual bins
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: public-surface fitness (E-COH1 bite)

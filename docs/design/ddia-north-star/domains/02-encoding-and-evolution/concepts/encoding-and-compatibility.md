@@ -9,7 +9,6 @@ epub_anchors:
 related: [schema-evolution-and-data-outlives-code, effective-remedies]
 last_refined: 2026-08-09
 path: domains/02-encoding-and-evolution/concepts/encoding-and-compatibility.md
-
 ---
 
 # Encoding and compatibility

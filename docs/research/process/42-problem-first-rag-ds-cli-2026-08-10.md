@@ -1,24 +1,25 @@
 ---
 title: Problem-first landscape — RAG, data science/MLOps, CLI
 status: RESEARCH — problem → tool (not tool → hype)
-date: 2026-08-10
+date: '2026-08-10'
 epic_seed: E-PROB0
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - docs/research/process/20-rag-problem-first-retrieval-systems-2026-08-10.md
-  - docs/research/coverage-quality/42-ds-mlops-problem-first-tooling-2026-08-10.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
-  - docs/design/operator-agent-surface-design-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- docs/research/process/20-rag-problem-first-retrieval-systems-2026-08-10.md
+- docs/research/coverage-quality/42-ds-mlops-problem-first-tooling-2026-08-10.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
+- docs/design/operator-agent-surface-design-2026-08-10.md
 do_not:
-  - treat embeddings / RAGAS / LLM-judge as citation or merge SoT
-  - treat climb Cover% / drift dashboards as fail_under 98.7
-  - treat rich TUI as CI machine SoT
-  - schedule LangChain/LlamaIndex/GraphRAG as tip runtime without Spec
+- treat embeddings / RAGAS / LLM-judge as citation or merge SoT
+- treat climb Cover% / drift dashboards as fail_under 98.7
+- treat rich TUI as CI machine SoT
+- schedule LangChain/LlamaIndex/GraphRAG as tip runtime without Spec
 spec_gate: DRAFT — research only; no Implement from this memo alone
+last_reviewed: '2026-08-10'
 ---
 
 # Problem-first: what RAG, data science, and CLI tools actually solve

@@ -2,25 +2,27 @@
 title: Suite stalking feature space — runners, telemetry, selection, triage (2026)
 status: RESEARCH COMPLETE — Spec gate APPROVED E-RUN0 (2026-08-09)
 spec_gate: APPROVED E-RUN0
-date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
-prefer_sources: "2026 primary (arXiv / product docs / OTel semconv); older only as contrast"
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
+prefer_sources: 2026 primary (arXiv / product docs / OTel semconv); older only as
+  contrast
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 design: docs/design/suite-stalking-sensors-design-2026-08-09.md
 siblings:
-  - docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
-  - docs/research/ci/07-ci-workflow-modularity.md
-  - docs/design/rust-stack-fit-memo-2026-08-08.md
+- docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
+- docs/research/ci/07-ci-workflow-modularity.md
+- docs/design/rust-stack-fit-memo-2026-08-08.md
 related:
-  - docs/research/archive/pr-94-followup-oracle-stabilize.md
-  - docs/research/quality-backlog.md
-  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+- docs/research/archive/pr-94-followup-oracle-stabilize.md
+- docs/research/quality-backlog.md
+- docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
 do_not:
-  - weaken fail_under=98.7 or replace oracle with runner green
-  - suite-wide -n / xdist / rpytest shard of the cov cell without E-TEST2 Spec
-  - in-tree Rust / Cargo workspace for this question
-  - LLM-as-judge of flaky vs real as merge SoT
-  - RTS that skips the oracle cell on merge
+- weaken fail_under=98.7 or replace oracle with runner green
+- suite-wide -n / xdist / rpytest shard of the cov cell without E-TEST2 Spec
+- in-tree Rust / Cargo workspace for this question
+- LLM-as-judge of flaky vs real as merge SoT
+- RTS that skips the oracle cell on merge
+last_reviewed: '2026-08-10'
 ---
 
 # 08 — Suite stalking feature space vs this oracle (2026)

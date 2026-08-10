@@ -1,23 +1,24 @@
 ---
 title: Pipeline / Stage-0 modularity via ports & vertical slices (2026)
 status: E-MOD0 APPROVED · E-MOD1–2 LANDED · E-MOD3 see research 13 (2026-08-09)
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — pipeline + Stage-0 tools BCs
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/quality-backlog.md
-  - docs/research/kitchen/10-kitchen-harness-modernization-2026.md
-  - docs/product-architecture.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/quality-backlog.md
+- docs/research/kitchen/10-kitchen-harness-modernization-2026.md
+- docs/product-architecture.md
 do_not:
-  - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
-  - introduce DI containers (injector / Guice-style)
-  - create utils/ grab-bag modules
-  - adopt mesh / Backstage / Spec Kit WorkflowEngine as runtime
-  - raise FILE_LOC_HARD (225) or complexipy caps
-  - rewrite all Stage-0 tools in one tip
+- weaken fail_under 98.7, complexipy ≤5, LOC ≤225
+- introduce DI containers (injector / Guice-style)
+- create utils/ grab-bag modules
+- adopt mesh / Backstage / Spec Kit WorkflowEngine as runtime
+- raise FILE_LOC_HARD (225) or complexipy caps
+- rewrite all Stage-0 tools in one tip
 spec_gate: APPROVED E-MOD0 (2026-08-09) — M1–M12 (plan accept)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: pipeline / Stage-0 modularity (ports & vertical slices)

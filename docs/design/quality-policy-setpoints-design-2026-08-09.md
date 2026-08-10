@@ -1,19 +1,21 @@
 ---
 category: Quality policy setpoints / central discoverability
 status: APPROVED — SPEC GATE E-KNOB0 (2026-08-09) — merge Approve of KNOB1–KNOB10
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/26-quality-policy-setpoints-2026.md
-  - docs/research/quality-backlog.md
-  - docs/design/concept-split-cohesion-design-2026-08-09.md
-  - src/doc_engine/ci/coverage_artifact_policy.py
+- docs/research/process/26-quality-policy-setpoints-2026.md
+- docs/research/quality-backlog.md
+- docs/design/concept-split-cohesion-design-2026-08-09.md
+- src/doc_engine/ci/coverage_artifact_policy.py
 do_not:
-  - create quality_knobs.py / ci/utils.py dumping all thresholds
-  - move sensor bars into Cover% SoT modules
-  - weaken fail_under / complexipy / LOC while consolidating
-  - treat pyproject or COV_FAIL_UNDER as independent SoT
+- create quality_knobs.py / ci/utils.py dumping all thresholds
+- move sensor bars into Cover% SoT modules
+- weaken fail_under / complexipy / LOC while consolidating
+- treat pyproject or COV_FAIL_UNDER as independent SoT
 spec_gate: APPROVED E-KNOB0 (2026-08-09) — KNOB1–KNOB10
+title: 'Design memo: quality policy setpoints (no god file)'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: quality policy setpoints (no god file)

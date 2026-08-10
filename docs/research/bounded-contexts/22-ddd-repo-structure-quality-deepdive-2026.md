@@ -1,26 +1,30 @@
 ---
 title: E-REPO0 deep — classify → quality research → modern + unusual layouts
 status: DRAFT Spec companion to modularity/21 — pending Approve of REPO1–REPO16
-research date: 2026-08-10
+date: '2026-08-10'
 research_window: 2024-11-01 → 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + meta CI + agent adapters
 parent: docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
 related:
-  - docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
-  - docs/design/ddia-north-star/domains/01-data-flow-and-truth/
-  - docs/design/ddia-north-star/domains/05-maintainability-and-change/
-  - docs/product-architecture.md
+- docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
+- docs/design/ddia-north-star/domains/01-data-flow-and-truth/
+- docs/design/ddia-north-star/domains/05-maintainability-and-change/
+- docs/product-architecture.md
 do_not:
-  - treat LLM architecture recovery (ArchAgent) as merge SoT
-  - adopt polylith-cli / Pants / Hive frameworks as runtime deps under ≥1k★ bar without Spike
-  - weaken fail_under 98.7, complexipy ≤5, LOC ≤225, PathCohesion, policy 16-A
-  - big-bang filesystem rewrite before PairSmell-style inventory + Spec Approve
-spec_gate: DRAFT E-REPO0 companion (2026-08-10) — expands REPO decisions; Approve with 21
-gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/docs); pattern-only below bar"
+- treat LLM architecture recovery (ArchAgent) as merge SoT
+- adopt polylith-cli / Pants / Hive frameworks as runtime deps under ≥1k★ bar without
+  Spike
+- weaken fail_under 98.7, complexipy ≤5, LOC ≤225, PathCohesion, policy 16-A
+- big-bang filesystem rewrite before PairSmell-style inventory + Spec Approve
+spec_gate: DRAFT E-REPO0 companion (2026-08-10) — expands REPO decisions; Approve
+  with 21
+gh_sor_bar: ≥1000★ and pushed_at within research_window (prefer Releases/docs); pattern-only
+  below bar
+last_reviewed: '2026-08-10'
 ---
 
 # Deep research: classify → quality → unusual value

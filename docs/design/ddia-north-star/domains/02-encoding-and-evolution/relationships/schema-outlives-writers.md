@@ -6,7 +6,6 @@ tags: [relationship, schema, evolution]
 related: [schema-evolution-and-data-outlives-code, encoding-and-compatibility, effective-remedies]
 last_refined: 2026-08-09
 path: domains/02-encoding-and-evolution/relationships/schema-outlives-writers.md
-
 ---
 
 # Relationship: schema outlives writers

@@ -1,19 +1,20 @@
 ---
 title: Tools wave 2 modularity — run_manifest + citation_coverage (2026)
 status: E-MOD3 APPROVED (2026-08-09) · IMPLEMENTING
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — Stage-0 / analytics tools BC
 related:
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
-  - introduce DI containers or utils/ grab-bags
-  - pull scanning package or local_runner_phases/support into this tip
-  - schedule Defer sensors (E-UX2 / E-QA3 / E-RUN*) as this tip
+- weaken fail_under 98.7, complexipy ≤5, LOC ≤225
+- introduce DI containers or utils/ grab-bags
+- pull scanning package or local_runner_phases/support into this tip
+- schedule Defer sensors (E-UX2 / E-QA3 / E-RUN*) as this tip
 spec_gate: APPROVED E-MOD3 (2026-08-09) — MOD3-A–D (plan accept)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: tools wave 2 (`run_manifest`, `citation_coverage`)

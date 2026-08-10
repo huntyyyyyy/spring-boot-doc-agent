@@ -9,7 +9,6 @@ epub_anchors:
 related: [materialized-views-and-caches, sor-vs-derived, trust-but-verify-and-auditability, rel-batch-feeds-serving, domain-derived-data-processing, effective-remedies]
 last_refined: 2026-08-09
 path: domains/09-derived-data-processing/concepts/batch-vs-stream-derived-state.md
-
 ---
 
 # Batch vs stream derived state

@@ -1,32 +1,33 @@
 ---
 title: E-LINT0 — Import/lint SoT revisit (ruff vs ty / type checkers)
 status: RESEARCH COMPLETE — Spec Draft (no Implement until Approve)
-date: 2026-08-10
+date: '2026-08-10'
 epic: E-LINT0
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
-  - deepwiki_ask_question
-  - llms_txt
+- deepwiki_ask_question
+- llms_txt
 related:
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - .ruff.toml
-  - scripts/ci/pre_pr.py
-  - .cursor/skills/principal-se-research-epic/SKILL.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- .ruff.toml
+- scripts/ci/pre_pr.py
+- .cursor/skills/principal-se-research-epic/SKILL.md
 sources:
   deepwiki_ask:
-    - https://deepwiki.com/search/does-ruff-resolve-python-impor_44f053f2-1e5c-42e0-9501-88ed257f8634
-    - https://deepwiki.com/search/for-catching-broken-topoffile_a6d46c28-5873-485a-8502-ecf459ab9408
-    - https://deepwiki.com/search/what-is-the-difference-between_8e91c8bd-3da4-409d-a56d-2dfb2aa3a82f
+  - https://deepwiki.com/search/does-ruff-resolve-python-impor_44f053f2-1e5c-42e0-9501-88ed257f8634
+  - https://deepwiki.com/search/for-catching-broken-topoffile_a6d46c28-5873-485a-8502-ecf459ab9408
+  - https://deepwiki.com/search/what-is-the-difference-between_8e91c8bd-3da4-409d-a56d-2dfb2aa3a82f
   llms_txt:
-    - https://docs.astral.sh/ruff/llms.txt
-    - https://docs.astral.sh/ty/llms.txt
+  - https://docs.astral.sh/ruff/llms.txt
+  - https://docs.astral.sh/ty/llms.txt
   deepwiki_pages:
-    - https://deepwiki.com/astral-sh/ruff
-    - https://deepwiki.com/astral-sh/ty
-    - https://deepwiki.com/DetachHead/basedpyright
+  - https://deepwiki.com/astral-sh/ruff
+  - https://deepwiki.com/astral-sh/ty
+  - https://deepwiki.com/DetachHead/basedpyright
   mcp: https://mcp.deepwiki.com/mcp (ask_question / read_wiki_*)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: was ruff “premature,” and how do we catch bad top-of-file imports?

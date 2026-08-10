@@ -10,7 +10,6 @@ epub_anchors:
 related: [sor-vs-derived, coverage-gates, transactions-and-integrity-lite, effective-remedies]
 last_refined: 2026-08-09
 path: domains/04-integrity-and-verification/concepts/trust-but-verify-and-auditability.md
-
 ---
 
 # Trust, but verify (and auditability)

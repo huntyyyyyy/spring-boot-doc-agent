@@ -1,22 +1,24 @@
 ---
-title: Cross-domain isomorphisms — when unrelated sciences share structure that CS already stole
+title: Cross-domain isomorphisms — when unrelated sciences share structure that CS
+  already stole
 status: RESEARCH — refines E-DYN1; structure Adopt ≠ substrate tip SoT
-date: 2026-08-10
+date: '2026-08-10'
 epic_seed: E-DYN1
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
-  - docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
-  - docs/research/process/20-theory-domains-problem-first-gates-2026.md
-  - docs/research/process/21-physical-unconventional-computing-2026.md
-  - docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
+- docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
+- docs/research/process/20-theory-domains-problem-first-gates-2026.md
+- docs/research/process/21-physical-unconventional-computing-2026.md
+- docs/research/process/05-dynamics-neuromorphic.md
 do_not:
-  - conflate formal isomorphism with tip hardware runtime
-  - treat “chemistry stores information” as license to soften fail_under
-  - invent functorial merge gates without Spec
+- conflate formal isomorphism with tip hardware runtime
+- treat “chemistry stores information” as license to soften fail_under
+- invent functorial merge gates without Spec
 spec_gate: DRAFT E-DYN1 addendum — isomorphism hygiene
 skill: .cursor/skills/cross-domain-isomorphism/SKILL.md
 rule: .cursor/rules/cross-domain-isomorphism.mdc
+last_reviewed: '2026-08-10'
 ---
 
 # Cross-domain isomorphisms (your pushback, taken seriously)

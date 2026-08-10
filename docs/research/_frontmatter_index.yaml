@@ -1,0 +1,631 @@
+schema_version: 1
+entries:
+- path: docs/design/astgrep-tailored-packs-design-2026-08-10.md
+  title: Design stub — E-AST0 tailored ast-grep packs
+  status: DRAFT (awaits Spec Approve of docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md)
+  date: '2026-08-10'
+  epic: null
+  related_count: 0
+- path: docs/design/ci-workflow-modularity-design-2026-08-09.md
+  title: 'Design memo: CI workflow modularity'
+  status: APPROVED — SPEC GATE E-CI0 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 0
+- path: docs/design/codegen-quality-dimensions-design-2026-08-09.md
+  title: 'Design memo: E-CGQ0 Spec gate'
+  status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
+  date: '2026-08-09'
+  epic: null
+  related_count: 4
+- path: docs/design/concept-split-cohesion-design-2026-08-09.md
+  title: 'Design memo: cohesion-first concept splits (post-MOD-S1 tip audit)'
+  status: APPROVED — SPEC GATE E-COH0 (2026-08-09) — merge Approve of COH1–COH12
+  date: '2026-08-09'
+  epic: null
+  related_count: 6
+- path: docs/design/concern-to-solution-remedies-design-2026-08-09.md
+  title: 'Design memo: E-SOL0 Spec gate'
+  status: DRAFT — SPEC GATE E-SOL0 pending Approve of SOL1–SOL12
+  date: '2026-08-09'
+  epic: null
+  related_count: 6
+- path: docs/design/control-plane-closed-loop-design-2026-08-09.md
+  title: Control-plane closed-loop — Spec (E-CPL0)
+  status: DRAFT — pending Approve of CPL1–CPL12
+  date: '2026-08-09'
+  epic: E-CPL0
+  related_count: 3
+- path: docs/design/coverage-measure-modes-design-2026-08-08.md
+  title: 'Design memo: climb/measure feedback-loop architecture'
+  status: APPROVED — SPEC GATE E-CM0 (2026-08-08)
+  date: '2026-08-08'
+  epic: null
+  related_count: 0
+- path: docs/design/local-domain-pytest-select-design-2026-08-09.md
+  title: 'Design memo: domain select + fine ABI paths'
+  status: APPROVED — SPEC GATE E-SEL0 (2026-08-09) — SEL1–SEL10
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/design/local-oracle-push-parity-design-2026-08-09.md
+  title: 'Design: local oracle Cover% on pre_pr'
+  status: APPROVED — SPEC GATE E-HOOK2 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 0
+- path: docs/design/local-pre-push-hook-design-2026-08-09.md
+  title: 'Design memo: local pre-push as first-line quality'
+  status: APPROVED — SPEC GATE E-HOOK0 (2026-08-09) — merge Approve of HOOK1–HOOK12
+    (modern-landscape amendment)
+  date: '2026-08-09'
+  epic: null
+  related_count: 4
+- path: docs/design/local-stalker-telemetry-design-2026-08-09.md
+  title: 'Design memo: local stalker telemetry ETL'
+  status: APPROVED — SPEC GATE E-TEL0 (2026-08-09) — TEL1–TEL10
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/design/md-frontmatter-metadata-design-2026-08-10.md
+  title: E-MD0 Design — closed markdown frontmatter by kind (corpus C)
+  status: APPROVED FOR IMPLEMENT — user ordered Implement after research
+  date: '2026-08-10'
+  epic: E-MD0
+  related_count: 4
+- path: docs/design/ocs-dual-plant-profile-design-2026-08-10.md
+  title: OCS dual-plant profile — Spec (E-OCS0)
+  status: APPROVED — SPEC GATE E-OCS0 (2026-08-10)
+  date: '2026-08-10'
+  epic: E-OCS0
+  related_count: 0
+- path: docs/design/operator-agent-surface-design-2026-08-10.md
+  title: 'Design memo: E-OAS0 Spec gate'
+  status: DRAFT — SPEC GATE E-OAS0 pending Approve of OAS1–OAS16
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/design/post-merge-gate-repair-design-2026-08-09.md
+  title: 'Design memo: E-HOT0 Spec gate (post-merge CI red)'
+  status: APPROVED — SPEC GATE E-HOT0 (2026-08-09) — HOT1–HOT13
+  date: '2026-08-09'
+  epic: null
+  related_count: 4
+- path: docs/design/quality-policy-setpoints-design-2026-08-09.md
+  title: 'Design memo: quality policy setpoints (no god file)'
+  status: APPROVED — SPEC GATE E-KNOB0 (2026-08-09) — merge Approve of KNOB1–KNOB10
+  date: '2026-08-09'
+  epic: null
+  related_count: 4
+- path: docs/design/rust-stack-fit-memo-2026-08-08.md
+  title: 'Principal SE memo: Should Rust improve `spring-boot-doc-agent`?'
+  status: research complete; recommendation = no in-tree Rust for 30 days
+  date: '2026-08-08'
+  epic: null
+  related_count: 0
+- path: docs/design/stack-rescope-10k-design-2026-08-09.md
+  title: 'Design memo: E-STACK0 Spec gate (stack rescope)'
+  status: APPROVED — SPEC GATE E-STACK0 (2026-08-09) — STACK1–STACK12
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/design/suite-stalking-sensors-design-2026-08-09.md
+  title: 'Design memo: suite-stalking sensors (E-RUN v1)'
+  status: APPROVED — SPEC GATE E-RUN0 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 0
+- path: docs/design/test-adequacy-markers-design-2026-08-09.md
+  title: 'Design memo: test adequacy markers (E-QA)'
+  status: APPROVED — SPEC GATE E-QA0 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 0
+- path: docs/design/test-suite-parallel-domains-design-2026-08-08.md
+  title: 'Design memo: test-suite bounded contexts → CI shards'
+  status: APPROVED — SPEC GATE E-TEST0 (2026-08-08)
+  date: '2026-08-08'
+  epic: null
+  related_count: 0
+- path: docs/design/tip-grounding-mcp-design-2026-08-09.md
+  title: 'Design memo: E-GND0 Spec gate'
+  status: DRAFT — SPEC GATE E-GND0 pending Approve of GND1–GND10
+  date: '2026-08-09'
+  epic: null
+  related_count: 6
+- path: docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
+  title: Test-suite bounded contexts and parallelization
+  status: APPROVED — feeds E-TEST1 Implement (E-TEST0 Spec locked 2026-08-08)
+  date: '2026-08-08'
+  epic: null
+  related_count: 0
+- path: docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+  title: Pipeline / Stage-0 modularity via ports & vertical slices (2026)
+  status: E-MOD0 APPROVED · E-MOD1–2 LANDED · E-MOD3 see research 13 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 5
+- path: docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md
+  title: Tools wave 2 modularity — run_manifest + citation_coverage (2026)
+  status: E-MOD3 APPROVED (2026-08-09) · IMPLEMENTING
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
+  title: E-SCAN1 — AstGrepBackend modularity (scanning/astgrep)
+  status: E-SCAN1 APPROVED (2026-08-09) — plan accept attached Spec
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
+  title: E-TACH0 — Dependency-map-as-blueprint (modern enforcement, Jun–Aug 2026)
+  status: DRAFT Spec — pending Approve of TACH1–TACH10
+  date: '2026-08-09'
+  epic: null
+  related_count: 6
+- path: docs/research/bounded-contexts/21-coh1-public-surface-fitness-2026.md
+  title: E-COH1 — Public-surface fitness for provisional façades (2026)
+  status: APPROVED — Spec delta for Active E-COH1 slice (2026-08-09)
+  date: '2026-08-09'
+  epic: E-COH1
+  related_count: 4
+- path: docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
+  title: E-REPO0 — DDD repository structure options (shallow root + fat folders)
+  status: DRAFT Spec — options inventory; pending Approve of REPO1–REPO16 (see companion
+    22)
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md
+  title: E-REPO0 deep — classify → quality research → modern + unusual layouts
+  status: DRAFT Spec companion to modularity/21 — pending Approve of REPO1–REPO16
+  date: '2026-08-10'
+  epic: null
+  related_count: 7
+- path: docs/research/bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md
+  title: E-REPO0 amend — future-capability backcast of repository structures
+  status: DRAFT Spec companion — pending Approve with memos 21+22 as one packet
+  date: '2026-08-10'
+  epic: null
+  related_count: 0
+- path: docs/research/bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md
+  title: E-REPO0 gap analysis — what will not land at Implement/Test
+  status: DRAFT amend — honest landing risks for packet 21+22+23
+  date: '2026-08-10'
+  epic: null
+  related_count: 3
+- path: docs/research/bounded-contexts/25-e-repo1-first-nest-prune-2026.md
+  title: E-REPO1 — first BC nest + future-facing prune (semantic_eval, docs_site)
+  status: APPROVED Implement Spec (user-directed tip 2026-08-10)
+  date: '2026-08-10'
+  epic: null
+  related_count: 2
+- path: docs/research/bounded-contexts/certification-fold-phase-runner-2026-08-10.md
+  title: E-CERT0 — Certification fold honesty under phase runner (Spec seed)
+  status: DRAFT Spec — pending Approve of C0-1–C0-8
+  date: '2026-08-10'
+  epic: null
+  related_count: 5
+- path: docs/research/ci/07-ci-workflow-modularity.md
+  title: CI workflow modularity — why YAML god-files form
+  status: APPROVED — feeds E-CI1 Implement (E-CI0 Spec locked 2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 0
+- path: docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
+  title: CI / script output UX — summary-first progressive disclosure (2026)
+  status: E-UX0 APPROVED · E-UX1 LANDED (#105, 2026-08-09) — E-UX2 deferred (U6)
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
+  title: E-CQL0 — CodeQL signals CI skip / fingerprint (when logic unchanged)
+  status: E-CQL0 APPROVED (2026-08-09) — merge Approve of CQ1–CQ9
+  date: '2026-08-09'
+  epic: null
+  related_count: 5
+- path: docs/research/ci/36-ocs-dual-plant-profile-2026.md
+  title: E-OCS0 — Dual plant (fixture merge SoT + OCS campaign profile)
+  status: APPROVED — SPEC GATE E-OCS0 (2026-08-10) — OCS1–OCS8
+  date: '2026-08-10'
+  epic: null
+  related_count: 4
+- path: docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+  title: Cold BC dimensional mental map — DDD · SOLID · patterns · CLI/a11y · RAG-later
+  status: ACTIVE principal research — Spec lattice DRAFT; no Implement without Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 12
+- path: docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
+  title: Cold BC domain/subdomain taxonomy — arXiv · GitHub · DeepWiki Bloom
+  status: ACTIVE research synthesis — Spec seeds DRAFT; no Implement without per-epic
+    Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 10
+- path: docs/research/cold-product-bc-research-map-2026-08-10.md
+  title: Cold product BC research map — beyond E-OAS0 (2026-08-10)
+  status: ACTIVE portfolio — Spec seeds DRAFT; no Implement without per-epic Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 4
+- path: docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+  title: Coverage oracle vs climb — DDIA SoT, SOLID/DRY/OCP, complexipy, naming
+  status: RESEARCH COMPLETE — informs design approval; dual-mode NOT implemented
+  date: '2026-08-08'
+  epic: null
+  related_count: 3
+- path: docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+  title: Scientific dimensions — Structural/Cognitive, Computational/Environmental,
+    Architectural/Operational, Agentic/Probabilistic
+  status: RESEARCH COMPLETE — segment SoT for metric scorecards + gate mapping; no
+    code impl
+  date: '2026-08-08'
+  epic: null
+  related_count: 2
+- path: docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+  title: Suite stalking feature space — runners, telemetry, selection, triage (2026)
+  status: RESEARCH COMPLETE — Spec gate APPROVED E-RUN0 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
+  title: Test adequacy vs coverage inflation — 2026 math, criteria, and this repo
+  status: RESEARCH COMPLETE — Spec gate APPROVED E-QA0 (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/research/coverage-quality/32-realtime-architecture-assertion-agents-2026.md
+  title: Real-time architecture & logic assertion for coding agents (2026)
+  status: legacy — needs review
+  date: '2026-08-10'
+  epic: null
+  related_count: 0
+- path: docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+  title: Rust (and Rust-core) quality toolscape — BFS then DFS (2026)
+  status: legacy — needs review
+  date: '2026-08-10'
+  epic: null
+  related_count: 0
+- path: docs/research/coverage-quality/42-ds-mlops-problem-first-tooling-2026-08-10.md
+  title: DS / analytics / ML-ops tooling — problem-first map for doc-engine
+  status: RESEARCH COMPLETE — Spec gate OPEN E-DS0 (no code; Embody/Adopt/Refuse only)
+  date: '2026-08-10'
+  epic: E-DS0
+  related_count: 1
+- path: docs/research/coverage-quality/harn-nimbus-noprop-release-scan-2026.md
+  title: Release scan — Harn 0.10.69 · Nimbus 0.2.1 · noprop 0.0.4
+  status: RESEARCH COMPLETE — Spec-only stance (no impl tip)
+  date: '2026-08-10'
+  epic: null
+  related_count: 4
+- path: docs/research/findings/2026-08-09-e-hot-r1-r4-spike-receipts.md
+  title: E-HOT-R1–R4 spike receipts — gate repair benchmarks (2026-08-09)
+  status: complete
+  date: '2026-08-09'
+  epic: null
+  related_count: 3
+- path: docs/research/findings/2026-08-09-statement-split-cascade.md
+  title: Finding — statement-split thrash → cascading CI red (2026-08-09)
+  status: closed — E-STK1 G1–G6 sensors Embodied (2026-08-09)
+  date: '2026-08-09'
+  epic: null
+  related_count: 4
+- path: docs/research/kitchen/10-kitchen-harness-modernization-2026.md
+  title: Kitchen harness modernization — setUpModule / run_chain / fixtures (2026)
+  status: E-KH0 APPROVED · E-KH1 LANDED (2026-08-09) — KH-S2 syrupy deferred
+  date: '2026-08-09'
+  epic: null
+  related_count: 6
+- path: docs/research/process/02-foundational-agentic-se-2026.md
+  title: Foundational vs Agentic SE taxonomy (2026)
+  status: RESEARCH COMPLETE — segment SoT for taxonomy / layers / Embody·Adopt·Refuse
+  date: '2026-08-08'
+  epic: null
+  related_count: 1
+- path: docs/research/process/04-implementation-frameworks.md
+  title: Implementation frameworks — Embody / Adopt / Refuse
+  status: RESEARCH COMPLETE — sibling segment for synthesis; no code impl
+  date: '2026-08-08'
+  epic: null
+  related_count: 3
+- path: docs/research/process/05-dynamics-neuromorphic.md
+  title: 'Segment 05: Dynamics & neuromorphic metaphors (saliency, hysteresis, SoA,
+    PID)'
+  status: RESEARCH COMPLETE — informs synthesis; no code impl
+  date: '2026-08-08'
+  epic: null
+  related_count: 5
+- path: docs/research/process/14-facade-poke-research-hooks-2026.md
+  title: Façade poke-surface fitness + design-research hooks (2026)
+  status: E-FAC0 / E-RES0 / E-CUR0 APPROVED (2026-08-09) — Cursor-native hooks this
+    tip
+  date: '2026-08-09'
+  epic: null
+  related_count: 5
+- path: docs/research/process/15-legacy-size-remediation-2026-frameworks.md
+  title: Legacy size-offender remediation — 2026 frameworks + intentionality (2026)
+  status: E-LEG0 APPROVED (2026-08-09) — this conversation (legacy must update; research
+    modern frameworks)
+  date: '2026-08-09'
+  epic: null
+  related_count: 6
+- path: docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
+  title: E-DOC0 — Research domain taxonomy + claude→docs consolidation + look-first
+    hook
+  status: E-DOC0 APPROVED (2026-08-09) — merge Approve of DOC1–DOC12
+  date: '2026-08-09'
+  epic: null
+  related_count: 5
+- path: docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+  title: E-STK0 — Watch/stalker agents (findings → research → refactor) without context
+    bloat
+  status: E-STK0 APPROVED (2026-08-09) — merge Approve of STK1–STK10
+  date: '2026-08-09'
+  epic: null
+  related_count: 5
+- path: docs/research/process/20-rag-problem-first-retrieval-systems-2026-08-10.md
+  title: RAG & retrieval systems — problem-first inventory (SoT vs sensor vs adapter)
+  status: ACTIVE research packet — Spec seeds DRAFT; no Implement without Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/process/20-theory-domains-problem-first-gates-2026.md
+  title: Problem-FIRST theory domains A–H → quality gates (SoT vs sensor vs metaphor
+    vs Refuse)
+  status: RESEARCH COMPLETE — informs synthesis; no code impl
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/process/21-physical-unconventional-computing-2026.md
+  title: Physical / unconventional computing — Problem-FIRST transfer bar for doc-engine
+  status: RESEARCH COMPLETE — informs process hygiene; no code impl
+  date: '2026-08-10'
+  epic: null
+  related_count: 5
+- path: docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
+  title: E-HOT0 — Post-merge CI red vs cohesion (gate repair Spec)
+  status: APPROVED — SPEC GATE E-HOT0 (2026-08-09) — human Approve HOT1–HOT13
+  date: '2026-08-09'
+  epic: null
+  related_count: 7
+- path: docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+  title: E-STACK0 — Stack rescope under ≥10k★ SoR bar (2026)
+  status: APPROVED — SPEC GATE E-STACK0 (2026-08-09) — human Approve STACK1–STACK12
+  date: '2026-08-09'
+  epic: null
+  related_count: 7
+- path: docs/research/process/23-concern-to-solution-remedies-2026.md
+  title: E-SOL0 — Concern→solution map (DDIA labels → 2026 effective remedies)
+  status: DRAFT Spec — pending Approve of SOL1–SOL12
+  date: '2026-08-09'
+  epic: null
+  related_count: 8
+- path: docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+  title: E-CGQ0 — Codegen-quality dimensions + remedy-mechanism depth
+  status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10; tip-grounding MCP vehicle Explicit
+    Defer (E-GND)
+  date: '2026-08-09'
+  epic: null
+  related_count: 8
+- path: docs/research/process/25-tip-grounding-mcp-2026.md
+  title: E-GND0 — Tip-grounding MCP (extend query isolation; refuse remote codegen)
+  status: DRAFT Spec — pending Approve of GND1–GND10
+  date: '2026-08-09'
+  epic: null
+  related_count: 8
+- path: docs/research/process/26-agent-context-markdown-bloat-2026.md
+  title: E-CTX0 — Agent context bloat from huge markdown (arXiv + SE mental models)
+  status: DRAFT Spec — CTX1–CTX10 pending Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 5
+- path: docs/research/process/26-quality-policy-setpoints-2026.md
+  title: Quality policy setpoints — central discoverability without god files
+  status: APPROVED — SPEC GATE E-KNOB0 (2026-08-09)
+  date: '2026-08-09'
+  epic: E-KNOB0
+  related_count: 4
+- path: docs/research/process/27-agent-context-repo-discernment-2026.md
+  title: E-CTX0 deepdive — models in depth + GH repo discernment (star inflation)
+  status: DRAFT amend to E-CTX0 — CTX11–CTX18 pending Approve with CTX1–CTX10
+  date: '2026-08-10'
+  epic: null
+  related_count: 2
+- path: docs/research/process/27-local-pre-push-hook-2026.md
+  title: Local pre-push gate as first-line quality (no remote required)
+  status: APPROVED — SPEC GATE E-HOOK0 (2026-08-09) — amended modern-landscape pass
+  date: '2026-08-09'
+  epic: E-HOOK0
+  related_count: 5
+- path: docs/research/process/28-agent-context-algorithm-first-2026.md
+  title: E-CTX0 — algorithm-first quality frameworks (build/orchestrate from theory)
+  status: DRAFT amend — CTX19–CTX26 pending Approve with 26+27
+  date: '2026-08-10'
+  epic: null
+  related_count: 2
+- path: docs/research/process/28-local-stalker-telemetry-etl-2026.md
+  title: Local stalker telemetry ETL — suite logs + masked-failure sensor
+  status: APPROVED — SPEC GATE E-TEL0 (2026-08-09)
+  date: '2026-08-09'
+  epic: E-TEL0
+  related_count: 3
+- path: docs/research/process/29-local-domain-pytest-select-2026.md
+  title: Local domain pytest selection + fine ABI path shards (2026)
+  status: APPROVED — SPEC GATE E-SEL0 (2026-08-09)
+  date: '2026-08-09'
+  epic: E-SEL0
+  related_count: 4
+- path: docs/research/process/30-local-oracle-push-parity-2026.md
+  title: E-HOOK2 — Local oracle Cover% on push (parity with remote 3.11)
+  status: APPROVED — SPEC GATE E-HOOK2 (2026-08-09)
+  date: '2026-08-09'
+  epic: E-HOOK2
+  related_count: 3
+- path: docs/research/process/31-stalker-path-parity-sensors-2026.md
+  title: E-TEL2 — Path-parity stalker sensors (oracle / CodeQL / suite map)
+  status: APPROVED — SPEC GATE E-TEL2 (2026-08-09)
+  date: '2026-08-09'
+  epic: E-TEL2
+  related_count: 4
+- path: docs/research/process/34-text-search-allow-ripgrep-2026.md
+  title: Text search allow (ripgrep) — Spec + Implement receipt
+  status: legacy — needs review
+  date: '2026-08-10'
+  epic: null
+  related_count: 0
+- path: docs/research/process/35-control-plane-closed-loop-2026.md
+  title: E-CPL0 — Control-plane closed-loop (evidence-gated quality gates)
+  status: DRAFT Spec — pending Approve of CPL1–CPL12
+  date: '2026-08-09'
+  epic: null
+  related_count: 8
+- path: docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+  title: E-OAS0 — Operator/agent surface (CLI grade + MCP + structured retrieval)
+  status: DRAFT Spec — pending Approve of OAS1–OAS14
+  date: '2026-08-10'
+  epic: null
+  related_count: 11
+- path: docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+  title: CLI DX · terminal a11y · dual human/JSON sinks (landing pads)
+  status: RESEARCH memo — feeds E-OAS0 / doc-engine grade (no impl)
+  date: '2026-08-10'
+  epic: null
+  related_count: 5
+- path: docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
+  title: CLI / operator surfaces — problem-first inventory (A–J)
+  status: RESEARCH memo — deepens E-OAS0; no Implement
+  date: '2026-08-10'
+  epic: null
+  related_count: 6
+- path: docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
+  title: Polyglot CLI toolkit BFS — Rust · WASM · Go · TS · PyO3 (Bloom Create)
+  status: ACTIVE research — Spec epic E-POLY0 DRAFT; amends E-RUST0; no Implement
+  date: '2026-08-10'
+  epic: null
+  related_count: 10
+- path: docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
+  title: Open polyglot BFS — pilot-before-refuse (Ruby · JVM · .NET · Elixir · Datalog
+    · enterprise)
+  status: ACTIVE research — amends E-POLY0; Spec E-POLY0b DRAFT; no Implement
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
+  title: Language excellence domains → subdomains (Rust · Go · Ruby · Clojure · WASM)
+  status: ACTIVE deep research — amends E-POLY0b; Spec E-LANG0 DRAFT; no Implement
+  date: '2026-08-10'
+  epic: null
+  related_count: 6
+- path: docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
+  title: Problem-first landscape — RAG, data science/MLOps, CLI
+  status: RESEARCH — problem → tool (not tool → hype)
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
+  title: Problem-first — dynamical systems, information/thermo, physical & unconventional
+    computing
+  status: RESEARCH — deepens process/05; Spec seed E-DYN1 (metaphor hygiene only)
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
+  title: Formulas & concepts — dynamics, information, thermo, physical computing
+  status: RESEARCH — mathematical companion to process/43 and process/20-theory
+  date: '2026-08-10'
+  epic: null
+  related_count: 3
+- path: docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md
+  title: Cross-domain isomorphisms — when unrelated sciences share structure that
+    CS already stole
+  status: RESEARCH — refines E-DYN1; structure Adopt ≠ substrate tip SoT
+  date: '2026-08-10'
+  epic: null
+  related_count: 5
+- path: docs/research/process/46-lint-import-resolution-ruff-vs-ty-2026-08-10.md
+  title: E-LINT0 — Import/lint SoT revisit (ruff vs ty / type checkers)
+  status: RESEARCH COMPLETE — Spec Draft (no Implement until Approve)
+  date: '2026-08-10'
+  epic: E-LINT0
+  related_count: 5
+- path: docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md
+  title: E-MDC0 — Cursor MDC rules DevEx (activation algebra, not MD rename)
+  status: RESEARCH COMPLETE — Spec Approve (Implement on tip
+  date: '2026-08-10'
+  epic: E-MDC0
+  related_count: 6
+- path: docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
+  title: E-TOOL0 — Complete toolscape for agents, repo gates, and developers (2026-08-10)
+  status: RESEARCH COMPLETE — Spec Draft (no mass installs until Approve)
+  date: '2026-08-10'
+  epic: E-TOOL0
+  related_count: 9
+- path: docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
+  title: E-MD0 — Markdown frontmatter metadata schemas (research → closed CI)
+  status: IMPLEMENTING — closed schema + CI on tip (corpus C)
+  date: '2026-08-10'
+  epic: E-MD0
+  related_count: 7
+- path: docs/research/quality-backlog.md
+  title: Quality backlog — Active tip + queues
+  status: ACTIVE — one stream at a time
+  date: '2026-08-10'
+  epic: null
+  related_count: 4
+- path: docs/research/se-quality-synthesis-2026-08-08.md
+  title: SE quality synthesis — dual-mode, taxonomy, metrics, frameworks, dynamics
+  status: PRINCIPAL MEMO — merge of research segments 01–05
+  date: '2026-08-08'
+  epic: null
+  related_count: 2
+- path: docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md
+  title: E-AST0 — Tailored ast-grep packs (fixture Stage-0 + OCS campaign + Python
+    vacuity)
+  status: DRAFT — Spec gate E-AST0 (research complete; do not implement pack migration
+    until Approve)
+  date: '2026-08-10'
+  epic: null
+  related_count: 6
+- path: docs/research/stage0/claim-symbol-entity-identity-adr-2026-07-30.md
+  title: ADR — Claim-symbol / entity identity (L3)
+  status: legacy — needs review
+  date: '2026-07-30'
+  epic: null
+  related_count: 0
+- path: docs/research/stage0/claim-symbol-grammar-2026-07-30.md
+  title: Claim-symbol grammar (L3 normative)
+  status: legacy — needs review
+  date: '2026-07-30'
+  epic: null
+  related_count: 0
+- path: docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
+  title: D1 Query & agent retrieval (cold BC research)
+  status: ACTIVE research packet — Spec seeds DRAFT; no Implement without Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 11
+- path: docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
+  title: D2 Certification & attestation + D3 Fact stores & code KGs (cold BC research)
+  status: ACTIVE research packet — Spec seeds DRAFT; no Implement without Approve
+  date: '2026-08-10'
+  epic: null
+  related_count: 4
+- path: docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md
+  title: D4/D5/D6 cold BC research — static join · drift/capacity · operator CLI
+  status: DRAFT research — Spec seeds for E-CQLJ0 / E-TOOL4 slice / E-OAS16; no Implement
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/stage0/query-packet-bc-research-2026-08-10.md
+  title: E-QUERY0 — Query / context-packet BC + MCP isolation (Spec seed)
+  status: DRAFT Spec — pending Approve of Q0-1–Q0-10
+  date: '2026-08-10'
+  epic: null
+  related_count: 8
+- path: docs/research/stage0/stage0-covering-absence-recall-2026-07-30.md
+  title: Stage-0 covering proof, callable absence, and recall writers
+  status: legacy — needs review
+  date: '2026-07-30'
+  epic: null
+  related_count: 0

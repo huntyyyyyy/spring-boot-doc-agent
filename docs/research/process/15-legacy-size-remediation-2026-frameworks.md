@@ -1,24 +1,28 @@
 ---
 title: Legacy size-offender remediation — 2026 frameworks + intentionality (2026)
-status: E-LEG0 APPROVED (2026-08-09) — this conversation (legacy must update; research modern frameworks)
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+status: E-LEG0 APPROVED (2026-08-09) — this conversation (legacy must update; research
+  modern frameworks)
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — grandfathered LOC debt across scanning/tools/pipeline/query/stf
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md
-  - docs/research/process/14-facade-poke-research-hooks-2026.md
-  - docs/research/quality-backlog.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md
+- docs/research/process/14-facade-poke-research-hooks-2026.md
+- docs/research/quality-backlog.md
 do_not:
-  - weaken fail_under 98.7, complexipy ≤5, or FILE_LOC_HARD 225
-  - raise size/complexipy baselines to “make room”
-  - mechanical part2 chops or utils/ grab-bags
-  - DI containers, mesh/Backstage/ECS theater, Spec Kit WorkflowEngine runtime
-  - ungated LLM multi-agent rewrite of the tip without MOD-S1 + poke + intentionality bar
-  - treat ChaCo / VAPU / RefactorBench as merge SoT (sensors / process lessons only)
-spec_gate: APPROVED E-LEG0 (2026-08-09) — LEG1–LEG10 (human: update legacy + 2026 framework research)
+- weaken fail_under 98.7, complexipy ≤5, or FILE_LOC_HARD 225
+- raise size/complexipy baselines to “make room”
+- mechanical part2 chops or utils/ grab-bags
+- DI containers, mesh/Backstage/ECS theater, Spec Kit WorkflowEngine runtime
+- ungated LLM multi-agent rewrite of the tip without MOD-S1 + poke + intentionality
+  bar
+- treat ChaCo / VAPU / RefactorBench as merge SoT (sensors / process lessons only)
+spec_gate: 'APPROVED E-LEG0 (2026-08-09) — LEG1–LEG10 (human: update legacy + 2026
+  framework research)'
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: pay down size-baseline legacy with 2026 design, not forever-grandfather

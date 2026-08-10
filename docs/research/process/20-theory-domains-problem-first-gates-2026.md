@@ -1,25 +1,27 @@
 ---
-title: Problem-FIRST theory domains A–H → quality gates (SoT vs sensor vs metaphor vs Refuse)
+title: Problem-FIRST theory domains A–H → quality gates (SoT vs sensor vs metaphor
+  vs Refuse)
 status: RESEARCH COMPLETE — informs synthesis; no code impl
-research date: 2026-08-10
+date: '2026-08-10'
 wave: dynamics-physical-computing
 epic_seed: E-DYN1
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/05-dynamics-neuromorphic.md
-  - docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
-  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
-  - docs/research/process/21-physical-unconventional-computing-2026.md
-  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
+- docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
+- docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
+- docs/research/process/21-physical-unconventional-computing-2026.md
+- docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
 do_not:
-  - neuromorphic runtime
-  - fuzzy/PID green for fail_under
-  - SoA/ECS product rewrite
-  - mesh/Backstage theater
-  - invent arXiv IDs
+- neuromorphic runtime
+- fuzzy/PID green for fail_under
+- SoA/ECS product rewrite
+- mesh/Backstage theater
+- invent arXiv IDs
+last_reviewed: '2026-08-10'
 ---
 
 # Problem-FIRST: theory domains A–H for doc-engine quality gates
