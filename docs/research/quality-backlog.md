@@ -447,6 +447,18 @@ Research: [`docs/research/process/35-control-plane-closed-loop-2026.md`](process
 
 ---
 
+## P31 — Tailored ast-grep packs (fixture + OCS + Python vacuity) — Spec
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P31.0 | **E-AST0 Spec:** approve **AST0-A–H** (three packs; vocabulary B1/B2 lock; OCS overlay campaign-only; vacuity hybrid) | **DRAFT** (2026-08-10) — pending human Approve | research `stage0/astgrep-tailored-packs-fixture-ocs-2026.md` + design stub |
+| P31.1 | **E-AST1 Implement:** vacuity pack hard in `pre_pr` (AST0-E) even before B1/B2 | In flight on tip | `python -m doc_engine.ci.vacuity` exit 0 on tip; planted fixture fails |
+| P31.2 | **E-AST2 Implement:** `sgconfig` + utils + vocabulary B1/B2 + OCS overlay remeasure | Deferred | only after E-AST0 Approve; no OCS merge SoT |
+
+Research: [`docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md`](stage0/astgrep-tailored-packs-fixture-ocs-2026.md). Design: [`docs/design/astgrep-tailored-packs-design-2026-08-10.md`](../design/astgrep-tailored-packs-design-2026-08-10.md). Related: E-OCS0, E-SCAN1, RULE_ID_MIGRATION. **Embody** relational idioms + dual `@Name`/`@Name($$$)`; **Adopt** `sgconfig`/`utilDirs` + `vacuous` certain; **Refuse** rg-as-SoT / Artifactory CI SoT / in-tree Rust.
+
+---
+
 ## P14 — Docs research taxonomy + claude consolidation + look-first
 
 | # | Action | Stance | Verify |

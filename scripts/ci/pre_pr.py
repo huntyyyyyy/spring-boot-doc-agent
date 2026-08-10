@@ -667,6 +667,11 @@ def build_suites(mode: str) -> List[Tuple[str, str, SuiteFn]]:
                 ),
             ),
             (
+                "vacuous_tests",
+                "hard",
+                _py_script("scripts", "ci", "vacuous_test_gate.py"),
+            ),
+            (
                 "rule_coverage",
                 "hard",
                 _py_script("scripts", "coverage", "rule_coverage.py"),
