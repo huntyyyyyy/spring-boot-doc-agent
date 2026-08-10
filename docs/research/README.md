@@ -6,14 +6,14 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 
 | Domain | Path | Use when |
 | --- | --- | --- |
-| **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md), [`cold-product-bc-research-map-2026-08-10.md`](cold-product-bc-research-map-2026-08-10.md) | Active stream; Embody/Adopt/Refuse merge; **cold BC portfolio beyond E-OAS0** |
+| **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md), [`cold-product-bc-research-map-2026-08-10.md`](cold-product-bc-research-map-2026-08-10.md), [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md) | Active stream; Embody/Adopt/Refuse merge; **cold BC portfolio** + **D1–D6 domain/subdomain arXiv·GH·DeepWiki index** |
 | **findings/** | [`findings/`](findings/) | Stalker ledger entries (STK2) — compact events + gap IDs; not chat dumps |
 | **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, dynamics, façade/research hooks, legacy remediation Spec, docs taxonomy, **watch/stalker agents**, **control-plane closed-loop (E-CPL0)**, **operator/agent surface CLI+MCP+retrieval (E-OAS0)** |
 | **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking; **Rust toolscape + release scans (Harn/Nimbus/noprop)** |
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |
 | **modularity/** | [`modularity/`](modularity/) | Stage-0 ports, test-suite BCs, tools wave 2, AstGrepBackend split, **tach dependency blueprint** |
-| **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs; **tailored ast-grep packs (fixture + OCS + Python vacuity, E-AST0)**; **query/packet BC (E-QUERY0)**; fact-store next-phase seeds |
+| **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs; **tailored ast-grep packs (E-AST0)**; **D1 query (E-QUERY0)**; **D2–D3 cert+facts**; **D4–D6 join/drift/CLI**; fact-store next-phase seeds |
 | **archive/** | [`archive/`](archive/) | Superseded WIP, receipts, [`claude-lore/`](archive/claude-lore/) — **not** Spec SoT |
 
 ## Rules (DOC1 / DOC10)

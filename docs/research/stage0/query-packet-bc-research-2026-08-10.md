@@ -6,6 +6,8 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Stage-0 typed query + thin MCP
 related:
   - docs/research/cold-product-bc-research-map-2026-08-10.md
+  - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
+  - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
   - docs/research/archive/claude-lore/research/query-seam-audit-e4-2026-08-07.md
   - docs/research/process/25-tip-grounding-mcp-2026.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md

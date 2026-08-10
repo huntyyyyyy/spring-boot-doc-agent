@@ -490,10 +490,11 @@ Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P35.0 | Portfolio map: prioritize cold BCs (query, cert fold, facts, CodeQL/OpenAPI join, drift/capacity) | **Done** (research 2026-08-10) | [`cold-product-bc-research-map-2026-08-10.md`](cold-product-bc-research-map-2026-08-10.md) |
-| P35.1 | **E-QUERY0 Spec** Q0-1–Q0-10 (packet/MCP isolation before QUERY1) | **DRAFT** | [`stage0/query-packet-bc-research-2026-08-10.md`](stage0/query-packet-bc-research-2026-08-10.md) |
-| P35.2 | **E-CERT0 Spec** C0-1–C0-8 (fold honesty before PIPE1) | **DRAFT** | [`modularity/certification-fold-phase-runner-2026-08-10.md`](modularity/certification-fold-phase-runner-2026-08-10.md) |
-| P35.3 | **E-FACT0 / E-CQLJ0** Spec seeds (promote archive fact-store; OpenAPI↔facts join) | Deferred drafts | portfolio §3.3–3.4 — write design stubs after QUERY0/CERT0 Approve order |
-| P35.4 | Implement any cold BC | **Blocked** | human Spec Approve per epic; one tip stream; no unattended AI |
+| P35.1 | **E-QUERY0 Spec** Q0-1–Q0-10 (packet/MCP isolation before QUERY1) | **DRAFT** | [`stage0/query-packet-bc-research-2026-08-10.md`](stage0/query-packet-bc-research-2026-08-10.md) + full D1 packet |
+| P35.2 | **E-CERT0 Spec** C0-1–C0-8 (fold honesty before PIPE1) | **DRAFT** | [`modularity/certification-fold-phase-runner-2026-08-10.md`](modularity/certification-fold-phase-runner-2026-08-10.md) + D2 packet |
+| P35.3 | **E-FACT0 / E-CQLJ0** Spec seeds (promote archive fact-store; OpenAPI↔facts join) | **DRAFT research** (D3/D4 packets) | design stubs still after QUERY0/CERT0 Approve order |
+| P35.4 | **D1–D6 domain/subdomain taxonomy** (≥3 arXiv + ~10k★ repos + DeepWiki Evaluate/Create) | **Done** (research 2026-08-10) | [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md) |
+| P35.5 | Implement any cold BC | **Blocked** | human Spec Approve per epic; one tip stream; no unattended AI |
 
 **Embody** Stage-0 query + derived certification; **Adopt** structure-first retrieval patterns + SLSA honesty fields (pattern); **Refuse** embedding citation SoT / LWW cert / Spec Kit runtime / parallel tip thrash.
 

@@ -9,6 +9,7 @@ related:
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
   - docs/research/process/15-legacy-remediation-spec-gate-2026.md
+  - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
 do_not:
   - implement from this map without a named Spec Approve
   - add more process/ Specs for product BCs (process/ already overcrowded)
@@ -95,7 +96,9 @@ token budgets, and MCP tool surface **before** OAS/GND Implement?
 | Adopt | Structure-first retrieval (callers/dependents/packet) like code-index / sciogen **patterns** — not their DBs as deps `[Evidenced]` |
 | Refuse | MCP write/codegen; caller-supplied root; treating packet as Cover% proof |
 
-**External:** RepoDoc / code-KG MCP tools show agents prefer typed graph lookups
+**External:** Full D1 packet (≥3 arXiv/subdomain, DeepWiki Evaluate) —
+[`stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md`](stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md).
+RepoDoc / code-KG MCP tools show agents prefer typed graph lookups
 over raw dumps `[Evidenced]` arXiv 2604.26523 + GH patterns — aligns with Embody
 partial RAG already in synthesis.
 
@@ -226,8 +229,15 @@ Then TOOL4 / PIPE1 / QUERY1 per P12.2
 
 ## 7. Exit
 
-This portfolio is **research SoR for prioritization**. Each thrust needs its own
-design Spec Approve before code. Linked seeds:
+This portfolio is **research SoR for prioritization**. Domain/subdomain depth
+(arXiv ≥3, ~10k★ repos, DeepWiki Evaluate/Create) lives in:
+
+- [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md) — forced index
+- [`stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md`](stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md)
+- [`stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md`](stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md)
+- [`stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md`](stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md)
+
+Each thrust needs its own design Spec Approve before code. Thin Approve lists:
 
 - [`stage0/query-packet-bc-research-2026-08-10.md`](stage0/query-packet-bc-research-2026-08-10.md)
 - [`modularity/certification-fold-phase-runner-2026-08-10.md`](modularity/certification-fold-phase-runner-2026-08-10.md)
