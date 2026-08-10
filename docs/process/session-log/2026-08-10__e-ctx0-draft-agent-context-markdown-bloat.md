@@ -140,7 +140,7 @@ Assumptions affected:
 Files touched: .cursor/rules/*.mdc
 
 ## 2026-08-10 — E-TOOL0 complete toolscape incl. Ruby/Go/Clojure lanes
-Commit: uncommitted
+Commit: 76dcea70
 Tests: not run (docs Spec Draft); DeepWiki Ask on Charm/Babashka/Ruby families
 Assumptions affected:
 - Toolscape = LLM/agent only — [Resolved — memo 48 audience matrix: repo gates + developer laptop + agent; Ruby/Go/Clojure as Pilot/pattern not tip kernel]
