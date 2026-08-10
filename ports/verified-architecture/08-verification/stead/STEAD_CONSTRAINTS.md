@@ -9,17 +9,18 @@ paper_title: 'Formal Verification of Agentic Systems over Operational Data'
 # Stateful Tool-Enabled Agentic Deployment constraints (product specification)
 
 We **do not** implement First-Order Computation Tree Logic model checking in
-the minimum viable product. We **do** adopt the paper’s warning (*Formal
+the minimum viable product. We **Embody** the paper’s warning (*Formal
 Verification of Agentic Systems over Operational Data*): a large language
 model + tools over relational/operational data is easy to get *formally*
 wrong. Design the tool surface so we don’t paint into that corner.
+Exact public equivariance-wrapper engines found: **0** — ST-2 remains Spike.
 
 A **Stateful Tool-Enabled Agentic Deployment** is the paper’s name for an
 agent + tool harness over persistent operational data.
 
 Whole words in prose — see root `GLOSSARY.md`.
 
-## Adopted constraints (Wave 0 / Wave 1)
+## Embody constraints (Wave 0 / Wave 1 design — not industry normative)
 
 | ID | Constraint |
 | --- | --- |

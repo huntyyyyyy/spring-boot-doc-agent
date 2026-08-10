@@ -36,7 +36,7 @@ updating that matrix.
 Local **stdio** remains the MVP transport for IDE-embedded servers; still
 **session-free** at the protocol layer.
 
-## STEAD constraints (normative)
+## Stateful Tool-Enabled Agentic Deployment constraints (Embody — not industry normative)
 
 See `08-verification/stead/STEAD_CONSTRAINTS.md` ST-1…5.
 
@@ -99,7 +99,7 @@ unknown_id · unknown_handle · expired_handle · stale_receipt ·
 llm_witness_forbidden · schema_invalid · header_body_mismatch ·
 protocol_version_unsupported · equivariance_reject (when wrap ships)
 
-## Chosen vs rejected (short)
+## Working hypothesis vs rejected (short)
 
 | Chosen | Rejected | Why |
 | --- | --- | --- |

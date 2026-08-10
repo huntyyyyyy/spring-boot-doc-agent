@@ -1,6 +1,6 @@
 ---
 title: June–August 2026 research → port-readiness findings
-status: RESEARCH COMPLETE
+status: SUPERSEDED ON DEPTH — see entity-adoption-audit + shallow-decisions-honesty
 date: '2026-08-10'
 window: 2026-06-01 .. 2026-08-10
 claim_tiers: Evidenced / Confirmed / Unknown
@@ -8,8 +8,10 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # June–August 2026 findings (before port readiness work)
 
-Published timestamps verified via arXiv Atom application programming interface
-(2026-08-10). Whole words in prose — see root `GLOSSARY.md`.
+**Superseded on research depth** by
+`research/gaps/entity-adoption-audit-2026-08-10.md` and
+`research/gaps/shallow-decisions-honesty-2026-08-10.md`. Keep as historical
+title→action table only — do **not** treat as D0 PASS.
 
 ## Papers that change how we get “ready”
 
