@@ -54,6 +54,7 @@ flowchart TD
 | 7 | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape / MVP / leaders |
 | 8 | `08-verification/VERIFY_STACK.md` | **Graph+locks ∧ EA-Graph ∧ STEAD** |
 | 9 | `04-constraints/open-questions/OQ-*.md` | What still blocks |
+| 10 | `PORT_READY.md` + DoR | Spec port vs Implement gate |
 
 **Stop.** Do not open `research/**` wholesale. Do not open `nests/**` unless the
 task is that BC option. Do not open legacy `docs/**` unless promoting into `00/`–`12/`.
@@ -68,7 +69,9 @@ task is that BC option. Do not open legacy `docs/**` unless promoting into `00/`
 | Receipts / EA-Graph | `08-verification/receipts/` + `claim-memory/` |
 | STEAD / MCP tools | `08-verification/stead/` + `SPIKE-STEAD-equivariance.md` |
 | Ports / ICD | `07-system-design/ports-and-adapters/PORTS.md`, `icd/` |
-| QAS | `03-requirements/qas/TEMPLATE.md` |
+| QAS | `03-requirements/qas/` (N-01…N-08) |
+| Port / DoR | `PORT_READY.md` + `00-governance/dor-dod/DEFINITION_OF_READY.md` |
+| Jun–Aug readiness | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` **one file** |
 | Papers / overturn | `research/adversarial/july-august-2026-overturn-review.md` **one file** |
 
 ---

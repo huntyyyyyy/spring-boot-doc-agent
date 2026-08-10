@@ -36,6 +36,6 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 ## Ingest rules
 
 1. Prefer retrieving from `research/` over dumping into always-on agent context
-2. Promote into `docs/` only via Skill `promote-claim`
+2. Promote into `00/`–`12/` only via Skill `promote-claim` (legacy `docs/` demoted)
 3. Nest MDCs point at *which* pack to retrieve — they do not inline the pack
 4. Never mass-rename corpus Markdown into always-on `.mdc`

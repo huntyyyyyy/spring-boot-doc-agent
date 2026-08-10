@@ -46,4 +46,6 @@ Paste prompt: [HOW_TO_PRIME_AGENTS.md](HOW_TO_PRIME_AGENTS.md).
 
 ## Status
 
-**No product implementation yet.** Spec / gap-fill only — see `STATUS.md`.
+**Port Ready:** YES — [`PORT_READY.md`](PORT_READY.md) (export Spec corpus via [`EXPORT.md`](EXPORT.md)).  
+**Implement Ready:** NO — see [`STATUS.md`](STATUS.md).  
+Research that closed Spec gaps: [`june-august-2026-port-readiness.md`](research/papers-2026-may-aug/june-august-2026-port-readiness.md).
