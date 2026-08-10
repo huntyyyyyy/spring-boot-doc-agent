@@ -136,10 +136,47 @@ cmd_adv_path_prefix() {
 
 cmd_list() {
   cat <<'EOF'
-IDs: doctor p1 p2 p3 p4 h1 h2 h3 h4 h5 h6 h7 h8 h9 o1 o4 adv-path-prefix
+IDs: doctor self-test p1 p2 p3 p4 h1 h2 h3 h4 h5 h6 h7 h8 h9 o1 o4 adv-path-prefix
 Bundles: priority1 (= p1 p2) priority2 (= h1 h9 h3 h4) hermetic-lite (= h1 h3 h9)
 Logs: local-runs/logs/<id>.log
 Docs: docs/process/local-grading-pack.md
-Windows: scripts/ci/run_local_grading_pack.cmd <ids...>
+Windows Git Bash: ./scripts/ci/run_local_grading_pack.sh <ids...>
+Windows cmd/IntelliJ Batch: scripts\ci\run_local_grading_pack.cmd <ids...>
+Never: python scripts/ci/run_local_grading_pack.cmd
 EOF
+}
+
+cmd_self_test() {
+  # Fast launcher hygiene - also covered by tests/ci/test_local_grading_pack.py
+  _activate_venv || return $?
+  if ! python - <<'PY'
+from pathlib import Path
+root = Path.cwd()
+ci = root / "scripts" / "ci"
+paths = [
+    ci / "run_local_grading_pack.cmd",
+    ci / "run_local_grading_pack.sh",
+    ci / "grading_pack_steps.sh",
+]
+for path in paths:
+    raw = path.read_bytes()
+    text = raw.decode("ascii")
+    for bad in ("\u2014", "\u2013", "\ufeff"):
+        if bad in text:
+            raise SystemExit(f"non-ascii/forbidden in {path.name}: {bad!r}")
+    print(f"ascii_ok={path.name}")
+doc = root / "docs" / "process" / "local-grading-pack.md"
+body = doc.read_text(encoding="utf-8")
+if "```bash" in body:
+    raise SystemExit("grading pack markdown must not use bash fences")
+if "run_local_grading_pack.sh" not in body:
+    raise SystemExit("grading pack markdown missing .sh runner")
+print("markdown_ok")
+PY
+  then
+    return 1
+  fi
+  cmd_list >/dev/null || return $?
+  cmd_doctor || return $?
+  echo "self-test ok"
 }

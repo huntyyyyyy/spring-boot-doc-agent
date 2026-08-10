@@ -16,6 +16,7 @@ Examples (Git Bash, repo root, venv optional — the script activates `.venv`):
 
 ```text
 ./scripts/ci/run_local_grading_pack.sh doctor
+./scripts/ci/run_local_grading_pack.sh self-test
 ./scripts/ci/run_local_grading_pack.sh list
 ./scripts/ci/run_local_grading_pack.sh priority1
 ./scripts/ci/run_local_grading_pack.sh p1 p2

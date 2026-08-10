@@ -68,6 +68,7 @@ _run_one() {
   case "$id" in
     list|help|-h|--help) cmd_list ;;
     doctor) cmd_doctor ;;
+    self-test|self_test) cmd_self_test ;;
     p1) cmd_p1 ;;
     p2) cmd_p2 ;;
     p3) cmd_p3 ;;
@@ -106,10 +107,15 @@ main() {
     cmd_list
     return 0
   fi
-  local arg rc=0
+  local arg rc=0 step_rc
   for arg in "$@"; do
-    if ! _run_one "$arg"; then
-      rc=$?
+    # Do not use `if ! cmd; rc=$?` - $? after a successful if is 0.
+    set +e
+    _run_one "$arg"
+    step_rc=$?
+    set -e
+    if [[ "$step_rc" -ne 0 ]]; then
+      rc="$step_rc"
     fi
   done
   return "$rc"
