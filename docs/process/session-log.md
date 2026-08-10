@@ -4875,7 +4875,7 @@ Assumptions affected:
 Files touched: adapters/claude/hooks/deny_text_search.py, .claude/settings.json, scripts/ci/check_repo_claims.py, CLAUDE.md, AGENTS.md, CONSTRAINTS.md, SEARCH.md, agent prompts, tests/adapters/test_deny_text_search.py, tests/ci/test_repo_claims_*, docs/research/process/34-text-search-allow-ripgrep-2026.md
 
 ## 2026-08-09 — E-CPL0 research + TEL empty-log tee repair
-Commit: uncommitted
+Commit: e153f5c1
 Tests: tests/ci/test_stalker_telemetry.py 9/9 passing; check_repo_claims OK
 Assumptions affected:
 - `docs/research/process/28-local-stalker-telemetry-etl-2026.md` — suite log ETL non-empty bodies — [New info — tip runs still had 0-byte suite logs; live sink + post-with getvalue repair; E-CPL0 Spec DRAFT for standing closed-loop fitness]
@@ -4884,7 +4884,7 @@ Files touched: docs/research/process/35-control-plane-closed-loop-2026.md, docs/
 
 
 ## 2026-08-09 — Non-vacuous receipt hook on test writes
-Commit: uncommitted
+Commit: e153f5c1
 Tests: test_nonvacuous_receipt_witness + test_inject_nonvacuous_test_witness + hardened 39 passing
 Assumptions affected:
 - E-TEL / E-CPL0 — empty telemetry counted as observed — [Resolved — postToolUse inject on tests/** + commit-time witness markers on control-plane stage]
@@ -4892,7 +4892,7 @@ Files touched: .cursor/hooks/inject_nonvacuous_test_witness.py, .cursor/hooks.js
 
 
 ## 2026-08-10 — Empty-telemetry fail-closed + CodeQL skip corpus fix
-Commit: uncommitted
+Commit: e153f5c1
 Tests: stalker/oracle/nonvacuity suites green; gate run_expensive=false vs origin/main
 Assumptions affected:
 - E-TEL / E-CPL — empty suite log still overall=pass — [Resolved — hard suite empty tee → fail]
@@ -4989,3 +4989,12 @@ Assumptions affected:
 - Climb setattr on `semantic_eval` reaches scan via any tools shim — [Resolved — FACADE_BINDS + public_surface hard; helpers bind fails closed]
 - `PRE_PR_MODE=fast` is fine for tip push — [New info — refuse for tip; telemetry `92330ddf-fast` skipped oracle; only `--auto`/`full`]
 Files touched: src/doc_engine/ci/facade_bind_policy.py, tests/ci/test_facade_bind_policy.py, scripts/ci/check_public_surface.py, scripts/ci/check_facade_poke_surface.py, docs/process/session-log.md
+
+## 2026-08-10 — E-LINT0 research: ruff vs ty for top-of-file imports (DeepWiki Ask)
+Commit: e153f5c1
+Tests: not run (docs-only Spec Draft)
+Assumptions affected:
+- ruff alone catches “import failures” — [Resolved — premature conflation; L1 unused = ruff F401; L3 unresolved = ty unresolved-import]
+- DeepWiki is browse-only — [New info — MCP ask_question at mcp.deepwiki.com + llms.txt]
+- session-log monolith OK — [New info — E-LOG0 nest Spec seed in memo 46 §6]
+Files touched: docs/research/process/46-lint-import-resolution-ruff-vs-ty-2026-08-10.md, docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md

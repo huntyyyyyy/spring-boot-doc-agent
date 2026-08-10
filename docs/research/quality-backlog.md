@@ -69,6 +69,8 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-QUERY0 / E-CERT0 / E-FACT0** | Cold BC Spec seeds | cold-product + stage0 maps |
 | **E-CPL0** | Control-plane closed-loop | `process/35` |
 | **E-RT0 / E-RUST0 / E-POLY0 / E-LANG0** | RT assertion / Rust toolscape / polyglot | `process/32–33`, `39–41` |
+| **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
+| **E-LOG0** | Nest `session-log` (monolith → dated shards) | Spec seed in `process/46` §6 |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 
