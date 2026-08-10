@@ -121,7 +121,7 @@ None of these reopen E-CI policy **C-A** or fail_under **98.7**. They are sequen
 | ID | Decision |
 | --- | --- |
 | **CQ1** | Skip predicate lives in `scripts/ci/codeql_signals_change_gate.py` (concept-named; ≤225; complexipy ≤5). YAML only consumes outputs. |
-| **CQ2** | Fingerprint corpus = CI input closure: `spring-signals/codeql/**`, `spring-signals/harness/**` (exclude `__pycache__`), `.github/workflows/codeql-signals.yml`, `.github/actions/setup-codeql/**`, `scripts/ci/setup_codeql.sh`, and bundle URL+SHA from the workflow env/pin. **Exclude** Stage-0 `codeql/spring-signals/` unless a separate sync gate is Spec’d. |
+| **CQ2** | Fingerprint corpus = CI input closure: `spring-signals/codeql/**`, `spring-signals/harness/**` (exclude `__pycache__`), `.github/actions/setup-codeql/**`, `scripts/ci/setup_codeql.sh`, and bundle URL+SHA from the workflow env/pin. **Exclude** full `.github/workflows/codeql-signals.yml` bytes (pin only — full YAML self-dirties skip). **Exclude** Stage-0 `codeql/spring-signals/` unless a separate sync gate is Spec’d. Corpus collection MUST use `rglob` for `/**` (Path.glob `**` may yield dirs only). |
 | **CQ3** | Compare fingerprint at HEAD vs merge-base / `github.event.before` / `origin/main`. Equal → `run_expensive=false`. Empty base / git error / incomplete checkout → **fail closed → run**. |
 | **CQ4** | `codeql-signals-invariants` always runs. `compile` + `runtime` gated by `if: needs.gate.outputs.run_expensive == 'true'`. |
 | **CQ5** | Do **not** put `on.paths` on required `ci.yml` / CodeQL workflow triggers. |

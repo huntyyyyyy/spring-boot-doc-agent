@@ -271,8 +271,22 @@ def _suite(name: str, kind: str, fn: SuiteFn) -> SuiteResult:
     ms = int((time.perf_counter() - started) * 1000)
     if kind == "advisory":
         status = "advisory"
+        detail = f"exit={code}"
+    elif code != 0:
+        status = "fail"
+        detail = f"exit={code}"
+    elif not body.strip():
+        # Vacuous observation: exit 0 with empty tee is not a receipt (E-CPL/TEL).
+        status = "fail"
+        detail = "exit=0 empty_telemetry"
+        print(
+            f"error: hard suite {name!r} produced empty telemetry "
+            f"(exit 0); treating as fail — exit-only is not observation",
+            file=sys.stderr,
+        )
     else:
-        status = "pass" if code == 0 else "fail"
+        status = "pass"
+        detail = f"exit={code}"
     if _TELEMETRY is not None:
         _TELEMETRY.record(
             name=name,
@@ -282,7 +296,7 @@ def _suite(name: str, kind: str, fn: SuiteFn) -> SuiteResult:
             duration_ms=ms,
             body=body,
         )
-    return SuiteResult(name, status, ms, kind, detail=f"exit={code}")
+    return SuiteResult(name, status, ms, kind, detail=detail)
 
 
 def _py_script(*rel: str, extra_args: Optional[Sequence[str]] = None) -> SuiteFn:

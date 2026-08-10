@@ -143,6 +143,22 @@ def test_success_run_keeps_warning_excerpt(tmp_path: Path) -> None:
     assert "WARNING deprecated rule X" in log
 
 
+def test_hard_suite_empty_telemetry_fails() -> None:
+    """Exit 0 with empty tee is not observation — pre_pr must fail closed."""
+    import pre_pr
+
+    result = pre_pr._suite("silent_gate", "hard", lambda: 0)
+    assert result.status == "fail"
+    assert "empty_telemetry" in result.detail
+
+
+def test_advisory_empty_body_stays_advisory() -> None:
+    import pre_pr
+
+    result = pre_pr._suite("quiet_advisory", "advisory", lambda: 0)
+    assert result.status == "advisory"
+
+
 def test_g7_unreadable_index(tmp_path: Path) -> None:
     root = telemetry_root(tmp_path)
     run_dir = root / "x-fast-1"

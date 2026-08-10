@@ -19,10 +19,14 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+# Evaluation-time inputs only. Workflow YAML is *not* in the corpus: pin
+# URL+SHA are folded via bundle_pin(); hashing the whole workflow self-dirties
+# the skip gate on tips that only touch job wiring (forced ~12m rebuild).
+# Do not list the gate script itself — it is absent on older bases and would
+# fail-closed → always run until every base has it.
 CORPUS_GLOBS: tuple[str, ...] = (
     "spring-signals/codeql/**",
     "spring-signals/harness/**",
-    ".github/workflows/codeql-signals.yml",
     ".github/actions/setup-codeql/**",
     "scripts/ci/setup_codeql.sh",
 )
@@ -63,6 +67,17 @@ def _excluded(rel: str) -> bool:
 
 
 def _collect_glob(root: Path, pattern: str, hits: set[Path]) -> None:
+    """Collect corpus files. ``dir/**`` uses ``rglob`` — ``Path.glob('**')``
+    yields directories only on some Python builds, which emptied the fingerprint.
+    """
+    if pattern.endswith("/**"):
+        base = root / pattern[: -len("/**")]
+        if not base.is_dir():
+            return
+        for path in base.rglob("*"):
+            if path.is_file() and not _excluded(path.relative_to(root).as_posix()):
+                hits.add(path)
+        return
     for path in root.glob(pattern):
         if path.is_file() and not _excluded(path.relative_to(root).as_posix()):
             hits.add(path)

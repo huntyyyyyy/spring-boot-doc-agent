@@ -144,7 +144,7 @@ def test_print_gap_report_summary_noop_without_env(
     monkeypatch.delenv("GITHUB_STEP_SUMMARY", raising=False)
     report = cga.build_report([], floor=98.7)
     args = SimpleNamespace(worst=5, markdown=False, append_github_summary=True)
-    cga._print_gap_report(report, args)
+    assert cga._print_gap_report(report, args) is None
 
 def test_print_gap_report_appends_summary(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch

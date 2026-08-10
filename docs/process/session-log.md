@@ -4889,3 +4889,13 @@ Tests: test_nonvacuous_receipt_witness + test_inject_nonvacuous_test_witness + h
 Assumptions affected:
 - E-TEL / E-CPL0 — empty telemetry counted as observed — [Resolved — postToolUse inject on tests/** + commit-time witness markers on control-plane stage]
 Files touched: .cursor/hooks/inject_nonvacuous_test_witness.py, .cursor/hooks.json, adapters/claude/hooks/nonvacuous_receipt_witness.py, adapters/claude/hooks/require_hardened_tests.py, tests/adapters/test_nonvacuous_receipt_witness.py, tests/ci/test_inject_nonvacuous_test_witness.py, docs/design/control-plane-closed-loop-design-2026-08-09.md
+
+
+## 2026-08-10 — Empty-telemetry fail-closed + CodeQL skip corpus fix
+Commit: uncommitted
+Tests: stalker/oracle/nonvacuity suites green; gate run_expensive=false vs origin/main
+Assumptions affected:
+- E-TEL / E-CPL — empty suite log still overall=pass — [Resolved — hard suite empty tee → fail]
+- E-CQL1 — fingerprint skip — [New info — Path.glob(**) yielded dirs only so corpus was near-empty; rglob fix; workflow YAML removed from corpus; single expensive job]
+- Adequacy sensors as proof tests are non-vacuous — [Still accurate — advisory only; new AST check-free ratchet for tests/ci+adapters]
+Files touched: scripts/ci/pre_pr.py, scripts/ci/codeql_signals_change_gate.py, .github/workflows/codeql-signals.yml, tests/ci/test_*, adapters/claude/hooks/nonvacuous_receipt_witness.py, docs/research/ci/17-*.md

@@ -28,6 +28,7 @@ REQUIRED_MARKERS = (
     "test_success_run_keeps_warning_excerpt",
     "getvalue()",
     "WARNING",
+    "empty_telemetry",
 )
 
 

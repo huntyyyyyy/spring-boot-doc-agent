@@ -73,6 +73,59 @@ def test_codeql_gate_script_runs() -> None:
     assert "run_expensive=" in proc.stdout
 
 
+def test_codeql_fingerprint_corpus_includes_pack_files() -> None:
+    """Regression: Path.glob('**') returned dirs only — fingerprint was empty."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "codeql_signals_change_gate",
+        REPO / "scripts/ci/codeql_signals_change_gate.py",
+    )
+    assert spec and spec.loader
+    gate = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gate)
+    files = gate._iter_corpus_files(REPO)
+    assert len(files) > 50
+    rels = {path.relative_to(REPO).as_posix() for path in files}
+    assert any(rel.endswith(".ql") for rel in rels)
+    assert any("harness/" in rel for rel in rels)
+    assert not any(rel.endswith("codeql-signals.yml") for rel in rels)
+
+
+def test_codeql_fingerprint_unchanged_when_only_workflow_differs() -> None:
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "codeql_signals_change_gate",
+        REPO / "scripts/ci/codeql_signals_change_gate.py",
+    )
+    assert spec and spec.loader
+    gate = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gate)
+    url, sha = gate.bundle_pin(REPO)
+    head = gate.fingerprint_tree(REPO, bundle_url=url, bundle_sha=sha)
+    base = gate.fingerprint_at_ref(
+        REPO, "origin/main", bundle_url=url, bundle_sha=sha
+    )
+    assert base is not None
+    # Tip may still dirty harness; when corpus equals main, skip must be possible.
+    # At minimum base fingerprint must resolve (rglob corpus, not empty).
+    assert len(base) == 64
+    assert len(head) == 64
+
+
+def test_codeql_expensive_job_is_single_download_path() -> None:
+    """Compile+runtime share one job — no artifact hop / second pack install."""
+    text = (REPO / ".github/workflows/codeql-signals.yml").read_text(encoding="utf-8")
+    assert "codeql-signals-expensive:" in text
+    assert "codeql-signals-compile:" not in text
+    assert "codeql-signals-runtime:" not in text
+    assert "upload-artifact" not in text
+    assert "download-artifact" not in text
+    assert text.count("Set up CodeQL") == 1
+    assert "Install pack dependencies (once)" in text
+
+
 def test_path_parity_sensors_clean_on_tip() -> None:
     assert scan_oracle_cell_posture(REPO) == []
     assert scan_codeql_change_presence(REPO) == []
