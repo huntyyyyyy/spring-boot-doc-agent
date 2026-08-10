@@ -106,21 +106,20 @@ Cycle-break gates **scan/gate-adjacent** packages and tach layers — not every 
 
 ---
 
-## 5. Task order (other sessions: do not invent a parallel tip)
+## 5. Task order
 
-1. **Active tip (this PR):** E-REPO1-A — `semantic_eval` + `docs_site` nested; shims green.
-2. Wave 0 + 0.5 orientation — **shipped** (same arc / prior commits).
-3. Resume **E-COH1** cohesion reshape when this tip merges (one stream restored).
-4. Next structure: root-`skills/` retire Spec **or** cycle-break → scanning/gates nests.
-5. Larger `partition_capacity` nest + shim.
-6. H1 product evidence: Stage-4 mid-size, live Path B, semantic-eval once.
-7. H3 only after explicit product Spec — **no prep folders**.
+**Active tip / next / Draft Specs:** always read
+[`docs/research/quality-backlog.md`](docs/research/quality-backlog.md) — do not
+fork a parallel tip from this map. Wave 0/0.5 orientation and **E-REPO1-A** first
+nest are **Done**. Resume cohesion (**E-COH1**) and further nests only as the
+backlog Active/Next rows say.
 
-Full possibilities + landing gaps: research packet **21–24** under `docs/research/bounded-contexts/`.
+Full possibilities + landing gaps: research packet **21–24** under
+`docs/research/bounded-contexts/`.
 
 ---
 
-## 6. Scrapped / refuse (do not revive as “structure”)
+## 6. Scrapped / refused (do not revive as “structure”)
 
 | Item | Why |
 | --- | --- |
@@ -135,10 +134,11 @@ Full possibilities + landing gaps: research packet **21–24** under `docs/resea
 
 ---
 
-## 7. How agents should use this file
+## 7. How to use this file
 
-1. Open **this map** + [`docs/research/quality-backlog.md`](docs/research/quality-backlog.md) Active row.
+1. Open **this map** + backlog Active row (not a second policy essay).
 2. If changing `tools/`, update **`docs/design/tools_bc_inventory.json` in the same commit**.
-3. Prefer **nesting a tool into its BC** over adding another top-level noun folder.
-4. Do **not** mass-rename for “LLM clarity” — update this map and refuse table; one cluster + shim when cycles allow.
-5. Research look-first remains [`docs/research/README.md`](docs/research/README.md) (research domains, not code BCs).
+3. Prefer nesting a tool into its BC; one cluster + shim when cycles allow.
+4. Do **not** mass-rename for “LLM clarity.”
+5. Research look-first: [`docs/research/README.md`](docs/research/README.md).
+6. Cursor path lenses for code/CI/research live under `.cursor/rules/` (MDC globs) — this file is the **human BC map**, not a duplicate rule pack.

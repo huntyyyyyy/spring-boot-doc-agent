@@ -5006,3 +5006,13 @@ Assumptions affected:
 - DeepWiki is browse-only cartography — [Resolved — skill documents MCP ask_question + llms.txt]
 - Spec Draft memos may jump to Implement from chat memory — [Resolved — bloom_gate through Create required]
 Files touched: .cursor/skills/principal-se-research-epic/SKILL.md, .cursor/rules/se-quality-constitution.mdc, docs/research/README.md, docs/research/process/46-*, AGENTS.md, docs/process/session-log.md
+
+
+## 2026-08-10 — E-MDC0 optimized MDC DevEx (activation algebra)
+
+Commit: 2bc35241
+Tests: check_repo_claims OK; MDC mode smoke PASS (always=2, globs=4, agent=2, manual=1)
+Assumptions affected:
+- Agent context / alwaysApply layout — prior "3/3 alwaysApply" stack — [Resolved — redistributed to always≤2 + glob lenses + agent-requested + manual; isomorphism demoted; AGENTS slimmed to pointers]
+- `CLAUDE.md` Claude SoT / steering — [Still accurate — CLAUDE.md unchanged; Cursor path scoping now MDC globs only]
+Files touched: .cursor/rules/*, .cursor/skills/{principal-se-research-epic,cross-domain-isomorphism}/SKILL.md, AGENTS.md, DOMAIN_MAP.md, docs/research/process/47-*.md, docs/research/quality-backlog.md, docs/research/README.md, docs/process/session-log.md

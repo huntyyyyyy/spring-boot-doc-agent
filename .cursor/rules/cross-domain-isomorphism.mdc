@@ -1,24 +1,19 @@
 ---
-description: Always-on planning lens — structure vs substrate isomorphisms (I1–I5)
-alwaysApply: true
+description: Cross-domain analogy / Adopt-Refuse across science→SE — Structure-Adopt vs Substrate-Refuse (I1–I5)
+alwaysApply: false
 ---
 
-# Cross-domain isomorphism (planning)
+# Cross-domain isomorphism (agent-requested)
 
-When planning, researching, or weighing Adopt/Refuse across domains, follow skill
-**cross-domain-isomorphism** (`.cursor/skills/cross-domain-isomorphism/SKILL.md`).
+When planning or weighing Adopt/Refuse across domains, follow skill
+**cross-domain-isomorphism** — do not paste the full skill here.
 
-Hard split: **Structure-Adopt** (shared algebra → algorithm/pattern/sensor/docs) vs
-**Substrate-Refuse** (wetware/ASIC/medium as tip merge/citation SoT without Spec).
+Hard split: **Structure-Adopt** (shared algebra → pattern/sensor/docs) vs
+**Substrate-Refuse** (wetware/ASIC/medium as tip merge SoT without Spec).
 
-Before importing or dismissing a distant field, run **I1–I5**: name objects/morphisms;
-cite CS landing; state non-preserved; choose typed artefact; default **no** boolean
-SoT retype. One-line habit:
+Run **I1–I5** before importing or dismissing a distant field. Habit line:
 
 `Iso: A ≅ B → land as <type> | non-preserved: … | I5: no SoT retype`
 
-Do not soften fail_under / citation SoT via free-energy, Landauer, PID, entropy, or
-“chemistry already computes.” Steal algebra; keep predicate types; leave the dish/chip
-off tip unless Spec changes product category.
-
-SoR: `docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md`
+@.cursor/skills/cross-domain-isomorphism/SKILL.md
+@docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md

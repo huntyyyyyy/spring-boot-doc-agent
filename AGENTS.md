@@ -1,97 +1,34 @@
 # AGENTS.md
 
-For repo working conventions (steering prompts, session log, prefer-ast-grep
-citations with ripgrep allowed, state-claim gates), read `CLAUDE.md` first — it
-is the source of truth and applies to every session. This file is a thin Cursor
-Cloud ingest layer (gotchas + pointers), not a second SoT for recipes or counts.
+Thin Cursor Cloud ingest layer. Repo working conventions SoT: `CLAUDE.md`.
+Agent **path/task scoping** SoT: Project Rules under `.cursor/rules/` (MDC
+`alwaysApply` / `globs` / agent-requested / manual). Do **not** add nested
+`AGENTS.md` files for path scoping beside those globs.
 
-## One tip branch (cloud)
+## Orientation (start here)
 
-Cloud agents must stay on the **single Active tip branch** for the open PR
-stream (today: `cursor/local-ci-gate-fix-61f3` → PR #113). Do **not** create
-sibling research-only branches that fork the same tip work; archive research on
-the tip and push there. Parallel `cursor/*-61f3` branches are for **separate**
-epics with separate PRs — never two checkouts of the same Cover%/gate tip.
+| Pointer | Why |
+| --- | --- |
+| [`DOMAIN_MAP.md`](DOMAIN_MAP.md) | Product BCs, truth classes, refuse list |
+| [`docs/research/quality-backlog.md`](docs/research/quality-backlog.md) | **One** Active tip |
+| [`.cursor/rules/`](.cursor/rules/) | Activation algebra (constitution + lenses) |
+| [`.cursor/skills/principal-se-research-epic/SKILL.md`](.cursor/skills/principal-se-research-epic/SKILL.md) | Design-shaped: Bloom Create + DeepWiki |
+| [`.cursor/skills/cross-domain-isomorphism/SKILL.md`](.cursor/skills/cross-domain-isomorphism/SKILL.md) | Structure-Adopt vs Substrate-Refuse |
 
-**Cross-session orientation:** start at [`DOMAIN_MAP.md`](DOMAIN_MAP.md) (code BCs,
-truth classes, refuse list, task order) and
-[`docs/research/quality-backlog.md`](docs/research/quality-backlog.md) (Active tip).
-Do not invent a parallel tip or mass-rename packages for “LLM clarity.”
-Design/framework plans: skill
-[`.cursor/skills/principal-se-research-epic/SKILL.md`](.cursor/skills/principal-se-research-epic/SKILL.md)
-(Bloom through Create + DeepWiki MCP `ask_question` at `https://mcp.deepwiki.com/mcp`)
-before Implement.
+Stay on the Active tip branch/PR from the backlog. Do not invent a parallel tip.
 
-## Cursor Cloud specific instructions
+## Cloud environment (minimal)
 
-This is a **Python 3.10+ CLI/SDK** (`doc-engine`). There is no web server or
-database. Optional tools (`semgrep`, CodeQL, `gh`) may still touch the network;
-do not treat “no app server” as “fully offline / no egress.” Standard
-install/lint/test/run commands live in `README.md` and
-`.github/workflows/ci.yml`; prefer those over duplicating them here.
+- Python 3.10+ CLI/SDK (`doc-engine`); no app server/DB. Optional tools may egress.
+- Activate `.venv/` before lint/test/run (`README.md`, `.github/workflows/ci.yml`).
+- Pin-check: `ast-grep` / `semgrep` must match `requirements.txt` on `PATH`.
+- Before push (non-docs): `python3 scripts/ci/pre_pr.py --auto`. Outage:
+  `--actions-outage`. Details: rule `ci-local-gates` + `scripts/README.md`.
+- Touches to `scripts/` / `agents/` / `skills/`: `python3 scripts/ci/check_repo_claims.py`.
+- Hard denies: project [`.cursor/hooks.json`](.cursor/hooks.json) (not user-global).
 
-### Environment layout
+## Gotchas (one-liners)
 
-- Dependencies are installed into a virtualenv at `.venv/` (gitignored). The
-  startup update script refreshes it. Activate it before running anything:
-  `. .venv/bin/activate` (this puts `doc-engine`, `pytest`, `ruff`, `ast-grep`,
-  and `semgrep` on `PATH`). Equivalently call binaries directly, e.g.
-  `.venv/bin/pytest`.
-- `ast-grep` and `semgrep` must be the exact pinned versions from
-  `requirements.txt` on `PATH`; CI fails if a differently-versioned system
-  install shadows the venv one. Inside the activated venv the pinned versions
-  win — check with `which -a ast-grep` if a version gate ever complains.
-
-### Common commands (run inside the activated venv)
-
-- Lint / tests / E2E smoke: follow `.github/workflows/ci.yml` and `README.md`
-  (do not hardcode suite counts here).
-- **Before push** on non-docs tips: `python3 scripts/ci/pre_pr.py --auto`
-  (mirrors CI hard gates: full `ruff check scripts/ src/doc_engine/`, claims,
-  code quality, **domain markers**, **facade poke surface**, rule coverage,
-  pytest). Do not treat a scoped pytest subset as green. `--fast` is docs-only
-  — it skips markers/poke.
-- Design-shaped / ambiguous research asks: follow skill
-  `principal-se-research-epic` and memo
-  [`docs/research/process/14-facade-poke-research-hooks-2026.md`](docs/research/process/14-facade-poke-research-hooks-2026.md)
-  (arXiv + active GitHub + DeepWiki Tier C). Cross-domain analogy / science→SE
-  imports: also skill `cross-domain-isomorphism` (Structure-Adopt vs
-  Substrate-Refuse; I1–I5). Commit hook
-  `require_design_research` blocks design-shaped commits without a Spec memo.
-- **Agent policy hooks (portable):** project [`.cursor/hooks.json`](.cursor/hooks.json)
-  bridges Claude PreToolUse scripts (`deny_text_search`, `deny_raw_network`,
-  `check_pipe_exit_code`, `require_design_research`, `require_hardened_tests`)
-  so they run on Cursor Desktop **and** Cloud. Do not rely on Claude
-  third-party hook import or `~/.cursor/hooks.json` for this repo — Cloud
-  only loads the project file. Policy SoT stays under `adapters/claude/hooks/`
-  (+ `.claude/hooks/check_pipe_exit_code.py`); the bridge only normalizes I/O.
-- Before a final commit that touches `scripts/`, `agents/`, or `skills/`, run
-  `python3 scripts/ci/check_repo_claims.py` (see `CLAUDE.md`).
-- Before push: `python3 scripts/ci/install_git_hooks.py` once per clone (chains
-  into Cursor hooksPath when needed), then rely on `.githooks/pre-push` →
-  `pre_pr --auto` (or run `pre_pr` explicitly). Force-push still runs the hook.
-- If GitHub Actions is down: `python3 scripts/ci/pre_pr.py --actions-outage`
-  (runbook in `scripts/README.md` — do not invent a second local-CI SoT).
-- Optional local SonarQube advisory: `scripts/ci/sonar-local/README.md` (never SoT).
-
-### Non-obvious gotchas
-
-- `doc-engine certification verify <cert>` **rejects**
-  `generative_executor` of `none` or `mock` unless you pass `--allow-mock`.
-  A `deterministic_only` local run typically stamps `none`/`mock` and can still
-  write `certified: true` — verify fails without `--allow-mock`. Main
-  `.github/workflows/ci.yml` smoke only checks that `certification.json`
-  **exists** after the pipeline (it does not read `certified` or call verify).
-  The separate `.github/workflows/doc-engine.yml` certification jobs **do** run
-  `doc-engine certification verify --allow-mock`.
-- `generative_executor="live"` is written by `doc-engine pipeline gates`
-  (`live_gates.py`) for any agent that produced docs and then ran gates — not
-  only the Claude Code adapter. Live generative *stages* (1–4) still need an
-  LLM runtime; deterministic Stage 0 + gates do not need an LLM.
-- Pipe-exit pitfall: piping build/test output into `tail`/`head`/`grep` can
-  mask a non-zero tool exit (`tail` exits 0). Project hooks block that pattern
-  in Claude Code **and** Cursor (via `.cursor/hooks.json` →
-  `check_pipe_exit_code.py`). Safe pattern: redirect to a file and check the
-  tool’s own exit code, e.g.
-  `pytest tests/ -q > log.txt 2>&1; RC=$?; tail -n 40 log.txt` (see
-  `docs/process/tool-quirks.md`).
+- `doc-engine certification verify` rejects `none`/`mock` generative executor unless `--allow-mock`.
+- Main `ci.yml` smoke only checks `certification.json` **exists**; verify jobs live in `doc-engine.yml`.
+- Pipe to `tail`/`head` can mask non-zero exits — redirect to a file; check `$RC` (`docs/process/tool-quirks.md`).

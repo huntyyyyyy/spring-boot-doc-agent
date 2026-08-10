@@ -1,11 +1,11 @@
 ---
-description: Principal SE quality constitution — SoT hygiene, size/complexity, research bar, SDD one-stream
+description: Principal SE quality constitution — boolean invariants only (never soften)
 alwaysApply: true
 ---
 
 # SE quality constitution
 
-Hard invariants for every change in this repo (feature, fix, research, or epic). Details live in linked SoTs — do not weaken gates to “make room.”
+Hard invariants for every change. Details live in linked SoTs — do not weaken gates.
 
 ## Deterministic gates (never soften)
 
@@ -13,25 +13,23 @@ Hard invariants for every change in this repo (feature, fix, research, or epic).
 - **complexipy ≤5**; file **LOC ≤225** (src and tests when ratchet applies); cohesion over `part2` chops
 - **No `utils/` grab-bag** — concept-named modules (`doc_engine.core.*`, domain packages)
 - Descriptive names only — refuse single-letter mode/flags (`m`/`o`/`c`)
-- ast-grep for code search (citation correctness); follow `CLAUDE.md` / claims checker
+- Prefer structural search for citation claims; follow `CLAUDE.md` / claims checker
 
 ## SoT vs derived (DDIA)
 
 - Authoritative metrics (oracle `coverage.xml`, fail_under, size, complexipy, claims) are **boolean SoT**
 - Climb Cover%, gap-average, LLM-as-judge, Recall@K are **sensors** — never silent merge proof
-- Scoped `--cov` + fail_under is a **different predicate** than whole-repo 98.7 — never conflate
+- Scoped `--cov` + fail_under ≠ whole-repo 98.7 — never conflate
 - Policy **16-A**: climb artifacts use a **distinct** path (e.g. `coverage.climb.xml`); only `coverage.xml` is oracle SoR
 - No fuzzy/PID “confidence of green”; no cross-worktree `coverage combine`
 
 ## Process (SDD)
 
 - **Spec → Implement → Verify → Archive**; one active tip writer; no force-push tip thrash
-- Design-shaped work: claim-tier research (arXiv / GitHub / DeepWiki **MCP `ask_question`** + primary `llms.txt`) before impl; Evidenced / Confirmed / Unknown
-- Future-dev Spec/epic markdown: skill **principal-se-research-epic** Bloom ladder **through Create** before generating implementation code
-- Prefer strategies/ports (OCP) over if/elif gods; vertical/concept slices (DDD); patterns only when earned
-- Cross-domain imports: skill **cross-domain-isomorphism** — Structure-Adopt vs Substrate-Refuse; I1–I5 before Embody/Adopt/Refuse
+- Prefer strategies/ports (OCP) over if/elif gods; vertical/concept slices (DDD)
 - Refuse by default: in-tree Rust (unless profiled), PIT operator zoo, ECS/mesh/Backstage theater
+- Path/task scoping SoT = Project Rules **MDC globs** — do **not** add nested `AGENTS.md` as a second path SoT
 
-## When design or epic work starts
-
-Follow user-wide skill **principal-se-research-epic** (also in this repo under `.cursor/skills/`). SoT memos when present: `docs/research/se-quality-synthesis-2026-08-08.md`, `docs/research/quality-backlog.md`. DeepWiki MCP: `https://mcp.deepwiki.com/mcp` (`ask_question`).
+@docs/research/se-quality-synthesis-2026-08-08.md
+@docs/research/quality-backlog.md
+@.cursor/skills/principal-se-research-epic/SKILL.md

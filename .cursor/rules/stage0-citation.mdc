@@ -1,0 +1,19 @@
+---
+description: Stage-0 fixtures, signal scan, rule-coverage citation correctness
+globs: "**/spring-signals/**,scripts/fixtures/**,scripts/coverage/**"
+alwaysApply: false
+---
+
+# Stage-0 / citation lens
+
+When fixtures or rule-coverage paths are in context:
+
+- Prefer **ast-grep** structural patterns for citation-backed claims; zero matches = unproven, not absent.
+- Annotation shapes: try `@Name` **and** `@Name($$$)` — argument-bearing forms are disjoint.
+- Adding a Stage-0 rule means adding a trigger under `scripts/fixtures/spring_signals/` (and matching pack/ast-grep id) in the same commit.
+- Rule coverage denominator is pack `rule_id`s; do not conflate with ast-grep YAML inventory counts.
+- Groovy Gradle scripts have no ast-grep grammar — filename classification only.
+
+@CLAUDE.md
+@scripts/coverage/rule_coverage.py
+@scripts/fixtures/spring_signals/

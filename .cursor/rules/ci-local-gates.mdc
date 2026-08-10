@@ -1,0 +1,20 @@
+---
+description: Local CI / pre_pr / hooks — run when editing gates or workflows
+globs: scripts/ci/**,.github/workflows/**,.githooks/**
+alwaysApply: false
+---
+
+# CI / local gates lens
+
+When these paths are in context:
+
+- Before push on non-docs tips: `python3 scripts/ci/pre_pr.py --auto` (mirrors CI hard gates). `--fast` is docs-only.
+- Touches to `scripts/`, `agents/`, or `skills/`: run `python3 scripts/ci/check_repo_claims.py` before final commit.
+- Install hooks once per clone: `python3 scripts/ci/install_git_hooks.py` → `.githooks/pre-push` → `pre_pr --auto`.
+- Actions outage: `python3 scripts/ci/pre_pr.py --actions-outage` — do not invent a second local-CI SoT.
+- Optional Sonar local advisory is **never** merge SoT.
+- Project `.cursor/hooks.json` bridges hard denies; do not replace hooks with prose rules.
+
+@scripts/ci/pre_pr.py
+@.github/workflows/ci.yml
+@scripts/README.md

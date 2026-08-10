@@ -1,0 +1,19 @@
+---
+description: doc-engine package cohesion — nests, façades, public surface
+globs: src/doc_engine/**,tests/doc_engine/**
+alwaysApply: false
+---
+
+# doc-engine cohesion lens
+
+When editing product code under `src/doc_engine/` or its tests:
+
+- Nest by **product capability** (bounded context), not grab-bag folders — see `DOMAIN_MAP.md`.
+- Stable invoke: `python -m doc_engine.tools.<mod>` / `doc-engine …` stay green across moves (shim/façade) unless a deprecation Spec says otherwise.
+- Cohesion over mechanical `part2` LOC chops; public-surface / façade poke gates are hard when in `pre_pr`.
+- No new `utils/` packages; concept-named modules only.
+- Update `docs/design/tools_bc_inventory.json` in the same commit when changing `tools/` membership.
+
+@DOMAIN_MAP.md
+@docs/design/concept-split-cohesion-design-2026-08-09.md
+@docs/design/tools_bc_inventory.json

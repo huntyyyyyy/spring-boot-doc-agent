@@ -1,0 +1,21 @@
+---
+description: Design-shaped work, Spec/epic, framework Adopt — Bloom Create + DeepWiki before Implement
+alwaysApply: false
+---
+
+# Principal research gate (agent-requested)
+
+Use when the task is design-shaped: new SoT, gates, measure modes, architecture,
+framework/tool adoption, Spec Draft, or epic planning.
+
+1. Read skill **principal-se-research-epic** and follow Bloom **1→Create**.
+2. Gather deterministic evidence: primary `llms.txt` / docs + DeepWiki MCP
+   `ask_question` at `https://mcp.deepwiki.com/mcp`.
+3. Tag claims Evidenced / Confirmed / Unknown; map Embody / Adopt / Refuse.
+4. **Refuse Implement** until levels 1–6 are in a research/design memo.
+5. One Active tip only — see backlog.
+
+@.cursor/skills/principal-se-research-epic/SKILL.md
+@docs/research/se-quality-synthesis-2026-08-08.md
+@docs/research/quality-backlog.md
+@docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md

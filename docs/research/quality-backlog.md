@@ -35,8 +35,8 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **Stream** | Land combined tip **#119**, then resume **E-COH1** |
 | **Branch / PR** | `cursor/repo-and-context-combined-83d2` → [`#119`](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/119) |
 | **Why** | Research stack is ahead of Implement; E-COH1 was paused until this tip lands |
-| **Already on tip (Done)** | **E-REPO1-A** (`semantic_eval` / `docs_site` nest + `-m` shims); folds of #113–#118 |
-| **Do not do in this stream** | New research epics; Approve-all Drafts; E-CTX1 / E-DYN1 Implement; parallel tips |
+| **Already on tip (Done)** | **E-REPO1-A** (`semantic_eval` / `docs_site` nest + `-m` shims); folds of #113–#118; **E-MDC0** docs + `.cursor/rules` pack (`process/47`) |
+| **Do not do in this stream** | New research epics; Approve-all Drafts; E-CTX1 / E-DYN1 Implement; parallel tips; E-MDC0 must not block E-COH1 code |
 
 **E-COH1 exit (when resumed):** CGQ3 Accept rows (Concern→Remedy→Depth→Witness) on reshape; `check_public_surface` hard; no mechanical LOC chops. Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md).
 
@@ -71,6 +71,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-RT0 / E-RUST0 / E-POLY0 / E-LANG0** | RT assertion / Rust toolscape / polyglot | `process/32–33`, `39–41` |
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-LOG0** | Nest `session-log` (monolith → dated shards) | Spec seed in `process/46` §6 |
+| **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 

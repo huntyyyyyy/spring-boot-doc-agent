@@ -1,0 +1,20 @@
+---
+alwaysApply: false
+---
+
+# Tip recovery / outage (manual `@tip-recovery-manual`)
+
+Use only when recovering from tip thrash, pre-push failures, or Actions outage.
+
+1. Confirm Active tip in `@docs/research/quality-backlog.md` — one writer only.
+2. Default local gate: `python3 scripts/ci/pre_pr.py --auto` (never habitually
+   `PRE_PR_MODE=fast` / skip for tip push).
+3. Actions down: `python3 scripts/ci/pre_pr.py --actions-outage` per
+   `@scripts/README.md`.
+4. Inspect `.git/pre-pr-telemetry/` after failed pushes; fix root cause, do not
+   force-push tip thrash.
+5. For design-shaped commits blocked by hooks, attach Spec memo first.
+
+@scripts/ci/pre_pr.py
+@scripts/README.md
+@docs/research/quality-backlog.md

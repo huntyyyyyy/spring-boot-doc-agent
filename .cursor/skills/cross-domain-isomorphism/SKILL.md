@@ -1,19 +1,21 @@
 ---
 name: cross-domain-isomorphism
 description: >-
-  Always apply a structure-vs-substrate isomorphism lens when planning, researching,
+  Apply a structure-vs-substrate isomorphism lens when planning, researching,
   designing, or comparing ideas across domains (science, SE, tools, product). Use
   whenever framing a problem, weighing Adopt/Refuse, importing patterns from another
   field, or the user mentions analogy, isomorphism, genetics/chemistry/physics→CS,
   or “unrelated branches of science.” Prefer this over dismissing distant fields as
-  irrelevant OR collapsing them into tip wetware/runtime.
+  irrelevant OR collapsing them into tip wetware/runtime. Project rule
+  cross-domain-isomorphism.mdc is agent-requested (not alwaysApply); this skill holds depth.
 ---
 
-# Cross-domain isomorphism (always-on planning lens)
+# Cross-domain isomorphism (planning lens)
 
-Use this skill as a **default cognitive move** in planning and research — not only
+Use this skill when analogy / cross-domain Adopt-Refuse is in play — not only
 when the user names physics or biology. Pair with **se-quality-constitution** and,
-for design-shaped work, **principal-se-research-epic**.
+for design-shaped work, **principal-se-research-epic**. Rule file is a thin trigger;
+keep procedure here.
 
 ## Core distinction (never collapse)
 

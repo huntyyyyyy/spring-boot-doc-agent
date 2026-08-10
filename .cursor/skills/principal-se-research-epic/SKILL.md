@@ -12,8 +12,10 @@ description: >-
 
 Follow this skill whenever work is **design-shaped** (new SoT, gates, measure modes,
 architecture, framework/tool adoption) or the user asks for principal rigor. The
-always-on rule **se-quality-constitution** still applies during implementation. For
-cross-domain analogy, also follow **cross-domain-isomorphism** (I1–I5).
+always-on rule **se-quality-constitution** still applies during implementation.
+Agent-requested rule **principal-research-gate** mandates this skill; for
+cross-domain analogy, also follow **cross-domain-isomorphism** (I1–I5) via its
+agent-requested rule + this skill’s peer.
 
 ## SoTs (read first)
 
