@@ -137,9 +137,11 @@ Language tools emit a stable index (formerly Language Server Index Format lineag
 | `scip-code/scip-java` | ~131 / 2026-08-10 | **Adopt** Java lane |
 | `sourcegraph/scip-typescript` | ~106 / 2026-08-10 | **Adopt** TypeScript lane |
 | `sourcegraph/scip-python` | ~97 / 2026-08-07 | **Adopt** Python lane |
-| `microsoft/language-server-protocol` | ~12977 / 2026-08-10 | **Adopt** protocol lineage |
+| `microsoft/language-server-protocol` | ~12977 / 2026-08-10 | **Adopt** protocol lineage (interactive — not offline index) |
+| `sourcegraph/scip-clang` | ~91 / 2026-08-08 | **Adopt** C/C++ lane when needed |
+| `microsoft/lsif-node` | ~198 / 2026-06 | **Refuse** greenfield — Language Server Index Format superseded by Source Code Index Protocol |
 
-**Status:** ≥5 genuine. Gap is **freshness budgets** (open question 06), not missing indexers.
+**Status:** ≥5 genuine. Gap is **freshness budgets** (open question 06), not missing indexers. Source Code Index Protocol is transmission of facts, **not** architecture policy and **not** Spring Dependency Injection resolve.
 
 ---
 
@@ -194,6 +196,24 @@ Official Model Context Protocol org SDKs + servers (listed under Entity B) easil
 | Harness propose/decide | Partial | Yes (adjacent) | Must | Must process; pick one harness pattern via Spike |
 | Source Code Index Protocol | Yes | Yes | Assumed | Confirmed Adopt candidates |
 | Model Context Protocol tools | Partial | Yes | Draft Interface Control Document | Adopt SDKs; still need typed-id Spike |
+
+---
+
+## Entity G — Architecture Tradeoff Analysis Method + multi-agent drafting
+
+| Paper / method | Understanding |
+| --- | --- |
+| *Bridging Requirements and Architecture…* (arXiv:2606.01385) | Multi-agent drafting loop (Analyst / Modeler / Designer / Evaluator); emits Architecture Tradeoff Analysis Method-*style* prose — **not** deterministic lock receipts |
+| SEI Architecture Tradeoff Analysis Method (Kazman et al.) | Utility tree + Quality Attribute Scenario six-tuple + sensitivity/tradeoff/risk — workshop method |
+
+| Repository | Signal | Fit |
+| --- | --- | --- |
+| `RuiyinL/MAAD` | ~7 stars; **no runnable agent framework** in tree (artifact dump) | **Refuse** product dependency; schema inspiration only |
+| `FoundationAgents/MetaGPT`, `OpenBMB/ChatDev`, large orchestrators | Huge / active | **Refuse** as architecture verify System of Record |
+| `architecture-decision-record/architecture-decision-record` | ~16k / active | **Adopt** decision templates beside Quality Attribute Scenarios |
+| Pedagogical Architecture Tradeoff Analysis Method sims | Near-zero / teaching | **Refuse** production command-line interface |
+
+**Genuine gap:** no maintained open-source engine that deterministically scores architecture against code the way graph locks do. Drafting agents ≠ verify.
 
 ---
 
