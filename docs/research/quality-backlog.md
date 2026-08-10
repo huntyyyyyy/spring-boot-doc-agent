@@ -232,9 +232,9 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Active:** **E-COH1** — reshape provisional tip modules under cohesion bar (design memo); one stream.  
 **Spec draft (not Active tip):** **E-TACH0** — tach dependency-map-as-blueprint ([`modularity/20-…`](modularity/20-tach-dependency-blueprint-2026.md), Jun–Aug 2026 research); Approve TACH1–TACH10 before layers/`depends_on` Implement.  
-**Spec draft (not Active tip):** **E-REPO0** — DDD repo-structure options ([`modularity/21-…`](modularity/21-ddd-repository-structure-options-2026.md)); Approve REPO1–REPO8; prefer A+F; no mass `git mv` until Spec.  
+**Spec draft (not Active tip):** **E-REPO0** — DDD repo-structure packet ([`modularity/21-…`](modularity/21-ddd-repository-structure-options-2026.md) + [`modularity/22-…`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md)); Approve REPO1–REPO16; A+F+O spine + unusual J/K/H-pattern; PairSmell inventory before moves.  
 **Defer:** E-CQL1 (ready); E-STK1 (ready); E-COH2 / E-TACH1–2 (after E-TACH0 Approve + cycle cleanup); E-REPO1 (after E-REPO0 Approve); E-UX2 (U6); E-QA3; E-RUN2–5; E-CQL cache accel (CQ-S1).  
-**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**.
+**Never:** suite-wide xdist/rpytest-n on cov cell; RTS skipping oracle; fuzzy green; LLM-judge as fail_under; scrap Cover%/E-TEST because mutation exists; Testcontainers/Spec Kit WorkflowEngine as kitchen SoT; rich/emoji CI dashboards as SoT; Guice-style DI / pytest-bdd as kitchen SoT; `utils/` grab-bag; raising LOC/complexipy caps; forever-grandfather of size offenders without a remediation stream; workflow `paths` on required CI; Actions cache as CodeQL merge SoR; chat-dump research SoT; deleting Claude adapter packaging without retire Spec; DDIA-shaped nesting under `docs/research/`; always-on LLM stalker as oracle SoT; **mechanical LOC chops that fail the E-COH0 cohesion bar**; **folder-depth theater without tach/marker enforcement**; **LLM architecture recovery (ArchAgent-class) as merge SoT**.
 
 ---
 
@@ -272,15 +272,15 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 
 ---
 
-## P18 — DDD repository structure (shallow root + fat folders)
+## P18 — DDD repository structure (quality-classified; modern + unusual)
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO8** (BC-first taxonomy; A+F preferred; refuse layer-first / colocated bang; markers before test moves) | **Draft** (2026-08-10) | research 21 `spec_gate` → APPROVED |
-| P18.1 | **E-REPO1 Implement:** DOMAIN_MAP (B′) + `tools/`→BC inventory + first façade/tach interface | After Approve; after/with E-COH1 / E-TACH | map linked; no orphan tools file; `tach check` |
-| P18.2 | Spikes **REPO-S1/S2:** physical root zones cost; tools cluster cut | Spike | go/no-go memos |
+| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO16** (packet **21+22**: BC-first; A+F+O spine; truth zones; PairSmell before moves; Polylith *pattern*; refuse LLM recovery SoT) | **Draft** (2026-08-10) | research 21+22 `spec_gate` → APPROVED |
+| P18.1 | **E-REPO1 Implement:** DOMAIN_MAP + truth-class labels (N+J logical) → REPO-S3 inventory → first deep pack/tach interface | After Approve; with E-COH1 / E-TACH | map + InCol table; `tach check` |
+| P18.2 | Spikes **REPO-S1–S5:** root move cost; tools clusters; PairSmell inventory; physical truth zones; project-assembly without polylith-cli | Spike | go/no-go memos |
 
-Research: [`docs/research/modularity/21-ddd-repository-structure-options-2026.md`](modularity/21-ddd-repository-structure-options-2026.md). **Embody** BC-first + E-TEST marker order; **Adopt** vertical BCs + tach packs (A+F); **Defer** root `git mv` / multi-package workspace; **Refuse** Clean-Architecture-top and colocated-domain bang.
+Research: [`modularity/21-…`](modularity/21-ddd-repository-structure-options-2026.md) (A–F) + [`modularity/22-…`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md) (classify → PairSmell/Ousterhout/DDIA → unusual G–P). **Embody** quality-axis framing; **Adopt** A+F+O, N overlay, K for tools dissolution, H-pattern for deployables; **Defer** physical J/root bang / polylith-cli; **Refuse** ArchAgent-as-SoT, layer-first top, colocated bang.
 
 ---
 

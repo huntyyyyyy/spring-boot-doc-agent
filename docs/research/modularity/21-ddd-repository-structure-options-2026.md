@@ -1,11 +1,12 @@
 ---
 title: E-REPO0 — DDD repository structure options (shallow root + fat folders)
-status: DRAFT Spec — options inventory; pending Approve of REPO1–REPO8
+status: DRAFT Spec — options inventory; pending Approve of REPO1–REPO16 (see companion 22)
 research date: 2026-08-10
 research_window: 2026-01-01 → 2026-08-10
 claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + meta CI/adapters monorepo
 related:
+  - docs/research/modularity/22-ddd-repo-structure-quality-deepdive-2026.md
   - docs/product-architecture.md
   - docs/research/modularity/12-pipeline-stage0-modularity-ports-2026.md
   - docs/research/modularity/06-test-suite-bounded-contexts-parallel.md
@@ -20,7 +21,7 @@ do_not:
   - adopt Nx / Packwerk / Spring Modulith / Backstage as Python runtimes
   - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
   - cross-job coverage combine or PathCohesion breaks while reshaping tests
-spec_gate: DRAFT E-REPO0 (2026-08-10) — REPO1–REPO8 pending Approve
+spec_gate: DRAFT E-REPO0 (2026-08-10) — REPO1–REPO16 pending Approve (21+22 packet)
 gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/docs)"
 ---
 
@@ -36,17 +37,24 @@ strategic DDD (bounded contexts + enforced edges) — without poorly copying
 **Non-goal this tip:** implement any mass move. This memo drafts **≥5 distinct
 layouts**, ranks them for *this* product, and Spec-gates a preferred path.
 
+**Deep companion (required read for Approve):**  
+[`22-ddd-repo-structure-quality-deepdive-2026.md`](22-ddd-repo-structure-quality-deepdive-2026.md) —
+classifies the problem on quality axes (PairSmell InCol/InSep, module depth,
+SoR/derived, agent context), routes primary research, and adds **unusual**
+layouts G–P (Polylith pattern, truth-class tree, stage-DAG, Hive mini-hexagon,
+agent packs, …). **E-REPO0 Approve = memos 21 + 22 together.**
+
 ---
 
 ## 0. One-page verdict
 
 | Question | Answer |
 | --- | --- |
-| Is “shallow root + fat mid folders” a real problem here? | **Yes.** Root mixes product/meta/docs; `tools/` has **63** top-level `.py`; `tests/doc_engine` has **208** `test_*.py`; `tests/support` has **22** sibling packages. `[Confirmed]` |
+| Is “shallow root + fat mid folders” a real problem here? | **Yes — but as quality smells**, not depth taste. Root fails the scream test; `tools/` is InCol; tests risk InSep; SoR/derived is not named in the tree. See companion §1. `[Confirmed]` + `[Evidenced]` |
 | Is folder depth the fix? | **No.** Depth without **enforced** BC edges is DDD cosplay. `[Evidenced]` DDD 2026 practice; Packwerk/tach literature; E-TACH0 |
-| Best fit for this CLI monorepo? | **Hybrid of Options A + F** (vertical BCs inside one wheel + tach interfaces / optional `tach.domain.toml`) after cycle break; **Option B** only for *root* product/meta clarity. `[Confirmed]` product-architecture + E-MOD/E-TACH |
+| Best fit for this CLI monorepo? | **A+F+O spine** (vertical BCs + tach packs + deep façades), with **N** logical overlay first; selective **J/K/H-pattern/I/M** from companion. `[Confirmed]` + companion §5 |
 | Multi-package workspace / colocated domains / layer-first Clean Architecture? | **Defer** workspace; **Refuse** big-bang colocated slice move and layer-first top packages. |
-| First Implement after Approve? | Markers + concept façades (E-TEST / E-MOD / E-COH) — **not** root rename theater. |
+| First Implement after Approve? | DOMAIN_MAP + truth labels + PairSmell inventory (REPO-S3) → façades — **not** root rename theater. |
 
 ---
 
@@ -374,9 +382,12 @@ Shared kernel (`doc_engine.core`, paths, config) stays **minimal**. Cross-BC typ
 
 ## 9. Ranking for *this* tip (human Approve)
 
-1. **Approve REPO1–REPO2 / REPO6–REPO8** → pursue **A+F**.  
-2. **Adopt B′** immediately (docs only).  
-3. Keep **C/D** off the active backlog.  
-4. Sequence with existing streams: **E-COH / E-MOD façades → E-TACH layers → E-TEST markers → optional physical test dirs → REPO-S1 only if root pain remains.**
+**Approve packet = memo 21 + companion 22 (REPO1–REPO16).**
 
-DeepWiki/tach docs used as cartography for enforcement mechanics; merge stance cites this product’s locked A+C hybrid architecture.
+1. **Wave 0:** N overlay (DOMAIN_MAP + truth-class labels) + REPO-S3 PairSmell inventory.  
+2. **Wave 1 spine:** **A+F+O** (vertical BCs, tach interfaces, deep packs); dissolve `tools/` with **K** where clusters match stages.  
+3. **Wave 2 selective unusual:** **J** physical truth zones (if overlay fails), **H-pattern** project assembly (wheel/plugin/Action), **I** mini-hexagon in scanning, **M** agent packs as maps.  
+4. Keep **C/D/E/P** and ArchAgent-as-SoT off Active tip.  
+5. Sequence with **E-COH / E-TACH / E-TEST** — markers before mass test moves.
+
+DeepWiki/tach docs used as cartography for enforcement mechanics; PairSmell / Ousterhout / Polylith / DDIA cite primary sources in companion §2.
