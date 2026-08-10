@@ -476,12 +476,12 @@ Research: [`docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md`](st
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P34.0 | **E-OAS0 Spec:** approve **OAS1–OAS14** (RunContext ports; dual sinks; doctor fail-closed; Typer grade-only; Refuse rich/OTel/embedding SoTs; Embody Stage-0 packets) | **DRAFT** (2026-08-10) — pending human Approve | research `process/37-operator-agent-surface-cli-mcp-rag-2026.md` + design stub |
+| P34.0 | **E-OAS0 Spec:** approve **OAS1–OAS16** (RunContext; dual sinks; doctor; Typer grade-only; **human-review floor**; campaign OS×shell matrix; Refuse rich/OTel/embedding SoTs + unattended AI + universal emulator) | **DRAFT** (2026-08-10) — pending human Approve | research `process/37-operator-agent-surface-cli-mcp-rag-2026.md` + design stub |
 | P34.1 | **E-OAS1 Implement:** grade surface (context + JSONL receipt + remediation) | Deferred | only after E-OAS0 Approve |
 | P34.2 | **E-OAS2** MCP parity envelopes / stderr structured events | Deferred | after OAS1; MCP SDK pin still Deferred (GND9) |
 | P34.3 | **E-OAS3** retrieval eval harness (campaign) | Optional | never embedding citation SoT |
 
-Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`](process/37-operator-agent-surface-cli-mcp-rag-2026.md). Design: [`docs/design/operator-agent-surface-design-2026-08-10.md`](../design/operator-agent-surface-design-2026-08-10.md). Related: E-UX0, E-GND0 (separate DRAFT), E-OCS0. **Embody** RunContext + dual sinks + Stage-0 packets; **Adopt** clig.dev + actionable errors + Typer-for-grade-only; **Refuse** rich CI SoT / OTel tip SoT / embedding citation SoT / MCP codegen.
+Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`](process/37-operator-agent-surface-cli-mcp-rag-2026.md). Design: [`docs/design/operator-agent-surface-design-2026-08-10.md`](../design/operator-agent-surface-design-2026-08-10.md). Related: E-UX0, E-GND0 (separate DRAFT), E-OCS0. **Embody** RunContext + dual sinks + Stage-0 packets + **human-review floor**; **Adopt** clig.dev + actionable errors + Typer-for-grade-only + campaign OS×shell matrix; **Refuse** rich CI SoT / OTel tip SoT / embedding citation SoT / MCP codegen / **unattended AI merge** / **universal OS+terminal+phone emulator as CLI SoT**.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 category: Operator/agent surface (CLI grade + MCP + structured retrieval)
-status: DRAFT — SPEC GATE E-OAS0 pending Approve of OAS1–OAS14
+status: DRAFT — SPEC GATE E-OAS0 pending Approve of OAS1–OAS16
 research date: 2026-08-10
 claim tiers: Evidenced / Confirmed / Unknown
 related:
@@ -15,40 +15,31 @@ do_not:
   - rich / OTel / embedding as CI or citation SoT
   - MCP write/codegen tools
   - rewrite all scripts/ci to Typer in one tip
-spec_gate: DRAFT E-OAS0 (2026-08-10) — OAS1–OAS14 pending Approve
+  - unattended AI merge / full AI adoption
+  - phone/device-farm or “universal OS emulator” as CLI SoT
+spec_gate: DRAFT E-OAS0 (2026-08-10) — OAS1–OAS16 pending Approve
 ---
 
 # Design memo: E-OAS0 Spec gate
 
-> **DRAFT — awaiting Approve of OAS1–OAS14.**
+> **DRAFT — awaiting Approve of OAS1–OAS16.**
 >
 > Research: [`docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md`](../research/process/37-operator-agent-surface-cli-mcp-rag-2026.md).
 
 | Field | Value |
 | --- | --- |
-| Problem | Grade/MCP surfaces lack shared context, structured receipts, and actionable remediation; modern MCP/RAG bar demands dual human/agent observability without new SoT theater |
-| Fix | Shared `RunContext` ports + dual sinks + OCP step modules; thin grade CLI; MCP stderr discipline; Embody Stage-0 packets as retrieval |
+| Problem | Grade/MCP surfaces lack shared context, structured receipts, and actionable remediation; modern MCP/RAG bar demands dual human/agent observability without new SoT theater or unattended AI |
+| Fix | Shared `RunContext` ports + dual sinks + OCP step modules; thin grade CLI; MCP stderr discipline; Embody Stage-0 packets; human review floor; campaign OS×shell matrix |
 | Reuse | `dispatch_tool`, plant_profile exit taxonomy, pre_pr receipt schema ideas, E-UX0 summary-first |
-| Downstream | E-OAS1 Implement grade; E-OAS2 MCP parity; E-GND0 remains separate DRAFT |
+| Downstream | E-OAS1 Implement grade; E-OAS2 MCP parity; E-OAS4 shell matrix; E-GND0 remains separate DRAFT |
 
 ## Decisions (pending Approve)
 
 | ID | Decision |
 | --- | --- |
-| **OAS1** | Shared `RunContext` ports across grade CLI and MCP |
-| **OAS2** | Dual sink: headline + schema_versioned JSONL receipt |
-| **OAS3** | MCP stdio diagnostics on stderr only |
-| **OAS4** | Doctor fail-closed on venv / pin path before toolchain steps |
-| **OAS5** | Actionable `next_actions[]` for known Windows/operator failures |
-| **OAS6** | OCP step strategies; scalable modules ≤225 LOC |
-| **OAS7** | Typer only for optional local `doc-engine grade` — not all CI |
-| **OAS8** | Refuse rich as CI SoT; optional TTY + `NO_COLOR` only |
-| **OAS9** | Defer structlog hard pin; stdlib + JSONL unless Spike |
-| **OAS10** | Refuse OTel as tip SoT; future exporter port needs Spec |
-| **OAS11** | Embody Stage-0 + context_packet retrieval; Refuse embedding citation SoT |
-| **OAS12** | Refuse MCP write/codegen; tip-grounding stays on E-GND0 |
-| **OAS13** | One tip stream — grade surface before GND Implement thrash |
-| **OAS14** | Synthesis memo in process/; no third nesting level |
+| **OAS1–OAS14** | As in research memo (RunContext, dual sinks, doctor, Typer-grade-only, Refuse rich/OTel/embedding SoTs, …) |
+| **OAS15** | Human review is the floor — Spec Approve, operator `--write`, certification, merge SoR; MCP/agents assist only; Refuse unattended AI adoption |
+| **OAS16** | Campaign OS×shell matrix (ubuntu/bash, windows/bash, windows/pwsh, optional cmd); Refuse phone farms / universal emulator as CLI SoT |
 
 ## Operator unblock (no Spec — do now)
 
@@ -62,4 +53,4 @@ source .venv/Scripts/activate
 
 ## Exit
 
-Human Approve of OAS1–OAS14 flips this file to APPROVED and unblocks E-OAS1.
+Human Approve of OAS1–OAS16 flips this file to APPROVED and unblocks E-OAS1.
