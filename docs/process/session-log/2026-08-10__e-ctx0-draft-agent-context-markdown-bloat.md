@@ -126,7 +126,7 @@ Assumptions affected:
 Files touched: docs/process/session-log/**, scripts/process/pack_session_log*.py, tests/ci/test_pack_session_log.py, CLAUDE.md, docs/research/process/46-*, docs/research/quality-backlog.md
 
 ## 2026-08-10 — E-LOG0 MDC glob lens for session-log nest
-Commit: uncommitted
+Commit: 192a244b
 Tests: MDC mode smoke (globs include session-log-nest); claims n/a for rules-only
 Assumptions affected:
 - Session-log conventions live only in README/CLAUDE — [New info — glob rule `session-log-nest.mdc` auto-attaches on nest/packer paths; shards stay `.md`]
