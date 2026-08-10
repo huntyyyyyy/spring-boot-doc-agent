@@ -459,6 +459,15 @@ Research: [`docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md`](st
 
 ---
 
+## P32 — Harn / Nimbus / noprop release scan (2026-08-10) — stance only
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P32.0 | Record Embody/Adopt/Refuse for Harn 0.10.69, Nimbus 0.2.1, noprop 0.0.4 vs E-RUST0 | **Done** (research) — **Refuse** all as product deps; pattern-only for receipts/seeds | [`coverage-quality/harn-nimbus-noprop-release-scan-2026.md`](coverage-quality/harn-nimbus-noprop-release-scan-2026.md) |
+| P32.1 | Implement Harn runtime / Nimbus vault / noprop in tip | **Refuse** | no epic unless Evidenced gap vs denylist/Hypothesis/plant_profile |
+
+---
+
 ## P14 — Docs research taxonomy + claude consolidation + look-first
 
 | # | Action | Stance | Verify |
