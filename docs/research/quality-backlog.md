@@ -276,11 +276,11 @@ Research: [`docs/research/modularity/20-tach-dependency-blueprint-2026.md`](modu
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO20** (packet **21+22+23**: BC-first; Wave 0 overlay; Wave 1 deep BC+tach+stage dialect; multi-base pattern before HttpLLM; refuse workspace until H3 multi-repo Spec) | **Draft** (2026-08-10) | research 21+22+23 `spec_gate` → APPROVED |
-| P18.1 | **E-REPO1 Implement:** DOMAIN_MAP + truth labels → REPO-S3 → deep pack/tach; dissolve one `tools/` cluster via stage/BC name | After Approve; do **not** block H1 Stage-4 calibration | map + InCol table; `tach check` |
-| P18.2 | Spikes **REPO-S1–S5:** root move; tools clusters; PairSmell; physical truth zones; multi-base assembly without polylith-cli | Spike | go/no-go memos |
+| P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**: destinations + capability backcast + **landing gaps**; Wave 1 blocked on cycle-break; DOMAIN_MAP needs claims bite) | **Draft** (2026-08-10) | research 21–24 `spec_gate` → APPROVED |
+| P18.1 | **E-REPO1 Implement:** inventory+claims → cycle-break/façades (w/ E-COH1) → one tools cluster + invoke shim → tach layer/interface | After Approve; do **not** big-bang `tools/` or root | inventory count; one-way edges; `-m` shim; `tach check`; poke |
+| P18.2 | Spikes **REPO-S1–S5** + gap deliverables (PairSmell method, shim policy, Accept template) | Spike | go/no-go + schemas |
 
-Research: [`21`](modularity/21-ddd-repository-structure-options-2026.md) · [`22`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](modularity/23-ddd-repo-structure-capability-backcast-2026.md) (horizons H0–H3 + Possibilities 1–10 with pros/cons).
+Research: [`21`](modularity/21-ddd-repository-structure-options-2026.md) · [`22`](modularity/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](modularity/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](modularity/24-ddd-repo-structure-landing-gaps-2026.md).
 
 ---
 

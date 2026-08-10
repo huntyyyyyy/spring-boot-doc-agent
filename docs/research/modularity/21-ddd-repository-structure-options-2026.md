@@ -40,8 +40,9 @@ layouts**, ranks them for *this* product, and Spec-gates a preferred path.
 **Deep companions (required read for Approve):**  
 - [`22-ddd-repo-structure-quality-deepdive-2026.md`](22-ddd-repo-structure-quality-deepdive-2026.md) — quality axes + unusual G–P  
 - [`23-ddd-repo-structure-capability-backcast-2026.md`](23-ddd-repo-structure-capability-backcast-2026.md) — **future-capability roadmap + solid possibilities with pros/cons**  
+- [`24-ddd-repo-structure-landing-gaps-2026.md`](24-ddd-repo-structure-landing-gaps-2026.md) — **what will not land at Implement/Test (cycles, shims, fake-green)**  
 
-**E-REPO0 Approve = memos 21 + 22 + 23 together.**
+**E-REPO0 Approve = memos 21 + 22 + 23 + 24 together.**
 
 ---
 
