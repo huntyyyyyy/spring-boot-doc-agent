@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/resolve-input-0.1.json",
+  "title": "resolve.input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["injection_site_id", "snapshot_id"],
+  "properties": {
+    "injection_site_id": { "$ref": "common.schema.json#/$defs/injectionSiteId" },
+    "snapshot_id": { "$ref": "common.schema.json#/$defs/snapshotId" }
+  }
+}

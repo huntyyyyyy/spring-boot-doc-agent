@@ -91,7 +91,7 @@ a witness (`llm_witness_forbidden`).
 
 | Handle | Minted by | Required by | Expiry / reject |
 | --- | --- | --- | --- |
-| `snapshot_id` | index/registry refresh tool (future) or implied open | `resolve`, `claim_withdraw`, `locks_list` | `expired_handle`, `unknown_handle` |
+| `snapshot_id` | **`snapshot_open`** | `resolve`, `claim_withdraw`, scoped `locks_list`; optional on `verify` | `expired_handle`, `unknown_handle` |
 | `lock_set_id` | `locks_list` or git-derived list | `verify` | `unknown_id` |
 | `run_id` / `receipt_path` | `verify` | follow-up audit (Could) | `stale_receipt` if material digest drifts |
 | `injection_site_id` | resolve catalog / graph query (future) | `resolve` | `unknown_id` |
@@ -116,10 +116,9 @@ a witness (`llm_witness_forbidden`).
 
 | Gap | Blocks |
 | --- | --- |
-| Per-tool JSON Schema files | Implement of `packages/mcp-server` |
-| Effect-checkpoint fixtures | Verification and Validation |
-| Snapshot mint tool | Handle story incomplete until named |
+| Live Tier-1 scorer + replay world | G-M2 Implement |
 | Auth for remote HTTP | Only if remote ships |
+| `injection_site` catalog mint tool | Spike |
 
 ---
 

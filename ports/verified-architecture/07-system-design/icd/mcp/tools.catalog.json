@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/tools-list-annotations-0.1.json",
+  "title": "tools.list annotations for wave-1 primitives",
+  "description": "Hints for tools/list — not executable code. readOnly/destructive per MCP ToolAnnotations.",
+  "tools": [
+    {
+      "name": "snapshot_open",
+      "description": "Mint snapshot_id bound to tree_sha and index_sha. Call before resolve or claim_withdraw.",
+      "inputSchema_ref": "snapshot_open.input.schema.json",
+      "outputSchema_ref": "snapshot_open.output.schema.json",
+      "annotations": {
+        "title": "Open snapshot",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "locks_list",
+      "description": "List lock ids from git System of Record; returns lock_set_id handle.",
+      "inputSchema_ref": "locks_list.input.schema.json",
+      "outputSchema_ref": "locks_list.output.schema.json",
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "verify",
+      "description": "Run LockCheck; harness writes proof-carrying receipt. Model must not invent pass.",
+      "inputSchema_ref": "verify.input.schema.json",
+      "outputSchema_ref": "verify.output.schema.json",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "resolve",
+      "description": "Resolve one injection site against snapshot. Returns resolved | unknown | unprovable.",
+      "inputSchema_ref": "resolve.input.schema.json",
+      "outputSchema_ref": "resolve.output.schema.json",
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "claim_withdraw",
+      "description": "Recompute claim dispositions for snapshot; unprovable allowed without destroying artifacts.",
+      "inputSchema_ref": "claim_withdraw.input.schema.json",
+      "outputSchema_ref": "claim_withdraw.output.schema.json",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
+  "list_cache": { "ttlMs": 3600000, "cacheScope": "server" }
+}

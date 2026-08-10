@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/common-0.1.json",
+  "title": "McpCommonDefs",
+  "$defs": {
+    "handleId": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "pattern": "^(snap|lock|run|site|claim)_[A-Za-z0-9._-]{6,120}$",
+      "description": "Minted handle; prefix encodes kind. Models must not invent these."
+    },
+    "snapshotId": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/handleId"
+        },
+        {
+          "pattern": "^snap_"
+        }
+      ]
+    },
+    "lockSetId": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/handleId"
+        },
+        {
+          "pattern": "^lock_"
+        }
+      ]
+    },
+    "runId": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/handleId"
+        },
+        {
+          "pattern": "^run_"
+        }
+      ]
+    },
+    "injectionSiteId": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/handleId"
+        },
+        {
+          "pattern": "^site_"
+        }
+      ]
+    },
+    "claimId": {
+      "type": "string",
+      "pattern": "^claim_[A-Za-z0-9._-]{6,120}$"
+    },
+    "absolutePath": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Absolute filesystem path under the trusted target root"
+    },
+    "sha256Hex": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "rejectClass": {
+      "type": "string",
+      "enum": [
+        "unknown_id",
+        "unknown_handle",
+        "expired_handle",
+        "stale_receipt",
+        "llm_witness_forbidden",
+        "schema_invalid",
+        "header_body_mismatch",
+        "protocol_version_unsupported",
+        "equivariance_reject",
+        "index_missing",
+        "index_stale",
+        "search_fallback_forbidden",
+        "todo_mutation_forbidden",
+        "binding_incomplete",
+        "command_set_drift",
+        "build_proof_missing",
+        "digest_mismatch",
+        "receipt_identity_incomplete"
+      ]
+    },
+    "toolError": {
+      "type": "object",
+      "required": [
+        "reject_class",
+        "message"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reject_class": {
+          "$ref": "#/$defs/rejectClass"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "hint": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "not": {
+        "required": [
+          "llm_text",
+          "rag_chunk",
+          "narrative_pass"
+        ]
+      }
+    }
+  }
+}

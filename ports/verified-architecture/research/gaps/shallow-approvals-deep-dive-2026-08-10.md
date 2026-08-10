@@ -262,14 +262,14 @@ Also still thin: DynamicMCPBench public code; Proof-or-Stop public engine; EA-Gr
 
 | Gap | Entity | Missing | Blocks |
 | --- | --- | --- | --- |
-| G-R1 | Receipts | Canon materialHash + ρ(E) + commandSetHash | D10 / open question 05 |
-| G-R2 | Receipts | Offline tamper Accept suite | Verification and Validation |
+| G-R1 | Receipts | β/ρ fields Draft in schema + Decision Matrix; canon ls-tree Spike remains | D10 / open question 05 |
+| G-R2 | Receipts | Tamper classes named in matrix; plants not yet executable | Verification and Validation |
 | G-E1 | Claim memory | Evidence enum + DISP vs claim disposition + completeness | D10b / QAS-N-07 |
 | G-E2 | Claim memory | Pilot invent Spike (0 public impls) | Honest Must |
-| G-M1 | Model Context Protocol | Decision matrix + ICD usage cases landed; still need per-tool JSON Schema + snapshot-mint tool | D7 / D10c |
-| G-M2 | Model Context Protocol | Effect checkpoints / fixtures | Implement |
+| G-M1 | Model Context Protocol | Per-tool schemas + `snapshot_open` Draft; Accept pending | D7 / D10c |
+| G-M2 | Model Context Protocol | FX-MCP TaskSpecs Draft; Tier-1 scorer + replay world pending | Implement |
 | G-C1 | C4 | Accept Context+Container with MVP subset | D8 |
-| G-L1 | Lock Intermediate Representation | `lock-ir.schema.json` + fidelity matrix + no agent `update-todo` | open question 04 |
+| G-L1 | Lock Intermediate Representation | `lock-ir.schema.json` Draft + Decision Matrix; adapter map open | open question 04 |
 | G-I1 | Index freshness | Budget fields + exact-commit Must policy | open question 06 |
 | G-H1 | Harness | Propose/decide ICD + cue-delivery schema (Pilot) | D7 / Must spine |
 | G-Q1 | Latency Quality Attribute Scenarios | Measure schema wired to receipts; Spike **T** or demote | D3 / N-01/N-02 |

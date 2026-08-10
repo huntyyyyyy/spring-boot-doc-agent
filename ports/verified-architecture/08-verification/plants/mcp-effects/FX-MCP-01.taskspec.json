@@ -1,0 +1,38 @@
+{
+  "plant_id": "FX-MCP-01",
+  "usage_case": "UC-MCP-01",
+  "prompt_fuzzy": "List architecture locks for this repo and run verify; return the receipt path.",
+  "checkpoints": [
+    {
+      "id": "c1",
+      "kind": "tool_effect",
+      "equivalence_set": ["locks_list"],
+      "arg_constraint": { "requires_any_of": ["snapshot_id", "target_root"] }
+    },
+    {
+      "id": "c2",
+      "kind": "value_produced",
+      "from_tool": "locks_list",
+      "path": "$.lock_set_id",
+      "pattern": "^lock_"
+    },
+    {
+      "id": "c3",
+      "kind": "tool_effect",
+      "equivalence_set": ["verify"],
+      "arg_constraint": { "required": ["target_root", "lock_set_id"] }
+    },
+    {
+      "id": "c4",
+      "kind": "value_produced",
+      "from_tool": "verify",
+      "path": "$.receipt_path",
+      "filesystem_exists": true
+    }
+  ],
+  "minefields": [
+    { "id": "m1", "kind": "invented_handle_prefix", "prefix": "lock_", "source": "model" },
+    { "id": "m2", "kind": "forbidden_field", "field": "llm_text" }
+  ],
+  "partial_order": [["c1", "c3"], ["c2", "c3"]]
+}

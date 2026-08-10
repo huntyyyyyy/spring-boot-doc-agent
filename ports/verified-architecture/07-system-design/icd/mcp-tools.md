@@ -47,10 +47,21 @@ See `08-verification/stead/STEAD_CONSTRAINTS.md` ST-1…5.
 
 | Tool | Args (typed) | Effect checkpoint | Primary usage |
 | --- | --- | --- | --- |
-| `verify` | `target_root: path`, `lock_set_id: id` | receipt written; exit reflects result | UC-MCP-03 |
+| `snapshot_open` | `target_root: path`, `require_index?: bool` | mints `snapshot_id`; binds tree/index digests | UC-MCP-02/04 prelude |
+| `verify` | `target_root: path`, `lock_set_id: id`, `snapshot_id?: id` | receipt written; exit reflects result | UC-MCP-03 |
 | `resolve` | `injection_site_id: id`, `snapshot_id: id` | resolve_result; Unknown allowed | UC-MCP-02 |
-| `claim_withdraw` | `snapshot_id: id` | dispositions[] | UC-MCP-04 |
-| `locks_list` | `snapshot_id: id` (optional) | returns lock ids from git System of Record | UC-MCP-01 |
+| `claim_withdraw` | `snapshot_id: id`, `claim_id?: id` | dispositions[] | UC-MCP-04 |
+| `locks_list` | `snapshot_id?: id` or `target_root` | returns `lock_set_id` + lock ids from git System of Record | UC-MCP-01 |
+
+### Schema files (JSON Schema 2020-12)
+
+Directory: `icd/mcp/` — see `tools.catalog.json`. Shared handle/reject defs in
+`common.schema.json`. Research: `research/gaps/mcp-open-items-research-2026-08-10.md`.
+
+### Effect plants (Tier-1)
+
+`08-verification/plants/mcp-effects/` — FX-MCP-01/03/05 TaskSpecs (DynamicMCPBench
+shape; engine not Adopted).
 
 ### Planned code map (Implement later — Spec binding now)
 
@@ -100,8 +111,10 @@ protocol_version_unsupported · equivariance_reject (when wrap ships)
 
 ## Still missing before Implement
 
-- [ ] Per-tool JSON Schema 2020-12 files under `icd/mcp/`  
-- [ ] Effect-checkpoint fixtures (filesystem receipt postcondition)  
-- [ ] Explicit snapshot-mint tool (or document how `snapshot_id` is born)  
+- [x] Per-tool JSON Schema 2020-12 files under `icd/mcp/` (Draft)  
+- [x] Explicit snapshot-mint tool (`snapshot_open`)  
+- [x] Effect-checkpoint fixtures (FX-MCP-* Draft plants)  
+- [ ] Live replay world + Tier-1 scorer implementation  
 - [ ] Auth story if remote HTTP ships  
-- [ ] Migration note if any client still speaks pre-`2026-07-28`
+- [ ] Migration note if any client still speaks pre-`2026-07-28`  
+- [ ] Human Accept of schemas + plants

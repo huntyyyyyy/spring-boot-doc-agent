@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/verify-output-0.1.json",
+  "title": "verify.output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "receipt_path", "result", "material_digest", "policy_digest"],
+  "properties": {
+    "run_id": { "$ref": "common.schema.json#/$defs/runId" },
+    "receipt_path": { "$ref": "common.schema.json#/$defs/absolutePath" },
+    "result": { "enum": ["pass", "fail", "unknown"] },
+    "material_digest": { "$ref": "common.schema.json#/$defs/sha256Hex" },
+    "policy_digest": { "$ref": "common.schema.json#/$defs/sha256Hex" }
+  },
+  "not": {
+    "required": ["llm_text", "narrative_pass"]
+  }
+}

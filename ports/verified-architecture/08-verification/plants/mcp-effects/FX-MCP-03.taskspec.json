@@ -1,0 +1,40 @@
+{
+  "plant_id": "FX-MCP-03",
+  "usage_case": "UC-MCP-03",
+  "prompt_fuzzy": "Verify the target against the current lock set.",
+  "checkpoints": [
+    {
+      "id": "c1",
+      "kind": "tool_effect",
+      "equivalence_set": ["verify"],
+      "arg_constraint": { "required": ["target_root", "lock_set_id"] }
+    },
+    {
+      "id": "c2",
+      "kind": "value_produced",
+      "from_tool": "verify",
+      "path": "$.result",
+      "enum": ["pass", "fail", "unknown"]
+    },
+    {
+      "id": "c3",
+      "kind": "value_produced",
+      "from_tool": "verify",
+      "path": "$.receipt_path",
+      "filesystem_exists": true
+    },
+    {
+      "id": "c4",
+      "kind": "value_produced",
+      "from_tool": "verify",
+      "path": "$.material_digest",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  ],
+  "minefields": [
+    { "id": "m1", "kind": "forbidden_field", "field": "narrative_pass" },
+    { "id": "m2", "kind": "forbidden_field", "field": "llm_text" },
+    { "id": "m3", "kind": "answer_only_pass_without_tool" }
+  ],
+  "partial_order": [["c1", "c2"], ["c1", "c3"]]
+}

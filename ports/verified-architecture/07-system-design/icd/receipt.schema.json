@@ -3,47 +3,190 @@
   "$id": "https://verified-architecture.local/schemas/receipt-0.1.json",
   "title": "VerifyReceipt",
   "type": "object",
-  "required": ["receipt_version", "run_id", "git_commit", "target_root", "result", "steps", "material_digest", "policy_digest"],
+  "required": [
+    "receipt_version",
+    "run_id",
+    "git_commit",
+    "head_hash",
+    "target_root",
+    "result",
+    "steps",
+    "material_digest",
+    "policy_digest",
+    "command_set_digest"
+  ],
   "properties": {
-    "receipt_version": { "const": "0.1.0" },
-    "run_id": { "type": "string", "format": "uuid" },
-    "git_commit": { "type": "string", "minLength": 1 },
-    "target_root": { "type": "string" },
-    "result": { "enum": ["pass", "fail", "unknown"] },
-    "material_digest": { "type": "string", "description": "Hash of verified content set (Proof-or-Stop freshness)" },
-    "policy_digest": { "type": "string", "description": "Hash of lock/policy set used" },
+    "receipt_version": {
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "git_commit": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Commit id or dirty marker \u2014 insufficient alone for freshness"
+    },
+    "head_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40,64}$",
+      "description": "Proof-or-Stop \u03b2(E) head binding"
+    },
+    "target_root": {
+      "type": "string"
+    },
+    "result": {
+      "enum": [
+        "pass",
+        "fail",
+        "unknown"
+      ]
+    },
+    "material_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "Tree hash excluding lifecycle receipt/metadata paths"
+    },
+    "policy_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "command_set_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "Hash of the command/tool set used for this verify"
+    },
+    "edge_fidelity": {
+      "type": "object",
+      "description": "Copied from Lock Intermediate Representation for this run"
+    },
     "steps": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["step_id", "kind", "ok", "witness"],
+        "required": [
+          "step_id",
+          "kind",
+          "ok",
+          "witness"
+        ],
         "properties": {
-          "step_id": { "type": "string" },
-          "kind": { "enum": ["index_load", "annotation", "resolve", "lock_check", "policy", "claim_put", "claim_withdraw"] },
-          "rule_id": { "type": "string" },
-          "lock_id": { "type": "string" },
-          "ok": { "type": "boolean" },
-          "message": { "type": "string" },
+          "step_id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "index_load",
+              "annotation",
+              "resolve",
+              "lock_check",
+              "policy",
+              "claim_put",
+              "claim_withdraw",
+              "command"
+            ]
+          },
+          "rule_id": {
+            "type": "string"
+          },
+          "lock_id": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "cmd": {
+            "type": "string",
+            "description": "\u03c1(E) command \u2014 required when kind=command"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cwd": {
+            "type": "string"
+          },
+          "exit": {
+            "type": "integer"
+          },
+          "output_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
           "witness": {
             "type": "object",
-            "required": ["file", "line", "column"],
+            "required": [
+              "file",
+              "line",
+              "column"
+            ],
             "properties": {
-              "file": { "type": "string" },
-              "line": { "type": "integer", "minimum": 1 },
-              "column": { "type": "integer", "minimum": 0 },
-              "symbol": { "type": "string" },
-              "edge_id": { "type": "string" },
-              "anchor_digest": { "type": "string" }
+              "file": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "column": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "edge_id": {
+                "type": "string"
+              },
+              "anchor_digest": {
+                "type": "string"
+              }
             },
             "not": {
-              "required": ["llm_text", "rag_chunk"]
+              "required": [
+                "llm_text",
+                "rag_chunk"
+              ]
             }
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "command"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "cmd",
+                "args",
+                "cwd",
+                "exit",
+                "output_digest"
+              ]
+            }
+          }
+        ]
       }
     },
-    "unknowns": { "type": "array" },
-    "claim_dispositions": { "type": "array" }
+    "unknowns": {
+      "type": "array"
+    },
+    "claim_dispositions": {
+      "type": "array"
+    }
   }
 }

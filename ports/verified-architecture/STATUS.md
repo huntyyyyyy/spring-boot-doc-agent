@@ -32,10 +32,10 @@ Definition of Ready row **D0 = FAIL**.
 
 ## Single next task
 
-1. MCP: decision matrix + ICD usage cases landed (`decisions/mcp-decision-matrix.md`, ADR-0011) — still need per-tool JSON Schema + snapshot-mint tool named.
-2. Add `lock-ir.schema.json` + receipt tamper enum + claim Pilot charter.
+1. MCP open items researched: `icd/mcp/*.schema.json`, `snapshot_open`, FX-MCP effect plants — still need human Accept + live Tier-1 scorer.
+2. Lock Intermediate Representation schema Draft + Decision Matrix landed; receipt β/ρ fields Draft.
 3. Continue Skill `paper-digest` on Must papers; do not mark research PASS early.
-4. Fill Decision Matrices for lock Intermediate Representation and receipts when those schemas land (same standard).
+4. Merge any richer findings from parallel research agents into matrices when they finish.
 
 ## Do not do next
 

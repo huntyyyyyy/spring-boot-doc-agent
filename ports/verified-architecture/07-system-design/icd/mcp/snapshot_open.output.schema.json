@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/snapshot-open-output-0.1.json",
+  "title": "snapshot_open.output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "snapshot_id",
+    "tree_sha",
+    "index_sha",
+    "indexer_name",
+    "indexer_version",
+    "built_at",
+    "expires_at"
+  ],
+  "properties": {
+    "snapshot_id": { "$ref": "common.schema.json#/$defs/snapshotId" },
+    "tree_sha": { "$ref": "common.schema.json#/$defs/sha256Hex" },
+    "index_sha": { "$ref": "common.schema.json#/$defs/sha256Hex" },
+    "indexer_name": { "type": "string", "minLength": 1 },
+    "indexer_version": { "type": "string", "minLength": 1 },
+    "registry_epoch": { "type": "integer", "minimum": 0 },
+    "built_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" }
+  }
+}
