@@ -291,3 +291,15 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
+---
+
+## P20 — Dynamics / physical & unconventional computing (E-DYN1)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P20.0 | **E-DYN1 Spec:** approve metaphor-hygiene table (§3) + Refuse physical tip substrates | **Draft** (2026-08-10) | process/43 `spec_gate` → APPROVED |
+| P20.1 | CONTRIBUTING one-liner: physics metaphors ≠ gate softeners | After Approve | claims path |
+| P20.2 | Physical RC / DNA / ionic / neuromorphic tip deps | **Refuse** | no Implement tickets |
+
+Research: [`process/43-physical-info-dynamics-computing-2026-08-10.md`](process/43-physical-info-dynamics-computing-2026-08-10.md) (deepens [`05`](process/05-dynamics-neuromorphic.md)).
