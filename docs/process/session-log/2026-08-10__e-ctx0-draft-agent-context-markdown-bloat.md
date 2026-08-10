@@ -131,3 +131,10 @@ Tests: MDC mode smoke (globs include session-log-nest); claims n/a for rules-onl
 Assumptions affected:
 - Session-log conventions live only in README/CLAUDE — [New info — glob rule `session-log-nest.mdc` auto-attaches on nest/packer paths; shards stay `.md`]
 Files touched: .cursor/rules/session-log-nest.mdc, docs/process/session-log/README.md
+
+## 2026-08-10 — MDC pack: tooling sections on all project rules
+Commit: uncommitted
+Tests: MDC line smoke (each rule ≤80); claims n/a for rules-only
+Assumptions affected:
+- MDC lenses are policy-only without search/CLI affordances — [Resolved — every `.cursor/rules/*.mdc` now carries path-relevant tooling (ast-grep / rg / venv / pre_pr / DeepWiki) + `@adapters/claude/SEARCH.md` where useful]
+Files touched: .cursor/rules/*.mdc

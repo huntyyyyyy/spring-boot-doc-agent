@@ -15,7 +15,15 @@ framework/tool adoption, Spec Draft, or epic planning.
 4. **Refuse Implement** until levels 1–6 are in a research/design memo.
 5. One Active tip only — see backlog.
 
+## Tooling
+
+- Activate `.venv/` if running repo CLIs while researching.
+- **rg** for existing memos / backlog rows; **ast-grep** when the Spec must cite live code structure.
+- Optional Stage-0: `doc-engine query context-packet` / evidence queries when a run-dir exists.
+- Do not use raw `curl`/`wget` for research egress when WebFetch / MCP / `llms.txt` suffice; hooks still deny raw clone/curl via Bash.
+
 @.cursor/skills/principal-se-research-epic/SKILL.md
 @docs/research/se-quality-synthesis-2026-08-08.md
 @docs/research/quality-backlog.md
+@adapters/claude/SEARCH.md
 @docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md

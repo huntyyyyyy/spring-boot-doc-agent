@@ -8,12 +8,23 @@ alwaysApply: false
 
 When fixtures or rule-coverage paths are in context:
 
+## Citation rules
+
 - Prefer **ast-grep** structural patterns for citation-backed claims; zero matches = unproven, not absent.
 - Annotation shapes: try `@Name` **and** `@Name($$$)` — argument-bearing forms are disjoint.
 - Adding a Stage-0 rule means adding a trigger under `scripts/fixtures/spring_signals/` (and matching pack/ast-grep id) in the same commit.
 - Rule coverage denominator is pack `rule_id`s; do not conflate with ast-grep YAML inventory counts.
 - Groovy Gradle scripts have no ast-grep grammar — filename classification only.
 
+## Tooling
+
+- Activate `.venv/`; use pinned `ast-grep` / `semgrep` on `PATH`.
+- Scan path: `spring_signal_scan` / rule coverage scripts — same as CI.
+- **rg** OK to inventory fixture filenames or rule ids; prove Java/Kotlin structure with ast-grep before `[Evidenced]`.
+- Metamorphic / fixture regen helpers live under `scripts/fixtures/` — do not hand-edit expected JSON without the regen path.
+- Semgrep twin coverage: `semgrep_rule_coverage.py` when touching Semgrep packs.
+
 @CLAUDE.md
+@adapters/claude/SEARCH.md
 @scripts/coverage/rule_coverage.py
 @scripts/fixtures/spring_signals/

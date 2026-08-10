@@ -15,5 +15,12 @@ Run **I1–I5** before importing or dismissing a distant field. Habit line:
 
 `Iso: A ≅ B → land as <type> | non-preserved: … | I5: no SoT retype`
 
+## Tooling
+
+- Locate prior iso memos with **rg** under `docs/research/` (prose); verify any CS landing citations in code with **ast-grep**.
+- External frameworks: DeepWiki MCP `ask_question` + primary `llms.txt` — same bar as principal research.
+- Never retype boolean SoTs via metaphor; keep fail_under / coverage predicates typed.
+
 @.cursor/skills/cross-domain-isomorphism/SKILL.md
 @docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md
+@adapters/claude/SEARCH.md

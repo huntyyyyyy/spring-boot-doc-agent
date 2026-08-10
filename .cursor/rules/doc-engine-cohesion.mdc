@@ -8,12 +8,23 @@ alwaysApply: false
 
 When editing product code under `src/doc_engine/` or its tests:
 
+## Product rules
+
 - Nest by **product capability** (bounded context), not grab-bag folders — see `DOMAIN_MAP.md`.
 - Stable invoke: `python -m doc_engine.tools.<mod>` / `doc-engine …` stay green across moves (shim/façade) unless a deprecation Spec says otherwise.
 - Cohesion over mechanical `part2` LOC chops; public-surface / façade poke gates are hard when in `pre_pr`.
 - No new `utils/` packages; concept-named modules only.
 - Update `docs/design/tools_bc_inventory.json` in the same commit when changing `tools/` membership.
 
+## Tooling
+
+- Activate `.venv/`; run focused `pytest tests/doc_engine/…` then broader `pre_pr --auto` before tip push.
+- **ast-grep** `-l python` for call/import structure before citing; try both bare and `$$$` forms when patterns take args.
+- **rg** for string/inventory (error messages, CLI flags); re-verify structural claims with ast-grep.
+- Public surface / façade: `python3 scripts/ci/check_public_surface.py` and façade-poke scripts when touching tools shims.
+- Optional: `doc-engine query …` / Stage-0 packet when a `--run-dir` exists (see search playbook).
+
 @DOMAIN_MAP.md
 @docs/design/concept-split-cohesion-design-2026-08-09.md
 @docs/design/tools_bc_inventory.json
+@adapters/claude/SEARCH.md

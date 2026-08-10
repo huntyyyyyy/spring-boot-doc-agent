@@ -8,13 +8,25 @@ alwaysApply: false
 
 When these paths are in context:
 
+## Gates
+
 - Before push on non-docs tips: `python3 scripts/ci/pre_pr.py --auto` (mirrors CI hard gates). `--fast` is docs-only.
-- Touches to `scripts/`, `agents/`, or `skills/`: run `python3 scripts/ci/check_repo_claims.py` before final commit.
-- Install hooks once per clone: `python3 scripts/ci/install_git_hooks.py` → `.githooks/pre-push` → `pre_pr --auto`.
-- Actions outage: `python3 scripts/ci/pre_pr.py --actions-outage` — do not invent a second local-CI SoT.
+- Touches to `scripts/`, `agents/`, or `skills/`: `python3 scripts/ci/check_repo_claims.py` before final commit.
+- Install hooks once: `python3 scripts/ci/install_git_hooks.py` → `.githooks/pre-push` → `pre_pr --auto`.
+- Actions outage: `python3 scripts/ci/pre_pr.py --actions-outage` — no second local-CI SoT.
 - Optional Sonar local advisory is **never** merge SoT.
 - Project `.cursor/hooks.json` bridges hard denies; do not replace hooks with prose rules.
+
+## Tooling
+
+- Activate `.venv/`; pin-check `ast-grep` / `semgrep` / `ruff` from `requirements.txt`.
+- Lint: `ruff check scripts/ src/doc_engine/`; complexity: `doc-engine complexipy-ratchet`.
+- Find CI/script symbols: **ast-grep** (`-l python`) for structural claims; **rg** for workflow YAML / prose.
+- Tests: `pytest` per `ci.yml` / `README.md` — redirect logs to a file; check `$RC` (no pipe-mask).
+- Rule coverage / fixtures: `scripts/coverage/rule_coverage.py` when changing Stage-0 packs.
 
 @scripts/ci/pre_pr.py
 @.github/workflows/ci.yml
 @scripts/README.md
+@adapters/claude/SEARCH.md
+@.cursor/hooks.json

@@ -15,6 +15,15 @@ Use only when recovering from tip thrash, pre-push failures, or Actions outage.
    force-push tip thrash.
 5. For design-shaped commits blocked by hooks, attach Spec memo first.
 
+## Tooling
+
+- Activate `.venv/`; re-run failing step from telemetry JSON, not a guessed subset.
+- Diagnose with **rg** on `.git/pre-pr-telemetry/` and CI logs; structural code fixes still need **ast-grep**/tests.
+- Claims after meta edits: `python3 scripts/ci/check_repo_claims.py`.
+- Hooks SoT: `.cursor/hooks.json` + `adapters/claude/hooks/` — do not disable denies to “get green.”
+
 @scripts/ci/pre_pr.py
 @scripts/README.md
 @docs/research/quality-backlog.md
+@.cursor/hooks.json
+@adapters/claude/SEARCH.md

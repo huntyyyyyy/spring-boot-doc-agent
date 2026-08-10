@@ -8,6 +8,8 @@ alwaysApply: false
 
 When the nest, stub, or packer are in context:
 
+## Nest rules
+
 - Append to the **latest shard** (or create `YYYY-MM-DD__topic-slug.md`) — never grow the stub `docs/process/session-log.md`.
 - Shard budget **≤225 lines**; filename = date-first span + lead-title kebab slug.
 - Chronology SoT for re-reads = `docs/process/session-log/.pack-order` (not `ls` alpha).
@@ -15,6 +17,14 @@ When the nest, stub, or packer are in context:
 - Bulk rebuild only: `python3 scripts/process/pack_session_log.py --from-git HEAD:docs/process/session-log.md`.
 - **Refuse:** chat dumps as research SoT; rewriting history; month/week-only splits; mass `.md`→`.mdc` of shards.
 
+## Tooling
+
+- Find past assumptions: **rg** across `docs/process/session-log/` and `docs/process/steering-prompts/` (prose — not ast-grep markdown).
+- Verify “Files touched” / code claims with **ast-grep** (structure) or **rg** (paths/strings), then `check_repo_claims` when meta paths change.
+- Activate `.venv/` before running the packer or pytest for `tests/ci/test_pack_session_log.py`.
+- Prefer opening one shard from `.pack-order` / README table — do not reassemble a mental monolith.
+
 @docs/process/session-log/README.md
 @scripts/process/pack_session_log.py
+@adapters/claude/SEARCH.md
 @CLAUDE.md

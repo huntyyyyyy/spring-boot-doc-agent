@@ -13,7 +13,14 @@ Hard invariants for every change. Details live in linked SoTs — do not weaken 
 - **complexipy ≤5**; file **LOC ≤225** (src and tests when ratchet applies); cohesion over `part2` chops
 - **No `utils/` grab-bag** — concept-named modules (`doc_engine.core.*`, domain packages)
 - Descriptive names only — refuse single-letter mode/flags (`m`/`o`/`c`)
-- Prefer structural search for citation claims; follow `CLAUDE.md` / claims checker
+
+## Tooling (every chat)
+
+- Activate `.venv/` before lint/test/CLI (`which ast-grep` / `semgrep` must match `requirements.txt` pins).
+- **Code citations:** prefer **ast-grep** structural patterns; zero hits = unproven, not absent.
+- **Prose / inventory:** **ripgrep** (`rg`) / Grep tool / Glob+Read — allowed; not alone as structural `[Evidenced — path:line]`.
+- **Hard denies stay hooks:** no raw `curl`/`wget`/`git clone` via Bash; pipe-to-`tail` masking — see project hooks.
+- Claims / steering path checks: `python3 scripts/ci/check_repo_claims.py` when touching `scripts/` / `agents/` / `skills/`.
 
 ## SoT vs derived (DDIA)
 
@@ -32,4 +39,6 @@ Hard invariants for every change. Details live in linked SoTs — do not weaken 
 
 @docs/research/se-quality-synthesis-2026-08-08.md
 @docs/research/quality-backlog.md
+@adapters/claude/SEARCH.md
+@CLAUDE.md
 @.cursor/skills/principal-se-research-epic/SKILL.md

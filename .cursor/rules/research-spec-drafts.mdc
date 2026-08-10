@@ -8,12 +8,22 @@ alwaysApply: false
 
 When research or design markdown is in context:
 
+## Spec rules
+
 - Future-dev Spec/epic plans require skill **principal-se-research-epic** Bloom ladder **through Create** before generating implementation code.
 - Use DeepWiki MCP `ask_question` (`https://mcp.deepwiki.com/mcp`) + primary `llms.txt` — chat-only “I read the docs” is not evidence.
 - Set `bloom_gate: required-through-create` on future-dev memos.
 - Draft Specs stay parked in `quality-backlog.md` until human Approve; do not open parallel Active tips.
 - Research domains stay `.md` — do **not** mass-rename to `.mdc`.
 
+## Tooling
+
+- **rg** / Glob+Read for prose memos and cross-links (ast-grep markdown grammar is not a prose SoT).
+- Framework learning: fetch `llms.txt` / primary docs; DeepWiki pages for cartography; MCP Ask for grounded Q&A.
+- When a Spec cites code paths, verify with **ast-grep** (code) or **rg** (docs) before tagging Evidenced.
+- Look-first map: `docs/research/README.md`; Active tip: `quality-backlog.md`.
+
 @docs/research/README.md
 @docs/research/quality-backlog.md
 @.cursor/skills/principal-se-research-epic/SKILL.md
+@adapters/claude/SEARCH.md

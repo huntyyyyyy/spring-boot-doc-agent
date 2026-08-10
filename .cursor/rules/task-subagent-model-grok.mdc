@@ -11,3 +11,6 @@ When calling the **Task** tool (explore, generalPurpose, shell, or any other sub
 2. **Do not** use `composer-2.5`, `composer-2.5-fast`, or omit `model` / pass `"fast"` — those either burn the wrong premium pool or trade accuracy for speed.
 3. Prefer a slower, more accurate, better-informed subagent over a faster cheaper one. Token/latency savings are not the goal for Task exploration or analysis.
 4. If a Task call fails with `API usage limit reached`, retry **once** with the same `cursor-grok-4.5-high` pin (do not silently fall back to Composer). If it still fails, tell the user it is a quota/routing issue and stop — do not substitute Composer unless they ask.
+5. Prompt subagents to use this repo’s stack: activate `.venv/`, **ast-grep** for structural code claims, **rg** for prose/inventory, `doc-engine` / `pytest` / `pre_pr` as needed — same playbook as `@adapters/claude/SEARCH.md`.
+
+@adapters/claude/SEARCH.md
