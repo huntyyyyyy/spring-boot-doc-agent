@@ -28,6 +28,9 @@ sources:
     - astral-sh/ruff · astral-sh/uv · ast-grep/ast-grep · semgrep/semgrep
     - charmbracelet/bubbletea · spf13/cobra · hashicorp/go-plugin
     - ruby/ruby · babashka/babashka · clojure/clojure
+    - TNG/ArchUnit · gradle/gradle · elixir-lang/elixir · livebook-dev/livebook
+    - bytecodealliance/wasmtime · extism/extism
+    - modelcontextprotocol/typescript-sdk
   mcp: https://mcp.deepwiki.com/mcp
 ---
 
@@ -35,11 +38,14 @@ sources:
 
 **Product:** `doc-engine` Python CLI + Cursor/Claude agent DevEx.  
 **Question.** Beyond “LLM prompts,” what is the **complete toolscape** humans and
-agents should download and run — including **Ruby / Clojure / Go** — without
+agents should download and run — **all polyglot lanes** (Rust wheels, Go, Ruby,
+Clojure, Elixir, JVM, .NET, PHP, TS/MCP, WASM, Datalog, shells, …) — without
 making polyglot the merge SoT?
 
 **Method.** Fold Jul–Aug 2026 memos (22/33/39–41/46/47) + DeepWiki MCP Ask +
 Astral/`cursor.com` `llms.txt` → Embody / Adopt / Pilot / Refuse by **audience**.
+Depth scorecards remain in process/39–41; this memo is the **install / audience
+SoR** that binds them.
 
 ---
 
@@ -47,16 +53,13 @@ Astral/`cursor.com` `llms.txt` → Embody / Adopt / Pilot / Refuse by **audience
 
 | Audience | Must have today `[Confirmed]` | Next Adopt / Pilot | Refuse |
 | --- | --- | --- | --- |
-| **Repo / CI** | `.venv` pins: ruff, pytest, complexipy, tach, ast-grep, semgrep; CodeQL jobs; `pre_pr --auto`; claims | **ty** unresolved-import (E-LINT0); optional SARIF sensors | Mega-linter as SoT; dual Cover%; Sonar floor |
-| **Developer laptop** | Same venv + `gh` + ripgrep + editor LSP; hooks via `install_git_hooks` | `uv` as installer Spike; AsciiDoc/RuboCop **sidecars** if Rails targets | Node husky; Go/Ruby/Clojure as tip kernel |
-| **Cursor / Claude agent** | MDC pack + Skills + hooks; SEARCH playbook; DeepWiki MCP; WebFetch/`llms.txt` | Tip-probe MCP later (E-GND0); richer MCP sinks (E-OAS0) | Raw curl/clone; nested AGENTS path-SoT; alwaysApply bloat |
-| **Ruby** | — | **Pilot-now:** Asciidoctor sink · RuboCop/Brakeman SARIF · Packwerk↔tach vocab | Ruby tip rewrite |
-| **Go** | — | **Pattern / Pilot:** cobra/gh dual-sink · Bubble Tea TUI shape · go-plugin sensor host · Syft/Trivy | Go product rewrite |
-| **Clojure** | — | **Pattern → Pilot-later:** Malli/Spec contracts · DataScript/XTDB facts · Babashka ops recipes | Clojure/SCI tip kernel |
+| **Repo / CI** | `.venv`: ruff, pytest, complexipy, tach, ast-grep, semgrep; CodeQL; `pre_pr --auto`; claims | **ty** (E-LINT0); SARIF/SBOM sensors; Conftest optional | Mega-linter SoT; dual Cover%; Sonar floor |
+| **Developer laptop** | Same venv + `gh` + ripgrep + LSP; `install_git_hooks` | `uv` Spike; dual-sink recipes (Nu/pwsh); named language sidecars only after Pilot | husky; tip rewrite in another language |
+| **Cursor / Claude agent** | MDC + Skills + hooks; SEARCH; DeepWiki MCP; `llms.txt` | E-GND0 tip-probe; E-OAS0 sinks; MCP TS **patterns** in Python host | Raw curl/clone; Node as tip dep; alwaysApply bloat |
 
-**Bottom line:** Python kernel + Embodied Rust wheels stay SoT. Ruby/Go/Clojure
-are **enhancement lanes** (patterns, sidecars, pilots) — already mapped in
-E-POLY0 / E-POLY0b / E-LANG0 — not competing runtimes for `coverage.xml`.
+**Polyglot lanes (compressed):** Python kernel + Embodied **Rust wheels** stay SoT.
+Every other family is **Pilot / Pattern / Defer** per E-POLY0b — never a second
+`coverage.xml` writer. Full family table → §2.
 
 ---
 
@@ -64,92 +67,194 @@ E-POLY0 / E-POLY0b / E-LANG0 — not competing runtimes for `coverage.xml`.
 
 | Level | Evidence |
 | --- | --- |
-| **1 Remember** | Tool IDs + `llms.txt` + DeepWiki Ask on Astral / Charm / Babashka families |
-| **2 Understand** | Audiences = repo gate / human DevEx / agent context — not one install list |
-| **3 Apply** | Today: `.venv` + `pre_pr`; agents: MDC + SEARCH; pilots named with keep/drop |
-| **4 Analyze** | Embody wheels vs Adopt-pattern vs Pilot-before-Refuse (memo 40 doctrine) |
-| **5 Evaluate** | §7 adversarial — false-green from extra linters; false-red from ty without venv |
-| **6 Create** | Tickets TOOL0–TOOL6 below — **Implement blocked until Approve** |
+| **1 Remember** | Tool IDs + `llms.txt` + DeepWiki Ask (Astral, Charm, Babashka, ArchUnit, Livebook, wasmtime/Extism, MCP TS SDK) |
+| **2 Understand** | Audiences ≠ one install list; languages ≠ tip kernels |
+| **3 Apply** | Today `.venv`+`pre_pr`; pilots named with keep/drop from memo 40 §4 |
+| **4 Analyze** | Embody wheels vs Adopt-pattern vs Pilot-before-Refuse |
+| **5 Evaluate** | §6 adversarial |
+| **6 Create** | TOOL0–TOOL12 — **Implement blocked until Approve** |
 
 ---
 
-## 1. Problem classes (do not collapse)
+## 1. Problem classes
 
 | Class | Failure | Owner |
 | --- | --- | --- |
 | **T1 Gate SoT** | Local green ≠ CI 98.7 | `pre_pr` / oracle |
 | **T2 Citation** | Text hit as structural proof | ast-grep (+ CodeQL/Semgrep) |
-| **T3 Import resolution** | Unused ≠ unresolved | ruff vs **ty** (E-LINT0) |
-| **T4 Agent context** | Always-on essay / missing tools | MDC modes + SEARCH |
+| **T3 Import resolution** | Unused ≠ unresolved | ruff vs **ty** |
+| **T4 Agent context** | Always-on essay / missing tools | MDC + SEARCH |
 | **T5 Human DX** | Opaque CLI / no dual-sink | E-OAS0 / gh patterns |
-| **T6 Polyglot envy** | Rewrite tip in Go/Ruby/Clojure | Pilot-before-Refuse |
+| **T6 Polyglot envy** | Rewrite tip in $LANG | Pilot-before-Refuse |
 
 ---
 
-## 2. Ruby / Go / Clojure (explicit answer)
+## 2. Full language marketplace (audience SoR)
 
-Already researched 2026-08-10 in [`39`](39-polyglot-cli-toolkit-bfs-2026-08-10.md),
-[`40`](40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md),
-[`41`](41-language-excellence-domains-subdomains-2026-08-10.md). DeepWiki Ask
-this session reconfirmed shapes:
+Doctrine: five buckets from [`40`](40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md).
+Excellence maps: [`41`](41-language-excellence-domains-subdomains-2026-08-10.md).
+Rust engine marketplace: [`33`](../coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md).
 
-### Go — **yes, as patterns + optional helpers**
+### 2.0 Already Embodied (do not re-debate)
 
-| Stick | Bucket | Why |
+| Stick | Family | Role |
 | --- | --- | --- |
-| **cobra / gh `--json`** | Pattern | Subcommand + dual-sink UX for `doc-engine` / operator CLIs |
-| **Bubble Tea / Lip Gloss** | Pattern → Pilot TUI | Elm-MVU review UX; host in Python, do not rewrite product in Go `[Evidenced — DeepWiki]` |
-| **go-plugin** | Pattern → Pilot | Language-sensor sidecar shape (not in-proc merge) |
-| **Syft / Trivy** | Pilot-now sensor | SBOM/vuln SARIF — never Cover% SoT |
-| **Go rewrite of doc-engine** | **Refuse** | Category error vs Python kernel + Embodied Rust wheels |
+| **ruff · complexipy · tach · ast-grep** | Rust wheels | Lint / cognitive / cycles / citation |
+| **semgrep** | OCaml engine | Stage-0 / FP twin |
+| **pytest · coverage adapter** | Python | Tests + oracle fold |
+| **CodeQL** | CodeQL | Signals pack (CI) |
+| **ripgrep allowed** | Rust binary | Prose inventory (E-SEARCH0) |
+| **MDC + Skills + hooks** | Cursor | Agent activation (E-MDC0) |
 
-### Ruby — **yes, for targets and sinks**
+### 2.1 Rust (beyond Embodied wheels)
 
-| Stick | Bucket | Why |
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **uv** | Spike / Adopt-installer | Fast venv + `tool install` `[Evidenced — DeepWiki/llms]` |
+| **ty** | Adopt after E-LINT0 Approve | `unresolved-import` |
+| **maturin / PyO3 profiled bin** | Pilot-now if measured | Never unprofiled in-tree Cargo |
+| **difftastic / delta** | Pilot-now review sink | Optional human DX |
+| **cargo-\* / Miri / Clippy as deps** | **Refuse** | Pattern/culture only |
+| **In-tree Cargo workspace** | **Refuse** | Constitution |
+
+### 2.2 Go
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **cobra / gh `--json`** | Pattern | Dual-sink CLI contracts |
+| **Bubble Tea / Lip Gloss / glow** | Pattern → Pilot TUI | Elm-MVU; Python-hosted `[Evidenced — DeepWiki]` |
+| **go-plugin** | Pattern → Pilot | Sensor ABI shape |
+| **Syft / Trivy** | Pilot-now | SBOM/vuln SARIF — never Cover% SoT |
+| **OPA / Conftest** | Pattern → Pilot-later | Policy packets over grade JSON |
+| **Prometheus / OTel Collector** | Pattern / Pilot-later | Sensors only |
+| **Istio/Linkerd/mesh product** | **Refuse** | Category error |
+| **Go tip rewrite** | **Refuse** | |
+
+### 2.3 Ruby
+
+| Stick | Bucket | Notes |
 | --- | --- | --- |
 | **Asciidoctor** | Pilot-now | Doc sink beside MkDocs |
-| **RuboCop / Brakeman SARIF** | Pilot-now | When scanning Rails *targets*, not our Python tip |
-| **Packwerk** | Pilot-later | Boundary vocabulary ↔ tach (E-TACH0) |
-| **Bundler/Rake** | Dev helper only | If a Ruby sidecar exists — not tip deps `[Evidenced — DeepWiki]` |
-| **Ruby tip kernel** | **Refuse** | Same as Go rewrite |
+| **RuboCop / Brakeman SARIF** | Pilot-now | Rails *targets* |
+| **Packwerk ↔ tach** | Pilot-later | Boundary vocab |
+| **Sorbet / ruby-lsp** | Pilot-later | Read-only sensors |
+| **Bundler/Rake** | Sidecar only | If Ruby helper exists |
+| **Ruby tip kernel** | **Refuse** | |
 
-### Clojure — **yes, for contracts/facts/ops patterns**
+### 2.4 Clojure
 
-| Stick | Bucket | Why |
+| Stick | Bucket | Notes |
 | --- | --- | --- |
-| **Malli / Spec** | Pattern → Pilot-later | Closed contract registries (FACT0/QUERY0 kin) |
-| **DataScript / XTDB** | Pilot-later | As-of fact audits — sensors, not citation SoT |
-| **Babashka** | Pilot-later ops | Fast native scripting binary **shape**; refuse as merge interpreter `[Evidenced — DeepWiki]` |
-| **Clojure/SCI tip kernel** | **Refuse** | JVM/SCI as merge authority |
+| **Malli / Spec / Schema** | Pattern → Pilot-later | Contract registries |
+| **DataScript / XTDB** | Pilot-later | FACT0 as-of facts |
+| **Babashka** | Pilot-later ops | Binary *shape*; not merge interpreter `[Evidenced — DeepWiki]` |
+| **Clerk / CIDER** | Pattern | Moldable review → marimo kin |
+| **rewrite-clj as citation SoT** | **Refuse** | ast-grep remains citation SoT |
+| **Clojure/SCI tip kernel** | **Refuse** | |
 
-**Doctrine:** Pilot-before-Refuse (memo 40) — keep/drop exits required; stars are
-cartography only.
+### 2.5 Elixir / Erlang
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **OTP supervision patterns** | Pattern | MCP/tool restart budgets `[Evidenced — DeepWiki]` |
+| **Livebook sidecar** | Pilot-later | Operator notebooks; not tip SoT |
+| **Credo** | Pilot-later sensor | If Elixir targets appear |
+| **Elixir tip runtime** | **Refuse** | |
+
+### 2.6 JVM (beyond Spring-as-scan-target)
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **ArchUnit fitness vocabulary** | Pilot-now | Pattern → Stage-0/tach docs `[Evidenced — DeepWiki]` |
+| **Gradle Tooling API** | Pilot-now/later | Read-only capacity/drift receipt |
+| **ErrorProne / SpotBugs / Detekt / Infer** | Pilot-later | Bug corpora / FP crosswalk |
+| **JVM rewrite of tip** | **Refuse** | Spring remains *scan target*, not host |
+
+### 2.7 .NET
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **Spectre.Console UX** | Pattern | CLI presentation culture |
+| **Nuke DAG** | Pattern | Build orchestration shapes |
+| **Roslyn analyzers** | Pilot-later | Only if .NET BC Spec’d |
+| **.NET tip kernel** | **Refuse** | |
+
+### 2.8 PHP / Lua / Fennel
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **PHPStan levels** | Pattern-now | Maturity/honesty UX in docs |
+| **Composer provenance** | Pattern | Lockfile hygiene analogy |
+| **Laravel / Kong Lua packs** | Pilot-later | Target BC only |
+| **Neovim Lua review** | Defer / Pilot-later | Editor floor — not in-proc merge |
+| **PHP/Lua tip kernel** | **Refuse** | |
+
+### 2.9 TypeScript / Node (MCP & DX)
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **MCP TS SDK envelopes** | Pattern | Reimplement concepts in Python host `[Evidenced — DeepWiki]` |
+| **Node as tip dependency** | **Refuse** | No husky / no required Node for gates |
+| **jscpd (existing npm pin)** | Embody-continue | Quality gate only as already pinned |
+
+### 2.10 WASM / Extism
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **bubblewrap / Landlock first** | Pilot-now | OS jail before WASM guests |
+| **Extism / wasmtime guests** | Pilot-later | After bwrap insufficient `[Evidenced — DeepWiki]` |
+| **WASM tip SoT / Cover%** | **Refuse** | Guest platform only (LANG0) |
+| **“Wasm = secure” theater** | **Refuse** | |
+
+### 2.11 OCaml / Datalog / FP extras
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **Semgrep** | Embody-continue | Already pinned |
+| **Infer** | Pilot-later | Optional sensor |
+| **Soufflé / Formulog** | Pilot-later | FACT0 fact-join Spike |
+| **Haskell QuickCheck culture** | Pattern | Deepen Hypothesis — not new runtime |
+
+### 2.12 Shells / notebooks / supply-chain / policy
+
+| Stick | Bucket | Notes |
+| --- | --- | --- |
+| **Nushell / PowerShell recipes** | Pilot-now | Dual-sink operator docs; pipe-exit hygiene |
+| **marimo / Jupyter** | Pilot-now | Human review notebooks |
+| **Syft / CycloneDX / Grype** | Pilot-now / later | SBOM sensors |
+| **Conftest / Rego** | Pilot-now | Over grade JSON — not Gatekeeper tip |
+| **OTel spans** | Pilot-now optional | Stalker ETL only — never tip SoT |
+| **Backstage / mesh / ECS product** | **Refuse** | Category error |
+
+### 2.13 Niche / roadmap-gated (Defer)
+
+Crystal, Perl, Nim, V, Odin, Carbon, Swift, Dart, Julia, R, mruby/ruby.wasm —
+**Defer-with-revisit** unless a named target BC or measured gap vs Rust wheels
+appears. Stars alone never Adopt.
 
 ---
 
-## 3. Install matrix (download scope)
+## 3. Install matrix (who downloads what)
 
-### 3.1 Already Embodied (do not re-debate)
+### 3.1 Every developer + CI (today)
 
-`ast-grep-cli`, `semgrep`, `ruff`, `pytest`(+cov), `complexipy`, `tach`, CodeQL
-(CI), `mkdocs-material`, `vacuous`, project hooks, `pre_pr`, claims checker,
-ripgrep allowed (E-SEARCH0), Cursor MDC+Skills (E-MDC0).
+Activate `.venv` from `requirements.txt` + `requirements-dev.txt`; install git
+hooks; use system/user **ripgrep** + **gh**. Do not invent a second lockfile SoT.
 
-### 3.2 Developer + agent recommended (not all pip-pinned)
+### 3.2 Agent runtime (today)
 
-| Tool | Who | Role |
-| --- | --- | --- |
-| **ripgrep** | Dev + agent | Prose/inventory |
-| **gh** | Dev + agent | PR/CI JSON sinks |
-| **DeepWiki MCP** | Agent (+ optional Dev) | Framework Ask |
-| **uv** | Dev Spike | Fast venv/tool install (Astral) |
-| **ty** | Repo gate after Approve | Unresolved imports |
-| **Ruby/Go/Clojure sidecars** | Optional Dev/CI jobs | Only after named Pilot tickets |
+Cursor project rules (MDC), Skills, `.cursor/hooks.json`, DeepWiki MCP URL,
+SEARCH playbook. No separate “agent-only” pip world.
 
-### 3.3 Agent context (not downloads)
+### 3.3 Optional after Approve (not default bootstrap)
 
-MDC glob lenses already teach tooling; Skills hold depth; hooks hard-deny raw
-egress. Do not paste tool essays into alwaysApply.
+| Install | Gate |
+| --- | --- |
+| `ty` in `pre_pr` | E-LINT0 Approve |
+| Ruby toolchain for Asciidoctor/RuboCop job | TOOL4 Spike keep |
+| Go helper binaries (Syft/Trivy) | TOOL5/SBOM Spike keep |
+| Extism guest | after bubblewrap Pilot |
+| Babashka / Livebook / Soufflé | named Pilot-later Spec |
 
 ---
 
@@ -157,16 +262,22 @@ egress. Do not paste tool essays into alwaysApply.
 
 | ID | Acceptance |
 | --- | --- |
-| **TOOL0** | This memo + backlog Draft row |
-| **TOOL1** | Publish `docs/process/toolscape.md` thin pointer index (audiences × Embody list) — docs-only |
-| **TOOL2** | Wire **ty** per E-LINT0 after Approve |
-| **TOOL3** | Document laptop bootstrap (`uv`/`venv`/`gh`/`rg`) in CONTRIBUTING — no husky |
-| **TOOL4** | Ruby Pilot-now scorecard (Asciidoctor **or** RuboCop SARIF) with keep/drop |
-| **TOOL5** | Go pattern landing: dual-sink CLI checklist stolen from gh/cobra (Python impl) |
-| **TOOL6** | Clojure pattern note → FACT0/contracts; Babashka only if ops Spike named |
+| **TOOL0** | This memo (full marketplace §2) + backlog Draft |
+| **TOOL1** | `docs/process/toolscape.md` thin pointer index → audiences × Embody |
+| **TOOL2** | Wire **ty** per E-LINT0 |
+| **TOOL3** | CONTRIBUTING laptop bootstrap (`uv`/`venv`/`gh`/`rg`) — no husky |
+| **TOOL4** | Ruby Pilot-now (Asciidoctor **or** RuboCop/Brakeman SARIF) keep/drop |
+| **TOOL5** | Go pattern landing: dual-sink CLI + Syft/Trivy sensor Spike |
+| **TOOL6** | Clojure pattern → FACT0/contracts; Babashka only if ops Spike |
+| **TOOL7** | JVM: ArchUnit vocabulary → Stage-0/tach docs Spike |
+| **TOOL8** | Elixir: OTP supervision pattern doc for MCP tools; Livebook deferred |
+| **TOOL9** | TS MCP: steal envelopes into Python host — **no** Node tip dep |
+| **TOOL10** | WASM: bubblewrap Pilot-now; Extism only after fail |
+| **TOOL11** | Shells/notebooks: Nu/pwsh recipes + marimo review Spike |
+| **TOOL12** | Policy/SBOM: Conftest + CycloneDX export labeled sensors |
 
-**Refuse until Approve:** mass `apt`/`brew` of Ruby/Go/Clojure toolchains on tip;
-replacing Python oracle; mega-linter orchestrators.
+**Refuse until Approve:** mass polyglot toolchains on tip; replacing Python
+oracle; mega-linter; mesh/Backstage/ECS product theater.
 
 ---
 
@@ -174,17 +285,22 @@ replacing Python oracle; mega-linter orchestrators.
 
 | Risk | Mitigation |
 | --- | --- |
-| “Complete scope” → install everything | Audience matrix + Pilot exits |
-| ty without `.venv` | E-LINT0 false-red checklist |
-| Go TUI as CI SoT | Pattern-only; CI stays JSON/text |
-| Babashka merge scripts | Refuse SCI authority |
+| “Complete” → install everything | Audience matrix + Pilot exits (memo 40 §4) |
+| Starving Spring Stage-0 for Rails/WASM fashion | Pilot queue ranks; Stage-0 stays Active priority |
+| ty / SARIF false-red | venv pin; sensors honesty-labeled |
+| Node/Elixir/Ruby as silent tip deps | Explicit Refuse rows |
+| WASM before OS jail | TOOL10 ordering |
 | DeepWiki as Spec proof | Primary `llms.txt` for merge-critical |
 
 ---
 
-## 6. Pointers for agents
+## 6. Pointers
 
-- Search playbook: `adapters/claude/SEARCH.md`
-- Polyglot depth: process/39–41
-- Stack ★ bar: process/22
-- MDC activation: process/47 + `.cursor/rules/`
+| Need | Open |
+| --- | --- |
+| Search | `adapters/claude/SEARCH.md` |
+| Polyglot BFS | process/39–41 |
+| Stack ★ bar | process/22 |
+| Rust toolscape | coverage-quality/33 |
+| MDC | process/47 + `.cursor/rules/` |
+| Active tip | `docs/research/quality-backlog.md` |

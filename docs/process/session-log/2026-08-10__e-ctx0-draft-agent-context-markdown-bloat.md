@@ -145,3 +145,10 @@ Tests: not run (docs Spec Draft); DeepWiki Ask on Charm/Babashka/Ruby families
 Assumptions affected:
 - Toolscape = LLM/agent only — [Resolved — memo 48 audience matrix: repo gates + developer laptop + agent; Ruby/Go/Clojure as Pilot/pattern not tip kernel]
 Files touched: docs/research/process/48-*.md, docs/research/quality-backlog.md, docs/research/README.md, .cursor/rules/{principal-research-gate,cross-domain-isomorphism}.mdc
+
+## 2026-08-10 — E-TOOL0 expand full polyglot marketplace (not only Ruby/Go/Clojure)
+Commit: uncommitted
+Tests: not run (docs Spec Draft); DeepWiki Ask ArchUnit/Livebook/wasmtime/MCP-TS
+Assumptions affected:
+- E-TOOL0 covered only Ruby/Go/Clojure — [Resolved — memo 48 §2 now lists Rust extras, Elixir, JVM, .NET, PHP/Lua, TS/MCP, WASM, OCaml/Datalog, shells/notebooks/policy + TOOL7–12]
+Files touched: docs/research/process/48-*.md, docs/research/quality-backlog.md
