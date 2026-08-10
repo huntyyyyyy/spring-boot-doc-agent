@@ -9,7 +9,7 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 | **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md) | Active stream; Embody/Adopt/Refuse merge of foundational segments |
 | **findings/** | [`findings/`](findings/) | Stalker ledger entries (STK2) — compact events + gap IDs; not chat dumps |
 | **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, dynamics, façade/research hooks, legacy remediation Spec, docs taxonomy, **watch/stalker agents** |
-| **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking |
+| **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking; **DS/ML-ops problem-first (E-DS0)** → [`42-ds-mlops-…`](coverage-quality/42-ds-mlops-problem-first-tooling-2026-08-10.md) |
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |
 | **modularity/** | [`modularity/`](modularity/) | Stage-0 ports, test-suite BCs, tools wave 2, AstGrepBackend split, **tach dependency blueprint** |

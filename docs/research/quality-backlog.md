@@ -291,3 +291,20 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
+---
+
+## P19 — DS/ML-ops problem-first tooling (E-DS0)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P19.0 | **E-DS0 Spec:** approve Embody/Adopt/Refuse §7 (classes A–I) | **Draft** (2026-08-10) | research coverage-quality/42 `spec_gate` → APPROVED |
+| P19.1 | CONTRIBUTING note: quality artifacts as data products (oracle vs climb) | After Approve | claims path resolves |
+| P19.2 | Spikes U1–U3 (fixture digests / run ledger / cert schema) only if pain is real | Refuse-by-default | spike memo; no GE/MLflow/Feast deps |
+
+Research: [`docs/research/coverage-quality/42-ds-mlops-problem-first-tooling-2026-08-10.md`](coverage-quality/42-ds-mlops-problem-first-tooling-2026-08-10.md).
+
+**Embody** fail_under + `coverage.xml` oracle; climb sensors; fixture plants; claims predicates.  
+**Adopt** contract/lineage/run-identity *patterns* without platform installs.  
+**Refuse** GE/Pandera/Evidently/DVC/MLflow/Feast as required deps; feature store; A/B as CI core; dashboard theater as 98.7.
+
