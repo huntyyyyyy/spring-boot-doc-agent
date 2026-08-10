@@ -8,38 +8,27 @@ last_reviewed: '2026-08-10'
 
 ## Phase
 
-**Spec / gap-fill** — **Implement = Refuse.**
+**Spec / gap-fill** — Implement = Refuse.  
+**Port Ready:** YES — see `PORT_READY.md` (export Spec corpus).
 
-## Must spine (amended — do not shrink)
+## Research basis (Jun–Aug 2026)
 
-Graph + locks **∧** EA-Graph claim memory **∧** STEAD tool constraints **∧**
-receipts. Canonical: `08-verification/VERIFY_STACK.md`.
+`research/papers-2026-may-aug/june-august-2026-port-readiness.md`  
+(Proof-or-Stop, Contracts, Cue-WM, EA-Graph, STEAD, Aria, MAAD, HyperTool, MCPBench)
 
-## Product one-liner (draft)
+## Must spine
 
-Local developer tool: virtual dep/DI graph, git locks, **anchored verification
-claims** (unprovable > guess), receipts; agents propose / harness decides.
-Boundary: `01-vision/problem-frame/BOUNDARY.md`.
+Graph + locks ∧ EA-Graph ∧ STEAD ∧ freshness-bound receipts — `VERIFY_STACK.md`.
 
-## Next tasks (do in order)
+## Next tasks after port
 
-1. Read `AGENT_WALKTHROUGH.md` + `STRUCTURE.md` if new to the tree
-2. **Human Accept** VERIFY_STACK + BOUNDARY (or amend)
-3. Promote ICD stubs: claim-memory API + MCP tools citing STEAD ST-1…5
-   (`07-system-design/icd/`)
-4. Write Must QAS files (`03-requirements/qas/`)
-5. Close OQ-02…05 against SoR + receipts + Unknown taxonomy
-6. Complete STEAD spike notes (even if FO-CTL deferred)
-7. Human **W0 Approve** when DoR moves
+1. Human sign BOUNDARY + VERIFY_STACK + wave-1 StRS/SRS in `SIGNOFF_LOG.md`
+2. Spike PIL-LAT-1/2 for QAS-N-01/02 measures (or demote latency from Must)
+3. Build fixture plants named in `vv-plan/`
+4. Only then consider Implement Approve
 
 ## Do not do next
 
-- Shrink spine back to “just graph+locks”
-- Cargo / nine-language scaffolds
-- MCP tools that take free-text entity names from the model
-- Kuzu/Lance/Phi as verify SoR
-
-## Gate refs
-
-`AGENT_BOOTSTRAP` · `AGENT_WALKTHROUGH` · `STRUCTURE` · `VERIFY_STACK` ·
-`claim-memory/EA_GRAPH_CLAIMS` · `stead/STEAD_CONSTRAINTS` · DoR · no-code-gate
+- Treat Port Ready as Implement Ready
+- Shrink Must spine
+- Cargo scaffolds

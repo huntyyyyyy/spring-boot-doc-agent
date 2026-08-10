@@ -5,25 +5,25 @@ status: ACTIVE
 
 # Definition of Ready (DoR)
 
-A wave is **Ready for Spike/Implement** only when all rows are `PASS` or
-explicitly `WAIVED` with human sign-off in `02-stakeholders/signoff/`.
+Implement Ready = all PASS or WAIVED with signoff.  
+**Port Ready** is separate — see `PORT_READY.md`.
 
-| # | Predicate | Evidence path | Status |
+| # | Predicate | Evidence | Status |
 | --- | --- | --- | --- |
-| D1 | Product boundary one-liner Accepted | `01-vision/problem-frame/BOUNDARY.md` | PARTIAL (draft; human Accept open) |
-| D2 | Wave Must StRS/SRS set named | `03-requirements/` | FAIL |
-| D3 | Every Must NFR has complete six-part QAS | `03-requirements/qas/` | FAIL |
-| D4 | Constraints ledger current | `04-constraints/` + legacy `docs/constraints/` | PARTIAL |
-| D5 | No open `blocks_code` OQs (or WAIVED) | `04-constraints/open-questions/` | FAIL |
-| D6 | SoR vs derived matrix Draft Accepted | `08-verification/sor-derived-matrix.md` | PARTIAL (draft) |
-| D7 | Ports + ICD stubs for spike seam | `ports-and-adapters/PORTS.md`, `icd/` | PARTIAL (schemas still missing) |
-| D8 | C4 Context + Container cite ADRs | `07-system-design/c4/` or legacy `docs/c4/` | PARTIAL |
-| D9 | Irreversible choices have Accepted ADRs; else options/ | `ARCHITECTURE_BRIEF.md` + adr/ | PARTIAL |
-| D10 | Receipt / proof-tour schema named | `08-verification/receipts/` | PARTIAL |
-| D10b | EA-Graph claim memory Spec Accepted | `08-verification/claim-memory/` | PARTIAL (draft) |
-| D10c | STEAD ST-1…5 cited in MCP ICD | `08-verification/stead/` + `icd/` | PARTIAL (draft) |
-| D11 | V&V / fixture Accept methods named | `08-verification/vv-plan/` | FAIL |
-| D12 | Human wave Approve recorded | `02-stakeholders/signoff/` | FAIL |
+| D1 | Product boundary draft present | `01-vision/.../BOUNDARY.md` | PARTIAL (Awaiting human Accept) |
+| D2 | Wave Must StRS/SRS named | `03-requirements/strs|srs` | PARTIAL (Draft present) |
+| D3 | Must NFRs as six-part QAS | `03-requirements/qas/` | PARTIAL (N-05..08 complete; N-01/02 Spike-blocked) |
+| D4 | Constraints ledger | `04-constraints/technical/constraints-wave1.md` | PARTIAL (Draft) |
+| D5 | blocks_code OQs closed/waived | `open-questions/` | FAIL (awaiting Accept) |
+| D6 | SoR matrix Draft | `sor-derived-matrix.md` | PARTIAL |
+| D7 | Ports + ICD stubs | `PORTS.md`, `icd/*` | PARTIAL (schemas drafted) |
+| D8 | C4 Context+Container | legacy `docs/c4/` | PARTIAL |
+| D9 | ADRs / brief | `ARCHITECTURE_BRIEF.md` | PARTIAL |
+| D10 | Receipt schema | `icd/receipt.schema.json` | PARTIAL |
+| D10b | EA-Graph claim Spec+schema | `claim-memory/`, `ea-graph-claims.schema.json` | PARTIAL |
+| D10c | STEAD in MCP ICD | `stead/`, `mcp-tools.md` | PARTIAL |
+| D11 | V&V Accept methods | `vv-plan/` | PARTIAL (fixtures named) |
+| D12 | Human wave Approve | `signoff/SIGNOFF_LOG.md` | FAIL |
 
-**Agent rule:** if any row is `FAIL` or `PARTIAL` awaiting Accept, refuse product
-codegen; work the next item in `STATUS.md` instead.
+**Port Ready:** `PORT_READY.md` checklist PASS — export Spec corpus now.  
+**Implement:** still Refuse.

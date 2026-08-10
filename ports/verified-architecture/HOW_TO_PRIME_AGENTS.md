@@ -4,13 +4,14 @@
 
 ```text
 Repo root = this planning corpus. No prior chat.
+Port Ready = yes; Implement Ready = no (see PORT_READY.md + STATUS.md).
 Read in order:
   AGENT_BOOTSTRAP.md → STATUS.md → AGENT_WALKTHROUGH.md → STRUCTURE.md
   → 08-verification/VERIFY_STACK.md
+  → research/papers-2026-may-aug/june-august-2026-port-readiness.md (if amending Spec)
 Follow Skill cold-start. Do not write product code.
-Must spine = graph + locks ∧ EA-Graph claim memory ∧ STEAD tool constraints
-∧ receipts (VERIFY_STACK) — never graph+locks alone.
-Work the single next task in STATUS.md.
+Must spine = graph+locks ∧ EA-Graph ∧ STEAD ∧ freshness-bound receipts.
+Next human task: sign SIGNOFF_LOG.md; then work STATUS next tasks.
 ```
 
 ## Repo as Cursor / Cloud root
