@@ -45,7 +45,7 @@ spec_gate: DRAFT E-AST0 — AST0-A–H below; Approve before Implement
 
 ### Question
 
-What ast-grep **project layout, utils, relational patterns, rule ids, and plant-scoped customizations** should this product Embody so that (a) Stage-0 on hermetic fixtures stays honest, and (b) offline/campaign measurement against `ocs-api-service-develop` improves recall without making Artifactory CodeQL the merge SoT?
+What ast-grep **project layout, utils, relational patterns, rule ids, and plant-scoped customizations** should this product Embody so that (a) Stage-0 on hermetic fixtures stays honest, and (b) offline/campaign measurement against `ocs-api-service @ develop` improves recall without making Artifactory CodeQL the merge SoT?
 
 ### Alternatives considered
 
