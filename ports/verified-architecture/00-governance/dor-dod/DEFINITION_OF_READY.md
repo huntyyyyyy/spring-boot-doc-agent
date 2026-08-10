@@ -19,7 +19,7 @@ Whole words — `GLOSSARY.md`.
 
 | # | Predicate | Evidence | Status | What is still left |
 | --- | --- | --- | --- | --- |
-| **D0** | Per-entity research: paper **digests** (type key + sections + related walk) then ≥5 genuine GitHub algorithm adopters | `research/method/paper-digest-framework.md` + `research/gaps/entity-adoption-audit-2026-08-10.md` + digests/ | **FAIL** | Framework now defined; only one worked digest (2608.04278); equivariance / Proof-or-Stop digests and exact adopters still missing |
+| **D0** | Per-entity research: paper **digests** (type key + sections + related walk) then ≥5 genuine GitHub algorithm adopters | `research/method/paper-digest-framework.md` + `research/gaps/entity-adoption-audit-2026-08-10.md` + `research/gaps/shallow-approvals-deep-dive-2026-08-10.md` + digests/ | **FAIL** | Digests thin; shallow entities deepened in memo; MCP `2026-07-28` was a missing industry primary |
 | D1 | Product boundary draft Accepted | `01-vision/.../BOUNDARY.md` | **FAIL** for Implement (draft only) | Human Accept in `SIGNOFF_LOG.md` |
 | D2 | Wave Must Stakeholder + Software Requirements Specifications named and Accepted | `03-requirements/strs|srs` | **PARTIAL** | Drafts exist; no human Accept; Requirements Traceability Matrix still Draft |
 | D3 | Must non-functional requirements as six-part Quality Attribute Scenarios | `03-requirements/qas/` | **PARTIAL** | N-05…N-08 drafted; **N-01/N-02 latency still Spike-blocked**; open question 07 still OPEN |

@@ -94,10 +94,14 @@ Industry validators: Cloudflare Workers day-zero, Google / Microsoft / AWS comme
 
 Draft `receipt.schema.json` has `material_digest` / `policy_digest` but not yet:
 
-- Canonical **tree hash algorithm** (what files? ignore noise?)  
+- Canonical **tree hash algorithm** (what files? ignore noise?) — Proof-or-Stop β(E): `materialHash`, `headHash`, story/policy/command-set hashes  
+- **Receipt identity ρ(E)** on executed steps: `cmd`, `args`, `cwd`, `exit`, `outputDigest`  
 - **`step_id` stability** across re-runs (open question 05)  
 - Binding of receipt to **protocol version** / tool handle set  
-- Tamper classes we claim to reject (Proof-or-Stop lists 18 — we have none enumerated)
+- Tamper classes we claim to reject (Proof-or-Stop lists 18 — we have none enumerated)  
+- Mapping to in-toto Statement subject/predicate (even if MVP unsigned)
+
+**Do not** rename Supply-chain Levels for Software Artifacts provenance as Proof-or-Stop — compose them.
 
 ### Implementations
 
@@ -128,6 +132,8 @@ Draft `receipt.schema.json` has `material_digest` / `policy_digest` but not yet:
 ### Missing requirements
 
 Withdrawal API sequencing; rebuild-from-receipts rules; plant fixtures FX-claim-*; Spike exit before Must Implement.
+
+**Paper detail agents flatten:** leaf/sub-path anchors (not file-only); evidence lattice independent of freshness; `unprovable` terminal without destroying last verified artifact; OPS vs ANCH completeness check. Evidence enum in draft schema (`weak|strong`) is **under-specified** vs paper `unknown|partial|proven`.
 
 ---
 
@@ -239,12 +245,16 @@ Also still thin: DynamicMCPBench public code; Proof-or-Stop public engine; EA-Gr
 
 ---
 
-## Recommended next Spec tickets (not Implement)
+## Spec gap IDs (actionable)
 
-1. Rewrite `icd/mcp-tools.md` for `2026-07-28` + handle args + headers.  
-2. Add `lock-ir.schema.json` + one Packwerk-faithful plant story.  
-3. Enumerate receipt tamper rejects + `step_id` Spike.  
-4. ClaimMemory Pilot charter (invent under Spike).  
-5. Index freshness budget table.  
-6. Accepted C4 Context/Container (this commit starts a brief).  
-7. Latency: Spike or demote.
+| Gap | Entity | Missing | Blocks |
+| --- | --- | --- | --- |
+| G-R1 | Receipts | Canon materialHash + ρ(E) + commandSetHash | D10 / open question 05 |
+| G-R2 | Receipts | Offline tamper Accept suite | Verification and Validation |
+| G-E1 | Claim memory | Evidence enum + DISP vs claim disposition + completeness | D10b / QAS-N-07 |
+| G-E2 | Claim memory | Pilot invent Spike (0 public impls) | Honest Must |
+| G-M1 | Model Context Protocol | ICD already amended for `2026-07-28`; still need per-tool JSON Schema + handle inventory | D7 / D10c |
+| G-M2 | Model Context Protocol | Effect checkpoints / fixtures | Implement |
+| G-C1 | C4 | Accept Context+Container with MVP subset | D8 |
+| G-L1 | Lock Intermediate Representation | `lock-ir.schema.json` | open question 04 |
+| G-I1 | Index freshness | Budget table | open question 06 |
