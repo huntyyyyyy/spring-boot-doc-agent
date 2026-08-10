@@ -7,14 +7,19 @@ from __future__ import annotations
 
 import unittest
 
+import pytest
+
 from scripts.process.pack_session_log import (
     Entry,
+    header_line_count,
     pack_entries,
     parse_entries,
     shard_filename,
     shard_sort_key,
     slugify,
 )
+
+pytestmark = pytest.mark.domain_ci_meta
 
 
 class PackSessionLogTests(unittest.TestCase):
@@ -60,8 +65,6 @@ class PackSessionLogTests(unittest.TestCase):
         ]
         shards = pack_entries(entries, target=90)
         self.assertGreaterEqual(len(shards), 2)
-        from scripts.process.pack_session_log import header_line_count
-
         for shard in shards:
             lines = header_line_count(shard, target=90) + sum(e.lines for e in shard)
             if len(shard) > 1:
