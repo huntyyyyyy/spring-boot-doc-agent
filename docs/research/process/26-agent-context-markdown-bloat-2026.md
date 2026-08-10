@@ -9,6 +9,7 @@ related:
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
   - docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
   - docs/research/process/27-agent-context-repo-discernment-2026.md
+  - docs/research/process/28-agent-context-algorithm-first-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
   - paste full research memos into every agent turn
@@ -35,14 +36,15 @@ bloat LLM agent context — and what do arXiv / SE architecture models prescribe
 
 | Stance | Decision |
 | --- | --- |
-| **Embody** | Context = **working set**, not warehouse; U-shaped attention; SoR on disk, slice into tips |
-| **Adopt** | Section-first reads; map/index doors (DOC1); observation masking / drop over LLM-summary-of-docs; MemGPT *mental model* (RAM vs disk) without runtime dep |
-| **Spike** | Soft LOC/token budget on research memos; inject-map only (already look-first); “open §N” agent instruction |
-| **Refuse** | Dumping whole `quality-backlog` / packet 21–25 into every tip; MemGPT/Letta as merge SoT; chat-dump research (DOC12 / STK); **★-only Adopt of viral AI tools** |
+| **Embody** | Context = **working set**, not warehouse; U-shaped attention; SoR on disk, slice into tips; **algorithm+Accept ≻ product★** (memo 28) |
+| **Adopt** | Section-first reads; map/index doors (DOC1); observation masking / drop over LLM-summary-of-docs; MemGPT *mental model* (RAM vs disk) without runtime dep; **self-orchestrated ports** of named methods |
+| **Spike** | Soft LOC/token budget on research memos; inject-map only (already look-first); “open §N” agent instruction; thin mask-policy porter |
+| **Refuse** | Dumping whole `quality-backlog` / packet 21–25 into every tip; MemGPT/Letta as merge SoT; chat-dump research (DOC12 / STK); **★-only Adopt of viral AI tools**; **token-prune of agent action grammar** |
 
 **Answer to the session question:** yes — long markdown in the middle of the tip is exactly the failure mode Liu et al. measure. Bigger windows do not fix it.
 
-**Deepdive:** repo discernment + star inflation → [`27-agent-context-repo-discernment-2026.md`](27-agent-context-repo-discernment-2026.md).
+**Deepdive:** repo discernment + star inflation → [`27`](27-agent-context-repo-discernment-2026.md).  
+**Algorithm-first build doctrine:** [`28`](28-agent-context-algorithm-first-2026.md).
 
 ---
 

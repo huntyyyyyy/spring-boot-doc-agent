@@ -4865,3 +4865,12 @@ Assumptions affected:
 - Low-★ repos cannot be algorithm SoR — [Resolved — Complexity Trap 17★ JetBrains paper preferred over viral MCP ★ for mask vs summary]
 - E-STK0 memory shortlist ★ confidence — [New info — claude-mem/headroom/rtk hyper ★/day; magic-context LOW_FORK; re-score in memo 27]
 Files touched: docs/research/process/27-*, 26-* (cross-link), README, quality-backlog P19, session-log
+
+## 2026-08-10 — E-CTX0 algorithm-first: build/orchestrate from theory
+Commit: uncommitted
+Tests: not run (docs-only Spec amend)
+Assumptions affected:
+- Quality comes from adopting high-★ memory products — [Resolved — doctrine: named algorithm + Accept predicate; self-orchestrated ports (memo 28)]
+- Token-level prompt compressors are fine for coding agents — [New info — AGORA arXiv:2605.26596: action-grammar destruction; refuse on trajectories]
+- First build target unclear — [Resolved — observation/step masking + always-keep floor; MemGPT/CAT/Liu as laws not runtimes]
+Files touched: docs/research/process/28-*, 26-* verdict, README, quality-backlog P19, session-log

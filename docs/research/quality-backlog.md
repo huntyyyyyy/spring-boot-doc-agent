@@ -298,8 +298,8 @@ Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P19.0 | **E-CTX0 Spec:** approve **CTX1–CTX18** (working set; section reads; mask≻LLM-summary of SoR; ★ discernment / fake-star lens; refuse MemGPT runtime) | **Draft** (2026-08-10) | research **26+27** `spec_gate` → APPROVED |
-| P19.1 | **E-CTX1 Implement:** AGENTS/CONTRIBUTING working-set rule + section-read habit | After Approve | claims green; tips cite § not whole packets |
-| P19.2 | **CTX-S1** token measure + optional **CTX-S2** StarScout/heuristic audit of Spike shortlist | Spike | go/no-go numbers; integrity flags |
+| P19.0 | **E-CTX0 Spec:** approve **CTX1–CTX26** (working set; ★ discernment; **algorithm-first build/orchestrate**; mask≻token-prune≻viral MCP) | **Draft** (2026-08-10) | research **26+27+28** → APPROVED |
+| P19.1 | **E-CTX1 Implement:** tip-brief + `ObservationMaskPolicy` port (Complexity Trap / AGORA floor) + AGENTS blurb | After Approve | claims; complexipy≤5; CTX-S1 |
+| P19.2 | **CTX-S1/S2** token measure + optional StarScout/heuristic audit | Spike | numbers + integrity flags |
 
-Research: [`26`](process/26-agent-context-markdown-bloat-2026.md) · [`27`](process/27-agent-context-repo-discernment-2026.md). **Embody** Liu + DOC doors + ★-as-filter-not-proof ([arXiv:2412.13459](https://arxiv.org/abs/2412.13459)); **Adopt** Complexity-Trap masking (even at 17★); **Refuse** ★-only Adopt of viral memory MCP stacks / MemGPT runtime / summary-as-SoR.
+Research: [`26`](process/26-agent-context-markdown-bloat-2026.md) · [`27`](process/27-agent-context-repo-discernment-2026.md) · [`28`](process/28-agent-context-algorithm-first-2026.md). **Embody** algorithm+Accept; **Adopt** observation/step masking we own; **Refuse** ★-products, token-prune of actions, CompactionRL-as-SoT, summary-as-SoR.
