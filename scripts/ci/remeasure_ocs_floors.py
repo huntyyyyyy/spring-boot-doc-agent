@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shutil
 import subprocess
 import sys
 from collections import Counter
@@ -44,12 +46,28 @@ def _scan_roots(checkout: Path) -> list[Path]:
     return [checkout.resolve()]
 
 
+def _resolve_astgrep() -> str:
+    """Prefer PATH, then the binary next to this interpreter (venv Scripts)."""
+    found = shutil.which("ast-grep")
+    if found:
+        return found
+    sibling = Path(sys.executable).resolve().parent / (
+        "ast-grep.exe" if os.name == "nt" else "ast-grep"
+    )
+    if sibling.is_file():
+        return str(sibling)
+    raise FileNotFoundError(
+        "ast-grep not found on PATH or next to Python "
+        f"({sys.executable}). Activate .venv or: pip install -r requirements.txt"
+    )
+
+
 def _run_astgrep(roots: Sequence[Path], rules: Path) -> Counter[str]:
     if not roots:
         return Counter()
     completed = subprocess.run(
         [
-            "ast-grep",
+            _resolve_astgrep(),
             "scan",
             "-r",
             str(rules),
@@ -187,7 +205,11 @@ def main(argv: Optional[list[str]] = None) -> int:
     if not rules.is_file():
         print(f"error: rules missing: {rules}", file=sys.stderr)
         return 2
-    counts = _run_astgrep(_scan_roots(checkout), rules)
+    try:
+        counts = _run_astgrep(_scan_roots(checkout), rules)
+    except FileNotFoundError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
     data = json.loads(expectations.read_text(encoding="utf-8"))
     proposal = build_proposal(
         counts, _numeric_minimums(data), checkout=checkout.resolve()

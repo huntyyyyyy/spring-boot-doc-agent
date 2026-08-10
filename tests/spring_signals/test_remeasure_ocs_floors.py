@@ -143,3 +143,10 @@ def test_remeasure_missing_checkout_exits_2() -> None:
     mod = _load_remeasure()
     rc = mod.main(["--checkout", "/no/such/ocs/checkout"])
     assert rc == 2
+
+
+def test_resolve_astgrep_finds_binary() -> None:
+    mod = _load_remeasure()
+    path = Path(mod._resolve_astgrep())
+    assert path.is_file()
+    assert "ast-grep" in path.name.lower()
