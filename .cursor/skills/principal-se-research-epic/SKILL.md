@@ -58,6 +58,10 @@ bloom_mcp:
 
 ### A1 — Paper digests (mandatory)
 
+**Route first** with `docs/research/method/paper-api-schemas.md` (OpenAlex type →
+Semantic Scholar `publicationTypes`/`tldr` → arXiv Atom). Use cheatsheet field
+selects; do not fetch HTML until a shortlist survives filters.
+
 For each load-bearing paper, run skill **paper-digest**:
 
 1. arXiv Atom for metadata (**categories ≠ paper type**).

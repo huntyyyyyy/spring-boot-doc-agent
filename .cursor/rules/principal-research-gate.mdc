@@ -31,6 +31,7 @@ planning.
 @.cursor/skills/principal-se-research-epic/SKILL.md
 @.cursor/skills/paper-digest/SKILL.md
 @docs/research/method/paper-digest-framework.md
+@docs/research/method/paper-api-schemas.md
 @docs/research/se-quality-synthesis-2026-08-08.md
 @docs/research/quality-backlog.md
 @adapters/claude/SEARCH.md

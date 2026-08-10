@@ -15,6 +15,7 @@ Agent **path/task scoping** SoT: Project Rules under `.cursor/rules/` (MDC
 | [`.cursor/skills/principal-se-research-epic/SKILL.md`](.cursor/skills/principal-se-research-epic/SKILL.md) | Design-shaped: digests + Bloom Create + DeepWiki |
 | [`.cursor/skills/paper-digest/SKILL.md`](.cursor/skills/paper-digest/SKILL.md) | arXiv digests: type keys, sections, refs, GitHub anti-bogus |
 | [`docs/research/method/paper-digest-framework.md`](docs/research/method/paper-digest-framework.md) | Paper-digest method Source of Truth |
+| [`docs/research/method/paper-api-schemas.md`](docs/research/method/paper-api-schemas.md) | OpenAlex / Semantic Scholar / arXiv call schemas + routing |
 | [`.cursor/skills/cross-domain-isomorphism/SKILL.md`](.cursor/skills/cross-domain-isomorphism/SKILL.md) | Structure-Adopt vs Substrate-Refuse |
 
 Stay on the Active tip branch/PR from the backlog. Do not invent a parallel tip.

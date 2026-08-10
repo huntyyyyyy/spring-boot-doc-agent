@@ -22,16 +22,21 @@ Digests land in: `docs/research/papers/digests/<arxiv-id>-<slug>.md`
 
 ## Steps
 
+0. Scout with `docs/research/method/paper-api-cheatsheet.md` field selects
+   (OpenAlex / Semantic Scholar / arXiv Atom). Drop wrong `type` /
+   `publicationTypes` before any HTML.
 1. Read the framework (closed type keys + anti-bogus filter).
 2. Fetch Atom: `https://export.arxiv.org/api/query?id_list=<id>`.
 3. Fetch HTML if present: `https://arxiv.org/html/<id>` — build section map.
 4. Assign **primary_type** from the closed set. Mark `[Inferred]` unless
-   self-labeled. **arXiv categories are not paper-type keys.**
+   self-labeled. **arXiv categories are not paper-type keys.** OpenAlex `type`
+   / Semantic Scholar `publicationTypes` are **form** filters only.
 5. Copy the template into `docs/research/papers/digests/` (or port mirror) and
    fill every slot.
 6. Run the type-appropriate understanding checklist.
 7. From References / Related Work, queue up to five algorithmic kin; digest at
-   least one follow-on or record why none apply.
+   least one follow-on or record why none apply. Prefer
+   `/paper/{id}/references?fields=title,year,externalIds,publicationTypes`.
 8. Fill GitHub anti-bogus table — separate **exact** vs **adjacent**.
 9. Only then update Embody/Adopt/Refuse or Definition of Ready evidence links.
 
@@ -39,5 +44,7 @@ Digests land in: `docs/research/papers/digests/<arxiv-id>-<slug>.md`
 
 - Abstract-only “research complete”
 - Using `cs.AI` / `cs.SE` as if it meant empirical / theoretical
+- Fetching full HTML/PDF for unfiltered search lists
+- Requesting embeddings / full citation trees on scout calls
 - Promoting Must Adopt when only adjacent repos exist
 - Treating Zenodo study zips or unreleased org profiles as shipped products

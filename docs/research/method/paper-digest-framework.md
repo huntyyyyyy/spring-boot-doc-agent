@@ -19,6 +19,15 @@ The arXiv Atom application programming interface exposes **subject categories**
 reference, digital object identifier — **not** a controlled vocabulary for
 theoretical / empirical / systematic review.
 
+For **callable schemas**, field selects, and the low-token routing ladder
+(OpenAlex → Semantic Scholar → arXiv Atom → HTML), see:
+
+- `docs/research/method/paper-api-schemas.md`
+- `docs/research/method/paper-api-cheatsheet.md`
+
+OpenAlex `type` and Semantic Scholar `publicationTypes` are the best **API-native
+form filters**; our digest `primary_type` is still inferred from sections.
+
 | Field (API) | Use for |
 | --- | --- |
 | `arxiv:primary_category` + `category` | Domain filter / query (`cat:cs.SE`) |
