@@ -15,9 +15,15 @@ do_not:
   - treat “chemistry stores information” as license to soften fail_under
   - invent functorial merge gates without Spec
 spec_gate: DRAFT E-DYN1 addendum — isomorphism hygiene
+skill: .cursor/skills/cross-domain-isomorphism/SKILL.md
+rule: .cursor/rules/cross-domain-isomorphism.mdc
 ---
 
 # Cross-domain isomorphisms (your pushback, taken seriously)
+
+**Standing practice.** This memo’s lens is now skill **cross-domain-isomorphism**
+(always-on rule + `.cursor/skills/…`) — apply I1–I5 whenever planning across domains,
+not only in E-DYN1 research.
 
 **Claim under test.** Unrelated branches of science often share **the same
 abstract structure**. When that structure is made precise, CS routinely

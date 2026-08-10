@@ -37,7 +37,9 @@ install/lint/test/run commands live in `README.md` and
 - Design-shaped / ambiguous research asks: follow skill
   `principal-se-research-epic` and memo
   [`docs/research/process/14-facade-poke-research-hooks-2026.md`](docs/research/process/14-facade-poke-research-hooks-2026.md)
-  (arXiv + active GitHub + DeepWiki Tier C). Commit hook
+  (arXiv + active GitHub + DeepWiki Tier C). Cross-domain analogy / science→SE
+  imports: also skill `cross-domain-isomorphism` (Structure-Adopt vs
+  Substrate-Refuse; I1–I5). Commit hook
   `require_design_research` blocks design-shaped commits without a Spec memo.
 - **Agent policy hooks (portable):** project [`.cursor/hooks.json`](.cursor/hooks.json)
   bridges Claude PreToolUse scripts (`deny_text_search`, `deny_raw_network`,

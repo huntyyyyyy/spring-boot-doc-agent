@@ -10,7 +10,7 @@ description: >-
 
 # Principal SE research → epic → implement
 
-Follow this skill whenever work is **design-shaped** (new SoT, gates, measure modes, architecture) or the user asks for principal rigor. The always-on rule **se-quality-constitution** still applies during implementation.
+Follow this skill whenever work is **design-shaped** (new SoT, gates, measure modes, architecture) or the user asks for principal rigor. The always-on rule **se-quality-constitution** still applies during implementation. For cross-domain analogy / “unrelated sciences,” also follow skill **cross-domain-isomorphism** (structure vs substrate; I1–I5) — do not skip it when planning.
 
 ## SoTs (read first)
 
