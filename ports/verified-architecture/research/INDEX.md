@@ -19,7 +19,9 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 | **Worked digest example** | `research/papers-2026-may-aug/digests/2608.04278-ea-graph.md` | Empirical + section map for Artifact-Anchored Verification Memory |
 | **Shallow approvals deep-dive** | `research/gaps/shallow-approvals-deep-dive-2026-08-10.md` | MCP `2026-07-28` stateless, receipts, claims, lock IR, freshness, harness, QAS, C4 + agent-codegen bites |
 | **Shallow decisions honesty / FREEZE** | `research/gaps/shallow-decisions-honesty-2026-08-10.md` | Overclaim audit; deepen-max-3; demote Chosen→Working hypothesis |
+| **Spec corpus MCP + polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec MCP vs product verify; Rust/WASM/Go feature map |
 | **MCP open items (schemas / mint / fixtures)** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool JSON Schema 2020-12, `snapshot_open`, DynamicMCPBench effect fixtures |
+| **Spec / corpus MCP polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec MCP (not product verify); SDK tiers; Rust/WASM/Go/TS/Python/Ruby/Clojure; Architectures A–D |
 | **DynamicMCPBench digest** | `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md` | Effect checkpoints, minefields, Tier-1; engine pending |
 | **Decision Framework** | `docs/standards/decision-framework.md` | Six-vector Selection Taxonomy (Decision Matrix / ADR companion / Governance) |
 | **Math / formal brainstorm** | `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` | TLA+ / Alloy / theorem provers / JMT / AHP / Monte Carlo — **ideas only, not Must** |

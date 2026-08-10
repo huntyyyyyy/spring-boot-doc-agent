@@ -41,6 +41,11 @@ Do: demote wording; deepen **at most three** topics below.
 2. Claim memory withdrawal (Pilot charter + plants; engines = 0)  
 3. MCP handle lifecycle only (stop adding tools)
 
+Optional **outside deepen-3** (does not expand product verify): read-only Spec
+corpus MCP research — `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` /
+`SPIKE-SPEC-MCP-0` (Python tip host; Rust/Go Could later; WASM LockCheck stays
+product Wave-3).
+
 Everything else = **parked** (Could / brainstorm).
 
 ## Do not do next
