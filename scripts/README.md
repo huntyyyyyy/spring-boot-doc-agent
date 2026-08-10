@@ -101,3 +101,15 @@ python3 scripts/ratchets/mutate.py
 Baselines for the CI checkers live in `ratchets/`; coverage baselines stay beside the coverage runners. Path helpers: `doc_engine.paths.scripts_dir()` / `scripts_meta_path_entries()`.
 
 Suites mirror this taxonomy under [`tests/`](../tests/README.md) (`ci/`, `ratchets/`, `coverage/`, `doc_engine/`, `adapters/`). Discovery is recursive via `suite_layout.suite_paths`.
+
+## Local grading pack (Windows / IntelliJ)
+
+Do **not** run `docs/process/local-grading-pack.md` via the Markdown play button.
+Use `scripts/ci/run_local_grading_pack.cmd` (Git Bash) or the `.sh` on Linux:
+
+```text
+scripts/ci/run_local_grading_pack.cmd doctor
+scripts/ci/run_local_grading_pack.cmd priority1
+```
+
+Logs: `local-runs/logs/`. Checklist: `docs/process/local-grading-pack.md`.
