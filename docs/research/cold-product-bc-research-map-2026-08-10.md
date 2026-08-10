@@ -122,6 +122,7 @@ with honest `generative_executor` / mock labeling?
 | Refuse | Dual-writer / LWW merge; vacuous `certified: true` without gate facts; LLM-judge as cert |
 
 **Spec seed:** `docs/research/modularity/certification-fold-phase-runner-2026-08-10.md`  
+**External packet (D2):** `docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md`  
 **Unblocks:** E-PIPE1 size cuts without breaking trust.
 
 ---
@@ -142,7 +143,8 @@ Explicit Embody/Adopt/Refuse for phase 2.
 | Adopt | Incremental re-index / typed edges patterns from structure-first KGs `[Evidenced]` — **Spike** before picking store |
 | Refuse | Vector embeddings as citation SoT; replacing ast-grep/CodeQL plant with LLM KG |
 
-**Promote** archive → active `stage0/` Spec before any FACT1 Implement.
+**Promote** archive → active `stage0/` Spec before any FACT1 Implement.  
+**External packet (D3):** `docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md`
 
 ---
 
