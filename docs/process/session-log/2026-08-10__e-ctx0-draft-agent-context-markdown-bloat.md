@@ -133,7 +133,7 @@ Assumptions affected:
 Files touched: .cursor/rules/session-log-nest.mdc, docs/process/session-log/README.md
 
 ## 2026-08-10 — MDC pack: tooling sections on all project rules
-Commit: uncommitted
+Commit: ae4a8755
 Tests: MDC line smoke (each rule ≤80); claims n/a for rules-only
 Assumptions affected:
 - MDC lenses are policy-only without search/CLI affordances — [Resolved — every `.cursor/rules/*.mdc` now carries path-relevant tooling (ast-grep / rg / venv / pre_pr / DeepWiki) + `@adapters/claude/SEARCH.md` where useful]
