@@ -568,6 +568,12 @@ entries:
   date: '2026-08-10'
   epic: E-MD0
   related_count: 7
+- path: docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
+  title: E-LIE0 — Local-first verified architecture agent (Layers of Truth)
+  status: RESEARCH COMPLETE — Spec Draft (no kernel rewrite until Approve)
+  date: '2026-08-10'
+  epic: E-LIE0
+  related_count: 7
 - path: docs/research/quality-backlog.md
   title: Quality backlog — Active tip + queues
   status: ACTIVE — one stream at a time
