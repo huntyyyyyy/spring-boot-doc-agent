@@ -33,12 +33,14 @@ def _run_sh(*args: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-def _assert_ascii(path: Path) -> None:
+def _test_file_is_ascii(path: Path) -> None:
     raw = path.read_bytes()
     try:
         text = raw.decode("ascii")
     except UnicodeDecodeError as exc:
-        pytest.fail(f"{path.name} must be ASCII-only (cmd/Git Bash): {exc}")
+        raise AssertionError(
+            f"{path.name} must be ASCII-only (cmd/Git Bash): {exc}"
+        ) from exc
     assert "\ufeff" not in text
     # Em-dash / en-dash often sneak into REM comments and break cmd.exe.
     for bad in ("\u2014", "\u2013", "\u2018", "\u2019", "\u201c", "\u201d"):
@@ -53,9 +55,9 @@ def test_launcher_files_exist() -> None:
 
 
 def test_cmd_and_shell_are_ascii_only() -> None:
-    _assert_ascii(CMD)
-    _assert_ascii(SH)
-    _assert_ascii(STEPS)
+    _test_file_is_ascii(CMD)
+    _test_file_is_ascii(SH)
+    _test_file_is_ascii(STEPS)
 
 
 def test_cmd_is_batch_not_python() -> None:
