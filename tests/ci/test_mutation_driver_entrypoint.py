@@ -35,7 +35,7 @@ def _run_import_only(argv: list[str]) -> subprocess.CompletedProcess[str]:
     )
 
 
-def _assert_import_probe(completed: subprocess.CompletedProcess[str]) -> None:
+def _test_import_probe(completed: subprocess.CompletedProcess[str]) -> None:
     combined = f"{completed.stdout}\n{completed.stderr}"
     assert "ModuleNotFoundError" not in combined, combined[-2000:]
     assert "No module named 'tests'" not in combined, combined[-2000:]
@@ -45,14 +45,14 @@ def _assert_import_probe(completed: subprocess.CompletedProcess[str]) -> None:
 
 def test_mutation_driver_script_entrypoint_no_module_not_found() -> None:
     """Legacy script argv must bootstrap before ``from tests.spring_signals…``."""
-    _assert_import_probe(
+    _test_import_probe(
         _run_import_only([sys.executable, str(_CI_SCRIPT), _IMPORT_ONLY])
     )
 
 
 def test_mutation_driver_module_entrypoint_imports() -> None:
     """CI SoT argv (``python -m …``) must import cleanly without the kill loop."""
-    _assert_import_probe(
+    _test_import_probe(
         _run_import_only([sys.executable, "-m", _MODULE, _IMPORT_ONLY])
     )
 

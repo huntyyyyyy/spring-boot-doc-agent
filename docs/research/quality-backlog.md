@@ -28,6 +28,8 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 
 ## 1. Active tip (NOW)
 
+**Active:** land combined tip #119, then resume E-COH1
+
 | Field | Value |
 | --- | --- |
 | **Stream** | Land combined tip **#119**, then resume **E-COH1** |
