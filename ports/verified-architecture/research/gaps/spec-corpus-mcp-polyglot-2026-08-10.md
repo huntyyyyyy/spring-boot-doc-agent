@@ -121,7 +121,7 @@ verify. Excellent “train on unfinished contracts” without false-green receip
 | Option | Why | What | Who | How | When | Where | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **A. Thin Python Spec MCP** (extend tip pattern) | 2 | 2 | 2 | 2 | 2 | 2 | **Working hypothesis** for Spike |
-| B. Thin TypeScript-only Spec MCP | 2 | 1 | 1 | 2 | 2 | 1 | **Could** if Cursor-only; fights TOOL9 |
+| B. Thin TypeScript-only Spec MCP | 2 | 1 | 1 | 2 | 2 | 1 | **Could** (Cursor stdio ergonomics); peer lean — fights TOOL9 “no Node tip dep” unless facade-only |
 | C. Rust core + thin TS/Python facade | 2 | 2 | 1 | 1 | 1 | 1 | **Could** after A proves tools |
 | D. WASM guest readers day one | 1 | 1 | 0 | 0 | 0 | 0 | **Refuse** v0 |
 | E. Full polyglot Spec MCP (all lanes) | 0 | 0 | 0 | 0 | 0 | 0 | **Refuse** (FREEZE + shallow risk) |
