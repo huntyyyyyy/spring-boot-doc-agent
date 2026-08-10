@@ -15,7 +15,9 @@ related:
   - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
   - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
   - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
+  - docs/research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md
   - docs/design/e-lie0-requirements-2026-08-10.md
+  - docs/design/adr/README.md
   - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
   - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md

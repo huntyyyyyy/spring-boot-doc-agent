@@ -15,6 +15,8 @@ related:
   - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
   - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
   - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
+  - docs/research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md
+  - docs/design/adr/README.md
   - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
   - docs/research/quality-backlog.md
@@ -26,6 +28,9 @@ do_not:
   - Approve Design Spec without every Must REQ having an RTM Accept method
   - Promote inbound RE-MASTER-001 to SoR without process/52 rewrite rules
   - Flatten Pilot to Python-only — see process/53 polyglot lanes (Packwerk/bb/Go/SQLite/WASM)
+  - Let NFR adjectives influence Design without ATAM six-part QAS (process/54)
+  - Skip ADRs for architecturally significant choices
+  - Label WASM/Rust boxes "proved" without FML artifacts
 sources:
   web:
     - https://www.iso.org/standard/72089.html
@@ -177,19 +182,45 @@ Quality bar: singular, verifiable, **implementation-free**. MoSCoW applies to
 
 ---
 
-## 3. NFR (RE-2 continued)
+## 3. NFR — Quality Attribute Scenarios only (ATAM)
 
-| ID | MoSCoW | Requirement |
+**Hard gate `[Evidenced — SEI ATAM]`.** A non-functional need may influence
+Design **only** as a completed six-part QAS (stimulus source · stimulus ·
+environment · artifact · response · response measure). Methodology:
+[`process/54`](../research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md).
+Adjective budgets alone are **incomplete-qas**.
+
+| Legacy ID | QAS ID | Status | Notes |
+| --- | --- | --- | --- |
+| REQ-N-01 | QAS-N-01 | Draft — measure *T* TBD until Spike | Warm resolve; see process/54 §2 |
+| REQ-N-02 | QAS-N-02 | Draft — measure *U* TBD until Spike | Lock check; peak=10 concurrent |
+| REQ-N-03 | QAS-N-03 | incomplete-qas | Observability of Unknown rate — rewrite before Design |
+| REQ-N-04 | QAS-N-04 | incomplete-qas | Index rebuild cost |
+| REQ-N-05 | QAS-N-05 | Draft | Offline egress deny harness |
+| REQ-N-06 | QAS-N-06 | Draft | Determinism / canonical JSON |
+| REQ-N-07 | QAS-N-07 | incomplete-qas | LSP interactive latency |
+| REQ-N-08 | QAS-N-08 | incomplete-qas | Reference SKU declaration |
+| REQ-N-09 | QAS-N-09 | Draft (constraint-adjacent) | Model identity is config, not FR |
+
+Numeric SLAs in Design require Spike-filled response measures, not invented ms.
+
+### 3.1 Constraints (separate from requirements)
+
+| ID | Constraint | Source |
 | --- | --- | --- |
-| **REQ-N-01** | Must | Resolve or Unknown for a single injection site on kitchen fixtures completes within a documented budget (default target ≤2s local warm cache; spike measures Confirmed). |
-| **REQ-N-02** | Must | Lock check of one changed file’s outbound edges completes within a documented budget (default target ≤500ms warm). |
-| **REQ-N-03** | Must | Unknown rate and reason codes are observable (metric or receipt field) for CI dashboards. |
-| **REQ-N-04** | Should | Index rebuild cost for OCS-scale trees is bounded and documented; owners can opt strict vs advisory stale. |
-| **REQ-N-05** | Must | Privacy: ghost/prefetch caches do not exfiltrate source; local-first default. |
-| **REQ-N-06** | Must | Determinism: same inputs (sources digest + locks version) ⇒ same resolve/lock outcomes. |
-| **REQ-N-07** | Should | LSP diagnostic latency feels interactive (budget TBD after REQ-F-12 Spike). |
-| **REQ-N-08** | Should | NFR latency/RSS measurements declare a reference SKU (dev laptop class **and** Linux CI class); swap=0 during published benches. |
-| **REQ-N-09** | Must | Remediation inference (if enabled) is model-agnostic at the REQ layer; swapping models re-runs NFR benches — identity is config, not FR text. |
+| **CON-01** | Python tip sole `coverage.xml` / claims writer until cutover ADR | Constitution; ADR-005 |
+| **CON-02** | No dual Cover% / climb XML as oracle | Policy 16-A |
+| **CON-03** | Java 17/21 · Spring Boot 3.2/3.3 Pilot envelope | StRS §1.5 |
+| **CON-04** | Local-first default; locks in git; index blobs local-derived | StRS C3 |
+| **CON-05** | complexipy ≤5; LOC ≤225; no `utils/` | Constitution |
+| **CON-06** | One Active tip stream | quality-backlog |
+
+Constraints are not MoSCoW’d away; changing them requires an ADR.
+
+### 3.2 Decisions (ADRs, not diagrams)
+
+Architecturally significant choices: [`docs/design/adr/`](adr/README.md).
+Orchestra/C4 sketches cite ADR IDs or are non-SoR.
 
 ---
 
@@ -216,8 +247,9 @@ business intent. RE-4 change control covers lock intent drift.
 | Stale / conflict honesty | F-07, F-10 | Index freshness (ADV-1 SoR matrix) | Mismatch digest → stale fail under strict |
 | No dual Cover% | F-09, F-19 | Constitution; ACI boundary | Claims/oracle path unchanged in Pilot |
 | Package locks | F-11 | Packwerk-inspired IR (ADV-4) | controller→repo demo red |
-| Latency budgets | N-01, N-02, N-07 | Chain budget (ADV-5) | Spike numbers recorded Confirmed |
-| Privacy / local | N-05 | Prefetch design (later) | No network in default Pilot path |
+| Latency budgets | QAS-N-01/02 | Chain budget (ADV-5); ADR tradeoffs | Spike fills *T*/*U*; no invented SLA in Design |
+| Privacy / local | QAS-N-05 | Prefetch design (later) | Deny-net harness: 0 egress |
+| Determinism | QAS-N-06 | Full Must spine | Canonical JSON match across reruns |
 | Sandbox Could | F-16 | WASM LockCheck (LIE0-6) | Parity suite native vs guest |
 | Suggest ≠ verify | F-20, N-09 | Optional remediation adapter | Receipt witnesses exclude model text |
 | Org-wide query Could | F-21 | Shared-state Spike (CRM-5) | Keep/drop embedded graph assumption |
@@ -249,7 +281,8 @@ capabilities outside this table without amending this file (RE-4).
 | **RE-2** SRS + NFR | **Drafted** §2–3 |
 | **RE-3** RTM | **Drafted** §5 |
 | **RE-4** change control | **Drafted** §6 |
-| Human **Approve** RE package | **Open** |
+| Human **Approve** RE package | **Open** — Must QAS drafts required (process/54) |
+| ATAM-1…3 / ADR-0 | **In progress** — process/54 + `docs/design/adr/` |
 | ADV-1…3 (SoR / ports / DI envelope) | Still required before Design Spec Approve |
 | Implement (Cargo / tip kernel) | **Blocked** |
 
@@ -257,9 +290,8 @@ capabilities outside this table without amending this file (RE-4).
 
 ## 8. Design notes (non-requirements)
 
-Optional Pilot tech and **mental models** live in
-[`process/53`](../research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md):
-Packwerk-shaped lock IR, SCIP→SQLite registry, bb+Datascript graph REPL, Cobra
-watch daemon, Wasmtime/Extism LockCheck sandbox. Python tip remains
-`coverage.xml` / claims writer. See also process/50–52.
+Polyglot mental models: [`process/53`](../research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md).  
+ATAM QAS · constraints · tactics · ADR · formal boundaries:
+[`process/54`](../research/process/54-e-lie0-atam-qas-adr-formal-boundaries-2026-08-10.md).  
+ADRs: [`docs/design/adr/`](adr/README.md).
 
