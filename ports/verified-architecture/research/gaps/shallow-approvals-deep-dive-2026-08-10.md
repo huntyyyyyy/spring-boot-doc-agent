@@ -139,72 +139,85 @@ Withdrawal API sequencing; rebuild-from-receipts rules; plant fixtures FX-claim-
 
 ## 4. Lock Intermediate Representation
 
-| Classify | Practice systems (Packwerk / ArchUnit / dependency-cruiser) |
-| Exact field | **Yes** (≥5 genuine) |
+| Classify | Practice systems (Packwerk primary docs; adjacent ArchUnit / dependency-cruiser / tach / import-linter) |
+| Exact Packwerk Intermediate Representation | **2** strong (`Shopify/packwerk`, `alexevanczuk/packs`); polyglot lock class **≥5** |
 | Our gap | **No `lock-ir.schema.json`** (open question 04) |
+
+Fidelity limits to bind into every receipt: constant-reference edges only; no method-call / dynamic require / initializer graph; clean todo ≠ isolatable boot. Privacy enforcement removed in Packwerk 3.0 — do not encode as core Intermediate Representation.
 
 ### Agent-codegen bites
 
 1. Inventing lock dialects per language in the same monorepo.  
 2. Encoding **method-call** edges Packwerk never saw → false red.  
-3. Growing `package_todo` forever without burn-down (false green debt).  
-4. Letting the model rewrite policy System of Record without human Approve.
+3. Growing `package_todo` forever via agent `update-todo` (debt becomes the green path).  
+4. Letting the model rewrite policy System of Record without human Approve.  
+5. Stopping at static clean while runtime NameError / initializer edges remain.  
+6. Placing files by token similarity to “fix” violations.
 
 ### Missing requirements
 
-Single language-agnostic Intermediate Representation schema; allowlist + todo-debt + layer matrix; plant that proves new edges fail CI.
+Language-agnostic JSON Schema (package node, allowed edges, violation kinds, content-stable todo fingerprint); strict vs gradual modes; forbid silent agent `update-todo`; edge-fidelity matrix on receipts; stale-todo garbage-collection gate; adapter mapping rules (open question 04).
 
 ---
 
 ## 5. Index freshness (Source Code Index Protocol)
 
-| Classify | Practice systems |
-| Exact indexers | scip-java / scip-typescript / scip / … **Adopt** |
+| Classify | Practice systems (`scip-code/scip` + language indexers) |
+| Exact indexers | scip-java / scip-typescript / scip-python / src-cli **Adopt** |
+| Industry model | Full rebuild + **commit-bound** upload; nearest-upload soft stale is for humans browsing — **Refuse** as Must verify |
 | Our gap | Freshness **budgets** Unknown (open question 06) |
 
 ### Agent-codegen bites
 
 1. Verify against **stale** `index.scip` while sources changed.  
 2. Mixing indexer versions across languages → ghost symbols.  
-3. Claiming Spring Dependency Injection resolve from SCIP alone (stereotype Unknown).
+3. Claiming Spring Dependency Injection resolve from SCIP alone (stereotype Unknown).  
+4. Treating nearest-commit / search fallback as precise resolve.  
+5. Assuming fine-grained incremental invalidation exists (practice is full reindex).
 
 ### Missing requirements
 
-Dirty-set definition; max age / invalidation on save; version matrix for indexers; Unknown taxonomy when index incomplete.
+Budget fields: `tree_sha`, `index_sha`, `indexer_name`/`version`, `built_at`, `max_commit_distance`, `stale_policy`; reject codes `index_missing` / `index_stale` / `nearest_upload_exceeds_budget` / `search_fallback_forbidden`; Must verify = exact commit index or rebuild; bind `scip_sha` into receipts (mismatch → `unprovable`).
 
 ---
 
 ## 6. Harness propose / decide
 
-| Classify | Methodological + systems |
-| Engines | Prompts→Contracts / Aria public code **Unknown**; adjacent harnesses exist |
+| Classify | Methodological + systems (arXiv:2607.08028 Contracts; 2607.20972 Delivery) |
+| Exact engines | Prompts→Contracts / cue-anchor / Aria public code **0** → Pilot invent |
+| Adjacent | openai-agents, instructor, pydantic-ai, SWE-agent, guardrails — **Adopt propose/decide pattern only** |
 
 ### Agent-codegen bites
 
 1. “The agent decided verify passed” in the same process that proposes.  
 2. Prompt-only “be careful with ids” instead of code-owned schema checks.  
-3. Cue/memory products that **store** but do not **deliver** at lifecycle points.
+3. Cue/memory products that **store** but do not **deliver** at lifecycle points (~0 voluntary memory ops under compaction).  
+4. Bolt-on guardrails that over-refuse or miss composition-boundary checks.  
+5. Agent-authored `update-todo` / claim write without harness decision record.
 
 ### Missing requirements
 
-Agent–computer interface: which tools propose vs decide; reject matrix; optional cue injection port ≠ ClaimMemory.
+Normative propose/decide split; versioned contract artifacts + fault-injection rejects; cue-anchor Intermediate Representation + delivery receipts; compaction/resume re-inject cues (conversation summary ≠ System of Record); effect checkpoints on mutating tools.
 
 ---
 
 ## 7. Latency Quality Attribute Scenarios
 
-| Classify | Methodological (Architecture Tradeoff six-tuple) |
-| Status | N-01/N-02 drafted; **response measures empty** |
+| Classify | Methodological (Architecture Tradeoff six-tuple; Kazman et al.) |
+| Exact ATAM latency engines | **0** — Embody method + Spike plant |
+| Status | N-01/N-02 drafted; **response measures empty** (`threshold_status != measured`) |
 
 ### Agent-codegen bites
 
 1. Agents invent “p95 &lt; 200ms” with no plant.  
 2. Optimizing the wrong path (cold index rebuild vs warm resolve).  
-3. Making latency Must → forces premature language/runtime choice.
+3. Making latency Must → forces premature language/runtime choice.  
+4. Measuring mean of three hand runs; mixing cold rebuild into warm budget.  
+5. LLM-written Architecture Tradeoff prose as latency System of Record.
 
 ### Missing requirements
 
-Stimulus / environment / response measure filled **or** demote latency from Must until Spike PIL-LAT exits.
+Six-part scenario + `measure_method` + `spike_id` + `threshold_status`; separate budgets (index rebuild vs warm resolve vs lock-check-on-save); Ban Design influence until Spike fills **T**; CI replay of p95 within tolerance — **or** demote latency from Must until Spike exits.
 
 ---
 
@@ -256,5 +269,7 @@ Also still thin: DynamicMCPBench public code; Proof-or-Stop public engine; EA-Gr
 | G-M1 | Model Context Protocol | ICD already amended for `2026-07-28`; still need per-tool JSON Schema + handle inventory | D7 / D10c |
 | G-M2 | Model Context Protocol | Effect checkpoints / fixtures | Implement |
 | G-C1 | C4 | Accept Context+Container with MVP subset | D8 |
-| G-L1 | Lock Intermediate Representation | `lock-ir.schema.json` | open question 04 |
-| G-I1 | Index freshness | Budget table | open question 06 |
+| G-L1 | Lock Intermediate Representation | `lock-ir.schema.json` + fidelity matrix + no agent `update-todo` | open question 04 |
+| G-I1 | Index freshness | Budget fields + exact-commit Must policy | open question 06 |
+| G-H1 | Harness | Propose/decide ICD + cue-delivery schema (Pilot) | D7 / Must spine |
+| G-Q1 | Latency Quality Attribute Scenarios | Measure schema wired to receipts; Spike **T** or demote | D3 / N-01/N-02 |
