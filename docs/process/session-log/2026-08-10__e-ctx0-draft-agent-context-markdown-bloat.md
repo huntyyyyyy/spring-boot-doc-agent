@@ -147,7 +147,7 @@ Assumptions affected:
 Files touched: docs/research/process/48-*.md, docs/research/quality-backlog.md, docs/research/README.md, .cursor/rules/{principal-research-gate,cross-domain-isomorphism}.mdc
 
 ## 2026-08-10 — E-TOOL0 expand full polyglot marketplace (not only Ruby/Go/Clojure)
-Commit: uncommitted
+Commit: b7cec683
 Tests: not run (docs Spec Draft); DeepWiki Ask ArchUnit/Livebook/wasmtime/MCP-TS
 Assumptions affected:
 - E-TOOL0 covered only Ruby/Go/Clojure — [Resolved — memo 48 §2 now lists Rust extras, Elixir, JVM, .NET, PHP/Lua, TS/MCP, WASM, OCaml/Datalog, shells/notebooks/policy + TOOL7–12]
