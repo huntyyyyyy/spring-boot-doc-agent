@@ -4966,10 +4966,10 @@ Assumptions affected:
 Files touched: process/20-theory-*, 21-physical-*, 43–45-*, cross-domain-isomorphism skill/rule, quality-backlog P38, README
 
 ## 2026-08-10 — Reshape quality-backlog layout (Done vs Active)
-Commit: uncommitted
-Tests: not run (docs SoT reshape)
+Commit: 48880a5
+Tests: claims OK; 4/4 `test_tools_bc_inventory` passing
 Assumptions affected:
 - `docs/research/quality-backlog.md` is an ordered P0…Pn ticket dump — [Resolved — Active tip + queues + Done ledger; P-tables archived]
 - Start next chat at backlog P0 — [Resolved — P0 is conditional size hygiene; Active tip is land #119 then E-COH1]
-Files touched: docs/research/quality-backlog.md, docs/research/archive/quality-backlog-ticket-ledger-2026-08-10.md, docs/research/README.md, docs/process/session-log.md
+Files touched: docs/research/quality-backlog.md, docs/research/archive/quality-backlog-ticket-ledger-2026-08-10.md, docs/research/README.md, docs/process/session-log.md, docs/design/tools_bc_inventory.json
 
