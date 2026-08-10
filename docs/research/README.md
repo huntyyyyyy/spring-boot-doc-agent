@@ -13,7 +13,7 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |
 | **modularity/** | [`modularity/`](modularity/) | Stage-0 ports, test-suite BCs, tools wave 2, AstGrepBackend split, **tach dependency blueprint** |
-| **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs (migrated from `claude/research/`) |
+| **stage0/** | [`stage0/`](stage0/) | Covering/absence/recall + claim-symbol ADRs; **D2/D3 cert+facts cold BC packet** ([`d2-d3-certification-fact-stores-bc-research-2026-08-10.md`](stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md)) |
 | **archive/** | [`archive/`](archive/) | Superseded WIP, receipts, [`claude-lore/`](archive/claude-lore/) — **not** Spec SoT |
 
 ## Rules (DOC1 / DOC10)
