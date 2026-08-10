@@ -18,7 +18,7 @@ from plant_profile import (  # noqa: E402
     resolve_ocs_checkout,
 )
 
-pytestmark = pytest.mark.domain_ci_meta
+pytestmark = pytest.mark.domain_stage0
 
 
 def test_fixture_plant_always_ok(tmp_path: Path) -> None:
