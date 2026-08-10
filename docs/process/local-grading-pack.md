@@ -11,15 +11,22 @@ Use Git Bash. Activate `.venv` first (`source .venv/Scripts/activate`) so
 `python`/`ast-grep`/`semgrep` match pins. Never pipe through `tail`/`head` as
 the only consumer — that masks non-zero exits.
 
-Prereqs once:
+Prereqs once (skip reinstall if tools already work):
 
 ```bash
 mkdir -p local-runs/logs
+source .venv/Scripts/activate
+which -a ast-grep; ast-grep --version   # need ~=0.45 from .venv/Scripts
+# Only if missing / wrong version — corp TLS often breaks PyPI:
+#   export PIP_CERT="/path/to/corp-root.pem"   # NOT JDK cacerts
+#   # or: pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org ...
 pip install -r requirements.txt -r requirements-dev.txt && pip install -e .
-npm ci   # jscpd for quality-gates
+npm ci   # jscpd for quality-gates (H7); skip until Priority 2
 # OCS pointer (gitignored; forward slashes OK):
 #   echo C:/dossier/.../ocs-api-service > local-runs/real-repo.path
 ```
+
+See `docs/process/tool-quirks.md` (2026-08-10 corp TLS / `ast-grep-cli`) if pip SSL fails.
 
 Legend: **SoR** = merge/CI source of record · **Campaign** = OCS opt-in ·
 **Sensor** = informative only.

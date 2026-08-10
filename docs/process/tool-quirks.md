@@ -401,3 +401,26 @@ Status: [Resolved — project-native bridge]
 Symptom: Cloud agent commits skipped `require_hardened_tests` / pipe-exit / text-search denies that Claude Code sessions enforce, so scoped-pytest “green” reached remote CI.
 Cause: Claude plugin hooks and optional Cursor “third-party Claude hooks” import are not the Cloud SoT. Cloud loads **project** `.cursor/hooks.json` only (not `~/.cursor/hooks.json`). Claude tool name is `Bash`; Cursor shell event is `beforeShellExecution` with top-level `command`, and the Shell tool is named `Shell` on `preToolUse`.
 Resolution: commit `.cursor/hooks.json` + `.cursor/hooks/bridge_claude_policy.py` that normalizes Cursor stdin → Claude `{tool_name, tool_input}` and maps Claude `hookSpecificOutput` / design-research `decision:block` → Cursor `{permission, agent_message}`. Policy SoT stays under `adapters/claude/hooks/` (+ `.claude/hooks/check_pipe_exit_code.py`). Do not treat Claude third-party import as sufficient for this repo.
+
+---
+
+## 2026-08-10 — Corp TLS intercept breaks `pip install ast-grep-cli` (SSL CERTIFICATE_VERIFY_FAILED); JDK `cacerts` does not fix pip
+Tools/commands involved: `pip install -r requirements.txt` / `ast-grep-cli`, Windows Git Bash, corp proxy MITM, optional `PIP_CERT` / `REQUESTS_CA_BUNDLE`
+Status: [Partially resolved — operator PEM / trusted-host; not a repo pin bug]
+Symptom: grading-pack or README prereqs fail while fetching `ast-grep-cli` (or other PyPI wheels) with `SSLError` / `CERTIFICATE_VERIFY_FAILED` / similar. Operators sometimes point `JAVA_HOME`/`cacerts` at the corp store; that only helps the JVM (Gradle / CodeQL), not CPython/`pip`.
+Diagnostic steps taken (re-runnable):
+    source .venv/Scripts/activate
+    which -a ast-grep; ast-grep --version
+    python -c "import shutil; print(shutil.which('ast-grep'))"
+    # If the above already prints ~=0.45.x from the venv Scripts dir, skip reinstall.
+Resolution / workaround (prefer in order):
+1. **Skip reinstall** when the venv already has the pin — OCS remeasure / plant floors only need a working `ast-grep` on PATH next to the venv Python.
+2. **Corp root PEM for pip** (preferred when available): export a PEM that includes the intercepting CA, then install:
+       export PIP_CERT="/path/to/corp-root-or-bundle.pem"
+       export REQUESTS_CA_BUNDLE="$PIP_CERT"
+       export SSL_CERT_FILE="$PIP_CERT"
+       pip install -r requirements.txt
+3. **Trusted-host escape hatch** (weaker; use only on known hosts when PEM is unavailable):
+       pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org \
+         --trusted-host pypi.python.org -r requirements.txt
+4. Never feed JDK `cacerts` to `PIP_CERT` — wrong format/store for pip. Keep JVM trust separate for Artifactory/CodeQL DB create.
