@@ -7,6 +7,8 @@ epic_seed: E-DYN1
 claim tiers: Evidenced / Confirmed / Unknown
 related:
   - docs/research/process/05-dynamics-neuromorphic.md
+  - docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
+  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
   - docs/research/process/21-physical-unconventional-computing-2026.md
   - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
   - docs/research/se-quality-synthesis-2026-08-08.md

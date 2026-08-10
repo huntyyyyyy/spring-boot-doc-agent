@@ -34,6 +34,11 @@ hysteresis on advisory only; refuse SoA/neuromorphic/PID-as-floor. This memo
 **deepens** the problem inventory across theory + unconventional computing
 without reopening those refuses.
 
+**Math companion:** formulas and named objects live in
+[`44-formulas-concepts-…`](44-formulas-concepts-dynamics-info-physical-2026-08-10.md).
+Domain A–H transfer tables:
+[`20-theory-domains-…`](20-theory-domains-problem-first-gates-2026.md).
+
 **Lattice.** Sensor ≠ SoT · Metaphor ≠ runtime · Physical substrate ≠ CI predicate ·
 Derived ≠ LWW · Human review floor.
 
