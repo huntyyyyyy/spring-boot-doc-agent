@@ -79,7 +79,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
-| **E-LIE0** | Local-first verified architecture agent — Layers + adversarial (`process/51`) + RE package + **RE-MASTER critique** (`process/52`) | `process/50` · `51` · `52` · [`e-lie0-requirements`](../design/e-lie0-requirements-2026-08-10.md) · inbound RE-MASTER parked |
+| **E-LIE0** | Local-first verified agent — vision/adversarial/RE + **Pilot depth** (mental models · Packwerk/SQLite/bb/Go/WASM lanes) | `process/50–53` · [`e-lie0-requirements`](../design/e-lie0-requirements-2026-08-10.md) · inbound RE-MASTER parked |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 

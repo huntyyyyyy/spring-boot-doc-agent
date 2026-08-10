@@ -14,6 +14,7 @@ related:
   - docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
   - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
   - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
+  - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
   - docs/design/e-lie0-requirements-2026-08-10.md
   - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
@@ -225,7 +226,11 @@ traces to RTM rows in the RE file.
 
 ## 8. Status
 
-Research **Complete** through Bloom Create (Spec Draft) + **RE draft**.  
+Research **Complete** through Bloom Create (Spec Draft) + **RE draft** +
+**Pilot depth** ([`process/53`](53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md)
+— Packwerk/SQLite/bb/Go/WASM mental models).  
 **Do not** start Cargo monorepo or tip kernel swap until RE **Approve**,
-ADV-1…3, Design Spec Approve, and Active tip allows (after E-COH1 / reorder).
+ADV-1…3, Design Spec Approve, and Active tip allows. Pilot Implement follows
+**PIL-*** lanes in process/53 (Must spine + rich sidecars), not a flattened
+Python-only rewrite.
 

@@ -14,6 +14,7 @@ related:
   - docs/research/process/50-local-first-verified-architecture-agent-2026-08-10.md
   - docs/research/process/51-e-lie0-adversarial-ddia-solid-polyglot-slate-2026-08-10.md
   - docs/research/process/52-verified-slice-re-master-adversarial-critique-2026-08-10.md
+  - docs/research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md
   - docs/research/inbound/verified-slice-re-master-v0.5.1-draft.md
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
   - docs/research/quality-backlog.md
@@ -24,6 +25,7 @@ do_not:
   - Dual-write coverage.xml or claims from a second kernel
   - Approve Design Spec without every Must REQ having an RTM Accept method
   - Promote inbound RE-MASTER-001 to SoR without process/52 rewrite rules
+  - Flatten Pilot to Python-only — see process/53 polyglot lanes (Packwerk/bb/Go/SQLite/WASM)
 sources:
   web:
     - https://www.iso.org/standard/72089.html
@@ -255,6 +257,9 @@ capabilities outside this table without amending this file (RE-4).
 
 ## 8. Design notes (non-requirements)
 
-Optional Pilot tech (not REQ text): scip-java index, tree-sitter summaries,
-Python ACI today, Rust resolve later, wasmtime sandbox, Babashka graph REPL,
-Cobra watch daemon. See process/50–51.
+Optional Pilot tech and **mental models** live in
+[`process/53`](../research/process/53-e-lie0-pilot-mental-models-polyglot-lanes-2026-08-10.md):
+Packwerk-shaped lock IR, SCIP→SQLite registry, bb+Datascript graph REPL, Cobra
+watch daemon, Wasmtime/Extism LockCheck sandbox. Python tip remains
+`coverage.xml` / claims writer. See also process/50–52.
+
