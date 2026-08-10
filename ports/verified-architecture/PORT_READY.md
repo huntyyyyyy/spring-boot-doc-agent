@@ -7,31 +7,40 @@ date: '2026-08-10'
 # Port-ready checklist
 
 **Port** = push this folder as a standalone GitHub/Cursor root for
-specification-phase agents.  
-**Implement** = product code — still Refuse until Definition of Ready PASS
-and human Wave 0 / Wave 1 Approve.
+**continued specification work**.  
+**Implement** = product code — Refuse until Definition of Ready PASS
+(including research row D0) and human Wave 0 / Wave 1 Approve.
 
-Whole words required in prose — `GLOSSARY.md`.
+Whole words — `GLOSSARY.md`.
+
+## Honesty correction (2026-08-10)
+
+Earlier “Port Ready = YES” overstated **research depth**. Export is still useful
+for Spec agents, but **P3 is FAIL** until the entity adoption audit is completed
+(see `research/gaps/entity-adoption-audit-2026-08-10.md`). Definition of Ready
+Implement bar: **0 PASS rows**.
 
 ## Port checklist (specification corpus)
 
 | # | Item | Status |
 | --- | --- | --- |
-| P1 | Cold-start chain (bootstrap → status → walkthrough → structure → verify stack) | PASS |
-| P2 | Must spine docs: graph **and** artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic Deployment constraints **and** receipts | PASS |
-| P3 | June–August 2026 research memo informing readiness | PASS |
-| P4 | Wave-1 Stakeholder Requirements Specification, Software Requirements Specification, Requirements Traceability Matrix under `03-requirements/` | PASS (Draft) |
-| P5 | Quality Attribute Scenarios for privacy, determinism, claims, tool ids; latency Spike-blocked | PASS |
-| P6 | Interface Control Document drafts: receipt JSON Schema, claims Schema, Model Context Protocol tools, registry Structured Query Language notes | PASS (Draft) |
-| P7 | Verification and Validation fixture names + Accept methods | PASS (Draft) |
-| P8 | Sign-off log template (human still must sign) | PASS |
-| P9 | `EXPORT.md` instructions | PASS |
-| P10 | Legacy `docs/` / `nests/` clearly demoted | PASS |
+| P1 | Cold-start chain (bootstrap → status → walkthrough → structure → verify stack → glossary) | PASS |
+| P2 | Must spine *documents* exist (graph, claim memory, tool constraints, receipts) | PASS (docs only — not field-proven) |
+| P3 | June–August 2026 research **per entity**, content understood, ≥5 genuine GitHub algorithm adopters after anti-bogus filter | **FAIL** — audit started; exact algorithms for claim memory + equivariance wrapper have **0** public adopters found |
+| P4 | Wave-1 Stakeholder / Software Requirements / Traceability under `03-requirements/` | PARTIAL (Draft) |
+| P5 | Quality Attribute Scenarios; latency Spike-blocked | PARTIAL |
+| P6 | Interface Control Document drafts | PARTIAL |
+| P7 | Verification and Validation fixture names | PARTIAL (no plants) |
+| P8 | Sign-off log template | PASS (unsigned) |
+| P9 | `EXPORT.md` | PASS |
+| P10 | Legacy `docs/` / `nests/` demoted | PASS |
 
 ## Still not Implement-ready
 
-Human Accept rows in `SIGNOFF_LOG.md`; latency Spikes; real plants; Cargo forbidden.
+Everything in `DEFINITION_OF_READY.md` that is PARTIAL or FAIL — especially D0,
+D5, D12.
 
 ## How to port
 
-Follow `EXPORT.md`. First message to agents: paste from `HOW_TO_PRIME_AGENTS.md`.
+Follow `EXPORT.md` if you want a Spec sandbox. Do **not** treat export as
+research-complete or Implement-ready.
