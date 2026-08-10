@@ -1,14 +1,13 @@
-# Documentation map
+# Documentation
 
 | Path | Role |
 | --- | --- |
-| `standards/` | How we research, write QAS, ADRs, C4; no-code gate |
+| `DOMAIN_MAP.md` | Forced entry for agents |
+| `standards/` | ISO 29148, ATAM QAS, ADR, C4, claim tiers, no-code gate |
 | `requirements/` | StRS, SRS, QAS, RTM |
-| `constraints/` | Fixed for a wave (not MoSCoW wishes) |
-| `c4/` | Context · Container · Component · (Code later) |
-| `adr/` | Nygard architecture decision records |
-| `architecture/` | Layers of Truth, tactics/tradeoffs, polyglot portfolio |
-| `research/` | Provenance + method notes ported from prior work |
+| `constraints/` | Fixed for the wave |
+| `c4/` | Context · Container · Component · Code(deferred) |
+| `adr/` | Nygard ADRs |
 
-**SoR rule:** Requirements and constraints beat diagrams. ADRs beat informal chat.
-C4 without ADR IDs is a sketch.
+Research lives at repo-root [`../research/`](../research/) (not under `docs/`) so
+nests and MDC can point at a stable evidence tree. Nested BCs: [`../nests/`](../nests/).

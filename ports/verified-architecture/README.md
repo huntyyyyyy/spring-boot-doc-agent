@@ -1,37 +1,45 @@
-# Verified Architecture Engine
+# Verified Architecture Engine — planning repository
 
-**Status:** Requirements · Constraints · C4 · ADR planning only — **no product code yet.**
+**Working draft.** Requirements · constraints · research · C4 · ADRs.  
+**No product code** until the CONTRIBUTING gate is green.
 
-Polyglot local-first **verified architecture** system (Spring/Java wiring +
-architecture locks + proof-tour receipts). Languages are first-class peers:
+Follows industry planning practice shaped by **ISO/IEC/IEEE 29148** (RE),
+**SEI ATAM** quality-attribute scenarios, **Nygard ADRs**, and **C4** models.
+Claim tiers: Evidenced / Confirmed / Unknown. This is intentionally a
+**living draft** — statuses are Proposed/Draft until stakeholder Accept.
 
-**Rust · WASM · SQLite · Go · Ruby · Clojure · TypeScript · Python (peer) · C · Zig (earned)**
+## How this repo is meant to be used (nested context)
 
-This repository is the **planning SoR**. Implementation lands only after the
-gates in [`CONTRIBUTING.md`](CONTRIBUTING.md) pass.
+```text
+.cursor/rules/          ← repo-wide MDC (constitution, look-first, draft/ISO)
+docs/                   ← SoR: requirements, constraints, standards, C4, ADRs
+research/               ← full research corpus (keep — this is the value)
+nests/<NN>-<bc>/        ← N nested “next repos”: each has README + .cursor/rules
+                          so agents load only that BC’s context when working there
+```
 
-## Start here
+1. Open [`docs/DOMAIN_MAP.md`](docs/DOMAIN_MAP.md) first (forced entry).  
+2. Load research under `research/` as needed — **do not discard**; it is the
+   evidence base.  
+3. When implementing a BC later, work inside `nests/<bc>/` so nest MDC scopes
+   context to that language/BC while still pointing at shared research/ADRs.
 
-| Order | Read |
+## Polyglot identity
+
+Rust · WASM · SQLite · Go · Ruby · Clojure · TypeScript · Python (peer) · C · Zig (earned).  
+Not a Python-majority doc-engine port. See ADR-0001 + `research/polyglot/`.
+
+## Start reading
+
+| Priority | Path |
 | --- | --- |
-| 1 | [`docs/standards/no-code-gate.md`](docs/standards/no-code-gate.md) |
-| 2 | [`docs/requirements/strs.md`](docs/requirements/strs.md) |
-| 3 | [`docs/constraints/constraints.md`](docs/constraints/constraints.md) |
-| 4 | [`docs/requirements/qas.md`](docs/requirements/qas.md) |
-| 5 | [`docs/c4/`](docs/c4/README.md) |
-| 6 | [`docs/adr/`](docs/adr/README.md) |
+| Map | [`docs/DOMAIN_MAP.md`](docs/DOMAIN_MAP.md) |
+| Standards | [`docs/standards/`](docs/standards/) |
+| Requirements | [`docs/requirements/`](docs/requirements/) |
+| Constraints | [`docs/constraints/constraints.md`](docs/constraints/constraints.md) |
+| C4 | [`docs/c4/`](docs/c4/) |
+| ADRs | [`docs/adr/`](docs/adr/) |
+| Research | [`research/README.md`](research/README.md) |
+| Nests | [`nests/README.md`](nests/README.md) |
 
-## Provenance
-
-Ported and **re-scoped** from research on
-[`huntyyyyyy/spring-boot-doc-agent`](https://github.com/huntyyyyyy/spring-boot-doc-agent)
-(PR #120 process/50–55 + ADRs). That repo remains the historical doc-engine /
-kitchen plant. **This** repo does **not** assume Python owns the majority of the
-engine.
-
-## Explicit non-goals (until gates clear)
-
-- Shipping application code under `crates/`, `go/`, etc.
-- Treating C4 diagrams as decisions without ADRs
-- Dual merge oracles
-- LLM/RAG as verify witnesses
+Export to a standalone GitHub remote: [`EXPORT.md`](EXPORT.md).

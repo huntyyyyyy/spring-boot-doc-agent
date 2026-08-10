@@ -1,0 +1,20 @@
+---
+description: Nest context for TypeScript IDE/MCP — scoped look-first
+globs:
+  - nests/07-ide-typescript/**
+alwaysApply: false
+---
+
+# Nest: TypeScript IDE/MCP
+
+When working under `nests/07-ide-typescript/`:
+
+1. Read this nest `README.md`.
+2. Open ADRs: ADR-0010.
+3. Open research:
+   - `docs/c4/02-containers.md`
+   - `docs/adr/adr-0010-typescript-ide-mcp.md`
+4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
+   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
+5. Do **not** load every other nest unless integrating across BCs.
+6. Owns: LSP diagnostics, verification panel, MCP presentation

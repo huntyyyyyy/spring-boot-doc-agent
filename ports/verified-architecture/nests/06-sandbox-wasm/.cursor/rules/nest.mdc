@@ -1,0 +1,20 @@
+---
+description: Nest context for WASM sandbox — scoped look-first
+globs:
+  - nests/06-sandbox-wasm/**
+alwaysApply: false
+---
+
+# Nest: WASM sandbox
+
+When working under `nests/06-sandbox-wasm/`:
+
+1. Read this nest `README.md`.
+2. Open ADRs: ADR-0004.
+3. Open research:
+   - `research/atam-formal/`
+   - `docs/adr/adr-0004-native-then-wasm-lockcheck.md`
+4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
+   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
+5. Do **not** load every other nest unless integrating across BCs.
+6. Owns: Capability LockCheck guest; fuel/epoch; trust-boundary (not unearned proved)

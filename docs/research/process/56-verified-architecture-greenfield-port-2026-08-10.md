@@ -1,28 +1,28 @@
 ---
-title: Greenfield port — verified-architecture planning repo
-status: RESEARCH COMPLETE — export under ports/verified-architecture
+title: Greenfield verified-architecture port — research nests + MDC
+status: RESEARCH COMPLETE — ports/verified-architecture
 date: '2026-08-10'
 epic: E-LIE0
 claim_tiers: Confirmed
 related:
   - ports/verified-architecture/README.md
-  - ports/verified-architecture/EXPORT.md
+  - ports/verified-architecture/docs/DOMAIN_MAP.md
+  - ports/verified-architecture/research/README.md
+  - ports/verified-architecture/nests/README.md
   - docs/research/process/55-e-lie0-full-polyglot-product-portfolio-2026-08-10.md
-  - docs/design/adr/adr-006-polyglot-first-monorepo.md
 do_not:
-  - Treat ports/ as product tip code
-  - Keep Python-majority identity in the greenfield repo
+  - Strip research/ as fluff — it is the evidence corpus
+  - Treat ports/ as product tip implementation
 last_reviewed: '2026-08-10'
 ---
 
-# Greenfield port
+# Greenfield port (clarified)
 
-Stakeholder asked to port RE / constraints / C4 / ADRs into a **new** repository
-that starts planning-only and is polyglot without Python-majority doc-engine
-identity.
+**Useful research is kept** under `ports/verified-architecture/research/`
+(process/50–55 corpus). “Lean” means **nested MDC context loading**, not
+deleting evidence.
 
-**Deliverable in this tip:** [`ports/verified-architecture/`](../../../ports/verified-architecture/)
-(full tree + `EXPORT.md`). Cloud token cannot `createRepository`; create the
-GitHub remote from your account and push per EXPORT.md.
+Structure: `docs/` SoR · `research/` evidence · `nests/*` progressive BC
+packages with `.cursor/rules/nest.mdc` · working draft under ISO/ATAM/ADR/C4.
 
-Rewrites vs tip ADRs: see `ports/verified-architecture/docs/research/provenance.md`.
+Export: `ports/verified-architecture/EXPORT.md`.

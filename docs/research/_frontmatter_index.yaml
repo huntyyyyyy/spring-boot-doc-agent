@@ -621,11 +621,11 @@ entries:
   epic: E-LIE0
   related_count: 10
 - path: docs/research/process/56-verified-architecture-greenfield-port-2026-08-10.md
-  title: Greenfield port — verified-architecture planning repo
-  status: RESEARCH COMPLETE — export under ports/verified-architecture
+  title: Greenfield verified-architecture port — research nests + MDC
+  status: RESEARCH COMPLETE — ports/verified-architecture
   date: '2026-08-10'
   epic: E-LIE0
-  related_count: 4
+  related_count: 5
 - path: docs/research/quality-backlog.md
   title: Quality backlog — Active tip + queues
   status: ACTIVE — one stream at a time

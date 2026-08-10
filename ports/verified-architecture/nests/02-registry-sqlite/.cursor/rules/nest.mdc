@@ -1,0 +1,20 @@
+---
+description: Nest context for SQLite registry — scoped look-first
+globs:
+  - nests/02-registry-sqlite/**
+alwaysApply: false
+---
+
+# Nest: SQLite registry
+
+When working under `nests/02-registry-sqlite/`:
+
+1. Read this nest `README.md`.
+2. Open ADRs: ADR-0002.
+3. Open research:
+   - `research/polyglot/`
+   - `docs/adr/adr-0002-sqlite-registry.md`
+4. Obey repo constitution (`.cursor/rules/00-constitution.mdc`): working draft,
+   ISO/ATAM/ADR/C4 form, polyglot-first, no product code yet.
+5. Do **not** load every other nest unless integrating across BCs.
+6. Owns: Derived beans/edges schema; rebuildable local DB

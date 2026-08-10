@@ -1,27 +1,23 @@
-# Contributing — planning gates before code
+# Contributing
 
-## Hard gate
+## Hard gate (no product code yet)
 
-**No product implementation** (Rust crates, Go daemon, Ruby gems, Clojure
-services, WASM guests, TS extensions, Python packages, C/Zig shims) until:
+PRs may change docs, research, nests’ README/MDC, and docs CI only until:
 
-1. **StRS / SRS / RTM** Approved (or explicitly wave-scoped) under `docs/requirements/`
-2. **Constraints** ledger current under `docs/constraints/`
-3. Every Must **NFR** is a completed **ATAM QAS** (`docs/requirements/qas.md`)
-4. **C4** Context + Container (+ Component for touched BCs) reviewed (`docs/c4/`)
-5. Relevant **ADRs** Accepted (`docs/adr/`) — diagrams cite ADR IDs
-6. Utility / **tradeoff** table updated for chosen tactics
+1. StRS / SRS / RTM wave-scoped Accept (or explicit Draft wave Approve)
+2. Constraints ledger current
+3. Must NFRs are complete ATAM QAS (or MEASURE-TBD only pre-Spike)
+4. C4 Context + Container reviewed; Component for touched nest
+5. Relevant ADRs Accepted; diagrams cite ADR IDs
+6. Tradeoff table updated for chosen tactics
 
-Until then, PRs may only change `docs/**`, this file, README, LICENSE, and
-planning CI that **lints docs** (no compile of product code).
+## Working draft
 
-## Standards
+Content may be Draft/Proposed while still obeying **ISO 29148-shaped RE**,
+**ATAM QAS**, **Nygard ADR**, and **C4** form. See `.cursor/rules/` and
+`docs/standards/`.
 
-See [`docs/standards/`](docs/standards/).
+## Nested context
 
-## After gates
-
-Implementation follows polyglot BCs in
-[`docs/architecture/polyglot-portfolio.md`](docs/architecture/polyglot-portfolio.md)
-with keep/drop Spikes and a **single** deterministic gate writer (language chosen
-by ADR — not assumed Python).
+Work inside `nests/<bc>/` when focused on one BC so nest MDC scopes context.
+Keep `research/` intact — it is the evidence corpus.

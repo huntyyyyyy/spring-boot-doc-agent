@@ -1,0 +1,13 @@
+---
+description: Look-first domain map — open before deep research or design edits
+alwaysApply: false
+---
+
+# Look-first
+
+1. Read `docs/DOMAIN_MAP.md`.
+2. For requirements work → `docs/requirements/` + `docs/constraints/`.
+3. For architecture decisions → `docs/adr/` + matching `research/` folder.
+4. For a language BC → enter `nests/<bc>/` and obey its `nest.mdc`.
+5. Prefer `research/` primary memos over paraphrasing from chat memory.
+   Claim tiers: Evidenced / Confirmed / Unknown.

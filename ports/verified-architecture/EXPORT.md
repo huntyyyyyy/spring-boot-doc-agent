@@ -1,34 +1,21 @@
 # Export to a new GitHub repository
 
-This tree is the **planning SoR** for Verified Architecture Engine (docs only).
-
-## Create the remote (on your machine)
+This folder is a **self-contained planning repository**: standards, requirements,
+constraints, C4, ADRs, **full research corpus**, and **nested BC packages** with
+MDC for progressive agent context.
 
 ```bash
-# 1) Create empty repo on GitHub (UI or):
-gh repo create huntyyyyyy/verified-architecture --public --description "Polyglot verified architecture — RE, constraints, C4, ADRs before code"
+gh repo create huntyyyyyy/verified-architecture --public \
+  --description "Polyglot verified architecture — RE/ATAM/C4/ADR + research nests (working draft)"
 
-# 2) From a clean clone of this port:
-cd ports/verified-architecture   # or copy this folder out of spring-boot-doc-agent
+# copy this directory out of spring-boot-doc-agent, then:
+cd verified-architecture
 git init -b main
 git add -A
-git commit -m "Initial planning SoR: RE, constraints, C4, polyglot ADRs"
+git commit -m "Planning SoR: ISO/ATAM draft, research corpus, nested MDC BCs"
 git remote add origin git@github.com:huntyyyyyy/verified-architecture.git
 git push -u origin main
 ```
 
-Alternatively restore from the agent bundle (if you have it):
-
-```bash
-git clone /path/to/verified-architecture-initial.bundle verified-architecture
-cd verified-architecture
-git remote add origin git@github.com:huntyyyyyy/verified-architecture.git
-git push -u origin main
-```
-
-## What is different from spring-boot-doc-agent ADRs
-
-- Product identity = **polyglot-first** (ADR-0001); Python is peer glue, not majority engine
-- Oracle writer is **language-neutral** (ADR-0006) — supersedes “Python tip writer”
-- Rust owns engine (ADR-0007); Go chassis; Ruby locks; Clojure brain; TS IDE/MCP
-- **No product code** until CONTRIBUTING gate (ADR-0008)
+Cloud agent tokens often cannot `createRepository` — run the create step from
+your account.

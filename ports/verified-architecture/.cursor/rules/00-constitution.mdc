@@ -1,0 +1,29 @@
+---
+description: Repo constitution — working draft, ISO/ATAM/ADR/C4, polyglot, no code yet
+alwaysApply: true
+---
+
+# Verified Architecture — constitution
+
+You are in the **Verified Architecture Engine planning repository**.
+
+## Identity
+
+- **Working draft** following ISO/IEC/IEEE 29148-shaped RE, SEI ATAM QAS,
+  Nygard ADRs, and C4. Draft content is expected; skipping the *form* is not.
+- **Polyglot-first:** Rust, WASM, SQLite, Go, Ruby, Clojure, TypeScript, Python
+  as peer, C/Zig when earned. Not a Python-majority doc-engine.
+- **Research corpus under `research/` is SoR evidence** — use it; do not
+  discard as fluff.
+
+## Gates
+
+- No product code until `CONTRIBUTING.md` checklist is green (ADR-0008).
+- Must NFRs need six-part QAS before influencing Design.
+- Constraints ≠ requirements (`docs/constraints/`).
+- C4 structural claims cite ADR IDs.
+
+## Look-first
+
+Open `docs/DOMAIN_MAP.md` before broad exploration. When working under
+`nests/<bc>/`, follow that nest’s `.cursor/rules/nest.mdc` for scoped context.
