@@ -2,11 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://verified-architecture.local/schemas/mcp/tools-list-annotations-0.1.json",
   "title": "tools.list annotations for wave-1 primitives",
-  "description": "Hints for tools/list — not executable code. readOnly/destructive per MCP ToolAnnotations.",
+  "description": "Hints for tools/list \u2014 not executable code. readOnly/destructive per MCP ToolAnnotations.",
   "tools": [
     {
       "name": "snapshot_open",
-      "description": "Mint snapshot_id bound to tree_sha and index_sha. Call before resolve or claim_withdraw.",
+      "description": "Mint snapshot_id bound to tree_sha and index_sha (default handle TTL 3600s). Call before resolve or claim_withdraw.",
       "inputSchema_ref": "snapshot_open.input.schema.json",
       "outputSchema_ref": "snapshot_open.output.schema.json",
       "annotations": {
@@ -62,5 +62,9 @@
       }
     }
   ],
-  "list_cache": { "ttlMs": 3600000, "cacheScope": "server" }
+  "list_cache": {
+    "ttlMs": 3600000,
+    "cacheScope": "server"
+  },
+  "handle_ttl_default_seconds": 3600
 }

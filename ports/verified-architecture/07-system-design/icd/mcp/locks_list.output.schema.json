@@ -2,24 +2,52 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://verified-architecture.local/schemas/mcp/locks-list-output-0.1.json",
   "title": "locks_list.output",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["lock_set_id", "locks"],
-  "properties": {
-    "lock_set_id": { "$ref": "common.schema.json#/$defs/lockSetId" },
-    "locks": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["lock_id", "path"],
-        "properties": {
-          "lock_id": { "type": "string", "minLength": 1 },
-          "path": { "type": "string", "minLength": 1 },
-          "mode": { "enum": ["strict", "gradual"] }
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lock_set_id",
+        "locks"
+      ],
+      "properties": {
+        "lock_set_id": {
+          "$ref": "common.schema.json#/$defs/lockSetId"
+        },
+        "locks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lock_id",
+              "path"
+            ],
+            "properties": {
+              "lock_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mode": {
+                "enum": [
+                  "strict",
+                  "gradual"
+                ]
+              }
+            }
+          }
+        },
+        "policy_digest": {
+          "$ref": "common.schema.json#/$defs/sha256Hex"
         }
       }
     },
-    "policy_digest": { "$ref": "common.schema.json#/$defs/sha256Hex" }
-  }
+    {
+      "$ref": "common.schema.json#/$defs/toolError"
+    }
+  ]
 }

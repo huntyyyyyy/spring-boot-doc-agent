@@ -2,23 +2,80 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://verified-architecture.local/schemas/mcp/resolve-output-0.1.json",
   "title": "resolve.output",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["status"],
-  "properties": {
-    "status": { "enum": ["resolved", "unknown", "unprovable"] },
-    "bean_id": { "type": "string", "pattern": "^bean_[A-Za-z0-9._-]{3,120}$" },
-    "witness": {
+  "oneOf": [
+    {
       "type": "object",
       "additionalProperties": false,
-      "required": ["file", "line", "column"],
+      "required": [
+        "status"
+      ],
       "properties": {
-        "file": { "type": "string" },
-        "line": { "type": "integer", "minimum": 1 },
-        "column": { "type": "integer", "minimum": 0 },
-        "symbol": { "type": "string" }
+        "status": {
+          "enum": [
+            "resolved",
+            "unknown",
+            "unprovable"
+          ]
+        },
+        "bean_id": {
+          "type": "string",
+          "pattern": "^bean_[A-Za-z0-9._-]{3,120}$"
+        },
+        "witness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file",
+            "line",
+            "column"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "column": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "symbol": {
+              "type": "string"
+            }
+          },
+          "not": {
+            "required": [
+              "llm_text",
+              "rag_chunk"
+            ]
+          }
+        }
       },
-      "not": { "required": ["llm_text", "rag_chunk"] }
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "resolved"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "bean_id",
+              "witness"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "$ref": "common.schema.json#/$defs/toolError"
     }
-  }
+  ]
 }

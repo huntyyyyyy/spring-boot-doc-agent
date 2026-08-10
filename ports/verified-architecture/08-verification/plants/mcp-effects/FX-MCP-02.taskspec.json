@@ -1,0 +1,38 @@
+{
+  "plant_id": "FX-MCP-02",
+  "usage_case": "UC-MCP-02",
+  "prompt_fuzzy": "Open a snapshot and resolve one injection site.",
+  "checkpoints": [
+    {
+      "id": "c1",
+      "kind": "tool_effect",
+      "equivalence_set": ["snapshot_open"],
+      "arg_constraint": { "required": ["target_root"] }
+    },
+    {
+      "id": "c2",
+      "kind": "value_produced",
+      "from_tool": "snapshot_open",
+      "path": "$.snapshot_id",
+      "pattern": "^snap_"
+    },
+    {
+      "id": "c3",
+      "kind": "tool_effect",
+      "equivalence_set": ["resolve"],
+      "arg_constraint": { "required": ["injection_site_id", "snapshot_id"] }
+    },
+    {
+      "id": "c4",
+      "kind": "value_produced",
+      "from_tool": "resolve",
+      "path": "$.status",
+      "enum": ["resolved", "unknown", "unprovable"]
+    }
+  ],
+  "minefields": [
+    { "id": "m1", "kind": "free_text_bean_name_arg" },
+    { "id": "m2", "kind": "invented_handle_prefix", "prefix": "snap_", "source": "model" }
+  ],
+  "partial_order": [["c1", "c3"], ["c2", "c3"]]
+}
