@@ -291,3 +291,20 @@ Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/co
 | P14.1 | **E-DOC1 Implement:** domain map + hooks + migrate + claims rewrite | **Done** (2026-08-09) | claims green; design writes denied without research-map Read; marketplace intact |
 
 Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md`](process/18-docs-research-taxonomy-claude-consolidation-2026.md).
+
+---
+
+## P18 — RAG problem-first inventory (E-RAG0)
+
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P18.0 | **E-RAG0 Spec:** approve problem A–G → SoT/sensor/adapter map + RAG0-1…RAG0-6 | **Draft** (2026-08-10) | research 20 seeds → APPROVED |
+| P18.1 | Keep Stage-0 structure facts as citation SoT; embeddings/rank as sensors only | Embody | no embedding-only citation path |
+| P18.2 | Optional RAGAS/faithfulness harness only behind distinct sensor artifact path (16-A analogue) | Adopt sensor / Refuse merge SoT | never overwrite certification / oracle |
+| P18.3 | Adaptive/hierarchical/tool-retrieval patterns only after Approve; no GraphRAG LLM-KG as Stage-0 writer | Adopt pattern / Refuse | one tip stream |
+
+Research: [`docs/research/process/20-rag-problem-first-retrieval-systems-2026-08-10.md`](process/20-rag-problem-first-retrieval-systems-2026-08-10.md).
+
+**Embody** Stage-0 cite SoT; human Approve merge SoT; structure-first packets.  
+**Adopt** Self-RAG/FLARE/Adaptive routing *patterns*; RAPTOR hierarchy *idea*; RAGAS as labeled sensor.  
+**Refuse** embedding citation SoT; RAGAS/LLM-judge as merge/`fail_under`; LLM GraphRAG KG as Stage-0.
