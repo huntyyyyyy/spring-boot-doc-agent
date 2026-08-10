@@ -7,6 +7,7 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + meta CI + agent adapters
 parent: docs/research/modularity/21-ddd-repository-structure-options-2026.md
 related:
+  - docs/research/modularity/23-ddd-repo-structure-capability-backcast-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
   - docs/research/process/04-implementation-frameworks.md
   - docs/research/modularity/20-tach-dependency-blueprint-2026.md
@@ -419,4 +420,5 @@ Approve **REPO9–REPO16** with REPO1–8.
 | Ranked A+F | Keeps A+F as spine; adds O/N/J/K/H-pattern/I/M |
 | REPO1–8 | Adds REPO9–16 + S3–S5 |
 
-Human Approve should treat **21 + this file** as one Spec packet for E-REPO0.
+Human Approve should treat **21 + 22 + 23** as one Spec packet for E-REPO0.
+Capability-backed pros/cons and horizon fits live in memo 23.

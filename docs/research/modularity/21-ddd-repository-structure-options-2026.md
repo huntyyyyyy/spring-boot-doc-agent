@@ -21,7 +21,7 @@ do_not:
   - adopt Nx / Packwerk / Spring Modulith / Backstage as Python runtimes
   - weaken fail_under 98.7, complexipy ≤5, LOC ≤225
   - cross-job coverage combine or PathCohesion breaks while reshaping tests
-spec_gate: DRAFT E-REPO0 (2026-08-10) — REPO1–REPO16 pending Approve (21+22 packet)
+spec_gate: DRAFT E-REPO0 (2026-08-10) — REPO1–REPO20 pending Approve (21+22+23 packet)
 gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/docs)"
 ---
 
@@ -37,12 +37,11 @@ strategic DDD (bounded contexts + enforced edges) — without poorly copying
 **Non-goal this tip:** implement any mass move. This memo drafts **≥5 distinct
 layouts**, ranks them for *this* product, and Spec-gates a preferred path.
 
-**Deep companion (required read for Approve):**  
-[`22-ddd-repo-structure-quality-deepdive-2026.md`](22-ddd-repo-structure-quality-deepdive-2026.md) —
-classifies the problem on quality axes (PairSmell InCol/InSep, module depth,
-SoR/derived, agent context), routes primary research, and adds **unusual**
-layouts G–P (Polylith pattern, truth-class tree, stage-DAG, Hive mini-hexagon,
-agent packs, …). **E-REPO0 Approve = memos 21 + 22 together.**
+**Deep companions (required read for Approve):**  
+- [`22-ddd-repo-structure-quality-deepdive-2026.md`](22-ddd-repo-structure-quality-deepdive-2026.md) — quality axes + unusual G–P  
+- [`23-ddd-repo-structure-capability-backcast-2026.md`](23-ddd-repo-structure-capability-backcast-2026.md) — **future-capability roadmap + solid possibilities with pros/cons**  
+
+**E-REPO0 Approve = memos 21 + 22 + 23 together.**
 
 ---
 
@@ -382,12 +381,14 @@ Shared kernel (`doc_engine.core`, paths, config) stays **minimal**. Cross-BC typ
 
 ## 9. Ranking for *this* tip (human Approve)
 
-**Approve packet = memo 21 + companion 22 (REPO1–REPO16).**
+**Approve packet = memos 21 + 22 + 23 (REPO1–REPO20).**
 
-1. **Wave 0:** N overlay (DOMAIN_MAP + truth-class labels) + REPO-S3 PairSmell inventory.  
-2. **Wave 1 spine:** **A+F+O** (vertical BCs, tach interfaces, deep packs); dissolve `tools/` with **K** where clusters match stages.  
-3. **Wave 2 selective unusual:** **J** physical truth zones (if overlay fails), **H-pattern** project assembly (wheel/plugin/Action), **I** mini-hexagon in scanning, **M** agent packs as maps.  
-4. Keep **C/D/E/P** and ArchAgent-as-SoT off Active tip.  
-5. Sequence with **E-COH / E-TACH / E-TEST** — markers before mass test moves.
+Capability-aware composition (memo 23 §4):
 
-DeepWiki/tach docs used as cartography for enforcement mechanics; PairSmell / Ousterhout / Polylith / DDIA cite primary sources in companion §2.
+1. **Wave 0:** Possibility 1 overlay + logical truth labels + scream names in the map.  
+2. **Wave 1:** Possibility 2 deep BC+tach spine + Possibility 3 stage dialect to dissolve `tools/`.  
+3. **Wave 1b:** Possibility 5 multi-base *pattern* sketch; Possibility 7 agent-pack maps.  
+4. **Wave 2:** Possibility 6 Hive only in hot scanner/pipeline BCs; physical truth zones if overlay fails.  
+5. **Wave 3:** Possibility 8 / physical bases only after H3 multi-repo or HttpLLM product Spec.
+
+Keep refuse set (memo 23 Possibility 10). Sequence with **E-COH / E-TACH / E-TEST** — no mass moves during H1 Stage-4 calibration.
