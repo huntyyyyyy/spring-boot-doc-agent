@@ -179,22 +179,17 @@ DeepWiki overview (cartography): ruff monorepo contains **ruff + ty** sharing pa
 
 ---
 
-## 6. Companion: session-log nest (E-LOG0) — Spec seed
+## 6. Companion: session-log nest (E-LOG0) — Implemented on tip
 
-**Problem.** `docs/process/session-log.md` is a ~5k-line monolith — hard to navigate; violates cohesion / look-first.
+**Problem.** `docs/process/session-log.md` was a ~5k-line monolith.
 
-**Adopt structure (Draft):**
+**Adopt (landed):** `docs/process/session-log/` with greedy **≤225 LOC** packs;
+filenames `START__slug.md` / `START__END__slug.md` (date-first sort + first-entry
+title slug). Stub `docs/process/session-log.md` kept for claims. Packer:
+`scripts/process/pack_session_log.py`.
 
-```text
-docs/process/session-log/
-  README.md          # index + how to append
-  2026-07.md         # or 2026-07-23.md shards
-  2026-08.md
-docs/process/session-log.md  → stub pointing at nest (keep claims stable)
-```
-
-**Refuse:** chat dumps as research SoT; rewriting history entries.  
-**Implement** only after Approve; may land after #119 / with E-LINT0 or as small process tip.
+**Refuse:** chat dumps as research SoT; rewriting history entries; month/week-only
+splits that ignore LOC.
 
 ---
 

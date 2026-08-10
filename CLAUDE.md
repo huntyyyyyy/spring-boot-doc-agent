@@ -31,13 +31,18 @@ CONSTRAINTS.md bracket claims use a **content-stable key** (digest of status buc
 The checker is the floor, not the ceiling: it decides whether a claim is *well-formed and resolvable*, never whether it is *true*. A `[Resolved]` tag pointing at a file that exists still passes while being wrong about what the file does. That judgment is what the rest of this pass is for. See `.claude/skills/verify-state-claims/SKILL.md`.
 
 - If nothing you changed is plausibly relevant to any of the prompts, don't write a log entry — churn here is worse than silence. Most commits (a typo fix, a small test addition) won't touch anything a steering prompt assumed.
-- If something is relevant, append one entry to `docs/process/session-log.md` (create it from the template below if it doesn't exist yet) in the same commit. Keep it distilled, not a raw diff — the point is that a downstream reviewer (human or another Claude session) can read ten lines instead of parsing a diff.
+- If something is relevant, append one entry to the current
+  `docs/process/session-log/` shard (see that folder’s `README.md` for the
+  date+slug naming and ≤225-line pack rule; keep the stub
+  `docs/process/session-log.md` as a pointer only) in the same commit. Keep it
+  distilled, not a raw diff — the point is that a downstream reviewer (human or
+  another Claude session) can read ten lines instead of parsing a diff.
 
 ### The same check covers `CONSTRAINTS.md`
 
 `CONSTRAINTS.md`'s `[Resolved]` / `[Partially resolved]` / `[Flagged, not yet resolved]` entries make the same kind of statement a steering prompt does — a claim about this repo's current state that a later commit can falsify — so check them in the same pass, on the same trigger (`scripts/`, `agents/`, `skills/`). `check_repo_claims.py` covers the mechanical half: a `CONSTRAINTS.md` entry citing a path or `symbol()` that no longer exists now fails CI, which is how this file managed to cite a deleted script in two places at once. What it cannot decide is whether a surviving path still supports the claim attached to it, so this pass remains the only thing standing between *that* and silent drift. Three things worth knowing:
 
-- **Correct the entry in place.** `CONSTRAINTS.md` is a current-state doc, not an append-only log — fix the claim where it stands, keeping the bracket-tag vocabulary above. Only add a `docs/process/session-log.md` entry if a steering-prompt assumption moved too; a `CONSTRAINTS.md` correction on its own isn't log-worthy.
+- **Correct the entry in place.** `CONSTRAINTS.md` is a current-state doc, not an append-only log — fix the claim where it stands, keeping the bracket-tag vocabulary above. Only add a `docs/process/session-log/` shard entry if a steering-prompt assumption moved too; a `CONSTRAINTS.md` correction on its own isn't log-worthy.
 - **A claim can drift in either direction.** It can become false, or it can have been written *ahead of* the code and only become true later — a `[Resolved]` written for a fix that was still partial reads as settled when it isn't. Both are worth correcting, and say which happened rather than quietly restating the claim.
 - **Don't hardcode a count.** They go stale faster than they get read, and this bullet is the proof: it used to carry three wrong numbers of its own, quoting a `MATURITY_ASSESSMENT.md` sentence that had already been corrected and stamping its replacement "as of" a date it was wrong on. Two fixes, in order of preference. Name the command that recomputes it, which `MATURITY_ASSESSMENT.md` and `CONSTRAINTS.md`'s drift-check entry both now do. Or, when a number genuinely has to appear in prose, wrap it in a derived block:
 
@@ -64,7 +69,7 @@ Only tag an assumption `[Resolved]` if you're confident the prompt's stated prob
 
 ### Why this exists, not just what to do
 
-A Claude Code CLI session (this one) has full repo and git access but no access to the Claude project where the canonical copies of `00`–`06` live. A Cowork session attached to that project has the reverse — it can read/edit the prompts but can't run git commands against this repo directly. `docs/process/session-log.md` is the one file that crosses that gap: cheap for this session to write (it already has full context of its own change), and small enough for the other session to read directly once it has folder access, without needing the full diff or `.git` history relayed by hand.
+A Claude Code CLI session (this one) has full repo and git access but no access to the Claude project where the canonical copies of `00`–`06` live. A Cowork session attached to that project has the reverse — it can read/edit the prompts but can't run git commands against this repo directly. `docs/process/session-log/` (indexed from `docs/process/session-log.md`) is the bridge that crosses that gap: cheap for this session to write (it already has full context of its own change), and small enough for the other session to read directly once it has folder access, without needing the full diff or `.git` history relayed by hand.
 
 ## Searching code: prefer ast-grep for citations; ripgrep allowed
 
@@ -95,4 +100,4 @@ Check F (in `scripts/ci/check_repo_claims.py`) denies raw network egress for any
 
 ## Tool and environment quirks
 
-`docs/process/tool-quirks.md` is a separate, append-only index from `docs/process/session-log.md` above — it's about odd behavior in the *ambient tools/environment* this repo is worked in (`gh`, `git`, MCP tools, Windows/Git-Bash-specific quirks), not this plugin's own document-generation logic. See `adapters/claude/skills/tool-quirks/SKILL.md` for the full convention. Check it before deep-diving into something that looks like a tool bug; append an entry whenever you diagnose one (resolved, partially diagnosed, or still open) so the next session doesn't redo the investigation.
+`docs/process/tool-quirks.md` is a separate, append-only index from `docs/process/session-log/` above — it's about odd behavior in the *ambient tools/environment* this repo is worked in (`gh`, `git`, MCP tools, Windows/Git-Bash-specific quirks), not this plugin's own document-generation logic. See `adapters/claude/skills/tool-quirks/SKILL.md` for the full convention. Check it before deep-diving into something that looks like a tool bug; append an entry whenever you diagnose one (resolved, partially diagnosed, or still open) so the next session doesn't redo the investigation.

@@ -1,0 +1,194 @@
+# Session log — 2026-07-23
+
+Lead: **Stray scaffolding commit landed on the wrong branch, caught by a later session**
+
+Packed shard (target ≤225 lines). Index: [`README.md`](README.md).
+
+Entries: 5. Newest at the bottom of this file.
+
+---
+
+## 2026-07-23 ? Stray scaffolding commit landed on the wrong branch, caught by a later session
+
+
+
+Commit: 065680a (this entry documents an incident, not a code change)
+
+
+
+Tests: not applicable ? process/doc incident, no code touched
+
+
+
+Assumptions affected:
+
+
+
+- `claude/steering-prompts/00-shared-research-standards.md` ? "a local Claude Code CLI session... has no access to [the Claude] project" while "a Cowork session attached to that project... can't run git commands against this repo directly" ? [Still accurate ? this exact gap is what caused the incident below, not something the incident changed.]
+
+
+
+Details: A memoryless Cowork session wrote CLAUDE.md and `claude/` (this convention itself) as untracked working-tree files, intentionally left out of PR #1 per handoff instructions. A separate, also-memoryless Claude Code CLI session later committed those files directly onto `implement-handoff-items` (commit `8bb2404`) without checking whether they were supposed to stay untracked, and that commit rode along when PR #1 merged to `main`. The next session caught it only by running `git status` and `gh pr view 1` directly rather than trusting the task description's assumption that the files were still untracked. Outcome: left as-is on `main` (functionally correct ? the convention is live ? just via the wrong branch/PR, a cosmetic history detail not worth rewriting merged history to fix).
+
+
+
+Files touched: claude/session-log.md
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+## 2026-07-23 ? Add CONSTRAINTS.md
+
+
+
+Commit: d989796
+
+
+
+Tests: not applicable ? documentation-only change, no code touched
+
+
+
+Assumptions affected:
+
+
+
+- `claude/steering-prompts/03-constraints-research-prompt.md` ? "What to scaffold and implement": a single `CONSTRAINTS.md` at the plugin root, structured like `doc-taxonomy.md`, tagged by kind (runtime prerequisite / integration gap not a scope cut / known precision tradeoff / confidentiality-handling rule), cross-linked from `README.md` and `SKILL.md` ? [Resolved ? `CONSTRAINTS.md` added at plugin root with all four specified kinds plus a fifth ("Enterprise-readiness gap") added to hold findings ? license, no CI, no RBAC, no audit trail, unpinned deps, no multi-repo ? from a direct 2026-07-23 audit of this repo that didn't fit the original four categories cleanly. Cross-linked from both `README.md` and `SKILL.md` as specified.]
+
+
+
+- `claude/steering-prompts/03-constraints-research-prompt.md` ? "the confidentiality rule... currently lives only in prose handoff notes rather than a standing rule in the repo itself" ? [New info ? a standing confidentiality rule now exists in `CONSTRAINTS.md`, but its exact wording is a fresh reconstruction from the prompt's own hint ("the real-repo-name/content rule"), not a verbatim carry-forward of the original handoff prose, which wasn't reachable from this repo/session. Flagged explicitly in the entry itself; worth reconciling against the original text if it ever resurfaces.]
+
+
+
+Files touched: CONSTRAINTS.md, README.md, skills/document-spring-repo/SKILL.md, claude/session-log.md
+
+
+
+## 2026-07-23 ? Wire spring_drift_check.py into SKILL.md and README.md
+
+
+
+Commit: e614e7c (also f969521 on the same branch)
+
+
+
+Tests: 12/12 passing (`python3 scripts/test_spring_drift_check.py -v`) ? an initial run surfaced a real Windows path-separator bug in `spring_drift_check.py`'s `tier1_scan()` (raw `os.path.relpath()` instead of normalizing to forward slashes like `spring_signal_scan.py` does everywhere else), fixed in this same PR along with a stale test assertion that predated the `references` bucket being cited as per-file evidence
+
+
+
+Assumptions affected:
+
+
+
+- `claude/steering-prompts/03-constraints-research-prompt.md` ? "Integration gap, not a scope cut" item: `spring_drift_check.py` exists and works standalone but isn't wired into `SKILL.md`'s pipeline or documented in `README.md` ? [Resolved ? SKILL.md's Stage 0 now documents it as an optional pre-flight check, and README.md now has an "On drift detection" section; still standalone/not CI-triggered by design, which both files now say explicitly.]
+
+
+
+- `claude/steering-prompts/04-analytics-logging-research-prompt.md` ? re-scoped "what to scaffold" item 1, "add a SKILL.md-documented way to run spring_drift_check.py... and document it in README.md" ? [Resolved ? same SKILL.md/README.md additions as above; the run-manifest half of that prompt (item 2) remains open, out of scope for this commit.]
+
+
+
+Files touched: skills/document-spring-repo/SKILL.md, README.md, claude/session-log.md
+
+
+
+## 2026-07-23 ? Cross-reference: second instance of trust-without-verify failure mode
+
+
+
+Commit: 8bb2404 (the incident); this entry is documentation only
+
+
+
+Tests: not applicable ? process/doc incident
+
+
+
+Assumptions affected:
+
+
+
+- `claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md` ? describes the device-bridge write-without-verify failure (device_commit_files reporting success while content stayed stale) as the motivating incident for a "write-then-verify" rule. [New info ? a second, structurally identical failure mode confirmed: a memoryless session trusting a *handoff document's* stale assumption (files were supposed to stay untracked) rather than checking actual repo state (`git status`, `gh pr view`) directly. Same root cause ? trusting a tool/doc's account of state instead of re-verifying ? different surface (git/PR state vs. file content).]
+
+
+
+  Details: See entry above (2026-07-23, "Stray scaffolding commit landed on the wrong branch") for the incident itself. Logged here specifically to link it to the write-then-verify pattern already named in `05-clarity-delivery-trust-research-prompt.md`, since that prompt's "not started" scaffold item #1 (a documented rule: after any state-changing action, the next action is direct re-verification, never trusting a tool's or doc's success claim alone) now has two independent incidents as evidence, not one. Worth citing both when that prompt is picked up.
+
+
+
+  Files touched: claude/session-log.md
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+## 2026-07-23 ? Add CONTRIBUTING.md (write-then-verify rule) and STATUS.md
+
+
+
+Commit: 8b1cc65
+
+
+
+Tests: not applicable ? documentation-only change, no code touched
+
+
+
+Assumptions affected:
+
+
+
+- `claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md` ? scaffold item 1, a documented write-then-verify rule ? [Resolved ? `CONTRIBUTING.md` now states the rule, citing both prior incidents (the device-bridge write-without-verify failure from `IMPLEMENTATION_HANDOFF.md`, and the stray-scaffolding-commit incident logged above) as evidence for the same root cause.]
+
+
+
+- `claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md` ? scaffold item 2, a single in-place-edited `STATUS.md` distinct from an append-only history doc, cross-linked to it ? [Resolved ? `STATUS.md` added at plugin root, cross-linked with `claude/session-log.md`, `CONSTRAINTS.md`, and `IMPLEMENTATION_HANDOFF.md`; both files also linked from a new "Status and contributing" section in `README.md`.]
+
+
+
+- `claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md` ? research item asking whether Claude Code's own docs describe tool-response reliability for file-write tools ? [New info ? `code.claude.com/docs/en/sub-agents` and `plugins-reference` do not document any guarantee that a write/edit tool's success response reflects the live file; the closest supported mechanism found is a `PostToolUse` hook matched against `Write|Edit`, which is documented but not wired into this repo. Noted in `CONTRIBUTING.md` as the automation path if the checklist-rule version (item 1) isn't sufficient later.]
+
+
+
+- `claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md` ? scaffold item 3, "if research turns up a genuinely useful small write-verification helper, wire it in; otherwise codify read-after-write as an explicit checklist step" ? [Resolved ? GitHub search for on-point write-then-verify/checksum-confirm utilities surfaced only download-integrity checksum tools (`teran/checksum`, `nicjansma/checksum-verifier`), not the same problem (tool-reported success vs. actual live-file state); per the shared research standard this null result is itself valid, so the fallback was taken: codified as an explicit rule in `CONTRIBUTING.md` rather than left as tribal knowledge.]
+
+
+
+Files touched: CONTRIBUTING.md, STATUS.md, README.md, claude/steering-prompts/05-clarity-delivery-trust-research-prompt.md, claude/session-log.md
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
