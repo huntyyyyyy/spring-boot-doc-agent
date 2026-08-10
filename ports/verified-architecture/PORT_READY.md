@@ -29,8 +29,8 @@ Implement bar: **0 PASS rows**.
 | P3 | June–August 2026 research **per entity**, content understood, ≥5 genuine GitHub algorithm adopters after anti-bogus filter | **FAIL** — audit started; exact algorithms for claim memory + equivariance wrapper have **0** public adopters found |
 | P4 | Wave-1 Stakeholder / Software Requirements / Traceability under `03-requirements/` | PARTIAL (Draft) |
 | P5 | Quality Attribute Scenarios; latency Spike-blocked | PARTIAL |
-| P6 | Interface Control Document drafts | PARTIAL |
-| P7 | Verification and Validation fixture names | PARTIAL (no plants) |
+| P6 | Interface Control Document drafts | PARTIAL — drafts proliferated; research depth still FAIL |
+| P7 | Verification and Validation plants | PARTIAL — TaskSpec *drafts* exist; no live scorer / replay (not Accept) |
 | P8 | Sign-off log template | PASS (unsigned) |
 | P9 | `EXPORT.md` | PASS |
 | P10 | Legacy `docs/` / `nests/` demoted | PASS |

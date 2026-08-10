@@ -1,6 +1,6 @@
 ---
-title: Artifact-anchored claim memory — specification (adopt 2608.04278)
-status: DRAFT
+title: Artifact-anchored claim memory — specification (Pilot invent from 2608.04278)
+status: DRAFT — Pilot; exact public engines = 0
 date: '2026-08-10'
 arxiv: '2608.04278'
 paper_title: 'EA-Graph: Artifact-Anchored Verification Memory for Coding Agents under Upstream Drift'
@@ -8,9 +8,11 @@ paper_title: 'EA-Graph: Artifact-Anchored Verification Memory for Coding Agents 
 
 # Artifact-anchored claim memory (product specification)
 
-We **Adopt** the paper *EA-Graph: Artifact-Anchored Verification Memory for
-Coding Agents under Upstream Drift* for *verification claims*, not its
-synthetic benchmark worlds as plants.
+We **Embody** ideas from the paper *EA-Graph: Artifact-Anchored Verification
+Memory for Coding Agents under Upstream Drift* (`unprovable`, evidence≠freshness,
+leaf anchors). We do **not** industry-**Adopt** a field library — exact public
+engines found: **0**. Product stance: **Pilot invent** under Spike before Must
+Implement honesty.
 
 Whole words in prose — see root `GLOSSARY.md`.
 

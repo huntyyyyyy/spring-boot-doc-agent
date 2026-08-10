@@ -161,7 +161,7 @@ errors, possession ≠ auth.
 
 | Option | Why | What | Who | How | When | Where | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **A. `snapshot_open` tools/call mint** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Chosen** |
+| **A. `snapshot_open` tools/call mint** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — Pilot invent |
 | B. Implicit cwd / process session | 0 | 0 | 1 | 0 | 0 | 1 | 2 | **Refuse** (SEP-2567; concurrent agents) |
 | C. `resource://snapshot/{id}` only | 1 | 1 | 1 | 1 | 1 | 1 | 6 | **Defer** as Could companion (read metadata); mint still via tool |
 | D. Auto-mint inside every `verify` | 1 | 1 | 1 | 1 | 2 | 1 | 7 | **Defer** — hides checkpoint for resolve-only flows |

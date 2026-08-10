@@ -24,7 +24,7 @@ related_gaps: [G-R1, G-R2]
 
 | Option | Why | What | Who | How | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- |
-| **A. PoS-shaped fields + Witness honesty + unsigned MVP** | 2 | 2 | 2 | 2 | **8** | **Chosen** |
+| **A. PoS-shaped fields + Witness honesty + unsigned MVP** | 2 | 2 | 2 | 2 | **8** | **Working hypothesis (Draft)** — Embody β/ρ; Proof-or-Stop engine = 0 (Pilot) |
 | B. `git_commit` only as freshness | 0 | 0 | 1 | 1 | 2 | **Refuse** |
 | C. Treat SLSA provenance as Proof-or-Stop | 1 | 0 | 1 | 1 | 3 | **Refuse** (compose, don’t rename) |
 | D. Narrative message as witness | 0 | 0 | 0 | 0 | 0 | **Refuse** |

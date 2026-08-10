@@ -18,9 +18,9 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 ---
 
-## Six vectors (chosen shape)
+## Six vectors (working hypothesis)
 
-| Vector | Chosen content |
+| Vector | Working hypothesis content |
 | --- | --- |
 | **Why** | Agents hallucinate entity ids and treat chat as verify System of Record; we need a **typed, handle-passing, harness-owned** tool surface that cannot green-wash without receipts. |
 | **What** | Primitive tools only (`verify`, `resolve`, `claim_withdraw`, `locks_list`); Stateful Tool-Enabled Agentic Deployment ST-1…5; protocol pin `2026-07-28`; reject classes listed in Interface Control Document; no Roots/Sampling/Logging. |
@@ -35,12 +35,14 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 | Option | Why | What | Who | How | When | Where | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **A. Primitive tools + `2026-07-28` + handles** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Chosen** |
+| **A. Primitive tools + `2026-07-28` + handles** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — wire pin Evidenced; *our* tool set = Pilot invent |
 | B. Pre-July sessionful MCP (`initialize` + `Mcp-Session-Id`) | 1 | 0 | 1 | 0 | 0 | 1 | 3 | **Refuse** for new work |
 | C. HyperTool / mega-tools (“do architecture”) | 1 | 0 | 0 | 1 | 1 | 1 | 4 | **Defer** (Could) |
 | D. Free-text bean_name tools | 0 | 0 | 0 | 1 | 1 | 1 | 3 | **Refuse** (ST-1/ST-5) |
-| E. CLI-only; no Model Context Protocol | 2 | 1 | 1 | 2 | 2 | 1 | 9 | **Accept as peer**; MCP still needed for IDE hosts |
+| E. CLI-only; no Model Context Protocol | 2 | 1 | 1 | 2 | 2 | 1 | 9 | **Accept as peer**; MCP still hypothesized for IDE hosts |
 | F. Remote SaaS MCP with org session store | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **Refuse** MVP (product shape) |
+
+Scores are a **sensor**, not Accept. See `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
 
 **Why A over E:** command-line interface covers humans and scripts; IDE / agent
 hosts expect Model Context Protocol. Same harness, two transports — not two

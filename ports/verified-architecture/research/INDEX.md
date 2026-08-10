@@ -18,6 +18,7 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 | **Paper digest template** | `research/method/PAPER_DIGEST_TEMPLATE.md` | Fill one file per arXiv id under `papers-2026-may-aug/digests/` |
 | **Worked digest example** | `research/papers-2026-may-aug/digests/2608.04278-ea-graph.md` | Empirical + section map for Artifact-Anchored Verification Memory |
 | **Shallow approvals deep-dive** | `research/gaps/shallow-approvals-deep-dive-2026-08-10.md` | MCP `2026-07-28` stateless, receipts, claims, lock IR, freshness, harness, QAS, C4 + agent-codegen bites |
+| **Shallow decisions honesty / FREEZE** | `research/gaps/shallow-decisions-honesty-2026-08-10.md` | Overclaim audit; deepen-max-3; demote Chosen→Working hypothesis |
 | **MCP open items (schemas / mint / fixtures)** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool JSON Schema 2020-12, `snapshot_open`, DynamicMCPBench effect fixtures |
 | **DynamicMCPBench digest** | `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md` | Effect checkpoints, minefields, Tier-1; engine pending |
 | **Decision Framework** | `docs/standards/decision-framework.md` | Six-vector Selection Taxonomy (Decision Matrix / ADR companion / Governance) |

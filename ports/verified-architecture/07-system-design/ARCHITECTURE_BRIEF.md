@@ -64,7 +64,7 @@ agents share the same checker.
 
 | Topology option | Verdict |
 | --- | --- |
-| **Monorepo (engine + specs + plugins)** | **Adopt for product source** after Spec Approve — single lock/engine version |
+| **Monorepo (engine + specs + plugins)** | **Working hypothesis** after Spec Approve — single lock/engine version (not earned Adopt) |
 | **Multi-service org platform** | **Refuse MVP** — wrong scale |
 | **Library embedded in customer apps** | **Defer** — secondary SDK; primary is out-of-process tool |
 | **Pure SaaS** | **Refuse MVP** — fights local-first + privacy QAS |

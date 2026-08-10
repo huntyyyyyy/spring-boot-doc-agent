@@ -43,7 +43,7 @@ Every filled matrix **must** also carry:
 | --- | --- |
 | **Usage case** | Concrete scenario (actor + goal + outcome) — not a slogan |
 | **Code / Spec locus** | File, port, package, or Interface Control Document path where the choice binds |
-| **Chosen** | The selected option |
+| **Working hypothesis** | The selected Draft option (not human Accept) |
 | **Rejected alternatives** | Named options + **why not** (at least one serious alternative) |
 | **Embody / Adopt / Refuse / Pilot** | Product tier (constitution vocabulary) |
 | **Claim tier** | Evidenced / Confirmed / Unknown |
@@ -65,6 +65,21 @@ alternatives. Formal methods (Temporal Logic of Actions, Alloy, queueing
 models, Monte Carlo) are catalogued as ideas in
 `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` — **not**
 Definition of Ready Must and **not** substitutes for plants.
+
+### Research-depth gate (before human Accept)
+
+A matrix may say **Working hypothesis (Draft)** freely. It must **not** be
+proposed for human Accept, and agents must not treat scores as Chosen truth,
+unless one of:
+
+| Gate | Meaning |
+| --- | --- |
+| `digest` | Load-bearing paper digested (type + sections + refs) |
+| `primary_spec` | Normative industry Spec cited with section/SEP |
+| `pilot_waiver` | Exact public engines = 0; explicit Pilot invent charter |
+
+See `research/gaps/shallow-decisions-honesty-2026-08-10.md`. Score totals are
+**sensors** only.
 
 ## Anti-patterns (refuse)
 

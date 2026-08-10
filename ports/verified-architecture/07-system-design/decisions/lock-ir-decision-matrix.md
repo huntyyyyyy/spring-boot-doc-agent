@@ -24,7 +24,7 @@ icd: 07-system-design/icd/lock-ir.schema.json
 
 | Option | Why | What | Who | How | When | Where | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **A. Packwerk-shaped shared IR + fidelity matrix** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Chosen** |
+| **A. Packwerk-shaped shared IR + fidelity matrix** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — Adopt *pattern* from Packwerk; our JSON IR = Pilot |
 | B. Per-language native checkers only (no shared IR) | 1 | 1 | 1 | 0 | 1 | 1 | 5 | **Refuse** as sole path |
 | C. Method-call / full DI graph as core edges | 1 | 0 | 1 | 0 | 1 | 1 | 4 | **Refuse** core (unproven vs Packwerk) |
 | D. Prose `.mdc` locks without executable IR | 0 | 0 | 0 | 0 | 1 | 1 | 2 | **Refuse** |
