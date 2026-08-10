@@ -8,6 +8,7 @@ related:
   - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
   - docs/research/cold-product-bc-research-map-2026-08-10.md
   - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+  - docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
   - docs/research/process/04-implementation-frameworks.md
   - docs/research/se-quality-synthesis-2026-08-08.md
