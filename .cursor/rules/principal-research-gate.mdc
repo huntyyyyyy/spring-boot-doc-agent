@@ -20,6 +20,8 @@ framework/tool adoption, Spec Draft, or epic planning.
 - Activate `.venv/` if running repo CLIs while researching.
 - **rg** for existing memos / backlog rows; **ast-grep** when the Spec must cite live code structure.
 - Optional Stage-0: `doc-engine query context-packet` / evidence queries when a run-dir exists.
+- Complete download/pilot matrix (incl. Ruby/Go/Clojure lanes):
+  `@docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md`.
 - Do not use raw `curl`/`wget` for research egress when WebFetch / MCP / `llms.txt` suffice; hooks still deny raw clone/curl via Bash.
 
 @.cursor/skills/principal-se-research-epic/SKILL.md
@@ -27,3 +29,4 @@ framework/tool adoption, Spec Draft, or epic planning.
 @docs/research/quality-backlog.md
 @adapters/claude/SEARCH.md
 @docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md
+@docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md

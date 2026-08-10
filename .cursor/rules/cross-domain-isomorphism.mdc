@@ -19,8 +19,12 @@ Run **I1–I5** before importing or dismissing a distant field. Habit line:
 
 - Locate prior iso memos with **rg** under `docs/research/` (prose); verify any CS landing citations in code with **ast-grep**.
 - External frameworks: DeepWiki MCP `ask_question` + primary `llms.txt` — same bar as principal research.
+- Polyglot enhancement lanes (Ruby / Go / Clojure / …): Spec Draft **E-TOOL0** /
+  `docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md`
+  + E-POLY0b pilot-before-refuse — **not** tip kernel rewrites.
 - Never retype boolean SoTs via metaphor; keep fail_under / coverage predicates typed.
 
 @.cursor/skills/cross-domain-isomorphism/SKILL.md
 @docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md
+@docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md
 @adapters/claude/SEARCH.md

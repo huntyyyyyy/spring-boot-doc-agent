@@ -138,3 +138,10 @@ Tests: MDC line smoke (each rule ≤80); claims n/a for rules-only
 Assumptions affected:
 - MDC lenses are policy-only without search/CLI affordances — [Resolved — every `.cursor/rules/*.mdc` now carries path-relevant tooling (ast-grep / rg / venv / pre_pr / DeepWiki) + `@adapters/claude/SEARCH.md` where useful]
 Files touched: .cursor/rules/*.mdc
+
+## 2026-08-10 — E-TOOL0 complete toolscape incl. Ruby/Go/Clojure lanes
+Commit: uncommitted
+Tests: not run (docs Spec Draft); DeepWiki Ask on Charm/Babashka/Ruby families
+Assumptions affected:
+- Toolscape = LLM/agent only — [Resolved — memo 48 audience matrix: repo gates + developer laptop + agent; Ruby/Go/Clojure as Pilot/pattern not tip kernel]
+Files touched: docs/research/process/48-*.md, docs/research/quality-backlog.md, docs/research/README.md, .cursor/rules/{principal-research-gate,cross-domain-isomorphism}.mdc
