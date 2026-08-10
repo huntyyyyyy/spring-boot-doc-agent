@@ -214,13 +214,18 @@ Language tools emit a stable index (formerly Language Server Index Format lineag
 
 | Must-spine entity | Papers understood? | ≥5 genuine algorithm repos? | Prior corpus claim | Corrected claim |
 | --- | --- | --- | --- | --- |
-| Graph + locks | Adequate (practice-heavy) | **Yes** | Must | Must **Adopt** field patterns; still need lock Intermediate Representation Accept |
-| Artifact-anchored claims | Partial (1 core paper) | **No (0 exact)** | Must Adopt | **Must intent / Pilot invent** — D0 FAIL |
-| Stateful Tool-Enabled Agentic Deployment constraints | Partial (1 core paper) | **No (0 exact wrapper)** | Must Adopt | **Embody warning + Spike** — D0 FAIL |
-| Freshness-bound receipts | Partial | Adjacent yes; named engine **missing** | Must | Must **shape** from attestations; Proof-or-Stop engine **Unknown** |
-| Harness propose/decide | Partial | Yes (adjacent) | Must | Must process; pick one harness pattern via Spike |
+| Graph + locks | Adequate (practice-heavy) | **Yes** (Packwerk, dependency-cruiser, ArchUnit, Nx, Bazel, tach, import-linter, …) | Must | Must **Adopt** field patterns; still need lock Intermediate Representation Accept |
+| Artifact-anchored claims | Digest started (2608.04278) + kin CAVA/PCAA | **No exact** (Zenodo-only study; ≥5 adjacent attestations) | Must Adopt | **Must intent / Pilot invent** — D0 FAIL |
+| Stateful Tool-Enabled Agentic Deployment constraints | Partial + AgentLTL/CAGE kin | **No exact wrapper**; ≥5 adjacent guardrails/SDKs | Must Adopt | **Embody warning + Spike** — D0 FAIL |
+| Freshness-bound receipts | Proof-or-Stop + supply-chain | Adjacent yes; named engine **pending release** | Must | Must **shape** from Witness/in-toto; engine **Unknown** |
+| Harness propose/decide | Partial | Yes (adjacent coding harnesses) | Must | Must process; Prompts→Contracts / Aria engines **Unknown** |
 | Source Code Index Protocol | Yes | Yes | Assumed | Confirmed Adopt candidates |
-| Model Context Protocol tools | Partial | Yes | Draft Interface Control Document | Adopt SDKs; still need typed-id Spike |
+| Model Context Protocol tools | Partial | Yes (+ Model Context Protocol–Universe evaluators) | Draft Interface Control Document | Adopt SDKs; DynamicMCPBench/HyperTool code **Unknown** |
+| Architecture Tradeoff drafting | Method + Multi-Agent Architecture Design | Tooling-thin (MAAD dump ≠ engine) | Soft | **Embody** Quality Attribute Scenario forms; **Refuse** LLM Architecture Tradeoff reports as certify |
+
+### Research agents (2026-08-10)
+
+Graph/locks + index + Architecture Tradeoff · Stateful Tool-Enabled Agentic Deployment / harness / Model Context Protocol · claim-memory / Proof-or-Stop — all three finished; findings merged here. Paper-type digests (framework) still required per Must paper.
 
 ---
 
