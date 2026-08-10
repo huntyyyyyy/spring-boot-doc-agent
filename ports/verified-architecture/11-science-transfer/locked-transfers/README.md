@@ -11,7 +11,7 @@ date: '2026-08-10'
 | Field | Failure it addresses | Allowed use here |
 | --- | --- | --- |
 | Nonlinear DST | Long-term prediction / stability vs chaos | Metaphor for tip thrash — **not** a gate plant |
-| Information theory | Uncertainty, channel limits, compressibility | Label sensor≠SoT; refuse entropy as merge |
+| Information theory | Uncertainty, channel limits, compressibility | Label sensor≠Source of Truth; refuse entropy as merge |
 | Stat mech | Macro phases from micro laws | Soft→hard threshold metaphor only |
 | Linear algebra / probability | Representation; rare events | Flake language OK; probabilistic “green” **not** |
 | Thermodynamics | Irreversibility & work bounds | Green-AI / remasure cost language; **not** \(kT\ln 2\) CI floor |

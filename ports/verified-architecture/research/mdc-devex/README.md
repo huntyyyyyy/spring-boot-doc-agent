@@ -11,9 +11,9 @@ Evidence for how Cursor `.mdc` rules should activate for **agents** and
 
 | File | Use |
 | --- | --- |
-| `cursor-mdc-activation-algebra.md` | SoT memo: Always / globs / agent-requested / manual; Skills vs rules |
+| `cursor-mdc-activation-algebra.md` | Source of Truth memo: Always / globs / agent-requested / manual; Skills vs rules |
 | `agent-context-markdown-bloat-2026.md` | Why always-on markdown thrash fails |
 | `agent-context-algorithm-first-2026.md` | Algorithm-first context selection |
 
-**Product rule derived here:** research stays `.md` for RAG/humans; `.mdc`
+**Product rule derived here:** research stays `.md` for Retrieval-Augmented Generation/humans; `.mdc`
 carries *activation*, not a mass rename of the corpus.

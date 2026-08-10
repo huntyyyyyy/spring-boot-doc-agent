@@ -45,8 +45,17 @@ appear in *file paths* only; in running text, expand them.
 | minimum viable product | MVP |
 | Concrete Syntax Tree | CST |
 | Source Code Index Protocol (SCIP index) | SCIP alone without gloss |
+| WebAssembly | WASM alone |
+| Model Context Protocol SEP (numbered proposal) | SEP alone |
+| Temporal Logic of Actions / TLA+ TLC model checker | TLC alone |
+| Analytic Hierarchy Process | AHP |
+| Multi-Criteria Decision Analysis | MCDA |
+| Java Modelling Tools | JMT |
 | bounded context | BC |
 | large language model | LLM (expand on first use in a file) |
+| software development kit | SDK alone |
+| TypeScript | TS alone in prose |
+| Architecture Decision Records (plural) | ADRs |
 
 ## Paper titles (June–August 2026 readiness set)
 
@@ -64,3 +73,15 @@ appear in *file paths* only; in running text, expand them.
 
 When a path must keep a short label (example: `QAS-N-01-warm-resolve.md`),
 write the full phrase beside it on first mention in that file.
+
+
+## Enforcement note (2026-08-10)
+
+A whole-word pass expanded bare short forms across `ports/verified-architecture/**/*.md`
+(except this glossary’s “avoid” column). **Keep** short forms inside:
+
+- fenced code and inline `` `paths` ``
+- stable ids after the full phrase once: `Architecture Decision Record ADR-0001`
+- paper nicknames only in paths (`ea-graph-claims.schema.json`)
+
+New prose must not reintroduce bare `MCP` / `ADR` / `ICD` / `DoR` / `QAS` / `WASM` / `SCIP` without the full phrase.

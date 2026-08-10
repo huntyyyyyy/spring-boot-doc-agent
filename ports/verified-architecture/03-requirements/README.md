@@ -1,5 +1,5 @@
 # 03-requirements
 
-StRS/SRS/use-cases/QAS/RTM/MoSCoW. NFRs enter Design only as six-part QAS.
+Stakeholder Requirements Specification/Software Requirements Specification/use-cases/Quality Attribute Scenario/Requirements Traceability Matrix/MoSCoW. non-functional requirements enter Design only as six-part Quality Attribute Scenario.
 
 See [PRECODE_MAP.md](../PRECODE_MAP.md).

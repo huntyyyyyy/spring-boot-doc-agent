@@ -23,12 +23,12 @@ related:
 
   - .cursor/rules/00-constitution.mdc
 do_not:
-  - Dual-write coverage.xml from two writers without cutover ADR
-  - Claim SCIP alone resolves Spring @Primary/@Qualifier/profiles
-  - Equate WASM with mathematical proof (Z3/Kani are proof; WASM is sandbox)
-  - Water product down to Python-only — full polyglot is identity (ADR-0001)
-  - Treat Duck.ai chat as Evidenced SoT — inspiration only
-  - Treat this memo as SRS — cite docs/requirements/ for REQ-*
+  - Dual-write coverage.xml from two writers without cutover Architecture Decision Record
+  - Claim Source Code Index Protocol alone resolves Spring @Primary/@Qualifier/profiles
+  - Equate WebAssembly with mathematical proof (Z3/Kani are proof; WebAssembly is sandbox)
+  - Water product down to Python-only — full polyglot is identity (Architecture Decision Record ADR-0001)
+  - Treat Duck.ai chat as Evidenced Source of Truth — inspiration only
+  - Treat this memo as Software Requirements Specification — cite docs/requirements/ for REQ-*
 
 sources:
   github:
@@ -47,8 +47,8 @@ sources:
 
 # VA — Local-first verified architecture agent
 
-**Product framing:** polyglot verified architecture + RAG/MDC progressive disclosure (planning corpus).  
-**Ambition:** glue **SCIP → local SCM → graph verify → (optional) SMT**, with
+**Product framing:** polyglot verified architecture + Retrieval-Augmented Generation/MDC progressive disclosure (planning corpus).  
+**Ambition:** glue **Source Code Index Protocol → local SCM → graph verify → (optional) SMT**, with
 Python (then Rust hot paths) as ACI — more precise than chat-only agents, more
 flexible than a pure verifier.
 
@@ -60,20 +60,20 @@ polyglot memos. **No Refuse-by-default** — Pilot-before-cutover.
 
 ## 0. One-page verdict
 
-| Layer | Question | Tools | Merge SoT? |
+| Layer | Question | Tools | Merge Source of Truth? |
 | --- | --- | --- | --- |
-| **L1 Where** | Where is it? What shape? Who refs it? | ast-grep (fast) · tree-sitter · **SCIP** | Index SoR (sensor) |
-| **L1b Wire** | Which bean binds here? | Annotation registry + SCIP types + **Spring resolve** | Graph SoR (sensor→gate) |
-| **L2 How** | Is this change allowed? | `.mdc` / locks · claims · E-MD0 FM | **Policy SoT** |
-| **L3 Proof** | Can we refute a property? | Z3 / Kani (Rust) · CodeQL queries | Optional proof SoR |
-| **Sandbox** | Where does untrusted check run? | **WASM** (validator harness) | Not a prover |
+| **L1 Where** | Where is it? What shape? Who refs it? | ast-grep (fast) · tree-sitter · **Source Code Index Protocol** | Index System of Record (sensor) |
+| **L1b Wire** | Which bean binds here? | Annotation registry + Source Code Index Protocol types + **Spring resolve** | Graph System of Record (sensor→gate) |
+| **L2 How** | Is this change allowed? | `.mdc` / locks · claims · E-MD0 FM | **Policy Source of Truth** |
+| **L3 Proof** | Can we refute a property? | Z3 / Kani (Rust) · CodeQL queries | Optional proof System of Record |
+| **Sandbox** | Where does untrusted check run? | **WebAssembly** (validator harness) | Not a prover |
 
 **v1 Accept (pragmatic):** virtual Spring/dep **graph** + lock checks + proof-tour
 receipts. **Defer** full Z3 bean “proofs.” Keep Python tip until Explicit cutover.
 
-**Requirements SoR:**
+**Requirements System of Record:**
 [`docs/requirements/`](../../design/docs/requirements-2026-08-10.md)
-(StRS / MoSCoW SRS / RTM). Tours below are product sketches; **Must** capabilities
+(Stakeholder Requirements Specification / MoSCoW Software Requirements Specification / Requirements Traceability Matrix). Tours below are product sketches; **Must** capabilities
 are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05/06`).
 
 ---
@@ -83,9 +83,9 @@ are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05
 | Level | Evidence |
 | --- | --- |
 | **1 Remember** | scip-java, tree-sitter, SWE-agent ACI, Z3, Kani, LanceDB, Glean-as-pattern |
-| **2 Understand** | Spring DI ≠ Java symbols; WASM ≠ SMT; sg is fast path inside L1 |
+| **2 Understand** | Spring Dependency Injection ≠ Java symbols; WebAssembly ≠ SMT; sg is fast path inside L1 |
 | **3 Apply** | Pilot: `scip-java index` on corpus/OCS → SQLite registry → cycle/layer gate |
-| **4 Analyze** | Embody wheels/sg; Pilot Rust analyzer + SCIP; Pattern SWE-agent loop; Defer Z3 |
+| **4 Analyze** | Embody wheels/sg; Pilot Rust analyzer + Source Code Index Protocol; Pattern SWE-agent loop; Defer Z3 |
 | **5 Evaluate** | §6 adversarial |
 | **6 Create** | VA tickets below — Implement blocked until Approve |
 
@@ -97,9 +97,9 @@ are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05
 
 - **ast-grep:** high-speed filter, Stage-0 fire, lock patterns that are pure shape.  
 - **tree-sitter:** CST for large Java; prune to semantic summaries (methods + annotations).  
-- **SCIP:** defs/refs/impls across huge trees — “exactly where is this symbol?”
+- **Source Code Index Protocol:** defs/refs/impls across huge trees — “exactly where is this symbol?”
 
-**If removed:** agent is blind / keyword-RAG only.
+**If removed:** agent is blind / keyword-Retrieval-Augmented Generation only.
 
 ### L1b — Wire (virtual Spring graph) `[Confirmed gap today]`
 
@@ -109,17 +109,17 @@ sg finds `@Service` / `@Autowired`; it does **not** answer “bean for
 Static model (not a JVM):
 
 1. Annotation scan → bean registry (SQLite)  
-2. Injection sites → SCIP **requested type**  
+2. Injection sites → Source Code Index Protocol **requested type**  
 3. Resolve (Rust/Python): impls ∩ stereotypes ∩ `@Primary`/`@Qualifier`/`@Bean`  
 4. Edges → **virtual dependency graph** (Unknown when ambiguous)
 
-SCIP is **substrate**; Spring resolve is **extra**.
+Source Code Index Protocol is **substrate**; Spring resolve is **extra**.
 
 ### L2 — How (intent / policy)
 
 Locks / `.mdc`: e.g. controllers call services, not repositories. Same rules for
-**AI and humans** (LSP red squiggle). Git is lock SoR; engines sync locks, **not**
-the vector/SCIP blob.
+**AI and humans** (Language Server Protocol red squiggle). Git is lock System of Record; engines sync locks, **not**
+the vector/Source Code Index Protocol blob.
 
 ### L3 — Proof (optional)
 
@@ -127,7 +127,7 @@ the vector/SCIP blob.
 - **Kani:** model-check **Rust** engine code.  
 - **CodeQL:** query-as-existence proof for vuln/pattern classes.  
 
-WASM runs the **translator/validator** in a sandbox; it does **not** prove beans.
+WebAssembly runs the **translator/validator** in a sandbox; it does **not** prove beans.
 
 ### Synergy loop
 
@@ -141,10 +141,10 @@ WASM runs the **translator/validator** in a sandbox; it does **not** prove beans
 | Tour | Intent |
 | --- | --- |
 | **Proof tour** | Clickable steps: lock → graph edge → snippet → formula |
-| **Ghost prefetch** | Cursor predicts files; preload AST/SCIP/locks; Cmd+K feels instant |
-| **Red squiggle** | LSP runs same locks on human typing |
+| **Ghost prefetch** | Cursor predicts files; preload AST/Source Code Index Protocol/locks; Cmd+K feels instant |
+| **Red squiggle** | Language Server Protocol runs same locks on human typing |
 | **Lock sync** | `.mdc` in git; teammates’ engines refresh rules only |
-| **Polyglot bell** | Cross-lang SCIP/bridges (Java API ↔ TS fetch); “what breaks FE?” |
+| **Polyglot bell** | Cross-lang Source Code Index Protocol/bridges (Java API ↔ TS fetch); “what breaks FE?” |
 
 ---
 
@@ -152,12 +152,12 @@ WASM runs the **translator/validator** in a sandbox; it does **not** prove beans
 
 | Pillar | Has | Lacks |
 | --- | --- | --- |
-| Sourcegraph/SCIP | Index | Local-first agent + locks loop |
+| Sourcegraph/Source Code Index Protocol | Index | Local-first agent + locks loop |
 | SWE-agent / Devin-likes | Reason→act loop | Local SCM + formal/structural locks |
 | CodeQL / Kani / Z3 | Proof/query | Agent + Spring graph ACI |
-| Ollama / LanceDB | Local model/vectors | AST/SCIP truth |
+| Ollama / LanceDB | Local model/vectors | AST/Source Code Index Protocol truth |
 
-**Glue:** local SCIP/SCM + virtual Spring graph + living locks + explainable verify
+**Glue:** local Source Code Index Protocol/SCM + virtual Spring graph + living locks + explainable verify
 (+ optional SMT). Working name: **local-first verified architecture agent**.
 
 ---
@@ -169,8 +169,8 @@ Inspired by local-intelligence-engine sketches; map onto **this** monorepo later
 | Dir | Role | Language |
 | --- | --- | --- |
 | `core-engine/` / `java-analyzer` | Parse, registry, resolve, graph checks | Rust Pilot |
-| `wasm-runtime/` | Sandboxed validator | Rust→WASM |
-| `ai-orchestrator/` | CLI/ACI/MCP/RAG | **Python tip today** |
+| `wasm-runtime/` | Sandboxed validator | Rust→WebAssembly |
+| `ai-orchestrator/` | command-line interface/ACI/Model Context Protocol/Retrieval-Augmented Generation | **Python tip today** |
 | `specs/` / `.cursor/rules` | Locks | MDC + schemas |
 | `plugins/` | Optional Go daemon / Clojure graph | Pilot |
 
@@ -186,8 +186,8 @@ Python remains `coverage.xml` / claims writer until **named cutover Approve**.
 | scip-java → SQLite registry + resolve + cycle/layer gate | **Pilot now** |
 | Proof-tour JSON receipts | **Pilot now** |
 | PyO3 / Rust crate for hot parse | **Pilot** after hotspot measure |
-| WASM validator harness | **Pilot** with graph checks (not SMT) |
-| LSP red squiggles | **Pilot later** |
+| WebAssembly validator harness | **Pilot** with graph checks (not SMT) |
+| Language Server Protocol red squiggles | **Pilot later** |
 | Ghost prefetch + LanceDB | **Pilot later** |
 | Z3 business FOL | **Defer** until locks are formulas |
 | Kani on Rust engine | **Defer** until Rust owns hot path |
@@ -199,18 +199,18 @@ Python remains `coverage.xml` / claims writer until **named cutover Approve**.
 
 | Failure | Mitigation |
 | --- | --- |
-| SCIP sold as Spring DI | L1b resolve + Unknown |
-| WASM sold as proof | Docs + gate naming |
+| Source Code Index Protocol sold as Spring Dependency Injection | L1b resolve + Unknown |
+| WebAssembly sold as proof | Docs + gate naming |
 | Dual Cover% | Constitution; one oracle path |
 | Hallucinated “verified” | Proof tour requires witness IDs or fail |
-| Index sync via git | Locks only; rebuild SCIP locally |
+| Index sync via git | Locks only; rebuild Source Code Index Protocol locally |
 
 ---
 
 ## 7. Create — tickets (Approve before Implement)
 
 Prereq: RE package Approve (`REQ-*`) + ADV-1…3 from process/51. Each ticket
-traces to RTM rows in the RE file.
+traces to Requirements Traceability Matrix rows in the RE file.
 
 | ID | Ticket | REQ trace | Acceptance |
 | --- | --- | --- | --- |
@@ -219,18 +219,18 @@ traces to RTM rows in the RE file.
 | **VA-3** | Bean registry + ctor/`@Autowired` resolve | F-01, F-02, F-07 | Query: bean for type X → impl or Unknown |
 | **VA-4** | Cycle + layer-lock check | F-03…05, F-11 | Catches controller→repo / A→B→A before merge |
 | **VA-5** | Proof-tour schema | F-06, F-13 | Steps clickable in markdown/JSON |
-| **VA-6** | Optional WASM wrap of LockCheck | F-16 Could | Same Accept as in-process |
-| **VA-7** | LSP squiggle Spike | F-12 Should | One lock live in editor |
-| **VA-8** | Polyglot bell Spike | F-15 Could | One Java↔TS bridge via OpenAPI or dual SCIP |
+| **VA-6** | Optional WebAssembly wrap of LockCheck | F-16 Could | Same Accept as in-process |
+| **VA-7** | Language Server Protocol squiggle Spike | F-12 Should | One lock live in editor |
+| **VA-8** | Polyglot bell Spike | F-15 Could | One Java↔TS bridge via OpenAPI or dual Source Code Index Protocol |
 
 ---
 
 ## 8. Status
 
-Research **Complete** through Bloom Create + RE + Pilot depth + ATAM method +
+Research **Complete** through Bloom Create + RE + Pilot depth + Architecture Tradeoff Analysis Method method +
 **full polyglot product stance**
 ([`process/55`](55-va-full-polyglot-product-portfolio-2026-08-10.md) ·
-[ADR-0001](../../design/adr/adr-006-polyglot-first-monorepo.md)).  
+[Architecture Decision Record ADR-0001](../../design/adr/adr-006-polyglot-first-monorepo.md)).  
 Implement follows **PF-*** / **PIL-*** after RE Approve + tip reorder — Rust,
-WASM, Go, Ruby, Clojure, SQLite, TS, C/Zig as first-class BCs, not demos.
+WebAssembly, Go, Ruby, Clojure, SQLite, TS, C/Zig as first-class bounded contexts, not demos.
 

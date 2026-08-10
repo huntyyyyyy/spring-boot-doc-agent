@@ -1,6 +1,6 @@
 # Nests — bounded contexts
 
-Each nest is a BC folder with a thin `README.md` and a **glob-scoped**
+Each nest is a bounded context folder with a thin `README.md` and a **glob-scoped**
 `.cursor/rules/nest.mdc`. Path scoping is MDC-only (no nested `AGENTS.md`).
 
 When entering a nest, agents load that nest’s rule automatically if matching

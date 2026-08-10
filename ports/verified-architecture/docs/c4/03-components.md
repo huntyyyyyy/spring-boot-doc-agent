@@ -3,9 +3,9 @@ title: C4 Level 3 — Engine components (Rust)
 status: DRAFT
 date: '2026-08-10'
 adr_refs:
-  - ADR-0007
-  - ADR-0002
-  - ADR-0004
+  - Architecture Decision Record ADR-0007
+  - Architecture Decision Record ADR-0002
+  - Architecture Decision Record ADR-0004
 ---
 
 # Components — Engine (Rust)

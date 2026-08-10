@@ -18,13 +18,13 @@ related_gaps: [G-R1, G-R2]
 | **Who** | `ReceiptWriter` harness mints; model never stamps; humans Accept offline tamper suite. |
 | **How** | JSON Schema + optional later in-toto Statement envelope; compose with Supply-chain Levels for Software Artifacts — **do not rename** SLSA as Proof-or-Stop. |
 | **When** | Draft schema now; Spike field set + tamper plants before Must Implement; review when Proof-or-Stop public engine appears. |
-| **Where** | `icd/receipt.schema.json`; verify MCP `structuredContent`; planned `crates/engine/receipt/`. |
+| **Where** | `icd/receipt.schema.json`; verify Model Context Protocol `structuredContent`; planned `crates/engine/receipt/`. |
 
 ## Alternatives scored
 
 | Option | Why | What | Who | How | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- |
-| **A. PoS-shaped fields + Witness honesty + unsigned MVP** | 2 | 2 | 2 | 2 | **8** | **Working hypothesis (Draft)** — Embody β/ρ; Proof-or-Stop engine = 0 (Pilot) |
+| **A. Proof-or-Stop-shaped fields + Witness honesty + unsigned minimum viable product** | 2 | 2 | 2 | 2 | **8** | **Working hypothesis (Draft)** — Embody β/ρ; Proof-or-Stop engine = 0 (Pilot) |
 | B. `git_commit` only as freshness | 0 | 0 | 1 | 1 | 2 | **Refuse** |
 | C. Treat SLSA provenance as Proof-or-Stop | 1 | 0 | 1 | 1 | 3 | **Refuse** (compose, don’t rename) |
 | D. Narrative message as witness | 0 | 0 | 0 | 0 | 0 | **Refuse** |
@@ -62,10 +62,10 @@ Canon: hash `git ls-tree` **excluding** lifecycle receipt paths so writeback doe
 
 | ID | Actor | Goal | Locus |
 | --- | --- | --- | --- |
-| UC-RCPT-01 | `verify` tool | Write receipt after LockCheck | MCP verify output + ICD-RCPT |
+| UC-RCPT-01 | `verify` tool | Write receipt after LockCheck | Model Context Protocol verify output + Interface Control Document ICD-RCPT |
 | UC-RCPT-02 | Continuous Integration | Offline verify; **recompute** digests | engine `receipt verify` |
 | UC-RCPT-03 | Auditor | Replay step ρ(E) | receipt `steps[]` |
-| UC-RCPT-04 | Hostile agent | Narrative pass only | minefield FX-MCP-03 |
+| UC-RCPT-04 | Hostile agent | Narrative pass only | minefield FX-Model Context Protocol-03 |
 | UC-RCPT-05 | Developer | Edit source, reuse yesterday receipt | must fail stale |
 | UC-RCPT-06 | Release (Could) | Compose in-toto / SLSA envelope with receipt | mapping table — not rename |
 
@@ -76,4 +76,4 @@ When `kind` is `command`, JSON Schema **must** use `if`/`then` to require
 
 ## Still open
 
-Normative ls-tree exclusion list; `step_id` stability Spike; in-toto mapping table (even if unsigned MVP).
+Normative ls-tree exclusion list; `step_id` stability Spike; in-toto mapping table (even if unsigned minimum viable product).

@@ -7,7 +7,7 @@ audience: [developer, agent, rag]
 
 # Provenance
 
-This repository is a **standalone** planning + RAG corpus. It does not claim
+This repository is a **standalone** planning + Retrieval-Augmented Generation corpus. It does not claim
 lineage from any named prior product repository.
 
 | Pack | Role |
@@ -15,9 +15,9 @@ lineage from any named prior product repository.
 | `research/layers-of-truth/` | Product vision / Layers of Truth |
 | `research/adversarial/` | Adversarial review + RE critique lessons |
 | `research/polyglot/` | Mental models + language portfolio |
-| `research/atam-formal/` | ATAM QAS, tactics, formal boundaries |
+| `research/atam-formal/` | Architecture Tradeoff Analysis Method Quality Attribute Scenario, tactics, formal boundaries |
 | `research/mdc-devex/` | Cursor MDC activation + context-efficiency evidence |
-| `docs/*` | Authoritative promotions (RE, constraints, C4, ADRs) |
+| `docs/*` | Authoritative promotions (RE, constraints, C4, Architecture Decision Records) |
 
 **Not product identity:** Python-majority tips, Cover%-as-oracle-by-language,
 or any single-language “home” runtime.

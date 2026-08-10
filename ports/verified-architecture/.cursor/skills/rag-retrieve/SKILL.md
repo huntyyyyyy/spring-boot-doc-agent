@@ -3,7 +3,7 @@ name: rag-retrieve
 description: Retrieve the right research pack for the active task without dumping the corpus into context
 ---
 
-# Skill: RAG retrieve
+# Skill: Retrieval-Augmented Generation retrieve
 
 ## When to use
 
@@ -30,5 +30,5 @@ If you have no session context, run Skill `cold-start` first.
 | Vision / Layers of Truth | `research/layers-of-truth/` |
 | Adversarial / RE critique | `research/adversarial/` |
 | Languages / peers | `research/polyglot/` |
-| QAS / formal | `research/atam-formal/` |
+| Quality Attribute Scenario / formal | `research/atam-formal/` |
 | MDC / context efficiency | `research/mdc-devex/` |

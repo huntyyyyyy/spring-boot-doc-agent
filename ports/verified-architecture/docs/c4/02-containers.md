@@ -1,22 +1,22 @@
 ---
-title: C4 Level 2 — Containers (polyglot BCs)
+title: C4 Level 2 — Containers (polyglot bounded contexts)
 status: DRAFT
 date: '2026-08-10'
 adr_refs:
-  - ADR-0001
-  - ADR-0002
-  - ADR-0003
-  - ADR-0004
-  - ADR-0005
-  - ADR-0006
-  - ADR-0007
-  - ADR-0009
-  - ADR-0010
+  - Architecture Decision Record ADR-0001
+  - Architecture Decision Record ADR-0002
+  - Architecture Decision Record ADR-0003
+  - Architecture Decision Record ADR-0004
+  - Architecture Decision Record ADR-0005
+  - Architecture Decision Record ADR-0006
+  - Architecture Decision Record ADR-0007
+  - Architecture Decision Record ADR-0009
+  - Architecture Decision Record ADR-0010
 ---
 
 # Containers
 
-Each container is a **first-class language BC** (ADR-0001). Python is optional
+Each container is a **first-class language bounded context** (Architecture Decision Record ADR-0001). Python is optional
 peer glue — not shown as the hub.
 
 ```mermaid
@@ -43,14 +43,14 @@ C4Container
     Rel(ide, engine, "LSP / MCP")
 ```
 
-| Container | Language | ADR |
+| Container | Language | Architecture Decision Record |
 | --- | --- | --- |
 | Engine | Rust | 0007, 0004 |
 | Registry | SQLite | 0002 |
-| Lock guest | WASM | 0004 |
+| Lock guest | WebAssembly | 0004 |
 | Chassis | Go | 0009 |
 | Lock DX | Ruby | 0003 |
 | Graph brain | Clojure | 0005 |
-| IDE/MCP | TypeScript | 0010 |
+| IDE/Model Context Protocol | TypeScript | 0010 |
 | Optional ACI glue | Python | peer only — not required hub |
 | C / Zig shims | C/Zig | earned Spikes |

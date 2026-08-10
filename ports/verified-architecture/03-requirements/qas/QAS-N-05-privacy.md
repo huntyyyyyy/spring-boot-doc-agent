@@ -1,11 +1,11 @@
 ---
-id: QAS-N-05
+id: Quality Attribute Scenario QAS-N-05
 title: Local-first privacy — no egress on Must path
 status: DRAFT
 nfr_traces: [REQ-N-05]
 ---
 
-# QAS-N-05 — Local-first privacy
+# Quality Attribute Scenario QAS-N-05 — Local-first privacy
 
 | Part | Value |
 | --- | --- |

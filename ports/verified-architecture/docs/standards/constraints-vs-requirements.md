@@ -8,10 +8,10 @@ date: '2026-08-10'
 
 | Kind | Meaning | Change process |
 | --- | --- | --- |
-| **Requirement** | Stakeholder-valued capability/quality (MoSCoW) | Amend SRS/QAS + RTM |
-| **Constraint** | Fixed for this wave; not casually traded | ADR + risk note |
+| **Requirement** | Stakeholder-valued capability/quality (MoSCoW) | Amend Software Requirements Specification/Quality Attribute Scenario + Requirements Traceability Matrix |
+| **Constraint** | Fixed for this wave; not casually traded | Architecture Decision Record + risk note |
 
 Examples of constraints: single deterministic gate writer; local-first default;
-polyglot BC ownership; no LLM as verify witness.
+polyglot bounded context ownership; no large language model as verify witness.
 
 Ledger: [`../constraints/constraints.md`](../constraints/constraints.md).

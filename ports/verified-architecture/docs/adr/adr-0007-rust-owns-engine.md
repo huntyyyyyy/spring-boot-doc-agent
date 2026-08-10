@@ -1,15 +1,15 @@
 ---
-title: 'ADR-0007: Rust owns the engine container'
+title: 'Architecture Decision Record ADR-0007: Rust owns the engine container'
 status: Proposed
 date: '2026-08-10'
 ---
 
-# ADR-0007: Rust owns the engine container
+# Architecture Decision Record ADR-0007: Rust owns the engine container
 
 ## Context
 
-Engine work (SCIP decode, resolve, lock evaluate, receipts, wasmtime host)
-fits Rust’s excellence domain. Polyglot peers integrate via CLI/FFI/WIT — not
+Engine work (Source Code Index Protocol decode, resolve, lock evaluate, receipts, wasmtime host)
+fits Rust’s excellence domain. Polyglot peers integrate via command-line interface/FFI/WIT — not
 by making Python the engine.
 
 ## Decision

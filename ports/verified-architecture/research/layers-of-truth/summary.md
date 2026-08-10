@@ -10,8 +10,8 @@ date: '2026-08-10'
 | --- | --- | --- |
 | L1 Where | Where is the symbol? | Engine + scip-java + tree-sitter |
 | L1b Wire | Which bean binds? | WiringResolver + SQLite |
-| L2 How | Is change allowed? | Lock IR (Ruby) + LockCheck (Rust/WASM) |
+| L2 How | Is change allowed? | Lock IR (Ruby) + LockCheck (Rust/WebAssembly) |
 | L3 Proof | Optional SMT/query proof | Deferred |
-| Sandbox | Where does untrusted check run? | WASM guest |
+| Sandbox | Where does untrusted check run? | WebAssembly guest |
 
-SCIP ≠ Spring DI. WASM ≠ mathematical proof.
+Source Code Index Protocol ≠ Spring Dependency Injection. WebAssembly ≠ mathematical proof.

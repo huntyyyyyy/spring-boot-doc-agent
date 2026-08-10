@@ -26,8 +26,8 @@ Verification and Validation with Tier-1 effect checkpoints and minefields —
 DynamicMCPBench algorithm **Embody**, public engine **Refuse / pending**.
 
 **DeepWiki:** Model Context Protocol Ask unavailable in this environment
-(no DeepWiki tool server). Compensated with `llms.txt`, Spec pages, SEP
-raw sources, and official SDK docs `[Evidenced]`.
+(no DeepWiki tool server). Compensated with `llms.txt`, Spec pages, Model Context Protocol SEP
+raw sources, and official software development kit docs `[Evidenced]`.
 
 ---
 
@@ -36,9 +36,9 @@ raw sources, and official SDK docs `[Evidenced]`.
 | Entity | Kind | Product binding |
 | --- | --- | --- |
 | Tool `inputSchema` / `outputSchema` / `structuredContent` | Protocol fields | Wave-1 primitives + reject envelope |
-| Explicit state handle (`snapshot_id`, …) | Tool-design pattern (SEP-2567) | ST-1 / ST-5; never transport session |
+| Explicit state handle (`snapshot_id`, …) | Tool-design pattern (Model Context Protocol SEP-2567) | ST-1 / ST-5; never transport session |
 | Effect checkpoint / equivalence set / minefield / partial order | Benchmark scoring objects (arXiv:2607.20531) | FX-\* plants; Tier-1 Accept |
-| Reject class | Harness predicate | ICD reject list |
+| Reject class | Harness predicate | Interface Control Document reject list |
 
 ---
 
@@ -46,7 +46,7 @@ raw sources, and official SDK docs `[Evidenced]`.
 
 | Level | Evidence |
 | --- | --- |
-| **1 Remember** | Spec `2026-07-28`; SEP-1613, SEP-2106, SEP-2567, SEP-2575, SEP-2243; blog mint-handle paragraph; arXiv:2607.20531; TypeScript / Python SDK tool docs; `llms.txt` |
+| **1 Remember** | Spec `2026-07-28`; Model Context Protocol SEP-1613, Model Context Protocol SEP-2106, Model Context Protocol SEP-2567, Model Context Protocol SEP-2575, Model Context Protocol SEP-2243; blog mint-handle paragraph; arXiv:2607.20531; TypeScript / Python software development kit tool docs; `llms.txt` |
 | **2 Understand** | Digests + restatements below; schemas in product types (`snap_`, `lock_`, receipt path) |
 | **3 Apply** | Planned `packages/mcp-server` + `07-system-design/icd/mcp/*.schema.json`; fixture IDs mapped to Accept methods |
 | **4 Analyze** | Alternatives scored (mint locus; schema dialect; DynamicMCPBench Adopt vs Pilot) |
@@ -61,17 +61,17 @@ raw sources, and official SDK docs `[Evidenced]`.
 
 | Source | Claim |
 | --- | --- |
-| SEP-1613 (Final) | Default dialect for embedded schemas is **JSON Schema 2020-12** when `$schema` absent; `inputSchema` **MUST NOT** be `null`; empty-args tools use `{ "type":"object", "additionalProperties": false }` (recommended) |
-| SEP-2106 (Final) | `inputSchema` keeps root `type: "object"` but allows full 2020-12 keywords (`oneOf`, `$ref`, …); `outputSchema` any valid 2020-12; `structuredContent` any JSON value conforming to `outputSchema` |
+| Model Context Protocol SEP-1613 (Final) | Default dialect for embedded schemas is **JSON Schema 2020-12** when `$schema` absent; `inputSchema` **MUST NOT** be `null`; empty-args tools use `{ "type":"object", "additionalProperties": false }` (recommended) |
+| Model Context Protocol SEP-2106 (Final) | `inputSchema` keeps root `type: "object"` but allows full 2020-12 keywords (`oneOf`, `$ref`, …); `outputSchema` any valid 2020-12; `structuredContent` any JSON value conforming to `outputSchema` |
 | Spec Tools page `2026-07-28` | Same; servers **MUST** conform structured results to `outputSchema`; clients **SHOULD** validate; also emit TextContent JSON for back-compat |
-| SEP-2106 security | **MUST NOT** auto-dereference network `$ref` (SSRF); bound schema depth / validation time |
+| Model Context Protocol SEP-2106 security | **MUST NOT** auto-dereference network `$ref` (SSRF); bound schema depth / validation time |
 
-### Official SDK conventions `[Evidenced]`
+### Official software development kit conventions `[Evidenced]`
 
-| SDK | Convention | Product implication |
+| software development kit | Convention | Product implication |
 | --- | --- | --- |
-| **TypeScript** (`registerTool`) | Zod / Standard Schema → advertised JSON Schema; validates args before handler; validates `structuredContent` against `outputSchema`; schema failures → tool result `isError: true` (handler never runs for bad input) | Presentation layer (Architecture Decision Record 0010) should mirror: Zod at edge, copy ICD JSON Schema into package |
-| **Python** (structured output docs) | Return annotation **is** `output_schema`; Pydantic models stay unwrapped objects; **scalars/lists wrapped** in `{ "result": ... }` today | Prefer **object-rooted** `outputSchema` for all wave-1 tools so TypeScript and Python hosts agree; avoid relying on bare-array `structuredContent` until both Tier-1 SDKs match SEP-2106 without wrappers |
+| **TypeScript** (`registerTool`) | Zod / Standard Schema → advertised JSON Schema; validates args before handler; validates `structuredContent` against `outputSchema`; schema failures → tool result `isError: true` (handler never runs for bad input) | Presentation layer (Architecture Decision Record 0010) should mirror: Zod at edge, copy Interface Control Document JSON Schema into package |
+| **Python** (structured output docs) | Return annotation **is** `output_schema`; Pydantic models stay unwrapped objects; **scalars/lists wrapped** in `{ "result": ... }` today | Prefer **object-rooted** `outputSchema` for all wave-1 tools so TypeScript and Python hosts agree; avoid relying on bare-array `structuredContent` until both Tier-1 software development kits match Model Context Protocol SEP-2106 without wrappers |
 
 **Confirmed:** Industry direction is schema-validated structured tool results.
 **Unknown:** Exact wire behavior of every host against non-object `structuredContent` on day-zero of `2026-07-28` — mitigate by object roots + TextContent fallback.
@@ -80,10 +80,10 @@ raw sources, and official SDK docs `[Evidenced]`.
 
 Harness rejects are **not** free-form model prose. Two channels:
 
-1. **Protocol:** `isError: true` + TextContent explaining the reject (SDK-aligned).  
+1. **Protocol:** `isError: true` + TextContent explaining the reject (software development kit-aligned).  
 2. **Structured:** optional `structuredContent` matching `toolError` (`reject_class`, `message`, optional `hint`) — **no** `llm_text` / `rag_chunk` / `narrative_pass` keys (`not` constraint).
 
-Reject classes (ICD + common schema): `unknown_id`, `unknown_handle`,
+Reject classes (Interface Control Document + common schema): `unknown_id`, `unknown_handle`,
 `expired_handle`, `stale_receipt`, `llm_witness_forbidden`, `schema_invalid`,
 `header_body_mismatch`, `protocol_version_unsupported`, `equivariance_reject`,
 `index_missing`, `index_stale`, `search_fallback_forbidden`.
@@ -109,13 +109,13 @@ capability with short TTL `[Evidenced — SEP-2567 Security]`.
 | --- | --- | --- |
 | `modelcontextprotocol/typescript-sdk` | **Exact** | `inputSchema`/`outputSchema` + runtime validate `structuredContent` |
 | `modelcontextprotocol/python-sdk` | **Exact** | Return-type → `output_schema`; validates before emit |
-| `PrefectHQ/fastmcp` | **Exact / adjacent** | Popular schema-first framework; historically wrapped non-object outputs (SEP-2106 motivation) |
-| Official “everything” server SEP-2106 demos | **Exact** | Array/primitive `structuredContent` reference tools |
+| `PrefectHQ/fastmcp` | **Exact / adjacent** | Popular schema-first framework; historically wrapped non-object outputs (Model Context Protocol SEP-2106 motivation) |
+| Official “everything” server Model Context Protocol SEP-2106 demos | **Exact** | Array/primitive `structuredContent` reference tools |
 | `anthropics/skills` mcp-builder Node guide | **Adjacent** | Documents `registerTool` + Zod + `structuredContent` pattern |
-| Linear / Notion / GitHub / Stripe remote MCP | **Adjacent** (handles, not our schemas) | Create→id→operate pattern cited in SEP-2567 |
+| Linear / Notion / GitHub / Stripe remote Model Context Protocol | **Adjacent** (handles, not our schemas) | Create→id→operate pattern cited in Model Context Protocol SEP-2567 |
 
-**≥5 exact-or-strong for “schema-constrained MCP tools”:** yes (SDK + FastMCP +
-everything demos + builder guide). **Exact adopters of our five-tool ICD:**
+**≥5 exact-or-strong for “schema-constrained Model Context Protocol tools”:** yes (software development kit + FastMCP +
+everything demos + builder guide). **Exact adopters of our five-tool Interface Control Document:**
 **0** — Pilot our schemas; do not claim industry Adopt of `verify`/`resolve`
 semantics.
 
@@ -123,9 +123,9 @@ semantics.
 
 | Piece | Tier |
 | --- | --- |
-| JSON Schema 2020-12 + `$schema` explicit on ICD files | **Adopt** |
+| JSON Schema 2020-12 + `$schema` explicit on Interface Control Document files | **Adopt** |
 | Object-rooted `outputSchema` + TextContent JSON twin | **Adopt** |
-| Zod at TypeScript presentation validating ICD shapes | **Adopt** |
+| Zod at TypeScript presentation validating Interface Control Document shapes | **Adopt** |
 | Bare-array `structuredContent` as wave-1 default | **Refuse** (interop risk) |
 | External `$ref` fetch in validators | **Refuse** |
 
@@ -139,7 +139,7 @@ Official blog `2026-07-28`: dropping protocol sessions does **not** force
 application statelessness — “mint an explicit handle from a tool and have the
 model pass it back as an argument.”
 
-SEP-2567 (Final): sessions removed; **explicit state handles are a tool-design
+Model Context Protocol SEP-2567 (Final): sessions removed; **explicit state handles are a tool-design
 pattern, not a wire type**; guidance — opaque ids, create tool returns id in
 `structuredContent`, operate tools take id, document durability, clear expiry
 errors, possession ≠ auth.
@@ -162,7 +162,7 @@ errors, possession ≠ auth.
 | Option | Why | What | Who | How | When | Where | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **A. `snapshot_open` tools/call mint** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — Pilot invent |
-| B. Implicit cwd / process session | 0 | 0 | 1 | 0 | 0 | 1 | 2 | **Refuse** (SEP-2567; concurrent agents) |
+| B. Implicit cwd / process session | 0 | 0 | 1 | 0 | 0 | 1 | 2 | **Refuse** (Model Context Protocol SEP-2567; concurrent agents) |
 | C. `resource://snapshot/{id}` only | 1 | 1 | 1 | 1 | 1 | 1 | 6 | **Defer** as Could companion (read metadata); mint still via tool |
 | D. Auto-mint inside every `verify` | 1 | 1 | 1 | 1 | 2 | 1 | 7 | **Defer** — hides checkpoint for resolve-only flows |
 | E. Client-invented `snap_` strings | 0 | 0 | 0 | 0 | 1 | 0 | 1 | **Refuse** (ST-5) |
@@ -171,16 +171,16 @@ errors, possession ≠ auth.
 
 | ID | How `snapshot_id` appears |
 | --- | --- |
-| UC-MCP-01 | Optional: `snapshot_open` → `locks_list(snapshot_id)` → `verify` |
-| UC-MCP-02 | **Required:** prior `snapshot_open` → `resolve(..., snapshot_id)` |
-| UC-MCP-03 | Optional pin on `verify`; mint not mandatory if only lock_set used — **recommend** mint for material bind |
-| UC-MCP-04 | **Required:** `claim_withdraw(snapshot_id)` |
-| UC-MCP-05 | Same mint over stdio |
-| UC-MCP-06 | Same; headers unrelated to handle |
-| UC-MCP-07 | Invented `snap_…` → `unknown_handle` |
-| UC-MCP-08 | Matrix/ADR audit trail |
+| UC-Model Context Protocol-01 | Optional: `snapshot_open` → `locks_list(snapshot_id)` → `verify` |
+| UC-Model Context Protocol-02 | **Required:** prior `snapshot_open` → `resolve(..., snapshot_id)` |
+| UC-Model Context Protocol-03 | Optional pin on `verify`; mint not mandatory if only lock_set used — **recommend** mint for material bind |
+| UC-Model Context Protocol-04 | **Required:** `claim_withdraw(snapshot_id)` |
+| UC-Model Context Protocol-05 | Same mint over stdio |
+| UC-Model Context Protocol-06 | Same; headers unrelated to handle |
+| UC-Model Context Protocol-07 | Invented `snap_…` → `unknown_handle` |
+| UC-Model Context Protocol-08 | Matrix/Architecture Decision Record audit trail |
 
-**ICD change implication (not applied in this research-only pass):** add
+**Interface Control Document change implication (not applied in this research-only pass):** add
 `snapshot_open` to the tools table (fifth primitive) or document it as
 wave-1.5 **blocking** resolve/claim. Decision Matrix already lists mint as
 open gap.
@@ -213,31 +213,31 @@ See `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md`.
 | Paper text | Still says code/data “will be released upon publication” in places — treat shipped HF as **partial**, engine as **pending** |
 
 **Verdict:** **Embody** scoring ideas; **Pilot** plant fixtures in-repo;
-**Refuse** depending on anonymous.4open as CI SoR.
+**Refuse** depending on anonymous.4open as CI System of Record.
 
 ### Our plant fixtures (propose)
 
 | Fixture ID | Tool under test | Effect checkpoints (Tier-1) | Equivalence set | Minefields | Partial order | Maps to |
 | --- | --- | --- | --- | --- | --- | --- |
-| **FX-MCP-VERIFY-RECEIPT** | `verify` | (1) tool-effect `verify` called with known `lock_set_id`; (2) **value_produced:** filesystem path in `receipt_path` exists; (3) receipt JSON `result` ∈ {pass,fail,unknown}; (4) `material_digest` present | singleton `{verify}` | `llm_witness` field in receipt; narrative-only pass without file | mint/list before verify if using snapshot pin | F-06/06b; N-06; UC-MCP-03 |
-| **FX-MCP-RESOLVE-UNKNOWN** | `resolve` | `resolve` with minted `snapshot_id` + known `site_…`; status ∈ {resolved, unknown, unprovable} | singleton | free-text bean name arg; invented `snap_` | `snapshot_open` ≺ `resolve` | F-01…05; UC-MCP-02 |
-| **FX-MCP-CLAIM-DISP** | `claim_withdraw` | dispositions[] length ≥1; each `disposition` ∈ {unaffected, affected, unprovable}; freshness present | singleton | inventing `unprovable` without harness; chat-memory substitute | `snapshot_open` ≺ `claim_withdraw` | F-06c / N-07; UC-MCP-04 |
-| **FX-MCP-MINE-WITNESS** | any mutating | — | — | structuredContent or receipt contains `llm_text` / `rag_chunk` / `narrative_pass` → fail (`llm_witness_forbidden`) | — | FX-STEAD family; ST-5 |
-| **FX-MCP-MINE-HANDLE** | `resolve` / `claim_withdraw` | — | — | invented handle / wrong prefix → expect `unknown_handle` reject (success = reject observed) | — | FX-STEAD; UC-MCP-07; F-09b / N-08 |
+| **FX-Model Context Protocol-VERIFY-RECEIPT** | `verify` | (1) tool-effect `verify` called with known `lock_set_id`; (2) **value_produced:** filesystem path in `receipt_path` exists; (3) receipt JSON `result` ∈ {pass,fail,unknown}; (4) `material_digest` present | singleton `{verify}` | `llm_witness` field in receipt; narrative-only pass without file | mint/list before verify if using snapshot pin | F-06/06b; N-06; UC-Model Context Protocol-03 |
+| **FX-Model Context Protocol-RESOLVE-UNKNOWN** | `resolve` | `resolve` with minted `snapshot_id` + known `site_…`; status ∈ {resolved, unknown, unprovable} | singleton | free-text bean name arg; invented `snap_` | `snapshot_open` ≺ `resolve` | F-01…05; UC-Model Context Protocol-02 |
+| **FX-Model Context Protocol-CLAIM-DISP** | `claim_withdraw` | dispositions[] length ≥1; each `disposition` ∈ {unaffected, affected, unprovable}; freshness present | singleton | inventing `unprovable` without harness; chat-memory substitute | `snapshot_open` ≺ `claim_withdraw` | F-06c / N-07; UC-Model Context Protocol-04 |
+| **FX-Model Context Protocol-MINE-WITNESS** | any mutating | — | — | structuredContent or receipt contains `llm_text` / `rag_chunk` / `narrative_pass` → fail (`llm_witness_forbidden`) | — | FX-Stateful Tool-Enabled Agentic Deployment family; ST-5 |
+| **FX-Model Context Protocol-MINE-HANDLE** | `resolve` / `claim_withdraw` | — | — | invented handle / wrong prefix → expect `unknown_handle` reject (success = reject observed) | — | FX-Stateful Tool-Enabled Agentic Deployment; UC-Model Context Protocol-07; F-09b / N-08 |
 
 ### Map to Verification and Validation Accept methods
 
 | Accept method (vv-plan) | Fixture |
 | --- | --- |
-| F-01…05 | FX-MCP-RESOLVE-UNKNOWN (+ FX-CYCLE/LAYER plants for engine) |
-| F-06/06b | FX-MCP-VERIFY-RECEIPT |
-| F-06c / N-07 | FX-MCP-CLAIM-DISP |
-| F-09b / N-08 | FX-MCP-MINE-HANDLE (+ FX-STEAD) |
-| N-06 | FX-MCP-VERIFY-RECEIPT (two runs → canonical compare) |
+| F-01…05 | FX-Model Context Protocol-RESOLVE-UNKNOWN (+ FX-CYCLE/LAYER plants for engine) |
+| F-06/06b | FX-Model Context Protocol-VERIFY-RECEIPT |
+| F-06c / N-07 | FX-Model Context Protocol-CLAIM-DISP |
+| F-09b / N-08 | FX-Model Context Protocol-MINE-HANDLE (+ FX-Stateful Tool-Enabled Agentic Deployment) |
+| N-06 | FX-Model Context Protocol-VERIFY-RECEIPT (two runs → canonical compare) |
 | Agent “looks green” without receipt digests | **fail** (existing vv-plan rule) |
 
 Tier-2 large-language-model judge: **sensor only**, never Definition of Ready
-boolean SoR `[Confirmed — constitution]`.
+boolean System of Record `[Confirmed — constitution]`.
 
 ---
 
@@ -247,8 +247,8 @@ boolean SoR `[Confirmed — constitution]`.
 | --- | --- |
 | Model invents `snap_deadbeef` | `unknown_handle` |
 | Model pastes expired snapshot | `expired_handle` / `index_stale` |
-| Model claims verify pass in prose only | No Accept; FX-MCP-VERIFY-RECEIPT fails without file |
-| Receipt embeds LLM witness | `llm_witness_forbidden`; fixture minefield |
+| Model claims verify pass in prose only | No Accept; FX-Model Context Protocol-VERIFY-RECEIPT fails without file |
+| Receipt embeds large language model witness | `llm_witness_forbidden`; fixture minefield |
 | Client omits `Mcp-Method` on HTTP | `header_body_mismatch` |
 | Schema uses draft-07 `dependencies` only | Fail dialect review; pin 2020-12 |
 | Treat DynamicMCPBench HF as merge gate | Refuse — engine pending; use our FX-\* |
@@ -260,8 +260,8 @@ boolean SoR `[Confirmed — constitution]`.
 | Gate | Status |
 | --- | --- |
 | A1 Paper digest (DynamicMCPBench) | **PASS** — digest file written |
-| A2 Related walk | **PARTIAL** — τ-bench / Contracts / STEAD named; full digests optional |
-| A3 ≥5 exact algorithm adopters | **PASS** for MCP schema+handle *patterns*; **FAIL / Pilot** for our tool semantics and DynamicMCPBench *engine* (0) |
+| A2 Related walk | **PARTIAL** — τ-bench / Contracts / Stateful Tool-Enabled Agentic Deployment named; full digests optional |
+| A3 ≥5 exact algorithm adopters | **PASS** for Model Context Protocol schema+handle *patterns*; **FAIL / Pilot** for our tool semantics and DynamicMCPBench *engine* (0) |
 | DeepWiki Ask | **WAIVED** — tool absent this run |
 | Bloom 6 Create | **Not started** (research-only) |
 
@@ -269,9 +269,9 @@ boolean SoR `[Confirmed — constitution]`.
 
 ## Recommendations (for Spec, not Implement)
 
-1. Promote `07-system-design/icd/mcp/*.schema.json` drafts (below) into ICD SoR; cite ST-1…5.  
-2. Add `snapshot_open` to ICD tools table + Decision Matrix handle inventory.  
-3. Author FX-MCP-\* under `08-verification/` as plant specs before `packages/mcp-server`.  
+1. Promote `07-system-design/icd/mcp/*.schema.json` drafts (below) into Interface Control Document System of Record; cite ST-1…5.  
+2. Add `snapshot_open` to Interface Control Document tools table + Decision Matrix handle inventory.  
+3. Author FX-Model Context Protocol-\* under `08-verification/` as plant specs before `packages/mcp-server`.  
 4. Keep DynamicMCPBench as literature Embody until non-anonymous engine + Spike exit.  
 5. Re-open on next Model Context Protocol Spec revision or first remote host.
 
@@ -281,7 +281,7 @@ boolean SoR `[Confirmed — constitution]`.
 
 Target directory: `07-system-design/icd/mcp/`. Dialect JSON Schema 2020-12.
 These drafts may already exist on disk from a parallel Spec pass — treat this
-section as the research-authored SoR text for review.
+section as the research-authored System of Record text for review.
 
 ### `common.schema.json`
 
@@ -631,4 +631,4 @@ section as the research-authored SoR text for review.
 - https://py.sdk.modelcontextprotocol.io/servers/structured-output/
 - https://arxiv.org/abs/2607.20531 · https://arxiv.org/html/2607.20531
 - https://huggingface.co/datasets/anonsubmitter/DynamicMCPBench
-- Port: Decision Matrix, ICD-MCP, ADR-0011, STEAD_CONSTRAINTS, vv-plan, decision-framework
+- Port: Decision Matrix, Interface Control Document ICD-MCP, Architecture Decision Record ADR-0011, `STEAD_CONSTRAINTS` (Stateful Tool-Enabled Agentic Deployment constraints), vv-plan, decision-framework

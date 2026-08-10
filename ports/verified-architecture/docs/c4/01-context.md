@@ -3,7 +3,7 @@ title: C4 Level 1 — System Context
 status: DRAFT
 date: '2026-08-10'
 adr_refs:
-  - ADR-0001
+  - Architecture Decision Record ADR-0001
 ---
 
 # Context
@@ -38,5 +38,5 @@ C4Context
 
 ## Notes
 
-- Target repo + locks (git) are SoR inputs; indexes/registry are derived.
-- LLM tools may assist remediation later; they are **not** context authorities.
+- Target repo + locks (git) are System of Record inputs; indexes/registry are derived.
+- large language model tools may assist remediation later; they are **not** context authorities.

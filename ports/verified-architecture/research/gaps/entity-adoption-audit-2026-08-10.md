@@ -84,15 +84,15 @@ GitHub metadata snapshot: **2026-08-10** via `gh api` `[Evidenced]`.
 
 | Result | Detail |
 | --- | --- |
-| **Equivariance wrapper / STEAD checker** | **0 public repos found** implementing the paper’s wrapper or First-Order Computation Tree Logic STEAD verify. Homonym / unrelated tool hosts do not count. |
+| **Equivariance wrapper / Stateful Tool-Enabled Agentic Deployment checker** | **0 public repos found** implementing the paper’s wrapper or First-Order Computation Tree Logic Stateful Tool-Enabled Agentic Deployment verify. Homonym / unrelated tool hosts do not count. |
 | **Adjacent (typed tools / structured calls — partial)** | ≥5 genuine repos exist for *schemas and harnesses*, **none** for equivariance |
 
 | Repository | Stars / pushed | Why genuine | Algorithm utilized | Fit |
 | --- | --- | --- | --- | --- |
 | `modelcontextprotocol/modelcontextprotocol` | ~8916 / 2026-08-10 | Spec org | Tool/resource protocol | **Adopt** wire shape |
-| `modelcontextprotocol/python-sdk` | ~23968 / 2026-08-10 | Official SDK; many workflows | Typed server/client tools | **Adopt** ST-1-ish typing |
-| `modelcontextprotocol/typescript-sdk` | ~13122 / 2026-08-10 | Official SDK | Same | **Adopt** |
-| `openai/openai-agents-python` | ~28542 / 2026-08-10 | Vendor SDK; active | Agent proposes; tools execute | **Adopt** propose/decide split carefully |
+| `modelcontextprotocol/python-sdk` | ~23968 / 2026-08-10 | Official software development kit; many workflows | Typed server/client tools | **Adopt** ST-1-ish typing |
+| `modelcontextprotocol/typescript-sdk` | ~13122 / 2026-08-10 | Official software development kit | Same | **Adopt** |
+| `openai/openai-agents-python` | ~28542 / 2026-08-10 | Vendor software development kit; active | Agent proposes; tools execute | **Adopt** propose/decide split carefully |
 | `567-labs/instructor` | ~13712 / 2026-08-09 | Structured outputs; Actions | Schema-constrained model outputs | **Adopt** for args, not equivariance |
 | `guardrails-ai/guardrails` | ~7267 / 2026-08-05 | Runtime validators | Output/tool guards | **Could** |
 | `NVIDIA-NeMo/Guardrails` | ~6907 / 2026-08-10 | Tool input/output rails | Block unsafe tool calls | **Could** |
@@ -216,12 +216,12 @@ Language tools emit a stable index (formerly Language Server Index Format lineag
 | --- | --- | --- | --- | --- |
 | Graph + locks | Adequate (practice-heavy) | **Yes** (Packwerk, dependency-cruiser, ArchUnit, Nx, Bazel, tach, import-linter, …) | Must | Must **Adopt** field patterns; still need lock Intermediate Representation Accept |
 | Artifact-anchored claims | Digest started (2608.04278) + kin CAVA/PCAA | **No exact** (Zenodo-only study; ≥5 adjacent attestations) | Must Adopt | **Must intent / Pilot invent** — D0 FAIL |
-| Stateful Tool-Enabled Agentic Deployment constraints | Partial + AgentLTL/CAGE kin | **No exact wrapper**; ≥5 adjacent guardrails/SDKs | Must Adopt | **Embody warning + Spike** — D0 FAIL |
+| Stateful Tool-Enabled Agentic Deployment constraints | Partial + AgentLTL/CAGE kin | **No exact wrapper**; ≥5 adjacent guardrails/software development kits | Must Adopt | **Embody warning + Spike** — D0 FAIL |
 | Freshness-bound receipts | Proof-or-Stop + supply-chain | Adjacent yes; named engine **pending release** | Must | Must **shape** from Witness/in-toto; engine **Unknown** |
 | Harness propose/decide | Partial | Yes (adjacent coding harnesses) | Must | Must process; Prompts→Contracts / Aria engines **Unknown** |
 | Source Code Index Protocol | Yes | Yes | Assumed | Confirmed Adopt candidates |
-| Model Context Protocol tools | Partial | Yes (+ Model Context Protocol–Universe evaluators) | Draft Interface Control Document | Adopt SDKs; DynamicMCPBench/HyperTool code **Unknown** |
-| Architecture Tradeoff drafting | Method + Multi-Agent Architecture Design | Tooling-thin (MAAD dump ≠ engine) | Soft | **Embody** Quality Attribute Scenario forms; **Refuse** LLM Architecture Tradeoff reports as certify |
+| Model Context Protocol tools | Partial | Yes (+ Model Context Protocol–Universe evaluators) | Draft Interface Control Document | Adopt software development kits; DynamicMCPBench/HyperTool code **Unknown** |
+| Architecture Tradeoff drafting | Method + Multi-Agent Architecture Design | Tooling-thin (MAAD dump ≠ engine) | Soft | **Embody** Quality Attribute Scenario forms; **Refuse** large language model Architecture Tradeoff reports as certify |
 
 ### Research agents (2026-08-10)
 
@@ -256,6 +256,6 @@ Graph/locks + index + Architecture Tradeoff · Stateful Tool-Enabled Agentic Dep
 ## Next research work (not optional)
 
 1. Locate or accept-as-missing Proof-or-Stop public engine; if missing, demote citations to paper-only `[Evidenced abstract]`.
-2. DeepWiki Ask + primary docs on Packwerk / SCIP / in-toto for Bloom Apply in *our* ports.
+2. DeepWiki Ask + primary docs on Packwerk / Source Code Index Protocol / in-toto for Bloom Apply in *our* ports.
 3. Spike charters: claim-store Pilot; equivariance wrap Pilot; receipt freshness keys.
 4. Per-entity folders under `research/entities/` with paper digests ≥1 page each (no title-only rows).

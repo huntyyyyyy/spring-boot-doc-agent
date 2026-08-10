@@ -1,11 +1,11 @@
 ---
-id: QAS-N-06
+id: Quality Attribute Scenario QAS-N-06
 title: Deterministic re-verify
 status: DRAFT
 nfr_traces: [REQ-N-06]
 ---
 
-# QAS-N-06 — Determinism
+# Quality Attribute Scenario QAS-N-06 — Determinism
 
 | Part | Value |
 | --- | --- |

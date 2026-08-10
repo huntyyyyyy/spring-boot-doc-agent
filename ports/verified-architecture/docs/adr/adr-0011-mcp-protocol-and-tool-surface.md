@@ -1,5 +1,5 @@
 ---
-title: 'ADR-0011: Model Context Protocol 2026-07-28 + primitive tool surface'
+title: 'Architecture Decision Record ADR-0011: Model Context Protocol 2026-07-28 + primitive tool surface'
 status: Proposed
 date: '2026-08-10'
 decision_matrix: 07-system-design/decisions/mcp-decision-matrix.md
@@ -8,7 +8,7 @@ related:
   - 07-system-design/icd/mcp-tools.md
 ---
 
-# ADR-0011: Model Context Protocol protocol pin and primitive tools
+# Architecture Decision Record ADR-0011: Model Context Protocol protocol pin and primitive tools
 
 ## Context
 
@@ -20,19 +20,19 @@ constraints forbid free-text entity parameters. Without a recorded choice,
 agents reintroduce sessions, mega-tools, or model-stamped “verify passed.”
 
 Companion analytical record: `07-system-design/decisions/mcp-decision-matrix.md`
-(six vectors, scored alternatives, usage cases UC-MCP-01…08).
+(six vectors, scored alternatives, usage cases UC-Model Context Protocol-01…08).
 
 ## Decision
 
 1. **Pin** Model Context Protocol **`2026-07-28`** for any remote/HTTP surface;
-   local stdio MVP must remain session-free at the protocol layer.  
+   local stdio minimum viable product must remain session-free at the protocol layer.  
 2. Expose **primitive** tools only in wave-1: `verify`, `resolve`,
-   `claim_withdraw`, `locks_list` — schemas in ICD-MCP.  
+   `claim_withdraw`, `locks_list` — schemas in Interface Control Document ICD-MCP.  
 3. **Handles** (`snapshot_id`, `lock_set_id`, …) are minted by tools and passed
    as arguments — never stored as transport session state.  
 4. **Harness decides** mutations (locks/receipts/claims); the model proposes.  
-5. TypeScript owns presentation (ADR-0010); engine ports own effects
-   (ADR-0007).
+5. TypeScript owns presentation (Architecture Decision Record ADR-0010); engine ports own effects
+   (Architecture Decision Record ADR-0007).
 
 ## Status
 
@@ -44,7 +44,7 @@ Positive:
 
 - Aligns with industry Spec; load-balanced hosts work.  
 - Traceable usage cases and rejected alternatives (matrix).  
-- Same reject classes for CLI and Model Context Protocol.
+- Same reject classes for command-line interface and Model Context Protocol.
 
 Negative:
 
@@ -56,10 +56,10 @@ Negative:
 | Alternative | Why rejected |
 | --- | --- |
 | Pre-July `initialize` + `Mcp-Session-Id` | Retired by Spec; concurrent agent death |
-| HyperTool mega-tools as MVP | Hides effect checkpoints; Contracts paper |
+| HyperTool mega-tools as minimum viable product | Hides effect checkpoints; Contracts paper |
 | Free-text entity name args | ST-1 / ST-5; paper 2608.03609 failure mode |
 | Model writes receipts / todos | Violates propose/decide; Proof-or-Stop adversary |
-| Org SaaS MCP with server-side session DB | Fights local-first product shape |
+| Org SaaS Model Context Protocol with server-side session DB | Fights local-first product shape |
 
 ## Review
 

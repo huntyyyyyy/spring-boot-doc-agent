@@ -8,9 +8,9 @@ date: '2026-08-10'
 
 Implementations may be Rust/Go/… later; **ports are stable names** for ICDs.
 
-| Port | Responsibility | MVP |
+| Port | Responsibility | minimum viable product |
 | --- | --- | --- |
-| `IndexReader` | Load SCIP (+ optional CST hints) | Must |
+| `IndexReader` | Load Source Code Index Protocol (+ optional CST hints) | Must |
 | `AnnotationScan` | Discover candidate beans/components from source | Must |
 | `Registry` | Persist nodes/edges (SQLite) | Must |
 | `Resolver` | injection_point → bean \| Unknown | Must |
@@ -19,15 +19,15 @@ Implementations may be Rust/Go/… later; **ports are stable names** for ICDs.
 | `ClaimMemory` | EA-Graph anchors + withdraw dispositions | Must |
 | `Watch` | FS events → reindex dirty set | Should (Go Pilot) |
 | `GraphQuery` | Ad-hoc Datalog/EDN queries | Could (bb Pilot) |
-| `Sandbox` | Run LockCheck guest under WASM caps | Could |
+| `Sandbox` | Run LockCheck guest under WebAssembly caps | Could |
 | `LspDiagnostics` | publishDiagnostics | Should (Wave-2) |
-| `RemediationAssist` | RAG/LLM suggestions | Could — non-witness |
+| `RemediationAssist` | Retrieval-Augmented Generation/large language model suggestions | Could — non-witness |
 | `AgentMemory` | Episodic/entity memory for agents | Could — **≠** Registry/ClaimMemory |
-| `EquivarianceWrap` | Canonicalize tool args (STEAD) | Spike → Should before FO claims |
+| `EquivarianceWrap` | Canonicalize tool args (Stateful Tool-Enabled Agentic Deployment) | Spike → Should before FO claims |
 
 ## Anti-god rule
 
-No single module owns Index+Resolve+Lock+LSP+RAG+Memory. Compose via these ports.
+No single module owns Index+Resolve+Lock+Language Server Protocol+Retrieval-Augmented Generation+Memory. Compose via these ports.
 
 ## Jul–Aug 2026 amendment
 

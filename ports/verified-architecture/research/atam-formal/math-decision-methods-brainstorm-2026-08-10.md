@@ -48,10 +48,10 @@ Records, and six-part Quality Attribute Scenarios.
 
 ## Cross-cutting verdict (brainstorm tiers)
 
-| Approach | Product tier (idea) | Exact public tools ≥5? | Fit to local verify CLI |
+| Approach | Product tier (idea) | Exact public tools ≥5? | Fit to local verify command-line interface |
 | --- | --- | --- | --- |
 | **Analytic Hierarchy Process / Multi-Criteria Decision Analysis** | **Could → Pilot** on Decision Matrix weights | Libraries exist (AHPy, pyAHP, …); commercial Expert Choice | Best near-term *math* upgrade to our six-vector scores |
-| **TLA+ / TLC** | **Pilot** (tiny protocols only) | Yes (`tlaplus/tlaplus` ★~3k, Examples ★~1.5k, Apalache ★~0.6k) `[Evidenced — GitHub 2026-08-10]` | Watch→reindex→verify freshness; MCP handle lifecycle |
+| **TLA+ / TLA+ TLC model checker** | **Pilot** (tiny protocols only) | Yes (`tlaplus/tlaplus` ★~3k, Examples ★~1.5k, Apalache ★~0.6k) `[Evidenced — GitHub 2026-08-10]` | Watch→reindex→verify freshness; Model Context Protocol handle lifecycle |
 | **Alloy** | **Could** | Yes (`AlloyTools/org.alloytools.alloy` ★~0.9k) | Lock Intermediate Representation / claim–anchor relational contradictions |
 | **Verus / Lean (code-adjacent)** | **Could / later Pilot** | Yes (Verus ★~2.8k, Lean4 ★~8.7k) | Tiny pure LockCheck / digest core — not whole product |
 | **Coq / Isabelle** | **Refuse tip**; **Embody** literature trust only | Yes (Coq/Rocq ★~5.5k) | Already: RustBelt/WasmCert as *language* trust — not our crates proved |
@@ -67,7 +67,7 @@ Records, and six-part Quality Attribute Scenarios.
 
 | Slot | Content |
 | --- | --- |
-| **(a) Math** | Temporal logic over actions; exhaustive (bounded) state exploration via TLC / symbolic via Apalache |
+| **(a) Math** | Temporal logic over actions; exhaustive (bounded) state exploration via TLA+ TLC model checker / symbolic via Apalache |
 | **(b) Our fit** | Protocol properties: “no verify Accept on stale `material_digest`”; snapshot handle expiry; propose/decide never inverted |
 | **(c) Adopters** | `tlaplus/tlaplus`, `tlaplus/Examples`, `informalsystems/apalache` (+ industry use Amazon/Microsoft lore — treat as Confirmed practice, not our proof) |
 | **(d) Agent bite** | Agents paste huge PlusCal for Spring Dependency Injection → state explosion; claim “proved architecture” for UI code |
@@ -88,9 +88,9 @@ Records, and six-part Quality Attribute Scenarios.
 | Slot | Content |
 | --- | --- |
 | **(a) Math** | Machine-checked proofs (type theory / HOL / SMT-assisted) |
-| **(b) Our fit** | Literature trust for Rust/WASM boundaries already recorded in ATAM formal memo; optional Verus on pure digest/ρ(E) helpers |
+| **(b) Our fit** | Literature trust for Rust/WebAssembly boundaries already recorded in Architecture Tradeoff Analysis Method formal memo; optional Verus on pure digest/ρ(E) helpers |
 | **(c) Adopters** | `coq/coq`, Lean4, `verus-lang/verus`, WasmCert family |
-| **(d) Agent bite** | Label WASM box “proved” because Wasmtime exists (explicitly forbidden in ATAM memo) |
+| **(d) Agent bite** | Label WebAssembly box “proved” because Wasmtime exists (explicitly forbidden in Architecture Tradeoff Analysis Method memo) |
 | **(e) Tier** | **Embody** language results; **Refuse** tip “whole product in Coq”; **Could** Verus on fingernail-sized pure functions |
 
 ---
@@ -105,13 +105,13 @@ Records, and six-part Quality Attribute Scenarios.
 | **(b) Our fit** | Latency Quality Attribute Scenarios N-01/N-02: separate index-rebuild vs warm-resolve queues before inventing **T** |
 | **(c) Adopters** | Primary: [jmt.sourceforge.net](https://jmt.sourceforge.net/) `[Evidenced — HTTP 200]`; GitHub ports sparse (anti-bogus: do not pretend ★ mirrors = engine) |
 | **(d) Agent bite** | Treat model output as measured Accept; skip plant p95 |
-| **(e) Tier** | **Could** Spike (sensor for Design talk only); plants remain SoR for thresholds |
+| **(e) Tier** | **Could** Spike (sensor for Design talk only); plants remain System of Record for thresholds |
 
 ### 2.2 MATLAB / Simulink
 
 | Slot | Content |
 | --- | --- |
-| **(e) Tier** | **Refuse** for this product (hardware/signal dynamics ≠ local verify CLI) |
+| **(e) Tier** | **Refuse** for this product (hardware/signal dynamics ≠ local verify command-line interface) |
 
 ### 2.3 Monte Carlo (NumPy/SciPy)
 
@@ -121,7 +121,7 @@ Records, and six-part Quality Attribute Scenarios.
 | **(b) Our fit** | Risk on index rebuild wall-clock, dirty-tree probability, Spike latency ranges |
 | **(c) Adopters** | NumPy/SciPy (exact libs); Crystal Ball = commercial adjacent |
 | **(d) Agent bite** | Fake tight distributions; replace Tier-1 effect plants with “p(success)=0.99” |
-| **(e) Tier** | **Could** as Decision Matrix / Spike appendix — never merge SoR |
+| **(e) Tier** | **Could** as Decision Matrix / Spike appendix — never merge System of Record |
 
 ---
 
@@ -132,10 +132,10 @@ Records, and six-part Quality Attribute Scenarios.
 | Slot | Content |
 | --- | --- |
 | **(a) Math** | Pairwise comparisons → eigenvector weights; consistency ratio |
-| **(b) Our fit** | **Natural upgrade** to six-vector Decision Matrices: turn 0–2 scores into weighted MCDA without inventing a second schema |
+| **(b) Our fit** | **Natural upgrade** to six-vector Decision Matrices: turn 0–2 scores into weighted Multi-Criteria Decision Analysis without inventing a second schema |
 | **(c) Adopters** | `PhilipGriffith/AHPy` ★~153, `pyAHP/pyAHP` ★~168 (maintenance uneven — Pilot lib choice carefully); Expert Choice commercial |
 | **(d) Agent bite** | Rig pairwise matrices to pre-chosen option; skip Rejected alternatives column |
-| **(e) Tier** | **Could → Pilot** Spike: optional AHP worksheet beside MCP/lock/receipt matrices |
+| **(e) Tier** | **Could → Pilot** Spike: optional Analytic Hierarchy Process worksheet beside Model Context Protocol/lock/receipt matrices |
 
 ### 3.2 How this sits with Decision Framework + Architecture Tradeoff Analysis Method
 
@@ -155,7 +155,7 @@ Architecture Decision Record (engineering record)
 Plants / Tier-1 effects / human Accept     ← still boolean SoR
 ```
 
-AHP does **not** replace Why/What/Who/How/When/Where — it only **quantifies
+Analytic Hierarchy Process does **not** replace Why/What/Who/How/When/Where — it only **quantifies
 preference weights** among vectors or alternatives already listed.
 
 ---
@@ -164,7 +164,7 @@ preference weights** among vectors or alternatives already listed.
 
 | If we want to test… | Mathematical approach | Candidate tool | Open a Spike when… |
 | --- | --- | --- | --- |
-| Logic & concurrency of freshness / handles | Formal specification | TLA+ / TLC (Apalache Could) | MCP `snapshot_open` + receipt β/ρ Accepted as Draft |
+| Logic & concurrency of freshness / handles | Formal specification | TLA+ / TLA+ TLC model checker (Apalache Could) | Model Context Protocol `snapshot_open` + receipt β/ρ Accepted as Draft |
 | Schema / relationship contradictions | Structural modeling | Alloy | Lock Intermediate Representation human-Accepted |
 | Absolute correctness of a tiny pure function | Theorem proving / SMT | Verus (not whole Coq tip) | After engine Pilot exists; LOC-bounded target named |
 | Throughput & latency prediction | Queueing theory | Java Modelling Tools | Before locking latency **T** into Design; always dual-run plants |
@@ -177,9 +177,9 @@ preference weights** among vectors or alternatives already listed.
 ## Agent-codegen / rubber-stamp bites (global)
 
 1. Declaring Architecture Decision Records “mathematically proved” without machine-checked artifacts in-tree.  
-2. Using AHP weights to soft-pass Definition of Ready.  
-3. Replacing Quality Attribute Scenario plants with JMT charts.  
-4. Expanding TLA+ models until TLC cannot finish, then claiming “no bugs found.”  
+2. Using Analytic Hierarchy Process weights to soft-pass Definition of Ready.  
+3. Replacing Quality Attribute Scenario plants with Java Modelling Tools charts.  
+4. Expanding TLA+ models until TLA+ TLC model checker cannot finish, then claiming “no bugs found.”  
 5. Treating Expert Choice / MATLAB licenses as required contributor toolchain.
 
 ---
@@ -188,7 +188,7 @@ preference weights** among vectors or alternatives already listed.
 
 These methods must **not** be treated as replacements for:
 
-- Executable plants (FX-MCP-*, lock illegal-edge, receipt tamper)  
+- Executable plants (FX-Model Context Protocol-*, lock illegal-edge, receipt tamper)  
 - Whole-repo coverage oracle / `fail_under`  
 - Human Accept on Definition of Ready rows  
 - Proof-or-Stop / claim-memory semantics invented from paper titles  
@@ -200,14 +200,14 @@ These methods must **not** be treated as replacements for:
 
 | ID | Spike | Exit |
 | --- | --- | --- |
-| SPIKE-MATH-AHP | Optional Analytic Hierarchy Process worksheet template next to Decision Framework | One worked MCP or lock matrix with consistency ratio documented |
-| SPIKE-MATH-TLA-FRESH | Tiny TLA+ model: stale material ⇒ verify refuse | TLC finds injected bug; model ≤ few hundred states guidance |
+| SPIKE-MATH-Analytic Hierarchy Process | Optional Analytic Hierarchy Process worksheet template next to Decision Framework | One worked Model Context Protocol or lock matrix with consistency ratio documented |
+| SPIKE-MATH-TLA-FRESH | Tiny TLA+ model: stale material ⇒ verify refuse | TLA+ TLC model checker finds injected bug; model ≤ few hundred states guidance |
 | SPIKE-MATH-ALLOY-LOCK | Alloy sigs for package deps + todo fingerprint | Counterexample for cycle / duplicate fingerprint |
-| SPIKE-MATH-JMT-LAT | Optional queueing sketch for index vs resolve | Explicitly labeled **sensor**; does not set Quality Attribute Scenario **T** |
+| SPIKE-MATH-Java Modelling Tools-LAT | Optional queueing sketch for index vs resolve | Explicitly labeled **sensor**; does not set Quality Attribute Scenario **T** |
 
 **FREEZE note (2026-08-10):** these Spikes stay **unscheduled**. See
 `research/gaps/shallow-decisions-honesty-2026-08-10.md` — deepen receipts /
-claims / MCP handles first; do not promote math rows to Must.
+claims / Model Context Protocol handles first; do not promote math rows to Must.
 
 ### Peer enrichment (GitHub API 2026-08-10) — still brainstorm
 
@@ -226,8 +226,8 @@ claims / MCP handles first; do not promote math rows to Must.
 
 | Level | Evidence |
 | --- | --- |
-| 1 | Tool IDs + GitHub/star snapshot 2026-08-10; JMT site; ATAM formal memo |
-| 2 | Mapped onto receipts, locks, MCP handles, latency Quality Attribute Scenarios |
+| 1 | Tool IDs + GitHub/star snapshot 2026-08-10; Java Modelling Tools site; Architecture Tradeoff Analysis Method formal memo |
+| 2 | Mapped onto receipts, locks, Model Context Protocol handles, latency Quality Attribute Scenarios |
 | 3 | Spike charters only (above) — **unscheduled under FREEZE** |
 | 4 | Embody/Adopt/Pilot/Could/Refuse table; **Adopt count in this catalog = 0** |
 | 5 | Refuse list + agent bites + peer enrichment |

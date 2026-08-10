@@ -1,16 +1,16 @@
 ---
-title: 'ADR-0001: Polyglot-first product identity'
+title: 'Architecture Decision Record ADR-0001: Polyglot-first product identity'
 status: Proposed
 date: '2026-08-10'
 ---
 
-# ADR-0001: Polyglot-first product identity
+# Architecture Decision Record ADR-0001: Polyglot-first product identity
 
 ## Context
 
 Prior planning lived beside a Python product and drifted toward
 “Python tip + sidecars.” Stakeholders require a **full** polyglot product:
-Rust, WASM (+ toolkits), SQLite, Go, Ruby, Clojure, TypeScript, Python as peer,
+Rust, WebAssembly (+ toolkits), SQLite, Go, Ruby, Clojure, TypeScript, Python as peer,
 C when necessary, Zig when earned.
 
 ## Decision
@@ -26,5 +26,5 @@ Proposed.
 ## Consequences
 
 Positive: matches stakeholder intent; clear ownership.  
-Negative: wider toolchain; stricter ADR/CI discipline.  
+Negative: wider toolchain; stricter Architecture Decision Record/CI discipline.  
 Rejected: Python-majority product port as the new tip; demoting Ruby/Clojure/Go to demos.

@@ -1,12 +1,12 @@
 ---
-title: ATAM Quality Attribute Scenario standard
+title: Architecture Tradeoff Analysis Method Quality Attribute Scenario standard
 status: ACTIVE
 date: '2026-08-10'
 ---
 
-# Quality Attribute Scenario (QAS) standard
+# Quality Attribute Scenario (Quality Attribute Scenario) standard
 
-From SEI ATAM: a non-functional need may influence Design **only** as a
+From SEI Architecture Tradeoff Analysis Method: a non-functional need may influence Design **only** as a
 six-part scenario.
 
 | Field | Meaning |

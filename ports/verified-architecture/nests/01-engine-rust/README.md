@@ -1,8 +1,8 @@
 # Nest: Rust engine
 
-**Owns:** SCIP decode, WiringResolver, LockCheck, receipts, wasmtime host
+**Owns:** Source Code Index Protocol decode, WiringResolver, LockCheck, receipts, wasmtime host
 
-**ADRs:** ADR-0007, ADR-0004, ADR-0002
+**Architecture Decision Records:** Architecture Decision Record ADR-0007, Architecture Decision Record ADR-0004, Architecture Decision Record ADR-0002
 
 **Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
 
@@ -13,7 +13,7 @@
 - `research/atam-formal/`
 - `docs/c4/03-components.md`
 
-## Shared SoR
+## Shared System of Record
 
 - `docs/DOMAIN_MAP.md`
 - `docs/requirements/` · `docs/constraints/`
@@ -23,4 +23,4 @@
 
 This nest may become a git subtree or standalone repo while keeping the same
 MDC look-first contract so the “next repository” inherits context without
-loading unrelated BCs.
+loading unrelated bounded contexts.

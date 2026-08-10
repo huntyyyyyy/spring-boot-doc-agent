@@ -1,14 +1,14 @@
 ---
-title: 'ADR-0010: TypeScript owns IDE and MCP presentation'
+title: 'Architecture Decision Record ADR-0010: TypeScript owns IDE and Model Context Protocol presentation'
 status: Proposed
 date: '2026-08-10'
 ---
 
-# ADR-0010: TypeScript IDE / MCP presentation
+# Architecture Decision Record ADR-0010: TypeScript IDE / Model Context Protocol presentation
 
 ## Context
 
-LSP diagnostics and verification panels live in editor ecosystems. MCP clients
+Language Server Protocol diagnostics and verification panels live in editor ecosystems. Model Context Protocol clients
 for org-wide tools are often TS. Engine remains Rust.
 
 ## Decision
@@ -17,8 +17,8 @@ for org-wide tools are often TS. Engine remains Rust.
 containers. Talks to engine via stdio/HTTP or local protocol. Not the merge
 oracle writer.
 
-**Protocol pin, tool primitives, and handle rules** live in **ADR-0011** and
-`07-system-design/decisions/mcp-decision-matrix.md` — this ADR does not define
+**Protocol pin, tool primitives, and handle rules** live in **Architecture Decision Record ADR-0011** and
+`07-system-design/decisions/mcp-decision-matrix.md` — this Architecture Decision Record does not define
 tool semantics.
 
 ## Status

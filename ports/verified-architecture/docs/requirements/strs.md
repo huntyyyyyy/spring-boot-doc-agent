@@ -1,16 +1,16 @@
 ---
-title: StRS — Stakeholder Requirements Specification
+title: Stakeholder Requirements Specification — Stakeholder Requirements Specification
 status: DRAFT — awaiting stakeholder review
 date: '2026-08-10'
 standard: ISO/IEC/IEEE 29148-shaped
 ---
 
-# StRS — Stakeholder requirements
+# Stakeholder Requirements Specification — Stakeholder requirements
 
 ## Purpose
 
 Define what the Verified Architecture Engine must achieve for stakeholders,
-**without** binding implementation language. SRS and C4 derive from this.
+**without** binding implementation language. Software Requirements Specification and C4 derive from this.
 
 ## Actors
 
@@ -42,13 +42,13 @@ pick among ambiguous candidates.
 ## Out of scope (this wave)
 
 - Full JVM fidelity (`@Conditional`, AOP proxies, SpEL) as “proved”
-- Embeddings/RAG as authority for bindings
+- Embeddings/Retrieval-Augmented Generation as authority for bindings
 - Org-wide social knowledge-graph SaaS as Must
-- Mesh / Backstage as merge SoT
+- Mesh / Backstage as merge Source of Truth
 
 ## Polyglot product identity
 
-The system is delivered as a **polyglot** monorepo of first-class language BCs
-(Rust engine, WASM trust boundary, Go chassis, Ruby locks, Clojure graph brain,
-SQLite registry, TS IDE/MCP, Python as **peer** ACI — not majority kernel).
-See ADR-0001.
+The system is delivered as a **polyglot** monorepo of first-class language bounded contexts
+(Rust engine, WebAssembly trust boundary, Go chassis, Ruby locks, Clojure graph brain,
+SQLite registry, TS IDE/Model Context Protocol, Python as **peer** ACI — not majority kernel).
+See Architecture Decision Record ADR-0001.

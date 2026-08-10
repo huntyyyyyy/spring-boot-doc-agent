@@ -8,22 +8,22 @@ See `12-delivery/no-code-gate/README.md` and
 Agents with no chat history: start at `AGENT_BOOTSTRAP.md` + `STATUS.md`.
 
 PRs may change planning Markdown (`00/`–`12/`, `docs/`, `research/`,
-`.cursor/`) and docs CI only until DoR is green for the active wave:
+`.cursor/`) and docs CI only until Definition of Ready is green for the active wave:
 
-1. Product boundary + wave Must StRS/SRS Accepted (or explicit Draft Approve)
-2. Constraints ledger current; no open `blocks_code` OQs (or WAIVED)
-3. Must NFRs are complete ATAM six-part QAS (no TBD measure on Must)
-4. SoR vs derived matrix Draft; ports + ICD stubs for the spike seam
-5. C4 Context + Container reviewed; Component only for touched BC
-6. Relevant ADRs Accepted; others stay in `options/` / Proposed
-7. Receipt schema + V&V Accept methods named
+1. Product boundary + wave Must Stakeholder Requirements Specification/Software Requirements Specification Accepted (or explicit Draft Approve)
+2. Constraints ledger current; no open `blocks_code` open questions (or WAIVED)
+3. Must non-functional requirements are complete Architecture Tradeoff Analysis Method six-part Quality Attribute Scenario (no TBD measure on Must)
+4. System of Record vs derived matrix Draft; ports + Interface Control Document stubs for the spike seam
+5. C4 Context + Container reviewed; Component only for touched bounded context
+6. Relevant Architecture Decision Records Accepted; others stay in `options/` / Proposed
+7. Receipt schema + Verification and Validation Accept methods named
 8. Tradeoff table updated for chosen tactics
 9. Human wave Approve in `02-stakeholders/signoff/`
 
 ## Working draft
 
 Content may be Draft/Proposed while still obeying **ISO 29148-shaped RE**,
-**ATAM QAS**, **Nygard ADR**, and **C4** form.
+**Architecture Tradeoff Analysis Method Quality Attribute Scenario**, **Nygard Architecture Decision Record**, and **C4** form.
 
 ## Where to write
 

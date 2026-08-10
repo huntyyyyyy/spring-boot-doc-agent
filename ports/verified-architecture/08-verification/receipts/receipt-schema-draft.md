@@ -2,7 +2,7 @@
 title: Receipt schema draft (proof tour v0)
 status: DRAFT
 date: '2026-08-10'
-traces: OQ-05
+traces: open question OQ-05
 ---
 
 # Receipt / proof-tour (v0)
@@ -54,7 +54,7 @@ JSON object per `verify` run. All fields mandatory unless marked optional.
 ## Invariants
 
 1. Fail with empty `steps` is invalid.
-2. LLM/RAG strings must not appear inside `witness`.
+2. large language model/Retrieval-Augmented Generation strings must not appear inside `witness`.
 3. **Evidence ≠ freshness** (EA-Graph, arXiv:2608.04278): a claim can have
    strong evidence on **stale** anchors — disposition becomes `affected` or
    `unprovable`, never a silent guess.

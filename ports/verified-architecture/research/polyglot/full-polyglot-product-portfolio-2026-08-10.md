@@ -1,5 +1,5 @@
 ---
-title: VA / E-POLY — Full polyglot product portfolio (Rust · WASM · SQLite · Go · Ruby · Clojure · TS · C · Zig)
+title: VA / E-POLY — Full polyglot product portfolio (Rust · WebAssembly · SQLite · Go · Ruby · Clojure · TS · C · Zig)
 status: RESEARCH COMPLETE — Spec Draft PRODUCT STANCE (user-directed; amends “sidecar-only” framing)
 date: '2026-08-10'
 epic: VA
@@ -21,8 +21,8 @@ related:
 
 do_not:
   - Water this down to “Python tip + optional demos”
-  - Dual-write coverage.xml from two languages without cutover ADR
-  - Skip QAS/ADR gates from process/54 when picking toolkits
+  - Dual-write coverage.xml from two languages without cutover Architecture Decision Record
+  - Skip Quality Attribute Scenario/Architecture Decision Record gates from process/54 when picking toolkits
   - Equate “full polyglot” with unproven formal claims on every crate
 sources:
   github:
@@ -48,12 +48,12 @@ last_reviewed: '2026-08-10'
 **Directive (2026-08-10).** The product is **not** “Python with cool sidecars.”
 It is a **polyglot local-first verified architecture engine** that **fully uses**:
 
-**Rust · WASM (+ Rust/WASM toolkits) · SQLite · Go · Ruby · Clojure · Python ·
+**Rust · WebAssembly (+ Rust/WebAssembly toolkits) · SQLite · Go · Ruby · Clojure · Python ·
 TypeScript (as needed) · C (when necessary) · Zig (when it earns a seat).**
 
 Earlier agent framing that demoted languages to Pattern-only or “optional after
 Python Must” is **amended**. process/53 lanes stay as *mental models*; this memo
-is the **product identity**. process/54 QAS/ADR/formal gates still bind — full
+is the **product identity**. process/54 Quality Attribute Scenario/Architecture Decision Record/formal gates still bind — full
 polyglot does **not** mean vibes or dual Cover%.
 
 ---
@@ -63,11 +63,11 @@ polyglot does **not** mean vibes or dual Cover%.
 | Level | Evidence |
 | --- | --- |
 | **1** | Logos from process/41 + toolkit list §3 |
-| **2** | Each language owns a *first-class* BC, not a demo folder |
+| **2** | Each language owns a *first-class* bounded context, not a demo folder |
 | **3** | Monorepo layout + build matrix + Pilot order |
 | **4** | Transitional oracle writer vs cutover; Zig/C when earned |
-| **5** | Adversarial: supply-chain, dual SoT, formal overclaim |
-| **6** | POLY-FULL tickets + ADR-0001 |
+| **5** | Adversarial: supply-chain, dual Source of Truth, formal overclaim |
+| **6** | POLY-FULL tickets + Architecture Decision Record ADR-0001 |
 
 ---
 
@@ -77,14 +77,14 @@ polyglot does **not** mean vibes or dual Cover%.
 | --- | --- |
 | Is the product polyglot? | **Yes — by design** |
 | Where does it live? | **This monorepo** (not a greenfield abandon of corpus/OCS) |
-| Can Rust own the engine? | **Yes** — first-class `crates/` / engine BC |
-| WASM? | **Yes** — guests + hosts + WIT/component model + Extism/wazero as needed |
-| Ruby / Clojure? | **Yes** — real lock DSL / graph brain BCs, not “pattern essays” |
-| Go? | **Yes** — daemon/chassis BC |
-| SQLite? | **Yes** — registry SoR-derived (ADR-001) |
-| Python / TS? | **Yes** — ACI, gates, IDE/MCP/LSP as needed |
-| C / Zig? | **Yes when needed** — grammars, amalgamation, systems/WASM niches |
-| Merge oracle today? | **Single writer** until **cutover ADR** (may move; not forever-Python) |
+| Can Rust own the engine? | **Yes** — first-class `crates/` / engine bounded context |
+| WebAssembly? | **Yes** — guests + hosts + WIT/component model + Extism/wazero as needed |
+| Ruby / Clojure? | **Yes** — real lock DSL / graph brain bounded contexts, not “pattern essays” |
+| Go? | **Yes** — daemon/chassis bounded context |
+| SQLite? | **Yes** — registry System of Record-derived (Architecture Decision Record ADR-001) |
+| Python / TS? | **Yes** — ACI, gates, IDE/Model Context Protocol/Language Server Protocol as needed |
+| C / Zig? | **Yes when needed** — grammars, amalgamation, systems/WebAssembly niches |
+| Merge oracle today? | **Single writer** until **cutover Architecture Decision Record** (may move; not forever-Python) |
 
 ---
 
@@ -120,21 +120,21 @@ the **current** oracle/ACI host, not the product ceiling.
 | tree-sitter (+ java grammar) | CST summaries |
 | scip / protobuf crates | Decode `index.scip` |
 | rusqlite | Registry access |
-| clap or equivalent | Engine CLI |
+| clap or equivalent | Engine command-line interface |
 | tokio | Async where earned |
 | PyO3 / maturin | Bridge to Python ACI during transition |
-| wasmtime (host) | Embed WASM guests |
-| wit-bindgen / component model | Typed WASM interfaces |
+| wasmtime (host) | Embed WebAssembly guests |
+| wit-bindgen / component model | Typed WebAssembly interfaces |
 | Miri / Clippy / rust-analyzer | Dev quality |
 | Kani / Verus | Pilot-later on pure resolve/lock cores (process/54 FML) |
 
-### 3.2 WASM (+ multi-host toolkits)
+### 3.2 WebAssembly (+ multi-host toolkits)
 
 | Toolkit | Role |
 | --- | --- |
 | wasmtime | Primary host (fuel/epoch) |
 | Extism | Multi-lang PDK plugins if useful |
-| wazero | Go-side WASM host (daemon sandboxes) |
+| wazero | Go-side WebAssembly host (daemon sandboxes) |
 | wit / component model | Capability interfaces |
 | wasm-bindgen / javy (opt) | JS/TS guest experiments |
 | Wasmer / WasmEdge | Spike only if wasmtime gaps |
@@ -145,16 +145,16 @@ the **current** oracle/ACI host, not the product ceiling.
 | --- | --- |
 | SQLite engine | Derived bean/edge registry |
 | SQL migrations | Versioned schema |
-| rusqlite / Go database/sql / Python sqlite3 | Language bindings — **one schema SoR** |
+| rusqlite / Go database/sql / Python sqlite3 | Language bindings — **one schema System of Record** |
 
 ### 3.4 Go
 
 | Toolkit | Role |
 | --- | --- |
-| Cobra | `lie0d` CLI/daemon |
+| Cobra | `lie0d` command-line interface/daemon |
 | fsnotify | Watch → reindex |
 | go-plugin / hashicorp | Optional language sidecars |
-| wazero | In-process WASM from Go |
+| wazero | In-process WebAssembly from Go |
 
 ### 3.5 Ruby
 
@@ -185,8 +185,8 @@ the **current** oracle/ACI host, not the product ceiling.
 
 | Toolkit | Role |
 | --- | --- |
-| LSP / VS Code or Cursor extension | Red squiggle + verification panel |
-| MCP TS SDK patterns | Org-wide / IDE MCP clients |
+| Language Server Protocol / VS Code or Cursor extension | Red squiggle + verification panel |
+| Model Context Protocol TS software development kit patterns | Org-wide / IDE Model Context Protocol clients |
 | Node only as **extension host**, not tip Cover% writer |
 
 ### 3.9 C (when crazy is required)
@@ -201,10 +201,10 @@ the **current** oracle/ACI host, not the product ceiling.
 
 | Use | Why Zig |
 | --- | --- |
-| Alternate WASM/systems toolkit | Simpler cross-compile / C-interop story |
+| Alternate WebAssembly/systems toolkit | Simpler cross-compile / C-interop story |
 | Native helpers | When Spike shows better fit than C/Rust for a shim |
 
-**Keep/drop rule.** Zig/C enter via Spike with QAS; they are **in the portfolio**,
+**Keep/drop rule.** Zig/C enter via Spike with Quality Attribute Scenario; they are **in the portfolio**,
 not forbidden — but not cargo-culted onto the tip without Accept.
 
 ---
@@ -214,8 +214,8 @@ not forbidden — but not cargo-culted onto the tip without Accept.
 | ID | Constraint |
 | --- | --- |
 | CON-ORACLE | Exactly **one** merge writer for `coverage.xml` / claims at a time |
-| CON-QAS | NFRs → ATAM QAS before Design (process/54) |
-| CON-ADR | Language BC additions need ADR (see ADR-0001) |
+| CON-Quality Attribute Scenario | non-functional requirements → Architecture Tradeoff Analysis Method Quality Attribute Scenario before Design (process/54) |
+| CON-Architecture Decision Record | Language bounded context additions need Architecture Decision Record (see Architecture Decision Record ADR-0001) |
 | CON-SIZE | New modules respect LOC/complexipy culture (cohesive crates OK) |
 | CON-PLANT | Kitchen/OCS remain Accept plants |
 
@@ -227,11 +227,11 @@ Polyglot **is** the product. These constraints keep it shippable.
 
 | Phase | Oracle writer | Engine |
 | --- | --- | --- |
-| **Now** | Python | Spikes: Rust crates + Go daemon + Ruby locks + bb + WASM guest |
-| **Pilot green** | Python | Rust engine called via PyO3/CLI; parity tests |
-| **Cutover (Approve)** | New ADR supersedes ADR-005 | Rust (or designated) writes oracle **or** Python remains thin façade over Rust |
+| **Now** | Python | Spikes: Rust crates + Go daemon + Ruby locks + bb + WebAssembly guest |
+| **Pilot green** | Python | Rust engine called via PyO3/command-line interface; parity tests |
+| **Cutover (Approve)** | New Architecture Decision Record supersedes Architecture Decision Record ADR-005 | Rust (or designated) writes oracle **or** Python remains thin façade over Rust |
 
-User intent: **do not stall** Rust/WASM/Go/Ruby/Clojure waiting for eternal
+User intent: **do not stall** Rust/WebAssembly/Go/Ruby/Clojure waiting for eternal
 Python ownership ideology.
 
 ---
@@ -240,12 +240,12 @@ Python ownership ideology.
 
 | ID | Ticket | Acceptance |
 | --- | --- | --- |
-| **PF-0** | ADR-0001 Accepted (product = polyglot monorepo) | Stakeholder Accept |
+| **PF-0** | Architecture Decision Record ADR-0001 Accepted (product = polyglot monorepo) | Stakeholder Accept |
 | **PF-1** | Cargo workspace skeleton `crates/va-*` | Builds in CI job (non-oracle) |
 | **PF-2** | Go `lie0d` Cobra skeleton + watch Spike | Stamp file updates |
 | **PF-3** | Ruby lock package project (Packwerk-shaped or Packwerk) | controller→repo demo |
 | **PF-4** | Clojure/bb Datascript REPL on EDN export | 3 queries = SQL goldens |
-| **PF-5** | WASM LockCheck guest + wasmtime host | Parity vs native |
+| **PF-5** | WebAssembly LockCheck guest + wasmtime host | Parity vs native |
 | **PF-6** | SQLite schema crate + rusqlite | Migrations + corpus load |
 | **PF-7** | TS extension Spike (diagnostics panel) | One lock visible in IDE |
 | **PF-8** | C/Zig Spike backlog | Only when PF-1/5 need ABI/grammar |
@@ -256,6 +256,6 @@ Python ownership ideology.
 ## 7. Status
 
 **Product stance:** full polyglot — **locked per user direction**.  
-**Method stance:** QAS + ADR + honest formal boundaries (process/54) — **unchanged**.  
+**Method stance:** Quality Attribute Scenario + Architecture Decision Record + honest formal boundaries (process/54) — **unchanged**.  
 **Implement:** still behind RE Approve + Active tip reorder; PF-* are the Pilot
 shape once Active.

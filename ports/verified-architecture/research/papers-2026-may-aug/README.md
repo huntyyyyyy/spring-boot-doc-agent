@@ -18,7 +18,7 @@ Published dates verified via arXiv Atom API (`export.arxiv.org`) on 2026-08-10.
 
 | # | arXiv | Published (UTC) | Title (short) | Primary domains crossed |
 | --- | --- | --- | --- | --- |
-| P1 | [2606.01385](https://arxiv.org/abs/2606.01385) | 2026-05-31 | Bridging Requirements and Architecture (MAAD) | RE, constraints, ATAM, frameworks, multi-agent |
+| P1 | [2606.01385](https://arxiv.org/abs/2606.01385) | 2026-05-31 | Bridging Requirements and Architecture (MAAD) | RE, constraints, Architecture Tradeoff Analysis Method, frameworks, multi-agent |
 | P2 | [2605.29013](https://arxiv.org/abs/2605.29013) | 2026-05-27 | Local observability + MHE training of FNNs | Control theory, observability, nonlinear DST, probability |
 | P3 | [2606.22621](https://arxiv.org/abs/2606.22621) | 2026-06-21 | Multi-level resistive synapses / memristive IMC | Analog, in-memory, lin.alg., info theory, neuromorphic, physics |
 | P4 | [2607.27341](https://arxiv.org/abs/2607.27341) | 2026-07-29 | Quantum vs classical erasure (Landauer) | Information theory, thermodynamics, physics, constraints (resource) |
@@ -30,8 +30,8 @@ Published dates verified via arXiv Atom API (`export.arxiv.org`) on 2026-08-10.
 | ID | arXiv | Published | Why it matters |
 | --- | --- | --- | --- |
 | P-A | [2608.04278](https://arxiv.org/abs/2608.04278) | 2026-08-04 | EA-Graph — amend receipts (unprovable, freshness) |
-| P-B | [2608.03609](https://arxiv.org/abs/2608.03609) | 2026-08-04 | STEAD — agent+tools FO-CTL; equivariance Spike |
-| P-D | [2607.19795](https://arxiv.org/abs/2607.19795) | 2026-07-22 | VeriSynth — LLM proposes / Z3 decides pattern |
+| P-B | [2608.03609](https://arxiv.org/abs/2608.03609) | 2026-08-04 | Stateful Tool-Enabled Agentic Deployment — agent+tools FO-CTL; equivariance Spike |
+| P-D | [2607.19795](https://arxiv.org/abs/2607.19795) | 2026-07-22 | VeriSynth — large language model proposes / Z3 decides pattern |
 
 Full adjudication: `research/adversarial/july-august-2026-overturn-review.md`.
 
@@ -70,9 +70,9 @@ Every selected domain appears in **≥2 papers** except IMC (P3 primary; deepen 
 
 ## Transfer verdicts (locked E-DYN1)
 
-| Paper | Steal (Adopt metaphor / process) | Refuse (tip SoT) |
+| Paper | Steal (Adopt metaphor / process) | Refuse (tip Source of Truth) |
 | --- | --- | --- |
-| **P1 MAAD** | RE→architecture workflow; Evaluator/ATAM report shape; mismatch analysis | Auto-generated architecture as merge SoT; LLM-as-architect without human Approve |
+| **P1 MAAD** | RE→architecture workflow; Evaluator/Architecture Tradeoff Analysis Method report shape; mismatch analysis | Auto-generated architecture as merge Source of Truth; large language model-as-architect without human Approve |
 | **P2 Observability** | Observability + PE inputs as *language* for sensors/rate caps | Cover% PID; treating agent tip as controllable plant |
 | **P3 Memristive IMC** | Capacity / noise / quantization as *remeasure cost language* | Analog/IMC hardware; non-hermetic substrate in CI |
 | **P4 Landauer erasure** | Irreversibility & work-budget language for Green-AI | \(kT\ln 2\) as CI floor |
@@ -87,11 +87,11 @@ Allowed locked transfers only: saliency/debounce · advisory hysteresis · dual-
 
 | Layer | Papers that inform | Pre-code artifact |
 | --- | --- | --- |
-| RE / QAS / ATAM | P1 | `03-requirements/`, `05-quality-architecture/` |
+| RE / Quality Attribute Scenario / Architecture Tradeoff Analysis Method | P1 | `03-requirements/`, `05-quality-architecture/` |
 | Control / observability of sensors | P2, P5 | `08-verification/` rate caps; refuse Cover% PID |
 | L3 proof / harness | P6 | `08-verification/l3-proof/`, proof-tour receipts |
 | Science metaphor budget | P3, P4, P5 | `11-science-transfer/locked-transfers/` |
-| RAG ≠ verify | P1 (mismatch), P6 (harness) | `10-rag-corpus/retrieval-contracts/` |
+| Retrieval-Augmented Generation ≠ verify | P1 (mismatch), P6 (harness) | `10-rag-corpus/retrieval-contracts/` |
 
 ---
 
@@ -107,5 +107,5 @@ Allowed locked transfers only: saliency/debounce · advisory hysteresis · dual-
 
 - Treating any of P3–P5 as hardware roadmap.
 - Using P4’s Landauer bound as a numeric gate threshold.
-- Using P6’s Iris/Rust results to claim Spring DI “proved.”
-- Expanding always-on agent context with full paper PDFs — retrieve via RAG pack only.
+- Using P6’s Iris/Rust results to claim Spring Dependency Injection “proved.”
+- Expanding always-on agent context with full paper PDFs — retrieve via Retrieval-Augmented Generation pack only.

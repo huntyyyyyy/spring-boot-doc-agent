@@ -3,7 +3,7 @@ title: Registry SQL sketch
 status: DRAFT
 ---
 
-# ICD-REG — SQLite registry (sketch)
+# Interface Control Document ICD-REG — SQLite registry (sketch)
 
 Derived only. Wipe/rebuild OK.
 

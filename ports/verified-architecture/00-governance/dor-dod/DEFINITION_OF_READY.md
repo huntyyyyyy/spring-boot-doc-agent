@@ -24,13 +24,13 @@ Whole words — `GLOSSARY.md`.
 | D2 | Wave Must Stakeholder + Software Requirements Specifications named and Accepted | `03-requirements/strs|srs` | **PARTIAL** | Drafts exist; no human Accept; Requirements Traceability Matrix still Draft |
 | D3 | Must non-functional requirements as six-part Quality Attribute Scenarios | `03-requirements/qas/` | **PARTIAL** | N-05…N-08 drafted; **N-01/N-02 latency still Spike-blocked**; open question 07 still OPEN |
 | D4 | Constraints ledger Accepted | `04-constraints/technical/constraints-wave1.md` | **PARTIAL** | Draft only |
-| D5 | `blocks_code` open questions closed or waived | `open-questions/` | **FAIL** | OQ-01…08 all SPIKE or OPEN; every one still `blocks_code: true` |
-| D6 | System of Record matrix Accepted | `sor-derived-matrix.md` | **PARTIAL** | Draft; OQ-02 blocks |
+| D5 | `blocks_code` open questions closed or waived | `open-questions/` | **FAIL** | open question OQ-01…08 all SPIKE or OPEN; every one still `blocks_code: true` |
+| D6 | System of Record matrix Accepted | `sor-derived-matrix.md` | **PARTIAL** | Draft; open question OQ-02 blocks |
 | D7 | Ports + Interface Control Document stubs Accepted | `PORTS.md`, `icd/*` | **PARTIAL** | Schemas drafted; no Accept; stability Spikes missing |
 | D8 | C4 Context + Container current | `07-system-design/c4/C4-BRIEF-CONFIDENCE.md` (+ legacy `docs/c4/`) | **PARTIAL** | Draft + confidence scores; not human Accepted |
-| D8b | Model Context Protocol transport requirements gathered | `icd/mcp-tools.md` + `decisions/mcp-decision-matrix.md` + shallow deep-dive | **PARTIAL** | Six-vector matrix + usage cases UC-MCP-01…08; JSON Schemas/fixtures still missing |
+| D8b | Model Context Protocol transport requirements gathered | `icd/mcp-tools.md` + `decisions/mcp-decision-matrix.md` + shallow deep-dive | **PARTIAL** | Six-vector matrix + usage cases UC-Model Context Protocol-01…08; JSON Schemas/fixtures still missing |
 | D9 | Architecture Decision Records / brief Accepted | `ARCHITECTURE_BRIEF.md` | **PARTIAL** | Draft; leaders table needs refresh after D0 audit |
-| D10 | Receipt schema Accepted + Spike on freshness keys | `icd/receipt.schema.json` | **PARTIAL** | Draft; OQ-05; Proof-or-Stop public engine **not found** as a genuine repo |
+| D10 | Receipt schema Accepted + Spike on freshness keys | `icd/receipt.schema.json` | **PARTIAL** | Draft; open question OQ-05; Proof-or-Stop public engine **not found** as a genuine repo |
 | D10b | Artifact-anchored claim specification + schema Accepted | `claim-memory/`, `ea-graph-claims.schema.json` | **PARTIAL** + **research gap** | Spec text exists; **zero genuine public implementations of this algorithm** found; Pilot/Spike required before “Must implement” can be honest |
 | D10c | Stateful Tool-Enabled Agentic Deployment constraints in Model Context Protocol Interface Control Document | `stead/`, `mcp-tools.md`, `mcp-decision-matrix.md` | **PARTIAL** + **research gap** | ST-1…5 + handles + reject classes in matrix; equivariance wrap Spike; schemas/fixtures missing |
 | D11 | Verification and Validation Accept methods + real plants | `vv-plan/` | **PARTIAL** | Fixture *names* only; no plants; no measured Accept |

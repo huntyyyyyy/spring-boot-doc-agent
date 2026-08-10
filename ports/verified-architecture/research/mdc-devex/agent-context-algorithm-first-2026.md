@@ -10,8 +10,8 @@ related:
 - docs/research/se-quality-synthesis-2026-08-08.md
 
 do_not:
-- vendor opaque viral MCP memory as “quality”
-- train CompactionRL / in-tree weight zoos as product SoT
+- vendor opaque viral Model Context Protocol memory as “quality”
+- train CompactionRL / in-tree weight zoos as product Source of Truth
 - token-prune agent action grammar (LLMLingua-class on trajectories)
 - replace claims/coverage oracles with compressed prose
 spec_gate: DRAFT E-CTX0 algorithm-first (2026-08-10)
@@ -23,7 +23,7 @@ last_reviewed: '2026-08-10'
 **User stance (Adopt as product doctrine).** Prefer research algorithms, applied math,
 and named quality frameworks we can **discern and implement/orchestrate ourselves**
 over black-box high-★ agent-memory products. If a repo is only a thin wrapper on an
-opaque service, it is not SoR — the **paper + measurable predicate** is.
+opaque service, it is not System of Record — the **paper + measurable predicate** is.
 
 **Claim tiers:** `[Evidenced]` · `[Confirmed]` · `[Unknown]`.
 
@@ -33,10 +33,10 @@ opaque service, it is not SoR — the **paper + measurable predicate** is.
 
 | Stance | Decision |
 | --- | --- |
-| **Embody** | SoR = **named algorithm + Accept predicate**; code is a port under our gates (LOC, complexipy, claims, 16-A) |
+| **Embody** | System of Record = **named algorithm + Accept predicate**; code is a port under our gates (LOC, complexipy, claims, 16-A) |
 | **Adopt** | Step-/observation-level **masking** (Complexity Trap); MemGPT **tier algebra** as design; CAT **compress-as-tool**; Liu **edge placement**; DOC map doors |
 | **Spike** | Thin in-repo porter for mask/budget; optional AGORA-class step scorer only after measure; StarScout offline |
-| **Refuse** | Viral memory MCP as merge dep; token-level extractive compression on agent actions; LLM-summary of SoR docs; trainable compaction weights in-tree |
+| **Refuse** | Viral memory Model Context Protocol as merge dep; token-level extractive compression on agent actions; large language model-summary of System of Record docs; trainable compaction weights in-tree |
 
 ---
 
@@ -51,7 +51,7 @@ An external idea is **build-eligible** only if all hold:
 | B3 | **Falsifiable Accept** | solve-rate±ε, token±%, claims green — not vibes |
 | B4 | **Fits constitution** | no second oracle; no utils bag; ≤225 / complexipy≤5 on *our* port |
 | B5 | **Orchestrable** | strategies/ports (OCP); we own the loop |
-| B6 | **Discernment** | ★ filter + memo 27 heuristics; paper/lab beats hypergrowth MCP |
+| B6 | **Discernment** | ★ filter + memo 27 heuristics; paper/lab beats hypergrowth Model Context Protocol |
 
 Fail any → orientation only.
 
@@ -68,7 +68,7 @@ Fail any → orientation only.
 | **CAT compress-as-tool** [arXiv:2512.22087](https://arxiv.org/abs/2512.22087) | Milestone compression into structured workspace | **Design pattern** for tip resets / handoffs |
 | **Working set / locality** (Denning) | Resident set ≤ attention budget | **Process law** for tips |
 | **U-placement** [arXiv:2307.03172](https://arxiv.org/abs/2307.03172) | Critical facts at context edges | **Prompt/orchestrator law** |
-| **CompactionRL** class | Learned compaction policy | **Refuse** weight training as product SoT (E-STK0) |
+| **CompactionRL** class | Learned compaction policy | **Refuse** weight training as product Source of Truth (E-STK0) |
 | **Claims / coverage / tach** (this repo) | Deterministic predicates | **Already Embody** — context hygiene must not dilute |
 
 ---
@@ -114,9 +114,9 @@ Verify: CTX-S1 tokens; claims; complexipy≤5; no coverage.xml climb dual-write.
 | **CTX21** | Refuse token-level extractive compression on agent action grammar | Refuse |
 | **CTX22** | MemGPT/CAT/Liu are **orchestration laws** we encode; runtimes optional never | Embody |
 | **CTX23** | Any port lives behind strategies/ports; constitution gates apply | Embody |
-| **CTX24** | Viral memory MCP may inform Spike only after B1–B6 | Adopt discernment |
-| **CTX25** | Trainable compaction / CompactionRL not product SoT | Refuse |
-| **CTX26** | Docs SoR stay file-backed; compression never invents a second SoR | Embody |
+| **CTX24** | Viral memory Model Context Protocol may inform Spike only after B1–B6 | Adopt discernment |
+| **CTX25** | Trainable compaction / CompactionRL not product Source of Truth | Refuse |
+| **CTX26** | Docs System of Record stay file-backed; compression never invents a second System of Record | Embody |
 
 ---
 

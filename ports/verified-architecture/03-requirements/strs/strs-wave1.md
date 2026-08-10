@@ -1,5 +1,5 @@
 ---
-title: StRS — Stakeholder requirements (wave-1)
+title: Stakeholder Requirements Specification — Stakeholder requirements (wave-1)
 status: DRAFT — awaiting human Accept
 date: '2026-08-10'
 standard: ISO/IEC/IEEE 29148-shaped
@@ -7,12 +7,12 @@ evidence:
   - research/papers-2026-may-aug/june-august-2026-port-readiness.md
 ---
 
-# StRS — wave-1
+# Stakeholder Requirements Specification — wave-1
 
 ## Purpose
 
 What the Verified Architecture Engine must achieve for stakeholders **without**
-binding implementation language. SRS/C4 derive from this.
+binding implementation language. Software Requirements Specification/C4 derive from this.
 
 ## Actors
 
@@ -33,14 +33,14 @@ claim digests**, not chat invention. Agents may propose; harness decides.
 
 | ID | Goal |
 | --- | --- |
-| G1 | Virtual dep/DI graph + lock checks on realistic plants |
+| G1 | Virtual dep/Dependency Injection graph + lock checks on realistic plants |
 | G2 | Same lock policy for agent and human paths |
 | G3 | Explainable verify (receipt + EA-Graph dispositions) |
-| G4 | Tool surface refuses hallucinated entity ids (STEAD) |
+| G4 | Tool surface refuses hallucinated entity ids (Stateful Tool-Enabled Agentic Deployment) |
 
 ## Out of scope (wave-1)
 
 - Full JVM fidelity as “proved”
-- Embeddings/RAG as binding authority
+- Embeddings/Retrieval-Augmented Generation as binding authority
 - Org-wide social knowledge-graph SaaS
 - FO-CTL model checking of the agent deployment

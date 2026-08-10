@@ -1,10 +1,10 @@
 ---
-title: 'ADR-0003: Packwerk-shaped lock IR with Ruby BC'
+title: 'Architecture Decision Record ADR-0003: Packwerk-shaped lock IR with Ruby bounded context'
 status: Proposed
 date: '2026-08-10'
 ---
 
-# ADR-0003: Packwerk-shaped lock IR (Ruby BC)
+# Architecture Decision Record ADR-0003: Packwerk-shaped lock IR (Ruby bounded context)
 
 ## Context
 
@@ -14,7 +14,7 @@ engine evaluation may be Rust for speed.
 
 ## Decision
 
-Ruby BC owns Packwerk-compatible or Packwerk-shaped package manifests and DX.
+Ruby bounded context owns Packwerk-compatible or Packwerk-shaped package manifests and DX.
 Executable checks may run in Rust (`packs`-like) and/or Ruby; IR schema is
 shared. Not prose-only markdown theater.
 

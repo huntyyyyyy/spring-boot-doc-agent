@@ -75,7 +75,7 @@ unless one of:
 | Gate | Meaning |
 | --- | --- |
 | `digest` | Load-bearing paper digested (type + sections + refs) |
-| `primary_spec` | Normative industry Spec cited with section/SEP |
+| `primary_spec` | Normative industry Spec cited with section or Model Context Protocol specification enhancement proposal |
 | `pilot_waiver` | Exact public engines = 0; explicit Pilot invent charter |
 
 See `research/gaps/shallow-decisions-honesty-2026-08-10.md`. Score totals are
@@ -83,7 +83,7 @@ See `research/gaps/shallow-decisions-honesty-2026-08-10.md`. Score totals are
 
 ## Anti-patterns (refuse)
 
-1. **Assertion-only ADR** — Decision without Rejected alternatives or Usage case.  
+1. **Assertion-only Architecture Decision Record** — Decision without Rejected alternatives or Usage case.  
 2. **Locus TBD forever** — “somewhere in the agent” is not a locus.  
 3. **Hidden session state** as “how” when the product claims stateless protocol.  
 4. **Model as Who-decides** for verify / lock / claim mutations.  

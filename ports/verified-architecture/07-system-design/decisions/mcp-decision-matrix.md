@@ -11,7 +11,7 @@ claim_tiers: Evidenced / Confirmed / Unknown
 # Model Context Protocol surface — Decision Matrix
 
 **Framings:** Analytical Decision Matrix · Architecture Decision Record companion
-(ADR-0011) · Governance (who may mutate verify state).
+(Architecture Decision Record ADR-0011) · Governance (who may mutate verify state).
 
 **Normative primary:** Model Context Protocol specification **`2026-07-28`**
 `[Evidenced — blog.modelcontextprotocol.io/posts/2026-07-28/]`.
@@ -24,9 +24,9 @@ claim_tiers: Evidenced / Confirmed / Unknown
 | --- | --- |
 | **Why** | Agents hallucinate entity ids and treat chat as verify System of Record; we need a **typed, handle-passing, harness-owned** tool surface that cannot green-wash without receipts. |
 | **What** | Primitive tools only (`verify`, `resolve`, `claim_withdraw`, `locks_list`); Stateful Tool-Enabled Agentic Deployment ST-1…5; protocol pin `2026-07-28`; reject classes listed in Interface Control Document; no Roots/Sampling/Logging. |
-| **Who** | **Decides:** harness (`LockCheck`, `ReceiptWriter`, `ClaimMemory`). **Proposes:** model / host. **Owns presentation:** TypeScript (ADR-0010). **Owns engine:** Rust Pilot (ADR-0007). **Accepts policy:** human (locks in git). |
-| **How** | Local **stdio** MVP; optional Streamable HTTP with required headers; state only as **tool-arg handles** minted by prior results; JSON Schema 2020-12 args/results. |
-| **When** | Spec wave now; Implement only after Definition of Ready D7/D10c + per-tool schemas; **review** when MCP Spec revises or first remote host ships. |
+| **Who** | **Decides:** harness (`LockCheck`, `ReceiptWriter`, `ClaimMemory`). **Proposes:** model / host. **Owns presentation:** TypeScript (Architecture Decision Record ADR-0010). **Owns engine:** Rust Pilot (Architecture Decision Record ADR-0007). **Accepts policy:** human (locks in git). |
+| **How** | Local **stdio** minimum viable product; optional Streamable HTTP with required headers; state only as **tool-arg handles** minted by prior results; JSON Schema 2020-12 args/results. |
+| **When** | Spec wave now; Implement only after Definition of Ready D7/D10c + per-tool schemas; **review** when Model Context Protocol Spec revises or first remote host ships. |
 | **Where** | Spec: `07-system-design/icd/mcp-tools.md`. Planned code: `packages/mcp-server/` (TypeScript presentation) → stdio/HTTP → `crates/engine/` ports. Never inside agent prompt memory. |
 
 ---
@@ -36,11 +36,11 @@ claim_tiers: Evidenced / Confirmed / Unknown
 | Option | Why | What | Who | How | When | Where | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **A. Primitive tools + `2026-07-28` + handles** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — wire pin Evidenced; *our* tool set = Pilot invent |
-| B. Pre-July sessionful MCP (`initialize` + `Mcp-Session-Id`) | 1 | 0 | 1 | 0 | 0 | 1 | 3 | **Refuse** for new work |
+| B. Pre-July sessionful Model Context Protocol (`initialize` + `Mcp-Session-Id`) | 1 | 0 | 1 | 0 | 0 | 1 | 3 | **Refuse** for new work |
 | C. HyperTool / mega-tools (“do architecture”) | 1 | 0 | 0 | 1 | 1 | 1 | 4 | **Defer** (Could) |
 | D. Free-text bean_name tools | 0 | 0 | 0 | 1 | 1 | 1 | 3 | **Refuse** (ST-1/ST-5) |
-| E. CLI-only; no Model Context Protocol | 2 | 1 | 1 | 2 | 2 | 1 | 9 | **Accept as peer**; MCP still hypothesized for IDE hosts |
-| F. Remote SaaS MCP with org session store | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **Refuse** MVP (product shape) |
+| E. command-line interface-only; no Model Context Protocol | 2 | 1 | 1 | 2 | 2 | 1 | 9 | **Accept as peer**; Model Context Protocol still hypothesized for IDE hosts |
+| F. Remote SaaS Model Context Protocol with org session store | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **Refuse** minimum viable product (product shape) |
 
 Scores are a **sensor**, not Accept. See `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
 
@@ -61,16 +61,16 @@ primitives first. Mega-tools hide effect checkpoints.
 
 | ID | Actor | Goal | Steps (logical) | Spec locus | Planned code locus | Why this shape |
 | --- | --- | --- | --- | --- | --- | --- |
-| **UC-MCP-01** | Developer in IDE | Check locks before commit | Host calls `locks_list` → optional `verify` → shows receipt path | `icd/mcp-tools.md` tools table; ICD-RCPT | `packages/mcp-server/src/tools/locks_list.ts` → engine `LockCheck`; `ReceiptWriter` | List before mutate; handle from snapshot, not invented |
-| **UC-MCP-02** | Coding agent | Resolve one injection site | Agent receives `snapshot_id` from prior tool → `resolve(injection_site_id, snapshot_id)` | ST-1/ST-5; resolve-result schema (to add) | `packages/mcp-server/src/tools/resolve.ts` → port `Resolver` | Typed ids only; Unknown/unprovable allowed |
-| **UC-MCP-03** | Coding agent | Run full verify | `verify(target_root, lock_set_id)` → harness writes receipt; agent **must not** invent pass | ICD-RCPT; Proof-or-Stop field gaps G-R1 | `packages/mcp-server/src/tools/verify.ts` → `LockCheck` + `ReceiptWriter` | Propose/decide split: model never stamps receipt |
-| **UC-MCP-04** | Agent after edit | Withdraw stale claims | `claim_withdraw(snapshot_id)` → dispositions including `unprovable` | ICD-CLAIM; QAS-N-07 | `packages/mcp-server/src/tools/claim_withdraw.ts` → `ClaimMemory` | Leaf anchors; no chat-memory substitute |
-| **UC-MCP-05** | CI / headless | Same tools over stdio | Same tool names; no HTTP headers; still session-free | Transport section of ICD | `packages/mcp-server/src/transport/stdio.ts` | One schema; two transports |
-| **UC-MCP-06** | Remote host (optional later) | Call over Streamable HTTP | Send `MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name`; handles in body | ICD transport; SEP-2243 | `packages/mcp-server/src/transport/streamable_http.ts` | Headers required; reject mismatch |
-| **UC-MCP-07** | Hostile / buggy agent | Invent `snapshot_id` / bean id | Harness reject `unknown_handle` / `unknown_id` | Reject classes; ST-5 | `packages/mcp-server/src/harness/reject.ts` + engine | Possession ≠ auth; mint-only handles |
-| **UC-MCP-08** | Product owner | Audit why MCP chosen | Read this matrix + ADR-0011 | `decisions/` + `docs/adr/` | N/A (governance) | Traceability; prevents drift back to sessions |
+| **UC-Model Context Protocol-01** | Developer in IDE | Check locks before commit | Host calls `locks_list` → optional `verify` → shows receipt path | `icd/mcp-tools.md` tools table; Interface Control Document ICD-RCPT | `packages/mcp-server/src/tools/locks_list.ts` → engine `LockCheck`; `ReceiptWriter` | List before mutate; handle from snapshot, not invented |
+| **UC-Model Context Protocol-02** | Coding agent | Resolve one injection site | Agent receives `snapshot_id` from prior tool → `resolve(injection_site_id, snapshot_id)` | ST-1/ST-5; resolve-result schema (to add) | `packages/mcp-server/src/tools/resolve.ts` → port `Resolver` | Typed ids only; Unknown/unprovable allowed |
+| **UC-Model Context Protocol-03** | Coding agent | Run full verify | `verify(target_root, lock_set_id)` → harness writes receipt; agent **must not** invent pass | Interface Control Document ICD-RCPT; Proof-or-Stop field gaps G-R1 | `packages/mcp-server/src/tools/verify.ts` → `LockCheck` + `ReceiptWriter` | Propose/decide split: model never stamps receipt |
+| **UC-Model Context Protocol-04** | Agent after edit | Withdraw stale claims | `claim_withdraw(snapshot_id)` → dispositions including `unprovable` | Interface Control Document ICD-CLAIM; Quality Attribute Scenario QAS-N-07 | `packages/mcp-server/src/tools/claim_withdraw.ts` → `ClaimMemory` | Leaf anchors; no chat-memory substitute |
+| **UC-Model Context Protocol-05** | CI / headless | Same tools over stdio | Same tool names; no HTTP headers; still session-free | Transport section of Interface Control Document | `packages/mcp-server/src/transport/stdio.ts` | One schema; two transports |
+| **UC-Model Context Protocol-06** | Remote host (optional later) | Call over Streamable HTTP | Send `MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name`; handles in body | Interface Control Document transport; Model Context Protocol SEP-2243 | `packages/mcp-server/src/transport/streamable_http.ts` | Headers required; reject mismatch |
+| **UC-Model Context Protocol-07** | Hostile / buggy agent | Invent `snapshot_id` / bean id | Harness reject `unknown_handle` / `unknown_id` | Reject classes; ST-5 | `packages/mcp-server/src/harness/reject.ts` + engine | Possession ≠ auth; mint-only handles |
+| **UC-Model Context Protocol-08** | Product owner | Audit why Model Context Protocol chosen | Read this matrix + Architecture Decision Record ADR-0011 | `decisions/` + `docs/adr/` | N/A (governance) | Traceability; prevents drift back to sessions |
 
-### Sequence (UC-MCP-03) — decide plane
+### Sequence (UC-Model Context Protocol-03) — decide plane
 
 ```text
 [Host / model] --tools/call verify(lock_set_id)--> [mcp-server TS]
@@ -128,9 +128,9 @@ a witness (`llm_witness_forbidden`).
 
 | Level | Evidence |
 | --- | --- |
-| 1 Remember | Spec `2026-07-28`; SEPs 2575/2567/2243; ADR-0010/0011 |
+| 1 Remember | Spec `2026-07-28`; SEPs 2575/2567/2243; Architecture Decision Record ADR-0010/0011 |
 | 2 Understand | Six vectors + usage cases above |
 | 3 Apply | Planned `packages/mcp-server` + engine ports |
 | 4 Analyze | Alternatives A–F scored |
 | 5 Evaluate | Reject classes; ST-1…5; false-green bites |
-| 6 Create | This matrix + ADR-0011 + ICD rewrite — **Implement still Refuse** |
+| 6 Create | This matrix + Architecture Decision Record ADR-0011 + Interface Control Document rewrite — **Implement still Refuse** |

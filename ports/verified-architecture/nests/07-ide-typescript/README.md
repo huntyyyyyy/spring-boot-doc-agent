@@ -1,8 +1,8 @@
-# Nest: TypeScript IDE/MCP
+# Nest: TypeScript IDE/Model Context Protocol
 
-**Owns:** LSP diagnostics, verification panel, MCP presentation
+**Owns:** Language Server Protocol diagnostics, verification panel, Model Context Protocol presentation
 
-**ADRs:** ADR-0010
+**Architecture Decision Records:** Architecture Decision Record ADR-0010
 
 **Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
 
@@ -11,7 +11,7 @@
 - `docs/c4/02-containers.md`
 - `docs/adr/adr-0010-typescript-ide-mcp.md`
 
-## Shared SoR
+## Shared System of Record
 
 - `docs/DOMAIN_MAP.md`
 - `docs/requirements/` · `docs/constraints/`
@@ -21,4 +21,4 @@
 
 This nest may become a git subtree or standalone repo while keeping the same
 MDC look-first contract so the “next repository” inherits context without
-loading unrelated BCs.
+loading unrelated bounded contexts.

@@ -6,7 +6,7 @@ date: '2026-08-10'
 
 # Constraints
 
-Change requires ADR. Distinct from REQs.
+Change requires Architecture Decision Record. Distinct from REQs.
 
 | ID | Constraint |
 | --- | --- |
@@ -14,14 +14,14 @@ Change requires ADR. Distinct from REQs.
 | CON-02 | Polyglot-first as options; no Python-majority identity |
 | CON-03 | Local-first default; locks in git; indexes/claims local-derived |
 | CON-04 | Java 17/21 · Boot 3.2/3.3 plant envelope until reopened |
-| CON-05 | No LLM/RAG output as verify witness or claim anchor |
-| CON-06 | No product code until DoR green + signoff |
-| CON-07 | Must NFRs influencing Design must be complete QAS (latency Spikes OK) |
-| CON-08 | C4 structural claims cite ADR IDs |
-| CON-09 | WASM/Rust = trust-boundary engineering until formal artifacts exist |
+| CON-05 | No large language model/Retrieval-Augmented Generation output as verify witness or claim anchor |
+| CON-06 | No product code until Definition of Ready green + signoff |
+| CON-07 | Must non-functional requirements influencing Design must be complete Quality Attribute Scenario (latency Spikes OK) |
+| CON-08 | C4 structural claims cite Architecture Decision Record IDs |
+| CON-09 | WebAssembly/Rust = trust-boundary engineering until formal artifacts exist |
 | CON-10 | Prefer Unknown/unprovable over wrong |
 | CON-11 | Evidence ⊥ freshness for claims (EA-Graph) |
-| CON-12 | MCP/CLI entity ids typed from stores (STEAD); harness code-owned |
+| CON-12 | Model Context Protocol/command-line interface entity ids typed from stores (Stateful Tool-Enabled Agentic Deployment); harness code-owned |
 | CON-13 | Proof-or-Stop: done requires freshness-bound receipt, not agent assertion |
 | CON-14 | ClaimMemory ≠ AgentMemory |
 | CON-15 | Science: locked transfers only |

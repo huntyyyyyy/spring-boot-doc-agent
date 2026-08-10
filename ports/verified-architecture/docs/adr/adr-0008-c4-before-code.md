@@ -1,20 +1,20 @@
 ---
-title: 'ADR-0008: C4 and ADRs before product code'
+title: 'Architecture Decision Record ADR-0008: C4 and Architecture Decision Records before product code'
 status: Proposed
 date: '2026-08-10'
 ---
 
-# ADR-0008: C4 + ADRs before product code
+# Architecture Decision Record ADR-0008: C4 + Architecture Decision Records before product code
 
 ## Context
 
-This repository exists to finish requirements, constraints, C4, and ADRs before
+This repository exists to finish requirements, constraints, C4, and Architecture Decision Records before
 coding. Shipping crates early recreates product drift.
 
 ## Decision
 
-No product code until CONTRIBUTING gate is green: StRS/SRS/QAS, constraints,
-C4 Context+Container (+ Component for touched BC), and Accepted ADRs for
+No product code until CONTRIBUTING gate is green: Stakeholder Requirements Specification/Software Requirements Specification/Quality Attribute Scenario, constraints,
+C4 Context+Container (+ Component for touched bounded context), and Accepted Architecture Decision Records for
 structural choices.
 
 ## Status
@@ -23,6 +23,6 @@ Proposed.
 
 ## Consequences
 
-Positive: planning SoR stays honest.  
+Positive: planning System of Record stays honest.  
 Negative: slower “visible code.”  
 Rejected: spike folders that become undeclared tip.

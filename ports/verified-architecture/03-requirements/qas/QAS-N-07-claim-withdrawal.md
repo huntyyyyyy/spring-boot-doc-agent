@@ -1,12 +1,12 @@
 ---
-id: QAS-N-07
+id: Quality Attribute Scenario QAS-N-07
 title: Claim withdrawal under upstream drift
 status: DRAFT
 nfr_traces: [REQ-F-06c]
 evidence: arXiv:2608.04278
 ---
 
-# QAS-N-07 — EA-Graph withdrawal
+# Quality Attribute Scenario QAS-N-07 — EA-Graph withdrawal
 
 | Part | Value |
 | --- | --- |

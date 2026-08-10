@@ -1,5 +1,5 @@
 ---
-title: Cursor MDC activation algebra (RAG + DevEx)
+title: Cursor MDC activation algebra (Retrieval-Augmented Generation + DevEx)
 status: RESEARCH COMPLETE
 date: '2026-08-10'
 claim_tiers: Evidenced / Confirmed / Unknown
@@ -21,9 +21,9 @@ the same corpus?
 
 | Question | Answer |
 | --- | --- |
-| Mass `.md` → `.mdc`? | **No** — category error. Research/human SoT stays Markdown for RAG. |
+| Mass `.md` → `.mdc`? | **No** — category error. Research/human Source of Truth stays Markdown for Retrieval-Augmented Generation. |
 | Always-on budget | **≤2** slim invariants |
-| Path scope SoT | **MDC `globs` only** — refuse nested `AGENTS.md` as a second path system |
+| Path scope Source of Truth | **MDC `globs` only** — refuse nested `AGENTS.md` as a second path system |
 | Depth procedures | **Skills** (progressive disclosure); rules mandate + `@` skill |
 | Hard deny | **Hooks** when needed — not prose “don’t” |
 
@@ -31,9 +31,9 @@ the same corpus?
 
 | `alwaysApply` | `description` | `globs` | Behavior | Primary use case |
 | --- | --- | --- | --- | --- |
-| `true` | — | — | Always in context | Constitution / RAG progressive-disclosure invariant |
-| `false` | — | provided | Auto-attach when matching files in context | Nest BC work; docs/standards edits |
-| `false` | provided | omitted | Agent pulls when relevant | Topic cards (ATAM, polyglot, promote-claim) |
+| `true` | — | — | Always in context | Constitution / Retrieval-Augmented Generation progressive-disclosure invariant |
+| `false` | — | provided | Auto-attach when matching files in context | Nest bounded context work; docs/standards edits |
+| `false` | provided | omitted | Agent pulls when relevant | Topic cards (Architecture Tradeoff Analysis Method, polyglot, promote-claim) |
 | `false` | omitted | omitted | Manual `@`-mention only | Rare deep playbooks (formal honesty) |
 
 ## Use cases mapped (agents ∪ developers)
@@ -41,9 +41,9 @@ the same corpus?
 | Use case | Actor | Mode | Why |
 | --- | --- | --- | --- |
 | Never weaken draft standards form | Both | always (thin) | False-green if missing |
-| Edit one nest / BC | Agent | globs `nests/<bc>/**` | Path-scoped lens |
-| Edit RE / ADR / C4 | Agent + human | globs `docs/**` | Standards attach with files |
-| Retrieve long research | Agent + RAG | agent-requested + Skill | Don’t dump corpus always-on |
+| Edit one nest / bounded context | Agent | globs `nests/<bc>/**` | Path-scoped lens |
+| Edit RE / Architecture Decision Record / C4 | Agent + human | globs `docs/**` | Standards attach with files |
+| Retrieve long research | Agent + Retrieval-Augmented Generation | agent-requested + Skill | Don’t dump corpus always-on |
 | Promote research → `docs/` | Human/agent | agent-requested Skill | Explicit promotion gate |
 | Formal “proved” claims | Agent | manual `@` | Rare; high damage if wrong |
 | Developer reading path | Human | Markdown nests + INDEX | Same taxonomy, no alwaysApply |

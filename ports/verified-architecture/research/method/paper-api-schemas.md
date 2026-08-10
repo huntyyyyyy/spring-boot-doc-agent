@@ -45,7 +45,7 @@ Whole words preferred in memos; API field names stay as published.
 | Item | Value |
 | --- | --- |
 | Base | `https://api.openalex.org` |
-| LLM index | `https://developers.openalex.org/llms.txt` |
+| large language model index | `https://developers.openalex.org/llms.txt` |
 | OpenAPI | `https://developers.openalex.org/api-reference/openapi.json` |
 | Polite pool | always pass `mailto=<contact>` (and `api_key` when available) |
 

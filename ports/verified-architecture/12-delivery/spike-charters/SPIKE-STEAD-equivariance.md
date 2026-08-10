@@ -1,5 +1,5 @@
 ---
-title: Spike — STEAD equivariance for MCP tool surface
+title: Spike — Stateful Tool-Enabled Agentic Deployment equivariance for Model Context Protocol tool surface
 status: DRAFT
 date: '2026-08-10'
 traces:
@@ -7,13 +7,13 @@ traces:
   - research/adversarial/july-august-2026-overturn-review.md
 ---
 
-# Spike charter — SPIKE-STEAD-1
+# Spike charter — SPIKE-Stateful Tool-Enabled Agentic Deployment-1
 
 ## Question
 
-If agents call MCP tools over our derived registry / lock APIs, what identifier
+If agents call Model Context Protocol tools over our derived registry / lock APIs, what identifier
 equivariance (or canonical wrapper) is required before we claim any FO-CTL-like
-properties — and what is the cheap engineering subset for MVP (no FO-CTL claims)?
+properties — and what is the cheap engineering subset for minimum viable product (no FO-CTL claims)?
 
 ## Exit
 
@@ -23,4 +23,4 @@ properties — and what is the cheap engineering subset for MVP (no FO-CTL claim
 
 ## Non-goals
 
-Proving STEAD theorems in-repo; implementing FO-CTL model checker.
+Proving Stateful Tool-Enabled Agentic Deployment theorems in-repo; implementing FO-CTL model checker.

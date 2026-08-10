@@ -39,11 +39,11 @@ Do: demote wording; deepen **at most three** topics below.
 
 1. Receipt freshness β/ρ (digest Proof-or-Stop + canon Spike **or** Pilot charter)  
 2. Claim memory withdrawal (Pilot charter + plants; engines = 0)  
-3. MCP handle lifecycle only (stop adding tools)
+3. Model Context Protocol handle lifecycle only (stop adding tools)
 
 Optional **outside deepen-3** (does not expand product verify): read-only Spec
-corpus MCP research — `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` /
-`SPIKE-SPEC-MCP-0` (Python tip host; Rust/Go Could later; WASM LockCheck stays
+corpus Model Context Protocol research — `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` /
+`SPIKE-SPEC-MCP-0` (Python tip host; Rust/Go Could later; WebAssembly LockCheck stays
 product Wave-3).
 
 Everything else = **parked** (Could / brainstorm).

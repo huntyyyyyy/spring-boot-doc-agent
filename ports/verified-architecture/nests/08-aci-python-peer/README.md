@@ -2,7 +2,7 @@
 
 **Owns:** Optional orchestration peer — NOT majority engine / NOT product identity
 
-**ADRs:** ADR-0001, ADR-0006
+**Architecture Decision Records:** Architecture Decision Record ADR-0001, Architecture Decision Record ADR-0006
 
 **Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
 
@@ -11,7 +11,7 @@
 - `research/polyglot/`
 - `docs/adr/adr-0001-polyglot-first-product.md`
 
-## Shared SoR
+## Shared System of Record
 
 - `docs/DOMAIN_MAP.md`
 - `docs/requirements/` · `docs/constraints/`
@@ -21,4 +21,4 @@
 
 This nest may become a git subtree or standalone repo while keeping the same
 MDC look-first contract so the “next repository” inherits context without
-loading unrelated BCs.
+loading unrelated bounded contexts.
