@@ -72,6 +72,9 @@ GitHub metadata snapshot: **2026-08-10** via `gh api` `[Evidenced]`.
 | Paper | Published | Algorithm | Limits |
 | --- | --- | --- | --- |
 | *Formal Verification of Agentic Systems over Operational Data* (arXiv:2608.03609) | 2026-08-04 | Formalises Stateful Tool-Enabled Agentic Deployments; First-Order Computation Tree Logic verify **undecidable**; equivariance under opaque-id rename; **canonical deployment wrapper** (graph-isomorphism-hard to compute) | No claim that wrapper is cheap or shipped; case study not a product library |
+| *AgentLTL: Trace-Verification for Procedural Compliance* (arXiv:2607.02599) | 2026-07 | First-Order Linear Temporal Logic over typed tool-call traces; online harness block/warn; grounding catches entities not seen in prior tool results | Not opaque-id rename equivariance; paper code fails anti-bogus (anonymous / no Continuous Integration) |
+| *CAGE: Certified Authorization under Typed-Return Uncertainty* (arXiv:2607.29190) | 2026-07 | Post-return authorization over binding faults + numerical drift neighborhoods | Complements pre-call equivariance; no product library found |
+| *Verified Tool Calls under Non-Atomic Failures* (arXiv:2608.02645) | 2026-08 | Postcondition checks, verify-before-retry, idempotency keys for non-atomic tools | Orthogonal to First-Order Computation Tree Logic; adopt wrapper pattern |
 
 ### Genuine GitHub — **algorithm adopters**
 
@@ -88,10 +91,13 @@ GitHub metadata snapshot: **2026-08-10** via `gh api` `[Evidenced]`.
 | `openai/openai-agents-python` | ~28542 / 2026-08-10 | Vendor SDK; active | Agent proposes; tools execute | **Adopt** propose/decide split carefully |
 | `567-labs/instructor` | ~13712 / 2026-08-09 | Structured outputs; Actions | Schema-constrained model outputs | **Adopt** for args, not equivariance |
 | `guardrails-ai/guardrails` | ~7267 / 2026-08-05 | Runtime validators | Output/tool guards | **Could** |
+| `NVIDIA-NeMo/Guardrails` | ~6907 / 2026-08-10 | Tool input/output rails | Block unsafe tool calls | **Could** |
+| `openai/openai-guardrails-python` | ~227 / 2026-07-21 | Official OpenAI guardrails | Tool/output gates | **Could** |
+| `Z3Prover/z3` | ~12542 / 2026-08-10 | Satisfiability Modulo Theories | Monitor/backends | **Could** Spike formal lane |
 | `dottxt-ai/outlines` | ~15562 / 2026-08-07 | Constrained generation | Structured decoding | **Could** |
 | `pydantic/pydantic` | ~28514 / 2026-08-10 | Validation substrate | Types as gates | **Embody** validation |
 
-**Genuine gap:** ST-1…5 in our Interface Control Document are **design constraints inspired by a paper with no field library**. Treating them as “Adopt from industry” was wrong. Correct tier: **Embody warning + Pilot wrapper Spike**.
+**Genuine gap:** ST-1…5 in our Interface Control Document are **design constraints inspired by a paper with no field library**. Treating them as “Adopt from industry” was wrong. Correct tier: **Embody warning + Pilot wrapper Spike**. Reject anonymous AgentLTL / 2★ Agent-C dumps as merge evidence.
 
 ---
 
@@ -160,13 +166,17 @@ Language tools emit a stable index (formerly Language Server Index Format lineag
 | Repository | Stars / pushed | Fit |
 | --- | --- | --- |
 | `microsoft/agent-framework` | ~12717 / 2026-08-10 | Cited by Proof-or-Stop; orchestration — **Adopt carefully** |
-| `langchain-ai/langgraph` | ~39384 / 2026-08-10 | Graph-shaped agent control — **Could** (not our SoR) |
+| `langchain-ai/langgraph` | ~39384 / 2026-08-10 | Graph-shaped agent control — **Could** (not our System of Record) |
 | `openai/openai-agents-python` | ~28542 / 2026-08-10 | **Adopt** patterns |
 | `google/adk-python` | ~21067 / 2026-08-10 | **Could** |
-| `stanfordnlp/dspy` | ~37037 / 2026-08-10 | Programmatic LLM pipelines — **Could** |
+| `stanfordnlp/dspy` | ~37037 / 2026-08-10 | Programmatic pipelines — **Could** |
 | `567-labs/instructor` + `guardrails-ai/guardrails` | (above) | **Adopt** contract checks |
+| `pydantic/pydantic-ai` | ~19196 / 2026-08-10 | Schema-as-contract agents — **Adopt** patterns |
+| `SWE-agent/SWE-agent` | ~20038 / 2026-08-10 | Coding-agent harness — **Could** |
+| `OpenHands/OpenHands` | ~83640 / 2026-08-10 | Full coding harness — **Could** (heavy) |
+| `openai/codex` | ~105146 / 2026-08-10 | Host hooks/compaction plane — **Could** for cue delivery |
 
-**Gap:** cue-anchored *delivery* as first-class harness property still thinly productized relative to “memory products” (`mem0ai/mem0`, `letta-ai/letta`) which optimize **storage** — often the wrong temptation per the paper. Do not Promote mem0 as verify claim store.
+**Gap:** cue-anchored *delivery* as first-class harness property still thinly productized; paper-linked `swapnanil/vectr` fails stars floor (~2★). Official Prompts→Contracts and Aria / Harness Hook Language public engines **Unknown** (not found). Do not Promote mem0 as verify claim store.
 
 ---
 
