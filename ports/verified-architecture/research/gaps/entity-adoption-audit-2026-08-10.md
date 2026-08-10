@@ -113,8 +113,13 @@ Recent papers are thinner here; foundational practice dominates. June–August 2
 | `TNG/ArchUnit` | ~3794 / 2026-08-10 | Java architecture unit tests | **Adopt** plant patterns |
 | `nrwl/nx` | ~29210 / 2026-08-10 | Module boundaries in monorepos | **Adopt** selectively |
 | `bazelbuild/bazel` | ~25699 / 2026-08-10 | Visibility / target graph | **Could** (heavy) |
+| `tach-org/tach` | ~2.8k / 2026-06 (CI present) | Python modular dependency enforce | **Adopt** Python lane |
+| `seddonym/import-linter` | ~1.1k / 2026-08-10 | Import contracts over graph | **Adopt** receipt-oriented peer |
+| `fe3dback/go-arch-lint` | ~528 / 2026-08 | Go architecture rules | **Adopt** Go lane |
 
 **Status:** this entity **can** meet the ≥5 genuine-repo bar. Our gap is **lock Intermediate Representation language** (open question 04), not “does the world ship graph locks.”
+
+**Fidelity gaps (do not soft-pass):** Packwerk-class tools often miss method-call edges; Bazel is build visibility not source refs; ArchUnit needs compiled classes; Spring `@Primary` / `@Qualifier` is **not** solved by this layer. `[Evidenced — follow-on from graph-lock research agent]`
 
 ---
 
