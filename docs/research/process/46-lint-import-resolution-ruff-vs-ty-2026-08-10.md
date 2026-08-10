@@ -4,11 +4,16 @@ status: RESEARCH COMPLETE — Spec Draft (no Implement until Approve)
 date: 2026-08-10
 epic: E-LINT0
 claim_tiers: Evidenced / Confirmed / Unknown
+bloom_gate: required-through-create
+bloom_mcp:
+  - deepwiki_ask_question
+  - llms_txt
 related:
   - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
   - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
   - .ruff.toml
   - scripts/ci/pre_pr.py
+  - .cursor/skills/principal-se-research-epic/SKILL.md
 sources:
   deepwiki_ask:
     - https://deepwiki.com/search/does-ruff-resolve-python-impor_44f053f2-1e5c-42e0-9501-88ed257f8634
@@ -45,6 +50,21 @@ sources:
 | Next product move | **Spike → Spec Approve → wire `ty check` (import-focused) in `pre_pr`**, keep ruff. Optional later: deptry for *declared*-deps hygiene (different predicate). |
 
 **Bottom line:** The premature step was **conflating lint with import resolution**. Keep ruff; **add ty** (or one peer) for unresolved imports — do not dual-type-check forever.
+
+---
+
+## 0b. Bloom ladder (required before E-LINT0 Implement)
+
+| Level | Evidence in this memo |
+| --- | --- |
+| **1 Remember** | Rule IDs `F401`, `unresolved-import`, `possibly-missing-import`; `llms.txt` + rule URLs |
+| **2 Understand** | Problem classes L1–L7; ruff ≠ type checker |
+| **3 Apply** | `ty check` + `.venv` / `VIRTUAL_ENV` / `--python`; mirror ruff paths `scripts/` + `src/doc_engine/` |
+| **4 Analyze** | Embody ruff / Adopt ty / Refuse flake8+pylint+mega-linter; I1–I5 |
+| **5 Evaluate** | Adversarial §7; FP on `possibly-missing-import`; venv false-red |
+| **6 Create** | Epic tickets LINT0–LINT4 + LINT-S1 with Acceptance — **Implement blocked until Approve** |
+
+MCP Ask URLs: see frontmatter `sources.deepwiki_ask`. Skill: `.cursor/skills/principal-se-research-epic/SKILL.md`.
 
 ---
 

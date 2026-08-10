@@ -23,6 +23,7 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 3. If a domain exceeds ~**12** active memos or needs a third nesting level, **reshape** (merge / synthesis / new top-level domain) — do not deepen.
 4. Chat transcripts and raw session lore are **refused** as research SoT.
 5. Process logs live under [`docs/process/`](../process/) (session-log, tool-quirks, steering-prompts).
+6. **Future-dev plans** (Spec Draft / epic Implement tickets): skill [`principal-se-research-epic`](../../.cursor/skills/principal-se-research-epic/SKILL.md) — Bloom **1→Create** with DeepWiki MCP `ask_question` + primary `llms.txt` **before** code. Set `bloom_gate: required-through-create` in frontmatter.
 
 ## Look-first (Cursor)
 

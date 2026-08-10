@@ -4998,3 +4998,11 @@ Assumptions affected:
 - DeepWiki is browse-only — [New info — MCP ask_question at mcp.deepwiki.com + llms.txt]
 - session-log monolith OK — [New info — E-LOG0 nest Spec seed in memo 46 §6]
 Files touched: docs/research/process/46-lint-import-resolution-ruff-vs-ty-2026-08-10.md, docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md
+
+## 2026-08-10 — Skill: DeepWiki MCP + Bloom Create gate before Implement
+Commit: 0c90c7e0
+Tests: claims OK (skills/agents/docs); not a code change
+Assumptions affected:
+- DeepWiki is browse-only cartography — [Resolved — skill documents MCP ask_question + llms.txt]
+- Spec Draft memos may jump to Implement from chat memory — [Resolved — bloom_gate through Create required]
+Files touched: .cursor/skills/principal-se-research-epic/SKILL.md, .cursor/rules/se-quality-constitution.mdc, docs/research/README.md, docs/research/process/46-*, AGENTS.md, docs/process/session-log.md

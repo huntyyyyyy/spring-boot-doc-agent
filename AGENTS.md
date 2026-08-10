@@ -17,6 +17,10 @@ epics with separate PRs — never two checkouts of the same Cover%/gate tip.
 truth classes, refuse list, task order) and
 [`docs/research/quality-backlog.md`](docs/research/quality-backlog.md) (Active tip).
 Do not invent a parallel tip or mass-rename packages for “LLM clarity.”
+Design/framework plans: skill
+[`.cursor/skills/principal-se-research-epic/SKILL.md`](.cursor/skills/principal-se-research-epic/SKILL.md)
+(Bloom through Create + DeepWiki MCP `ask_question` at `https://mcp.deepwiki.com/mcp`)
+before Implement.
 
 ## Cursor Cloud specific instructions
 
