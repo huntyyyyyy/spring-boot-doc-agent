@@ -43,7 +43,7 @@ Do: demote wording; deepen **at most three** topics below.
 
 Optional **outside deepen-3** (does not expand product verify): read-only Spec
 corpus Model Context Protocol research — `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` /
-`SPIKE-SPEC-MCP-0` (Python tip host; Rust/Go Could later; WebAssembly LockCheck stays
+`SPIKE-SPEC-MCP-0` (host language re-openable; WebAssembly LockCheck stays
 product Wave-3).
 
 Everything else = **parked** (Could / brainstorm).
@@ -53,4 +53,5 @@ Everything else = **parked** (Could / brainstorm).
 - Treat Port as Implement  
 - Add more shallow “Adopt” verdicts  
 - Cargo scaffolds  
-- Soft-pass D0 with schema file counts
+- Soft-pass D0 with schema file counts  
+- Dump `research/` into always-on context (use `.cursor/rules` + `research/INDEX.md`)

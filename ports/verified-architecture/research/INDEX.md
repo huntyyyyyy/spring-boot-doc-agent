@@ -24,7 +24,8 @@ Use this file as the **Retrieval-Augmented Generation catalog**. Chunk by file; 
 | **Spec / corpus Model Context Protocol polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec Model Context Protocol (not product verify); software development kit tiers; Rust/WebAssembly/Go/TS/Python/Ruby/Clojure; Architectures A–D |
 | **DynamicMCPBench digest** | `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md` | Effect checkpoints, minefields, Tier-1; engine pending |
 | **Decision Framework** | `docs/standards/decision-framework.md` | Six-vector Selection Taxonomy (Decision Matrix / Architecture Decision Record companion / Governance) |
-| **Math / formal brainstorm** | `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` | TLA+ / Alloy / theorem provers / Java Modelling Tools / Analytic Hierarchy Process / Monte Carlo — **ideas only, not Must** |
+| **Math / formal brainstorm** | `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` | Temporal Logic of Actions / Alloy / theorem provers / Java Modelling Tools / Analytic Hierarchy Process / Monte Carlo — **ideas only, not Must** |
+| **Cursor rules catalog** | `.cursor/rules/README.md` | Activation modes; FREEZE in constitution; dual globs for monorepo |
 | **Architecture Tradeoff Analysis Method + formal boundaries** | `research/atam-formal/atam-qas-adr-formal-boundaries-2026-08-10.md` | Quality Attribute Scenarios before Design; TLA+/Verus honesty |
 | **Model Context Protocol Decision Matrix** | `07-system-design/decisions/mcp-decision-matrix.md` | Usage cases UC-Model Context Protocol-01…08, planned code loci, scored alternatives |
 | **Model Context Protocol open-items research** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool schemas, snapshot_open, DynamicMCPBench plants |
