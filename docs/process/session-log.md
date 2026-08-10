@@ -4850,7 +4850,7 @@ Assumptions affected:
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
 ## 2026-08-10 — E-REPO: correct over-broad tools cycle-break gate
-Commit: 265d598
+Commit: 4a58c00
 Tests: claims + inventory set-equality (no schema change to gate)
 Assumptions affected:
 - Every tools module waits on pipeline↔scanning cycle-break — [Resolved — false; `semantic_eval` / `build_docs_site` are `nestable_now`; scan/gates stay blocked]
