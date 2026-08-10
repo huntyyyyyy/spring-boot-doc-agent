@@ -57,6 +57,11 @@ def test_ocs_checkout_present_without_artifactory_blocks_db(
     pointer.write_text(str(checkout) + "\n", encoding="utf-8")
     result = preflight(tmp_path, PLANT_OCS)
     assert not result.ok
+    assert result.remeasure_ok
     assert result.checkout == checkout.resolve()
     assert "artifactory" in result.reason.lower()
     assert "remeasure_ocs_floors" in result.reason
+    from plant_profile import exit_code_for, main
+
+    assert exit_code_for(result) == 3
+    assert main(["--root", str(tmp_path), "--plant", "ocs"]) == 3
