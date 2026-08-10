@@ -4867,7 +4867,7 @@ Assumptions affected:
 Files touched: docs/research/process/27-*, 26-* (cross-link), README, quality-backlog P19, session-log
 
 ## 2026-08-10 — E-CTX0 algorithm-first: build/orchestrate from theory
-Commit: uncommitted
+Commit: 2b7d5b8
 Tests: not run (docs-only Spec amend)
 Assumptions affected:
 - Quality comes from adopting high-★ memory products — [Resolved — doctrine: named algorithm + Accept predicate; self-orchestrated ports (memo 28)]
