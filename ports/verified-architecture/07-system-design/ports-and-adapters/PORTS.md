@@ -21,7 +21,14 @@ Implementations may be Rust/Go/… later; **ports are stable names** for ICDs.
 | `Sandbox` | Run LockCheck guest under WASM caps | Could |
 | `LspDiagnostics` | publishDiagnostics | Should (Wave-2) |
 | `RemediationAssist` | RAG/LLM suggestions | Could — non-witness |
+| `AgentMemory` | Episodic/entity memory for agents | Could — **≠** `Registry` (Neo4j-class OK later) |
+| `EquivarianceWrap` | Canonicalize tool args for agent FO properties | Research Spike (STEAD 2608.03609) |
 
 ## Anti-god rule
 
-No single module owns Index+Resolve+Lock+LSP+RAG. Compose via these ports.
+No single module owns Index+Resolve+Lock+LSP+RAG+Memory. Compose via these ports.
+
+## Jul–Aug 2026 amendment
+
+Split verify registry from agent memory (`research/adversarial/july-august-2026-overturn-review.md` A4).
+Aria-shaped loop: agent proposes → `LockCheck`+`ReceiptWriter` harness decides.

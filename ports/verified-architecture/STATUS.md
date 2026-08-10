@@ -22,12 +22,18 @@ LSP); refuse org SaaS MVP. Full brief:
 
 ## Next tasks for any agent (do in order)
 
-1. **Human review** `ARCHITECTURE_BRIEF.md` + `BOUNDARY.md` → Accept or amend OQ-01
-2. **Write Must QAS files** (`03-requirements/qas/`) from incomplete NFRs — or demote
-3. **Fill ICD drafts** listed in `07-system-design/icd/README.md` (lock-ir, registry SQL, resolve-result)
-4. **Mark OQ-02…05** SPIKE→CLOSED when SoR/ports/receipt drafts Accepted
-5. **OQ-08** wave-1 BC set (likely: engine+registry+locks only)
-6. Ask human for **wave-1 / W0 Approve** when DoR rows move
+1. **Human review** `ARCHITECTURE_BRIEF.md` + adversarial Jul–Aug memo → Accept/amend
+2. Read `research/adversarial/july-august-2026-overturn-review.md` (nothing overturned; A1–A7 amendments)
+3. **Write Must QAS files** (`03-requirements/qas/`) — or demote
+4. **Fill ICD drafts** (`07-system-design/icd/`)
+5. Close OQ-02…05 against amended receipt/SoR/Unknown taxonomy
+6. Ask human for **W0 Approve** when DoR moves
+
+## Jul–Aug 2026 note
+
+Adversarial pass complete: **HOLD** MVP spine; **AMEND** receipts (unprovable,
+evidence≠freshness), Aria-shaped harness loop, Registry≠AgentMemory, STEAD spike.
+
 
 ## Do not do next
 

@@ -14,6 +14,7 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 | Pack | Path | Use when |
 | --- | --- | --- |
 | **Architecture brief (principal)** | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape, MVP, math, leaders |
+| **Jul–Aug 2026 adversarial** | `research/adversarial/july-august-2026-overturn-review.md` | Did new papers overturn us? |
 | **Leaders / GitHub adoption** | `research/leaders-adoption/` | Who leads vs who ships |
 | **Pre-code BFS taxonomy** | `research/pre-code-bfs/` | Classify domains before AI codegen |
 | **Papers May–Aug 2026** | `research/papers-2026-may-aug/` | Cross-domain science + RE evidence |

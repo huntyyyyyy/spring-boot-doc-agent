@@ -23,7 +23,17 @@ Published dates verified via arXiv Atom API (`export.arxiv.org`) on 2026-08-10.
 | P3 | [2606.22621](https://arxiv.org/abs/2606.22621) | 2026-06-21 | Multi-level resistive synapses / memristive IMC | Analog, in-memory, lin.alg., info theory, neuromorphic, physics |
 | P4 | [2607.27341](https://arxiv.org/abs/2607.27341) | 2026-07-29 | Quantum vs classical erasure (Landauer) | Information theory, thermodynamics, physics, constraints (resource) |
 | P5 | [2608.00484](https://arxiv.org/abs/2608.00484) | 2026-08-01 | Digital→physical RC via dynamics matching | Physical RC, nonlinear DST, control, physics |
-| P6 | [2607.06341](https://arxiv.org/abs/2607.06341) | 2026-07-07 | Harnessing code agents for automatic software verification (Aria/Iris) | Formal frameworks, agentic verify loop, Rust/Iris proofs |
+| P6 | [2607.06341](https://arxiv.org/abs/2607.06341) | 2026-07-07 | Aria agent+harness verification | Formal frameworks, agentic verify loop |
+
+## Jul–Aug follow-on (adversarial; not replacing the six)
+
+| ID | arXiv | Published | Why it matters |
+| --- | --- | --- | --- |
+| P-A | [2608.04278](https://arxiv.org/abs/2608.04278) | 2026-08-04 | EA-Graph — amend receipts (unprovable, freshness) |
+| P-B | [2608.03609](https://arxiv.org/abs/2608.03609) | 2026-08-04 | STEAD — agent+tools FO-CTL; equivariance Spike |
+| P-D | [2607.19795](https://arxiv.org/abs/2607.19795) | 2026-07-22 | VeriSynth — LLM proposes / Z3 decides pattern |
+
+Full adjudication: `research/adversarial/july-august-2026-overturn-review.md`.
 
 **Near-misses (also in window; cite if deepening):**  
 2607.14504 RSA/sub-Nyquist reservoirs · 2607.23285 photonic RC networks ·  

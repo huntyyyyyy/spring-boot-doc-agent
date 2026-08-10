@@ -11,10 +11,10 @@ See also `07-system-design/ARCHITECTURE_BRIEF.md` §6.
 | Wave | Name | Ships | Explicitly not |
 | --- | --- | --- | --- |
 | **W0** | Spec | Boundary, QAS, SoR, ports, ICD drafts, DoR | Code |
-| **W1** | MVP verify CLI | SCIP ingest, SQLite graph, resolve+Unknown, locks, receipts | LSP, WASM, Z3, polyglot bell |
+| **W1** | MVP verify CLI | SCIP ingest, SQLite graph, resolve+Unknown/unprovable, locks, receipts (evidence≠freshness) | LSP, WASM, Z3, polyglot bell, agent-memory DB |
 | **W2** | IDE parity | LSP squiggles, proof-tour panel v0, git lock sync docs | Ghost prefetch |
-| **W3** | Enrichment | Go watch, bb graph, optional WASM package | Org SaaS |
-| **W4** | Proof+ / polyglot | Z3 formulas, Kani on engine, cross-lang bridges | Science hardware |
+| **W3** | Enrichment | Go watch, bb graph, optional WASM package; optional AgentMemory port | Org SaaS |
+| **W4** | Proof+ / polyglot / blueprint | Z3 on lock FOL; Kani on engine; AOCI-like L1 blueprint; STEAD equivariance Spike | Science hardware |
 
 ## MVP Accept (W1)
 

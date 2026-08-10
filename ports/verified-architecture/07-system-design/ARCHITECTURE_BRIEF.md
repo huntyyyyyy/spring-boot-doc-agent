@@ -24,9 +24,14 @@ build first*, and *what is still missing*.
 | **Distribution** | **Monorepo of crates/plugins** *after* Spec; ship as **one CLI binary + optional side cars** | One version line for locks↔engine; sidecars stay optional | Ports/ICD before Cargo |
 | **Not** | Multi-tenant org services / Backstage mesh as MVP | Explodes OpsCon, auth, SoR | Phase-3+ only |
 | **Not** | “Import a library into Spring apps” as primary | Wrong customer; we analyze their tree, we don’t become their runtime | Could later as SDK |
-| **MVP verify** | Virtual graph + lock IR + receipts + Unknown | High ROI; no SMT/LLM required | Schemas + plants |
+| **MVP verify** | Virtual graph + lock IR + receipts + Unknown/**unprovable** | High ROI; Jul–Aug EA-Graph reinforces anchors | Schemas + plants |
+| **Harness loop** | Agent **proposes**; LockCheck+receipt **decides** (Aria-shaped) | Jul 2026 Aria: kernel/harness is trust anchor | ACI docs |
 | **RAG** | Corpus/retrieve for *this planning product* and later assist | Never verify witness | Retrieval contract |
+| **Memory split** | `Registry` (verify) ≠ `AgentMemory` (optional later) | Neo4j-class memory ≠ merge locks; Kuzu deprecated in ecosystems | Port boundary |
 | **Languages** | Rust engine **Pilot after ports**; Go/Clojure/Ruby/TS **Pilot lanes**; Python **peer ACI** | Adoption exists per lane; tip identity ≠ nine languages day one | Wave-1 BC set (OQ-08) |
+
+**Jul–Aug 2026 adversarial pass:** nothing OVERTURNS this table; amendments in
+`research/adversarial/july-august-2026-overturn-review.md`.
 
 ---
 
