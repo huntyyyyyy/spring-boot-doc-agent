@@ -140,6 +140,23 @@ verify. Excellent “train on unfinished contracts” without false-green receip
 
 **Minefields:** any tool that writes; `verify`/`resolve`; narrative “research PASS”.
 
+### Contract stamps (required on every tool result)
+
+| Field | Why |
+| --- | --- |
+| `doc_status` | `DRAFT` / `SUPERSEDED` / … — blocks Draft-as-Accepted |
+| `freeze_active` | boolean from STATUS FREEZE |
+| `accepted` | always `false` until human Accept recorded |
+| `corpus_version` | digest or `spec_snap_…` — cache invalidation |
+
+Prefer **Resources** for corpus slices (URI + `ttlMs` / `cacheScope`) and **Tools**
+for typed getters. Go reminting a handle does **not** fix clients that cache
+long-TTL resource bodies across a FREEZE demotion — advertise short `ttlMs` or
+`listChanged`.
+
+Exact public products with these `spec_*` tool names = **0** → **Pilot invent**
+host pattern; do not read “Adopt pattern” as Adopt of tool semantics.
+
 ---
 
 ## 5. Training benefit vs false-green (direct answer)
@@ -187,7 +204,7 @@ Align with E-GND0: **Refuse** codegen / write tools on this server.
 | 3 | SPIKE-SPEC-MCP-0 |
 | 4 | Options A–F; Refuse polyglot/product now |
 | 5 | Training vs false-green; FREEZE |
-| 6 | This memo — Implement still Refuse for product; Spec Spike optional |
+| 6 | This memo + Spike charter — **not** Spec Approve; Implement Refuse for product |
 
 ---
 
