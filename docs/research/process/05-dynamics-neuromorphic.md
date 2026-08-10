@@ -8,6 +8,9 @@ related:
   - docs/design/coverage-measure-modes-design-2026-08-08.md
   - docs/agentic-foundational-se-taxonomy-2026-08-08.md
   - docs/research/archive/_wip-coverage-design-audit.md
+  - docs/research/process/20-theory-domains-problem-first-gates-2026.md
+  - docs/research/process/21-physical-unconventional-computing-2026.md
+  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
 ---
 
 # Segment 05: Dynamics & neuromorphic metaphors (saliency, hysteresis, SoA, PID)

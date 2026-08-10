@@ -234,7 +234,7 @@ Research: [`docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md`](ci/17-
 **Done (E-COH0 Spec):** COH1–COH12 Approve (2026-08-09).  
 **Combined tip (this PR):** fold `origin/cursor/local-ci-gate-fix-61f3` (PR #113) into REPO+CTX tip — nests (`semantic_eval`/`docs_site`), agent-context Spec drafts (26–28), and #113 local-CI / stalker / vacuity / cold-BC research.  
 **Paused Active (stream note):** **E-COH1** reshape — CGQ3 Accept rows required (Concern→Remedy→Depth→Witness); resume after combined tip lands.  
-**Shipped on combined tip:** **E-REPO1-A** nest + shims; **E-CTX0** research drafts (P36/P37).  
+**Shipped on combined tip:** **E-REPO1-A** nest + shims; **E-CTX0** research drafts (P36/P37); **E-DYN1** research drafts (P38); #113/#117/#118 folded.  
 **Done slice (2026-08-09):** E-COH1 public-surface fitness + delete `support`/`inventory_drift` warehouses; `semantic_eval` public façade.  
 **Done Spec + Implement:** **E-HOOK2** — local oracle Cover% remesure on push when src/tests change (2026-08-09); stalker/path-parity tests lift tip to ≥98.7.  
 **Done Spec + Implement:** **E-CQL1** — CodeQL signals content-fingerprint skip of compile/runtime (2026-08-09).  
@@ -552,6 +552,18 @@ Research: [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md)�
 
 Research: [`26`](process/26-agent-context-markdown-bloat-2026.md) · [`27`](process/27-agent-context-repo-discernment-2026.md) · [`28`](process/28-agent-context-algorithm-first-2026.md). **Embody** algorithm+Accept; **Adopt** observation/step masking we own; **Refuse** ★-products, token-prune of actions, CompactionRL-as-SoT, summary-as-SoR.
 
+---
 
+## P38 — Dynamics / physical & unconventional computing (E-DYN1)
 
-<!-- combined: includes #117 RAG/DS/CLI research -->
+| # | Action | Stance | Verify |
+| --- | --- | --- | --- |
+| P38.0 | **E-DYN1 Spec:** approve metaphor-hygiene table (§3) + Refuse physical tip substrates | **Draft** (2026-08-10) | process/43 `spec_gate` → APPROVED |
+| P38.1 | CONTRIBUTING one-liner: physics metaphors ≠ gate softeners | After Approve | claims path |
+| P38.2 | Physical RC / DNA / ionic / neuromorphic tip deps | **Refuse** | no Implement tickets |
+
+Research: [`process/43`](process/43-physical-info-dynamics-computing-2026-08-10.md) (umbrella; deepens [`05`](process/05-dynamics-neuromorphic.md)); substrate A–I [`21`](process/21-physical-unconventional-computing-2026.md); theory A–H [`20`](process/20-theory-domains-problem-first-gates-2026.md); formulas [`44`](process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md); isomorphisms [`45`](process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md). *(P20 on this tip is Concern→solution — dynamics epic lands as P38 after fold of #118.)*
+
+---
+
+<!-- combined: includes #113 local-CI + #117 RAG/DS/CLI + #118 dynamics -->

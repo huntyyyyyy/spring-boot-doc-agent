@@ -1,0 +1,24 @@
+---
+description: Always-on planning lens — structure vs substrate isomorphisms (I1–I5)
+alwaysApply: true
+---
+
+# Cross-domain isomorphism (planning)
+
+When planning, researching, or weighing Adopt/Refuse across domains, follow skill
+**cross-domain-isomorphism** (`.cursor/skills/cross-domain-isomorphism/SKILL.md`).
+
+Hard split: **Structure-Adopt** (shared algebra → algorithm/pattern/sensor/docs) vs
+**Substrate-Refuse** (wetware/ASIC/medium as tip merge/citation SoT without Spec).
+
+Before importing or dismissing a distant field, run **I1–I5**: name objects/morphisms;
+cite CS landing; state non-preserved; choose typed artefact; default **no** boolean
+SoT retype. One-line habit:
+
+`Iso: A ≅ B → land as <type> | non-preserved: … | I5: no SoT retype`
+
+Do not soften fail_under / citation SoT via free-energy, Landauer, PID, entropy, or
+“chemistry already computes.” Steal algebra; keep predicate types; leave the dish/chip
+off tip unless Spec changes product category.
+
+SoR: `docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md`

@@ -4942,11 +4942,26 @@ Assumptions affected:
 Files touched: merge of nest + context-hygiene research
 
 ## 2026-08-10 — Merge PR #113 (local-ci-gate-fix) into combined REPO+CTX tip
-Commit: uncommitted
+Commit: b096755
 Tests: not run (merge conflict resolution only)
 Assumptions affected:
 - `docs/research/README.md` — domain map paths (`modularity/` vs `bounded-contexts/`) — [Resolved — combined map uses `bounded-contexts/`; keeps agent context 26–28; folds #113 cold-BC / Rust / stage0 rows]
-- `docs/research/quality-backlog.md` — Active tip + P-rows — [Resolved — kept #113 P-rows + REPO/CTX sections; Active tip notes combined tip]
+- `docs/research/quality-backlog.md` — Active tip + P-rows — [Resolved — kept #113 P-rows + REPO/CTX as P36/P37; Active tip notes combined tip]
 - semantic_eval nest vs #113 tools façade — [Still accurate — package BC + tools shims + thin `tools/semantic_eval.py`]
 Files touched: docs/research/README.md, docs/research/quality-backlog.md, docs/process/session-log.md, docs/research/bounded-contexts/*, src/doc_engine/tools/semantic_eval*.py
+
+## 2026-08-10 — Merge PR #117 (problem-first RAG/DS/CLI) into combined tip
+Commit: 4d3c444
+Tests: not run (docs merge)
+Assumptions affected:
+- Parallel open PR #117 vs umbrella #119 — [Resolved — folded into `cursor/repo-and-context-combined-83d2`]
+Files touched: process/20-rag-*, 39-cli-operator-*, 42-problem-first-*, coverage-quality/42-ds-mlops-*
+
+## 2026-08-10 — Merge PR #118 (dynamics / physical computing) into combined tip
+Commit: uncommitted
+Tests: not run (docs merge + backlog renumber)
+Assumptions affected:
+- Parallel open PR #118 vs umbrella #119 — [Resolved — folded; E-DYN1 backlog as **P38** (tip P20 already Concern→solution)]
+- `docs/research/README.md` process row — [Resolved — dynamics links 05/20/21/43/45 + RAG]
+Files touched: process/20-theory-*, 21-physical-*, 43–45-*, cross-domain-isomorphism skill/rule, quality-backlog P38, README
 
