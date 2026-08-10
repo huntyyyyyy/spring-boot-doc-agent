@@ -6,9 +6,9 @@ Cursor look-first hooks inject this path and gate design-shaped writes.
 
 | Domain | Path | Use when |
 | --- | --- | --- |
-| **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md), [`cold-product-bc-research-map-2026-08-10.md`](cold-product-bc-research-map-2026-08-10.md), [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md) | Active stream; Embody/Adopt/Refuse merge; **cold BC portfolio** + **D1–D6 domain/subdomain arXiv·GH·DeepWiki index** |
+| **Cross-cutting SoT** | [`quality-backlog.md`](quality-backlog.md), [`se-quality-synthesis-2026-08-08.md`](se-quality-synthesis-2026-08-08.md), [`cold-product-bc-research-map-2026-08-10.md`](cold-product-bc-research-map-2026-08-10.md), [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md), [`cold-bc-dimensional-mental-map-2026-08-10.md`](cold-bc-dimensional-mental-map-2026-08-10.md) | Active stream; Embody/Adopt/Refuse; **cold BC portfolio**; **D1–D6 taxonomy**; **dimensional lattice (DDD/SOLID/patterns/CLI/RAG)** |
 | **findings/** | [`findings/`](findings/) | Stalker ledger entries (STK2) — compact events + gap IDs; not chat dumps |
-| **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, dynamics, façade/research hooks, legacy remediation Spec, docs taxonomy, **watch/stalker agents**, **control-plane closed-loop (E-CPL0)**, **operator/agent surface CLI+MCP+retrieval (E-OAS0)** |
+| **process/** | [`process/`](process/) | SDD, foundational SE, frameworks, dynamics, façade/research hooks, legacy remediation Spec, docs taxonomy, **watch/stalker agents**, **control-plane closed-loop (E-CPL0)**, **operator/agent surface CLI+MCP+retrieval (E-OAS0)**, **CLI DX/a11y/dual-sinks landing pads** |
 | **coverage-quality/** | [`coverage-quality/`](coverage-quality/) | Oracle vs climb, metrics, adequacy, suite-stalking; **Rust toolscape + release scans (Harn/Nimbus/noprop)** |
 | **ci/** | [`ci/`](ci/) | Workflow modularity, CI UX, CodeQL signals skip |
 | **kitchen/** | [`kitchen/`](kitchen/) | Kitchen harness modernization |

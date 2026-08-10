@@ -233,6 +233,8 @@ This portfolio is **research SoR for prioritization**. Domain/subdomain depth
 (arXiv ≥3, ~10k★ repos, DeepWiki Evaluate/Create) lives in:
 
 - [`cold-bc-domain-subdomain-taxonomy-2026-08-10.md`](cold-bc-domain-subdomain-taxonomy-2026-08-10.md) — forced index
+- [`cold-bc-dimensional-mental-map-2026-08-10.md`](cold-bc-dimensional-mental-map-2026-08-10.md) — dimensions · DDD/SOLID/patterns · CLI/RAG
+- [`process/38-cli-dx-a11y-dual-sinks-2026-08-10.md`](process/38-cli-dx-a11y-dual-sinks-2026-08-10.md) — CLI DX/a11y landing pads
 - [`stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md`](stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md)
 - [`stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md`](stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md)
 - [`stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md`](stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md)

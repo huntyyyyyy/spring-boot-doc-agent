@@ -12,6 +12,8 @@ related:
   - docs/research/stage0/query-packet-bc-research-2026-08-10.md
   - docs/research/modularity/certification-fold-phase-runner-2026-08-10.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
   - docs/research/quality-backlog.md
   - docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
@@ -204,4 +206,6 @@ Invariants: fail_under **98.7** · complexipy **≤5** · LOC **≤225** · no `
 
 ## Exit
 
-This taxonomy is the **forced index** for cold BC research. Detail lives in D1/D2–D3/D4–D6 packets. Next human action: Approve Spec seeds in epic order — not code.
+This taxonomy is the **forced index** for cold BC research. Detail lives in D1/D2–D3/D4–D6 packets. **Dimensional composition**
+(DDD/SOLID/patterns/CLI/RAG-later): [`cold-bc-dimensional-mental-map-2026-08-10.md`](cold-bc-dimensional-mental-map-2026-08-10.md).
+Next human action: Approve Spec seeds in epic order — not code.
