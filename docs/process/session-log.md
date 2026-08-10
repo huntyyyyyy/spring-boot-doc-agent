@@ -4981,3 +4981,11 @@ Assumptions affected:
 - `tests/ci/test_mutation_driver_entrypoint.py` must run full mutant kills to lock ModuleNotFoundError — [Resolved — `--import-only` bootstrap probe; full kills stay in CI/pre_pr]
 - grading-pack `self-test` should call `doctor` — [Resolved — hygiene-only; doctor remains its own id]
 Files touched: tests/spring_signals/mutation_driver.py, tests/ci/test_mutation_driver_entrypoint.py, scripts/ci/grading_pack_steps.sh, docs/process/session-log.md
+
+## 2026-08-10 — Global façade-bind gate (climb poke vs lazy _facade)
+Commit: 5b60d5f6
+Tests: 16/16 façade bind + public_surface + B7; poke/public_surface scripts green; claims OK
+Assumptions affected:
+- Climb setattr on `semantic_eval` reaches scan via any tools shim — [Resolved — FACADE_BINDS + public_surface hard; helpers bind fails closed]
+- `PRE_PR_MODE=fast` is fine for tip push — [New info — refuse for tip; telemetry `92330ddf-fast` skipped oracle; only `--auto`/`full`]
+Files touched: src/doc_engine/ci/facade_bind_policy.py, tests/ci/test_facade_bind_policy.py, scripts/ci/check_public_surface.py, scripts/ci/check_facade_poke_surface.py, docs/process/session-log.md

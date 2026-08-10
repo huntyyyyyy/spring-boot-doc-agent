@@ -17,6 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "src"))
 
+from doc_engine.ci.facade_bind_policy import facade_bind_errors  # noqa: E402
 from doc_engine.ci.public_surface_policy import (  # noqa: E402
     PUBLIC_ONLY_MODULES,
     forbidden_residual_paths,
@@ -42,12 +43,21 @@ def _residual_path_errors() -> list[str]:
     ]
 
 
+def _facade_bind_path_errors() -> list[str]:
+    return [f"facade bind: {msg}" for msg in facade_bind_errors()]
+
+
 def main() -> int:
-    errors = _private_export_errors() + _residual_path_errors()
+    errors = (
+        _private_export_errors()
+        + _residual_path_errors()
+        + _facade_bind_path_errors()
+    )
     if not errors:
         print(
             f"public-surface fitness OK "
-            f"({len(PUBLIC_ONLY_MODULES)} modules, no residual bins)"
+            f"({len(PUBLIC_ONLY_MODULES)} modules, no residual bins, "
+            f"facade binds green)"
         )
         return 0
     print("public-surface fitness FAILED:", file=sys.stderr)
