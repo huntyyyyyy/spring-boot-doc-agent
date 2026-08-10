@@ -1,7 +1,7 @@
 # Session log — 2026-08-10
 
 ## 2026-08-10 — Refactor principal research skill for paper digests
-Commit: uncommitted
+Commit: 1b674176
 Tests: `python3 scripts/ci/check_repo_claims.py` OK
 Assumptions affected:
 - `principal-se-research-epic` / design-shaped research — previously DeepWiki+llms.txt+Bloom without mandatory paper type/section/refs or exact-vs-adjacent GitHub anti-bogus — [Resolved — Phase A now requires skill paper-digest + docs/research/method/paper-digest-framework.md; adjacent ≠ exact Adopt]
