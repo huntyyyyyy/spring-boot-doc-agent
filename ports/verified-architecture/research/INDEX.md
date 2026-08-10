@@ -17,6 +17,8 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 | **Paper digest framework** | `research/method/paper-digest-framework.md` | Type keys + sections + references walk (arXiv has categories, **not** paper-type fields) |
 | **Paper digest template** | `research/method/PAPER_DIGEST_TEMPLATE.md` | Fill one file per arXiv id under `papers-2026-may-aug/digests/` |
 | **Worked digest example** | `research/papers-2026-may-aug/digests/2608.04278-ea-graph.md` | Empirical + section map for Artifact-Anchored Verification Memory |
+| **Shallow approvals deep-dive** | `research/gaps/shallow-approvals-deep-dive-2026-08-10.md` | MCP `2026-07-28` stateless, receipts, claims, lock IR, freshness, harness, QAS, C4 + agent-codegen bites |
+| **C4 + confidence** | `07-system-design/c4/C4-BRIEF-CONFIDENCE.md` | Context/Container sketch with per-entity scores |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
 | **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Earlier memo — **superseded on depth** by the adoption audit |
 | **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |

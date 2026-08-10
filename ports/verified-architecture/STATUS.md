@@ -22,27 +22,19 @@ Whole words — `GLOSSARY.md`.
 Prior readiness language claimed research was done. **It was not** at the bar:
 papers per entity understood + ≥5 genuine GitHub algorithm adopters.
 
+**New:** Model Context Protocol **`2026-07-28`** is **stateless** (Streamable HTTP
+headers, no session id). Our tool ICD was behind industry — see
+`research/gaps/shallow-approvals-deep-dive-2026-08-10.md` and
+`07-system-design/c4/C4-BRIEF-CONFIDENCE.md`.
+
 See: `research/gaps/entity-adoption-audit-2026-08-10.md`  
 Definition of Ready row **D0 = FAIL**.
 
-Genuine gaps called out:
-
-- Artifact-anchored claim memory algorithm: **0** public implementations found
-- Stateful Tool-Enabled Agentic Deployment equivariance wrapper: **0** found
-- Proof-or-Stop named public engine: **not found** (org stub only)
-- Graph locks / Source Code Index Protocol / Model Context Protocol SDKs: **do** have ≥5 genuine repos (adjacent Adopt candidates)
-
-## Must spine (intent — not “field Adopt”)
-
-Graph + locks **and** artifact-anchored claim memory **and** Stateful
-Tool-Enabled Agentic Deployment tool constraints **and** freshness-bound
-receipts — `VERIFY_STACK.md`. Claim-memory and equivariance pieces are
-**Pilot/Spike**, not silent industry Adopt.
-
 ## Single next task
 
-1. Use Skill `paper-digest` + `research/method/paper-digest-framework.md` on Must-spine papers (next: 2608.03609 Stateful Tool-Enabled Agentic Deployments; 2607.14890 Proof-or-Stop), including references walk.
-2. Do not mark research PASS until digests exist and D0 clears or is waived with eyes open.
+1. Close MCP ICD against `2026-07-28` (handles, headers, reject codes) — in progress in `icd/mcp-tools.md`.
+2. Add `lock-ir.schema.json` + receipt tamper enum + claim Pilot charter.
+3. Continue Skill `paper-digest` on Must papers; do not mark research PASS early.
 
 ## Do not do next
 
