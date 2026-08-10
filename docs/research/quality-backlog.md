@@ -277,8 +277,8 @@ Research: [`docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md`
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
 | P18.0 | **E-REPO0 Spec:** approve **REPO1–REPO24** (packet **21–24**; Wave 1 blocked on cycle-break; claims-gated DOMAIN_MAP) | **Draft** (research); **Wave 0 + 0.5** (map + `bounded-contexts/` rename) | `DOMAIN_MAP.md` + inventory + `behavior:tools_bc_inventory_covers_modules` |
-| P18.1 | **E-REPO1 Implement:** cycle-break → **nest one tools cluster into its BC** + `-m` shim → tach layers/interfaces | After Approve; inventory Done | one-way edges; shim; `tach check`; poke |
-| P18.2 | Spikes **REPO-S1–S5** + nest dual `skills/` under adapter SoT (retire Spec) | Spike | go/no-go + schemas |
+| P18.1 | **E-REPO1 Implement:** **first nest = `semantic_eval` (or `build_docs_site`)** + `-m` shim — no G-CYCLE; then cycle-break → scanning/gates; then larger `partition_capacity` | After Approve / when Active allows | one-way edges; shim; poke; inventory `move_status` |
+| P18.2 | Spikes **REPO-S1–S5** + **root `skills/` retire Spec** (adapter SoT; equality until delete) | Spike | go/no-go + schemas |
 
 Research: [`21`](bounded-contexts/21-ddd-repository-structure-options-2026.md) · [`22`](bounded-contexts/22-ddd-repo-structure-quality-deepdive-2026.md) · [`23`](bounded-contexts/23-ddd-repo-structure-capability-backcast-2026.md) · [`24`](bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md). **Orientation SoT:** [`DOMAIN_MAP.md`](../../DOMAIN_MAP.md).
 

@@ -85,32 +85,35 @@ moves (shim/façade) unless a deprecation Spec says otherwise.
 
 ## 4. Nest / collapse candidates (aggressive — map first, delete only with Spec)
 
-These are **genuine** DDD nests or removals. Wave 0.5 ships the **map rename**;
-physical collapse still needs cycle-break / equality-gate Spec where noted.
-
-| Candidate | Nest into | Why it can go / nest | Blocker |
+| Candidate | Nest into / action | Why | Real blocker |
 | --- | --- | --- | --- |
-| Research domain name `modularity/` | **`bounded-contexts/`** | Folder said process, not product meaning | **Done** (this tip) |
-| Flat `src/doc_engine/tools/*.py` | Home BC packages per inventory | Tools are verbs of BCs, not a BC | Cycle `pipeline`↔`scanning`; 118 tests on `doc_engine.tools`; keep `-m` shim |
-| Dual `skills/` ↔ `adapters/claude/skills/` | Single adapter SoT (+ mirror gate) | Two trees teach the wrong root | Equality CI; retire Spec before delete |
-| Layer-shaped tips (`domain/`/`application/`) | Refuse — use BC verbs | Wrong ubiquitous language (E-MOD M4) | Already refuse |
-| H3 prep folders (RBAC / multi-repo / HttpLLM) | Nowhere until product Spec | Speculative structure is debt | Explicit product Spec |
-| `scripts/verify_llms_docs.py` (deleted — refuse revival) | Tombstone only | RCE — do not revive | `path_absent` |
-| Research memos past ~12/domain | Synthesis / archive (DOC1) | Depth theater ≠ DDD | Reshape, do not deepen past 2 levels |
+| Research domain `modularity/` | **`bounded-contexts/`** | Process jargon ≠ product BC language | **Done** (Wave 0.5) |
+| **First tools nest:** `semantic_eval_*` (3 modules) | `semantic_eval` BC + `-m` shim | Sensor cluster; **no** pipeline↔scanning edge | **None technical** — tip pick (E-REPO1 / parallel only if Active allows) |
+| `docs_site` (`build_docs_site`) | `docs_site` BC + shim | Tiny; site builder is clean | `doc_tag_utils` is **shared vocab** (mis-tagged) — re-home or leave until ports |
+| E-MOD2 “first” façades (`capacity_preflight`, `partition_repo`, …) | `partition_capacity` | Already concept-split — **not** being retired | Large (~19 mods); fine *after* semantic_eval, still no cycle need |
+| Scanning / compliance tools | `scanning` / `compliance_gates` | Sit on pipeline↔scanning edges | **Cycle-break** + ports (E-TACH / E-REPO1 hard path) |
+| Dual `skills/` ↔ `adapters/claude/skills/` | Delete root mirror after retire Spec | Adapter is SoT; root is equality-gated **legacy alias** — this is the real “phase out” | Retire Spec + keep equality until delete |
+| Thin `scripts/` product aliases | Gone | Already phased — product invoke is `doc_engine.tools` only | **Done** (STATUS) |
+| `scripts/verify_llms_docs.py` | Tombstone | RCE (deleted — refuse revival) | `path_absent` |
 
-**Do dissolve when the blocker clears** — do not wait for “a big restructure day.”
-One BC cluster + shim per tip is the aggressive unit; big-bang `git mv` is not.
+**Correction:** Wave 0 stamped every inventory row `stay_until_cycle_break`. That was too blunt.
+Cycle-break gates **scan/gate-adjacent** packages and tach layers — not every tools cluster.
+
+**Not phased out:** E-MOD2/E-MOD3 product tools (`capacity_preflight`, `run_manifest`, …). Those were LOC/façade waves, not retirements.
+
+**Do dissolve when the blocker clears** — one BC cluster + shim per tip; big-bang `git mv` is not.
 
 ---
 
 ## 5. Task order (other sessions: do not invent a parallel tip)
 
 1. **Active tip:** E-COH1 cohesion reshape (see [`docs/research/quality-backlog.md`](docs/research/quality-backlog.md)).
-2. Wave 0 (map + inventory) — **shipped**; Wave 0.5 (`bounded-contexts/` rename + this map) — **this tip**.
-3. Cycle-break `pipeline`↔`scanning` → then E-TACH layers / interfaces.
-4. One `tools/` cluster move into its BC + shim — **aggressive unit**, not dissolve-all.
-5. H1 product evidence: Stage-4 mid-size measure, live Path B, semantic-eval once.
-6. H3 (RBAC / multi-repo / HttpLLM) only after explicit product Spec — **no prep folders**.
+2. Wave 0 + 0.5 orientation — **shipped**.
+3. **Next aggressive structure tip (when Active allows):** nest `semantic_eval` **or** open root-`skills/` retire Spec — neither waits on G-CYCLE.
+4. Cycle-break `pipeline`↔`scanning` → E-TACH layers / interfaces → scanning/gates tools nests.
+5. Larger `partition_capacity` nest + shim (E-MOD2 façades already split).
+6. H1 product evidence: Stage-4 mid-size, live Path B, semantic-eval once.
+7. H3 only after explicit product Spec — **no prep folders**.
 
 Full possibilities + landing gaps: research packet **21–24** under `docs/research/bounded-contexts/`.
 

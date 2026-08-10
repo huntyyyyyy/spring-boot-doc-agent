@@ -4849,12 +4849,11 @@ Assumptions affected:
 - `claude/` as process SoR — [Resolved — tombstone + archive under `docs/research/archive/claude-lore/`; adapter packaging kept]
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
-## 2026-08-10 — E-REPO Wave 0.5: nest research under bounded-contexts + aggressive DOMAIN_MAP
-Commit: f6db92c
-Tests: claims OK; look-first+inventory 8/8; research domain folder assert → `bounded-contexts`
+## 2026-08-10 — E-REPO: correct over-broad tools cycle-break gate
+Commit: 265d598
+Tests: claims + inventory set-equality (no schema change to gate)
 Assumptions affected:
-- Research domain `docs/research/modularity/` named process, not product — [Resolved — `git mv` → `docs/research/bounded-contexts/`; README domain map + look-first layout test retargeted]
-- DOMAIN_MAP under-specified nest/collapse — [Resolved — ubiquitous language + §4 candidates (tools→BC, dual skills); aggressive unit = one cluster+shim]
-- E-REPO0 packet links under modularity/ — [Resolved — quality-backlog P16–P18 + design COH SoT hrefs]
-Files touched: DOMAIN_MAP.md, docs/research/bounded-contexts/**, docs/research/README.md, docs/research/quality-backlog.md, docs/design/concept-split-*, tests/ci/test_research_map_look_first.py, docs/process/session-log.md
+- Every tools module waits on pipeline↔scanning cycle-break — [Resolved — false; `semantic_eval` / `build_docs_site` are `nestable_now`; scan/gates stay blocked]
+- “Phased out tools” = E-MOD2 façades — [New info — wrong; phase-out is root `skills/` mirror + already-gone scripts aliases; product tools stay]
+Files touched: DOMAIN_MAP.md, docs/design/tools_bc_inventory.json, docs/research/quality-backlog.md, docs/process/session-log.md
 

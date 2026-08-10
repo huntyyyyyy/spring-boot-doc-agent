@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "purpose": "Wave-0 tools\u2192BC inventory (E-REPO0). Every src/doc_engine/tools/*.py except __init__.py must appear. CI fails on orphan or stale rows.",
-  "so_t": "DOMAIN_MAP.md + this file; physical moves blocked until pipeline\u2194scanning cycle-break (memo 24).",
+  "so_t": "DOMAIN_MAP.md + this file. move_status: nestable_now | nestable_after_size_tip | shared_vocab_rehome | stay_until_cycle_break. Cycle-break is NOT required for every cluster.",
   "stable_invoke_policy": "doc_engine.tools.<mod> invoke remains green across moves via shim/fa\u00e7ade unless a deprecation Spec says otherwise.",
   "entries": [
     {
@@ -12,7 +12,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "build_docs_site.py",
@@ -21,8 +21,8 @@
       "target_bc": "docs_site",
       "stage_dialect": "s_docs",
       "truth_class": "product",
-      "note": "docs site helpers",
-      "move_status": "stay_until_cycle_break"
+      "note": "docs site builder; nestable without cycle-break",
+      "move_status": "nestable_now"
     },
     {
       "module": "capacity_preflight.py",
@@ -32,7 +32,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_calibration.py",
@@ -42,7 +42,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_cli.py",
@@ -52,7 +52,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_compute.py",
@@ -62,7 +62,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_constants.py",
@@ -72,7 +72,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_groups.py",
@@ -82,7 +82,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_ports.py",
@@ -92,7 +92,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "capacity_preflight_stage4.py",
@@ -102,7 +102,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "certification.py",
@@ -212,7 +212,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "cross_group_emit.py",
@@ -222,7 +222,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "cross_group_resolve.py",
@@ -232,7 +232,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "doc_tag_utils.py",
@@ -241,8 +241,8 @@
       "target_bc": "docs_site",
       "stage_dialect": "s_docs",
       "truth_class": "product",
-      "note": "docs site helpers",
-      "move_status": "stay_until_cycle_break"
+      "note": "shared tag vocab (pipeline/capacity/citation); not a clean docs_site move",
+      "move_status": "shared_vocab_rehome"
     },
     {
       "module": "gap_probe.py",
@@ -262,7 +262,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "partition_repo_cli.py",
@@ -272,7 +272,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "partition_repo_constants.py",
@@ -282,7 +282,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "partition_repo_groups.py",
@@ -292,7 +292,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "partition_repo_ports.py",
@@ -302,7 +302,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "partition_repo_tokens.py",
@@ -312,7 +312,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "partition_repo_walk.py",
@@ -322,7 +322,7 @@
       "stage_dialect": "s1_partition",
       "truth_class": "product",
       "note": "partition, edges, capacity preflight",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "pipeline_validators.py",
@@ -362,7 +362,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_cli.py",
@@ -372,7 +372,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_constants.py",
@@ -382,7 +382,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_finalize.py",
@@ -392,7 +392,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_interview.py",
@@ -402,7 +402,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_io.py",
@@ -412,7 +412,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_ports.py",
@@ -422,7 +422,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_stages.py",
@@ -432,7 +432,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "run_manifest_summary.py",
@@ -442,7 +442,7 @@
       "stage_dialect": "s_manifest",
       "truth_class": "product",
       "note": "run telemetry",
-      "move_status": "stay_until_cycle_break"
+      "move_status": "nestable_after_size_tip"
     },
     {
       "module": "semantic_eval_confirmed.py",
@@ -451,8 +451,8 @@
       "target_bc": "semantic_eval",
       "stage_dialect": "none",
       "truth_class": "sensor",
-      "note": "LLM-judge helpers (not oracle floor)",
-      "move_status": "stay_until_cycle_break"
+      "note": "LLM-judge helpers (not oracle floor); first-nest candidate (no pipeline\u2194scanning edge)",
+      "move_status": "nestable_now"
     },
     {
       "module": "semantic_eval_helpers.py",
@@ -461,8 +461,8 @@
       "target_bc": "semantic_eval",
       "stage_dialect": "none",
       "truth_class": "sensor",
-      "note": "LLM-judge helpers (not oracle floor)",
-      "move_status": "stay_until_cycle_break"
+      "note": "LLM-judge helpers (not oracle floor); first-nest candidate (no pipeline\u2194scanning edge)",
+      "move_status": "nestable_now"
     },
     {
       "module": "semantic_eval_mermaid.py",
@@ -471,8 +471,8 @@
       "target_bc": "semantic_eval",
       "stage_dialect": "none",
       "truth_class": "sensor",
-      "note": "LLM-judge helpers (not oracle floor)",
-      "move_status": "stay_until_cycle_break"
+      "note": "LLM-judge helpers (not oracle floor); first-nest candidate (no pipeline\u2194scanning edge)",
+      "move_status": "nestable_now"
     },
     {
       "module": "semantic_eval_scan.py",
@@ -624,5 +624,6 @@
       "note": "gates / cert / validators",
       "move_status": "stay_until_cycle_break"
     }
-  ]
+  ],
+  "first_nest_recommendation": "semantic_eval (3 modules) + -m shims"
 }
