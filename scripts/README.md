@@ -108,8 +108,10 @@ Do **not** run `docs/process/local-grading-pack.md` via the Markdown play button
 Use `scripts/ci/run_local_grading_pack.cmd` (Git Bash) or the `.sh` on Linux:
 
 ```text
-scripts/ci/run_local_grading_pack.cmd doctor
-scripts/ci/run_local_grading_pack.cmd priority1
+# Git Bash:
+./scripts/ci/run_local_grading_pack.sh doctor
+# cmd / IntelliJ Batch (not: python ...cmd):
+scripts\ci\run_local_grading_pack.cmd doctor
 ```
 
 Logs: `local-runs/logs/`. Checklist: `docs/process/local-grading-pack.md`.

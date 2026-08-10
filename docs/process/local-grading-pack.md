@@ -5,26 +5,28 @@ file — it runs cmd/PowerShell, treats `##` as junk, and is not Git Bash.
 
 ## How to run (IntelliJ / Windows)
 
-1. Open a **Git Bash** terminal, *or* right-click / Run:
+**Do not** run the `.cmd` with `python`. It is a batch file, not a Python script.
 
-   - `scripts/ci/run_local_grading_pack.cmd` (finds Git Bash for you)
-   - `scripts/ci/run_local_grading_pack.sh` (Linux / already-in-bash)
+| Where you are | What to run |
+|---------------|-------------|
+| Git Bash (IntelliJ terminal) | `./scripts/ci/run_local_grading_pack.sh doctor` |
+| cmd / IntelliJ Batch Run | `scripts\ci\run_local_grading_pack.cmd doctor` |
 
-2. From the **doc-engine** repo root (examples):
+Examples (Git Bash, repo root, venv optional — the script activates `.venv`):
 
 ```text
-scripts\ci\run_local_grading_pack.cmd doctor
-scripts\ci\run_local_grading_pack.cmd list
-scripts\ci\run_local_grading_pack.cmd priority1
-scripts\ci\run_local_grading_pack.cmd p1 p2
-scripts\ci\run_local_grading_pack.cmd p3
+./scripts/ci/run_local_grading_pack.sh doctor
+./scripts/ci/run_local_grading_pack.sh list
+./scripts/ci/run_local_grading_pack.sh priority1
+./scripts/ci/run_local_grading_pack.sh p1 p2
+./scripts/ci/run_local_grading_pack.sh p3
 ```
 
-3. Logs land in `local-runs/logs/<id>.log` with an `EXIT:` line. Send those.
+Logs land in `local-runs/logs/<id>.log` with an `EXIT:` line. Send those.
 
-IntelliJ tip: Run Configuration → Batch / Shell Script → target the `.cmd`
-file; Working directory = doc-engine root. Optional env: `GIT_BASH` =
-`C:\Program Files\Git\bin\bash.exe`.
+IntelliJ tip: Run Configuration → Batch → `scripts/ci/run_local_grading_pack.cmd`
+(working directory = doc-engine root). Or Terminal → Git Bash → `.sh` above.
+Optional env: `GIT_BASH=C:\Program Files\Git\bin\bash.exe`.
 
 ## Venv hygiene (new terminal)
 

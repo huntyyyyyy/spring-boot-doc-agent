@@ -49,7 +49,7 @@ cmd_p4() {
   ocs="$(_ocs_path)" || return 2
   yaml="$(find "$ocs" -path '*/OASv3/*.yaml' 2>/dev/null | head -n 1 || true)"
   if [[ -z "$yaml" ]]; then
-    echo "error: no OASv3 yaml under $ocs — set OPENAPI_YAML=" >&2
+    echo "error: no OASv3 yaml under $ocs - set OPENAPI_YAML=" >&2
     return 2
   fi
   yaml="${OPENAPI_YAML:-$yaml}"

@@ -25,7 +25,7 @@ _activate_venv() {
     # shellcheck disable=SC1091
     source "$ROOT/.venv/bin/activate"
   else
-    echo "error: no .venv at $ROOT/.venv — create it before grading" >&2
+    echo "error: no .venv at $ROOT/.venv - create it before grading" >&2
     return 2
   fi
 }

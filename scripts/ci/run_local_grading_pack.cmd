@@ -1,5 +1,5 @@
 @echo off
-REM Windows launcher for the local grading pack — use this from IntelliJ Run,
+REM Windows launcher for the local grading pack - use this from IntelliJ Run,
 REM not the Markdown play button (that uses cmd and chokes on ## headings).
 REM Requires Git for Windows. Forwards args to run_local_grading_pack.sh.
 setlocal EnableExtensions
