@@ -55,6 +55,11 @@ architecture engineering. Before a non-functional need may influence Design:
    Rust/WASM boundaries as **provable trust surfaces** only where the literature
    actually supports that claim.
 
+**Brainstorm catalog (not Must):** broader mathematical decision toolkit
+(TLA+, Alloy, theorem provers, Java Modelling Tools, Analytic Hierarchy Process,
+Monte Carlo) — ideas and Spike IDs only — see
+`math-decision-methods-brainstorm-2026-08-10.md`.
+
 This memo is the **methodology SoR**. It amends the RE package and blocks
 Design influence from incomplete NFRs.
 

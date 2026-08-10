@@ -55,6 +55,17 @@ For each alternative, score vectors **0–2** (absent / partial / meets) against
 **What**. Sum is a **sensor**, not a silent merge proof — human Accept still
 required for Definition of Ready gates that name human sign-off.
 
+### Optional mathematical layer (brainstorm — not Must)
+
+To reduce scoring bias, a later Spike may attach **Multi-Criteria Decision
+Analysis / Analytic Hierarchy Process** weights to the six vectors or to the
+alternatives table (pairwise comparisons → consistency ratio). That layer
+**quantifies preference**; it does not replace usage cases, loci, or Rejected
+alternatives. Formal methods (Temporal Logic of Actions, Alloy, queueing
+models, Monte Carlo) are catalogued as ideas in
+`research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` — **not**
+Definition of Ready Must and **not** substitutes for plants.
+
 ## Anti-patterns (refuse)
 
 1. **Assertion-only ADR** — Decision without Rejected alternatives or Usage case.  

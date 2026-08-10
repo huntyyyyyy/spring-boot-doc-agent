@@ -36,6 +36,7 @@ Definition of Ready row **D0 = FAIL**.
 2. Lock Intermediate Representation schema Draft + Decision Matrix landed; receipt β/ρ fields Draft.
 3. Continue Skill `paper-digest` on Must papers; do not mark research PASS early.
 4. Merge any richer findings from parallel research agents into matrices when they finish.
+5. Mathematical decision methods: brainstorm catalog only (`research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md`) — do not promote to Must without Spike exit.
 
 ## Do not do next
 
