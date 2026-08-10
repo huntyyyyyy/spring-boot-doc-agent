@@ -24,8 +24,8 @@ from doc_engine.semantic_eval.mermaid import (
 
 
 def _facade():
-    """Lazy façade bind so monkeypatch.setattr(seh, 'join_under', …) still bites."""
-    from doc_engine.tools import semantic_eval_helpers as facade
+    """Lazy façade bind so monkeypatch.setattr(seh, 'join_under', ...) still bites."""
+    from doc_engine.tools import semantic_eval as facade
 
     return facade
 
