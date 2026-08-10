@@ -4983,7 +4983,7 @@ Assumptions affected:
 Files touched: tests/spring_signals/mutation_driver.py, tests/ci/test_mutation_driver_entrypoint.py, scripts/ci/grading_pack_steps.sh, docs/process/session-log.md
 
 ## 2026-08-10 — Global façade-bind gate (climb poke vs lazy _facade)
-Commit: 5b60d5f6
+Commit: 7be43f55
 Tests: 16/16 façade bind + public_surface + B7; poke/public_surface scripts green; claims OK
 Assumptions affected:
 - Climb setattr on `semantic_eval` reaches scan via any tools shim — [Resolved — FACADE_BINDS + public_surface hard; helpers bind fails closed]
