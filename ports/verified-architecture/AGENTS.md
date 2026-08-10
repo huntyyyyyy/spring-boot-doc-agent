@@ -2,16 +2,16 @@
 
 Thin Cursor / Cloud ingest. **Not** a second rule essay.
 
-**Cold start (no chat history):** read `AGENT_BOOTSTRAP.md` → `STATUS.md`,
-then Skill `cold-start`.
+**Cold start:** `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH.md` →
+`STRUCTURE.md` → `08-verification/VERIFY_STACK.md`. Skill `cold-start`.
 
 | Need | Open |
 | --- | --- |
-| Bootstrap / STATUS | `AGENT_BOOTSTRAP.md`, `STATUS.md` |
-| Pre-code tree | `PRECODE_MAP.md` (`00/`…`12/`) |
+| Sequential chain | `AGENT_WALKTHROUGH.md` |
+| Tree visual | `STRUCTURE.md` |
+| Must spine | `08-verification/VERIFY_STACK.md` |
+| EA-Graph / STEAD | `claim-memory/`, `stead/` |
 | DoR / no-code | `00-governance/dor-dod/`, `12-delivery/no-code-gate/` |
-| Constitution / RAG budget | `.cursor/rules/00-constitution.mdc`, `01-rag-progressive-disclosure.mdc` |
-| Corpus catalog | `research/INDEX.md` |
 | Skills | `cold-start`, `fill-wave-gap`, `rag-retrieve`, `promote-claim` |
 
-Path scoping = MDC `globs` + nest MDCs. **No product code** until DoR green.
+**No product code** until DoR green. Must spine ≠ graph+locks alone.

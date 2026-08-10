@@ -37,13 +37,12 @@ corpus is retrieved for agents and developers via MDC modes + Skills + INDEX.
 
 ## Start here
 
-**Agents (no chat history):** [AGENT_BOOTSTRAP.md](AGENT_BOOTSTRAP.md) → [STATUS.md](STATUS.md)
+**Agents (new repo / no chat):**  
+[AGENT_BOOTSTRAP.md](AGENT_BOOTSTRAP.md) → [STATUS.md](STATUS.md) →
+[AGENT_WALKTHROUGH.md](AGENT_WALKTHROUGH.md) → [STRUCTURE.md](STRUCTURE.md) →
+[08-verification/VERIFY_STACK.md](08-verification/VERIFY_STACK.md)
 
-1. [AGENT_BOOTSTRAP.md](AGENT_BOOTSTRAP.md) — cold-start priming
-2. [STATUS.md](STATUS.md) — phase + next task
-3. [PRECODE_MAP.md](PRECODE_MAP.md) — BFS nested domains `00/`…`12/`
-4. [00-governance/dor-dod/DEFINITION_OF_READY.md](00-governance/dor-dod/DEFINITION_OF_READY.md)
-5. [research/INDEX.md](research/INDEX.md) — RAG catalog (retrieve, don’t dump)
+Paste prompt: [HOW_TO_PRIME_AGENTS.md](HOW_TO_PRIME_AGENTS.md).
 
 ## Status
 

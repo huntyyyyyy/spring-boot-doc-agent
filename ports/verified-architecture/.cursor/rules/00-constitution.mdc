@@ -1,5 +1,5 @@
 ---
-description: Repo constitution — planning corpus; cold agents follow bootstrap; no product code yet
+description: Repo constitution — planning corpus; VERIFY_STACK Must spine; no product code yet
 alwaysApply: true
 ---
 
@@ -10,30 +10,30 @@ product. Progressive disclosure is part of the product.
 
 ## Cold start
 
-If this session has no prior context: read `AGENT_BOOTSTRAP.md` and
-`STATUS.md` before any other file. Use Skill `cold-start`.
+No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH.md`
+→ `STRUCTURE.md`. Skill `cold-start`.
 
 ## Identity
 
 - **Working draft** under ISO/IEC/IEEE 29148-shaped RE, SEI ATAM QAS,
   Nygard ADRs, and C4. Draft *content* is fine; skipping the *form* is not.
-- **Must spine:** graph + locks + receipts + Unknown — not embeddings-as-SoR,
-  not LLM-as-verify-witness.
-- **Polyglot-first as options:** languages are peers under
-  `07-system-design/options/` — not a pre-approved monorepo scaffold.
-- **`research/` is evidence** — retrieve one pack; do not always-load.
+- **Must spine:** graph + locks **∧** EA-Graph claim memory **∧** STEAD tool
+  constraints **∧** receipts — `08-verification/VERIFY_STACK.md`.
+  Do **not** shrink to graph+locks alone.
+- **Polyglot as options** under `07-system-design/options/`.
+- **`research/` is evidence** — retrieve one pack; never always-load.
 
 ## Gates
 
-- No product code until `00-governance/dor-dod/DEFINITION_OF_READY.md` is green
-  and `12-delivery/no-code-gate/` agrees.
-- Must NFRs need six-part QAS before influencing Design.
-- Constraints ≠ requirements; open `blocks_code` OQs block codegen.
-- C4 structural claims cite ADR IDs.
-- Unknown > wrong; claim tiers Evidenced / Confirmed / Unknown.
-- Science substrates: locked transfers only (`11-science-transfer/`).
+- No product code until DoR + no-code-gate green.
+- Must NFRs → six-part QAS before Design.
+- Constraints ≠ requirements; `blocks_code` OQs block codegen.
+- Unknown / **unprovable** > wrong; evidence ≠ freshness.
+- MCP/CLI entity ids typed from stores (STEAD ST-1…5) — no hallucinated handles.
+- RAG/LLM text ∉ witnesses or claim anchors.
+- C4 cites ADR IDs; science = locked transfers only.
 
 ## Context budget
 
-Always-on rules ≤2. Path scope = MDC `globs`. Depth = Skills.
-Prefer `PRECODE_MAP.md` / `00/`–`12/` over legacy `docs/` + `nests/`.
+Always-on ≤2. Path scope = MDC globs. Depth = Skills.
+Prefer `00/`–`12/` over legacy `docs/` + `nests/`.

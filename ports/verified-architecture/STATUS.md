@@ -8,43 +8,38 @@ last_reviewed: '2026-08-10'
 
 ## Phase
 
-**Spec / gap-fill** — planning corpus only. **Implement = Refuse.**
+**Spec / gap-fill** — **Implement = Refuse.**
 
-## Product one-liner (draft — human Accept still open on OQ-01)
+## Must spine (amended — do not shrink)
 
-A **local developer tool** that builds a virtual dependency/DI graph, evaluates
-git-versioned locks, and emits proof-tour receipts — Unknown over wrong.
-See `01-vision/problem-frame/BOUNDARY.md`.
+Graph + locks **∧** EA-Graph claim memory **∧** STEAD tool constraints **∧**
+receipts. Canonical: `08-verification/VERIFY_STACK.md`.
 
-**Architecture decisions (draft):** monorepo *after* Spec; ship CLI (+ later
-LSP); refuse org SaaS MVP. Full brief:
-`07-system-design/ARCHITECTURE_BRIEF.md`.
+## Product one-liner (draft)
 
-## Next tasks for any agent (do in order)
+Local developer tool: virtual dep/DI graph, git locks, **anchored verification
+claims** (unprovable > guess), receipts; agents propose / harness decides.
+Boundary: `01-vision/problem-frame/BOUNDARY.md`.
 
-1. **Human review** `ARCHITECTURE_BRIEF.md` + adversarial Jul–Aug memo → Accept/amend
-2. Read `research/adversarial/july-august-2026-overturn-review.md` (nothing overturned; A1–A7 amendments)
-3. **Write Must QAS files** (`03-requirements/qas/`) — or demote
-4. **Fill ICD drafts** (`07-system-design/icd/`)
-5. Close OQ-02…05 against amended receipt/SoR/Unknown taxonomy
-6. Ask human for **W0 Approve** when DoR moves
+## Next tasks (do in order)
 
-## Jul–Aug 2026 note
-
-Adversarial pass complete: **HOLD** MVP spine; **AMEND** receipts (unprovable,
-evidence≠freshness), Aria-shaped harness loop, Registry≠AgentMemory, STEAD spike.
-
+1. Read `AGENT_WALKTHROUGH.md` + `STRUCTURE.md` if new to the tree
+2. **Human Accept** VERIFY_STACK + BOUNDARY (or amend)
+3. Promote ICD stubs: claim-memory API + MCP tools citing STEAD ST-1…5
+   (`07-system-design/icd/`)
+4. Write Must QAS files (`03-requirements/qas/`)
+5. Close OQ-02…05 against SoR + receipts + Unknown taxonomy
+6. Complete STEAD spike notes (even if FO-CTL deferred)
+7. Human **W0 Approve** when DoR moves
 
 ## Do not do next
 
-- Create `core-engine/` / `Cargo.toml` / nine-language scaffolds
-- Treat LanceDB/Phi/Kuzu as symbol or verify SoR
-- Skip QAS and jump to “latest frameworks” codegen
+- Shrink spine back to “just graph+locks”
+- Cargo / nine-language scaffolds
+- MCP tools that take free-text entity names from the model
+- Kuzu/Lance/Phi as verify SoR
 
-## Gate references
+## Gate refs
 
-- Brief: `07-system-design/ARCHITECTURE_BRIEF.md`
-- Bootstrap: `AGENT_BOOTSTRAP.md`
-- Leaders/stars: `research/leaders-adoption/`
-- DoR: `00-governance/dor-dod/DEFINITION_OF_READY.md`
-- Waves: `12-delivery/waves/`
+`AGENT_BOOTSTRAP` · `AGENT_WALKTHROUGH` · `STRUCTURE` · `VERIFY_STACK` ·
+`claim-memory/EA_GRAPH_CLAIMS` · `stead/STEAD_CONSTRAINTS` · DoR · no-code-gate

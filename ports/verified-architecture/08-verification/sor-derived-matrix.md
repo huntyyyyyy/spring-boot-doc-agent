@@ -14,8 +14,10 @@ traces: OQ-02
 | `index.scip` | **Index SoR** (derived from sources via scip-java) | Indexer job | Resolve | Rebuildable; don’t sync as team SoR |
 | SQLite registry / graph | **Derived** | Engine | LockCheck, queries | Wipe/rebuild OK |
 | Proof-tour receipt | **Verify artifact** | Engine | IDE, audit, CI | Immutable per run |
-| RAG embeddings / Lance chunks | **Retrieve-only** | Corpus ingest | Agent assist | **Never** verify witness |
+| EA-Graph claims + anchors | **Derived claim store** | Engine | Withdrawal / audit | Digests; not team git SoR |
+| RAG embeddings / Lance chunks | **Retrieve-only** | Corpus ingest | Agent assist | **Never** verify witness / anchor |
 | LLM remediation text | **Advisory** | Model | Human | Excluded from witnesses |
+| MCP/CLI tool args (entity ids) | **Interface** | Harness | Agent | STEAD: typed ids only |
 | Coverage / merge oracle | **Gate SoR** (one writer) | Named process | CI | Language-neutral; single writer |
 
 ## Rules

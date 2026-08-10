@@ -1,28 +1,30 @@
 # How to feed this repo to a fresh AI agent
 
-## Minimum prompt (paste)
+## Minimum prompt (paste into the new repository)
 
 ```text
-You are in the Verified Architecture planning corpus (standalone checkout).
-No prior chat context. Read AGENT_BOOTSTRAP.md then STATUS.md.
-Follow Skill cold-start. Do not write product code. Work the next FAIL
-DoR / open blocks_code OQ. Prefer folders 00/–12/ per PRECODE_MAP.md.
-Retrieve research via Skill rag-retrieve (one pack only).
+Repo root = this planning corpus. No prior chat.
+Read in order:
+  AGENT_BOOTSTRAP.md → STATUS.md → AGENT_WALKTHROUGH.md → STRUCTURE.md
+  → 08-verification/VERIFY_STACK.md
+Follow Skill cold-start. Do not write product code.
+Must spine = graph + locks ∧ EA-Graph claim memory ∧ STEAD tool constraints
+∧ receipts (VERIFY_STACK) — never graph+locks alone.
+Work the single next task in STATUS.md.
 ```
 
 ## Repo as Cursor / Cloud root
 
-1. Export/push this tree as its own GitHub repo (`EXPORT.md`).
-2. Point the agent environment root at **this** tree (not a parent monorepo).
-3. Ensure `.cursor/rules/` and `.cursor/skills/` are loaded from that root.
-4. Attach `@AGENT_BOOTSTRAP.md` on the first message if rules fail to load.
+1. Create empty GitHub repo; push **contents of this folder as root** (`EXPORT.md`).
+2. Point the agent environment at that root (not a parent monorepo).
+3. Confirm `.cursor/rules/` + `.cursor/skills/` load.
+4. If rules fail: `@AGENT_BOOTSTRAP.md` + `@AGENT_WALKTHROUGH.md` on message 1.
 
-## Still required before “build” agents
+## Sequential chain (short)
 
-Cold-start priming stops wrong codegen. It does **not** finish Spec:
+See mermaid + table in `AGENT_WALKTHROUGH.md`. Visual tree in `STRUCTURE.md`.
 
-- Close OQ-01…08 / DoR rows in `STATUS.md`
-- Fill Must QAS, ports/ICD, receipt schema
-- Human wave Approve in `02-stakeholders/signoff/`
+## Before “build” agents
 
-Only then switch STATUS phase to Implement and allow Spike charters.
+DoR green + human signoff. EA-Graph claim Accept tests + STEAD ST-1…5 in ICD
+schemas are part of Ready — not optional polish.

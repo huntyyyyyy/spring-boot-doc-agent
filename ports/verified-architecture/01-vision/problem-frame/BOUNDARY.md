@@ -17,8 +17,9 @@ target codebase, evaluates **git-versioned architectural locks**, and emits
 ## In
 
 - Out-of-process CLI (+ later LSP/MCP) over a target git workspace
-- Consume SCIP indexes + source ASTs; derived SQLite registry
+- Consume SCIP indexes + source ASTs; derived SQLite registry **and claim memory**
 - Policy locks in-repo; deterministic LockCheck
+- EA-Graph dispositions (`unprovable` > guess); STEAD-typed tool ids
 - RAG over *this* planning corpus (and later assist text) **without** using it as verify SoR
 
 ## Out (MVP)

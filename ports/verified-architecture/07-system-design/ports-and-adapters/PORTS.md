@@ -16,13 +16,14 @@ Implementations may be Rust/Go/… later; **ports are stable names** for ICDs.
 | `Resolver` | injection_point → bean \| Unknown | Must |
 | `LockCheck` | Evaluate lock IR against graph | Must |
 | `ReceiptWriter` | Emit proof-tour steps | Must |
+| `ClaimMemory` | EA-Graph anchors + withdraw dispositions | Must |
 | `Watch` | FS events → reindex dirty set | Should (Go Pilot) |
 | `GraphQuery` | Ad-hoc Datalog/EDN queries | Could (bb Pilot) |
 | `Sandbox` | Run LockCheck guest under WASM caps | Could |
 | `LspDiagnostics` | publishDiagnostics | Should (Wave-2) |
 | `RemediationAssist` | RAG/LLM suggestions | Could — non-witness |
-| `AgentMemory` | Episodic/entity memory for agents | Could — **≠** `Registry` (Neo4j-class OK later) |
-| `EquivarianceWrap` | Canonicalize tool args for agent FO properties | Research Spike (STEAD 2608.03609) |
+| `AgentMemory` | Episodic/entity memory for agents | Could — **≠** Registry/ClaimMemory |
+| `EquivarianceWrap` | Canonicalize tool args (STEAD) | Spike → Should before FO claims |
 
 ## Anti-god rule
 

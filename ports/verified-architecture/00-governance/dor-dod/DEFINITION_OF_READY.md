@@ -19,7 +19,9 @@ explicitly `WAIVED` with human sign-off in `02-stakeholders/signoff/`.
 | D7 | Ports + ICD stubs for spike seam | `ports-and-adapters/PORTS.md`, `icd/` | PARTIAL (schemas still missing) |
 | D8 | C4 Context + Container cite ADRs | `07-system-design/c4/` or legacy `docs/c4/` | PARTIAL |
 | D9 | Irreversible choices have Accepted ADRs; else options/ | `ARCHITECTURE_BRIEF.md` + adr/ | PARTIAL |
-| D10 | Receipt / proof-tour schema named | `08-verification/receipts/receipt-schema-draft.md` | PARTIAL (draft) |
+| D10 | Receipt / proof-tour schema named | `08-verification/receipts/` | PARTIAL |
+| D10b | EA-Graph claim memory Spec Accepted | `08-verification/claim-memory/` | PARTIAL (draft) |
+| D10c | STEAD ST-1…5 cited in MCP ICD | `08-verification/stead/` + `icd/` | PARTIAL (draft) |
 | D11 | V&V / fixture Accept methods named | `08-verification/vv-plan/` | FAIL |
 | D12 | Human wave Approve recorded | `02-stakeholders/signoff/` | FAIL |
 

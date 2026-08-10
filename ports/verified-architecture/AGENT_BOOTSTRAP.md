@@ -10,76 +10,61 @@ You have **no prior conversation**. This file is the priming packet.
 
 ## Who you are / where you are
 
-You are working in a **planning + RAG corpus** for a verified polyglot
-architecture product. Progressive disclosure (MDC + Skills + INDEX) is part
-of the product.
+You are in a **planning + RAG corpus** for a verified architecture product.
+Progressive disclosure (MDC + Skills + INDEX) is part of the product.
 
-**Product Must spine (wave-1 intent):** local virtual dep/DI **graph** +
-**lock IR** + **proof-tour receipts** + honest **Unknown** — not chat
-invention, not embeddings-as-symbol-truth, not org-wide social graph SaaS.
+**Must spine (do not reduce to graph+locks alone):**
 
-**Not ready:** emitting Rust/Go/Python/WASM **product** code, `Cargo.toml`
-trees, or treating language folders as decided Design.
+1. Virtual dep/DI **graph** + **lock IR**
+2. **EA-Graph claim memory** — anchors, evidence≠freshness, `unprovable`
+3. **STEAD tool constraints** — typed ids, equivariance, no FO-CTL cosplay
+4. **Receipts / proof-tour** — witnesses exclude LLM/RAG text
+5. Aria-shaped harness — agent proposes; verify stack decides
 
-## Open these five (in order) — then stop browsing
+See `08-verification/VERIFY_STACK.md`.
 
-1. This file (`AGENT_BOOTSTRAP.md`)
-2. `STATUS.md` — current mode + next task
-3. `PRECODE_MAP.md` — BFS domain tree `00/`…`12/`
-4. `12-delivery/no-code-gate/README.md` — codegen Refuse until green
-5. `04-constraints/open-questions/` — any `blocks_code: true` OQ
+**Not ready:** product language trees / `Cargo.toml` until DoR green.
 
-Only then retrieve from `research/INDEX.md` for the **one** pack the task needs.
+## Open in order — then stop browsing
 
-## Operating mode (today)
+1. `AGENT_BOOTSTRAP.md` (this file)
+2. `STATUS.md`
+3. `AGENT_WALKTHROUGH.md` — full chain + visuals
+4. `STRUCTURE.md` — repo map
+5. `08-verification/VERIFY_STACK.md` — EA-Graph + STEAD + graph
+6. `PRECODE_MAP.md` → DoR → no-code-gate → open OQs
+
+Only then: Skill `rag-retrieve` for **one** research pack if needed.
+
+## Operating mode
 
 | Mode | Value |
 | --- | --- |
 | Phase | **Spec / fill gaps** — not Implement |
-| Allowed edits | Markdown under `00/`–`12/`, `docs/`, `research/`, `.cursor/` |
-| Forbidden | Product source trees, mass language scaffolds, “just a spike crate” |
-| Authority | `00/`–`12/` preferred; flat `docs/` + `nests/` are **legacy** until promoted |
-| Science | Locked transfers only — `11-science-transfer/locked-transfers/` |
+| Allowed | Markdown under `00/`–`12/`, `research/`, `.cursor/` (+ legacy promote) |
+| Forbidden | Product scaffolds; ignoring EA-Graph/STEAD; dumping `research/` |
+| Authority | `00/`–`12/` preferred; `docs/` + `nests/` = legacy |
 
-## Hard refuses (agents fail these without priming)
+## Hard refuses
 
-1. **Do not** generate product code until no-code gate is green.
-2. **Do not** treat RE-MASTER / Phi / LanceDB / Kuzu org-graph drafts as Spec — see `research/pre-code-bfs/re-master-ai-draft-critique-2026-08-10.md`.
-3. **Do not** rewrite Must NFRs as bare latency numbers — use six-part QAS (`03-requirements/qas/TEMPLATE.md`).
-4. **Do not** confuse constraints with requirements.
-5. **Do not** equate SCIP with runtime Spring DI; Unknown required when ambiguous.
-6. **Do not** equate WASM sandbox with mathematical proof.
-7. **Do not** use RAG/LLM text as a verify witness.
-8. **Do not** always-load `research/` — retrieve one pack.
-9. **Do not** put languages at the tip — candidates live in `07-system-design/options/`.
-10. **Do not** promote neuromorphic / physical RC / IMC hardware into tip SoT.
-
-## Correct work loop (until Implement Approve)
-
-```text
-STATUS.md → ARCHITECTURE_BRIEF.md if shape unclear
-  → pick next OPEN/PARTIAL gap
-  → edit only that domain folder under 00–12
-  → if research needed: Skill rag-retrieve → one pack
-  → close or waive OQ; update STATUS.md
-  → never open Cargo/pyproject product trees
-```
+1. No product codegen until DoR + no-code-gate green.
+2. No RE-MASTER Phi/Lance/Kuzu as Spec.
+3. No bare latency NFRs — six-part QAS only.
+4. Constraints ≠ requirements.
+5. SCIP ≠ Spring DI runtime; Unknown/`unprovable` required.
+6. WASM ≠ mathematical proof.
+7. RAG/LLM text ∉ verify witnesses / claim anchors.
+8. Don’t always-load research.
+9. Languages live under `07-system-design/options/`, not tip.
+10. Don’t design MCP tools that accept hallucinated entity ids (STEAD ST-1…5).
 
 ## Skills
 
-| Skill | Use when |
-| --- | --- |
-| `cold-start` | Session start / lost context |
-| `rag-retrieve` | Need evidence from `research/` |
-| `promote-claim` | Research claim → authoritative docs |
-| `fill-wave-gap` | Close a `blocks_code` OQ or write a QAS |
+`cold-start` → `fill-wave-gap` → `rag-retrieve` → `promote-claim`
 
-## Success for a cold agent
+## Success check
 
-You are primed correctly if you can answer without chat history:
-
-- What phase are we in? → Spec / gap-fill
-- May I write engine code? → **No**
-- What is the product shape? → Local CLI tool; monorepo after Spec (`ARCHITECTURE_BRIEF.md`)
-- Where do new artifacts go? → `00/`–`12/` per `PRECODE_MAP.md`
-- What blocks codegen? → Open OQs + incomplete Must QAS + no-code gate
+- Phase? Spec/gap-fill  
+- Codegen? **No**  
+- Must spine? Graph+locks **and** EA-Graph **and** STEAD — see VERIFY_STACK  
+- Next file? Whatever `STATUS.md` lists first  
