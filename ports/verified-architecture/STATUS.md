@@ -41,8 +41,8 @@ receipts — `VERIFY_STACK.md`. Claim-memory and equivariance pieces are
 
 ## Single next task
 
-1. Continue `research/gaps/entity-adoption-audit-2026-08-10.md` → per-entity folders with full paper digests **or** explicit Unknown/Pilot demotions in Must spine.
-2. Do not mark Port research PASS until D0 clears or is waived with eyes open.
+1. Use Skill `paper-digest` + `research/method/paper-digest-framework.md` on Must-spine papers (next: 2608.03609 Stateful Tool-Enabled Agentic Deployments; 2607.14890 Proof-or-Stop), including references walk.
+2. Do not mark research PASS until digests exist and D0 clears or is waived with eyes open.
 
 ## Do not do next
 

@@ -14,6 +14,9 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 | Pack | Path | Use when |
 | --- | --- | --- |
 | **Architecture brief (principal)** | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape, MVP, math, leaders |
+| **Paper digest framework** | `research/method/paper-digest-framework.md` | Type keys + sections + references walk (arXiv has categories, **not** paper-type fields) |
+| **Paper digest template** | `research/method/PAPER_DIGEST_TEMPLATE.md` | Fill one file per arXiv id under `papers-2026-may-aug/digests/` |
+| **Worked digest example** | `research/papers-2026-may-aug/digests/2608.04278-ea-graph.md` | Empirical + section map for Artifact-Anchored Verification Memory |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
 | **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Earlier memo — **superseded on depth** by the adoption audit |
 | **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |

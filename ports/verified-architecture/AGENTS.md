@@ -16,7 +16,7 @@ Thin Cursor / Cloud ingest. **Not** a second rule essay.
 | Artifact-anchored claim memory | `08-verification/claim-memory/` |
 | Stateful Tool-Enabled Agentic Deployment constraints | `08-verification/stead/` |
 | Definition of Ready / no-code | `00-governance/dor-dod/`, `12-delivery/no-code-gate/` |
-| Skills | `cold-start`, `fill-wave-gap`, `rag-retrieve`, `promote-claim` |
+| Skills | `cold-start`, `fill-wave-gap`, `rag-retrieve`, `promote-claim`, `paper-digest` |
 
 **No product code** until Definition of Ready is green. Must spine is not
 graph + locks alone.

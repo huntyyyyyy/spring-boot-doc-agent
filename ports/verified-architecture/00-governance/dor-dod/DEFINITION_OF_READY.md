@@ -19,7 +19,7 @@ Whole words — `GLOSSARY.md`.
 
 | # | Predicate | Evidence | Status | What is still left |
 | --- | --- | --- | --- | --- |
-| **D0** | Per-entity research: recent papers **understood**, then mapped to **≥5 genuine GitHub repositories** that ship the algorithms (anti-bogus filter) | `research/gaps/entity-adoption-audit-2026-08-10.md` | **FAIL** | Artifact-anchored claim memory and Stateful Tool-Enabled Agentic Deployment equivariance wrappers have **no** verified public algorithm adopters yet; prior memo was title→action mapping, not adoption audit |
+| **D0** | Per-entity research: paper **digests** (type key + sections + related walk) then ≥5 genuine GitHub algorithm adopters | `research/method/paper-digest-framework.md` + `research/gaps/entity-adoption-audit-2026-08-10.md` + digests/ | **FAIL** | Framework now defined; only one worked digest (2608.04278); equivariance / Proof-or-Stop digests and exact adopters still missing |
 | D1 | Product boundary draft Accepted | `01-vision/.../BOUNDARY.md` | **FAIL** for Implement (draft only) | Human Accept in `SIGNOFF_LOG.md` |
 | D2 | Wave Must Stakeholder + Software Requirements Specifications named and Accepted | `03-requirements/strs|srs` | **PARTIAL** | Drafts exist; no human Accept; Requirements Traceability Matrix still Draft |
 | D3 | Must non-functional requirements as six-part Quality Attribute Scenarios | `03-requirements/qas/` | **PARTIAL** | N-05…N-08 drafted; **N-01/N-02 latency still Spike-blocked**; open question 07 still OPEN |
