@@ -5010,7 +5010,7 @@ Files touched: .cursor/skills/principal-se-research-epic/SKILL.md, .cursor/rules
 
 ## 2026-08-10 — E-MDC0 optimized MDC DevEx (activation algebra)
 
-Commit: 2bc35241
+Commit: 793658cd
 Tests: check_repo_claims OK; MDC mode smoke PASS (always=2, globs=4, agent=2, manual=1)
 Assumptions affected:
 - Agent context / alwaysApply layout — prior "3/3 alwaysApply" stack — [Resolved — redistributed to always≤2 + glob lenses + agent-requested + manual; isomorphism demoted; AGENTS slimmed to pointers]
