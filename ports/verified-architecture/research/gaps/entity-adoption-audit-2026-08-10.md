@@ -191,7 +191,18 @@ Language tools emit a stable index (formerly Language Server Index Format lineag
 
 ### Genuine GitHub (≥5)
 
-Official Model Context Protocol org SDKs + servers (listed under Entity B) easily clear five. **Gap:** our Verification and Validation plan names fixtures but has **no** effect-checkpoint harness wired — and DynamicMCPBench itself needs a confirmed public code home before we cite it as Adopt.
+| Repository | Stars / pushed | Fit |
+| --- | --- | --- |
+| `modelcontextprotocol/python-sdk` | ~23968 / 2026-08-10 | **Adopt** official Software Development Kit |
+| `modelcontextprotocol/servers` | ~89406 / 2026-08-10 | **Adopt** reference servers (hygiene eyes open) |
+| `modelcontextprotocol/typescript-sdk` | ~13122 / 2026-08-10 | **Adopt** |
+| `PrefectHQ/fastmcp` | ~27160 / 2026-08-10 | **Adopt** high-adoption server framework |
+| `microsoft/mcp` | ~3553 / 2026-08-10 | **Could** |
+| `docker/mcp-gateway` | ~1524 / 2026-08-06 | **Could** fleet surface control |
+| `SalesforceAIResearch/MCP-Universe` | ~593 / 2026-06-23 | **Adopt** execution-based evaluators (closest open effect/outcome pattern) |
+| `mcp-use/mcp-use` | ~10472 / 2026-08-10 | **Could** |
+
+**Gap:** DynamicMCPBench and HyperTool (arXiv) public code **Unknown** / unpublished; reject `toolprint/hypertool-mcp` as name-collision. Our Verification and Validation plan still has no effect-checkpoint harness.
 
 ---
 
