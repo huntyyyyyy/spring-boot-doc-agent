@@ -205,6 +205,21 @@ These methods must **not** be treated as replacements for:
 | SPIKE-MATH-ALLOY-LOCK | Alloy sigs for package deps + todo fingerprint | Counterexample for cycle / duplicate fingerprint |
 | SPIKE-MATH-JMT-LAT | Optional queueing sketch for index vs resolve | Explicitly labeled **sensor**; does not set Quality Attribute Scenario **T** |
 
+**FREEZE note (2026-08-10):** these Spikes stay **unscheduled**. See
+`research/gaps/shallow-decisions-honesty-2026-08-10.md` — deepen receipts /
+claims / MCP handles first; do not promote math rows to Must.
+
+### Peer enrichment (GitHub API 2026-08-10) — still brainstorm
+
+| Correction | Detail |
+| --- | --- |
+| **No Adopt** in this catalog | Strongest rows = **Pilot** (TLA+ tiny protocol) or **Pilot sensor** (Analytic Hierarchy Process beside matrices) |
+| Java Modelling Tools | SourceForge-first; GitHub exact mirrors **fail** ≥5 maintained — Spike must be honest |
+| Expert Choice | **Refuse** tip dependency; use open Analytic Hierarchy Process libs only as workshop aid |
+| Lean | Ecosystem large; **Refuse** Must distraction / proof theater for tip |
+| Monte Carlo “architecture risk” | Exact libs thin; use **adjacent** uncertainty-quantification (e.g. SALib) as Could sensor only |
+| DeepWiki | Unavailable on peer pass — waived with eyes open |
+
 ---
 
 ## Bloom
@@ -213,13 +228,13 @@ These methods must **not** be treated as replacements for:
 | --- | --- |
 | 1 | Tool IDs + GitHub/star snapshot 2026-08-10; JMT site; ATAM formal memo |
 | 2 | Mapped onto receipts, locks, MCP handles, latency Quality Attribute Scenarios |
-| 3 | Spike charters only (above) |
-| 4 | Embody/Adopt/Pilot/Could/Refuse table |
-| 5 | Refuse list + agent bites |
+| 3 | Spike charters only (above) — **unscheduled under FREEZE** |
+| 4 | Embody/Adopt/Pilot/Could/Refuse table; **Adopt count in this catalog = 0** |
+| 5 | Refuse list + agent bites + peer enrichment |
 | 6 | This catalog + Spike IDs — **Implement Refuse** |
 
 ---
 
 ## Review
 
-Re-score this brainstorm after: first engine Pilot; latency Spike exit; or any proposal to make formal methods Definition of Ready Must.
+Re-score this brainstorm after: first engine Pilot; latency Spike exit; or any proposal to make formal methods Definition of Ready Must. Under FREEZE, prefer **not** opening math Spikes until deepen-3 exits.
