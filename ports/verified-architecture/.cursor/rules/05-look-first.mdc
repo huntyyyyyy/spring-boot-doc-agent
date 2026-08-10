@@ -5,7 +5,7 @@ alwaysApply: false
 
 # Look-first
 
-1. Read `docs/DOMAIN_MAP.md`.
+1. Read `PRECODE_MAP.md`, then `docs/DOMAIN_MAP.md`.
 2. Requirements → `docs/requirements/` + `docs/constraints/`.
 3. Architecture → `docs/adr/` + matching `research/` pack.
 4. Language BC → `nests/<bc>/` and that nest’s `nest.mdc`.

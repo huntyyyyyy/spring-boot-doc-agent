@@ -13,12 +13,15 @@ Use this file as the **RAG catalog**. Chunk by file; embed `title` + first H2
 
 | Pack | Path | Use when |
 | --- | --- | --- |
+| **Pre-code BFS taxonomy** | `research/pre-code-bfs/` | Classify domains before AI codegen |
+| **Papers May–Aug 2026** | `research/papers-2026-may-aug/` | Cross-domain science + RE evidence |
 | Layers of Truth / vision | `research/layers-of-truth/` | Product intent, local-first verification story |
 | Adversarial + RE critique | `research/adversarial/` | Threaten Draft REQs; MoSCoW honesty |
 | ATAM / formal | `research/atam-formal/` | QAS, tactics, ADR method, formal bounds |
 | Polyglot portfolio | `research/polyglot/` | Language peers, WASM, mental models |
 | MDC / DevEx / context | `research/mdc-devex/` | Activation algebra; agents + developers |
 | Provenance | `research/PROVENANCE.md` | What this corpus is (no prior-repo identity) |
+| Nested domain tree | `PRECODE_MAP.md` + `00-`…`12-` | Industry-shaped pre-code folders |
 
 ## Claim tiers
 

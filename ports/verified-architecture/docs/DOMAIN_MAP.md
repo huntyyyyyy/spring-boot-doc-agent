@@ -3,6 +3,10 @@
 **Rule for agents:** open this file before deep work. Then open only the
 paths listed for the task. Nest MDC files restate a narrower map.
 
+**Preferred tree (BFS pre-code):** [PRECODE_MAP.md](../PRECODE_MAP.md) and
+folders `00-governance/` … `12-delivery/`. Flat `docs/` below is legacy until
+promoted.
+
 ## Working draft + standards
 
 | Topic | Path |

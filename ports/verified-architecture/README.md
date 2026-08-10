@@ -37,10 +37,11 @@ corpus is retrieved for agents and developers via MDC modes + Skills + INDEX.
 
 ## Start here
 
-1. [docs/DOMAIN_MAP.md](docs/DOMAIN_MAP.md)
-2. [docs/standards/](docs/standards/) — ISO / ATAM / IEEE-shaped drafts
-3. [docs/requirements/](docs/requirements/) → [constraints](docs/constraints/) → [c4](docs/c4/) → [adr](docs/adr/)
-4. [research/INDEX.md](research/INDEX.md) — corpus map for humans and RAG ingest
+1. [PRECODE_MAP.md](PRECODE_MAP.md) — BFS nested domains **before** AI codegen
+2. [research/pre-code-bfs/](research/pre-code-bfs/) — classification + RE-MASTER critique
+3. [research/papers-2026-may-aug/](research/papers-2026-may-aug/) — six May–Aug 2026 papers
+4. [docs/DOMAIN_MAP.md](docs/DOMAIN_MAP.md) — legacy flat map (migrating into `00-`…`12-`)
+5. [research/INDEX.md](research/INDEX.md) — RAG catalog
 
 ## Status
 
