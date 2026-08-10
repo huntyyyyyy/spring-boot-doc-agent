@@ -563,7 +563,8 @@ entries:
   related_count: 9
 - path: docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
   title: E-MD0 — Markdown frontmatter metadata schemas (research → closed CI)
-  status: IMPLEMENTING — closed schema + CI on tip (corpus C)
+  status: DONE ON TIP — gate live (`check_md_frontmatter`); further allowlist ratchets
+    OK
   date: '2026-08-10'
   epic: E-MD0
   related_count: 7

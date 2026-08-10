@@ -19,7 +19,7 @@ from .registry_hooks_absence_recall import (
     run_recall,
     uncertainty_absence,
 )
-from .registry_hooks_basic import (
+from .registry_hooks_rate_measures import (
     harvest_lin,
     project_code_dep,
     project_lin,

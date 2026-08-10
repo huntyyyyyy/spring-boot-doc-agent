@@ -161,3 +161,10 @@ Assumptions affected:
 - Bloom gate is README prose only — [Resolved — bloom_gate requires bloom_mcp + sources nest keys]
 - No look-first index of memo metadata — [Resolved — `docs/research/_frontmatter_index.yaml`]
 Files touched: scripts/ci/md_frontmatter_*.py, scripts/ci/check_md_frontmatter.py, scripts/ci/pre_pr.py, tests/ci/test_md_frontmatter.py, docs/research/process/49-*.md, docs/design/md-frontmatter-metadata-design-2026-08-10.md, docs/research/** (normalize), docs/research/quality-backlog.md, docs/research/README.md
+
+## 2026-08-10 — E-COH1 rename registry_hooks_basic residual bin
+Commit: uncommitted
+Tests: check_public_surface OK; pytest public_surface + gap_recall 9/9
+Assumptions affected:
+- `registry_hooks_basic` deferred COH1-2 — [Resolved — renamed `registry_hooks_rate_measures`; forbidden basename ratchet under gap_probe]
+Files touched: src/doc_engine/scanning/gap_probe/registry_hooks_rate_measures.py, registry_assembly.py, registry.py, public_surface_policy.py, concept-split design appendix, quality-backlog.md

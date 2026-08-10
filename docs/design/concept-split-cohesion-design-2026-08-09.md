@@ -145,7 +145,7 @@ Research: [`modularity/21-coh1-public-surface-fitness-2026.md`](../research/modu
 | 1 | `local_runner_phases/support.py` | Private `__all__` warehouse + residual name | **Deleted**; callers → concept modules |
 | 2 | `tools/semantic_eval_helpers.py` | Residual `helpers` + private warehouse | Public shim; new `semantic_eval.py` façade |
 | 3 | `inventory_drift.py` | Residual bin (3 concepts) | Split → `runner_argv` / `artifact_inventory` / `drift_check_phase` |
-| 4 | `registry_hooks_basic.py` | Residual `basic` | **Deferred** (next COH1-2) |
+| 4 | `registry_hooks_basic.py` | Residual `basic` | **Renamed** → `registry_hooks_rate_measures.py` (E-MD0 tip / E-COH1) |
 | 5 | MOD tool façades (`run_manifest`, …) | Private `__all__` | Deferred; fitness list expandable |
 
 ### CGQ3 Accept (slice shipped)

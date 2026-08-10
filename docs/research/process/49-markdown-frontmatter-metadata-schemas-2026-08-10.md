@@ -1,6 +1,6 @@
 ---
 title: E-MD0 — Markdown frontmatter metadata schemas (research → closed CI)
-status: IMPLEMENTING — closed schema + CI on tip (corpus C)
+status: DONE ON TIP — gate live (`check_md_frontmatter`); further allowlist ratchets OK
 date: '2026-08-10'
 epic: E-MD0
 claim_tiers: Evidenced / Confirmed / Unknown

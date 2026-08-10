@@ -35,19 +35,17 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 
 ## 1. Active tip (NOW)
 
-**Active:** **E-MD0** markdown frontmatter closed schemas (corpus C), then **E-COH1**
+**Active:** **E-COH1** cohesion (after E-MD0 green on this tip)
 
 | Field | Value |
 | --- | --- |
-| **Stream** | **E-MD0** Implement → then resume **E-COH1** |
-| **Branch / PR** | `cursor/e-md0-frontmatter-metadata-61f3` |
-| **Why** | #119 merged; level repo-wide `*.md` metadata before cohesion code |
-| **Already on tip** | process/49 research + design Spec; `check_md_frontmatter` gate; normalize + `_frontmatter_index.yaml` |
-| **Do not do in this stream** | Approve-all Drafts; E-TOOL0 installs; skip research gate on new design epics |
+| **Stream** | **E-COH1** reshape provisional residual bins / façades |
+| **Branch / PR** | `cursor/e-md0-frontmatter-metadata-61f3` → [#120](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/120) |
+| **Why** | E-MD0 closed FM landed; resume cohesion under COH2–COH4 |
+| **Already on tip** | **E-MD0** (`process/49`, `check_md_frontmatter`); COH1-2 `registry_hooks_basic` → `registry_hooks_rate_measures` |
+| **Do not do in this stream** | Approve-all Drafts; E-TOOL0 installs; LOC thrash without seam maps |
 
-**E-MD0 exit:** `check_md_frontmatter` hard green; kind allowlists; stale/orphan related cleaned on epic memos.
-
-**E-COH1 exit (when resumed):** CGQ3 Accept rows; `check_public_surface` hard; no mechanical LOC chops. Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md).
+**E-COH1 exit:** CGQ3 Accept rows; `check_public_surface` hard; no mechanical LOC chops. Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md).
 
 ---
 
@@ -55,12 +53,11 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 
 | Order | Epic | Action | Gate |
 | --- | --- | --- | --- |
-| A | **E-COH1** | Cohesion reshape (provisional façades / residual bins) | After E-MD0 green slice |
-| B | **E-REPO1-B** | `pipeline`↔`scanning` cycle-break → further nests | After E-COH1 green slice |
-| C | **E-LEG** remainder | Ordered size offenders: TOOL4 → PIPE1 → QUERY1 → STF1 | After E-COH1 green slice |
-| D | **E-OCS** operator | Live `run-plant.sh ocs` + OpenAPI join evidence | Operator checkout (not tip theater) |
-| E | **E-UX2** | Claims / code_quality headline + `<details>` | Optional |
-| F | **E-STK3** | Cycle-focus rotator / LLM ranker | Defer — not required for G1–G6 |
+| A | **E-REPO1-B** | `pipeline`↔`scanning` cycle-break → further nests | After E-COH1 green slice |
+| B | **E-LEG** remainder | Ordered size offenders: TOOL4 → PIPE1 → QUERY1 → STF1 | After E-COH1 green slice |
+| C | **E-OCS** operator | Live `run-plant.sh ocs` + OpenAPI join evidence | Operator checkout (not tip theater) |
+| D | **E-UX2** | Claims / code_quality headline + `<details>` | Optional |
+| E | **E-STK3** | Cycle-focus rotator / LLM ranker | Defer — not required for G1–G6 |
 
 ---
 
@@ -82,7 +79,6 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
-| **E-MD0** | Markdown frontmatter closed schemas (corpus C) — **Active tip** | `process/49` + `docs/design/md-frontmatter-metadata-design-2026-08-10.md` |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 
@@ -129,6 +125,7 @@ Compact ledger. Detail: [archived ticket tables](archive/quality-backlog-ticket-
 | **E-AST1** | Vacuity pack hard in `pre_pr` |
 | **E-REPO1-A** | First nest: `semantic_eval` + `docs_site` + shims |
 | **E-LOG0** | Session-log nest: ≤225 LOC packs + `START__slug` names; stub kept |
+| **E-MD0** | Closed markdown frontmatter schemas + `check_md_frontmatter` gate |
 | **P32 Harn/Nimbus/noprop** | Stance recorded — **Refuse** as product deps |
 
 ---
