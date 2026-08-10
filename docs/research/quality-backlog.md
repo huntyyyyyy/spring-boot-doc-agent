@@ -298,8 +298,8 @@ Research: [`docs/research/process/18-docs-research-taxonomy-claude-consolidation
 
 | # | Action | Stance | Verify |
 | --- | --- | --- | --- |
-| P19.0 | **E-CTX0 Spec:** approve **CTX1–CTX10** (working set ≠ warehouse; section reads; mask≻LLM-summary of SoR; refuse MemGPT runtime) | **Draft** (2026-08-10) | research 26 `spec_gate` → APPROVED |
-| P19.1 | **E-CTX1 Implement:** AGENTS/CONTRIBUTING 5-line working-set rule + optional memo LOC soft check | After Approve | claims green; tips cite § not whole packets |
-| P19.2 | **CTX-S1** measure token cost full-memo vs section Read | Spike | go/no-go numbers |
+| P19.0 | **E-CTX0 Spec:** approve **CTX1–CTX18** (working set; section reads; mask≻LLM-summary of SoR; ★ discernment / fake-star lens; refuse MemGPT runtime) | **Draft** (2026-08-10) | research **26+27** `spec_gate` → APPROVED |
+| P19.1 | **E-CTX1 Implement:** AGENTS/CONTRIBUTING working-set rule + section-read habit | After Approve | claims green; tips cite § not whole packets |
+| P19.2 | **CTX-S1** token measure + optional **CTX-S2** StarScout/heuristic audit of Spike shortlist | Spike | go/no-go numbers; integrity flags |
 
-Research: [`docs/research/process/26-agent-context-markdown-bloat-2026.md`](process/26-agent-context-markdown-bloat-2026.md). **Embody** Liu U-curve + DOC map doors; **Adopt** Complexity-Trap masking finding; **Refuse** MemGPT as merge dep / summary-as-SoR.
+Research: [`26`](process/26-agent-context-markdown-bloat-2026.md) · [`27`](process/27-agent-context-repo-discernment-2026.md). **Embody** Liu + DOC doors + ★-as-filter-not-proof ([arXiv:2412.13459](https://arxiv.org/abs/2412.13459)); **Adopt** Complexity-Trap masking (even at 17★); **Refuse** ★-only Adopt of viral memory MCP stacks / MemGPT runtime / summary-as-SoR.

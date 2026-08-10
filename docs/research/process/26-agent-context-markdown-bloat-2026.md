@@ -8,14 +8,16 @@ product: Meta-repo agent hygiene (Cursor/Claude tips) — not doc-engine kernel 
 related:
   - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
   - docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
+  - docs/research/process/27-agent-context-repo-discernment-2026.md
   - docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
   - paste full research memos into every agent turn
   - treat million-token windows as “just dump the docs”
-  - adopt MemGPT/Letta / complexity-trap code as product deps without ≥1k★+discernment
+  - treat ★≥1k as automatic Adopt (see memo 27 / fake-star literature)
+  - adopt MemGPT/Letta / complexity-trap *code* as product deps without discernment
   - replace deterministic SoR (claims, coverage.xml) with LLM summary memory
-spec_gate: DRAFT E-CTX0 (2026-08-10) — CTX1–CTX10 pending Approve
-gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/docs)"
+spec_gate: DRAFT E-CTX0 (2026-08-10) — CTX1–CTX10 + deepdive CTX11–CTX18 pending Approve
+gh_sor_bar: "≥1000★ + recent push is a filter only; require fork/velocity/institution/paper discernment (memo 27)"
 ---
 
 # Principal memo: huge markdown vs agent working set
@@ -36,9 +38,11 @@ bloat LLM agent context — and what do arXiv / SE architecture models prescribe
 | **Embody** | Context = **working set**, not warehouse; U-shaped attention; SoR on disk, slice into tips |
 | **Adopt** | Section-first reads; map/index doors (DOC1); observation masking / drop over LLM-summary-of-docs; MemGPT *mental model* (RAM vs disk) without runtime dep |
 | **Spike** | Soft LOC/token budget on research memos; inject-map only (already look-first); “open §N” agent instruction |
-| **Refuse** | Dumping whole `quality-backlog` / packet 21–25 into every tip; MemGPT/Letta as merge SoT; chat-dump research (DOC12 / STK) |
+| **Refuse** | Dumping whole `quality-backlog` / packet 21–25 into every tip; MemGPT/Letta as merge SoT; chat-dump research (DOC12 / STK); **★-only Adopt of viral AI tools** |
 
 **Answer to the session question:** yes — long markdown in the middle of the tip is exactly the failure mode Liu et al. measure. Bigger windows do not fix it.
+
+**Deepdive:** repo discernment + star inflation → [`27-agent-context-repo-discernment-2026.md`](27-agent-context-repo-discernment-2026.md).
 
 ---
 
