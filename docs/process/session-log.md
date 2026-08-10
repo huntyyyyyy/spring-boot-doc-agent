@@ -4850,7 +4850,7 @@ Assumptions affected:
 Files touched: docs/research/**, docs/process/**, .cursor/hooks*, scripts/ci/check_repo_claims.py, check_llms_coverage.py, CONTRIBUTING.md, STATUS.md, tests/ci/test_research_map_look_first.py, claude/README.md
 
 ## 2026-08-10 — E-REPO Wave 0.5: nest research under bounded-contexts + aggressive DOMAIN_MAP
-Commit: 1bee8ac
+Commit: f6db92c
 Tests: claims OK; look-first+inventory 8/8; research domain folder assert → `bounded-contexts`
 Assumptions affected:
 - Research domain `docs/research/modularity/` named process, not product — [Resolved — `git mv` → `docs/research/bounded-contexts/`; README domain map + look-first layout test retargeted]
