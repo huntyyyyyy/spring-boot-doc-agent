@@ -152,6 +152,7 @@ Adopt**; **substrate Refuse** as second path-SoT beside MDC globs in *this* repo
 | doc_engine nest / façade / cohesion | scattered | **Move** | glob `doc-engine-cohesion` |
 | ast-grep / fixtures / rule coverage | CLAUDE (Claude SoT) | **Lens** | glob `stage0-citation` (Cursor path attach) |
 | Spec Draft discipline | constitution / README | **Move** | glob `research-spec-drafts` |
+| Session-log append / pack | CLAUDE + nest README | **Lens** | glob `session-log-nest` (shards stay `.md`) |
 | Cloud env / venv / cert gotchas | AGENTS | **Keep slim** | root AGENTS ≤~40 lines |
 | BC map / truth classes | DOMAIN_MAP | **Keep human** | DOMAIN_MAP; drop tip-clone policy; point backlog |
 | CLAUDE.md steering / claims | Claude SoT | **Unchanged** | not Cursor MDC |
@@ -183,6 +184,7 @@ instruction to execute E-MDC0 plan (chat, 2026-08-10). Active tip remains land
 | `doc-engine-cohesion.mdc` | globs: `src/doc_engine/**,tests/doc_engine/**` |
 | `stage0-citation.mdc` | globs: `**/spring-signals/**,scripts/fixtures/**,scripts/coverage/**` |
 | `research-spec-drafts.mdc` | globs: `docs/research/**/*.md,docs/design/**/*.md` |
+| `session-log-nest.mdc` | globs: nest + packer paths — ≤225 / `START__slug` |
 | `principal-research-gate.mdc` | agent-requested |
 | `cross-domain-isomorphism.mdc` | agent-requested (demoted) |
 | `tip-recovery-manual.mdc` | manual |

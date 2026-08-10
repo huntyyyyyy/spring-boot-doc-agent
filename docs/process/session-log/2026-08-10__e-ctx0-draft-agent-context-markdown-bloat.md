@@ -124,3 +124,10 @@ Assumptions affected:
 - `docs/process/session-log.md` monolith is fine to keep growing — [Resolved — nested `session-log/`; greedy ≤225 packs; date-first `__slug` names from lead title]
 - Month/week calendar splits are enough — [Resolved — refused as size SoT; LOC packer + `.pack-order`]
 Files touched: docs/process/session-log/**, scripts/process/pack_session_log*.py, tests/ci/test_pack_session_log.py, CLAUDE.md, docs/research/process/46-*, docs/research/quality-backlog.md
+
+## 2026-08-10 — E-LOG0 MDC glob lens for session-log nest
+Commit: uncommitted
+Tests: MDC mode smoke (globs include session-log-nest); claims n/a for rules-only
+Assumptions affected:
+- Session-log conventions live only in README/CLAUDE — [New info — glob rule `session-log-nest.mdc` auto-attaches on nest/packer paths; shards stay `.md`]
+Files touched: .cursor/rules/session-log-nest.mdc, docs/process/session-log/README.md

@@ -1,0 +1,20 @@
+---
+description: Session-log nest — ≤225 LOC shards, date+slug names, no monolith revival
+globs: docs/process/session-log/**,docs/process/session-log.md,scripts/process/pack_session_log*.py,scripts/process/session_log_readme.template.md
+alwaysApply: false
+---
+
+# Session-log nest lens
+
+When the nest, stub, or packer are in context:
+
+- Append to the **latest shard** (or create `YYYY-MM-DD__topic-slug.md`) — never grow the stub `docs/process/session-log.md`.
+- Shard budget **≤225 lines**; filename = date-first span + lead-title kebab slug.
+- Chronology SoT for re-reads = `docs/process/session-log/.pack-order` (not `ls` alpha).
+- After a manual append: `python3 scripts/process/pack_session_log.py --index-only`.
+- Bulk rebuild only: `python3 scripts/process/pack_session_log.py --from-git HEAD:docs/process/session-log.md`.
+- **Refuse:** chat dumps as research SoT; rewriting history; month/week-only splits; mass `.md`→`.mdc` of shards.
+
+@docs/process/session-log/README.md
+@scripts/process/pack_session_log.py
+@CLAUDE.md
