@@ -1,20 +1,41 @@
 ---
-title: Spike — Spec corpus Model Context Protocol (read-only)
+title: Spike — Spec corpus Model Context Protocol (read-only, Rust)
 status: DRAFT — optional; not Wave-1 Must; not product verify
 date: '2026-08-10'
 source: research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md
+doc_role: spike
+freeze_class: deepen
+look_first:
+  - research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
+  - 07-system-design/schemas/va-doc-frontmatter.schema.json
+  - docs/adr/adr-0007-rust-owns-engine.md
+mcp_tools:
+  - spec_status
+  - spec_gap
+accepted: false
+corpus_version: '2026-08-10'
+related:
+  - research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
+  - 07-system-design/schemas/va-doc-frontmatter.schema.json
+  - docs/adr/adr-0007-rust-owns-engine.md
+  - research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md
 ---
 
 # SPIKE-SPEC-Model Context Protocol-0
 
-Read-only Model Context Protocol server over the Spec / FREEZE corpus to cut
-context dump and hallucination. **Refuse** product `verify` / writes / WebAssembly
-LockCheck in this Spike.
+Read-only Model Context Protocol over the Spec / FREEZE corpus. **Refuse**
+product `verify` / writes / WebAssembly LockCheck. **Refuse** tip-Python as
+host (circular Why).
 
 | Field | Content |
 | --- | --- |
-| Host | TypeScript or Rust stdio preferred as *independent* hypothesis; Python only if Spike explicitly accepts tip convenience (not “we wrote it”) |
-| Tools | `spec_status`, `spec_assumption`, `spec_icd`, `spec_decision`, `spec_gap` |
-| Keep | Agent uses tools for FREEZE/deepen-3; forged handle reject plant |
-| Drop | Tools are unbounded `cat`; or product verify sneaks in |
-| Later Could | Rust schema/digest crate; Go corpus snapshot; WebAssembly reader plugin |
+| **Host** | **Rust** stdio via official `modelcontextprotocol` Rust software development kit — Working hypothesis for this Spike (aligns Architecture Decision Record ADR-0007 digest/schema DNA). Optional later thin TypeScript facade for Cursor wiring only (Architecture D) — not a second SoT |
+| Frontmatter SoT | `07-system-design/schemas/va-doc-frontmatter.schema.json` — Rust validates + indexes |
+| Tools | `spec_status`, `spec_assumption`, `spec_icd`, `spec_decision`, `spec_gap`, optional `spec_lookup` |
+| Tool filter | `mcp_tools` contains tool; `doc_role`; refuse `accepted:true` under FREEZE for decisions |
+| Resources | Index rows (path, title, status, doc_role, freeze_class, look_first) — not unbounded `cat` |
+| Keep | Same edges Cursor MDC mandates; forged-handle reject plant; content-addressed corpus digest |
+| Drop | Python Spec host “because tip has E-MD0”; product verify sneaking in; second catalog |
+| Tip Python | E-MD0 `check_md_frontmatter` may stay a **monorepo research gate** — out of scope for this Spike’s runtime |
+| FREEZE | No tip `crates/` product scaffold until Spike is scheduled; charter + schema only is OK |
+| Later Could | Go `corpus_version` watch sidecar; WebAssembly sandboxed markdown reader plugin |

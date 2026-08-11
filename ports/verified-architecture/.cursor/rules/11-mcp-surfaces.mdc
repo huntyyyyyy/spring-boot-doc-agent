@@ -9,11 +9,17 @@ alwaysApply: false
 
 | Surface | Action |
 | --- | --- |
-| Product verify tools (`verify` / `resolve` / receipts) | Spec Draft only; **Refuse** Implement until deepen-3 |
-| Spec / corpus read-only MCP | Optional Spike `SPIKE-SPEC-MCP-0` — stamps Draft/FREEZE/`accepted:false` |
+| Product verify tools (`verify` / `resolve` / receipts) | Spec Draft only; **Refuse** Implement until deepen-3; **Rust engine** later (Architecture Decision Record ADR-0007) |
+| Spec / corpus read-only MCP | Spike `SPIKE-SPEC-MCP-0` — **Rust host** (Working hypothesis); stamps Draft/FREEZE/`accepted:false` |
+
+**Shared SoT with Cursor forced pointing:** document frontmatter
+(`doc_role`, `look_first`, `mcp_tools`, `freeze_class`, `accepted`) —
+`07-system-design/schemas/va-doc-frontmatter.schema.json`. Spec tools **must**
+filter on these keys. **Do not** grow tip Python into the Spec server.
 
 1. Wire pin `2026-07-28` is Evidenced; *our* tool semantics = Pilot invent.
 2. Read `07-system-design/icd/mcp-tools.md` + `decisions/mcp-decision-matrix.md`.
-3. Host language is **re-openable** — do not pick Python because tip already used Python.
+3. **Refuse circular Why:** tip E-MD0 / `adapters/mcp` existing ≠ Spec host choice.
 4. WebAssembly = sandbox guest Could — **not** Spec MCP host; not proof.
-5. Research: `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md`.
+5. Research: `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` and
+   `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md`.

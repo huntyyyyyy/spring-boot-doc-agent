@@ -86,7 +86,7 @@ Extism ★~5.7k, wazero ★~6.3k.
 | --- | --- | --- | --- |
 | **TypeScript** | Cursor/IDE stdio; Architecture Decision Record ADR-0010 Model Context Protocol presentation | Product Model Context Protocol presentation | **Working hypothesis (Draft)** for Spec host — independent of tip Python |
 | Python | Natural tip host (existing adapter + Interface Control Document JSON Schema validate with draft schemas) | Peer ACI only | **Could** (tip convenience — **not** earned Why) |
-| **Rust** | Fast path: schema validate, frontmatter index, content-addressed corpus digest | Engine + wasmtime host (Architecture Decision Record ADR-0007) | **Could** library behind Python/TS; **Refuse** day-one polyglot host |
+| **Rust** | **Spike host** (Working hypothesis): schema validate, frontmatter index, corpus digest, stdio Model Context Protocol | Engine + wasmtime host (Architecture Decision Record ADR-0007) | **Working hypothesis (Draft)** for Spec Model Context Protocol |
 | **WebAssembly / Wasmtime / Extism** | Optional **sandboxed markdown/schema reader** plugin (deny net) — niche | LockCheck guest (Architecture Decision Record ADR-0004); isolation ≠ proof | **Could** after thin Spec Model Context Protocol works; **Refuse** as Spec Model Context Protocol requirement |
 | **Go** | `corpus_version` / fsnotify invalidate Spec snapshot handle | Watch/reindex chassis (Architecture Decision Record ADR-0009) | **Could** sidecar for handle freshness |
 | **Ruby** | Weak for Spec Model Context Protocol | Packwerk lock DX (Architecture Decision Record ADR-0003) | **Park** for Spec Model Context Protocol |
@@ -125,10 +125,10 @@ product decision; it is tip convenience. Treat host language as **re-openable**.
 
 | Option | Independent why (ignore tip accident) | Tip convenience | Verdict |
 | --- | --- | --- | --- |
-| **A. TypeScript stdio Spec Model Context Protocol** | Cursor/IDE Model Context Protocol ecosystem; Architecture Decision Record ADR-0010 already names TS for Model Context Protocol *presentation*; JSON Schema tooling strong | Medium (new tip dep vs TOOL9) | **Working hypothesis (Draft)** — better *product-shaped* Spec host |
+| **A. TypeScript stdio Spec Model Context Protocol** | Cursor/IDE Model Context Protocol ecosystem; Architecture Decision Record ADR-0010 names TS for Model Context Protocol *presentation* | Medium (new tip dep vs TOOL9) | **Could** facade only — not Spec corpus SoT if Rust serves index |
 | **B. Python stdio Spec Model Context Protocol** | Fast Interface Control Document JSON validate; exists on tip | **High — circular if sole reason** | **Could** for throwaway Spike only; **do not** cite “we wrote it” as Why |
-| **C. Rust stdio Spec Model Context Protocol** | Official rust-sdk; digest/schema; matches future engine lane | Low tip ergonomics today | **Could** / strong if Spec Model Context Protocol should share engine DNA |
-| **D. Rust core + thin TS facade** | Separation: presentation vs corpus digest | More moving parts | **Could** after one host proves tools |
+| **C. Rust stdio Spec Model Context Protocol** | Official rust-sdk; digest/schema; matches engine lane (Architecture Decision Record ADR-0007); frontmatter index SoT | Low tip ergonomics today | **Working hypothesis (Draft) for Spike** — user course-correct 2026-08-10: build Rust here, not tip Python |
+| **D. Rust core + thin TS facade** | Separation: Cursor presentation vs corpus digest | More moving parts | **Could** after Rust host proves tools |
 | **E. WebAssembly as Spec Model Context Protocol host** | Wrong job — sandbox guest ≠ host; no earned realtime-server Spec | — | **Refuse** as host |
 | **F. WebAssembly sandbox for agent-generated tool probes** | User idea: spin capability-limited guests to test agent tooling | Separate Spike | **Could** (not Spec Model Context Protocol v0) |
 | **G. Full polyglot Spec Model Context Protocol day one** | Prestige | — | **Refuse** |

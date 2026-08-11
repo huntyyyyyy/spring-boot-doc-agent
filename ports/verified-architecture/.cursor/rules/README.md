@@ -13,7 +13,7 @@ Budget: **≤2** `alwaysApply: true`. Depth → Skills. Path → `globs` (port-r
 | File | Mode | Role |
 | --- | --- | --- |
 | `00-constitution.mdc` | always | FREEZE, dual surfaces, Must spine, circular-Why refuse |
-| `01-rag-progressive-disclosure.mdc` | always | Never dump research; INDEX/Skill |
+| `01-rag-progressive-disclosure.mdc` | always | Forced pointing: frontmatter `look_first`/`related` + Spec tools |
 | `02-working-draft-standards.mdc` | globs requirements/constraints | Standards form |
 | `03-architecture-docs.mdc` | globs `07-system-design` + adr/c4 | Decisions / Interface Control Documents / C4 |
 | `04-research-corpus.mdc` | globs `research/**` | Claim tiers + honesty |

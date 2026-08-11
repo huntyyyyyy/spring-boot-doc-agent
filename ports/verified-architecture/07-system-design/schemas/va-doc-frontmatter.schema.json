@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/verified-architecture/va-doc-frontmatter.schema.json",
+  "title": "Verified Architecture corpus document frontmatter",
+  "description": "Closed frontmatter for ports/verified-architecture Markdown. Shared SoT for Cursor forced-pointing and Rust Spec corpus Model Context Protocol (SPIKE-SPEC-MCP-0). Tip Python E-MD0 is a separate monorepo gate — not this runtime.",
+  "type": "object",
+  "required": ["title", "status"],
+  "properties": {
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "date": { "type": "string" },
+    "claim_tiers": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string", "minLength": 1 },
+          {
+            "type": "object",
+            "required": ["path"],
+            "properties": {
+              "path": { "type": "string" },
+              "role": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "doc_role": {
+      "type": "string",
+      "description": "Closed routing enum for Spec Model Context Protocol tools",
+      "enum": [
+        "status",
+        "bootstrap",
+        "index",
+        "gap",
+        "icd",
+        "decision",
+        "assumption",
+        "qas",
+        "adr",
+        "spike",
+        "digest",
+        "standard",
+        "glossary",
+        "nest",
+        "other"
+      ]
+    },
+    "look_first": {
+      "type": "array",
+      "description": "Ordered repo-relative paths an agent must open before using body claims",
+      "items": { "type": "string", "minLength": 1 },
+      "maxItems": 8
+    },
+    "mcp_tools": {
+      "type": "array",
+      "description": "Spec corpus Model Context Protocol tool names that may return this document",
+      "items": {
+        "type": "string",
+        "enum": [
+          "spec_status",
+          "spec_assumption",
+          "spec_icd",
+          "spec_decision",
+          "spec_gap",
+          "spec_lookup"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "freeze_class": {
+      "type": "string",
+      "enum": ["deepen", "frozen", "exempt", "read_only"]
+    },
+    "accepted": {
+      "type": "boolean",
+      "description": "Human Accept. Under FREEZE decisions must remain false."
+    },
+    "corpus_version": { "type": "string" },
+    "last_reviewed": { "type": "string" },
+    "freshness": { "type": "string" },
+    "superseded_by": { "type": "string" },
+    "blocks_code": { "type": "boolean" },
+    "audience": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "epic": { "type": "string" },
+    "bloom_gate": { "type": "string" },
+    "bloom_mcp": { "type": "array", "items": { "type": "string" } },
+    "sources": { "type": "object" },
+    "do_not": { "type": "array", "items": { "type": "string" } },
+    "aliases": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

@@ -24,8 +24,11 @@ the same corpus?
 | Mass `.md` → `.mdc`? | **No** — category error. Research/human Source of Truth stays Markdown for Retrieval-Augmented Generation. |
 | Always-on budget | **≤2** slim invariants |
 | Path scope Source of Truth | **MDC `globs` only** — refuse nested `AGENTS.md` as a second path system |
-| Depth procedures | **Skills** (progressive disclosure); rules mandate + `@` skill |
+| Depth procedures | **Skills** + **forced frontmatter walk** (`look_first` / `related`); rules mandate + `@` skill |
+| Shared Spec Model Context Protocol SoT | Same frontmatter schema — not a second catalog |
 | Hard deny | **Hooks** when needed — not prose “don’t” |
+
+See also: `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md`.
 
 ## Activation modes (Evidenced — Cursor rules docs)
 
@@ -58,3 +61,12 @@ the same corpus?
 ## Implementation in this repo
 
 See `.cursor/rules/` and `.cursor/skills/`. Catalog: `research/INDEX.md`.
+
+## Forced pointing (Adopt 2026-08-10)
+
+Always-on rules **mandate** a frontmatter graph walk (`look_first` then
+`related`). Schema:
+`07-system-design/schemas/va-doc-frontmatter.schema.json`. Spec corpus Model
+Context Protocol tools must filter on the same keys — not a second catalog.
+Rationale: `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md`.
+Mass `.md` → `.mdc` remains Refuse.

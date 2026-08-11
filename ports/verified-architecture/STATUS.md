@@ -2,6 +2,20 @@
 title: STATUS — single pointer for cold agents
 status: ACTIVE
 last_reviewed: '2026-08-10'
+doc_role: status
+freeze_class: read_only
+look_first:
+  - AGENT_BOOTSTRAP.md
+  - research/gaps/shallow-decisions-honesty-2026-08-10.md
+  - research/INDEX.md
+mcp_tools:
+  - spec_status
+accepted: false
+corpus_version: '2026-08-10'
+related:
+  - AGENT_BOOTSTRAP.md
+  - research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
+  - 07-system-design/schemas/va-doc-frontmatter.schema.json
 ---
 
 # STATUS

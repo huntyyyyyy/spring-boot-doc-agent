@@ -1,19 +1,21 @@
 ---
-description: Verified Architecture constitution — Spec corpus; FREEZE; Must spine; no product code
+description: Verified Architecture constitution — Spec corpus; FREEZE; forced pointing; no product code
 alwaysApply: true
 ---
 
 # Verified Architecture — constitution
 
 Planning + Retrieval-Augmented Generation **corpus** (not a shipped verify
-binary). Progressive disclosure is product behavior.
+binary). **Forced pointing** via frontmatter (`look_first` / `related`) is
+product behavior — not optional soft preference.
 
 **Whole words** in prose — `GLOSSARY.md`. No bare short labels in new text.
 
 ## Cold start
 
 No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH.md`
-→ `STRUCTURE.md` → `GLOSSARY.md`. Skill `cold-start`.
+→ `STRUCTURE.md` → `GLOSSARY.md`. Skill `cold-start`. Obey each file’s
+`look_first` when present.
 
 ## Dual surfaces (do not mix System of Record)
 
@@ -23,6 +25,8 @@ No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH
 | Planning corpus (this tree) | How we design that engine |
 
 Retrieval-Augmented Generation text is never a verify witness.
+Frontmatter routing keys are **Spec corpus** SoT; **Rust** Spec Model Context
+Protocol (Spike) serves them — not tip Python, not product receipt SoT.
 
 ## FREEZE + deepen (read `STATUS.md`)
 
@@ -43,7 +47,7 @@ Honesty: `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
 - Exact public engines for claim memory / Proof-or-Stop / equivariance = **0** →
   **Pilot invent**, not silent industry Adopt.
 - Polyglot lives under `07-system-design/options/` and `nests/` — no tip scaffolds.
-- `research/` is evidence — one pack via INDEX/Skill; never always-load.
+- `research/` is evidence — retrieve via INDEX + frontmatter graph; never always-load.
 
 ## Gates
 
@@ -59,3 +63,4 @@ Honesty: `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
 
 Always-on ≤2 slim rules. Path scope = Cursor rule **globs**. Depth = **Skills**.
 Prefer `00/`–`12/` over legacy `docs/` when both exist.
+Schema: `07-system-design/schemas/va-doc-frontmatter.schema.json`.

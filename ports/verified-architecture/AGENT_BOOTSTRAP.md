@@ -2,6 +2,21 @@
 title: Agent bootstrap — cold start with no chat history
 status: ACTIVE
 audience: [agent, developer]
+doc_role: bootstrap
+freeze_class: read_only
+look_first:
+  - STATUS.md
+  - GLOSSARY.md
+  - research/INDEX.md
+  - .cursor/rules/01-rag-progressive-disclosure.mdc
+mcp_tools:
+  - spec_status
+accepted: false
+corpus_version: '2026-08-10'
+related:
+  - STATUS.md
+  - research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
+  - 07-system-design/schemas/va-doc-frontmatter.schema.json
 ---
 
 # AGENT_BOOTSTRAP — read this first
