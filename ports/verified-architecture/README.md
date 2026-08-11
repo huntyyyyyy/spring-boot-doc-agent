@@ -10,9 +10,10 @@ plus a research corpus shaped for both developers and coding agents.
 | Layer | Role |
 | --- | --- |
 | `00/`–`12/` | Authoritative specification tree (preferred) |
-| `docs/` | Legacy product artifacts (demoted; promote into `00/`–`12/`) |
+| `docs/adr/`, `docs/c4/`, `docs/standards/` | **Active** Architecture Decision Records, C4 levels, standards |
+| `docs/requirements/`, `docs/constraints/` | **Pointers** → `03/` / `04/` |
 | `research/` | Evidence corpus (claim-tiered) — retrieve, do not always-load |
-| `nests/` | Legacy bounded-context folders (demoted) |
+| `nests/` | Language bounded contexts (nest 08 Python **REFUSED**) |
 | `.cursor/rules/` | Repo-wide Cursor rule activation algebra |
 | `.cursor/skills/` | Deep playbooks agents pull on demand |
 | `AGENTS.md` | Thin ingest pointer (not a second rule system) |

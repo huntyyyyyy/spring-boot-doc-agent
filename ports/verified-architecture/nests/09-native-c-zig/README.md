@@ -13,7 +13,7 @@
 ## Shared System of Record
 
 - `docs/DOMAIN_MAP.md`
-- `docs/requirements/` · `docs/constraints/`
+- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
 - `docs/c4/02-containers.md`
 
 ## Later (post-gate)

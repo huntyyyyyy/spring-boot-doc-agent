@@ -47,7 +47,7 @@ C4Container
 | --- | --- | --- |
 | Engine | Rust | 0007, 0004 |
 | Registry | SQLite | 0002 |
-| Lock guest | WebAssembly | 0004 |
+| Lock guest | WebAssembly | 0004 — **Could / Wave-3**, not Must |
 | Chassis | Go | 0009 |
 | Lock DX | Ruby | 0003 |
 | Graph brain | Clojure | 0005 |

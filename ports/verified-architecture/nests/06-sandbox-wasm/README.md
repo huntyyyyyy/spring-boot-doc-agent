@@ -1,24 +1,22 @@
 # Nest: WebAssembly sandbox
 
-**Owns:** Capability LockCheck guest; fuel/epoch; trust-boundary (not unearned proved)
+**Owns:** Optional LockCheck **guest** (Could / Wave-3) — fuel/epoch;
+trust-boundary (not unearned proved). **Refuse** Spec corpus Model Context
+Protocol host.
 
 **Architecture Decision Records:** Architecture Decision Record ADR-0004
+(amended).
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Status:** Planning nest — no product code until gate + Component C4. Not
+Wave-1 Must.
 
-## Look-first research
+## Look-first
 
-- `research/atam-formal/`
 - `docs/adr/adr-0004-native-then-wasm-lockcheck.md`
+- `docs/c4/02-containers.md`
 
 ## Shared System of Record
 
 - `docs/DOMAIN_MAP.md`
-- `docs/requirements/` · `docs/constraints/`
+- `03-requirements/` · `04-constraints/` (not flat `docs/requirements/` pointers)
 - `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.

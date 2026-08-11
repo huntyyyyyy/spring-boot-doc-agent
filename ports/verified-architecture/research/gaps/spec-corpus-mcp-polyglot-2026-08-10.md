@@ -141,7 +141,7 @@ product decision; it is tip convenience. Treat host language as **re-openable**.
 | **Why** | Cut dump/hallucination with typed Spec tools — not to bless tip Python |
 | **What** | Read-only tools + stamps; `2026-07-28` or explicit legacy Architecture Decision Record; size caps |
 | **Who** | Tip agents + human; maintainers must not be trapped by agent-written stack |
-| **How** | stdio into Cursor `mcp.json`; optional later Rust digest crate |
+| **How** | Rust stdio Spec server into Cursor `mcp.json`; optional later TS presentation facade |
 | **When** | Optional Spike after/in parallel with deepen-3 — not Must |
 | **Where** | New package under tip or port `packages/spec-mcp/` — **not** `packages/mcp-server` verify |
 
@@ -230,8 +230,8 @@ Align with E-GND0: **Refuse** codegen / write tools on this server.
 ## 9. One-line recommendation
 
 **Yes — a thin read-only Spec Model Context Protocol can train contracts without repo-dump
-hallucination.** Host language is **re-opened**: do not pick Python because the
-agent already wrote Python; prefer an independent score (TypeScript presentation
-vs Rust engine DNA). WebAssembly is **not** the Spec host — it remains a **Could**
-sandbox for agent-generated tool probes / later LockCheck. Product verify Model Context Protocol
-stays Refuse until deepen-3.
+hallucination.** **Host = Rust** (Working hypothesis; Architecture Decision Record
+ADR-0007). **Refuse Python** for this port. TypeScript remains presentation
+(Architecture Decision Record ADR-0010), not Spec corpus SoT. WebAssembly is
+**not** the Spec host — **Could** sandbox guest only. Product verify Model Context
+Protocol stays Refuse until deepen-3.

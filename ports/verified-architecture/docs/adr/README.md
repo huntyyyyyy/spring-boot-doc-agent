@@ -17,7 +17,7 @@ Could — not Spec host.
 | [0001](adr-0001-polyglot-first-product.md) | Polyglot peers; **Refuse Python** | nests (08 tombstone) | Amended |
 | [0002](adr-0002-sqlite-registry.md) | SQLite derived registry via Rust | `02-registry-sqlite` | OK |
 | [0003](adr-0003-packwerk-lock-ir.md) | Packwerk-shaped lock IR; Ruby DX | `03-locks-ruby` | OK |
-| [0004](adr-0004-native-then-wasm-lockcheck.md) | Native LockCheck first; WASM guest Pilot | `01` + `06` | OK |
+| [0004](adr-0004-native-then-wasm-lockcheck.md) | Native LockCheck first; WASM guest **Could**/Wave-3 | `01` + `06` | Amended |
 | [0005](adr-0005-clojure-graph-brain.md) | Clojure/bb Datascript over EDN export | `05-graph-clojure` | OK |
 | [0006](adr-0006-single-oracle-writer.md) | Single gate writer; hypothesis **Rust** | ADR-0007 | Amended |
 | [0007](adr-0007-rust-owns-engine.md) | Rust owns engine **and** Spec corpus MCP | `01-engine-rust` | Amended |

@@ -33,7 +33,8 @@ verified-architecture/          ← make THIS the git root
 ├── 04-constraints/             CON + OQ-01…08
 ├── 05-quality-architecture/    ATAM, tactics, tradeoffs, formal
 ├── 06-domain/                  ubiquity, BCs, info model, UNKNOWN-TAXONOMY
-├── 07-system-design/           ARCHITECTURE_BRIEF, ports, icd, adr, options, c4
+├── 07-system-design/           ARCHITECTURE_BRIEF, ports, icd, decisions, options, c4 brief
+│                                 (Architecture Decision Records live in docs/adr/ — not here)
 ├── 08-verification/            ★ VERIFY_STACK + L1/L2/L3 + receipts + claim-memory + stead
 ├── 09-product-tours/           proof-tour, lsp, ghost, lock-sync, polyglot-bell
 ├── 10-rag-corpus/              catalog, packs, retrieval contracts, eval
