@@ -69,4 +69,11 @@ Always-on rules **mandate** a frontmatter graph walk (`look_first` then
 `07-system-design/schemas/va-doc-frontmatter.schema.json`. Spec corpus Model
 Context Protocol tools must filter on the same keys — not a second catalog.
 Rationale: `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md`.
-Mass `.md` → `.mdc` remains Refuse.
+
+## Port MDC projections (Adopt 2026-08-11)
+
+**Port scope only.** Do not bulk-rename Markdown → `.mdc` under `research/`.
+Cursor only loads `.mdc` from `.cursor/rules/`. Add thin **projections** that
+carry `globs`/`description` and point at MD SoTs. Inventory:
+`research/mdc-devex/mdc-projection-inventory-2026-08-11.md`. Rust/WASM stack:
+`research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md`.

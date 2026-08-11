@@ -1,0 +1,19 @@
+---
+description: Definition of Ready — auto in governance / no-code-gate paths
+globs:
+  - 00-governance/**
+  - 12-delivery/no-code-gate/**
+  - PORT_READY.md
+  - ports/verified-architecture/00-governance/**
+  - ports/verified-architecture/12-delivery/no-code-gate/**
+  - ports/verified-architecture/PORT_READY.md
+alwaysApply: false
+---
+
+# Projection: Definition of Ready
+
+SoT: `00-governance/dor-dod/DEFINITION_OF_READY.md`.
+
+1. Current tip: **0 PASS** rows — do not soft-pass.
+2. Research-depth / D0 failures stay FAIL until digests + adopters land.
+3. Port Ready CONDITIONAL ≠ Implement Ready.

@@ -1,0 +1,16 @@
+---
+description: Architecture brief — auto when the principal brief is in context
+globs:
+  - 07-system-design/ARCHITECTURE_BRIEF.md
+  - ports/verified-architecture/07-system-design/ARCHITECTURE_BRIEF.md
+alwaysApply: false
+---
+
+# Projection: ARCHITECTURE_BRIEF
+
+SoT: `07-system-design/ARCHITECTURE_BRIEF.md` — read frontmatter first.
+
+1. Brief is Spec Draft — not Implement license.
+2. Cite claim tiers; do not upgrade Unknown silently.
+3. FREEZE still binds — no new Must from the brief alone.
+4. Prefer `@` / open SoT over pasting sections into rules.

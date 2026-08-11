@@ -1,0 +1,18 @@
+---
+description: Decision Framework six-vector — auto when editing decisions or standards
+globs:
+  - docs/standards/decision-framework.md
+  - 07-system-design/decisions/**
+  - ports/verified-architecture/docs/standards/decision-framework.md
+  - ports/verified-architecture/07-system-design/decisions/**
+alwaysApply: false
+---
+
+# Projection: Decision Framework
+
+SoT: `docs/standards/decision-framework.md`.
+
+1. Six-vector Selection Taxonomy before new Chosen/Adopt language.
+2. Under FREEZE: do not add matrices — deepen-3 only.
+3. Working hypothesis ≠ human Accept.
+4. Refuse circular Why (tip stack accident ≠ product Why).

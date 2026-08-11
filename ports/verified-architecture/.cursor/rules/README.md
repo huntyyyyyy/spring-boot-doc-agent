@@ -24,8 +24,14 @@ Budget: **≤2** `alwaysApply: true`. Depth → Skills. Path → `globs` (port-r
 | `09-cold-start.mdc` | agent-requested | Lost session |
 | `10-verification-stack.mdc` | globs `08-verification/**` | Locks/claims/receipts |
 | `11-mcp-surfaces.mdc` | agent-requested | Spec vs verify Model Context Protocol |
+| `projections/*.mdc` | globs / agent-requested | Thin pointers at MD SoTs (Wave-0) — see inventory |
 
 Nests: `nests/*/.cursor/rules/nest.mdc` — thin, dual globs, one nest at a time.
+
+**Port-only policy:** do not rename `research/**` or ADR/QAS bodies to `.mdc`.
+Cursor only activates `.mdc` under `.cursor/rules/`. Inventory:
+`research/mdc-devex/mdc-projection-inventory-2026-08-11.md`. Research:
+`research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md`.
 
 Parent monorepo also has `.cursor/rules/verified-architecture-port.mdc` (globs
 `ports/verified-architecture/**`).

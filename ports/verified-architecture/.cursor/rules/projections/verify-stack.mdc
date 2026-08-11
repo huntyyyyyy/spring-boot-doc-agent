@@ -1,0 +1,15 @@
+---
+description: Must verification spine — pull when discussing locks, claims, receipts, or STEAD
+alwaysApply: false
+---
+
+# Projection: VERIFY_STACK
+
+SoT: `08-verification/VERIFY_STACK.md` (also glob lens `10-verification-stack.mdc`).
+
+Must spine = graph + locks **and** artifact-anchored claim memory **and**
+Stateful Tool-Enabled Agentic Deployment tool constraints **and** receipts.
+
+1. Open SoT before inventing stack order.
+2. Exact public engines = 0 → Pilot invent, not silent Adopt.
+3. Schema drafts under `08-verification/` and `07-system-design/icd/`.

@@ -1,0 +1,19 @@
+---
+description: STATUS / FREEZE — auto when STATUS or honesty memos are in context
+globs:
+  - STATUS.md
+  - ports/verified-architecture/STATUS.md
+  - research/gaps/shallow-decisions-honesty-2026-08-10.md
+  - ports/verified-architecture/research/gaps/shallow-decisions-honesty-2026-08-10.md
+alwaysApply: false
+---
+
+# Projection: STATUS + FREEZE
+
+SoT: `STATUS.md` (read frontmatter `look_first` first).
+
+1. Implement Ready = **NO**; Definition of Ready **0 PASS**.
+2. FREEZE: no new Decision Matrices / Architecture Decision Records / Must entities.
+3. Deepen at most three: receipt β/ρ; claim withdrawal; Model Context Protocol handle lifecycle.
+4. Honesty memo: `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
+5. Do not paste the honesty memo into chat — open it.

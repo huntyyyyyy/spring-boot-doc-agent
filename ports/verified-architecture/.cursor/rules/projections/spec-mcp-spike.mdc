@@ -1,0 +1,17 @@
+---
+description: Spec corpus Model Context Protocol Spike — Rust host; frontmatter schema; not product verify
+alwaysApply: false
+---
+
+# Projection: Spec Model Context Protocol Spike
+
+SoTs:
+
+- `12-delivery/spike-charters/SPIKE-SPEC-MCP-0.md`
+- `07-system-design/schemas/va-doc-frontmatter.schema.json`
+- `research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md`
+
+1. **Rust** stdio host (Working hypothesis) — not tip Python.
+2. Tools filter on frontmatter `mcp_tools` / `doc_role` / `accepted`.
+3. WebAssembly = optional sandboxed reader guest — **not** host.
+4. Product `verify` / receipts Model Context Protocol = separate surface — Refuse here.

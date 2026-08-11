@@ -29,7 +29,10 @@ host (circular Why).
 
 | Field | Content |
 | --- | --- |
-| **Host** | **Rust** stdio via official `modelcontextprotocol` Rust software development kit — Working hypothesis for this Spike (aligns Architecture Decision Record ADR-0007 digest/schema DNA). Optional later thin TypeScript facade for Cursor wiring only (Architecture D) — not a second SoT |
+| **Host** | **Rust** stdio via official Model Context Protocol Rust software development kit |
+| Crates (Spike plan) | `serde_yaml` + Jekyll-style `---` split (not pulldown-cmark-frontmatter code-block dialect); `jsonschema` vs `va-doc-frontmatter.schema.json`; `blake3` corpus digest; path walk for `look_first`/`related` |
+| WebAssembly | Optional Extism/wasmtime **guest** for untrusted parse probes (deny net) — Architecture Decision Record ADR-0004 honesty; **Refuse** as Spec host |
+| Cursor layer | Thin `.cursor/rules/projections/*.mdc` — activation only; MD remains corpus SoT |
 | Frontmatter SoT | `07-system-design/schemas/va-doc-frontmatter.schema.json` — Rust validates + indexes |
 | Tools | `spec_status`, `spec_assumption`, `spec_icd`, `spec_decision`, `spec_gap`, optional `spec_lookup` |
 | Tool filter | `mcp_tools` contains tool; `doc_role`; refuse `accepted:true` under FREEZE for decisions |
