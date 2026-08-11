@@ -21,8 +21,12 @@ related:
 
 # Research corpus index
 
-Use this file as the **Retrieval-Augmented Generation catalog**. Chunk by file; embed `title` + first H2
-+ claim-tier tags from frontmatter when present.
+Chunk by file for Retrieval-Augmented Generation; embed `title` + first H2 +
+claim-tier tags when present. Prefer this catalog over dumping packs into
+always-on agent context. Fail-mode: treating any pack row as Implement Ready
+or Definition of Ready PASS without Skill `promote-claim`.
+
+Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 
 ## Topic packs
 
@@ -39,42 +43,42 @@ Use this file as the **Retrieval-Augmented Generation catalog**. Chunk by file; 
 | **Port MDC projections + Rust/WASM** | `research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md` | Port-only: thin `.mdc` projections; Rust Spec host; WASM guest Could |
 | **MDC projection inventory** | `research/mdc-devex/mdc-projection-inventory-2026-08-11.md` | Which port MD stay MD vs get Cursor projections |
 | **Forced pointing + frontmatter / Spec Model Context Protocol** | `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md` | MDC mandates graph walk; shared FM schema with Spec tools |
-| **Spec corpus Model Context Protocol + polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec Model Context Protocol vs product verify; Rust/WebAssembly/Go feature map |
-| **Model Context Protocol open items (schemas / mint / fixtures)** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool JSON Schema 2020-12, `snapshot_open`, DynamicMCPBench effect fixtures |
-| **Spec / corpus Model Context Protocol polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec Model Context Protocol (not product verify); software development kit tiers; Rust/WebAssembly/Go/TS/Python/Ruby/Clojure; Architectures A–D |
+| **Spec corpus Model Context Protocol + polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec Model Context Protocol (not product verify); Rust/WebAssembly/Go/TS software development kit tiers; Architectures A–D |
+| **Model Context Protocol open items** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool JSON Schema 2020-12, `snapshot_open`, DynamicMCPBench effect fixtures |
 | **DynamicMCPBench digest** | `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md` | Effect checkpoints, minefields, Tier-1; engine pending |
 | **Decision Framework** | `docs/standards/decision-framework.md` | Six-vector Selection Taxonomy (Decision Matrix / Architecture Decision Record companion / Governance) |
 | **Math / formal brainstorm** | `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` | Temporal Logic of Actions / Alloy / theorem provers / Java Modelling Tools / Analytic Hierarchy Process / Monte Carlo — **ideas only, not Must** |
 | **Cursor rules catalog** | `.cursor/rules/README.md` | Activation modes; FREEZE in constitution; dual globs for monorepo |
 | **Architecture Tradeoff Analysis Method + formal boundaries** | `research/atam-formal/atam-qas-adr-formal-boundaries-2026-08-10.md` | Quality Attribute Scenarios before Design; TLA+/Verus honesty |
 | **Model Context Protocol Decision Matrix** | `07-system-design/decisions/mcp-decision-matrix.md` | Usage cases UC-Model Context Protocol-01…08, planned code loci, scored alternatives |
-| **Model Context Protocol open-items research** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool schemas, snapshot_open, DynamicMCPBench plants |
 | **Lock / receipt Decision Matrices** | `07-system-design/decisions/lock-ir-decision-matrix.md`, `receipt-decision-matrix.md` | Six-vector selection for G-L1 / G-R1 |
 | **C4 + confidence** | `07-system-design/c4/C4-BRIEF-CONFIDENCE.md` | Context/Container sketch with per-entity scores |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
-| **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Earlier memo — **superseded on depth** by the adoption audit |
+| **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Historical title→action table — **superseded on depth** by adoption audit |
 | **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |
 | **Jul–Aug adversarial** | `research/adversarial/july-august-2026-overturn-review.md` | Did new papers overturn us? |
-| **Leaders / GitHub adoption** | `research/leaders-adoption/` | Who leads vs who ships |
+| **Leaders / GitHub adoption** | `research/leaders-adoption/` | Who leads vs who ships (★ ≠ fitness) |
 | **Pre-code BFS taxonomy** | `research/pre-code-bfs/` | Classify domains before AI codegen |
 | **Papers May–Aug 2026** | `research/papers-2026-may-aug/` | Cross-domain science + RE evidence |
 | Layers of Truth / vision | `research/layers-of-truth/` | Product intent, local-first verification story |
 | Adversarial + RE critique | `research/adversarial/` | Threaten Draft REQs; MoSCoW honesty |
 | Architecture Tradeoff Analysis Method / formal | `research/atam-formal/` | Quality Attribute Scenario, tactics, Architecture Decision Record method, formal bounds |
-| Polyglot portfolio | `research/polyglot/` | Language peers, WebAssembly, mental models |
+| Polyglot portfolio | `research/polyglot/` | Language peers, WebAssembly, mental models; **Refuse Python** |
 | MDC / DevEx / context | `research/mdc-devex/` | Activation algebra; agents + developers |
-| Provenance | `research/PROVENANCE.md` | What this corpus is (no prior-repo identity) |
+| Provenance | `research/PROVENANCE.md` | Standalone corpus; no prior-repo identity |
 | Nested domain tree | `PRECODE_MAP.md` + `00-`…`12-` | Industry-shaped pre-code folders |
 
-## Claim tiers
+## Claim tiers (fail-modes)
 
-- **Evidenced** — citation supports the claim
-- **Confirmed** — widely accepted or replicated
-- **Unknown** — must not be silently upgraded
+| Tier | Agent may | Agent must not |
+| --- | --- | --- |
+| **Evidenced** | Cite path / arXiv / API snapshot that supports the row | Invent a citation that “sounds right” |
+| **Confirmed** | Use widely replicated practice as design pressure | Upgrade from Evidenced without replication note |
+| **Unknown** | Keep open; schedule Spike | Silently promote to Must / Chosen |
 
 ## Ingest rules
 
-1. Prefer retrieving from `research/` over dumping into always-on agent context
+1. Retrieve from `research/` on demand — do not paste packs into every tip
 2. Promote into `00/`–`12/` only via Skill `promote-claim` (legacy `docs/` demoted)
-3. Nest MDCs point at *which* pack to retrieve — they do not inline the pack
+3. Nest MDCs name *which* pack to retrieve — they do not inline the pack
 4. Never mass-rename corpus Markdown into always-on `.mdc`

@@ -5,10 +5,12 @@ date: '2026-08-10'
 ---
 
 > Mirror of parent `docs/research/method/paper-api-cheatsheet.md` — parent wins on conflict.
+> **Historical / evidence — not product SoT.** Field-select copy-paste only.
 
 # Field-select cheatsheet (copy into tool calls)
 
-Full schemas: `paper-api-schemas.md`.
+Full schemas: `paper-api-schemas.md`. Fail-mode: request fat field sets
+(`abstract`+`citations`+`references`+`embedding`) on search lists.
 
 ## OpenAlex scout
 

@@ -47,14 +47,18 @@ sources:
 
 # VA — Local-first verified architecture agent
 
-**Product framing:** polyglot verified architecture + Retrieval-Augmented Generation/MDC progressive disclosure (planning corpus).  
-**Ambition:** glue **Source Code Index Protocol → local SCM → graph verify → (optional) SMT**, with
-Python (then Rust hot paths) as ACI — more precise than chat-only agents, more
-flexible than a pure verifier.
+**Historical / evidence — not product SoT.** Tip-Python / ACI / “Pilot-before-Refuse”
+rows below predate Architecture Decision Record ADR-0001 amend. **Product locks:**
+**Rust** Spec / engine host; **Refuse Python**; WebAssembly **Could** (sandbox ≠ proof).
 
-**Method note.** Shape inspired by a Duck.ai / Gemma exploration
-(`[Unknown — chat]`); corrected against this repo’s constitution and prior
-polyglot memos. **No Refuse-by-default** — Pilot-before-cutover.
+**Product framing:** polyglot verified architecture + Retrieval-Augmented Generation/MDC
+progressive disclosure (planning corpus only).  
+**Ambition:** Source Code Index Protocol → local SCM → graph verify → (optional) SMT —
+more precise than chat-only agents, more flexible than a pure verifier. Engine DNA =
+**Rust** (ADR-0007), not Python ACI.
+
+**Method note.** Shape inspired by Duck.ai / Gemma (`[Unknown — chat]`); corrected
+against constitution + polyglot memos. Body “Keep Python tip” language = historical.
 
 ---
 
@@ -69,7 +73,8 @@ polyglot memos. **No Refuse-by-default** — Pilot-before-cutover.
 | **Sandbox** | Where does untrusted check run? | **WebAssembly** (validator harness) | Not a prover |
 
 **v1 Accept (pragmatic):** virtual Spring/dep **graph** + lock checks + proof-tour
-receipts. **Defer** full Z3 bean “proofs.” Keep Python tip until Explicit cutover.
+receipts. **Defer** full Z3 bean “proofs.” **Refuse Python** tip/ACI for this port
+(historical “Keep Python tip until cutover” rows below).
 
 **Requirements System of Record:**
 [`docs/requirements/`](../../design/docs/requirements-2026-08-10.md)

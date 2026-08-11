@@ -3,59 +3,46 @@ title: Repository structure visual
 status: ACTIVE
 ---
 
-# Structure visual
+# Structure
 
-## Tree (what you push as the new repo root)
+## Tree (export root)
 
 ```text
-verified-architecture/          ← make THIS the git root
+verified-architecture/          ← git root when exporting
 │
 ├── AGENT_BOOTSTRAP.md          ★ cold start #1
-├── STATUS.md                   ★ cold start #2
-├── AGENT_WALKTHROUGH.md        ★ sequential chain + mermaid
+├── STATUS.md                   ★ FREEZE + next task
+├── AGENT_WALKTHROUGH.md        ★ this chain
 ├── STRUCTURE.md                ★ this file
-├── PRECODE_MAP.md
+├── PRECODE_MAP.md              where new files go
 ├── HOW_TO_PRIME_AGENTS.md
-├── AGENTS.md                   (thin Cloud ingest)
+├── AGENTS.md                   thin Cloud ingest
 ├── CONTRIBUTING.md
-├── EXPORT.md
-├── README.md
-├── PROVENANCE.md
+├── EXPORT.md / PORT_READY.md / PROVENANCE.md / README.md / GLOSSARY.md
 │
-├── .cursor/
-│   ├── rules/                  (≤2 alwaysApply; rest globs/requested)
-│   └── skills/                 cold-start, fill-wave-gap, rag-retrieve, promote-claim
+├── .cursor/rules/              ≤2 alwaysApply; rest globs/requested
+├── .cursor/skills/             cold-start, fill-wave-gap, rag-retrieve, …
 │
-├── 00-governance/              DoR, claim tiers, promotion
-├── 01-vision/                  BOUNDARY.md
-├── 02-stakeholders/            actors, opscon, signoff
-├── 03-requirements/            strs, srs, qas, rtm, use-cases
-├── 04-constraints/             CON + OQ-01…08
-├── 05-quality-architecture/    ATAM, tactics, tradeoffs, formal
-├── 06-domain/                  ubiquity, BCs, info model, UNKNOWN-TAXONOMY
-├── 07-system-design/           ARCHITECTURE_BRIEF, ports, icd, decisions, options, c4 brief
-│                                 (Architecture Decision Records live in docs/adr/ — not here)
-├── 08-verification/            ★ VERIFY_STACK + L1/L2/L3 + receipts + claim-memory + stead
-├── 09-product-tours/           proof-tour, lsp, ghost, lock-sync, polyglot-bell
-├── 10-rag-corpus/              catalog, packs, retrieval contracts, eval
+├── 00-governance/              Definition of Ready System of Record
+├── 01-vision/                  BOUNDARY.md (non-goals / success empty)
+├── 02-stakeholders/            SIGNOFF_LOG (actors/opscon empty)
+├── 03-requirements/            strs, srs, qas, rtm
+├── 04-constraints/             constraints-wave1 + OQ-01…08
+├── 05-quality-architecture/    EMPTY — .gitkeep only
+├── 06-domain/                  UNKNOWN-TAXONOMY only; BC/info-model empty
+├── 07-system-design/           brief, ports, icd; ADRs live in docs/adr/
+├── 08-verification/            VERIFY_STACK + receipts + claim-memory + stead
+├── 09-product-tours/           EMPTY — five .gitkeep tours
+├── 10-rag-corpus/              EMPTY — live catalog = research/INDEX.md
 ├── 11-science-transfer/        locked transfers / refuse substrates
-├── 12-delivery/                waves, spikes, no-code-gate, pilot-before-refuse
+├── 12-delivery/                no-code-gate + spike charters (Rust Spec host)
 │
-├── research/                   evidence (retrieve one pack — never always-load)
-│   ├── INDEX.md
-│   ├── adversarial/            incl. july-august-2026-overturn-review.md
-│   ├── papers-2026-may-aug/
-│   ├── leaders-adoption/
-│   ├── pre-code-bfs/
-│   ├── mdc-devex/
-│   ├── polyglot/ atam-formal/ layers-of-truth/
-│   └── …
-│
-├── docs/                       LEGACY flat RE/C4/ADR (prefer 00–12 for new work)
-└── nests/                      LEGACY language placeholders → prefer 07/.../options/
+├── research/                   evidence — one pack via INDEX.md
+├── docs/                       ADR + C4 + standards active; REQs/CON pointers
+└── nests/                      language options; 08 Python REFUSED
 ```
 
-## Authority layers
+## Authority flow
 
 ```mermaid
 flowchart TB
@@ -63,44 +50,31 @@ flowchart TB
     R0[00-constitution.mdc]
     R1[01-rag-progressive-disclosure.mdc]
   end
-
-  subgraph entry [Entry — read in order]
-    B[AGENT_BOOTSTRAP]
-    S[STATUS]
-    W[AGENT_WALKTHROUGH]
-    P[PRECODE_MAP]
+  subgraph entry [Entry]
+    B[BOOTSTRAP] --> S[STATUS] --> W[WALKTHROUGH] --> P[PRECODE_MAP]
   end
-
-  subgraph law [Product law — Spec]
-    V[08 VERIFY_STACK]
-    EG[claim-memory EA-Graph]
-    ST[stead STEAD constraints]
+  subgraph law [Spec law]
+    V[VERIFY_STACK]
     AR[ARCHITECTURE_BRIEF]
   end
-
-  subgraph evidence [Evidence — retrieve one]
+  subgraph evidence [Evidence]
     RX[research/INDEX → one pack]
   end
-
-  subgraph legacy [Legacy — do not prefer]
-    D[docs/]
-    N[nests/]
-  end
-
-  always --> entry
-  entry --> law
-  law --> evidence
-  entry -.-> legacy
+  always --> entry --> law --> evidence
+  entry -.->|do not prefer| legacy[docs/ nests/]
 ```
 
-## Verify stack (Must — not graph alone)
+## Must spine (not graph alone)
 
 ```mermaid
 flowchart LR
   L1[L1 Index/SCIP] --> L2[L2 Graph + LockCheck]
-  L2 --> L2b[L2b EA-Graph claims]
+  L2 --> L2b[L2b claim memory]
   L2b --> R[Receipts]
   R --> T[STEAD tool constraints]
   A[Agent proposes] --> L2
   A --> T
 ```
+
+Stack locks: Rust Spec corpus Model Context Protocol; TypeScript IDE only;
+WebAssembly LockCheck Could / Wave-3.

@@ -1,57 +1,44 @@
-# Verified Architecture — planning + Retrieval-Augmented Generation corpus
+# Verified Architecture
 
-Greenfield **product planning** repository for a verified polyglot system,
-plus a research corpus shaped for both developers and coding agents.
+Greenfield **specification** tree + claim-tiered research corpus. Product crates
+are forbidden until Definition of Ready PASS (`STATUS.md`).
 
-**Language:** use **whole words** in prose — see [`GLOSSARY.md`](GLOSSARY.md).
+Whole words — [`GLOSSARY.md`](GLOSSARY.md). Edit skill — `predicate-prose`.
 
-## What this is
+## Layers (authority)
 
-| Layer | Role |
-| --- | --- |
-| `00/`–`12/` | Authoritative specification tree (preferred) |
-| `docs/adr/`, `docs/c4/`, `docs/standards/` | **Active** Architecture Decision Records, C4 levels, standards |
-| `docs/requirements/`, `docs/constraints/` | **Pointers** → `03/` / `04/` |
-| `research/` | Evidence corpus (claim-tiered) — retrieve, do not always-load |
-| `nests/` | Language bounded contexts (nest 08 Python **REFUSED**) |
-| `.cursor/rules/` | Repo-wide Cursor rule activation algebra |
-| `.cursor/skills/` | Deep playbooks agents pull on demand |
-| `AGENTS.md` | Thin ingest pointer (not a second rule system) |
-
-## Product intent (short)
-
-Ship a **polyglot verified architecture** platform: languages are first-class
-peers; verification Musts are graph + locks + artifact-anchored claim memory +
-Stateful Tool-Enabled Agentic Deployment tool constraints + receipts; formal
-methods only where earned. This tree is also a **Retrieval-Augmented Generation
-tool surface**: the same Markdown corpus is retrieved for agents and developers
-via Cursor rule modes + Skills + indexes.
-
-## How context is loaded
-
-| Mode | When | Use here |
+| Path | Bound | Fail-mode |
 | --- | --- | --- |
-| `alwaysApply: true` | Rare — constitution + retrieval budget | Exactly 2 under `.cursor/rules/` |
-| `globs:` | Path-scoped work | Nest rules + `docs/**` / `research/**` |
-| Agent-requested | Agent pulls by description | Look-first, Architecture Tradeoff Analysis Method, polyglot topics |
-| Manual `@rule` | Human attaches | Formal honesty |
-| Skills | On-demand depth | `rag-retrieve`, `promote-claim` |
+| `00/`–`12/` | Preferred Spec System of Record | New Musts outside FREEZE deepen-3 → reject |
+| `docs/adr/`, `docs/c4/`, `docs/standards/` | Active Architecture Decision Records / C4 / standards | Duplicate Architecture Decision Record under `07/` → reject |
+| `docs/requirements/`, `docs/constraints/` | Pointers only → `03/` / `04/` | Editing pointer as if System of Record → reject |
+| `research/` | Evidence — retrieve one pack | Always-loading whole tree → reject |
+| `nests/` | Language options; nest 08 Python **REFUSED** | Treating nests as Approved Design → reject |
+| `.cursor/rules/` | ≤2 `alwaysApply` | Dumping research into always-on rules → reject |
+| `AGENTS.md` | Thin Cloud ingest | Second rule essay here → reject |
 
-**Do not** convert the whole research tree into always-on Cursor rules. Theory:
-`research/mdc-devex/`.
+## Stack locks
 
-## Start here
+| Concern | Owner | Reject |
+| --- | --- | --- |
+| Engine + Spec corpus Model Context Protocol | Rust | Python host / ACI |
+| IDE presentation Model Context Protocol | TypeScript | Spec corpus server as TypeScript default |
+| LockCheck WebAssembly guest | Could / Wave-3 | Spec host; Wave-1 Must |
 
-**Agents (new repository / no chat):**  
-[AGENT_BOOTSTRAP.md](AGENT_BOOTSTRAP.md) → [STATUS.md](STATUS.md) →
-[AGENT_WALKTHROUGH.md](AGENT_WALKTHROUGH.md) → [STRUCTURE.md](STRUCTURE.md) →
-[GLOSSARY.md](GLOSSARY.md) →
-[08-verification/VERIFY_STACK.md](08-verification/VERIFY_STACK.md)
+Must spine ≠ graph + locks alone — claim memory + Stateful Tool-Enabled Agentic
+Deployment constraints + receipts (`08-verification/VERIFY_STACK.md`).
 
-Paste prompt: [HOW_TO_PRIME_AGENTS.md](HOW_TO_PRIME_AGENTS.md).
+## Cold start
 
-## Status
+[`AGENT_BOOTSTRAP.md`](AGENT_BOOTSTRAP.md) → [`STATUS.md`](STATUS.md) →
+[`AGENT_WALKTHROUGH.md`](AGENT_WALKTHROUGH.md) → [`STRUCTURE.md`](STRUCTURE.md) →
+[`GLOSSARY.md`](GLOSSARY.md) → [`VERIFY_STACK.md`](08-verification/VERIFY_STACK.md).
 
-**Port ready:** YES — [`PORT_READY.md`](PORT_READY.md) (export specification corpus via [`EXPORT.md`](EXPORT.md)).  
-**Implement ready:** NO — see [`STATUS.md`](STATUS.md).  
-Research that closed specification gaps: [`june-august-2026-port-readiness.md`](research/papers-2026-may-aug/june-august-2026-port-readiness.md).
+Paste: [`HOW_TO_PRIME_AGENTS.md`](HOW_TO_PRIME_AGENTS.md).
+
+## Readiness
+
+| Gate | State | Bound |
+| --- | --- | --- |
+| Port / export | **CONDITIONAL** | Spec sandbox only — [`PORT_READY.md`](PORT_READY.md) / [`EXPORT.md`](EXPORT.md) |
+| Implement | **NO** | Definition of Ready 0 PASS; D0 FAIL — [`STATUS.md`](STATUS.md) |

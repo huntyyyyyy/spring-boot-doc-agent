@@ -1,23 +1,22 @@
 # Nest: C / Zig shims
 
-**Owns:** Grammars, amalgamation, earned systems toolkits — Spike keep/drop only
+**Owns (when built):** Grammar amalgamation / earned systems toolkits only
+after Spike keep/drop. Not a default runtime lane.
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0001
+**Fail closed:** unearned C/Zig product tree without Spike exit, or using this
+nest to revive Python glue → violates Architecture Decision Record ADR-0001
+polyglot lanes + FREEZE.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Now:** README + `nest.mdc` only — no amalgamation until Definition of Ready
+PASS and Spike keep.
 
-## Look-first research
+## Open first
 
-- `research/polyglot/`
+1. `docs/adr/adr-0001-polyglot-first-product.md`  
+2. `research/polyglot/`  
+3. `docs/c4/02-containers.md`
 
 ## Shared System of Record
 
-- `docs/DOMAIN_MAP.md`
-- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+- `03-requirements/` · `04-constraints/`  
+- `docs/c4/` · `docs/adr/`

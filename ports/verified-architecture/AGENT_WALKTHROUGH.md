@@ -1,95 +1,78 @@
 ---
-title: AGENT_WALKTHROUGH — sequential load order in a new repository
+title: AGENT_WALKTHROUGH — sequential load order
 status: ACTIVE
 audience: [agent, developer]
 ---
 
-# Agent walkthrough — what gets opened, in order
+# Agent walkthrough
 
-Use this when the folder is the **root** of a new GitHub/Cursor project.
-No chat history. Follow the steps; do not breadth-scan the whole tree.
+No chat history. Open the chain below; do not breadth-scan. Whole words —
+`GLOSSARY.md`.
 
-**Language:** whole words in prose — `GLOSSARY.md`.
+## Automatic (Cursor / Cloud)
 
-## Automatic context (Cursor loads without you asking)
+| Load | Bound |
+| --- | --- |
+| `00-constitution.mdc`, `01-rag-progressive-disclosure.mdc` | Only two `alwaysApply` |
+| `AGENTS.md` | Ingest pointer → bootstrap — not a second rule set |
 
-```text
-alwaysApply (.cursor/rules/)
-  1. 00-constitution.mdc          ← identity + gates + cold-start pointer
-  2. 01-rag-progressive-disclosure.mdc  ← don't dump research/
+All other paths are on-demand (globs, Skills, or this chain).
 
-Cloud / ingest may also inject:
-  AGENTS.md                       ← thin pointer → bootstrap
-```
-
-Everything else is **on demand** (globs, agent-requested, Skills, or this list).
-
----
-
-## Mandatory human/agent read chain (do not skip)
+## Mandatory chain
 
 ```mermaid
 flowchart TD
   A[1 AGENT_BOOTSTRAP.md] --> B[2 STATUS.md]
-  B --> C[3 AGENT_WALKTHROUGH.md this file]
-  C --> GLOSS[3b GLOSSARY.md whole words]
+  B --> C[3 AGENT_WALKTHROUGH.md]
+  C --> GLOSS[3b GLOSSARY.md]
   GLOSS --> D[4 PRECODE_MAP.md]
-  D --> E[5 Definition of Ready]
+  D --> E[5 DEFINITION_OF_READY.md]
   E --> F[6 no-code-gate README]
   F --> G[7 ARCHITECTURE_BRIEF.md]
-  G --> H[8 VERIFY_STACK claim memory + tool constraints + graph]
-  H --> I[9 open questions that block code]
-  I --> J{Task needs evidence?}
+  G --> H[8 VERIFY_STACK.md]
+  H --> I[9 open-questions/]
+  I --> J{Need evidence?}
   J -->|yes| K[Skill rag-retrieve → one pack]
-  J -->|no| L[Edit only the STATUS next-task path]
+  J -->|no| L[STATUS next-task path only]
   K --> L
-  L --> M[Update STATUS + open-question status]
 ```
 
-| Step | File | Why |
+| Step | Path | Attribute gained |
 | --- | --- | --- |
-| 1 | `AGENT_BOOTSTRAP.md` | Priming packet / refuses |
-| 2 | `STATUS.md` | Phase + **single next task** |
-| 3 | `AGENT_WALKTHROUGH.md` | This chain + structure visual |
-| 3b | `GLOSSARY.md` | Whole words — expand short labels |
-| 4 | `PRECODE_MAP.md` | Where new files go (`00/`–`12/`) |
-| 5 | `00-governance/dor-dod/DEFINITION_OF_READY.md` | Code-generation gate rows |
-| 6 | `12-delivery/no-code-gate/README.md` | Hard Refuse product code |
-| 7 | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape / minimum viable product / leaders |
-| 8 | `08-verification/VERIFY_STACK.md` | Graph + locks **and** artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic Deployment constraints |
-| 9 | `04-constraints/open-questions/` | What still blocks |
-| 10 | `PORT_READY.md` + Definition of Ready | Specification port versus Implement gate |
+| 1 | `AGENT_BOOTSTRAP.md` | Hard refuses + stack owners |
+| 2 | `STATUS.md` | FREEZE deepen-3 + single next task |
+| 3 | this file | Stop rules + task branches |
+| 3b | `GLOSSARY.md` | Bare short forms banned in prose |
+| 4 | `PRECODE_MAP.md` | Where new files land (`00/`–`12/`) |
+| 5 | `00-governance/dor-dod/DEFINITION_OF_READY.md` | Code-gen gate rows (0 PASS) |
+| 6 | `12-delivery/no-code-gate/README.md` | Product crates → reject |
+| 7 | `07-system-design/ARCHITECTURE_BRIEF.md` | Shape / leaders |
+| 8 | `08-verification/VERIFY_STACK.md` | Four-leg Must spine |
+| 9 | `04-constraints/open-questions/` | What still blocks Implement |
+| 10 | `PORT_READY.md` | Export CONDITIONAL ≠ Implement |
 
-**Stop.** Do not open `research/**` wholesale. Do not open `nests/**` unless the
-task is that bounded-context option. Do not open legacy `docs/**` unless
-promoting into `00/`–`12/`.
+**Stop:** no wholesale `research/**`; no `nests/**` unless that option is the
+task; no legacy `docs/**` write unless promoting into `00/`–`12/`.
 
----
+## Task branches (after step 9)
 
-## Task-shaped branches (after step 9)
-
-| If STATUS says… | Open next |
+| STATUS next task | Open |
 | --- | --- |
 | Boundary / open question 01 | `01-vision/problem-frame/BOUNDARY.md` |
-| Receipts / artifact-anchored claims | `08-verification/receipts/` + `claim-memory/` |
-| Tool constraints / Model Context Protocol tools | `08-verification/stead/` + `SPIKE-STEAD-equivariance.md` |
+| Receipts / claim memory | `08-verification/receipts/` + `claim-memory/` |
+| Tool constraints | `08-verification/stead/` + `SPIKE-STEAD-equivariance.md` |
 | Ports / Interface Control Document | `07-system-design/ports-and-adapters/PORTS.md`, `icd/` |
-| Quality Attribute Scenarios | `03-requirements/qas/` (N-01…N-08) |
-| Port / Definition of Ready | `PORT_READY.md` + `00-governance/dor-dod/DEFINITION_OF_READY.md` |
-| June–August readiness | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` **one file** |
-| Papers / overturn | `research/adversarial/july-august-2026-overturn-review.md` **one file** |
+| Quality Attribute Scenarios | `03-requirements/qas/` |
+| Port / Definition of Ready | `PORT_READY.md` + Definition of Ready |
+| June–August readiness | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` (one file) |
+| Overturn | `research/adversarial/july-august-2026-overturn-review.md` (one file) |
 
----
-
-## Paste prompt for the new repository
+## Paste prompt
 
 ```text
-Repository root is this planning corpus. No prior chat.
-Use whole words (GLOSSARY.md). No bare acronyms in prose.
-Read in order: AGENT_BOOTSTRAP.md → STATUS.md → AGENT_WALKTHROUGH.md → GLOSSARY.md.
-Obey Skill cold-start. Do not write product code.
-Must spine = graph + locks + artifact-anchored claim memory
-  + Stateful Tool-Enabled Agentic Deployment tool constraints
-(see 08-verification/VERIFY_STACK.md) — not graph + locks alone.
-Work the single next task in STATUS.md.
+Root = this planning corpus. No prior chat. Whole words (GLOSSARY.md).
+Read: AGENT_BOOTSTRAP → STATUS → AGENT_WALKTHROUGH → GLOSSARY.
+Skill cold-start. No product code. Must spine = graph + locks + claim memory
++ Stateful Tool-Enabled Agentic Deployment constraints (VERIFY_STACK.md).
+Work only the single next task in STATUS.md.
 ```

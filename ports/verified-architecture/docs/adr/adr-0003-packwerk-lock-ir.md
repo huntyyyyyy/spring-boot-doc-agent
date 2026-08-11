@@ -10,14 +10,17 @@ nest: nests/03-locks-ruby
 
 ## Context
 
-Package boundary debt needs an executable Intermediate Representation humans and
-agents share. Packwerk is the pattern source; evaluation lives in the engine.
+Package-boundary debt needs an Intermediate Representation humans and agents
+share. Packwerk supplies the pattern; evaluation must stay in the engine so
+per-language checkers cannot diverge.
 
 ## Decision
 
-**Packwerk-shaped lock Intermediate Representation** (JSON schema in ICD).
-**Ruby** owns Packwerk-shaped DX / authoring bounded context. **Rust**
-`LockCheck` evaluates (Architecture Decision Record ADR-0004 / ADR-0007).
+Lock rules ship as **Packwerk-shaped JSON** under the Interface Control
+Document schema. **Ruby** authors Packwerk-shaped manifests (nest
+`03-locks-ruby`). **Rust** `LockCheck` evaluates them (Architecture Decision
+Record ADR-0004 / ADR-0007). Prose-only locks or a Python authoring System of
+Record fail this Architecture Decision Record.
 
 ## Status
 
@@ -25,7 +28,7 @@ Proposed.
 
 ## Consequences
 
-Positive: gradual enforce modes; shared IR.  
-Negative: adapter fidelity matrix required.  
-Rejected: prose-only locks; per-language checkers with no shared IR; Python lock
-authoring SoT.
+Positive: gradual enforce modes against one Intermediate Representation.  
+Negative: adapter fidelity matrix required per language front-end.  
+Rejected: prose-only locks; per-language checkers with no shared Intermediate
+Representation; Python lock authoring System of Record.

@@ -52,18 +52,20 @@ last_reviewed: '2026-08-10'
 # VA Pilot depth — why these pieces exist, and how we pilot them *rich*
 
 > **Amended 2026-08-11:** Python tip/ACI sections below are historical. **Refuse Python** for this port — see Architecture Decision Record ADR-0001 + nest 08 tombstone.
+>
+> **Historical / evidence — not product SoT.** Mental-model lanes stay; tip-Python
+> ownership claims do not. Stack locks: **Rust** Spec host; WebAssembly **Could**.
 
 **Problem this memo fixes.** Prior chat compressed the Pilot to “thin Python
-slice.” That was correct for **Must verify** (graph + locks + receipt) but
-**wrong** as product framing: the distinctive VA feature set is a
+slice.” That mis-framed product identity: the distinctive VA feature set is a
 **polyglot orchestra** (Packwerk-shaped locks, SQLite registry, Babashka graph
-brain, Go watch chassis, WebAssembly sandbox) *on top of* the Python tip — doctrine
-already in process/40–41/48/51. Adopt-lists without history and mental models
-are not enough to Design or Implement.
+brain, Go watch chassis, WebAssembly sandbox) with **Rust** as Spec/engine host —
+earlier “on top of the Python tip” wording (process/40–41/48/51) is historical.
+Adopt-lists without history and mental models are not enough to Design or Implement.
 
-**Gate.** More research *of this depth* was the missing step. This memo is the
-**Pilot research System of Record**. Design Spec (VA-1 / ADV-1…3) cites it. Implement still
-needs RE Approve + one Active-tip reorder.
+**Gate.** This memo is the **Pilot research System of Record** (evidence depth).
+Design Spec (VA-1 / ADV-1…3) may cite it. Implement still needs RE Approve —
+memo ≠ green light.
 
 ---
 

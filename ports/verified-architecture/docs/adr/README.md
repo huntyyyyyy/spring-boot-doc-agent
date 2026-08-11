@@ -7,28 +7,31 @@ last_reviewed: '2026-08-11'
 
 # Architecture Decision Records
 
-Nygard format. All rows are **Proposed** (human Accept pending) unless noted.
-**Stack lock (2026-08-11):** Rust engine + Spec corpus Model Context Protocol;
-TypeScript IDE presentation; **Refuse Python**; WebAssembly = LockCheck guest
-Could — not Spec host.
+Nygard records live here. Rows stay **Proposed** until a human Accepts.
+**Stack lock (2026-08-11):** only Rust may write engine effects and Spec corpus
+Model Context Protocol indexes; TypeScript may present IDE surfaces only;
+**Refuse Python** runtime for this port; WebAssembly LockCheck guest =
+**Could / Wave-3** — never Spec host. FREEZE: deepen receipt β/ρ, claim
+withdrawal, handle lifecycle only — new matrices without human override =
+reject.
 
-| ID | Decision (one line) | Nest / locus | Align |
+| ID | Bound choice | Nest / locus | Align |
 | --- | --- | --- | --- |
-| [0001](adr-0001-polyglot-first-product.md) | Polyglot peers; **Refuse Python** | nests (08 tombstone) | Amended |
-| [0002](adr-0002-sqlite-registry.md) | SQLite derived registry via Rust | `02-registry-sqlite` | OK |
-| [0003](adr-0003-packwerk-lock-ir.md) | Packwerk-shaped lock IR; Ruby DX | `03-locks-ruby` | OK |
-| [0004](adr-0004-native-then-wasm-lockcheck.md) | Native LockCheck first; WASM guest **Could**/Wave-3 | `01` + `06` | Amended |
-| [0005](adr-0005-clojure-graph-brain.md) | Clojure/bb Datascript over EDN export | `05-graph-clojure` | OK |
-| [0006](adr-0006-single-oracle-writer.md) | Single gate writer; hypothesis **Rust** | ADR-0007 | Amended |
-| [0007](adr-0007-rust-owns-engine.md) | Rust owns engine **and** Spec corpus MCP | `01-engine-rust` | Amended |
-| [0008](adr-0008-c4-before-code.md) | C4 + ADRs before product code | `docs/c4/`, gate | OK |
-| [0009](adr-0009-go-chassis-daemon.md) | Go watch/reindex chassis | `04-chassis-go` | OK |
-| [0010](adr-0010-typescript-ide-mcp.md) | TS owns IDE / **presentation** MCP only | `07-ide-typescript` | Amended |
-| [0011](adr-0011-mcp-protocol-and-tool-surface.md) | Pin `2026-07-28`; dual surfaces (verify vs Spec) | ICD + Spike | Amended |
+| [0001](adr-0001-polyglot-first-product.md) | One Accepted language → one bounded context; **Refuse Python** | nests (08 tombstone) | Amended |
+| [0002](adr-0002-sqlite-registry.md) | Bean/edge rows via rusqlite only | `02-registry-sqlite` | OK |
+| [0003](adr-0003-packwerk-lock-ir.md) | Shared lock Intermediate Representation; Ruby authors | `03-locks-ruby` | OK |
+| [0004](adr-0004-native-then-wasm-lockcheck.md) | Native LockCheck Must; WebAssembly guest **Could**/Wave-3 | `01` + `06` | Amended |
+| [0005](adr-0005-clojure-graph-brain.md) | Datascript over EDN export; not merge oracle | `05-graph-clojure` | OK |
+| [0006](adr-0006-single-oracle-writer.md) | ≤1 gate writer; hypothesis **Rust** | ADR-0007 | Amended |
+| [0007](adr-0007-rust-owns-engine.md) | Rust engine **and** Spec corpus Model Context Protocol host | `01-engine-rust` | Amended |
+| [0008](adr-0008-c4-before-code.md) | Context+Container+Architecture Decision Records before crates | `docs/c4/`, gate | OK |
+| [0009](adr-0009-go-chassis-daemon.md) | Go watches/reindexes; never oracle writer | `04-chassis-go` | OK |
+| [0010](adr-0010-typescript-ide-mcp.md) | TypeScript presentation Model Context Protocol only | `07-ide-typescript` | Amended |
+| [0011](adr-0011-mcp-protocol-and-tool-surface.md) | Pin `2026-07-28`; verify ≠ Spec corpus surfaces | Interface Control Document + Spike | Amended |
 
-Decision matrices (Draft / FREEZE): `07-system-design/decisions/` — do not add
-new matrices without human override.
+Filled matrices: `07-system-design/decisions/` (Draft / FREEZE). Adding a new
+matrix file without human override fails FREEZE.
 
-**Requirements / C4 SoT:** prefer `03-requirements/` and `docs/c4/` (Nygard C4
-levels). Flat `docs/requirements/` are **pointers**. Brief confidence sketch:
+**Requirements / C4 System of Record:** `03-requirements/` and `docs/c4/`.
+Flat `docs/requirements/` are pointers only. Confidence sketch:
 `07-system-design/c4/C4-BRIEF-CONFIDENCE.md`.

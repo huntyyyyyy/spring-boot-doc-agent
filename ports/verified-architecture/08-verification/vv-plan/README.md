@@ -7,28 +7,28 @@ evidence:
   - arXiv:2607.20531
 ---
 
-# Verification and Validation plan (wave-1)
+# V&V plan (wave-1)
 
-## Fixtures (names — plants TBD)
+## Fixtures (plants TBD)
 
-| ID | Intent |
-| --- | --- |
-| FX-CYCLE | A→B→A injection cycle |
-| FX-LAYER | controller→repo lock violation |
-| FX-MULTI | two impls, no qualifier → Unknown |
-| FX-DRIFT | claim then edit anchor → affected/unprovable |
-| FX-Stateful Tool-Enabled Agentic Deployment | Model Context Protocol call with unknown bean_id → reject |
-| FX-PRIV | deny-net full verify |
-| FX-DET | two verifies → canonical JSON match |
+| ID | Intent (observable) | Fail-mode |
+| --- | --- | --- |
+| FX-CYCLE | A→B→A injection cycle detected | Cycle soft-pass |
+| FX-LAYER | controller→repo lock violation fails | Violation green |
+| FX-MULTI | two impls, no qualifier → Unknown | Guessed bean |
+| FX-DRIFT | claim then edit anchor → affected/unprovable | Stale green |
+| FX-STEAD | MCP call with unknown bean_id → reject | Invented handle OK |
+| FX-PRIV | deny-net full verify | Egress during verify |
+| FX-DET | two verifies → canonical JSON match | Non-deterministic receipt |
 
 ## Accept methods
 
-| REQ / Quality Attribute Scenario | Method |
+| REQ / QAS | Method |
 | --- | --- |
 | F-01…05 | FX-CYCLE, FX-LAYER, FX-MULTI |
-| F-06/06b | Receipt JSON Schema validate; material_digest bind (Proof-or-Stop) |
+| F-06/06b | Receipt JSON Schema; material_digest bind (Proof-or-Stop) |
 | F-06c / N-07 | FX-DRIFT |
-| F-09b / N-08 | FX-Stateful Tool-Enabled Agentic Deployment |
+| F-09b / N-08 | FX-STEAD |
 | N-05 | FX-PRIV |
 | N-06 | FX-DET |
 | N-01/N-02 latency | Spike PIL-LAT-* only — not Design gate yet |

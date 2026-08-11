@@ -2,12 +2,14 @@
 title: Architecture Tradeoff Analysis Method Quality Attribute Scenario standard
 status: ACTIVE
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 ---
 
-# Quality Attribute Scenario (Quality Attribute Scenario) standard
+# Quality Attribute Scenario standard
 
-From SEI Architecture Tradeoff Analysis Method: a non-functional need may influence Design **only** as a
-six-part scenario.
+From SEI Architecture Tradeoff Analysis Method: a non-functional need may
+influence Design **only** as a six-part scenario. A latency adjective alone is
+not a requirement.
 
 | Field | Meaning |
 | --- | --- |
@@ -18,7 +20,8 @@ six-part scenario.
 | Response | Observable behavior |
 | Response measure | Quantitative pass/fail + how measured |
 
-**Incomplete:** “p95 ≤ 2s” alone.  
-**Complete:** all six fields; measure method named; MEASURE-TBD only pre-Spike.
+**Incomplete (reject as Design input):** “p95 ≤ 2s” alone.  
+**Complete:** all six fields; measure method named; `MEASURE-TBD` only
+pre-Spike.
 
 Live scenarios: [`../requirements/qas.md`](../requirements/qas.md).

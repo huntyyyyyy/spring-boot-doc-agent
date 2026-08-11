@@ -43,6 +43,10 @@ sources:
 
 # Adversarial principal-SE review of VA
 
+**Historical / evidence — not product SoT.** Body rows that still say “Python tip
+Source of Truth until cutover” / PyO3→ACI predate Architecture Decision Record
+ADR-0001 amend — **Refuse Python**; **Rust** Spec host; WebAssembly **Could**.
+
 **Role.** Adversarial principal SE against
 [`process/50`](50-local-first-verified-architecture-agent-2026-08-10.md), using
 **requirements engineering** (IEEE 29148-shaped), **DDIA north-star** (System of Record vs

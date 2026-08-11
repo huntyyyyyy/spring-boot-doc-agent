@@ -5,8 +5,9 @@ status: ACTIVE
 
 # Open questions ledger
 
-Copy rows into `OQ-NNN.md` files. Any `blocks_code: true` must be closed or
-explicitly waived in the wave charter before AI codegen.
+Each `OQ-NNN.md` must state a **decidable** close criterion and a **concrete**
+`invalidate_if` (not “new evidence”). Any `blocks_code: true` must be CLOSED or
+WAIVED in the wave charter before AI codegen.
 
 ```yaml
 id: OQ-000
@@ -15,9 +16,9 @@ blocks_code: true
 wave: wave-1
 domain: 04-constraints/open-questions
 question: |
-  What must we know?
+  What must we know? (attribute + options, not synonym of title)
 invalidate_if: |
-  Observation that would reopen this even after close.
+  Specific observation that reopens (path, metric, or product pivot).
 evidence_needed:
   - Spike | stakeholder sign-off | paper | plant measurement
 status: OPEN  # OPEN | SPIKE | CLOSED | WAIVED
@@ -25,13 +26,15 @@ status: OPEN  # OPEN | SPIKE | CLOSED | WAIVED
 
 ## Seed open questions (wave-1)
 
-| ID | Question | blocks_code |
-| --- | --- | --- |
-| open question OQ-01 | Single product boundary sentence: local verify engine vs Retrieval-Augmented Generation corpus vs both? | true |
-| open question OQ-02 | System of Record vs derived matrix for index, registry, locks, receipts, embeddings | true |
-| open question OQ-03 | Spring Dependency Injection envelope: what Source Code Index Protocol cannot resolve → mandatory Unknown taxonomy | true |
-| open question OQ-04 | Executable lock IR shape (language-agnostic) before any engine language | true |
-| open question OQ-05 | Proof-tour receipt schema (stable step IDs) | true |
-| open question OQ-06 | Cache/invalidation / freshness budgets for index | true |
-| open question OQ-07 | Which Must non-functional requirements still lack six-part Quality Attribute Scenario measures? | true |
-| open question OQ-08 | Wave-1 bounded context set (likely 1–2); rest parked under options/ | true |
+| ID | Decidable question | blocks_code | Status |
+| --- | --- | --- | --- |
+| open question OQ-01 | Accept or amend the one-liner in `BOUNDARY.md` (local verify vs Retrieval-Augmented Generation corpus vs both)? | true | SPIKE |
+| open question OQ-02 | Human Accept of `sor-derived-matrix.md` (esp. Retrieval-Augmented Generation ≠ verify; single oracle)? | true | SPIKE |
+| open question OQ-03 | Accept Unknown taxonomy + plant confirmation of Spring Dependency Injection envelope? | true | SPIKE |
+| open question OQ-04 | Choose executable lock Intermediate Representation shape before engine language binding? | true | OPEN |
+| open question OQ-05 | Accept receipt schema fields + Spike `step_id` stability key? | true | SPIKE |
+| open question OQ-06 | Numeric freshness / invalidation budgets for local indexes? | true | OPEN |
+| open question OQ-07 | Latency T/U for Quality Attribute Scenarios QAS-N-01 / QAS-N-02 still unset (Spike or demote)? | true | OPEN |
+| open question OQ-08 | Name the 1–2 wave-1 bounded contexts; park other languages under `options/`? | true | OPEN |
+
+All eight still block Implement. **Rust** engine host assumed; **Refuse Python** not reopenable here without Architecture Decision Record.

@@ -14,6 +14,10 @@ related:
 
 # Pre-code BFS — domains, models, workflows before AI codegen
 
+**Historical / evidence — not product SoT.** Body “Python interface / Peer option”
+rows are classification pressure only — port stack locks **Refuse Python** Spec/ACI;
+**Rust** host; WebAssembly **Could**.
+
 **Method.** Breadth-first enumeration of every concern that must be *classified and
 gap-closed* before an agent is allowed to emit product code. Depth (filling each
 folder) comes after this map is stable.

@@ -7,21 +7,21 @@ traces: open question OQ-02
 
 # System of Record vs derived
 
-| Artifact | Class | Writer | Readers | Notes |
-| --- | --- | --- | --- | --- |
-| Target sources | System of Record (external) | Developers | Indexers, engine | Not ours to mutate as product |
-| Lock / MDC / pack manifests | **Policy System of Record** | Architects (git) | LockCheck, Language Server Protocol, CI | Team sync = git |
-| `index.scip` | **Index System of Record** (derived from sources via scip-java) | Indexer job | Resolve | Rebuildable; don’t sync as team System of Record |
-| SQLite registry / graph | **Derived** | Engine | LockCheck, queries | Wipe/rebuild OK |
-| Proof-tour receipt | **Verify artifact** | Engine | IDE, audit, CI | Immutable per run |
-| EA-Graph claims + anchors | **Derived claim store** | Engine | Withdrawal / audit | Digests; not team git System of Record |
-| Retrieval-Augmented Generation embeddings / Lance chunks | **Retrieve-only** | Corpus ingest | Agent assist | **Never** verify witness / anchor |
-| large language model remediation text | **Advisory** | Model | Human | Excluded from witnesses |
-| Model Context Protocol/command-line interface tool args (entity ids) | **Interface** | Harness | Agent | Stateful Tool-Enabled Agentic Deployment: typed ids only |
-| Coverage / merge oracle | **Gate System of Record** (one writer) | Named process | CI | Language-neutral; single writer |
+| Artifact | Class | Writer | Fail-mode |
+| --- | --- | --- | --- |
+| Target sources | SoR (external) | Developers | Product mutates target as SoR → reject |
+| Lock / MDC / pack manifests | **Policy SoR** | Architects (git) | Team sync outside git → reject |
+| `index.scip` | **Index SoR** (derived via scip-java) | Indexer job | Sync index as team SoR → reject |
+| SQLite registry / graph | **Derived** | Rust engine | Multi-writer / Python owner → reject |
+| Proof-tour receipt | **Verify artifact** | Rust engine | LLM text inside `witness` → invalid |
+| EA-Graph claims + anchors | **Derived claim store** | Rust engine | Git-sync claim DB as team SoR → reject |
+| RAG embeddings / Lance chunks | **Retrieve-only** | Corpus ingest | Used as verify witness/anchor → reject |
+| LLM remediation text | **Advisory** | Model | Inside witnesses → reject |
+| MCP/CLI tool args (entity ids) | **Interface** | Harness | Free-text / non-equivariant ids → reject |
+| Coverage / merge oracle | **Gate SoR** (one writer) | Named process | Multi-writer / language-identity oracle → reject |
 
 ## Rules
 
-1. Promoting derived → System of Record requires an Architecture Decision Record.
-2. Sensors (Retrieval-Augmented Generation, large language model, climb metrics) must not silently become gates.
-3. Ambiguous resolve writes Unknown — never invents a System of Record edge.
+1. Derived → SoR promotion needs an Architecture Decision Record.
+2. Sensors (RAG, LLM, climb) must not silently become gates.
+3. Ambiguous resolve → Unknown — never invent a SoR edge.

@@ -1,12 +1,15 @@
 # Nests — bounded contexts
 
-Each nest is a bounded context folder with a thin `README.md` and (when active) a
-**glob-scoped** `.cursor/rules/nest.mdc`. Path scoping is MDC-only.
+**Now:** one `README.md` per nest; active nests may add glob-scoped
+`.cursor/rules/nest.mdc` (MDC path scoping only).
 
-**Refuse:** `nests/08-aci-python-peer/` — tombstone README only; no nest rule
-(Architecture Decision Record ADR-0001 amended 2026-08-11).
+**Fail closed:** product crates/scaffolds inside a nest before Definition of
+Ready PASS → reject. Nest `08-aci-python-peer/` stays tombstone — no
+`nest.mdc`, no revive (Architecture Decision Record ADR-0001 amended
+2026-08-11).
 
-When entering an **active** nest, agents load that nest’s rule if matching files
-are in context. Long evidence via Skill `rag-retrieve` and `research/INDEX.md`.
+**Open first:** `docs/DOMAIN_MAP.md` nest table; then the nest README; long
+evidence via Skill `rag-retrieve` + `research/INDEX.md` (one pack).
 
-See `docs/DOMAIN_MAP.md` for the nest table.
+**Shared System of Record:** `03-requirements/` · `04-constraints/` ·
+`docs/c4/` · `docs/adr/`.

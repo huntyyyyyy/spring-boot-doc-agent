@@ -1,31 +1,36 @@
 # Contributing
 
-## Hard gate (no product code yet)
+## Hard gate
 
-See `12-delivery/no-code-gate/README.md` and
-`00-governance/dor-dod/DEFINITION_OF_READY.md`.
+Product crates / daemons / extensions → **reject** until Definition of Ready PASS
+(`12-delivery/no-code-gate/README.md`, `00-governance/dor-dod/DEFINITION_OF_READY.md`).
+Cold agents: `AGENT_BOOTSTRAP.md` → `STATUS.md`.
 
-Agents with no chat history: start at `AGENT_BOOTSTRAP.md` + `STATUS.md`.
+Until that gate is green, PRs may touch only planning Markdown (`00/`–`12/`,
+`docs/`, `research/`, `.cursor/`) and docs CI. FREEZE deepen-3 still binds —
+`STATUS.md`.
 
-PRs may change planning Markdown (`00/`–`12/`, `docs/`, `research/`,
-`.cursor/`) and docs CI only until Definition of Ready is green for the active wave:
+## Definition of Ready rows (Implement bar)
 
-1. Product boundary + wave Must Stakeholder Requirements Specification/Software Requirements Specification Accepted (or explicit Draft Approve)
-2. Constraints ledger current; no open `blocks_code` open questions (or WAIVED)
-3. Must non-functional requirements are complete Architecture Tradeoff Analysis Method six-part Quality Attribute Scenario (no TBD measure on Must)
-4. System of Record vs derived matrix Draft; ports + Interface Control Document stubs for the spike seam
-5. C4 Context + Container reviewed; Component only for touched bounded context
-6. Relevant Architecture Decision Records Accepted; others stay in `options/` / Proposed
-7. Receipt schema + Verification and Validation Accept methods named
-8. Tradeoff table updated for chosen tactics
-9. Human wave Approve in `02-stakeholders/signoff/`
+| # | Predicate | Fail if |
+| --- | --- | --- |
+| 1 | Wave Must Stakeholder / Software Requirements Accepted (or Draft Approve) | Boundary TBD |
+| 2 | Constraints ledger current; no open `blocks_code` (or WAIVED) | Open question blocks silent |
+| 3 | Must non-functionals = six-part Quality Attribute Scenario | TBD measure on Must |
+| 4 | System of Record vs derived matrix Draft; ports + Interface Control Document for spike seam | Missing seam stubs |
+| 5 | C4 Context + Container reviewed; Component only for touched bounded context | Full Code-level without touch |
+| 6 | Relevant Architecture Decision Records Accepted | Soft-Adopt without Accept criterion |
+| 7 | Receipt schema + Verification and Validation Accept methods named | Schema file count as PASS |
+| 8 | Tradeoff table updated for chosen tactics | Praise-only Consequences |
+| 9 | Human wave Approve in `02-stakeholders/signoff/` | Unsigned claim of Ready |
 
-## Working draft
+## Draft form (still enforced)
 
-Content may be Draft/Proposed while still obeying **ISO 29148-shaped RE**,
-**Architecture Tradeoff Analysis Method Quality Attribute Scenario**, **Nygard Architecture Decision Record**, and **C4** form.
+ISO 29148-shaped requirements engineering · Architecture Tradeoff Analysis Method
+Quality Attribute Scenario · Nygard Architecture Decision Record · C4.
 
 ## Where to write
 
-Prefer `00/`–`12/` per `PRECODE_MAP.md`. Legacy `docs/` and `nests/` remain
-until promoted — do not treat language nests as Approved Design.
+New artifacts → `00/`–`12/` per `PRECODE_MAP.md`. Legacy `docs/` / `nests/` =
+promote-or-leave; nests are not Approved Design. Nest 08 Python = REFUSED.
+Stack: Rust Spec host; TypeScript IDE only; WebAssembly LockCheck Could.

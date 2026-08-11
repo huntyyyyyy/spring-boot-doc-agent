@@ -1,24 +1,22 @@
 # Nest: Ruby lock DX
 
-**Owns:** Packwerk-shaped package manifests, todo bankruptcy, lock IR UX
+**Owns (when built):** Packwerk-shaped package manifests, todo bankruptcy,
+lock Intermediate Representation authoring UX. Evaluation stays Rust
+`LockCheck`.
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0003
+**Fail closed:** prose-only locks, per-language checkers without shared IR, or
+Python lock authoring System of Record → violates Architecture Decision
+Record ADR-0003.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Now:** README + `nest.mdc` only — no gems until Definition of Ready PASS.
 
-## Look-first research
+## Open first
 
-- `research/polyglot/`
-- `docs/adr/adr-0003-packwerk-lock-ir.md`
+1. `docs/adr/adr-0003-packwerk-lock-ir.md`  
+2. `docs/adr/adr-0004-native-then-wasm-lockcheck.md`  
+3. `docs/c4/02-containers.md`
 
 ## Shared System of Record
 
-- `docs/DOMAIN_MAP.md`
-- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+- `03-requirements/` · `04-constraints/`  
+- `docs/c4/` · `docs/adr/`

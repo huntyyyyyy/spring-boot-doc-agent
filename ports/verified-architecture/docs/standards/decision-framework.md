@@ -2,29 +2,27 @@
 title: Decision Framework — Selection Taxonomy (six vectors)
 status: ACTIVE
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 audience: [stakeholder, product, engineer, agent]
 ---
 
 # Decision Framework (Selection Taxonomy)
 
-Assertions without **usage**, **locus**, and **rejected alternatives** are not
-decisions — they are preferences. This standard turns “what / when / how / who /
-where / why” into a **repeatable schema** so procurement, architecture, and
-tool-surface choices stay traceable and bias-resistant.
-
-Use **one filled matrix per significant choice**. Link an Architecture Decision
-Record for the engineering record; keep the matrix as the analytical surface
-humans and agents can score against.
+A choice without **usage**, **locus**, and **rejected alternatives** is a
+preference, not a decision. Fill **one matrix per significant choice**; link an
+Architecture Decision Record for the engineering record. FREEZE: deepen
+existing matrices (receipt β/ρ, claim withdrawal, handle lifecycle) only — new
+matrix files without human override = reject.
 
 ## Three framings (same schema, different audience)
 
 | Audience | Call it | Emphasize |
 | --- | --- | --- |
-| Stakeholders / product | **Decision Matrix** (analytical) | Evaluation vectors; repeatable selection; scored alternatives |
-| Engineers | **Architecture Decision Record** companion | Rationale, context, consequences; prevents architectural drift |
-| Business / risk | **Governance Framework** | Accountability, alignment, lifecycle, security zone |
+| Stakeholders / product | **Decision Matrix** (analytical) | Evaluation vectors; scored alternatives |
+| Engineers | **Architecture Decision Record** companion | Rationale, context, consequences |
+| Business / risk | **Governance Framework** | Accountability, lifecycle, security zone |
 
-Do not invent three incompatible schemas. **One row set; three labels.**
+One row set; three labels — do not invent incompatible schemas.
 
 ## Six evaluation vectors
 
@@ -41,36 +39,33 @@ Every filled matrix **must** also carry:
 
 | Extra column | Purpose |
 | --- | --- |
-| **Usage case** | Concrete scenario (actor + goal + outcome) — not a slogan |
+| **Usage case** | Actor + goal + outcome — not a slogan |
 | **Code / Spec locus** | File, port, package, or Interface Control Document path where the choice binds |
-| **Working hypothesis** | The selected Draft option (not human Accept) |
-| **Rejected alternatives** | Named options + **why not** (at least one serious alternative) |
+| **Working hypothesis** | Selected Draft option (not human Accept) |
+| **Rejected alternatives** | Named options + **why not** (≥1 serious alternative) |
 | **Embody / Adopt / Refuse / Pilot** | Product tier (constitution vocabulary) |
 | **Claim tier** | Evidenced / Confirmed / Unknown |
-| **Review date** | When to re-score (stops stale rubber-stamps) |
+| **Review date** | When to re-score |
 
 ## Scoring (optional but preferred)
 
-For each alternative, score vectors **0–2** (absent / partial / meets) against
-**What**. Sum is a **sensor**, not a silent merge proof — human Accept still
-required for Definition of Ready gates that name human sign-off.
+Score alternatives **0–2** (absent / partial / meets) against **What**. Sum is
+a **sensor**, not silent merge proof — human Accept still required where
+Definition of Ready names sign-off.
 
 ### Optional mathematical layer (brainstorm — not Must)
 
-To reduce scoring bias, a later Spike may attach **Multi-Criteria Decision
-Analysis / Analytic Hierarchy Process** weights to the six vectors or to the
-alternatives table (pairwise comparisons → consistency ratio). That layer
+A later Spike may attach Multi-Criteria Decision Analysis / Analytic Hierarchy
+Process weights (pairwise comparisons → consistency ratio). That layer
 **quantifies preference**; it does not replace usage cases, loci, or Rejected
-alternatives. Formal methods (Temporal Logic of Actions, Alloy, queueing
-models, Monte Carlo) are catalogued as ideas in
-`research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` — **not**
-Definition of Ready Must and **not** substitutes for plants.
+alternatives. Formal methods catalogued in
+`research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` are
+**not** Definition of Ready Must and **not** substitutes for plants.
 
 ### Research-depth gate (before human Accept)
 
-A matrix may say **Working hypothesis (Draft)** freely. It must **not** be
-proposed for human Accept, and agents must not treat scores as Chosen truth,
-unless one of:
+Working hypothesis (Draft) is free. Agents must not treat scores as Chosen
+truth for human Accept unless one of:
 
 | Gate | Meaning |
 | --- | --- |
@@ -78,16 +73,17 @@ unless one of:
 | `primary_spec` | Normative industry Spec cited with section or Model Context Protocol specification enhancement proposal |
 | `pilot_waiver` | Exact public engines = 0; explicit Pilot invent charter |
 
-See `research/gaps/shallow-decisions-honesty-2026-08-10.md`. Score totals are
-**sensors** only.
+See `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
 
 ## Anti-patterns (refuse)
 
-1. **Assertion-only Architecture Decision Record** — Decision without Rejected alternatives or Usage case.  
+1. **Assertion-only Architecture Decision Record** — Decision without Rejected
+   alternatives or Usage case.  
 2. **Locus TBD forever** — “somewhere in the agent” is not a locus.  
 3. **Hidden session state** as “how” when the product claims stateless protocol.  
 4. **Model as Who-decides** for verify / lock / claim mutations.  
-5. **Copying paper titles** into What without binding Quality Attribute Scenarios or reject codes.
+5. **Copying paper titles** into What without binding Quality Attribute
+   Scenarios or reject codes.
 
 ## Where matrices live
 

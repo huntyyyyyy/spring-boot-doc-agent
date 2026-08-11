@@ -10,11 +10,9 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # Model Context Protocol surface — Decision Matrix
 
-**Framings:** Analytical Decision Matrix · Architecture Decision Record companion
-(Architecture Decision Record ADR-0011) · Governance (who may mutate verify state).
-
 **Normative primary:** Model Context Protocol specification **`2026-07-28`**
 `[Evidenced — blog.modelcontextprotocol.io/posts/2026-07-28/]`.
+Companion: Architecture Decision Record ADR-0011 (who may mutate verify state).
 
 ---
 
@@ -22,11 +20,11 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 | Vector | Working hypothesis content |
 | --- | --- |
-| **Why** | Agents hallucinate entity ids and treat chat as verify System of Record; we need a **typed, handle-passing, harness-owned** tool surface that cannot green-wash without receipts. |
-| **What** | Primitive tools only (`verify`, `resolve`, `claim_withdraw`, `locks_list`); Stateful Tool-Enabled Agentic Deployment ST-1…5; protocol pin `2026-07-28`; reject classes listed in Interface Control Document; no Roots/Sampling/Logging. |
-| **Who** | **Decides:** harness (`LockCheck`, `ReceiptWriter`, `ClaimMemory`). **Proposes:** model / host. **Owns presentation:** TypeScript (Architecture Decision Record ADR-0010). **Owns engine:** Rust Pilot (Architecture Decision Record ADR-0007). **Accepts policy:** human (locks in git). |
+| **Why** | Agents invent entity ids and treat chat as verify System of Record; typed handle-passing tools keep green-wash behind receipts. |
+| **What** | Primitive tools only (`verify`, `resolve`, `claim_withdraw`, `locks_list`, `snapshot_open`); Stateful Tool-Enabled Agentic Deployment ST-1…5; protocol pin `2026-07-28`; reject classes in Interface Control Document; no Roots/Sampling/Logging. |
+| **Who** | **Decides:** harness (`LockCheck`, `ReceiptWriter`, `ClaimMemory`). **Proposes:** model / host. **Owns presentation:** TypeScript (Architecture Decision Record ADR-0010). **Owns engine / Spec corpus host:** Rust Pilot (Architecture Decision Record ADR-0007) — **Refuse Python**. **Accepts policy:** human (locks in git). |
 | **How** | Local **stdio** minimum viable product; optional Streamable HTTP with required headers; state only as **tool-arg handles** minted by prior results; JSON Schema 2020-12 args/results. |
-| **When** | Spec wave now; Implement only after Definition of Ready D7/D10c + per-tool schemas; **review** when Model Context Protocol Spec revises or first remote host ships. |
+| **When** | Specification wave now; Implement only after Definition of Ready D7/D10c + per-tool schemas; **review** when Model Context Protocol Spec revises or first remote host ships. |
 | **Where** | Spec: `07-system-design/icd/mcp-tools.md`. Planned code: `packages/mcp-server/` (TypeScript presentation) → stdio/HTTP → `crates/engine/` ports. Never inside agent prompt memory. |
 
 ---
@@ -128,9 +126,9 @@ a witness (`llm_witness_forbidden`).
 
 | Level | Evidence |
 | --- | --- |
-| 1 Remember | Spec `2026-07-28`; SEPs 2575/2567/2243; Architecture Decision Record ADR-0010/0011 |
-| 2 Understand | Six vectors + usage cases above |
-| 3 Apply | Planned `packages/mcp-server` + engine ports |
-| 4 Analyze | Alternatives A–F scored |
-| 5 Evaluate | Reject classes; ST-1…5; false-green bites |
-| 6 Create | This matrix + Architecture Decision Record ADR-0011 + Interface Control Document rewrite — **Implement still Refuse** |
+| 1 Remember | Spec `2026-07-28`; Model Context Protocol SEPs 2575/2567/2243; Architecture Decision Record ADR-0010/0011 |
+| 2 Understand | Handle inventory + reject classes bind next tool calls |
+| 3 Apply | Planned `packages/mcp-server` (TypeScript) + `crates/engine/` (Rust) |
+| 4 Analyze | Alternatives A–F scored (sensor only) |
+| 5 Evaluate | ST-1…5; invented handle → `unknown_handle` |
+| 6 Create | Matrix + Architecture Decision Record ADR-0011 + Interface Control Document — **Implement still Refuse** |

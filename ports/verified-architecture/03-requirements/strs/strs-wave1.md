@@ -11,36 +11,40 @@ evidence:
 
 ## Purpose
 
-What the Verified Architecture Engine must achieve for stakeholders **without**
-binding implementation language. Software Requirements Specification/C4 derive from this.
+Stakeholder-visible outcomes the Verified Architecture Engine must deliver
+**without** binding runtime language. Software Requirements Specification and C4
+derive downward; this file does not restate folder names.
 
 ## Actors
 
-| ID | Actor | Concern |
+| ID | Actor | Concern (attribute) |
 | --- | --- | --- |
-| A-OP | Agent / tool operator | Wiring/architecture answers without hallucinated bindings |
-| A-ARCH | Architect | Author locks once; humans + AI share enforcement |
-| A-DEV | Developer (IDE) | Same violation signal as agent path |
+| A-OP | Agent / tool operator | Wiring answers anchored to index+locks — never hallucinated bindings |
+| A-ARCH | Architect | Author locks once; humans + AI share the same enforcement path |
+| A-DEV | Developer (IDE) | Same violation IDs as the agent / command-line interface path |
 | A-CI | CI / merge steward | Deterministic gate; single oracle writer; **receipt-gated done** (Proof-or-Stop) |
-| A-OWN | Target-repo owner | Local-first; Unknown/unprovable > wrong |
+| A-OWN | Target-repo owner | Local-first; Unknown/unprovable preferred over wrong |
 
 ## Mission need
 
-Traceable answers about architecture/wiring **anchored to index + locks +
-claim digests**, not chat invention. Agents may propose; harness decides.
+Answers about architecture/wiring are **traceable to index digests + lock IDs +
+claim digests**. Agents may propose; the harness decides accept/reject.
 
 ## Goals
 
-| ID | Goal |
-| --- | --- |
-| G1 | Virtual dep/Dependency Injection graph + lock checks on realistic plants |
-| G2 | Same lock policy for agent and human paths |
-| G3 | Explainable verify (receipt + EA-Graph dispositions) |
-| G4 | Tool surface refuses hallucinated entity ids (Stateful Tool-Enabled Agentic Deployment) |
+| ID | Goal | Bound |
+| --- | --- | --- |
+| G1 | Virtual dependency / Dependency Injection graph + lock checks | Realistic plants named in Verification and Validation |
+| G2 | Same lock policy for agent and human paths | Shared violation IDs |
+| G3 | Explainable verify | Receipt + Artifact-Anchored Verification Memory dispositions |
+| G4 | Tool surface refuses hallucinated entity ids | Stateful Tool-Enabled Agentic Deployment ST-1…5 |
 
 ## Out of scope (wave-1)
 
-- Full JVM fidelity as “proved”
-- Embeddings/Retrieval-Augmented Generation as binding authority
+- Full JVM fidelity marketed as “proved”
+- Embeddings / Retrieval-Augmented Generation as binding authority
 - Org-wide social knowledge-graph SaaS
-- FO-CTL model checking of the agent deployment
+- First-Order Computation Tree Logic model checking of the agent deployment
+- **Python** engine or Specification corpus host (Architecture Decision Record ADR-0001)
+
+Fail-mode: human Accept missing in `SIGNOFF_LOG.md` → Definition of Ready D2 stays PARTIAL.

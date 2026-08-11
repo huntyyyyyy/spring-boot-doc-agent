@@ -8,10 +8,11 @@ confidence_scale: >-
   ≥0.75 Evidenced+Confirmed shape; 0.4–0.74 Draft; <0.4 Unknown/Pilot.
 ---
 
-# C4 brief (so far) + confidence
+# C4 brief + confidence
 
-Not Accepted. ASCII only — replace with formal diagrams under this folder after
-signoff. Scores reflect **conceptual confidence**, not “ready to code.”
+ASCII only until signoff → formal diagrams under this folder. Scores =
+**conceptual confidence**, not “ready to code.” **Ready to Implement ≈ 0.15**
+(Definition of Ready 0 PASS).
 
 ## Context (Level 1)
 
@@ -35,17 +36,17 @@ signoff. Scores reflect **conceptual confidence**, not “ready to code.”
 | --- | --- | --- |
 | Developer / coding agent | Proposes changes; never sole verifier | **0.85** |
 | Target git repository | Policy locks + sources System of Record inputs | **0.80** |
-| Verified Architecture Engine | Local command-line interface (+ optional Model Context Protocol server) | **0.75** |
-| Optional remote Model Context Protocol host / IDE | May call engine tools over Streamable HTTP | **0.55** (need exists; transport reqs newly identified) |
+| Verified Architecture Engine | Local command-line interface (+ optional Model Context Protocol server); Rust engine | **0.75** |
+| Optional remote Model Context Protocol host / IDE | May call engine tools over Streamable HTTP; TypeScript presentation | **0.55** (need exists; transport reqs newly identified) |
 | Org SaaS / Backstage mesh | Out of scope minimum viable product | **0.90** (Refuse is firm) |
 
 | Relationship | Meaning | Confidence |
 | --- | --- | --- |
-| Agent → Engine via Model Context Protocol/command-line interface | Propose only; harness decides | **0.70** |
+| Agent → Engine via Model Context Protocol / command-line interface | Propose only; harness decides | **0.70** |
 | Engine → Target repo read | Index + locks + sources | **0.80** |
 | Engine → Target repo write locks | Policy System of Record — human Approve | **0.65** (process clear; Interface Control Document thin) |
-| Host → Engine Streamable HTTP `2026-07-28` | Stateless; headers; handles as args | **0.40** (spec Evidenced; our Interface Control Document stale) |
-| Retrieval-Augmented Generation/large language model → Engine witnesses | Forbidden | **0.85** |
+| Host → Engine Streamable HTTP `2026-07-28` | Stateless; headers; handles as args | **0.40** (spec Evidenced; our tool shapes Pilot) |
+| Retrieval-Augmented Generation / large language model → Engine witnesses | Forbidden | **0.85** |
 
 ## Container (Level 2)
 
@@ -80,15 +81,16 @@ signoff. Scores reflect **conceptual confidence**, not “ready to code.”
 | Harness decide loop | **0.55** |
 | IndexReader (Source Code Index Protocol) | **0.70** |
 | Registry / graph | **0.65** |
-| LockCheck + lock Intermediate Representation | **0.40** (no schema yet) |
+| LockCheck + lock Intermediate Representation | **0.45** (Draft `lock-ir.schema.json`; plants missing) |
 | ClaimMemory | **0.30** (Pilot) |
 | ReceiptWriter | **0.45** |
 | SQLite claim/registry store | **0.60** (plausible; unproven) |
-| Remediation Assist / Retrieval-Augmented Generation | **0.75** as Could/non-witness |
+| Remediation Assist / Retrieval-Augmented Generation | **0.75** as Could / non-witness |
+| WebAssembly LockCheck guest | **0.40** as **Could** / Wave-3 only |
 
 | Relationship | Confidence |
 | --- | --- |
-| Model Context Protocol/command-line interface → Harness | **0.60** |
+| Model Context Protocol / command-line interface → Harness | **0.60** |
 | Harness → LockCheck | **0.70** |
 | LockCheck → Registry | **0.65** |
 | LockCheck → ClaimMemory put/withdraw | **0.35** |
@@ -102,12 +104,12 @@ signoff. Scores reflect **conceptual confidence**, not “ready to code.”
 | View | Score | Meaning |
 | --- | --- | --- |
 | Product shape (local command-line interface, not SaaS) | **0.85** | Stable decision |
-| Verify Must spine *intent* | **0.70** | Right threats; weak field Adopt on claims/Stateful Tool-Enabled Agentic Deployment |
-| Ready to Implement | **0.15** | Definition of Ready 0 PASS; Model Context Protocol Interface Control Document stale vs `2026-07-28` |
+| Verify Must spine *intent* | **0.70** | Right threats; weak field Adopt on claims / Stateful Tool-Enabled Agentic Deployment |
+| Ready to Implement | **0.15** | Definition of Ready 0 PASS; tool argument shapes still Pilot |
 | Research method floor | **0.65** | Digests + API routing exist; few digests filled |
 
 ## Next diagram work
 
 1. Formal Context + Container in Structurizr or Mermaid Accepted set.  
 2. Tag every trust boundary (policy System of Record vs derived registry vs agent).  
-3. Re-score after Model Context Protocol Interface Control Document rewrite and lock Intermediate Representation schema land.
+3. Re-score after handle-lifecycle deepen and lock Intermediate Representation plants land.

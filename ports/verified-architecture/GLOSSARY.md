@@ -1,16 +1,16 @@
 ---
-title: Whole-words glossary — prefer full phrases over short labels
+title: Whole-words glossary — full phrases required in prose
 status: ACTIVE
 audience: [agent, developer]
 ---
 
-# Whole words (required in prose)
+# Whole words
 
-Agents and humans writing in this corpus **must use full phrases** in
-sentences, tables, and prompts. Short path names and paper nicknames may
-appear in *file paths* only; in running text, expand them.
+In sentences, tables, and prompts: **full phrases**. Short labels allowed only
+inside `` `paths` ``, fenced code, or once after the full phrase
+(`Architecture Decision Record ADR-0001`). Bare short form in new prose → reject.
 
-| Prefer this phrasing | Avoid bare short form |
+| Prefer | Avoid bare |
 | --- | --- |
 | Specification phase / specification artifacts | Spec |
 | Definition of Ready | DoR |
@@ -28,12 +28,12 @@ appear in *file paths* only; in running text, expand them.
 | command-line interface | CLI |
 | Architecture Tradeoff Analysis Method | ATAM |
 | Architecture Decision Record | ADR |
-| Decision Matrix / Selection Taxonomy / Decision Framework | bare “matrix” without saying which |
+| Decision Matrix / Selection Taxonomy / Decision Framework | bare “matrix” |
 | First-Order Computation Tree Logic | FO-CTL |
 | Stateful Tool-Enabled Agentic Deployment | STEAD |
-| Artifact-Anchored Verification Memory (paper title *EA-Graph*) | EA-Graph alone |
+| Artifact-Anchored Verification Memory (paper *EA-Graph*) | EA-Graph alone |
 | Multi-Agent Orchestration with External Knowledge and Hierarchical Memory | MAAD |
-| Proof-or-Stop (evidence-gated lifecycle) | PoS |
+| Proof-or-Stop | PoS |
 | Cue-anchored working memory | Cue-WM |
 | open question | OQ |
 | Wave 0 / Wave 1 | W0 / W1 |
@@ -44,7 +44,7 @@ appear in *file paths* only; in running text, expand them.
 | breadth-first search | BFS |
 | minimum viable product | MVP |
 | Concrete Syntax Tree | CST |
-| Source Code Index Protocol (SCIP index) | SCIP alone without gloss |
+| Source Code Index Protocol (SCIP index) | SCIP alone |
 | WebAssembly | WASM alone |
 | Model Context Protocol SEP (numbered proposal) | SEP alone |
 | Temporal Logic of Actions / TLA+ TLC model checker | TLC alone |
@@ -52,14 +52,14 @@ appear in *file paths* only; in running text, expand them.
 | Multi-Criteria Decision Analysis | MCDA |
 | Java Modelling Tools | JMT |
 | bounded context | BC |
-| large language model | LLM (expand on first use in a file) |
+| large language model | LLM (expand on first use per file) |
 | software development kit | SDK alone |
 | TypeScript | TS alone in prose |
 | Architecture Decision Records (plural) | ADRs |
 
-## Paper titles (June–August 2026 readiness set)
+## Paper titles (June–August 2026 set)
 
-| Paper title (use this) | arXiv |
+| Paper title | arXiv |
 | --- | --- |
 | Proof-or-Stop: Don't Trust the Agent, Trust the Evidence | 2607.14890 |
 | From Prompts to Contracts: Harness Engineering for Auditable Enterprise LLM Agents | 2607.08028 |
@@ -71,17 +71,5 @@ appear in *file paths* only; in running text, expand them.
 | HyperTool: Beyond Step-Wise Tool Calls for Tool-Augmented Agents | 2606.13663 |
 | DynamicMCPBench: A Trace-Grounded, Effect-Scored Benchmark for LLM Agents over Live MCP Servers | 2607.20531 |
 
-When a path must keep a short label (example: `QAS-N-01-warm-resolve.md`),
-write the full phrase beside it on first mention in that file.
-
-
-## Enforcement note (2026-08-10)
-
-A whole-word pass expanded bare short forms across `ports/verified-architecture/**/*.md`
-(except this glossary’s “avoid” column). **Keep** short forms inside:
-
-- fenced code and inline `` `paths` ``
-- stable ids after the full phrase once: `Architecture Decision Record ADR-0001`
-- paper nicknames only in paths (`ea-graph-claims.schema.json`)
-
-New prose must not reintroduce bare `MCP` / `ADR` / `ICD` / `DoR` / `QAS` / `WASM` / `SCIP` without the full phrase.
+Path short labels (e.g. `QAS-N-01-warm-resolve.md`): expand beside first mention
+in that file.

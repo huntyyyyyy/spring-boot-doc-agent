@@ -6,7 +6,11 @@ date: '2026-08-10'
 
 # Polyglot portfolio
 
-Product identity (Architecture Decision Record ADR-0001, amended 2026-08-11 — **Refuse Python**). Detailed toolkits planned; **no code yet**.
+**Historical / evidence — not product SoT** until Architecture Decision Records
+and Interface Control Documents Accept. Product identity: Architecture Decision
+Record ADR-0001 amended 2026-08-11 — **Refuse Python**. Toolkits planned;
+**no code yet**. Fail-mode: revive Python Spec / ACI host or treat WebAssembly
+as proof.
 
 | bounded context | Language | Owns | Architecture Decision Record |
 | --- | --- | --- | --- |

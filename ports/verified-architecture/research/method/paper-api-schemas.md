@@ -12,11 +12,13 @@ sources:
 ---
 
 > Mirror of parent `docs/research/method/paper-api-schemas.md` — parent wins on conflict.
+> **Historical / evidence — not product SoT.** Routing catalog only.
 
 # Paper research API schemas
 
 Use these **schemas + field selects** to filter candidates **before** fetching HTML
 or writing a full paper digest. Goal: lower token use, higher selection floor.
+Fail-mode: start with full PDF/HTML for a broad search.
 
 Primary method still: `docs/research/method/paper-digest-framework.md`.  
 This file is the **call catalog** for Phase A routing.

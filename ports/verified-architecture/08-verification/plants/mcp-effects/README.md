@@ -10,48 +10,36 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # Effect-checkpoint plants
 
-**Embody** DynamicMCPBench scoring shape; **Refuse** scoring final natural-language
-answers; **Pilot** our TaskSpec files until a public engine exists
-(`[Evidenced — arXiv:2607.20531]` code “will be released upon publication”;
-HF dataset is anonymized review dump — **not** Adopt as product dependency).
+**Embody** DynamicMCPBench scoring shape. **Refuse** scoring final NL answers;
+**Refuse** Tier-2 LLM judge as merge SoR. Public engine = Unknown pending
+publication — copy algorithm class only (`[Evidenced — arXiv:2607.20531]`).
 
-## Checkpoint kinds (paper)
+## Checkpoint kinds
 
-| Kind | Meaning |
-| --- | --- |
-| `tool_effect` | Some tool in an equivalence set was called with args satisfying a constraint |
-| `value_produced` | A demanded value appears in a tool result (`structuredContent`) |
-| `minefield` | Must **not** occur |
-| `partial_order` | Effect A before effect B when dependency is real |
+| Kind | Predicate | Fail-mode |
+| --- | --- | --- |
+| `tool_effect` | Tool in equivalence set called with constrained args | Wrong/missing call |
+| `value_produced` | Demanded value in `structuredContent` | Absent value |
+| `minefield` | Must **not** occur | Minefield present → fail |
+| `partial_order` | Effect A before B when dependency real | Order inverted → fail |
 
-Headline Accept uses **Tier-1 only** (deterministic). Tier-2 large language model judge = Refuse
-for merge System of Record.
+Headline Accept = **Tier-1 only** (deterministic).
 
 ## Plant catalog
 
-| Plant ID | Usage | Required effects | Minefields | Partial order |
-| --- | --- | --- | --- | --- |
-| FX-Model Context Protocol-01 | UC-Model Context Protocol-01 IDE locks→verify | `locks_list` value_produced `lock_set_id`; `verify` value_produced `receipt_path` + file exists | invent `lock_*`; `llm_witness` in receipt | locks_list → verify |
-| FX-Model Context Protocol-02 | UC-Model Context Protocol-02 resolve | `snapshot_open` → `resolve` with status in enum | free-text bean name arg; invented `snap_` | snapshot_open → resolve |
-| FX-Model Context Protocol-03 | UC-Model Context Protocol-03 verify harness | receipt file on disk; `result` enum; digests sha256 | model-only “pass” without tool; narrative_pass field | (none) |
-| FX-Model Context Protocol-04 | UC-Model Context Protocol-04 withdraw | dispositions include allowed enums; `unprovable` allowed | deleting last verified artifact because unprovable | snapshot_open → claim_withdraw |
-| FX-Model Context Protocol-05 | UC-Model Context Protocol-07 hostile handle | tool returns `isError` + `reject_class=unknown_handle` | accepting invented handle as success | (none) |
-| FX-Model Context Protocol-06 | Stale index | `snapshot_open` with require_index → `index_stale` or rebuild | nearest-upload soft pass | (none) |
+| Plant ID | Required effects | Minefields | Order |
+| --- | --- | --- | --- |
+| FX-MCP-01 | `locks_list`→`lock_set_id`; `verify`→`receipt_path`+file | invent `lock_*`; `llm_witness` | locks_list → verify |
+| FX-MCP-02 | `snapshot_open` → `resolve` status∈enum | free-text bean; invented `snap_` | snapshot_open → resolve |
+| FX-MCP-03 | receipt on disk; `result` enum; sha256 digests | model-only pass; `narrative_pass` | — |
+| FX-MCP-04 | dispositions∈enums; `unprovable` allowed | delete last verified on unprovable | snapshot_open → claim_withdraw |
+| FX-MCP-05 | `isError` + `reject_class=unknown_handle` | invented handle as success | — |
+| FX-MCP-06 | `require_index` → `index_stale` or rebuild | nearest-upload soft pass | — |
 
-## Machine-readable TaskSpec (draft)
-
-See sibling `*.taskspec.json` files. Schema fields mirror the paper’s distillation
-output, not a gold tool path.
-
-## Planned code locus (Implement later)
+## Locus (Implement later)
 
 | Concern | Path |
 | --- | --- |
-| Plants | `08-verification/plants/mcp-effects/` |
-| Scorer (Tier-1) | `packages/mcp-server/src/harness/effect_score.ts` or engine test crate |
-| Replay world | fixture target repo under `scripts/fixtures/` (future) |
-
-## Anti-bogus note
-
-DynamicMCPBench public **engine** = Unknown / pending publication. We copy the
-**algorithm class** (path-agnostic effects + minefields), not a dependency pin.
+| Plants / TaskSpecs | `08-verification/plants/mcp-effects/` |
+| Tier-1 scorer | engine test crate or `packages/mcp-server/.../effect_score.ts` |
+| Replay world | `scripts/fixtures/` (future) |

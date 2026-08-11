@@ -5,10 +5,12 @@ status: ACTIVE
 
 # Sign-off log
 
-Record human Approves here. Agents may draft; they may **not** self-Approve
-(multi-agent requirements/architecture drafting papers / Proof-or-Stop).
+| Who | May | Must not |
+| --- | --- | --- |
+| Human signer | Fill Decision + Signer + Date on a row | Leave Wave Approve blank while claiming Implement Ready |
+| Agent | Draft artifact text pointed at by a row | Self-Approve any row (Proof-or-Stop / multi-agent drafting papers) |
 
-Whole words in prose — see root `GLOSSARY.md`.
+Whole words — root `GLOSSARY.md`.
 
 | Date | Artifact | Decision | Signer | Notes |
 | --- | --- | --- | --- | --- |
@@ -20,7 +22,10 @@ Whole words in prose — see root `GLOSSARY.md`.
 
 ## Port Approve (recommended before public GitHub)
 
-Signing **Wave 0 Port** means: cold-start chain is intentional; Must spine
-includes artifact-anchored claim memory and Stateful Tool-Enabled Agentic
-Deployment tool constraints; Implement still Refuse until remaining Definition
-of Ready PASS.
+Signing **Wave 0 Port** asserts all of:
+
+1. Cold-start chain (`AGENT_BOOTSTRAP.md` → `STATUS.md` → this log) is intentional.  
+2. Must spine includes artifact-anchored claim memory + Stateful Tool-Enabled Agentic Deployment tool constraints.  
+3. Implement remains **Refuse** until remaining Definition of Ready rows PASS — engine host stays **Rust**; **Refuse Python**.
+
+Absent signer initials on the Wave 0 Port row → treat Port as unsigned.

@@ -13,10 +13,10 @@ icd: 07-system-design/icd/lock-ir.schema.json
 
 | Vector | Content |
 | --- | --- |
-| **Why** | Prose architecture rules and agent “fixes” do not enforce package boundaries; need an executable, gradual debt-aware Intermediate Representation. |
-| **What** | Language-agnostic schema: package node, allowed dependencies, enforce mode (`true`/`strict`/`false`), todo debt with content-stable fingerprint, **edge_fidelity** matrix bound into every receipt. |
-| **Who** | Humans own policy + todo allow; Ruby bounded context owns Packwerk-shaped DX (Architecture Decision Record ADR-0003); engine `LockCheck` decides; agents propose only. |
-| **How** | Adapters compile Ruby/Go/Java manifests → one Intermediate Representation; evaluate in engine; forbid silent agent `update-todo`. |
+| **Why** | Prose `.mdc` rules and agent “fixes” leave illegal package edges green in Continuous Integration; need executable Intermediate Representation with gradual debt. |
+| **What** | Language-agnostic schema: package node, allowed dependencies, enforce mode (`true`/`strict`/`false`), todo debt with content-stable fingerprint, **edge_fidelity** stamped on every receipt. |
+| **Who** | Humans own policy + todo allow; Ruby bounded context owns Packwerk-shaped DX (Architecture Decision Record ADR-0003); Rust `LockCheck` decides; agents propose only. |
+| **How** | Adapters compile Ruby/Go/Java manifests → one Intermediate Representation; evaluate in engine; silent agent `update-todo` → reject. |
 | **When** | Schema Draft now (open question 04); Accept after plant proves new illegal edge fails Continuous Integration; review when Packwerk major changes. |
 | **Where** | Spec: `icd/lock-ir.schema.json`. Planned: `crates/engine/lockcheck/`; adapters under language bounded contexts; locks remain git System of Record. |
 
@@ -24,7 +24,7 @@ icd: 07-system-design/icd/lock-ir.schema.json
 
 | Option | Why | What | Who | How | When | Where | Total | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **A. Packwerk-shaped shared IR + fidelity matrix** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — Adopt *pattern* from Packwerk; our JSON IR = Pilot |
+| **A. Packwerk-shaped shared Intermediate Representation + fidelity** | 2 | 2 | 2 | 2 | 2 | 2 | **12** | **Working hypothesis (Draft)** — Packwerk *pattern* only; our JSON Intermediate Representation = Pilot |
 | B. Per-language native checkers only (no shared IR) | 1 | 1 | 1 | 0 | 1 | 1 | 5 | **Refuse** as sole path |
 | C. Method-call / full Dependency Injection graph as core edges | 1 | 0 | 1 | 0 | 1 | 1 | 4 | **Refuse** core (unproven vs Packwerk) |
 | D. Prose `.mdc` locks without executable IR | 0 | 0 | 0 | 0 | 1 | 1 | 2 | **Refuse** |
@@ -53,7 +53,8 @@ package docs plus shared `edge_fidelity` stamped onto the receipt.
 `privacy_legacy` in todo = import-only tombstone; **new** privacy enforcement is
 **Refuse** (Packwerk 3.0 removed it as core).
 
-Privacy-as-core API (removed Packwerk 3.0); clean-todo ⇒ runtime-isolated; method-call edges without Spike.
+**Also Refuse without Spike:** method-call edges as core; clean-todo ⇒
+runtime-isolated without plant proof.
 
 ## Still open
 

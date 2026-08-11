@@ -6,7 +6,7 @@ date: '2026-08-10'
 
 # Software Requirements Specification — Functional requirements (wave-1)
 
-Implementation-free. Languages live in Architecture Decision Records / options/, not REQ text.
+Implementation-free statements. Runtime language choices live in Architecture Decision Records / `options/`, not in REQ text (**Rust** engine host is CON/ADR scope; **Refuse Python** is CON-02).
 
 ## Must
 
@@ -17,13 +17,13 @@ Implementation-free. Languages live in Architecture Decision Records / options/,
 | REQ-F-03 | Build virtual dependency graph from resolved + lock package edges |
 | REQ-F-04 | Detect cycles; report offending edge sets |
 | REQ-F-05 | Evaluate architecture locks; report violations with lock IDs |
-| REQ-F-06 | Every verify emits proof-tour receipt with required witnesses (**no large language model/Retrieval-Augmented Generation in witnesses**) |
+| REQ-F-06 | Every verify emits proof-carrying receipt with required witnesses (**no large language model / Retrieval-Augmented Generation text in witnesses**) |
 | REQ-F-06b | Receipts are freshness-bound to content digests; stale/tampered receipts rejected (Proof-or-Stop) |
-| REQ-F-06c | Persist EA-Graph claims with anchors; withdrawal → unaffected\|affected\|unprovable |
+| REQ-F-06c | Persist Artifact-Anchored Verification Memory claims with anchors; withdrawal → unaffected\|affected\|unprovable |
 | REQ-F-07 | Failure taxonomy includes: unknown, ambiguous, stale, conflict, unprovable |
 | REQ-F-08 | Locks versioned in git; no index/claim-DB blob as team System of Record |
 | REQ-F-09 | Exactly one deterministic merge-gate writer at a time |
-| REQ-F-09b | Model Context Protocol/command-line interface entity parameters are typed ids from Registry/Source Code Index Protocol/claims — harness rejects unknowns (Stateful Tool-Enabled Agentic Deployment ST-1…5) |
+| REQ-F-09b | Model Context Protocol / command-line interface entity parameters are typed ids from Registry / Source Code Index Protocol / claims — harness rejects unknowns (Stateful Tool-Enabled Agentic Deployment ST-1…5) |
 | REQ-F-09c | Harness decides accept/reject; agent proposes only (Aria / Contracts) |
 
 ## Should
@@ -42,7 +42,7 @@ Implementation-free. Languages live in Architecture Decision Records / options/,
 | REQ-F-14 | Ghost prefetch (embeddings not System of Record) |
 | REQ-F-15 | Cross-language bridges via explicit System of Record |
 | REQ-F-16 | WebAssembly sandbox guests |
-| REQ-F-20 | NL remediation (non-witness) |
+| REQ-F-20 | Natural-language remediation (non-witness) |
 | REQ-F-22 | HyperTool-style Model Context Protocol composition blocks over primitive schemas |
 | REQ-F-23 | Cue-anchored working-memory delivery (≠ claim store) |
 
@@ -51,6 +51,8 @@ Implementation-free. Languages live in Architecture Decision Records / options/,
 | ID | Statement |
 | --- | --- |
 | REQ-F-17 | SMT proof of Spring Dependency Injection as Must |
-| REQ-F-18 | Vector/Retrieval-Augmented Generation as proof of binding |
+| REQ-F-18 | Vector / Retrieval-Augmented Generation as proof of binding |
 | REQ-F-19 | Two concurrent merge-oracle writers |
-| REQ-F-24 | FO-CTL “proved agent” without Stateful Tool-Enabled Agentic Deployment Spike exit |
+| REQ-F-24 | First-Order Computation Tree Logic “proved agent” without Stateful Tool-Enabled Agentic Deployment Spike exit |
+
+Fail-mode: treating Draft rows as Accepted without `SIGNOFF_LOG.md` → reject codegen.

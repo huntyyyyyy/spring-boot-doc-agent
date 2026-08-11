@@ -20,6 +20,9 @@ last_reviewed: '2026-08-10'
 
 # Algorithm-first: theory → our orchestration (not ★-products)
 
+**Historical / evidence — not product SoT.** Doctrine for context selection —
+stack locks elsewhere still bind (**Rust** Spec host; **Refuse Python**; WASM Could).
+
 **User stance (Adopt as product doctrine).** Prefer research algorithms, applied math,
 and named quality frameworks we can **discern and implement/orchestrate ourselves**
 over black-box high-★ agent-memory products. If a repo is only a thin wrapper on an

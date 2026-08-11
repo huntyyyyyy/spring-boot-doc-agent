@@ -10,14 +10,16 @@ nest: nests/04-chassis-go
 
 ## Context
 
-File watch, reindex triggers, and stamp invalidation fit a long-running chassis
-beside the Rust engine — not inside the IDE and not in Python.
+File watch, reindex triggers, and stamp invalidation need a long-running
+process beside the Rust engine — not inside the IDE and not in Python.
 
 ## Decision
 
-**Go** owns the watch/reindex chassis daemon. Triggers engine work; may later
-mint Spec `corpus_version` / snapshot freshness sidecars. Not the verify oracle
-writer (Architecture Decision Record ADR-0006 / ADR-0007).
+**Go** runs the watch/reindex chassis: watches the target tree, triggers engine
+index/verify, may later mint Spec `corpus_version` / snapshot freshness
+sidecars. Writing verify oracle artifacts from the chassis fails Architecture
+Decision Record ADR-0006 / ADR-0007. Folding chassis into the TypeScript
+extension or a Python watchdog fails this Architecture Decision Record.
 
 ## Status
 
@@ -25,6 +27,7 @@ Proposed.
 
 ## Consequences
 
-Positive: solid daemon ecosystem.  
-Negative: extra language in the monorepo.  
-Rejected: Python watchdog as product chassis; folding chassis into TS extension.
+Positive: mature daemon/watch ecosystem.  
+Negative: another language in the monorepo to staff and CI.  
+Rejected: Python watchdog as product chassis; chassis inside TypeScript
+extension.

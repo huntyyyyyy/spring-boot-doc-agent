@@ -2,18 +2,18 @@
 title: C4 modeling standard
 status: ACTIVE
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 ---
 
 # C4 standard
 
-Levels used here:
+| Level | What it binds | When required | If missing |
+| --- | --- | --- | --- |
+| **Context** | System + actors + external systems | Before any Implement | Block Implement |
+| **Container** | Deployable/runtime unit per language nest | Before any Implement | Block Implement |
+| **Component** | Major parts inside one container | Before coding that container | Block that container’s crates |
+| **Code** | Classes/modules | **After** Component + Architecture Decision Records; optional | Leave deferred (Architecture Decision Record ADR-0008) |
 
-| Level | Purpose | When required |
-| --- | --- | --- |
-| **Context** | System + actors + external systems | Before any Implement |
-| **Container** | Deployable/runtime units (per language bounded context) | Before any Implement |
-| **Component** | Major components inside a container | Before coding that container |
-| **Code** | Classes/modules | **After** Component + Architecture Decision Records; optional |
-
-Diagrams are Mermaid (or exported PNG) under `docs/c4/diagrams/`.  
-Every container maps to a polyglot bounded context and cites Architecture Decision Records.
+Diagrams: Mermaid (or exported PNG) under `docs/c4/diagrams/`.  
+Every container cites Architecture Decision Record IDs. A diagram edge without
+an Architecture Decision Record citation is a sketch — not System of Record.

@@ -1,24 +1,21 @@
 # Nest: Clojure graph brain
 
-**Owns:** Babashka/Datascript (and optional JVM) queries over EDN export
+**Owns (when built):** Babashka/Datascript (optional JVM) queries over EDN
+export from SQLite registry. Read-mostly; not merge oracle.
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0005
+**Fail closed:** Neo4j-as-System-of-Record or Python notebook as graph System
+of Record → violates Architecture Decision Record ADR-0005.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Now:** README + `nest.mdc` only — no deps.edn product until Definition of
+Ready PASS.
 
-## Look-first research
+## Open first
 
-- `research/polyglot/`
-- `docs/adr/adr-0005-clojure-graph-brain.md`
+1. `docs/adr/adr-0005-clojure-graph-brain.md`  
+2. `docs/adr/adr-0002-sqlite-registry.md`  
+3. `docs/c4/02-containers.md`
 
 ## Shared System of Record
 
-- `docs/DOMAIN_MAP.md`
-- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+- `03-requirements/` · `04-constraints/`  
+- `docs/c4/` · `docs/adr/`

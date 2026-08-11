@@ -43,10 +43,13 @@ sources:
 
 # Full polyglot product portfolio — user stance locked
 
+**Historical / evidence — not product SoT.** Older layout / PyO3-transition
+sections below are evidence of prior framing only.
+
 **Directive (2026-08-11).** **Refuse Python** as Spec host, ACI nest, oracle
 writer, or default PyO3 bridge for this port (Architecture Decision Record
-ADR-0001 amended). Older “Python peer / tip” sections below are **historical** —
-follow ADR-0001 + `portfolio-summary.md` + nest 08 tombstone.
+ADR-0001 amended). Follow ADR-0001 + `portfolio-summary.md` + nest 08 tombstone.
+**Rust** Spec host; WebAssembly **Could** (sandbox, not proof).
 
 **Directive (2026-08-10).** The product is **not** “Python with cool sidecars.”
 It is a **polyglot local-first verified architecture engine** that **fully uses**:

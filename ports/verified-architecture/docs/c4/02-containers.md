@@ -2,6 +2,7 @@
 title: C4 Level 2 — Containers (polyglot bounded contexts)
 status: DRAFT
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 adr_refs:
   - Architecture Decision Record ADR-0001
   - Architecture Decision Record ADR-0002
@@ -16,8 +17,9 @@ adr_refs:
 
 # Containers
 
-Each container is a **first-class language bounded context** (Architecture Decision Record ADR-0001).
-**No Python container** — Refuse (ADR-0001 amendment 2026-08-11).
+One deployable/runtime unit per Accepted language (Architecture Decision
+Record ADR-0001). **No Python container** — Refuse; nest 08 tombstoned;
+revival = reject.
 
 ```mermaid
 C4Container
@@ -43,15 +45,15 @@ C4Container
     Rel(ide, engine, "LSP / MCP")
 ```
 
-| Container | Language | Architecture Decision Record |
+| Container | Language | Bound / fail-mode |
 | --- | --- | --- |
-| Engine | Rust | 0007, 0004 |
-| Registry | SQLite | 0002 |
-| Lock guest | WebAssembly | 0004 — **Could / Wave-3**, not Must |
-| Chassis | Go | 0009 |
-| Lock DX | Ruby | 0003 |
-| Graph brain | Clojure | 0005 |
-| IDE/Model Context Protocol | TypeScript | 0010 |
-| Spec corpus Model Context Protocol | Rust | 0007 + Spike |
-| C / Zig shims | C/Zig | earned Spikes |
+| Engine | Rust | ADR-0007, ADR-0004 — sole oracle / Spec corpus Model Context Protocol host |
+| Registry | SQLite | ADR-0002 — rusqlite writers only |
+| Lock guest | WebAssembly | ADR-0004 — **Could / Wave-3**, not Must, not Spec host |
+| Chassis | Go | ADR-0009 — triggers only; never oracle writer |
+| Lock DX | Ruby | ADR-0003 — authors Intermediate Representation |
+| Graph brain | Clojure | ADR-0005 — EDN read-mostly |
+| IDE / Model Context Protocol UI | TypeScript | ADR-0010 — **presentation only** |
+| Spec corpus Model Context Protocol | Rust | ADR-0007 + Spike — not TypeScript |
+| C / Zig shims | C/Zig | earned Spikes only |
 | ~~Optional ACI glue~~ | ~~Python~~ | **Refuse** — nest 08 tombstoned |

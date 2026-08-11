@@ -1,14 +1,8 @@
 # Provenance
 
-This repository is a **planning and Retrieval-Augmented Generation corpus** for a verified polyglot
-architecture product.
-
-It excludes identity claims about any prior product repository. Evidence is
-organized for:
-
-1. **Human progressive disclosure** — nested `docs/` and `nests/`
-2. **Agent progressive disclosure** — Cursor `.mdc` activation algebra
-3. **Retrieval** — frontmatter-indexed `research/` for Retrieval-Augmented Generation tooling
-
-Authoritative product claims live under `docs/` once promoted. Research under
-`research/` is evidence, not law.
+| Claim | Bound | Fail-mode |
+| --- | --- | --- |
+| This tree’s job | Spec + Retrieval-Augmented Generation evidence for a polyglot verified-architecture product | Shipping product crates from here → reject |
+| Identity | No claim that this continues a prior commercial product repo | Invented lineage → reject |
+| Law vs evidence | Promoted claims under `00/`–`12/` + active `docs/adr|c4|standards` | Treating `research/` as law → reject |
+| Progressive disclosure | Humans: nested folders; agents: ≤2 alwaysApply + Skills + `research/INDEX.md` | Always-loading `research/` → reject |

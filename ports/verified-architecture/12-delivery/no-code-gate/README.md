@@ -1,14 +1,16 @@
 # No-code gate
 
-Mirror of the checklist in root `CONTRIBUTING.md` plus BFS Definition of Ready:
+**Fail closed:** any AI product codegen while any row below is red.
 
-1. Wave Must REQs Accepted (or explicit Draft wave Approve)
-2. No `blocks_code: true` open questions open without WAIVED
-3. Must non-functional requirements are complete six-part Quality Attribute Scenario
-4. Constraints ledger current
-5. C4 Context+Container; Component only for touched bounded context
-6. Relevant Architecture Decision Records Accepted; options/ holds the rest
-7. Ports + Interface Control Document stubs for the spike seam
-8. Receipt / Verification and Validation schema named
+Mirror of root `CONTRIBUTING.md` + BFS Definition of Ready:
 
-Until green: **Refuse AI product codegen**.
+| # | Predicate (must hold) | Fail-mode if violated |
+| --- | --- | --- |
+| 1 | Wave Must REQs Accepted (or explicit Draft-wave Approve) | codegen blocked |
+| 2 | No open `blocks_code: true` without WAIVED | codegen blocked |
+| 3 | Must NFRs are complete six-part Quality Attribute Scenario | codegen blocked |
+| 4 | Constraints ledger current | codegen blocked |
+| 5 | C4 Context+Container; Component only for touched BC | codegen blocked |
+| 6 | Relevant ADRs Accepted; options/ holds the rest | codegen blocked |
+| 7 | Ports + ICD stubs for the spike seam | codegen blocked |
+| 8 | Receipt / V&V schema named | codegen blocked |

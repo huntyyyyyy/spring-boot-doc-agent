@@ -25,6 +25,9 @@ last_reviewed: '2026-08-10'
 
 # Principal memo: huge markdown vs agent working set
 
+**Historical / evidence — not product SoT.** Meta-repo tip hygiene evidence —
+does not authorize tip-Python Spec host for this port (**Refuse Python**; **Rust** host).
+
 **Question.** Do giant in-repo markdown SoTs (research packets, session-logs, STATUS)
 bloat large language model agent context — and what do arXiv / SE architecture models prescribe?
 

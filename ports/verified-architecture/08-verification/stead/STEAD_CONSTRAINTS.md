@@ -6,39 +6,26 @@ arxiv: '2608.03609'
 paper_title: 'Formal Verification of Agentic Systems over Operational Data'
 ---
 
-# Stateful Tool-Enabled Agentic Deployment constraints (product specification)
+# STEAD constraints (product specification)
 
-We **do not** implement First-Order Computation Tree Logic model checking in
-the minimum viable product. We **Embody** the paper’s warning (*Formal
-Verification of Agentic Systems over Operational Data*): a large language
-model + tools over relational/operational data is easy to get *formally*
-wrong. Design the tool surface so we don’t paint into that corner.
-Exact public equivariance-wrapper engines found: **0** — ST-2 remains Spike.
+MVP **does not** ship FO-CTL model checking. **Embody** 2608.03609 warning:
+LLM+tools over operational data is easy to get formally wrong. Public
+equivariance-wrapper engines found: **0** — ST-2 remains Spike.
 
-A **Stateful Tool-Enabled Agentic Deployment** is the paper’s name for an
-agent + tool harness over persistent operational data.
+Whole words — root `GLOSSARY.md`.
 
-Whole words in prose — see root `GLOSSARY.md`.
+## Embody (Wave 0/1 design)
 
-## Embody constraints (Wave 0 / Wave 1 design — not industry normative)
+| ID | Constraint | Fail-mode |
+| --- | --- | --- |
+| **ST-1** | Entity params typed from Registry/SCIP/claim-store — not free-form model prose | Free-text bean → reject |
+| **ST-2** | α-rename in store ⇒ corresponding rename in admissible calls (or `EquivarianceWrap`) | Non-equivariant call → reject |
+| **ST-3** | No “agent satisfies business FO-CTL” without Spike exit + finite-domain story | Claim without exit → refuse |
+| **ST-4** | MCP/CLI schemas in `07-system-design/icd/` cite ST-1…3 | Schema without cite → incomplete |
+| **ST-5** | Harness rejects ids absent from current snapshot | Invented handle success → reject |
 
-| ID | Constraint |
-| --- | --- |
-| **ST-1** | Tool parameters that name entities (bean, symbol, edge, path, claim) MUST be typed identifiers from Registry / Source Code Index Protocol / claim-store — not free-form model prose |
-| **ST-2** | α-renaming opaque identifiers in the store MUST induce only corresponding renames in admissible tool calls (equivariance) — or calls pass through `EquivarianceWrap` |
-| **ST-3** | No product claim of “agent satisfies business First-Order Computation Tree Logic” without Spike exit + finite-domain story |
-| **ST-4** | Model Context Protocol / command-line interface schemas listed in `07-system-design/icd/` must cite ST-1…3 |
-| **ST-5** | Harness rejects tool calls whose identifiers are not present in the current snapshot (no hallucinated handles) |
+## Deferred
 
-## Explicitly deferred
-
-- Canonical deployment wrapper proving equivariance for arbitrary base agents  
-- PSPACE First-Order Computation Tree Logic checker over our registry  
+Canonical deployment wrapper for arbitrary agents; PSPACE FO-CTL checker.
 
 Spike: `12-delivery/spike-charters/SPIKE-STEAD-equivariance.md`.
-
-## Why this is not optional fluff
-
-If we ship Model Context Protocol `fitness_check` / `resolve` that accept
-large-language-model-invented bean names, we recreate this paper’s failure
-mode on day one — even with a perfect graph + lock core.

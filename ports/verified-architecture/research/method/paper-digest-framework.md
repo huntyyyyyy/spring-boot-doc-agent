@@ -8,8 +8,11 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # Paper digest framework
 
+**Historical / evidence — not product SoT.** Planning-corpus mirror of parent
+method — parent wins on conflict; digest ≠ Implement green.
+
 **Parent-repo Source of Truth:** `docs/research/method/paper-digest-framework.md`
-(this file is a planning-corpus mirror — keep aligned; parent wins on conflict).
+(keep aligned).
 
 Use this **before** promoting a paper into Must spine, Definition of Ready,
 or Embody/Adopt/Refuse. Title-skim is not enough.

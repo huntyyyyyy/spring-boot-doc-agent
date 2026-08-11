@@ -6,29 +6,27 @@ date: '2026-08-10'
 
 # Interface control documents (index)
 
-Each Interface Control Document is a schema + invariants file. **Write schemas
-here before code.**
+Schemas and fail-modes land here **before** crates. Cold agents use paths below;
+do not invent parallel contracts in prompts.
 
-| Interface Control Document | Path | Covers |
+| ID | Path | Attributes / fail-modes |
 | --- | --- | --- |
-| Interface Control Document ICD-LOCK | `icd/lock-ir.schema.json` | Lock Intermediate Representation (Draft) |
-| Interface Control Document ICD-REG | `icd/registry.sql.md` | SQLite DDL + meaning of tables |
-| Interface Control Document ICD-RCPT | `icd/receipt.schema.json` | Proof-tour receipt (+ β/ρ Draft) |
-| Interface Control Document ICD-CLAIM | `icd/ea-graph-claims.schema.json` | Artifact-anchored claim + disposition |
-| Interface Control Document ICD-RESOLVE | `icd/resolve-result.schema.json` | bean \| Unknown \| unprovable |
-| Interface Control Document ICD-MCP | `icd/mcp-tools.md` + `icd/mcp/*.schema.json` | Tools + Stateful Tool-Enabled Agentic Deployment + JSON Schema 2020-12 |
-| Interface Control Document ICD-LSP | `icd/lsp-diagnostics.md` | Diagnostic field mapping |
-
-**Decision matrices:**
+| ICD-LOCK | `lock-ir.schema.json` | Package Intermediate Representation; silent `update-todo` forbidden |
+| ICD-REG | `registry.sql.md` | Derived SQLite DDL; wipe/rebuild OK; never policy System of Record |
+| ICD-RCPT | `receipt.schema.json` | β/ρ digests; `llm_text` witness → reject |
+| ICD-CLAIM | `ea-graph-claims.schema.json` | Artifact anchors; disposition includes `unprovable` |
+| ICD-RESOLVE | `resolve-result.schema.json` | bean \| Unknown \| unprovable — never silent pick |
+| ICD-MCP | `mcp-tools.md` + `mcp/*.schema.json` | Primitives + handles; `unknown_handle` / session state refuse |
+| ICD-LSP | `lsp-diagnostics.md` | Diagnostic field mapping (Wave-2) |
 
 | Topic | Matrix | Architecture Decision Record |
 | --- | --- | --- |
-| Model Context Protocol | `../decisions/mcp-decision-matrix.md` | Architecture Decision Record ADR-0011 |
-| Lock Intermediate Representation | `../decisions/lock-ir-decision-matrix.md` | Architecture Decision Record ADR-0003 |
-| Freshness-bound receipts | `../decisions/receipt-decision-matrix.md` | (pending Accept) |
+| Model Context Protocol | `../decisions/mcp-decision-matrix.md` | ADR-0011 |
+| Lock Intermediate Representation | `../decisions/lock-ir-decision-matrix.md` | ADR-0003 |
+| Freshness-bound receipts | `../decisions/receipt-decision-matrix.md` | pending Accept |
 
-**Effect plants:** `../../08-verification/plants/mcp-effects/`.
+Effect plants: `../../08-verification/plants/mcp-effects/`.
 
 Draft schemas **exist**; Definition of Ready D7 stays FAIL until **human Accept**.
-Open question 04 (adapter map) and open question 05 (step_id / ls-tree canon)
+Open question 04 (adapter map) and open question 05 (`step_id` / ls-tree canon)
 remain open.

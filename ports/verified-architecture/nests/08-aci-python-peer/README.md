@@ -16,20 +16,18 @@ do_not:
 
 # Nest: Python — REFUSED
 
-**Owns:** nothing. This bounded context is **out** of the port product.
+**Owns:** nothing — out of the port product.
 
-| Was | Now |
+**Fail closed:** any new file here except this tombstone, any `nest.mdc`, any
+tip-Python Spec/ACI/PyO3 scaffold → reject (Architecture Decision Record
+ADR-0001 amended 2026-08-11).
+
+| Path attempted | Disposition |
 | --- | --- |
-| Optional ACI / glue peer | **Refuse** |
-| Spec Model Context Protocol host candidate | **Refuse** (was circular tip convenience) |
-| PyO3 engine bridge default | **Refuse** as planning default |
+| Spec Model Context Protocol host | **Refuse** → Rust (`SPIKE-SPEC-MCP-0`, ADR-0007) |
+| ACI / glue peer container | **Refuse** |
+| PyO3 as default engine bridge | **Refuse** as planning default |
+| IDE / presentation MCP | TypeScript only (ADR-0010) — not Python |
 
-**Engine / Spec corpus Model Context Protocol:** **Rust** (Architecture Decision
-Record ADR-0007; Spike `SPIKE-SPEC-MCP-0`).
-
-**IDE / presentation Model Context Protocol:** TypeScript (Architecture Decision
-Record ADR-0010) — not Python.
-
-Do not schedule product code, scaffolds, or tip-Python carry-over into this nest.
-Historical “Python peer” language elsewhere is superseded by Architecture
-Decision Record ADR-0001 amendment (2026-08-11).
+**Now:** this README only. Historical “Python peer” prose elsewhere is
+superseded by ADR-0001 amendment.

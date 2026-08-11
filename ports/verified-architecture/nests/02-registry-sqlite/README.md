@@ -1,24 +1,21 @@
 # Nest: SQLite registry
 
-**Owns:** Derived beans/edges schema; rebuildable local DB
+**Owns (when built):** Derived beans/edges schema; rebuildable local DB via
+rusqlite from the Rust engine; EDN export feed for nest 05.
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0002
+**Fail closed:** another language owns registry schema/write path, or Python
+registry owner → violates Architecture Decision Record ADR-0002.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Now:** README + `nest.mdc` only — no schema DDL / crates until Definition of
+Ready PASS.
 
-## Look-first research
+## Open first
 
-- `research/polyglot/`
-- `docs/adr/adr-0002-sqlite-registry.md`
+1. `docs/adr/adr-0002-sqlite-registry.md`  
+2. `docs/c4/02-containers.md`  
+3. `08-verification/sor-derived-matrix.md`
 
 ## Shared System of Record
 
-- `docs/DOMAIN_MAP.md`
-- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+- `03-requirements/` · `04-constraints/`  
+- `docs/c4/` · `docs/adr/`

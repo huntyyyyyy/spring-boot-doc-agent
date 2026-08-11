@@ -1,24 +1,21 @@
 # Nest: Go chassis
 
-**Owns:** Cobra daemon: watch, reindex, freshness stamps
+**Owns (when built):** Cobra daemon — watch, reindex triggers, freshness
+stamps; optional later Spec `corpus_version` sidecar. Not verify-oracle writer.
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0009
+**Fail closed:** Python watchdog as product chassis, or folding chassis into
+TypeScript extension → violates Architecture Decision Record ADR-0009 /
+ADR-0006.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Now:** README + `nest.mdc` only — no modules until Definition of Ready PASS.
 
-## Look-first research
+## Open first
 
-- `research/polyglot/`
-- `docs/adr/adr-0009-go-chassis-daemon.md`
+1. `docs/adr/adr-0009-go-chassis-daemon.md`  
+2. `docs/adr/adr-0006-single-oracle-writer.md`  
+3. `docs/c4/02-containers.md`
 
 ## Shared System of Record
 
-- `docs/DOMAIN_MAP.md`
-- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+- `03-requirements/` · `04-constraints/`  
+- `docs/c4/` · `docs/adr/`

@@ -10,31 +10,31 @@ evidence:
   - https://blog.modelcontextprotocol.io/posts/2026-07-28/
 ---
 
-# Interface Control Document ICD-MCP — primitive tools (wave-1)
+# Primitive tools (wave-1)
 
 HyperTool-style composition = **Could** later. Minimum viable product exposes
-**primitives** with schemas; harness is code-owned (Contracts arXiv:2607.08028).
+**primitives** with JSON Schema; harness is code-owned (Contracts arXiv:2607.08028).
+Rust engine decides; TypeScript presents; **Refuse Python** hosts.
 
-**Decision record:** `decisions/mcp-decision-matrix.md` (what/when/how/who/where/why
-+ usage cases + rejected alternatives). Do not edit tool semantics here without
-updating that matrix.
+Semantics System of Record: `decisions/mcp-decision-matrix.md` — edit tool
+behavior there in the same change as this file.
 
 ## Transport (normative)
 
 **Remote dialect:** Model Context Protocol **`2026-07-28`**.
 
-| Requirement | Detail | Why over alternative |
+| Requirement | Detail | Fail-mode if violated |
 | --- | --- | --- |
-| Stateless core | No `initialize`; no `Mcp-Session-Id` | Session middleware breaks load-balanced hosts (Model Context Protocol SEP-2575/2567) |
+| Stateless core | No `initialize`; no `Mcp-Session-Id` | Load-balanced hosts break (Model Context Protocol SEP-2575/2567) |
 | Per-request `_meta` | Version, clientInfo, capabilities | Replaces handshake |
-| Streamable HTTP headers | `MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name` required | Gateway routing; reject mismatch |
+| Streamable HTTP headers | `MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name` required | Gateway mismatch → `header_body_mismatch` |
 | Discovery | Optional `server/discover` | Not a session bootstrap |
-| Application state | Handles as **tool arguments** | Explicit > hidden transport state |
+| Application state | Handles as **tool arguments** | Hidden transport state under concurrent agents |
 | List caching | `ttlMs` / `cacheScope` when present | Tools are fixed → cacheable |
 | Deprecated | Roots, Sampling, Logging; legacy HTTP+SSE | Do not design new features on them |
 
-Local **stdio** remains the minimum viable product transport for IDE-embedded servers; still
-**session-free** at the protocol layer.
+Local **stdio** remains the minimum viable product transport for IDE-embedded
+servers; still **session-free** at the protocol layer.
 
 ## Stateful Tool-Enabled Agentic Deployment constraints (Embody — not industry normative)
 
@@ -60,10 +60,10 @@ Directory: `icd/mcp/` — see `tools.catalog.json`. Shared handle/reject defs in
 
 ### Effect plants (Tier-1)
 
-`08-verification/plants/mcp-effects/` — FX-Model Context Protocol-01/03/05 TaskSpecs (DynamicMCPBench
-shape; engine not Adopted).
+`08-verification/plants/mcp-effects/` — FX-Model Context Protocol-01/03/05 TaskSpecs
+(DynamicMCPBench shape; engine not Adopted).
 
-### Planned code map (Implement later — Spec binding now)
+### Planned code map (Implement later — Specification binding now)
 
 | Layer | Planned path | Port / role |
 | --- | --- | --- |
@@ -71,12 +71,11 @@ shape; engine not Adopted).
 | Transport stdio | `packages/mcp-server/src/transport/stdio.ts` | UC-Model Context Protocol-05 |
 | Transport HTTP | `packages/mcp-server/src/transport/streamable_http.ts` | UC-Model Context Protocol-06 |
 | Reject harness | `packages/mcp-server/src/harness/reject.ts` | ST-5; UC-Model Context Protocol-07 |
-| Engine | `crates/engine/` (Pilot) | `LockCheck`, `Resolver`, `ReceiptWriter`, `ClaimMemory` |
+| Engine | `crates/engine/` (Rust Pilot) | `LockCheck`, `Resolver`, `ReceiptWriter`, `ClaimMemory` |
 | Schemas | `07-system-design/icd/*.schema.json` → copied into package at build | Single dialect |
 
-Until those packages exist, **this Interface Control Document + decision matrix
-are the System of Record** for tool behavior. Agents must not invent a second
-tool list in prompts.
+Until those packages exist, **this file + decision matrix** bind tool behavior.
+Agents must not invent a second tool list in prompts.
 
 ## Usage cases (summary)
 
@@ -88,7 +87,7 @@ Full table: `decisions/mcp-decision-matrix.md`.
 | UC-Model Context Protocol-02 | Agent: resolve one injection site with snapshot handle |
 | UC-Model Context Protocol-03 | Agent: verify; only harness writes receipt |
 | UC-Model Context Protocol-04 | After edit: claim withdraw → unprovable allowed |
-| UC-Model Context Protocol-05 | CI: same tools over stdio |
+| UC-Model Context Protocol-05 | Continuous Integration: same tools over stdio |
 | UC-Model Context Protocol-06 | Optional remote: Streamable HTTP headers |
 | UC-Model Context Protocol-07 | Invented handle → reject |
 | UC-Model Context Protocol-08 | Governance: audit matrix + Architecture Decision Record |
@@ -101,7 +100,7 @@ protocol_version_unsupported · equivariance_reject (when wrap ships)
 
 ## Working hypothesis vs rejected (short)
 
-| Chosen | Rejected | Why |
+| Working hypothesis | Rejected | Why |
 | --- | --- | --- |
 | Primitives + handles | Mega “architecture” tools | Effect checkpoints stay visible |
 | `2026-07-28` | Sessionful pre-July dialect | Normative Spec; concurrent hosts |

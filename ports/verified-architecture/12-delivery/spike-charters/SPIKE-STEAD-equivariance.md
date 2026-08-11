@@ -7,20 +7,22 @@ traces:
   - research/adversarial/july-august-2026-overturn-review.md
 ---
 
-# Spike charter — SPIKE-Stateful Tool-Enabled Agentic Deployment-1
+# SPIKE-STEAD-equivariance
 
 ## Question
 
-If agents call Model Context Protocol tools over our derived registry / lock APIs, what identifier
-equivariance (or canonical wrapper) is required before we claim any FO-CTL-like
-properties — and what is the cheap engineering subset for minimum viable product (no FO-CTL claims)?
+Before any FO-CTL-like claim on MCP tools over derived registry/lock APIs:
+what identifier equivariance (or canonical wrapper) is required, and what is
+the cheap MVP subset that claims **none**?
 
-## Exit
+## Exit (shrink next actions)
 
-1. Written threat examples (rename bean ids / paths → wrong tool args)
-2. Recommend: ignore until Phase-2 **or** minimal canonicalization rules
-3. Keep/drop: `EquivarianceWrap` port
+| # | Deliverable | Fail if missing |
+| --- | --- | --- |
+| 1 | Threat examples: rename bean ids/paths → wrong tool args | No concrete rename attack |
+| 2 | Recommend: ignore until Phase-2 **or** minimal canonicalization rules | Open-ended “later” |
+| 3 | Keep/drop: `EquivarianceWrap` port | Port left undecided |
 
 ## Non-goals
 
-Proving Stateful Tool-Enabled Agentic Deployment theorems in-repo; implementing FO-CTL model checker.
+Proving STEAD theorems in-repo; implementing FO-CTL model checker.

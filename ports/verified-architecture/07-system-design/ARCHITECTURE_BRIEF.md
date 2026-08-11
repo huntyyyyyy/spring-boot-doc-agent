@@ -9,9 +9,6 @@ bloom_gate: required-through-create
 
 # Principal architecture brief
 
-**Authors’ stance:** principal software engineer + principal architect.  
-**Purpose:** replace slogan-docs with *where to look*, *who ships*, *what we
-build first*, and *what is still missing*.  
 **Stars / push dates:** GitHub API snapshot **2026-08-10** `[Evidenced]`.
 
 ---
@@ -20,22 +17,22 @@ build first*, and *what is still missing*.
 
 | Decision | Choice | Why | Still needed |
 | --- | --- | --- | --- |
-| **Product shape** | **Local developer tool** (command-line interface + optional Language Server Protocol/Model Context Protocol) that reads a **target repo** | Matches local-first verify; not a SaaS knowledge graph | open question OQ-01 human Accept |
-| **Distribution** | **Monorepo of crates/plugins** *after* Spec; ship as **one command-line interface binary + optional side cars** | One version line for locks↔engine; sidecars stay optional | Ports/Interface Control Document before Cargo |
+| **Product shape** | **Local developer tool** (command-line interface + optional Language Server Protocol / Model Context Protocol) that reads a **target repo** | Matches local-first verify; not a SaaS knowledge graph | open question OQ-01 human Accept |
+| **Distribution** | **Monorepo of crates/plugins** *after* Specification Approve; ship as **one command-line interface binary + optional side cars** | One version line for locks↔engine; sidecars stay optional | Ports / Interface Control Document before Cargo |
 | **Not** | Multi-tenant org services / Backstage mesh as minimum viable product | Explodes OpsCon, auth, System of Record | Phase-3+ only |
 | **Not** | “Import a library into Spring apps” as primary | Wrong customer; we analyze their tree, we don’t become their runtime | Could later as software development kit |
-| **minimum viable product verify** | Virtual graph + lock IR + receipts + Unknown/**unprovable** | High ROI; Jul–Aug EA-Graph reinforces anchors | Schemas + plants |
+| **minimum viable product verify** | Virtual graph + lock Intermediate Representation + receipts + Unknown/**unprovable** | High ROI; Jul–Aug Artifact-Anchored Verification Memory reinforces anchors | Schemas + plants |
 | **Harness loop** | Agent **proposes**; LockCheck+receipt **decides** (Aria-shaped) | Jul 2026 Aria: kernel/harness is trust anchor | ACI docs |
 | **Retrieval-Augmented Generation** | Corpus/retrieve for *this planning product* and later assist | Never verify witness | Retrieval contract |
 | **Memory split** | `Registry` (verify) ≠ `AgentMemory` (optional later) | Neo4j-class memory ≠ merge locks; Kuzu deprecated in ecosystems | Port boundary |
-| **Languages** | Rust engine **Pilot after ports**; Go/Clojure/Ruby/TS **Pilot lanes**; **Refuse Python** for this port | Adoption exists per lane; tip identity ≠ nine languages day one | Wave-1 bounded context set (open question OQ-08) |
+| **Languages** | **Rust** = Spec-corpus host + engine (Pilot after ports); **TypeScript** = presentation only; Go/Clojure/Ruby = Pilot lanes; **Refuse Python**; **WebAssembly** guest = **Could** | Adoption exists per lane; tip identity ≠ nine languages day one | Wave-1 bounded context set (open question OQ-08) |
 
 **Jul–Aug 2026 adversarial pass:** nothing OVERTURNS this table; amendments in
 `research/adversarial/july-august-2026-overturn-review.md`.
 
 ---
 
-## 1. What the system actually is (architecture)
+## 1. Topology and artifact landing
 
 ### 1.1 C4 one-liner
 
@@ -64,7 +61,7 @@ agents share the same checker.
 
 | Topology option | Verdict |
 | --- | --- |
-| **Monorepo (engine + specs + plugins)** | **Working hypothesis** after Spec Approve — single lock/engine version (not earned Adopt) |
+| **Monorepo (engine + specs + plugins)** | **Working hypothesis** after Specification Approve — single lock/engine version (not earned Adopt) |
 | **Multi-service org platform** | **Refuse minimum viable product** — wrong scale |
 | **Library embedded in customer apps** | **Defer** — secondary software development kit; primary is out-of-process tool |
 | **Pure SaaS** | **Refuse minimum viable product** — fights local-first + privacy Quality Attribute Scenario |
@@ -76,12 +73,12 @@ agents share the same checker.
 | Requirements / Quality Attribute Scenario / Requirements Traceability Matrix | `03-requirements/` | N/A |
 | Constraints / open questions | `04-constraints/` | N/A |
 | Ubiquitous language + bounded context map | `06-domain/` | N/A |
-| C4 + Architecture Decision Record + ports/Interface Control Document | `07-system-design/` | N/A |
+| C4 + Architecture Decision Record + ports / Interface Control Document | `07-system-design/` | N/A |
 | Lock DSL / JSON Schema for locks | `07-system-design/icd/` → later `specs/` | **Policy System of Record** (git) |
 | Registry schema (SQL DDL) | `06-domain/information-model/` → engine migrations | **Derived** |
 | Source Code Index Protocol protobuf / symbol IDs | External `scip` — we **consume** | Index System of Record for symbols |
 | Receipt / proof-tour JSON Schema | `08-verification/receipts/` | Verify artifact |
-| Model Context Protocol/Language Server Protocol tool schemas | `07-system-design/icd/` + TS IDE Pilot | Interface |
+| Model Context Protocol / Language Server Protocol tool schemas | `07-system-design/icd/` + TypeScript IDE Pilot | Interface |
 | Retrieval-Augmented Generation chunk manifests | `10-rag-corpus/` | Retrieve only |
 | Science metaphors | `11-science-transfer/` | Never merge Source of Truth |
 
@@ -95,10 +92,10 @@ agents share the same checker.
 | --- | --- | --- | --- | --- |
 | RE document family | ISO/IEC/IEEE **29148** | ISO/IEC/IEEE | ISO store; INCOSE SE Handbook | Process standard — not a GitHub product |
 | Quality in RE | ISO/IEC **25010** | ISO | ISO 25010:2023 | Characteristics vocabulary |
-| Architecture tradeoffs | **Architecture Tradeoff Analysis Method** | **SEI / CMU** | sei.cmu.edu Architecture Tradeoff Analysis Method collection | Method; large language model-Architecture Tradeoff Analysis Method papers exist — **not** Source of Truth |
+| Architecture tradeoffs | **Architecture Tradeoff Analysis Method** | **SEI / CMU** | sei.cmu.edu Architecture Tradeoff Analysis Method collection | Method; large language model–Architecture Tradeoff Analysis Method papers exist — **not** Source of Truth |
 | Decisions | **Nygard Architecture Decision Record** | Michael Nygard (blog/practice) | “Documenting architecture decisions” | Widely Adopted pattern; adr-tools etc. |
 | Diagrams | **C4** | **Simon Brown** | [c4model.com](https://c4model.com/) | Structurizr / many renderers |
-| Views classic | 4+1 (Kruchten) | Philippe Kruchten | IEEE Software 1995 | Background for MAAD etc. |
+| Views classic | 4+1 (Kruchten) | Philippe Kruchten | IEEE Software 1995 | Background for Multi-Agent Orchestration with External Knowledge and Hierarchical Memory etc. |
 
 **Agent rule:** cite these for *form*. Do not invent Phi-pinned FRs and call it 29148.
 
@@ -106,7 +103,7 @@ agents share the same checker.
 
 | Piece | Problem | Research / protocol lead | Shipping implementation (GitHub) | Stars* | Role here |
 | --- | --- | --- | --- | --- | --- |
-| **tree-sitter** | Incremental CST | Max Brunsfeld / tree-sitter org | [tree-sitter/tree-sitter](https://github.com/tree-sitter/tree-sitter) | ~26.6k | Grammar/CST foundation |
+| **tree-sitter** | Incremental Concrete Syntax Tree | Max Brunsfeld / tree-sitter org | [tree-sitter/tree-sitter](https://github.com/tree-sitter/tree-sitter) | ~26.6k | Grammar / Concrete Syntax Tree foundation |
 | **ast-grep** | Structural pattern search | ast-grep org (built on tree-sitter) | [ast-grep/ast-grep](https://github.com/ast-grep/ast-grep) | ~15.5k | Fast “shape fire” |
 | **Source Code Index Protocol** | Precise cross-file symbols | Sourcegraph → **scip-code** | [scip-code/scip](https://github.com/scip-code/scip) | ~0.7k | Index format System of Record |
 | **scip-java** | JVM indexer | Sourcegraph / scip-code | [scip-code/scip-java](https://github.com/scip-code/scip-java) (~131★; active 2026-08) | niche but **production indexer** | Produce `index.scip` |
@@ -121,7 +118,7 @@ agents share the same checker.
 | --- | --- | --- | --- | --- |
 | **Packwerk** | Shopify | [Shopify/packwerk](https://github.com/Shopify/packwerk) | ~1.9k | **Adopt pattern** (packages, todo bankruptcy) — Refuse Ruby tip kernel |
 | packs (Rust Packwerk-like) | community (e.g. alexevanczuk/packs) | see Packwerk README ecosystem | — | Optional Pilot later |
-| MDC / Cursor rules | Cursor | cursor.com/docs/context/rules | — | Activation algebra for *this* corpus |
+| Cursor rule files (`.mdc`) | Cursor | cursor.com/docs/context/rules | — | Activation algebra for *this* corpus |
 
 ### 2.4 Graph / query brain (enrichment)
 
@@ -153,7 +150,7 @@ agents share the same checker.
 
 Leaders: neuromorphic (Intel Loihi line), physical RC (photonic/soft-robot 2026 arXiv), Landauer/thermo (physics community).  
 **Our locked transfers only** — see `11-science-transfer/locked-transfers/`.  
-Papers pack: `research/papers-2026-may-aug/` (MAAD, observability, IMC, Landauer, PRC, Aria).
+Papers pack: `research/papers-2026-may-aug/` (Multi-Agent Orchestration with External Knowledge and Hierarchical Memory, observability, IMC, Landauer, PRC, Aria).
 
 ---
 
@@ -163,12 +160,12 @@ Papers pack: `research/papers-2026-may-aug/` (MAAD, observability, IMC, Landauer
 | --- | --- | --- | --- |
 | **Graphs** (directed): nodes=beans/types/packages; edges=injects/imports/depends | Cycle detect, layer reachability | **Yes** | Pretending graph = running JVM |
 | **Relations / Datalog-ish queries** | “Who injects X?”, lock queries | Pilot (DataScript) | Merge authority without deterministic engine |
-| **Formal languages / parsing** (CFGs via tree-sitter) | CST extraction | **Yes** (via tools) | Hand-rolled parsers day one |
+| **Formal languages / parsing** (CFGs via tree-sitter) | Concrete Syntax Tree extraction | **Yes** (via tools) | Hand-rolled parsers day one |
 | **Type/symbol identity** (Source Code Index Protocol symbol strings) | Cross-file resolve | **Yes** | Embeddings cosine as identity |
 | **SAT/SMT** (Z3) | Lock predicates as formulas | **No** (Phase 2+) | “Proved the Spring app” |
 | **Model checking** (Kani) | Rust engine properties | When engine exists | Java Stage-0 |
 | **Probability / concentration** | Flake language, eval variance | Sensors only | Probabilistic merge green |
-| **Information theory / Landauer** | Cost/remeasure *language* | Metaphor | \(kT\ln 2\) CI floor |
+| **Information theory / Landauer** | Cost/remeasure *language* | Metaphor | \(kT\ln 2\) Continuous Integration floor |
 | **Control / observability Gramians** | Sensor rate caps metaphor | Metaphor | Cover% PID |
 | **Reservoir → linear readout** | climb/sensors → oracle readout analogy | Metaphor | Physical RC hardware |
 
@@ -180,20 +177,20 @@ Papers pack: `research/papers-2026-may-aug/` (MAAD, observability, IMC, Landauer
 
 | ID | Constraint |
 | --- | --- |
-| C-LOCAL | Local-first; indexes derived on developer/CI machine |
-| C-LOCKGIT | Locks live in git; do not sync Lance/Source Code Index Protocol blobs as team System of Record |
+| C-LOCAL | Local-first; indexes derived on developer / Continuous Integration machine |
+| C-LOCKGIT | Locks live in git; do not sync Lance / Source Code Index Protocol blobs as team System of Record |
 | C-ORACLE1 | One deterministic gate/oracle writer at a time |
 | C-UNK | Ambiguous Dependency Injection → Unknown, never silent pick |
-| C-Retrieval-Augmented Generation≠V | Retrieval-Augmented Generation/large language model text ∉ verify witnesses |
-| C-WebAssembly≠P | WebAssembly = sandbox/trust-boundary engineering, not theorem |
-| C-Source Code Index Protocol≠Dependency Injection | Source Code Index Protocol ≠ Spring `@Primary`/`@Qualifier`/profiles runtime |
+| C-Retrieval-Augmented Generation≠V | Retrieval-Augmented Generation / large language model text ∉ verify witnesses |
+| C-WebAssembly≠P | WebAssembly = sandbox / trust-boundary engineering, not theorem |
+| C-Source Code Index Protocol≠Dependency Injection | Source Code Index Protocol ≠ Spring `@Primary` / `@Qualifier` / profiles runtime |
 | C-NOCODE | No product codegen until Definition of Ready green |
 | C-SCIENCE | Only locked E-DYN1 transfers enter product language |
 | C-PLANT | Java 17/21 · Boot 3.2/3.3 envelope until reopened |
 
 ---
 
-## 5. What implementation looks like (concrete, still Spec)
+## 5. What implementation looks like (concrete, still Specification)
 
 ### Wave-0 — this repo (now)
 
@@ -210,8 +207,8 @@ Markdown under `00/`–`12/`: RE, Quality Attribute Scenario, constraints, ports
 5. Writes **receipt JSON** (proof tour v0: lock id, edge id, file:line)
 6. Exit nonzero on Must violations
 
-**Stack Pilot order:** external scip-java → Rust (or thin host) decode/resolve/check → SQLite → receipts.  
-Go watch, bb graph, WebAssembly guest, TS Language Server Protocol = **not** minimum viable product blockers.
+**Stack Pilot order:** external scip-java → Rust decode/resolve/check → SQLite → receipts.  
+Go watch, Babashka graph, WebAssembly guest, TypeScript Language Server Protocol = **not** minimum viable product blockers.
 
 ### Wave-2
 
@@ -227,27 +224,27 @@ Ghost prefetch, polyglot bell (explicit bridge facts / OpenAPI), optional Z3 on 
 
 | Phase | Outcome | Exit criterion |
 | --- | --- | --- |
-| **P0 Spec** | Boundary, Quality Attribute Scenario, System of Record matrix, ports, receipt schema, open questions closed | Definition of Ready green + human Approve |
+| **P0 Specification** | Boundary, Quality Attribute Scenario, System of Record matrix, ports, receipt schema, open questions closed | Definition of Ready green + human Approve |
 | **P1 Index ingest** | Consume `index.scip` + annotation scan → SQLite | Query: list beans for type X |
 | **P2 Resolve** | injection_point → bean \| Unknown | Multi-impl without qualifier → Unknown |
 | **P3 Locks** | Package/layer/cycle rules on graph | Fixture plant fails controller→repo |
 | **P4 Receipts** | Stable step IDs; command-line interface prints path | Missing witness → fail |
 | **P5 ACI** | Agent/human same command-line interface | SWE-agent-style loop uses verify tool |
 | **P6 Language Server Protocol** | publishDiagnostics | Human edit same violation ID |
-| **P7 Enrichment** | Go watch, bb queries, WebAssembly package | Keep/drop per Spike |
+| **P7 Enrichment** | Go watch, Babashka queries, WebAssembly package | Keep/drop per Spike |
 | **P8 Proof+/polyglot** | Z3/Kani/cross-lang | Separate Approves |
 
 ---
 
-## 7. Why these choices are good (and where they land today)
+## 7. Choice → landing → gap
 
-| Choice | Good because | Lands today | Gap to accomplish |
+| Choice | Bound / evidence | Lands today | Gap to accomplish |
 | --- | --- | --- | --- |
 | Tool over SaaS | Privacy, offline, git locks | Vision draft in STATUS | open question OQ-01 Accept |
-| Graph+locks before SMT/large language model | Deterministic Accept; high ROI | Described in research memos | DDL + lock IR + plants |
+| Graph+locks before SMT / large language model | Deterministic Accept; high ROI | Described in research memos | DDL + lock Intermediate Representation + plants |
 | SQLite derived registry | Hermetic, CTE-friendly, local | Architecture Decision Record ADR-0002 Proposed | Schema file + migrations design |
 | Source Code Index Protocol consume | Real symbol identity at scale | Named external | Plant indexing runbook |
-| Packwerk pattern | Battle-tested modular monorepo UX | Research + Architecture Decision Record ADR-0003 | Executable lock IR |
+| Packwerk pattern | Battle-tested modular monorepo UX | Research + Architecture Decision Record ADR-0003 | Executable lock Intermediate Representation |
 | Monorepo later | Version alignment | Folders `07/options` | No Cargo yet — correct |
 | Refuse embeddings-as-System of Record | Stars≠truth; LanceDB ≠ Source Code Index Protocol | Critique memos | Keep in constraints |
 | Polyglot as Pilot lanes | Steal UX without tip thrash | nests/ legacy + options/ | open question OQ-08 wave-1 bounded context set |

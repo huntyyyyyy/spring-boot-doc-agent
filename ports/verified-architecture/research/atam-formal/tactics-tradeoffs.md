@@ -6,6 +6,10 @@ date: '2026-08-10'
 
 # Tactics · sensitivity · tradeoffs
 
+**Historical / evidence — not product SoT.** Knob catalog — chosen tactics land
+in Architecture Decision Records, not only here. Fail-mode: Retrieval-Augmented
+Generation on the verify path as Must.
+
 | Decision knob | Helps | Hurts | Class |
 | --- | --- | --- | --- |
 | Aggressive Source Code Index Protocol/registry cache | Latency Quality Attribute Scenario | Freshness / stale false-green | Tradeoff |

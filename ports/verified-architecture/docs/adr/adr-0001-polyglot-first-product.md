@@ -9,20 +9,21 @@ last_reviewed: '2026-08-11'
 
 ## Context
 
-Prior planning lived beside a Python monorepo tip and drifted toward
-“Python tip + sidecars,” then “optional Python ACI peer.” Stakeholders require a
-**polyglot** product **without** a Python runtime lane for this port: Rust engine,
-WebAssembly guests, SQLite, Go, Ruby, Clojure, TypeScript IDE/Model Context
-Protocol, C when necessary, Zig when earned.
+Planning beside a Python monorepo tip pulled the product toward “Python tip +
+sidecars,” then “optional Python ACI peer.” Stakeholders need local-first verify
+across Rust, WebAssembly guests, SQLite, Go, Ruby, Clojure, TypeScript
+IDE/Model Context Protocol, C when necessary, Zig when earned — without a
+Python runtime lane for this port.
 
 ## Decision
 
-**Polyglot-first** is product identity. Each **accepted** language owns a
-first-class bounded context (see C4 Containers).
+Every **Accepted** language owns exactly one first-class bounded context (C4
+Containers + nest). A language without nest + Architecture Decision Record
+fails the no-code gate.
 
-**Refuse (2026-08-11):** Python as Spec Model Context Protocol host, product ACI
-container, coverage/oracle writer identity, or default PyO3 bridge for this port.
-Nest `nests/08-aci-python-peer/` is tombstoned.
+**Refuse (2026-08-11):** Python as Spec Model Context Protocol host, product
+ACI container, coverage/oracle writer, or default PyO3 bridge. Nest
+`nests/08-aci-python-peer/` stays tombstoned; revival = reject.
 
 ## Status
 
@@ -30,7 +31,8 @@ Proposed (amended).
 
 ## Consequences
 
-Positive: ends circular tip-Python Why; Rust owns engine + Spec corpus serving.  
-Negative: no Python glue convenience — orchestration stays Rust/Go/TS.  
-Rejected: Python-majority product; Python-as-optional-hub; tip `adapters/mcp`
-Python as Spec SoT for this port.
+Positive: tip-Python “Why” stops steering container ownership; Rust path for
+engine + Spec corpus serving is unblocked.  
+Negative: no Python glue — orchestration must stay Rust / Go / TypeScript.  
+Rejected: Python-majority product; Python-as-optional-hub; tip
+`adapters/mcp` Python as Spec System of Record for this port.

@@ -2,6 +2,7 @@
 title: C4 Level 1 — System Context
 status: DRAFT
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 adr_refs:
   - Architecture Decision Record ADR-0001
 ---
@@ -10,8 +11,9 @@ adr_refs:
 
 ## In one sentence
 
-Verified Architecture Engine helps operators, architects, and developers get
-**traceable** Spring wiring and architecture-lock answers for a target codebase.
+Operators, architects, and developers get **traceable** Spring wiring and
+architecture-lock answers for a target codebase; large language models are not
+context authorities.
 
 ## Actors and externals
 
@@ -38,5 +40,8 @@ C4Context
 
 ## Notes
 
-- Target repo + locks (git) are System of Record inputs; indexes/registry are derived.
-- large language model tools may assist remediation later; they are **not** context authorities.
+- **System of Record inputs:** target repo + locks in git. Indexes and registry
+  are derived — treating them as identity fails Architecture Decision Record
+  ADR-0002 / ADR-0006.  
+- Large language model tools may assist remediation later; they must not author
+  verify witnesses.

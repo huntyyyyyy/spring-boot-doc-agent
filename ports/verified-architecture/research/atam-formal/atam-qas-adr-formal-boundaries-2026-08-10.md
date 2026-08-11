@@ -43,6 +43,10 @@ last_reviewed: '2026-08-10'
 
 # Architecture method for VA — Quality Attribute Scenario before Design
 
+**Historical / evidence — not product SoT.** Later tables that still name “Python
+ACI” as the artifact are pre–ADR-0001 amend — **Refuse Python**; **Rust** Spec
+host; WebAssembly trust-surface honesty only where literature supports it.
+
 **User correction (accepted).** process/53 restored polyglot mental models but
 still let **assumption-shaped non-functional requirements** (“≤2s warm”) steer Pilot talk. That is not
 architecture engineering. Before a non-functional need may influence Design:

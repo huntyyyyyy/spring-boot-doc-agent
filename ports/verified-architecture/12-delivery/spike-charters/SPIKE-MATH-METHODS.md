@@ -7,14 +7,14 @@ source: research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md
 
 # Spike charters (ideas only)
 
-Do **not** schedule these until a human picks one. They are Create-level tickets
-from the brainstorm catalog — not Wave-1 Must.
+**Fail closed:** scheduling any row before a human picks one; treating as
+Wave-1 Must.
 
-| ID | Intent | Exit criterion |
+| ID | Exit criterion (predicate) | Bound |
 | --- | --- | --- |
-| SPIKE-MATH-Analytic Hierarchy Process | Analytic Hierarchy Process weights beside a Decision Matrix | Worked example + consistency ratio; matrix still has Rejected alternatives |
-| SPIKE-MATH-TLA-FRESH | Tiny Temporal Logic of Actions model for stale-refuse | TLA+ TLC model checker finds injected bug; model kept tiny |
-| SPIKE-MATH-ALLOY-LOCK | Alloy for lock-set cycles / todo fingerprint | Counterexample produced |
-| SPIKE-MATH-Java Modelling Tools-LAT | Queueing sketch index vs resolve | Labeled sensor only; does not set Quality Attribute Scenario threshold |
+| SPIKE-MATH-AHP | Worked AHP + consistency ratio; Decision Matrix still has Rejected alternatives | brainstorm memo |
+| SPIKE-MATH-TLA-FRESH | TLA+ TLC finds injected stale-refuse bug; model stays tiny | brainstorm memo |
+| SPIKE-MATH-ALLOY-LOCK | Alloy counterexample for lock-set cycles / todo fingerprint | brainstorm memo |
+| SPIKE-MATH-JMT-LAT | Queueing sketch labeled **sensor only** — does not set QAS threshold | brainstorm memo |
 
-Full context and Refuse list: the brainstorm memo.
+Refuse list + full context: source brainstorm memo.

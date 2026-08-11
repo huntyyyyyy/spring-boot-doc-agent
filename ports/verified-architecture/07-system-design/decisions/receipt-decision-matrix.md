@@ -13,9 +13,9 @@ related_gaps: [G-R1, G-R2]
 
 | Vector | Content |
 | --- | --- |
-| **Why** | “Tests passed” prose and stale commits are adversarial for agent verify; need authenticated, source-state-bound evidence that gates can refuse. |
-| **What** | Receipt with β(E) source binding (`material_digest`, `head_hash`, `policy_digest`, `command_set_digest`) + ρ(E) step identity (`cmd`, `args`, `cwd`, `exit`, `output_digest`) + ban on llm/rag witnesses. |
-| **Who** | `ReceiptWriter` harness mints; model never stamps; humans Accept offline tamper suite. |
+| **Why** | “Tests passed” prose and reused commits green-wash agent verify; gates need source-state-bound digests they can refuse. |
+| **What** | Receipt with β(E) source binding (`material_digest`, `head_hash`, `policy_digest`, `command_set_digest`) + ρ(E) step identity (`cmd`, `args`, `cwd`, `exit`, `output_digest`) + ban on large language model / Retrieval-Augmented Generation witnesses. |
+| **Who** | Rust `ReceiptWriter` harness mints; model never stamps; humans Accept offline tamper suite. |
 | **How** | JSON Schema + optional later in-toto Statement envelope; compose with Supply-chain Levels for Software Artifacts — **do not rename** SLSA as Proof-or-Stop. |
 | **When** | Draft schema now; Spike field set + tamper plants before Must Implement; review when Proof-or-Stop public engine appears. |
 | **Where** | `icd/receipt.schema.json`; verify Model Context Protocol `structuredContent`; planned `crates/engine/receipt/`. |
@@ -30,7 +30,7 @@ related_gaps: [G-R1, G-R2]
 | D. Narrative message as witness | 0 | 0 | 0 | 0 | 0 | **Refuse** |
 | E. Wait for Proof-or-Stop engine repo | 1 | 1 | 1 | 0 | 3 | **Pilot** fields; don’t block Spec |
 
-Exact Proof-or-Stop engine public repos = **0** `[Evidenced — adoption audit]` → Embody gate semantics; Adopt Witness/in-toto shape.
+Exact Proof-or-Stop engine public repos = **0** `[Evidenced — adoption audit]` → Embody gate semantics; Witness / in-toto shape = **Working hypothesis** (not earned Adopt).
 
 ## Fields to add (G-R1) — Spec delta
 

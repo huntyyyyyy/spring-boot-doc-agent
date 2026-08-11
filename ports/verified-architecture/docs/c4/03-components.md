@@ -2,6 +2,7 @@
 title: C4 Level 3 — Engine components (Rust)
 status: DRAFT
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 adr_refs:
   - Architecture Decision Record ADR-0007
   - Architecture Decision Record ADR-0002
@@ -9,6 +10,9 @@ adr_refs:
 ---
 
 # Components — Engine (Rust)
+
+Rust engine internals only. Other containers lack Component diagrams until
+their Implement wave — do not invent Component ownership from this file.
 
 ```mermaid
 C4Component
@@ -20,7 +24,7 @@ C4Component
         Component(resolve, "WiringResolver", "Rust", "Bind or Unknown")
         Component(lockir, "LockIR", "Rust", "Parse Packwerk-shaped IR")
         Component(lockchk, "LockCheck", "Rust", "Evaluate locks vs edges")
-        Component(receipt, "Receipt", "Rust", "Proof-tour JSON")
+        Component(receipt, "Receipt", "Rust", "Proof-carrying JSON")
         Component(host, "WasmHost", "Rust", "wasmtime embedder")
         Component(export, "EdnExport", "Rust", "Export for Clojure BC")
     }
@@ -34,4 +38,5 @@ C4Component
     Rel(reg, export, "Snapshot")
 ```
 
-Other containers get Component diagrams before their Implement wave.
+`WasmHost` → guest LockCheck remains **Could / Wave-3** (Architecture Decision
+Record ADR-0004); treat the Rel as optional until Wave-3 earns it.

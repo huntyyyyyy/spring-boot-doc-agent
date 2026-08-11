@@ -12,6 +12,9 @@ selection_rule: >-
 
 # Six papers (May–August 2026) — cross-reference pack
 
+**Historical / evidence — not product SoT.** Transfer metaphors + locked E-DYN1
+paths only — not Implement green, not hardware roadmap, not tip-Python identity.
+
 Published dates verified via arXiv Atom API (`export.arxiv.org`) on 2026-08-10.
 
 ## Selected six

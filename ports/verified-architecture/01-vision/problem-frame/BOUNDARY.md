@@ -11,15 +11,15 @@ traces: open question OQ-01
 
 A **local developer tool** that builds a **virtual dependency/Dependency Injection graph** for a
 target codebase, evaluates **git-versioned architectural locks**, and emits
-**explainable proof-tour receipts** — shared by humans and agents — preferring
+**explainable proof-carrying receipts** — shared by humans and agents — preferring
 **Unknown** over wrong answers.
 
 ## In
 
 - Out-of-process command-line interface (+ later Language Server Protocol/Model Context Protocol) over a target git workspace
-- Consume Source Code Index Protocol indexes + source ASTs; derived SQLite registry **and claim memory**
+- Consume Source Code Index Protocol indexes + source ASTs; derived SQLite registry **and claim memory** written only by the **Rust** verify engine
 - Policy locks in-repo; deterministic LockCheck
-- EA-Graph dispositions (`unprovable` > guess); Stateful Tool-Enabled Agentic Deployment-typed tool ids
+- Artifact-Anchored Verification Memory dispositions (`unprovable` > guess); Stateful Tool-Enabled Agentic Deployment-typed tool ids
 - Retrieval-Augmented Generation over *this* planning corpus (and later assist text) **without** using it as verify System of Record
 
 ## Out (minimum viable product)
@@ -28,12 +28,13 @@ target codebase, evaluates **git-versioned architectural locks**, and emits
 - Embedding cosine as symbol or bean identity
 - Claiming Spring runtime fidelity (`@Conditional`, AOP proxies) as proved
 - Shipping nine-language monorepo as day-one identity
+- **Python** verify/Specification corpus host (tombstone nest; Architecture Decision Record ADR-0001)
 
 ## Dual surfaces (explicit)
 
-| Surface | Job |
-| --- | --- |
-| **Verify engine** | Graph + locks + receipts |
-| **Planning Retrieval-Augmented Generation corpus** | Progressive disclosure for agents/devs designing the engine |
+| Surface | Writes / owns | Must not |
+| --- | --- | --- |
+| **Verify engine** (**Rust**) | Graph edges, lock verdicts, freshness-bound receipts, claim dispositions | Treat chat or Retrieval-Augmented Generation text as witness |
+| **Planning Retrieval-Augmented Generation corpus** | Progressive disclosure packs for agents/devs designing the engine | Serve as System of Record for binding or lock truth |
 
-They share repo hygiene; they do **not** share System of Record.
+Shared repo hygiene only. Fail-mode: merging the two Systems of Record → open question OQ-02 reopen + reject codegen.

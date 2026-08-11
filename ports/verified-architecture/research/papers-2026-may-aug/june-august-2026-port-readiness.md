@@ -8,10 +8,10 @@ claim_tiers: Evidenced / Confirmed / Unknown
 
 # June–August 2026 findings (before port readiness work)
 
-**Superseded on research depth** by
+**Historical / evidence — not product SoT.** Superseded on research depth by
 `research/gaps/entity-adoption-audit-2026-08-10.md` and
-`research/gaps/shallow-decisions-honesty-2026-08-10.md`. Keep as historical
-title→action table only — do **not** treat as D0 PASS.
+`research/gaps/shallow-decisions-honesty-2026-08-10.md`. Keep as title→action
+table only — do **not** treat as D0 PASS or Implement green.
 
 ## Papers that change how we get “ready”
 

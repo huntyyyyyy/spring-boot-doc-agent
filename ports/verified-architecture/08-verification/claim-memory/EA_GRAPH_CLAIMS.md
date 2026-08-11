@@ -8,42 +8,42 @@ paper_title: 'EA-Graph: Artifact-Anchored Verification Memory for Coding Agents 
 
 # Artifact-anchored claim memory (product specification)
 
-We **Embody** ideas from the paper *EA-Graph: Artifact-Anchored Verification
-Memory for Coding Agents under Upstream Drift* (`unprovable`, evidence≠freshness,
-leaf anchors). We do **not** industry-**Adopt** a field library — exact public
-engines found: **0**. Product stance: **Pilot invent** under Spike before Must
-Implement honesty.
+**Embody** `unprovable`, evidence≠freshness, leaf anchors from EA-Graph
+(2608.04278). **Refuse** industry-Adopt of a field library (public engines =
+0). Stance: **Pilot invent** under Spike before Must Implement.
 
-Whole words in prose — see root `GLOSSARY.md`.
+Whole words — root `GLOSSARY.md`.
 
 ## Objects
 
-| Object | Meaning |
+| Object | Attribute (not in name) |
 | --- | --- |
-| Artifact node | Sub-path (file or finer) with content digest |
-| Claim | “Lock L holds / resolve R = bean B / cycle absent” at time T |
-| Anchor | Binding claim → artifact identity + digest used when established |
+| Artifact node | Sub-path + content digest |
+| Claim | Lock/resolve/cycle assertion at time T |
+| Anchor | Claim → artifact identity + establishing digest |
 | Meta | Independent `(evidence_strength, freshness)` |
-| Disposition | `unaffected` \| `affected` \| `unprovable` after withdrawal query |
+| Disposition | `unaffected` \| `affected` \| `unprovable` after withdrawal |
 
-## Withdrawal algorithm (specification)
+## Withdrawal (fail closed)
 
 ```text
 for each stored claim C:
   recompute digests of ANCH(C)
-  if digests unchanged → disposition = unaffected
-  else if replacement content available → mark affected; require re-verify
-  else → disposition = unprovable   # DO NOT GUESS
+  if digests unchanged → unaffected
+  else if replacement content available → affected; require re-verify
+  else → unprovable   # DO NOT GUESS
 ```
 
-## Storage (design)
+Guessed bean/edge on `unprovable` → reject.
 
-- Table/collection `claims` beside registry (same SQLite file OK in minimum viable product).
-- Not agent conversational memory (`AgentMemory` port stays separate).
-- Rebuildable from receipts + current files; git does **not** sync claim database blobs
-  as team System of Record (locks in git remain policy System of Record).
+## Storage
 
-## Application programming interface sketch (Interface Control Document later)
+- `claims` beside registry (same SQLite OK in MVP).
+- Not `AgentMemory` conversational port.
+- Rebuildable from receipts + files; git does **not** sync claim DB as team SoR
+  (locks in git remain policy SoR).
 
-See `07-system-design/icd/ea-graph-claims.schema.json` and
+## ICD later
+
+`07-system-design/icd/ea-graph-claims.schema.json` ·
 `receipts/receipt-schema-draft.md`.

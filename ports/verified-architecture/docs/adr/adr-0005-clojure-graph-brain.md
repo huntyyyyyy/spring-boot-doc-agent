@@ -10,14 +10,15 @@ nest: nests/05-graph-clojure
 
 ## Context
 
-Architects need interactive graph ask over derived facts without making the
+Architects need interactive graph ask over derived facts without making an
 embedded graph the multi-writer System of Record.
 
 ## Decision
 
-**Clojure / Babashka + Datascript** owns the graph-brain bounded context over
-**EDN export** from the SQLite registry (Architecture Decision Record ADR-0002).
-Read-mostly; not the merge oracle.
+**Clojure / Babashka + Datascript** queries **EDN export** from the SQLite
+registry (Architecture Decision Record ADR-0002). Read-mostly. Writing merges
+or oracle artifacts from the graph brain fails Architecture Decision Record
+ADR-0006.
 
 ## Status
 
@@ -25,6 +26,7 @@ Proposed.
 
 ## Consequences
 
-Positive: strong query DX.  
-Negative: export lag / sync contract.  
-Rejected: Neo4j-as-SoR; Python notebook as graph SoT.
+Positive: strong interactive query developer experience.  
+Negative: export lag / sync contract must be explicit.  
+Rejected: Neo4j-as-System-of-Record; Python notebook as graph System of
+Record.

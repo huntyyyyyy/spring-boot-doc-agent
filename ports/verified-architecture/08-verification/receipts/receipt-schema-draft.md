@@ -7,7 +7,7 @@ traces: open question OQ-05
 
 # Receipt / proof-tour (v0)
 
-JSON object per `verify` run. All fields mandatory unless marked optional.
+JSON object per `verify` run. Fields mandatory unless marked optional.
 
 ```json
 {
@@ -51,18 +51,14 @@ JSON object per `verify` run. All fields mandatory unless marked optional.
 }
 ```
 
-## Invariants
+## Invariants (fail closed)
 
-1. Fail with empty `steps` is invalid.
-2. large language model/Retrieval-Augmented Generation strings must not appear inside `witness`.
-3. **Evidence ≠ freshness** (EA-Graph, arXiv:2608.04278): a claim can have
-   strong evidence on **stale** anchors — disposition becomes `affected` or
-   `unprovable`, never a silent guess.
-4. Prefer `unprovable` over inventing a bean/edge when replacement content is
-   missing.
-5. `step_id` stable for the same logical check across runs when inputs unchanged
-   *(Unknown until Spike defines stability key)*.
+| # | Predicate | Fail-mode |
+| --- | --- | --- |
+| 1 | Fail run has non-empty `steps` | Empty `steps` → invalid receipt |
+| 2 | `witness` excludes LLM/RAG strings | Present → invalid |
+| 3 | Evidence ⊥ freshness | Silent guess on stale anchor → reject |
+| 4 | Prefer `unprovable` over inventing bean/edge | Invented edge → reject |
+| 5 | `step_id` stable when inputs unchanged | *(Unknown until Spike defines key)* |
 
-## Jul–Aug 2026 amendment
-
-See `research/adversarial/july-august-2026-overturn-review.md` §4 A1.
+Jul–Aug amendment: `research/adversarial/july-august-2026-overturn-review.md` §4 A1.

@@ -7,7 +7,9 @@ snapshot: GitHub API 2026-08-10
 
 # Leaders vs implementers (adoption map)
 
-Canonical narrative: `07-system-design/ARCHITECTURE_BRIEF.md` §2.
+Attention ≠ fitness. Stars below measure **GitHub attention on 2026-08-10**, not
+Spring Dependency Injection resolve capability. Narrative SoT:
+`07-system-design/ARCHITECTURE_BRIEF.md` §2. Fail-mode: ★≥N → automatic Adopt.
 
 | Domain | Theory/standard lead | Shipping GitHub (stars ≈) |
 | --- | --- | --- |
@@ -22,5 +24,3 @@ Canonical narrative: `07-system-design/ARCHITECTURE_BRIEF.md` §2.
 | Agent ACI | SWE-agent (~20.0k) | Loop shape |
 | command-line interface UX | Cobra (~44.4k); Bubble Tea (~44.3k) | Go Pilot patterns |
 | Vectors | LanceDB (~11.1k) | Retrieval-Augmented Generation only |
-
-Stars measure attention, not fitness for Spring Dependency Injection resolve.

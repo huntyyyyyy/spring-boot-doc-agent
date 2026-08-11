@@ -3,9 +3,11 @@ title: Registry SQL sketch
 status: DRAFT
 ---
 
-# Interface Control Document ICD-REG — SQLite registry (sketch)
+# SQLite registry (derived)
 
-Derived only. Wipe/rebuild OK.
+Derived only — wipe/rebuild OK. Never policy System of Record (locks stay in
+git). Fail-mode: treating this DDL as merge authority without deterministic
+engine LockCheck.
 
 ```sql
 -- nodes: beans, types, packages

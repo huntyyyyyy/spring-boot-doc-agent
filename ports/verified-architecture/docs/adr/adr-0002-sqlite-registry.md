@@ -10,17 +10,18 @@ nest: nests/02-registry-sqlite
 
 ## Context
 
-Need a local rebuildable store after Source Code Index Protocol + stereotype
-merge. Candidates: LanceDB, Kuzu, Neo4j, Datascript, SQLite. Quality Attribute
-Scenario determinism/latency + local-first apply.
+After Source Code Index Protocol + stereotype merge, operators need a local
+rebuildable bean/edge store. Candidates compared: LanceDB, Kuzu, Neo4j,
+Datascript, SQLite. Quality Attribute Scenario determinism/latency and
+local-first constrain the choice.
 
 ## Decision
 
-**SQLite** is the derived registry for beans/edges. Schema is System of Record;
-accessed via **rusqlite (Rust engine)**. Other languages use adapters only.
-Datascript consumes **EDN export** (Architecture Decision Record ADR-0005).
-Not LanceDB/Kuzu as symbol System of Record. **Refuse** Python as registry
-owner.
+**SQLite** holds rebuildable bean/edge rows; schema files are System of Record.
+Only the Rust engine writes via **rusqlite**. Other languages use read adapters.
+Datascript consumes **EDN export** only (Architecture Decision Record
+ADR-0005). A second embedded-graph writer or Python registry owner fails
+Architecture Decision Record ADR-0006 / Refuse.
 
 ## Status
 
@@ -28,7 +29,7 @@ Proposed.
 
 ## Consequences
 
-Positive: single-file rebuild; goldens.  
-Negative: recursive queries via export.  
-Rejected: embeddings as identity; multi-writer embedded graph behind load
-balancer; Python-owned registry.
+Positive: single-file rebuild and golden fixtures.  
+Negative: recursive / graph queries require export lag contracts.  
+Rejected: embeddings as identity; multi-writer embedded graph behind a load
+balancer; LanceDB/Kuzu as symbol System of Record; Python-owned registry.
