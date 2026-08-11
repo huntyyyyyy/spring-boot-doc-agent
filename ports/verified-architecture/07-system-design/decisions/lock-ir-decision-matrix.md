@@ -16,7 +16,7 @@ icd: 07-system-design/icd/lock-ir.schema.json
 | **Why** | Prose architecture rules and agent “fixes” do not enforce package boundaries; need an executable, gradual debt-aware Intermediate Representation. |
 | **What** | Language-agnostic schema: package node, allowed dependencies, enforce mode (`true`/`strict`/`false`), todo debt with content-stable fingerprint, **edge_fidelity** matrix bound into every receipt. |
 | **Who** | Humans own policy + todo allow; Ruby bounded context owns Packwerk-shaped DX (Architecture Decision Record ADR-0003); engine `LockCheck` decides; agents propose only. |
-| **How** | Adapters compile Ruby/Python/Go/Java manifests → one Intermediate Representation; evaluate in engine; forbid silent agent `update-todo`. |
+| **How** | Adapters compile Ruby/Go/Java manifests → one Intermediate Representation; evaluate in engine; forbid silent agent `update-todo`. |
 | **When** | Schema Draft now (open question 04); Accept after plant proves new illegal edge fails Continuous Integration; review when Packwerk major changes. |
 | **Where** | Spec: `icd/lock-ir.schema.json`. Planned: `crates/engine/lockcheck/`; adapters under language bounded contexts; locks remain git System of Record. |
 

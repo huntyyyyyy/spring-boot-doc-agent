@@ -1,30 +1,32 @@
 ---
 title: 'Architecture Decision Record ADR-0006: Single deterministic gate writer (language-neutral)'
-status: Proposed
+status: Proposed — amended 2026-08-11 (writer ≠ Python)
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 ---
 
 # Architecture Decision Record ADR-0006: Single deterministic gate writer
 
 ## Context
 
-Former Architecture Decision Record “Python tip remains coverage writer” encoded **legacy tip history**,
-not a polyglot product law. The invariant is **single writer**, not Python.
+Former framing (“Python tip remains coverage writer”) encoded **legacy tip
+history**, not a polyglot product law. The invariant is **single writer**.
 
 ## Decision
 
 At most **one** process/language writes the merge oracle / deterministic gate
-artifacts at a time. Initial writer language is chosen in a follow-on Architecture Decision Record after
-engine Spike (likely Rust or a thin façade). Python may write only if explicitly
-Accepted — it is **not** the default identity of this repo.
+artifacts at a time. Writer language is chosen after engine Spike — **Working
+hypothesis: Rust** (align Architecture Decision Record ADR-0007).
+
+**Refuse:** Python as default or silent coverage/oracle writer for this port.
 
 ## Status
 
-Proposed. **Supersedes** the planning workspace Architecture Decision Record ADR-005 framing for *this*
-product.
+Proposed (amended). **Supersedes** planning-workspace “Python remains writer”
+framing for *this* product.
 
 ## Consequences
 
-Positive: preserves shippability without Python-majority lock-in.  
-Negative: cutover must be explicit.  
-Rejected: dual Cover%/gate writers; silent Python re-center.
+Positive: language-neutral invariant; cutover explicit.  
+Negative: must implement Rust (or Accepted façade) writer before merge gates.  
+Rejected: dual Cover%/gate writers; Python re-center.

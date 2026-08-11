@@ -28,4 +28,4 @@ artifacts are marketing.
 
 - Engine crates, daemons, gems, JVM services, WebAssembly binaries as product
 - “Just a spike folder” that becomes the tip without Architecture Decision Record Accept
-- Python-majority scaffolding that re-centers the old product identity
+- Any Python product scaffolding / Spec server / ACI nest revival for this port

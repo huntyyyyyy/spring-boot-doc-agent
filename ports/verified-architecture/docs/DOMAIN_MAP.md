@@ -61,5 +61,5 @@ promoted.
 | `nests/05-graph-clojure` | Clojure | Datascript graph brain |
 | `nests/06-sandbox-wasm` | WebAssembly | Capability LockCheck guest |
 | `nests/07-ide-typescript` | TypeScript | IDE / Model Context Protocol UI |
-| `nests/08-aci-python-peer` | Python | Optional ACI peer (not majority) |
+| `nests/08-aci-python-peer` | — | **REFUSED** (tombstone README only; no nest rule) |
 | `nests/09-native-c-zig` | C / Zig | Earned native shims |

@@ -14,7 +14,7 @@ related:
 do_not:
   - Rename all research/*.md to .mdc outside .cursor/rules (Cursor ignores them)
   - Mass alwaysApply projections
-  - Tip-Python Spec host
+  - Any Python Spec / ACI / host path for this port
   - Product verify Model Context Protocol in this Spike
 last_reviewed: '2026-08-11'
 doc_role: gap
@@ -100,7 +100,7 @@ arXiv **2607.17598** (*Is Progressive Disclosure All You Need for Long-Context A
 | Untrusted agent-generated parse probes | Host calls guest | Extism/wasmtime deny-net — Architecture Decision Record ADR-0004 pattern |
 | Product LockCheck | Engine nest (later) | Wave-3 Could — not Spec v0 |
 
-**Rejected:** growing tip Python E-MD0 into the port Spec server (circular Why).
+**Rejected:** any Python Spec / ACI path for this port (Architecture Decision Record ADR-0001 amended).
 
 ## 5. Conversion policy (port)
 

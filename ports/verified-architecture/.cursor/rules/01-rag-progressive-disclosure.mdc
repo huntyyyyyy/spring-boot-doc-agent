@@ -16,7 +16,7 @@ serves the **same** frontmatter keys — see
 3. Then walk `related` until budget is spent.
 4. Prefer Spec tools (`spec_status` / `spec_gap` / …) when available — **Rust**
    Spec Model Context Protocol filters on `doc_role`, `mcp_tools`, `freeze_class`,
-   `accepted` (Spike — not tip Python).
+   `accepted` (Spike). **Refuse** Python Spec servers for this port.
 5. **Refuse** inventing paths not in `research/INDEX.md`, frontmatter edges, or
    tool results.
 

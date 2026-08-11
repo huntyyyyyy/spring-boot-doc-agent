@@ -1,7 +1,7 @@
 ---
 title: STATUS — single pointer for cold agents
 status: ACTIVE
-last_reviewed: '2026-08-10'
+last_reviewed: '2026-08-11'
 doc_role: status
 freeze_class: read_only
 look_first:
@@ -11,9 +11,10 @@ look_first:
 mcp_tools:
   - spec_status
 accepted: false
-corpus_version: '2026-08-10'
+corpus_version: '2026-08-11'
 related:
   - AGENT_BOOTSTRAP.md
+  - docs/adr/adr-0001-polyglot-first-product.md
   - research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
   - 07-system-design/schemas/va-doc-frontmatter.schema.json
 ---
@@ -23,6 +24,9 @@ related:
 ## Phase
 
 **Specification / gap-fill** — product implementation = Refuse.
+
+**Stack:** Rust engine + Spec corpus Model Context Protocol. **Refuse Python**
+for this port (nest 08 tombstoned; Architecture Decision Record ADR-0001 amended).
 
 | Gate | Status |
 | --- | --- |

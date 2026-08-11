@@ -28,7 +28,7 @@ build first*, and *what is still missing*.
 | **Harness loop** | Agent **proposes**; LockCheck+receipt **decides** (Aria-shaped) | Jul 2026 Aria: kernel/harness is trust anchor | ACI docs |
 | **Retrieval-Augmented Generation** | Corpus/retrieve for *this planning product* and later assist | Never verify witness | Retrieval contract |
 | **Memory split** | `Registry` (verify) ≠ `AgentMemory` (optional later) | Neo4j-class memory ≠ merge locks; Kuzu deprecated in ecosystems | Port boundary |
-| **Languages** | Rust engine **Pilot after ports**; Go/Clojure/Ruby/TS **Pilot lanes**; Python **peer ACI** | Adoption exists per lane; tip identity ≠ nine languages day one | Wave-1 bounded context set (open question OQ-08) |
+| **Languages** | Rust engine **Pilot after ports**; Go/Clojure/Ruby/TS **Pilot lanes**; **Refuse Python** for this port | Adoption exists per lane; tip identity ≠ nine languages day one | Wave-1 bounded context set (open question OQ-08) |
 
 **Jul–Aug 2026 adversarial pass:** nothing OVERTURNS this table; amendments in
 `research/adversarial/july-august-2026-overturn-review.md`.

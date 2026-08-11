@@ -29,4 +29,5 @@ Proposed.
 
 Positive: natural developer-experience surface.  
 Negative: Node toolchain for extensions only.  
-Rejected: forcing all IDE UX through Python; putting verify oracle logic in TS.
+Rejected: forcing all IDE UX through Python (**Refuse** Python for this port);
+putting verify oracle logic in TypeScript.

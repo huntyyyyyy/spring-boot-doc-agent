@@ -19,6 +19,7 @@ related:
   - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
 
 do_not:
+  - Revive Python ACI/Spec host for this port (ADR-0001 amended 2026-08-11)
   - Flatten Pilot to “Python only” and drop Packwerk/bb/Go/SQLite/WebAssembly lanes
   - Treat Source Code Index Protocol transmission as Spring Dependency Injection resolve
   - Use LanceDB/Kuzu as symbol or multi-writer System of Record in v1 Pilot
@@ -49,6 +50,8 @@ last_reviewed: '2026-08-10'
 ---
 
 # VA Pilot depth — why these pieces exist, and how we pilot them *rich*
+
+> **Amended 2026-08-11:** Python tip/ACI sections below are historical. **Refuse Python** for this port — see Architecture Decision Record ADR-0001 + nest 08 tombstone.
 
 **Problem this memo fixes.** Prior chat compressed the Pilot to “thin Python
 slice.” That was correct for **Must verify** (graph + locks + receipt) but

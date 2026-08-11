@@ -11,7 +11,7 @@ related:
   - research/mdc-devex/cursor-mdc-activation-algebra.md
 do_not:
   - Mass-convert Markdown into always-on .mdc
-  - Grow tip Python as Spec Model Context Protocol host (circular Why)
+  - Any Python Spec / ACI / host path for this port
   - Soft-pass Definition of Ready with richer metadata alone
   - Tip Cargo product scaffolds under FREEZE — Spike charter only until scheduled
 last_reviewed: '2026-08-10'
@@ -42,7 +42,7 @@ Python tip convenience layer.
 | Cursor `.mdc` | Mandate the walk (`look_first` → `related`) | Activation algebra — not a catalog SoT |
 | Markdown frontmatter | Edge data + route keys | Closed schema (JSON Schema file) |
 | Spec corpus Model Context Protocol | Answer agent queries from that graph | **Rust** (Spike) — parse FM, index, filter tools, digests |
-| Tip `check_md_frontmatter.py` | Monorepo research/design gate (E-MD0) | Python — **do not** grow into Spec host |
+| Tip monorepo E-MD0 gate | Outside this port | Not a port runtime — do not import |
 | Product verify Model Context Protocol | Later; separate System of Record | Rust engine — out of Spec Spike scope |
 
 Mass `.md` → `.mdc` remains **Refuse**. Progressive disclosure without machine

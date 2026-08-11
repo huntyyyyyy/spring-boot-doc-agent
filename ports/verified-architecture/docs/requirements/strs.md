@@ -50,5 +50,5 @@ pick among ambiguous candidates.
 
 The system is delivered as a **polyglot** monorepo of first-class language bounded contexts
 (Rust engine, WebAssembly trust boundary, Go chassis, Ruby locks, Clojure graph brain,
-SQLite registry, TS IDE/Model Context Protocol, Python as **peer** ACI — not majority kernel).
-See Architecture Decision Record ADR-0001.
+SQLite registry, TS IDE/Model Context Protocol — **Refuse Python** runtime for this port).
+See Architecture Decision Record ADR-0001 (amended 2026-08-11).

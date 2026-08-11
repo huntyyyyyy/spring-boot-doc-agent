@@ -1,24 +1,35 @@
-# Nest: Python ACI peer
+---
+title: Nest 08 — Python ACI peer — REFUSED
+status: REFUSED — 2026-08-11
+doc_role: nest
+freeze_class: frozen
+accepted: false
+corpus_version: '2026-08-11'
+look_first:
+  - ../../docs/adr/adr-0001-polyglot-first-product.md
+  - ../../docs/adr/adr-0007-rust-owns-engine.md
+do_not:
+  - Revive Python Spec Model Context Protocol host
+  - Revive Python ACI as product container
+  - PyO3 as default engine bridge for this port
+---
 
-**Owns:** Optional orchestration peer — NOT majority engine / NOT product identity
+# Nest: Python — REFUSED
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0001, Architecture Decision Record ADR-0006
+**Owns:** nothing. This bounded context is **out** of the port product.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+| Was | Now |
+| --- | --- |
+| Optional ACI / glue peer | **Refuse** |
+| Spec Model Context Protocol host candidate | **Refuse** (was circular tip convenience) |
+| PyO3 engine bridge default | **Refuse** as planning default |
 
-## Look-first research
+**Engine / Spec corpus Model Context Protocol:** **Rust** (Architecture Decision
+Record ADR-0007; Spike `SPIKE-SPEC-MCP-0`).
 
-- `research/polyglot/`
-- `docs/adr/adr-0001-polyglot-first-product.md`
+**IDE / presentation Model Context Protocol:** TypeScript (Architecture Decision
+Record ADR-0010) — not Python.
 
-## Shared System of Record
-
-- `docs/DOMAIN_MAP.md`
-- `docs/requirements/` · `docs/constraints/`
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+Do not schedule product code, scaffolds, or tip-Python carry-over into this nest.
+Historical “Python peer” language elsewhere is superseded by Architecture
+Decision Record ADR-0001 amendment (2026-08-11).

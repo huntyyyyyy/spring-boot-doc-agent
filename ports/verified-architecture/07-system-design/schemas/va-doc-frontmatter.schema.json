@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://local.invalid/verified-architecture/va-doc-frontmatter.schema.json",
   "title": "Verified Architecture corpus document frontmatter",
-  "description": "Closed frontmatter for ports/verified-architecture Markdown. Shared SoT for Cursor forced-pointing and Rust Spec corpus Model Context Protocol (SPIKE-SPEC-MCP-0). Tip Python E-MD0 is a separate monorepo gate — not this runtime.",
+  "description": "Closed frontmatter for ports/verified-architecture Markdown. Shared SoT for Cursor forced-pointing and Rust Spec corpus Model Context Protocol (SPIKE-SPEC-MCP-0). Refuse Python runtime for this port.",
   "type": "object",
   "required": ["title", "status"],
   "properties": {

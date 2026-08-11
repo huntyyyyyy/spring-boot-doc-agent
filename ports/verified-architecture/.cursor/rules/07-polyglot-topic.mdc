@@ -5,9 +5,10 @@ alwaysApply: false
 
 # Polyglot portfolio topic
 
-1. Polyglot-first identity — Architecture Decision Record ADR-0001 (Proposed).
+1. Polyglot-first identity — Architecture Decision Record ADR-0001 (Proposed, amended).
 2. Open **one** nest README + matching Architecture Decision Record — not all nests.
-3. Python is optional peer (nest 08), not majority engine — and not automatic Spec MCP host.
-4. WebAssembly / Rust trust stories need earned artifacts — no unearned “proved”.
-5. Retrieve `research/polyglot/` only if needed; prefer nest pointer.
-6. FREEZE: no new language-lane Architecture Decision Records without human ask.
+3. **Refuse Python** for this port (Spec host, ACI nest, default PyO3). Nest 08 is tombstone.
+4. Engine + Spec corpus Model Context Protocol = **Rust**. IDE presentation = TypeScript.
+5. WebAssembly / Rust trust stories need earned artifacts — no unearned “proved”.
+6. Retrieve `research/polyglot/` only if needed; prefer nest pointer.
+7. FREEZE: no new language-lane Architecture Decision Records without human ask.

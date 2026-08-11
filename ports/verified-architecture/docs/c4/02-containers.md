@@ -16,8 +16,8 @@ adr_refs:
 
 # Containers
 
-Each container is a **first-class language bounded context** (Architecture Decision Record ADR-0001). Python is optional
-peer glue — not shown as the hub.
+Each container is a **first-class language bounded context** (Architecture Decision Record ADR-0001).
+**No Python container** — Refuse (ADR-0001 amendment 2026-08-11).
 
 ```mermaid
 C4Container
@@ -52,5 +52,6 @@ C4Container
 | Lock DX | Ruby | 0003 |
 | Graph brain | Clojure | 0005 |
 | IDE/Model Context Protocol | TypeScript | 0010 |
-| Optional ACI glue | Python | peer only — not required hub |
+| Spec corpus Model Context Protocol | Rust | 0007 + Spike |
 | C / Zig shims | C/Zig | earned Spikes |
+| ~~Optional ACI glue~~ | ~~Python~~ | **Refuse** — nest 08 tombstoned |

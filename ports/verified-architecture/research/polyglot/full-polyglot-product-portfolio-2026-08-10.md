@@ -1,7 +1,8 @@
 ---
 title: VA / E-POLY — Full polyglot product portfolio (Rust · WebAssembly · SQLite · Go · Ruby · Clojure · TS · C · Zig)
-status: RESEARCH COMPLETE — Spec Draft PRODUCT STANCE (user-directed; amends “sidecar-only” framing)
+status: RESEARCH COMPLETE — Spec Draft PRODUCT STANCE; **amended 2026-08-11 — Refuse Python runtime**
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
@@ -13,13 +14,11 @@ related:
   - docs/adr/README.md
   - docs/adr/adr-0001-polyglot-first-product.md
   - research/polyglot/
-
   - research/mdc-devex/
-
   - research/polyglot/pilot-mental-models-polyglot-lanes-2026-08-10.md
   - research/atam-formal/atam-qas-adr-formal-boundaries-2026-08-10.md
-
 do_not:
+  - Revive Python ACI / Spec host / tip convenience for this port
   - Water this down to “Python tip + optional demos”
   - Dual-write coverage.xml from two languages without cutover Architecture Decision Record
   - Skip Quality Attribute Scenario/Architecture Decision Record gates from process/54 when picking toolkits
@@ -40,19 +39,23 @@ sources:
   web:
     - https://component-model.bytecodealliance.org/
   mcp: https://mcp.deepwiki.com/mcp
-last_reviewed: '2026-08-10'
 ---
 
 # Full polyglot product portfolio — user stance locked
 
+**Directive (2026-08-11).** **Refuse Python** as Spec host, ACI nest, oracle
+writer, or default PyO3 bridge for this port (Architecture Decision Record
+ADR-0001 amended). Older “Python peer / tip” sections below are **historical** —
+follow ADR-0001 + `portfolio-summary.md` + nest 08 tombstone.
+
 **Directive (2026-08-10).** The product is **not** “Python with cool sidecars.”
 It is a **polyglot local-first verified architecture engine** that **fully uses**:
 
-**Rust · WebAssembly (+ Rust/WebAssembly toolkits) · SQLite · Go · Ruby · Clojure · Python ·
-TypeScript (as needed) · C (when necessary) · Zig (when it earns a seat).**
+**Rust · WebAssembly (+ Rust/WebAssembly toolkits) · SQLite · Go · Ruby · Clojure ·
+TypeScript · C (when necessary) · Zig (when it earns a seat).** **Not Python.**
 
-Earlier agent framing that demoted languages to Pattern-only or “optional after
-Python Must” is **amended**. process/53 lanes stay as *mental models*; this memo
+Earlier agent framing that demoted languages to Pattern-only or kept a Python
+Must/peer is **amended**. process/53 lanes stay as *mental models*; this memo
 is the **product identity**. process/54 Quality Attribute Scenario/Architecture Decision Record/formal gates still bind — full
 polyglot does **not** mean vibes or dual Cover%.
 

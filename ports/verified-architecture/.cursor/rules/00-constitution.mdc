@@ -26,7 +26,8 @@ No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH
 
 Retrieval-Augmented Generation text is never a verify witness.
 Frontmatter routing keys are **Spec corpus** SoT; **Rust** Spec Model Context
-Protocol (Spike) serves them — not tip Python, not product receipt SoT.
+Protocol (Spike) serves them — not product receipt SoT. **Refuse Python**
+runtimes for this port (Architecture Decision Record ADR-0001 amended).
 
 ## FREEZE + deepen (read `STATUS.md`)
 

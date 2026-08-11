@@ -11,7 +11,7 @@ Fixed for this planning wave. Change requires an Architecture Decision Record.
 | ID | Constraint |
 | --- | --- |
 | **CON-01** | Exactly one deterministic merge-gate / coverage-oracle writer at a time |
-| **CON-02** | Polyglot-first: language bounded contexts are peers; no Python-majority engine identity |
+| **CON-02** | Polyglot-first: language bounded contexts are peers; **Refuse Python** runtime / ACI / Spec host for this port (Architecture Decision Record ADR-0001 amended) |
 | **CON-03** | Local-first default; locks in git; indexes local-derived |
 | **CON-04** | Java 17/21 · Spring Boot 3.2/3.3 plant envelope (until R-03 reopen) |
 | **CON-05** | No large language model/Retrieval-Augmented Generation output as verify witness |

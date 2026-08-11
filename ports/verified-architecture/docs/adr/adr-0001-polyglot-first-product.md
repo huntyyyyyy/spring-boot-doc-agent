@@ -1,30 +1,36 @@
 ---
 title: 'Architecture Decision Record ADR-0001: Polyglot-first product identity'
-status: Proposed
+status: Proposed — amended 2026-08-11 (Python runtime Refuse)
 date: '2026-08-10'
+last_reviewed: '2026-08-11'
 ---
 
 # Architecture Decision Record ADR-0001: Polyglot-first product identity
 
 ## Context
 
-Prior planning lived beside a Python product and drifted toward
-“Python tip + sidecars.” Stakeholders require a **full** polyglot product:
-Rust, WebAssembly (+ toolkits), SQLite, Go, Ruby, Clojure, TypeScript, Python as peer,
-C when necessary, Zig when earned.
+Prior planning lived beside a Python monorepo tip and drifted toward
+“Python tip + sidecars,” then “optional Python ACI peer.” Stakeholders require a
+**polyglot** product **without** a Python runtime lane for this port: Rust engine,
+WebAssembly guests, SQLite, Go, Ruby, Clojure, TypeScript IDE/Model Context
+Protocol, C when necessary, Zig when earned.
 
 ## Decision
 
-We will treat **polyglot-first** as product identity. Each language owns a
-first-class bounded context (see C4 Containers). Python is an optional ACI/
-glue peer — **not** the majority engine and **not** the identity of the system.
+**Polyglot-first** is product identity. Each **accepted** language owns a
+first-class bounded context (see C4 Containers).
+
+**Refuse (2026-08-11):** Python as Spec Model Context Protocol host, product ACI
+container, coverage/oracle writer identity, or default PyO3 bridge for this port.
+Nest `nests/08-aci-python-peer/` is tombstoned.
 
 ## Status
 
-Proposed.
+Proposed (amended).
 
 ## Consequences
 
-Positive: matches stakeholder intent; clear ownership.  
-Negative: wider toolchain; stricter Architecture Decision Record/CI discipline.  
-Rejected: Python-majority product port as the new tip; demoting Ruby/Clojure/Go to demos.
+Positive: ends circular tip-Python Why; Rust owns engine + Spec corpus serving.  
+Negative: no Python glue convenience — orchestration stays Rust/Go/TS.  
+Rejected: Python-majority product; Python-as-optional-hub; tip `adapters/mcp`
+Python as Spec SoT for this port.

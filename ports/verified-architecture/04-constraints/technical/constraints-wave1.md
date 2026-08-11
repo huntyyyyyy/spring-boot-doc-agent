@@ -11,7 +11,7 @@ Change requires Architecture Decision Record. Distinct from REQs.
 | ID | Constraint |
 | --- | --- |
 | CON-01 | Exactly one deterministic merge-gate / oracle writer at a time |
-| CON-02 | Polyglot-first as options; no Python-majority identity |
+| CON-02 | Polyglot-first as options; **Refuse Python** runtime for this port (Architecture Decision Record ADR-0001 amended) |
 | CON-03 | Local-first default; locks in git; indexes/claims local-derived |
 | CON-04 | Java 17/21 · Boot 3.2/3.3 plant envelope until reopened |
 | CON-05 | No large language model/Retrieval-Augmented Generation output as verify witness or claim anchor |
