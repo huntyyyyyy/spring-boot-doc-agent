@@ -10,9 +10,15 @@ confidence_scale: >-
 
 # C4 brief + confidence
 
-ASCII only until signoff → formal diagrams under this folder. Scores =
-**conceptual confidence**, not “ready to code.” **Ready to Implement ≈ 0.15**
-(Definition of Ready 0 PASS).
+ASCII only until signoff → formal diagrams under this folder.
+
+| Sensor | Meaning | Not meaning |
+| --- | --- | --- |
+| Per-entity **0.xx** | Shape confidence that the C4 entity/edge matches the Draft Spec | Implement readiness / Definition of Ready PASS |
+| Engine **0.75** | We are fairly sure *a local engine container* belongs in the sketch | **Not** “75% ready to code” |
+| Ready to Implement **≈ 0.15** | Definition of Ready **0 PASS**; research-depth FAIL | Do not average with shape scores |
+
+Scores = **conceptual confidence**, not “ready to code.”
 
 ## Context (Level 1)
 

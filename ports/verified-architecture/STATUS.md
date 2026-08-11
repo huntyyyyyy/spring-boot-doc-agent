@@ -32,7 +32,13 @@ related:
 | IDE presentation Model Context Protocol | **TypeScript** (ADR-0010) | Reject Spec corpus server in TS as default |
 | WebAssembly LockCheck guest | **Could / Wave-3** (ADR-0004) | Reject as Spec host or Wave-1 Must |
 
-Prose: whole words — `GLOSSARY.md`. Skill when editing: `predicate-prose`.
+Prose: whole words — `GLOSSARY.md` (expand-on-first-use preference, not CI reject).
+Skill when editing: `predicate-prose`.
+
+**Tip search policy (monorepo SoT):** tip `CLAUDE.md` (2026-08-09+) allows
+`Grep`/`rg` for inventory; prefer `ast-grep` for structural citations. Stale
+injected “hard-deny Grep” excerpts are **not** tip SoT — do not thrash. Port
+does not restate a deny.
 
 ## Alarms (uncertainty already reduced — do not re-litigate)
 
@@ -46,10 +52,10 @@ Prose: whole words — `GLOSSARY.md`. Skill when editing: `predicate-prose`.
 
 | Allowed | Forbidden |
 | --- | --- |
-| Deepen receipt freshness β/ρ | New Decision Matrices |
+| Deepen receipt freshness β/ρ (`deepen-receipt-beta-rho` + `SPIKE-receipt-fresh`; Fresh still unmeasured) | New Decision Matrices |
 | Deepen claim-memory withdrawal | New Architecture Decision Records / Must entities |
-| Deepen Model Context Protocol **handle lifecycle** only (in progress: digest 2608.03609 + `research/gaps/deepen-mcp-handle-lifecycle-2026-08-11.md` — Hypothesis, not DoR PASS) | Math brainstorm → Adopt; Cargo scaffolds |
-| Demote overclaim wording; predicate-prose rewrites | Soft-pass D0 via schema file counts |
+| Deepen Model Context Protocol **handle lifecycle** only (host note Draft + `SPIKE-handle-TTL` unmeasured — not DoR PASS) | Math brainstorm → Adopt; Cargo scaffolds |
+| Demote overclaim wording; predicate-prose rewrites; **sensor refresh** (DoR / honesty inventory) | Soft-pass D0 via schema file counts |
 
 Optional outside deepen-3: read-only Spec corpus Spike (`SPIKE-SPEC-MCP-0`) —
 does **not** unlock product `verify` tools.

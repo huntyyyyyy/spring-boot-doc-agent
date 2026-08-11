@@ -8,10 +8,12 @@ sources:
   - arXiv:2607.06341  # Aria harness pattern
 ---
 
-# Verify stack (Must spine)
+# Verify stack (Must-intent spine — Pilot invent until Accept)
 
-Wave-1 verify is **four Must legs**. Skip L2b or tool boundary → recreate
-Jul–Aug attacks. Whole words — root `GLOSSARY.md`.
+Wave-1 verify targets **four legs**. Exact public engines for L2b / STEAD wrap /
+Proof-or-Stop product = **0** today → treat as **Must intent / Pilot invent**,
+not industry Adopt. Skip L2b or tool boundary → recreate Jul–Aug attacks.
+Whole words — root `GLOSSARY.md`.
 
 ```text
  Agent/Human proposes
@@ -34,7 +36,7 @@ Jul–Aug attacks. Whole words — root `GLOSSARY.md`.
                          before any FO-CTL-like claim
 ```
 
-## Four Must legs
+## Four Must-intent legs (Pilot invent until Accept)
 
 | Leg | Job | SoR class | Fail-mode if skipped |
 | --- | --- | --- | --- |
@@ -55,7 +57,8 @@ Optional **L3 Proof** (SMT/Kani/WASM) = Wave-4 Could — not MVP Must.
 4. **`unprovable` never becomes a guessed bean/edge** (same severity as Unknown).
 5. Loss of proof keeps last verified artifact record (audit).
 
-Schemas: `receipts/receipt-schema-draft.md`, `claim-memory/EA_GRAPH_CLAIMS.md`.
+Schemas: `07-system-design/icd/receipt.schema.json` (SoT), `claim-memory/EA_GRAPH_CLAIMS.md`.
+Historical sketch only: `receipts/receipt-schema-draft.md` (pointer — do not edit as SoT).
 
 ### STEAD tool constraints (even without FO-CTL checker)
 

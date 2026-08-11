@@ -1,6 +1,6 @@
 ---
 title: VA — Local-first verified architecture agent (Layers of Truth)
-status: RESEARCH COMPLETE — Spec Draft (no kernel rewrite until Approve)
+status: DRAFT vision — Could / incomplete Create (not D0; not Implement)
 date: 2026-08-10
 epic: VA
 claim_tiers: Evidenced / Confirmed / Unknown
@@ -232,10 +232,11 @@ traces to Requirements Traceability Matrix rows in the RE file.
 
 ## 8. Status
 
-Research **Complete** through Bloom Create + RE + Pilot depth + Architecture Tradeoff Analysis Method method +
-**full polyglot product stance**
-([`process/55`](55-va-full-polyglot-product-portfolio-2026-08-10.md) ·
-[Architecture Decision Record ADR-0001](../../design/adr/adr-006-polyglot-first-monorepo.md)).  
-Implement follows **PF-*** / **PIL-*** after RE Approve + tip reorder — Rust,
-WebAssembly, Go, Ruby, Clojure, SQLite, TS, C/Zig as first-class bounded contexts, not demos.
+**Draft vision / Could only** — not research-complete for Must-spine, not Bloom
+Create PASS, not Definition of Ready green. Entity digests and exact adopters
+for load-bearing claims live under `research/papers-2026-may-aug/digests/` and
+the adoption audit; this memo does not substitute. Implement remains forbidden
+until Definition of Ready PASS + human Accept. Nest 08 Python peer is
+**REFUSED**; polyglot packaging below is historical pressure, not an Approved
+lane set.
 

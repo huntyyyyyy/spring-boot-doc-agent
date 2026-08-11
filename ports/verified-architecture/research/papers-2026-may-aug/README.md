@@ -1,6 +1,6 @@
 ---
 title: Six quality papers (May–Aug 2026) — cross-domain transfer pack
-status: RESEARCH COMPLETE — Spec Draft
+status: HISTORICAL transfer pack — Spec Draft sensors (≠ D0 PASS; ≠ RESEARCH COMPLETE for Must-spine)
 date: '2026-08-10'
 claim_tiers: Evidenced / Confirmed / Unknown
 window: 2026-05-01 .. 2026-08-10
@@ -12,7 +12,8 @@ selection_rule: >-
 
 # Six papers (May–August 2026) — cross-reference pack
 
-**Historical / evidence — not product SoT.** Transfer metaphors + locked E-DYN1
+**Historical / evidence — not product SoT.** Transfer pack **≠** Definition of
+Ready D0 / research-complete Must-spine. Transfer metaphors + locked E-DYN1
 paths only — not Implement green, not hardware roadmap, not tip-Python identity.
 
 Published dates verified via arXiv Atom API (`export.arxiv.org`) on 2026-08-10.

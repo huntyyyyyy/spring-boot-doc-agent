@@ -41,6 +41,8 @@ table only — do **not** treat as D0 PASS or Implement green.
 
 ## Port versus Implement
 
-These findings make the **planning corpus** ready to export with a coherent
-Must spine and Accept methods. They do **not** by themselves green Definition
-of Ready human Accept or authorize Cargo.
+**Historical title→action only.** These findings name papers that *pressured*
+Must-intent rows; they do **not** make the planning corpus export-green, do
+**not** entail Definition of Ready PASS, and do **not** authorize Cargo.
+Treat this file as a superseded sensor — Authority: entity-adoption-audit +
+shallow-decisions-honesty + STATUS.

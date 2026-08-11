@@ -37,19 +37,21 @@ Whole words — root `GLOSSARY.md`. Claim tiers on load-bearing rows only.
 | `Accepted` | ~34 | Mostly “not Accepted” / human Accept pending — keep that honesty |
 | `normative` | ~13 | Model Context Protocol Spec earned; Stateful Tool-Enabled Agentic Deployment “normative” did **not** |
 | `Chosen` | ~9 remaining | Matrices partially demoted; mcp-open-items + Interface Control Document heading still raw |
-| Paper digests with type+sections | **3** | `2608.04278`, `2607.20531`, `2608.03609` |
+| Paper digests with type+sections | **4** | `2608.04278`, `2607.20531`, `2608.03609`, `2607.14890` |
 
 **Missing digests for Must-spine papers (depth FAIL evidence):**
 
 | arXiv | Topic | Digest? |
 | --- | --- | --- |
-| 2607.14890 | Proof-or-Stop / receipt β/ρ | **Absent** |
-| 2608.03609 | Stateful Tool-Enabled Agentic Deployment | **Present** (2026-08-11) — Embody/Hypothesis only; silent on Model Context Protocol handles |
+| 2607.14890 | Proof-or-Stop / receipt β/ρ | **Present** (2026-08-11) — Embody field shapes; public engine = 0; deepen Fresh Spike / Pilot charter still open |
+| 2608.03609 | Stateful Tool-Enabled Agentic Deployment | **Present** — Embody/Hypothesis only; silent on Model Context Protocol handles |
 | 2607.08028 | Prompts→Contracts harness | **Absent** |
 | 2607.20972 | Cue-anchored delivery | **Absent** |
 | 2607.06341 | Aria harness | **Absent** |
 
-Three digests still leave β/ρ and other Must-spine papers thin; D0 remains **FAIL** until those land or are explicitly Pilot-invent chartered. Handle deepen memo: `deepen-mcp-handle-lifecycle-2026-08-11.md`.
+Four digests still leave Contracts/Cue/Aria thin; exact engines = 0 for claim memory / Proof-or-Stop product / STEAD wrap. D0 remains **FAIL**. Handle deepen: `deepen-mcp-handle-lifecycle-2026-08-11.md`. Proof-or-Stop digest: `papers-2026-may-aug/digests/2607.14890-proof-or-stop.md`.
+
+**Sensor refresh (2026-08-11):** This inventory previously under-counted digests and falsely marked 2607.14890 Absent — that lag made the honesty memo a false SoT for “what’s missing.”
 
 ---
 
@@ -78,15 +80,15 @@ Honest tiers used: **Unknown** · **Pilot invent** · **Could brainstorm** · **
 | `snapshot_open` mint as **Chosen 12/12** | `mcp-open-items-research` alternatives table | Model Context Protocol SEP-2567 handle *pattern* Evidenced; name `snapshot_open` is local preference; TTL 1h invent | **Pilot invent** (pattern **Embody**; name **Could**) | Wall-clock TTL + digest bind is the right expiry story | Silent upgrade of stale snaps; concurrent agents share wrong view |
 | FX-Model Context Protocol TaskSpecs = Verification and Validation Accept | `plants/mcp-effects/` | Digest 2607.20531; exact bench engine **0** / anonymized | **Embody** checkpoint *shape*; plants = **Draft sensors** | Live Tier-1 scorer + replay world will appear | False Verification and Validation green from JSON that never runs |
 | Packwerk-shaped **`lock-ir.schema.json`** + matrix **12/12** | `lock-ir.schema.json`; `lock-ir-decision-matrix.md`; Architecture Decision Record ADR-0003 | Packwerk / packs / tach / ArchUnit / dependency-cruiser = ≥5 **adjacent** checkers; **0** adopters of *our* JSON IR + `edge_fidelity` | **Adopt pattern** (Packwerk UX); **Pilot invent** (shared IR file) | Constant/import edges enough for Wave-1 Spring value (**A-FIDELITY**) | Method-call / Dependency Injection false-green; agent `update-todo` debt path |
-| Receipt **β/ρ** fields + matrix Chosen | `receipt.schema.json`; `receipt-decision-matrix.md` | Proof-or-Stop paper **no digest**; engine public repos **0**; Witness/in-toto **adjacent** | **Embody** field *names*; **Pilot invent** canon + unsigned minimum viable product | `git ls-tree` exclusion list known; `step_id` stable | Self-invalidating digests; forgeable narrative pass; flaky Accept |
-| Artifact-anchored claim memory as Must / “Adopt paper” | `EA_GRAPH_CLAIMS.md` (partially demoted); VERIFY_STACK; requirements; digest 2608.04278 | **1** digest; Zenodo study only; **0** product engines | **Pilot invent** (+ **Embody** `unprovable` / evidence≠freshness) | Synthetic-world transfer works (**A-TRANSFER** Unknown) | Guess on drift; chat-memory collapse; wrong evidence enum |
-| Stateful Tool-Enabled Agentic Deployment ST-1…5 titled **“normative”** / “Adopted constraints” | `STEAD_CONSTRAINTS.md`; `mcp-tools.md` § Stateful Tool-Enabled Agentic Deployment | Paper 2608.03609 **no digest**; equivariance wrap **0** repos; Spike charter only | **Embody only** (design constraints); ST-2 = **Spike / Unknown** | Typed ids ⇒ equivariance without wrap | ST-2 claimed satisfied; FO-CTL theater |
+| Receipt **β/ρ** fields + matrix Chosen | `receipt.schema.json`; `receipt-decision-matrix.md` | Digest **2607.14890 Present**; engine public repos **0**; Witness/in-toto **adjacent** | **Embody** field *names*; **Pilot invent** canon + unsigned minimum viable product | `git ls-tree` exclusion list known; `step_id` stable | Self-invalidating digests; forgeable narrative pass; flaky Accept |
+| Artifact-anchored claim memory as Must / “Adopt paper” | `EA_GRAPH_CLAIMS.md` (partially demoted); VERIFY_STACK; requirements; digest 2608.04278 | Digest Present; Zenodo study only; **0** product engines | **Pilot invent** (+ **Embody** `unprovable` / evidence≠freshness) | Synthetic-world transfer works (**A-TRANSFER** Unknown) | Guess on drift; chat-memory collapse; wrong evidence enum |
+| Stateful Tool-Enabled Agentic Deployment ST-1…5 titled **“normative”** / “Adopted constraints” | `STEAD_CONSTRAINTS.md`; `mcp-tools.md` § Stateful Tool-Enabled Agentic Deployment | Digest **2608.03609 Present**; equivariance wrap **0** repos; Spike charter only | **Embody only** (design constraints); ST-2 = **Spike / Unknown** | Typed ids ⇒ equivariance without wrap | ST-2 claimed satisfied; FO-CTL theater |
 | Rust owns engine (Architecture Decision Record ADR-0007) | Architecture Decision Record ADR-0007; Architecture Brief; Interface Control Document planned `crates/engine/` | Lane adoption cartography; **no** latency plant; Kani/Verus deferred | **Pilot invent** (language choice) | Rust skill floor OK; FFI surface cheap enough | Premature lock-in before Quality Attribute Scenario **T** |
 | TypeScript owns Model Context Protocol presentation (Architecture Decision Record ADR-0010) | Architecture Decision Record ADR-0010; matrix Who | Ecosystem habit; software development kit Adopt for *Model Context Protocol generally* | **Could → Pilot** | Contributors accept Node for extensions | Toolchain surprise; oracle leaked into TS |
 | Decision Matrices scored **12/12** then Chosen | mcp / lock / receipt matrices; snapshot_open sub-matrix | Analytical six-vector only; framework admits sensor; **no** depth gate enforced in practice | **Could brainstorm** scores; verdict ≤ **Working hypothesis (Draft)** | Perfect scores = truth; human Accept optional | Rubber-stamp Definition of Ready |
 | Math methods (Analytic Hierarchy Process / TLA+ / Alloy / Java Modelling Tools) | `math-decision-methods-brainstorm`; SPIKE-MATH-* | Banner honest (**brainstorm**); “Best near-term *math* upgrade” still suggestion-as-best | **Could brainstorm** only | Math Spike replaces plants | Soft-pass Definition of Ready via Analytic Hierarchy Process weights / “proved” Architecture Decision Record prose |
 | C4 confidence scores (0.15–0.90) | `C4-BRIEF-CONFIDENCE.md` | ASCII sketch; no Structurizr Accept; some cells stale vs landed schemas | **Sensor only** — not Accept | Numeric confidence = readiness | Fake D8 green; fifth microservice codegen |
-| PORT_READY / “Port ready: YES” | `README.md`, `EXPORT.md`, `HOW_TO_PRIME_AGENTS.md` vs `PORT_READY.md` P3 FAIL | Honesty correction exists in `PORT_READY.md` / STATUS; **entry points still say YES** | Export **CONDITIONAL**; research **FAIL** | Agents read README first, not P3 | Spec agents Implement on FAIL D0 |
+| PORT_READY / “Port ready: YES” | `README.md`, `EXPORT.md` vs `PORT_READY.md` P3 FAIL | **CLOSED on entry points** — README/EXPORT = CONDITIONAL; P3 still FAIL | Export **CONDITIONAL**; research **FAIL** | Agents ignore STATUS / FREEZE | Spec agents Implement on FAIL D0 |
 | `june-august-2026-port-readiness.md` **RESEARCH COMPLETE** | papers-2026-may-aug | Title→action table; superseded by adoption audit | Relabel **superseded / shallow** | Complete = digests + ≥5 exact | Agents skip D0 |
 | Layers-of-truth “Research Complete through Bloom Create” | `local-first-verified-architecture-*.md` | Vision memo; not entity digests | **Could** vision only | Vision = Bloom Create | False Create |
 | Polyglot nine-lane monorepo | Brief / Architecture Decision Records / nests | Preference + Pilot lanes | **Working hypothesis** | Single version line required | Wrong distribution; tip thrash |
@@ -100,9 +102,9 @@ Honest tiers used: **Unknown** · **Pilot invent** · **Could brainstorm** · **
 | **Model Context Protocol 2026-07-28 Interface Control Document** | “normative” for whole Interface Control Document | Wire pin = **true Adopt**; tool semantics = **Pilot invent**; Interface Control Document status remains DRAFT |
 | **`snapshot_open`** | Chosen 12/12 | **Pilot invent** mint tool; demote Chosen → Working hypothesis |
 | **`lock-ir.schema`** | Chosen 12/12 Packwerk IR | Pattern Adopt; schema Pilot; adapter map still open question 04 |
-| **Receipt β/ρ** | Chosen / Proof-or-Stop-shaped | Embody names; Pilot canon; **digest 2607.14890 missing** |
+| **Receipt β/ρ** | Chosen / Proof-or-Stop-shaped | Embody names; Pilot canon; **digest 2607.14890 Present**; public engine = 0; Fresh Spike / `story_files_hash` Pilot open |
 | **EA-Graph** | “We Adopt the paper” / Must | **Pilot invent**; digest exists; engines 0 |
-| **Stateful Tool-Enabled Agentic Deployment** | “Adopted constraints” / “normative” | **Embody**; wrap Spike; **digest 2608.03609 missing** |
+| **Stateful Tool-Enabled Agentic Deployment** | “Adopted constraints” / “normative” | **Embody**; wrap Spike; **digest 2608.03609 Present**; wrap engines = 0 |
 | **Rust engine Pilot** | Architecture Decision Record Decision reads as settled | Keep **Proposed** + **Pilot**; no excellence-domain Adopt |
 | **Packwerk IR** | Shared polyglot IR as industry | Field checkers Adopt *patterns*; our IR invent |
 | **Decision Matrices 12/12** | Chosen | Score = sensor; verdict ≤ Working hypothesis |
@@ -135,16 +137,16 @@ If any row fails, reopen the linked decisions:
 
 | Gap | Detail |
 | --- | --- |
-| **G-DIGEST-DEBT** | Must papers without type+section digests (list above) |
-| **G-EXACT-ZERO** | Exact public engines = 0 for claim memory, Stateful Tool-Enabled Agentic Deployment wrap, Proof-or-Stop, DynamicMCPBench scorer |
-| **G-SCORE-THEATER** | 12/12 Chosen without depth gate / plants |
-| **G-NORMATIVE-STEAL** | Stateful Tool-Enabled Agentic Deployment labeled normative beside Model Context Protocol Spec |
-| **G-ENTRY-YES** | README / EXPORT / HOW_TO_PRIME still “Port ready: yes” while P3 FAIL |
-| **G-Architecture Decision Record-DRIFT** | Architecture Decision Record ADR-0011 tool list omits `snapshot_open`; consequences still say mint outstanding |
-| **G-DOR-STALE** | D8b/D10c “schemas missing” vs tree that has `icd/mcp/*.schema.json` + FX plants |
-| **G-SHALLOW-SUPERSEDED** | `june-august-2026-port-readiness.md` still `RESEARCH COMPLETE` |
-| **G-ASSUME** | No living assumption register until this table |
-| **G-IMPL-SEAM** | Planned `packages/mcp-server` / `crates/engine` loci asserted without layout Accept |
+| **G-DIGEST-DEBT** | Must papers without type+section digests — **OPEN** for 2607.08028 / 2607.20972 / 2607.06341 (14890/STEAD/EA-Graph/DynamicMCPBench digests Present) |
+| **G-EXACT-ZERO** | Exact public engines = 0 for claim memory, Stateful Tool-Enabled Agentic Deployment wrap, Proof-or-Stop, DynamicMCPBench scorer — **OPEN** |
+| **G-SCORE-THEATER** | 12/12 as preference sensor without depth gate — **OPEN** (matrices demoted to Working hypothesis; scores still not merge proof) |
+| **G-NORMATIVE-STEAL** | Stateful Tool-Enabled Agentic Deployment labeled normative beside Model Context Protocol Spec — demote language where residual |
+| **G-ENTRY-YES** | **CLOSED (2026-08-11)** — README / EXPORT / PORT_READY say CONDITIONAL; Implement = no |
+| **G-Architecture Decision Record-DRIFT** | **CLOSED (2026-08-11)** — ADR-0011 lists `(+ snapshot_open per open-items)` |
+| **G-DOR-STALE** | **CLOSED (2026-08-11)** — DoR D8b/D10c/D11 = PARTIAL (schemas + Draft plants present; Accept/scorer absent) |
+| **G-SHALLOW-SUPERSEDED** | `june-august-2026-port-readiness.md` frontmatter SUPERSEDED — **body soft-pass demoted 2026-08-11** |
+| **G-ASSUME** | Assumption register in this memo — keep; do not invent parallel SoT |
+| **G-IMPL-SEAM** | Planned `packages/mcp-server` / `crates/engine` loci asserted without layout Accept — **OPEN** under FREEZE |
 
 ---
 
@@ -188,9 +190,9 @@ These may **remain** in-tree as Draft working hypotheses **if** language is demo
 
 | # | Topic | Why | Done when (decidable) |
 | --- | --- | --- | --- |
-| **1** | Receipt freshness β/ρ | Merge System of Record; Proof-or-Stop engine 0; no digest | Digest **2607.14890** (type+sections+refs) **and** ls-tree exclusion Spike **or** explicit Pilot-invent charter with tamper plants executable |
+| **1** | Receipt freshness β/ρ | Merge System of Record; Proof-or-Stop engine 0 | Digest **2607.14890** **landed** + deepen memo; still need Fresh Spike measure **or** explicit Pilot-invent (`SPIKE-receipt-fresh.md`) |
 | **2** | Claim memory withdrawal | Must spine; engines 0; enum under-specified | Keep digest 2608.04278; **Pilot charter** + evidence-lattice schema align + FX-claim plants; stop saying Adopt |
-| **3** | Model Context Protocol handle lifecycle only | Schemas exist; semantics Pilot | Digest 2608.03609 + `deepen-mcp-handle-lifecycle-2026-08-11.md` + host note (Draft); **still need** expiry Spike measure; **stop adding tools**; demote Chosen on `snapshot_open` |
+| **3** | Model Context Protocol handle lifecycle only | Schemas exist; semantics Pilot | Digest 2608.03609 + deepen memo + **host note on disk** (Draft); **SPIKE-handle-TTL** unmeasured or “TTL unmeasured, Pilot invent”; **stop adding tools** |
 
 **Parked:** Analytic Hierarchy Process, TLA+, Alloy, Java Modelling Tools, Monte Carlo, C4 Accept polish, Rust/Go/Clojure lane identity fights, latency **T**, HyperTool, org SaaS Model Context Protocol, cue-delivery schema, equivariance wrap **implementation** (Spike text may stay; do not deepen into code).
 
@@ -245,7 +247,7 @@ Apply as whole-phrase demotions. Prefer the “to” column even when a prior se
 
 | Level | Evidence |
 | --- | --- |
-| 1 Remember | Vocabulary counts; file pointers; digest inventory = 2 |
+| 1 Remember | Vocabulary counts; file pointers; digest inventory = **4** (still FAIL on exact engines + missing Contracts/Cue/Aria) |
 | 2 Understand | Assertion → depth → honest tier table |
 | 3 Apply | FREEZE + deepen-max-3 + search→replace demotions |
 | 4 Analyze | Score theater; normative steal; entry-point YES vs P3 FAIL |
@@ -257,6 +259,8 @@ Apply as whole-phrase demotions. Prefer the “to” column even when a prior se
 ## Bottom line
 
 Prior work produced a **wide Draft surface** (Interface Control Document, plants, matrices, C4 scores)
-on a **narrow evidence core** (two digests; many exact engines at zero).
-That is the opposite of principal-SE order. Demote language, freeze expansion,
-deepen at most three topics, and leave the banner up: **research-depth FAIL**.
+on a **narrow evidence core**. Sensor refresh 2026-08-11: **four** digests on disk
+(Proof-or-Stop / DynamicMCPBench / STEAD / EA-Graph); Contracts / Cue / Aria still
+Absent; exact engines still **0**. Meta-docs that under-counted digests were a
+false inventory SoT — fixed here. Demote language, freeze expansion, deepen at
+most three topics, and leave the banner up: **research-depth FAIL**.

@@ -106,17 +106,19 @@ Mark this deepen row **complete** only when all of:
    (this commit satisfies the digest half).
 2. One **host-integration note** stating: stdio MVP treats possession of a
    minted handle as capability; remote auth later must not equate possession
-   with authorization `[Evidenced — SEP-2567 Security via open-items]` — still
-   **Draft** until written under `research/gaps/` or Interface Control Document
-   *amendment proposal* (not done in this file’s body beyond this checklist).
+   with authorization `[Evidenced — SEP-2567 Security via open-items]` —
+   **Present** as Draft: `mcp-handle-host-integration-note-2026-08-11.md`
+   (not yet an Interface Control Document amendment Accept).
 3. A Spike charter exit that **measures** expiry: either wall-clock plant or
    explicit “Pilot invent, unmeasured TTL” recorded next to `expires_at` — not
-   a Chosen score.
+   a Chosen score. Charter stub: `12-delivery/spike-charters/SPIKE-handle-TTL.md`
+   (unmeasured until Spike runs).
 4. Language demotion: no “Chosen 12/12” / “STEAD normative” left on the handle
    path (open-items alternatives table already says Working hypothesis; keep it).
 
-Until (2)–(4), status stays **RESEARCH — Hypothesis**. Definition of Ready D0
-does **not** flip to PASS from this memo alone (β/ρ digest and withdrawal charter
+Until (3) measures or records Pilot-invent TTL and (4) residuals are gone,
+status stays **RESEARCH — Hypothesis**. Definition of Ready D0 does **not**
+flip to PASS from this memo alone (β/ρ Fresh Spike and withdrawal charter
 still open).
 
 ---

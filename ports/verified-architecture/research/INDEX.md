@@ -12,7 +12,7 @@ mcp_tools:
   - spec_lookup
   - spec_gap
 accepted: false
-corpus_version: '2026-08-10'
+corpus_version: '2026-08-11'
 related:
   - gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
   - gaps/spec-corpus-mcp-polyglot-2026-08-10.md
@@ -47,7 +47,9 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Model Context Protocol open items** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool JSON Schema 2020-12, `snapshot_open`, DynamicMCPBench effect fixtures |
 | **Deepen-3 handle lifecycle** | `research/gaps/deepen-mcp-handle-lifecycle-2026-08-11.md` | Mint/bind/expire Hypotheses; STEAD silent on handles; not DoR PASS |
 | **Handle host-integration note** | `research/gaps/mcp-handle-host-integration-note-2026-08-11.md` | Stdio possession≠remote auth; Draft |
+| **Deepen-1 receipt β/ρ** | `research/gaps/deepen-receipt-beta-rho-2026-08-11.md` | Map Proof-or-Stop onto `receipt.schema.json`; Fresh Spike |
 | **DynamicMCPBench digest** | `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md` | Effect checkpoints, minefields, Tier-1; engine pending |
+| **Proof-or-Stop digest** | `research/papers-2026-may-aug/digests/2607.14890-proof-or-stop.md` | β/ρ Embody; public engine = 0; Fresh / `story_files_hash` Pilot |
 | **STEAD digest** | `research/papers-2026-may-aug/digests/2608.03609-stead-agentic-verification.md` | FO undecidable; equivariance Embody/Hypothesis; 0 wrap engines |
 | **Decision Framework** | `docs/standards/decision-framework.md` | Six-vector Selection Taxonomy (Decision Matrix / Architecture Decision Record companion / Governance) |
 | **Math / formal brainstorm** | `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` | Temporal Logic of Actions / Alloy / theorem provers / Java Modelling Tools / Analytic Hierarchy Process / Monte Carlo — **ideas only, not Must** |

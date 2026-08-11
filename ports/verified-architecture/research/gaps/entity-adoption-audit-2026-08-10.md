@@ -253,9 +253,18 @@ Graph/locks + index + Architecture Tradeoff · Stateful Tool-Enabled Agentic Dep
 2. **Port Ready P3** (research informing readiness) must be **PARTIAL/FAIL**, not PASS.
 3. Elevating July–August papers into Must spine without adoption audit created **false confidence** — your alarm is correct.
 
-## Next research work (not optional)
+## Suggested next research (Could / Pilot under FREEZE)
 
-1. Locate or accept-as-missing Proof-or-Stop public engine; if missing, demote citations to paper-only `[Evidenced abstract]`.
-2. DeepWiki Ask + primary docs on Packwerk / Source Code Index Protocol / in-toto for Bloom Apply in *our* ports.
-3. Spike charters: claim-store Pilot; equivariance wrap Pilot; receipt freshness keys.
-4. Per-entity folders under `research/entities/` with paper digests ≥1 page each (no title-only rows).
+1. Locate or accept-as-missing Proof-or-Stop public engine; if missing, keep
+   **Pilot invent** (digest Present; engines = 0) — do not Adopt.
+2. DeepWiki Ask + primary docs on Packwerk / Source Code Index Protocol / in-toto
+   for Bloom Apply in *our* ports.
+3. Spike charters: claim-store Pilot; equivariance wrap Pilot; receipt Fresh /
+   `story_files_hash` (see deepen-receipt-beta-rho memo).
+4. Per-entity folders under `research/entities/` are **optional layout**. Digests
+   under `papers-2026-may-aug/digests/` already satisfy the digest path; do not
+   treat a missing `research/entities/` tree as a second SoT failure.
+5. Missing Must-pressure digests (Contracts 2607.08028, Cue 2607.20972, Aria
+   2607.06341, and MAAD 2606.01385 if still Design-pressure): either deepen
+   under FREEZE **or** record an explicit **Pilot-invent waiver** per id — leave
+   D0 FAIL either way.

@@ -6,9 +6,12 @@ audience: [agent, developer]
 
 # Whole words
 
-In sentences, tables, and prompts: **full phrases**. Short labels allowed only
+In sentences, tables, and prompts: prefer **full phrases**. Short labels allowed
 inside `` `paths` ``, fenced code, or once after the full phrase
-(`Architecture Decision Record ADR-0001`). Bare short form in new prose → reject.
+(`Architecture Decision Record ADR-0001`). Bare short form elsewhere is a
+**style preference** (expand-on-first-use) — not a CI/hook reject. Cold-start
+files may use short forms after first expansion; do not treat this glossary as
+an unenforceable “reject” gate.
 
 | Prefer | Avoid bare |
 | --- | --- |
