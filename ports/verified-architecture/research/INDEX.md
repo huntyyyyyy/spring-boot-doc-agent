@@ -64,6 +64,7 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Review: three-track MVP roadmap** | `research/gaps/review-three-track-mvp-2026-08-11.md` | Interface-first OK as Spec; thin-thread / Clojure orchestrator / WASM-spine Refuse |
 | **Review: kernel wireframe v1** | `research/gaps/review-kernel-wireframe-2026-08-11.md` | Hash-guard Embody; toy receipt / Wasmer-first / Clojure atom Refuse |
 | **Review: plugin kernel wireframe** | `research/gaps/review-plugin-kernel-wireframe-2026-08-11.md` | Registry/middleware taste OK; session_id / WASM spine / weak plants Refuse |
+| **Review: formal vs distilled pipeline** | `research/gaps/review-formal-vs-distilled-2026-08-11.md` | Category/SMT/ISO theater Refuse; hash anchors + structural edit/deny Embody as subset |
 | **Review: kernel wireframe** | `research/gaps/review-kernel-wireframe-2026-08-11.md` | Hash-guard/zoom seeds OK; toy receipt / Wasmer-first / Clojure atom SOT Refuse as start |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
 | **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Historical title→action table — **superseded on depth** by adoption audit |
