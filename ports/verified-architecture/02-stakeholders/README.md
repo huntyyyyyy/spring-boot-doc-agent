@@ -1,5 +1,3 @@
 # 02-stakeholders
 
-Actors, OpsCon, sign-off log. Human Approve lives here.
-
-See [PRECODE_MAP.md](../PRECODE_MAP.md).
+**SoT:** `signoff/SIGNOFF_LOG.md` (thin). See [PRECODE_MAP.md](../PRECODE_MAP.md).

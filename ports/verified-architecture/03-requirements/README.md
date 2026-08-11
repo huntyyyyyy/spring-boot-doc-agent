@@ -1,5 +1,12 @@
 # 03-requirements
 
-Stakeholder Requirements Specification/Software Requirements Specification/use-cases/Quality Attribute Scenario/Requirements Traceability Matrix/MoSCoW. non-functional requirements enter Design only as six-part Quality Attribute Scenario.
+**SoT for requirements** (prefer over flat `docs/requirements/` pointers).
 
-See [PRECODE_MAP.md](../PRECODE_MAP.md).
+| Artifact | Path |
+| --- | --- |
+| Stakeholder Requirements Specification | `strs/strs-wave1.md` |
+| Software Requirements Specification | `srs/srs-wave1.md` |
+| Quality Attribute Scenarios | `qas/` |
+| Requirements Traceability Matrix | `rtm/rtm-wave1.md` |
+
+`moscow-waves/` and `use-cases/` are **empty stubs**. See [PRECODE_MAP.md](../PRECODE_MAP.md).

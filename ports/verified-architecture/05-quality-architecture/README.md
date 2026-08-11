@@ -1,5 +1,4 @@
 # 05-quality-architecture
 
-Architecture Tradeoff Analysis Method utility tree, tactics, tradeoffs, formal boundaries.
-
-See [PRECODE_MAP.md](../PRECODE_MAP.md).
+**STUB folders** (`atam/`, `tactics/`, …) — no content yet. Evidence today:
+`research/atam-formal/`. Do not decorate empty dirs. See [PRECODE_MAP.md](../PRECODE_MAP.md).

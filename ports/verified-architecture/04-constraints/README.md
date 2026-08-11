@@ -1,5 +1,4 @@
 # 04-constraints
 
-Fixed CON-*; assumptions; open questions with blocks_code.
-
-See [PRECODE_MAP.md](../PRECODE_MAP.md).
+**SoT:** `technical/constraints-wave1.md` + `open-questions/`.  
+Flat `docs/constraints/` is a pointer. See [PRECODE_MAP.md](../PRECODE_MAP.md).

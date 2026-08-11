@@ -1,5 +1,3 @@
 # 00-governance
 
-Definition of Ready/Definition of Done, claim tiers, promotion rules. Always classify before deeper work.
-
-See [PRECODE_MAP.md](../PRECODE_MAP.md).
+**SoT:** `dor-dod/DEFINITION_OF_READY.md`. See [PRECODE_MAP.md](../PRECODE_MAP.md).

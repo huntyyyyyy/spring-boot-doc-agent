@@ -23,11 +23,12 @@ promoted.
 
 | Artifact | Path |
 | --- | --- |
-| Stakeholder Requirements Specification | `docs/requirements/strs.md` |
-| Software Requirements Specification | `docs/requirements/srs.md` |
-| Quality Attribute Scenario | `docs/requirements/qas.md` |
-| Requirements Traceability Matrix | `docs/requirements/rtm.md` |
-| Constraints | `docs/constraints/constraints.md` |
+| Stakeholder Requirements Specification | `03-requirements/strs/strs-wave1.md` |
+| Software Requirements Specification | `03-requirements/srs/srs-wave1.md` |
+| Quality Attribute Scenario | `03-requirements/qas/` |
+| Requirements Traceability Matrix | `03-requirements/rtm/rtm-wave1.md` |
+| Constraints | `04-constraints/technical/constraints-wave1.md` |
+| Legacy pointers | `docs/requirements/`, `docs/constraints/` |
 
 ## Architecture
 
