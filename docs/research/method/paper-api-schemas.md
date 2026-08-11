@@ -4,11 +4,16 @@ status: ACTIVE
 date: '2026-08-10'
 audience: [agent, developer, architect]
 claim_tiers: Evidenced / Confirmed / Unknown
+related:
+  - docs/research/method/paper-digest-framework.md
+  - docs/research/method/paper-api-cheatsheet.md
 sources:
-  - https://info.arxiv.org/help/api/user-manual.html
-  - https://api.semanticscholar.org/api-docs/
-  - https://developers.openalex.org/llms.txt
-  - https://developers.openalex.org/api-reference/work-types
+  llms_txt:
+    - https://developers.openalex.org/llms.txt
+  web:
+    - https://info.arxiv.org/help/api/user-manual.html
+    - https://api.semanticscholar.org/api-docs/
+    - https://developers.openalex.org/api-reference/work-types
 ---
 
 # Paper research API schemas

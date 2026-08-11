@@ -36,6 +36,7 @@ RESEARCH_ALLOWED: FrozenSet[str] = RESEARCH_REQUIRED | frozenset(
         "freshness",
         "superseded_by",
         "aliases",
+        "audience",
         "stars_as_of",
         "arxiv_verified",
         "gh_sor_bar",

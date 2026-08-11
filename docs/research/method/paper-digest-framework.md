@@ -4,6 +4,10 @@ status: ACTIVE
 date: '2026-08-10'
 audience: [agent, developer, architect]
 claim_tiers: Evidenced / Confirmed / Unknown
+related:
+  - docs/research/method/PAPER_DIGEST_TEMPLATE.md
+  - docs/research/method/paper-api-schemas.md
+  - docs/research/method/paper-api-cheatsheet.md
 ---
 
 # Paper digest framework (project Source of Truth)

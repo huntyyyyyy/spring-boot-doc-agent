@@ -2,6 +2,10 @@
 title: OpenAlex / Semantic Scholar / arXiv — field-select cheatsheet
 status: ACTIVE
 date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
+related:
+  - docs/research/method/paper-api-schemas.md
+  - docs/research/method/paper-digest-framework.md
 ---
 
 # Field-select cheatsheet (copy into tool calls)

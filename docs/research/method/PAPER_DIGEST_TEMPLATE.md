@@ -1,6 +1,11 @@
 ---
 title: Paper digest template
 status: ACTIVE
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
+related:
+  - docs/research/method/paper-digest-framework.md
+  - docs/research/method/paper-api-schemas.md
 ---
 
 # Paper digest — `<arxiv-id>`
