@@ -37,19 +37,19 @@ Whole words — root `GLOSSARY.md`. Claim tiers on load-bearing rows only.
 | `Accepted` | ~34 | Mostly “not Accepted” / human Accept pending — keep that honesty |
 | `normative` | ~13 | Model Context Protocol Spec earned; Stateful Tool-Enabled Agentic Deployment “normative” did **not** |
 | `Chosen` | ~9 remaining | Matrices partially demoted; mcp-open-items + Interface Control Document heading still raw |
-| Paper digests with type+sections | **2** | `2608.04278`, `2607.20531` only |
+| Paper digests with type+sections | **3** | `2608.04278`, `2607.20531`, `2608.03609` |
 
 **Missing digests for Must-spine papers (depth FAIL evidence):**
 
 | arXiv | Topic | Digest? |
 | --- | --- | --- |
 | 2607.14890 | Proof-or-Stop / receipt β/ρ | **Absent** |
-| 2608.03609 | Stateful Tool-Enabled Agentic Deployment | **Absent** |
+| 2608.03609 | Stateful Tool-Enabled Agentic Deployment | **Present** (2026-08-11) — Embody/Hypothesis only; silent on Model Context Protocol handles |
 | 2607.08028 | Prompts→Contracts harness | **Absent** |
 | 2607.20972 | Cue-anchored delivery | **Absent** |
 | 2607.06341 | Aria harness | **Absent** |
 
-Two digests + dozens of “Adopt / Chosen / normative” assertions = **research-depth FAIL**.
+Three digests still leave β/ρ and other Must-spine papers thin; D0 remains **FAIL** until those land or are explicitly Pilot-invent chartered. Handle deepen memo: `deepen-mcp-handle-lifecycle-2026-08-11.md`.
 
 ---
 
@@ -190,7 +190,7 @@ These may **remain** in-tree as Draft working hypotheses **if** language is demo
 | --- | --- | --- | --- |
 | **1** | Receipt freshness β/ρ | Merge System of Record; Proof-or-Stop engine 0; no digest | Digest **2607.14890** (type+sections+refs) **and** ls-tree exclusion Spike **or** explicit Pilot-invent charter with tamper plants executable |
 | **2** | Claim memory withdrawal | Must spine; engines 0; enum under-specified | Keep digest 2608.04278; **Pilot charter** + evidence-lattice schema align + FX-claim plants; stop saying Adopt |
-| **3** | Model Context Protocol handle lifecycle only | Schemas exist; semantics Pilot | One host-integration note + snapshot expiry Spike measure; **stop adding tools**; demote Chosen on `snapshot_open` |
+| **3** | Model Context Protocol handle lifecycle only | Schemas exist; semantics Pilot | Digest 2608.03609 + `deepen-mcp-handle-lifecycle-2026-08-11.md` + host note (Draft); **still need** expiry Spike measure; **stop adding tools**; demote Chosen on `snapshot_open` |
 
 **Parked:** Analytic Hierarchy Process, TLA+, Alloy, Java Modelling Tools, Monte Carlo, C4 Accept polish, Rust/Go/Clojure lane identity fights, latency **T**, HyperTool, org SaaS Model Context Protocol, cue-delivery schema, equivariance wrap **implementation** (Spike text may stay; do not deepen into code).
 

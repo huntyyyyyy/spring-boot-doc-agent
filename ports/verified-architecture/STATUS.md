@@ -48,7 +48,7 @@ Prose: whole words — `GLOSSARY.md`. Skill when editing: `predicate-prose`.
 | --- | --- |
 | Deepen receipt freshness β/ρ | New Decision Matrices |
 | Deepen claim-memory withdrawal | New Architecture Decision Records / Must entities |
-| Deepen Model Context Protocol **handle lifecycle** only | Math brainstorm → Adopt; Cargo scaffolds |
+| Deepen Model Context Protocol **handle lifecycle** only (in progress: digest 2608.03609 + `research/gaps/deepen-mcp-handle-lifecycle-2026-08-11.md` — Hypothesis, not DoR PASS) | Math brainstorm → Adopt; Cargo scaffolds |
 | Demote overclaim wording; predicate-prose rewrites | Soft-pass D0 via schema file counts |
 
 Optional outside deepen-3: read-only Spec corpus Spike (`SPIKE-SPEC-MCP-0`) —

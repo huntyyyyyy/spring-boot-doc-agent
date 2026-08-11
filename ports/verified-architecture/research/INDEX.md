@@ -45,7 +45,10 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Forced pointing + frontmatter / Spec Model Context Protocol** | `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md` | MDC mandates graph walk; shared FM schema with Spec tools |
 | **Spec corpus Model Context Protocol + polyglot** | `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` | Read-only Spec Model Context Protocol (not product verify); Rust/WebAssembly/Go/TS software development kit tiers; Architectures A–D |
 | **Model Context Protocol open items** | `research/gaps/mcp-open-items-research-2026-08-10.md` | Per-tool JSON Schema 2020-12, `snapshot_open`, DynamicMCPBench effect fixtures |
+| **Deepen-3 handle lifecycle** | `research/gaps/deepen-mcp-handle-lifecycle-2026-08-11.md` | Mint/bind/expire Hypotheses; STEAD silent on handles; not DoR PASS |
+| **Handle host-integration note** | `research/gaps/mcp-handle-host-integration-note-2026-08-11.md` | Stdio possession≠remote auth; Draft |
 | **DynamicMCPBench digest** | `research/papers-2026-may-aug/digests/2607.20531-dynamicmcpbench.md` | Effect checkpoints, minefields, Tier-1; engine pending |
+| **STEAD digest** | `research/papers-2026-may-aug/digests/2608.03609-stead-agentic-verification.md` | FO undecidable; equivariance Embody/Hypothesis; 0 wrap engines |
 | **Decision Framework** | `docs/standards/decision-framework.md` | Six-vector Selection Taxonomy (Decision Matrix / Architecture Decision Record companion / Governance) |
 | **Math / formal brainstorm** | `research/atam-formal/math-decision-methods-brainstorm-2026-08-10.md` | Temporal Logic of Actions / Alloy / theorem provers / Java Modelling Tools / Analytic Hierarchy Process / Monte Carlo — **ideas only, not Must** |
 | **Cursor rules catalog** | `.cursor/rules/README.md` | Activation modes; FREEZE in constitution; dual globs for monorepo |
