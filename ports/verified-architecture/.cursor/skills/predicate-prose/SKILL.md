@@ -12,6 +12,9 @@ description: >-
 **Scope:** `ports/verified-architecture/` only.  
 **Theory:** `research/gaps/anti-tautology-predicate-prose-2026-08-11.md`.
 
+**Adjacent:** root Skill `semantic-adversarial-review` (chat reviews / hooks) —
+same three tests; that skill bans Support/Refuse scoreboards without if→then.
+
 ## Three tests (every sentence / bullet)
 
 1. **Logical (A→B):** Delete the subject’s name from the predicate. If nothing

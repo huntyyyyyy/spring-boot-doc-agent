@@ -3,6 +3,8 @@
     "Project-native Cursor hooks. Claude PreToolUse policies bridge via",
     "bridge_claude_policy.py. E-DOC1 adds research-map look-first (DOC7/DOC9):",
     "beforeSubmitPrompt inject + Read receipt + deny design writes without it.",
+    "Semantic adversarial review: beforeSubmitPrompt inject + afterAgentResponse",
+    "audit + stop rewrite follow-up (if→then, not Support/Refuse scoreboards).",
     "postToolUse on tests/** injects non-vacuous receipt witness (E-CPL/TEL).",
     "Cloud loads this file only (not ~/.cursor/hooks.json).",
     "Docs: https://cursor.com/docs/hooks — no sessionStart on cloud agents."
@@ -13,6 +15,23 @@
       {
         "command": "python3 .cursor/hooks/inject_research_map.py",
         "timeout": 10
+      },
+      {
+        "command": "python3 .cursor/hooks/inject_semantic_review.py",
+        "timeout": 10
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "python3 .cursor/hooks/audit_semantic_review_response.py",
+        "timeout": 10
+      }
+    ],
+    "stop": [
+      {
+        "command": "python3 .cursor/hooks/stop_semantic_review_rewrite.py",
+        "timeout": 10,
+        "loop_limit": 2
       }
     ],
     "beforeShellExecution": [
