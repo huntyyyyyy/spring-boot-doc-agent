@@ -38,3 +38,18 @@ target codebase, evaluates **git-versioned architectural locks**, and emits
 | **Planning Retrieval-Augmented Generation corpus** | Progressive disclosure packs for agents/devs designing the engine | Serve as System of Record for binding or lock truth |
 
 Shared repo hygiene only. Fail-mode: merging the two Systems of Record → open question OQ-02 reopen + reject codegen.
+
+## Stakeholder discovery pressure (2026-08-11) — not Accepted
+
+Human input: brownfield engineers; stale docs; repo-as-Model Context Protocol;
+metrics include index lag, stale fragment rate, **grounding gap ≈ 0**; preferred
+thin Eyes/Hands/Wiki tool stack (hash-guarded `apply_diff`, JIT disk reads).
+
+**Adjudication:** `research/gaps/stakeholder-discovery-brownfield-mcp-2026-08-11.md`.
+
+- Grounding gap / Fresh → **Embody** into existing Must-intent spine.  
+- Eyes/Hands/Wiki as Wave-1 replacement for verify tools → **Refuse** until
+  open question OQ-01 Accept chooses product sentence.  
+- “No derived index” slogan **contradicts** index-lag / coverage metrics.
+
+This section does **not** flip Definition of Ready or authorize crates.

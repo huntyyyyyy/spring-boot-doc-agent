@@ -38,6 +38,7 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Worked digest example** | `research/papers-2026-may-aug/digests/2608.04278-ea-graph.md` | Empirical + section map for Artifact-Anchored Verification Memory |
 | **Shallow approvals deep-dive** | `research/gaps/shallow-approvals-deep-dive-2026-08-10.md` | Model Context Protocol `2026-07-28` stateless, receipts, claims, lock IR, freshness, harness, Quality Attribute Scenario, C4 + agent-codegen bites |
 | **Shallow decisions honesty / FREEZE** | `research/gaps/shallow-decisions-honesty-2026-08-10.md` | Overclaim audit; deepen-max-3; demote Chosen→Working hypothesis |
+| **Stakeholder discovery (brownfield MCP)** | `research/gaps/stakeholder-discovery-brownfield-mcp-2026-08-11.md` | Who/pain/metrics/grounding gap; Eyes/Hands/Wiki vs verify spine; OQ-01 pressure |
 | **Parallel predicate rewrite plan** | `research/gaps/parallel-predicate-rewrite-plan-2026-08-11.md` | Domain-isolated fan-out partitions A–F |
 | **Anti-tautology / predicate prose** | `research/gaps/anti-tautology-predicate-prose-2026-08-11.md` | A→B tests; Skill `predicate-prose` |
 | **Port MDC projections + Rust/WASM** | `research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md` | Port-only: thin `.mdc` projections; Rust Spec host; WASM guest Could |

@@ -46,7 +46,10 @@ does not restate a deny.
 2. Too many Draft Chosen/Adopt on thin digests → FREEZE —
    `research/gaps/shallow-decisions-honesty-2026-08-10.md`.  
 3. Wire pin `2026-07-28` is Evidenced; **our** tool argument shapes = Pilot invent
-   (0 exact public engines for claim memory / equivariance wrappers).
+   (0 exact public engines for claim memory / equivariance wrappers).  
+4. Stakeholder brownfield / grounding-gap / Eyes-Hands-Wiki stack →
+   `research/gaps/stakeholder-discovery-brownfield-mcp-2026-08-11.md` (OQ-01
+   pressure; **not** a new Wave-1 tool list under FREEZE).
 
 ## FREEZE — allowed edit set
 
