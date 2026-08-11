@@ -10,7 +10,9 @@ confidence_scale: >-
 
 # C4 brief + confidence
 
-ASCII only until signoff → formal diagrams under this folder.
+ASCII only until signoff → formal diagrams under this folder. Mermaid pack:
+`ARCHITECTURE_VISUALIZATION.md` (context, containers, verify pipeline, dual
+Model Context Protocol surfaces, systems of record).
 
 | Sensor | Meaning | Not meaning |
 | --- | --- | --- |
