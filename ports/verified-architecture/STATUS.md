@@ -15,61 +15,46 @@ corpus_version: '2026-08-11'
 related:
   - AGENT_BOOTSTRAP.md
   - docs/adr/adr-0001-polyglot-first-product.md
-  - research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md
+  - research/gaps/anti-tautology-predicate-prose-2026-08-11.md
   - 07-system-design/schemas/va-doc-frontmatter.schema.json
 ---
 
 # STATUS
 
-## Phase
+## What is true right now
 
-**Specification / gap-fill** — product implementation = Refuse.
+| Fact | Bound | If violated |
+| --- | --- | --- |
+| Product crates / daemons / extensions | **Forbidden** | Reject the change; cite no-code gate |
+| Definition of Ready | **0** rows PASS; **D0 FAIL** | Do not claim Implement Ready |
+| Port export | CONDITIONAL — tree usable for Spec only | Do not advertise research-complete |
+| Engine + Spec corpus Model Context Protocol host | **Rust** (ADR-0007 / Spike) | Reject Python hosts / ACI revival |
+| IDE presentation Model Context Protocol | **TypeScript** (ADR-0010) | Reject Spec corpus server in TS as default |
+| WebAssembly LockCheck guest | **Could / Wave-3** (ADR-0004) | Reject as Spec host or Wave-1 Must |
 
-**Stack:** Rust engine + Spec corpus Model Context Protocol. **Refuse Python**
-for this port (nest 08 tombstoned; Architecture Decision Record ADR-0001 amended).
+Prose: whole words — `GLOSSARY.md`. Skill when editing: `predicate-prose`.
 
-| Gate | Status |
+## Alarms (uncertainty already reduced — do not re-litigate)
+
+1. Research depth was over-claimed → `research/gaps/entity-adoption-audit-2026-08-10.md`.  
+2. Too many Draft Chosen/Adopt on thin digests → FREEZE —
+   `research/gaps/shallow-decisions-honesty-2026-08-10.md`.  
+3. Wire pin `2026-07-28` is Evidenced; **our** tool argument shapes = Pilot invent
+   (0 exact public engines for claim memory / equivariance wrappers).
+
+## FREEZE — allowed edit set
+
+| Allowed | Forbidden |
 | --- | --- |
-| Port (export for more Spec) | CONDITIONAL — folder usable; research depth **not** green |
-| Implement | **NO** — Definition of Ready has **0 PASS** rows |
+| Deepen receipt freshness β/ρ | New Decision Matrices |
+| Deepen claim-memory withdrawal | New Architecture Decision Records / Must entities |
+| Deepen Model Context Protocol **handle lifecycle** only | Math brainstorm → Adopt; Cargo scaffolds |
+| Demote overclaim wording; predicate-prose rewrites | Soft-pass D0 via schema file counts |
 
-Whole words — `GLOSSARY.md`.
+Optional outside deepen-3: read-only Spec corpus Spike (`SPIKE-SPEC-MCP-0`) —
+does **not** unlock product `verify` tools.
 
-## Alarm (do not paper over)
+## Parked
 
-1. Prior readiness language claimed research was done. **It was not.**  
-2. **New:** too many Draft **Chosen/Adopt** decisions on thin digests — see
-   `research/gaps/shallow-decisions-honesty-2026-08-10.md` (**FREEZE**).  
-3. Model Context Protocol **`2026-07-28`** wire pin is Evidenced; *our* tool
-   semantics remain **Pilot invent**.
-
-Definition of Ready row **D0 = FAIL**.  
-Also: `research/gaps/entity-adoption-audit-2026-08-10.md`.
-
-## FREEZE (effective now)
-
-Do **not**: add Decision Matrices, Architecture Decision Records, Must entities,
-or promote math brainstorm → Adopt.
-
-Do: demote wording; deepen **at most three** topics below.
-
-## Deepen next (only)
-
-1. Receipt freshness β/ρ (digest Proof-or-Stop + canon Spike **or** Pilot charter)  
-2. Claim memory withdrawal (Pilot charter + plants; engines = 0)  
-3. Model Context Protocol handle lifecycle only (stop adding tools)
-
-Optional **outside deepen-3** (does not expand product verify): read-only Spec
-corpus Model Context Protocol research — `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` /
-`SPIKE-SPEC-MCP-0` (host language re-openable; WebAssembly LockCheck stays
-product Wave-3).
-
-Everything else = **parked** (Could / brainstorm).
-
-## Do not do next
-
-- Treat Port as Implement  
-- Add more shallow “Adopt” verdicts  
-- Cargo scaffolds  
-- Soft-pass D0 with schema file counts  
-- Dump `research/` into always-on context (use `.cursor/rules` + `research/INDEX.md`)
+Everything not in the three deepen rows — including new language lanes and
+verify Model Context Protocol Implement.

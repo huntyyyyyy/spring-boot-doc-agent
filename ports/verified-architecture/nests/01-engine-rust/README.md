@@ -1,26 +1,20 @@
 # Nest: Rust engine
 
-**Owns:** Source Code Index Protocol decode, WiringResolver, LockCheck, receipts, wasmtime host
+**Owns (when built):** Source Code Index Protocol decode, resolve, LockCheck,
+receipts, wasmtime host, Spec corpus Model Context Protocol Spike host.
 
-**Architecture Decision Records:** Architecture Decision Record ADR-0007, Architecture Decision Record ADR-0004, Architecture Decision Record ADR-0002
+**Fail closed:** any engine effect or Spec index writer in another language
+violates Architecture Decision Record ADR-0007.
 
-**Status:** Planning nest — no product code until repo CONTRIBUTING gate + this nest’s Component C4.
+**Now:** README + `nest.mdc` only — no crates until Definition of Ready PASS.
 
-## Look-first research
+## Open first
 
-- `research/layers-of-truth/`
-- `research/polyglot/`
-- `research/atam-formal/`
-- `docs/c4/03-components.md`
+1. `docs/adr/adr-0007-rust-owns-engine.md`  
+2. `docs/adr/adr-0004-native-then-wasm-lockcheck.md`  
+3. `08-verification/VERIFY_STACK.md`
 
 ## Shared System of Record
 
-- `docs/DOMAIN_MAP.md`
-- `03-requirements/` · `04-constraints/` (flat `docs/requirements/` are pointers)
-- `docs/c4/02-containers.md`
-
-## Later (post-gate)
-
-This nest may become a git subtree or standalone repo while keeping the same
-MDC look-first contract so the “next repository” inherits context without
-loading unrelated bounded contexts.
+- `03-requirements/` · `04-constraints/`  
+- `docs/c4/` · `docs/adr/`

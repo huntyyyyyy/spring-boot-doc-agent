@@ -1,36 +1,36 @@
 ---
 title: 'Architecture Decision Record ADR-0007: Rust owns the engine container'
-status: Proposed — amended 2026-08-11 (no PyO3 peer default)
+status: Proposed — amended 2026-08-11 (engine + Spec corpus MCP; no PyO3 default)
 date: '2026-08-10'
 last_reviewed: '2026-08-11'
+nest: nests/01-engine-rust
 ---
 
 # Architecture Decision Record ADR-0007: Rust owns the engine container
 
 ## Context
 
-Engine work (Source Code Index Protocol decode, resolve, lock evaluate, receipts,
-wasmtime host) and Spec corpus Model Context Protocol (frontmatter index, digests)
-fit Rust’s excellence domain. Polyglot peers integrate via command-line interface /
-FFI / WIT — **not** by making Python the engine or the default bridge.
+Source Code Index Protocol decode, resolve, lock evaluate, receipts, and
+wasmtime hosting need one language with strong FFI and a path to later formal
+cores. Spec corpus indexing (frontmatter validate, digests, read-only Model
+Context Protocol) shares those needs. Tip Python and PyO3 were tempting only
+because the monorepo tip already used them — not because of product forces.
 
 ## Decision
 
-**Rust** owns the primary **engine** container and the **Spec corpus Model
-Context Protocol** Spike host (`SPIKE-SPEC-MCP-0`). Other accepted languages call
-it (Go daemon, TypeScript IDE, Ruby DX, Clojure queries against exports).
-
-**Refuse:** Python-majority engine; PyO3 as default planning bridge; Spec host in
-tip Python.
+1. **Rust** is the only language allowed to implement engine effects and the
+   Spec corpus Model Context Protocol Spike host (`SPIKE-SPEC-MCP-0`).  
+2. Go / TypeScript / Ruby / Clojure call the engine across process or export
+   boundaries; they do not reimplement verify oracles.  
+3. **Refuse** Python engine, Spec host, and default PyO3 bridge for this port.
 
 ## Status
 
-Proposed (amended).
+Proposed (amended). Human Accept pending.
 
 ## Consequences
 
-Positive: clear ownership; path to Verus/Kani on pure cores later; one stack for
-engine + Spec digest.  
-Negative: Rust skill floor; FFI surface without PyO3 convenience.  
-Rejected: Python-majority engine; engine logic reimplemented per language; tip
-Python Spec server.
+Positive: one ownership line for digests/schemas; future Verus/Kani possible on
+pure cores.  
+Negative: higher Rust skill floor; no PyO3 shortcut for ACI glue.  
+Rejected: Python-majority engine; “host in tip language because adapters exist.”

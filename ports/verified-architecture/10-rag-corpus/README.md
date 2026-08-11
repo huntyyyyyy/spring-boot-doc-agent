@@ -1,4 +1,5 @@
 # 10-rag-corpus
 
-**STUB** — catalog/packs/eval not filled. Live Retrieval-Augmented Generation
-catalog: `research/INDEX.md`. See [PRECODE_MAP.md](../PRECODE_MAP.md).
+**Empty:** `catalog/`, `packs/`, `eval/`, `retrieval-contracts/` have no
+contracts yet. Live catalog for agents: `research/INDEX.md`. Writing here
+without a retrieval contract is decoration — reject.

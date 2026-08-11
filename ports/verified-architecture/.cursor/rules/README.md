@@ -24,7 +24,8 @@ Budget: **≤2** `alwaysApply: true`. Depth → Skills. Path → `globs` (port-r
 | `09-cold-start.mdc` | agent-requested | Lost session |
 | `10-verification-stack.mdc` | globs `08-verification/**` | Locks/claims/receipts |
 | `11-mcp-surfaces.mdc` | agent-requested | Spec vs verify Model Context Protocol |
-| `projections/*.mdc` | globs / agent-requested | Thin pointers at MD SoTs (Wave-0) — see inventory |
+| `projections/*.mdc` | globs / agent-requested | Thin pointers at MD SoTs — see inventory |
+| `projections/predicate-prose.mdc` | agent-requested | Anti-tautology rewrite skill |
 
 Nests: `nests/*/.cursor/rules/nest.mdc` — thin, dual globs, one nest at a time.
 

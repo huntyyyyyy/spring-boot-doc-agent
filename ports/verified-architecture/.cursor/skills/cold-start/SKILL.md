@@ -7,20 +7,18 @@ description: Prime a new agent session with no chat history — bootstrap, walkt
 
 ## Steps
 
-1. Read `AGENT_BOOTSTRAP.md`.
-2. Read `STATUS.md`.
-3. Read `AGENT_WALKTHROUGH.md` (sequential chain).
-4. Read `GLOSSARY.md` — use **whole words** in every edit (no bare acronyms).
-5. Skim `STRUCTURE.md` if orientation needed.
-6. Read `08-verification/VERIFY_STACK.md` — confirm Must spine includes
-   artifact-anchored claim memory **and** Stateful Tool-Enabled Agentic
-   Deployment tool constraints, not graph + locks alone.
-7. Skim Definition of Ready + no-code-gate; list open `blocks_code` open questions.
-8. Announce: phase, code generation allowed? (**no**), Must spine one-liner,
-   FREEZE/deepen-3 from `STATUS.md`, **one** next task.
-9. Do not browse the whole repository. Do not add Decision Matrices or Adopt
-   verdicts. Prefer Skill `rag-retrieve` for one research pack if needed.
-10. Obey `.cursor/rules/00-constitution.mdc` (circular Why refuse; whole words).
+1. Read `AGENT_BOOTSTRAP.md` (obey `look_first`).
+2. Read `STATUS.md` — memorize FREEZE deepen-3 and gate table.
+3. Read `AGENT_WALKTHROUGH.md` if sequence unclear.
+4. Read `GLOSSARY.md` — whole words in every edit.
+5. Skim `STRUCTURE.md` only if path orientation fails.
+6. Read `08-verification/VERIFY_STACK.md` — confirm four Must legs.
+7. Skim Definition of Ready; list open `blocks_code` questions.
+8. Before any Spec Markdown edit: Skill `predicate-prose` (three tests).
+9. Announce: phase, codegen allowed? (**no**), Must spine one-liner, FREEZE
+   deepen-3, **one** next task path.
+10. Do not browse the whole tree. Do not add Decision Matrices. Prefer
+    `rag-retrieve` for one research pack.
 
 ## Exit
 

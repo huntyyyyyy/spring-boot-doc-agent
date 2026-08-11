@@ -34,6 +34,7 @@ Use this file as the **Retrieval-Augmented Generation catalog**. Chunk by file; 
 | **Worked digest example** | `research/papers-2026-may-aug/digests/2608.04278-ea-graph.md` | Empirical + section map for Artifact-Anchored Verification Memory |
 | **Shallow approvals deep-dive** | `research/gaps/shallow-approvals-deep-dive-2026-08-10.md` | Model Context Protocol `2026-07-28` stateless, receipts, claims, lock IR, freshness, harness, Quality Attribute Scenario, C4 + agent-codegen bites |
 | **Shallow decisions honesty / FREEZE** | `research/gaps/shallow-decisions-honesty-2026-08-10.md` | Overclaim audit; deepen-max-3; demote Chosen→Working hypothesis |
+| **Anti-tautology / predicate prose** | `research/gaps/anti-tautology-predicate-prose-2026-08-11.md` | A→B tests; Skill `predicate-prose` |
 | **Port MDC projections + Rust/WASM** | `research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md` | Port-only: thin `.mdc` projections; Rust Spec host; WASM guest Could |
 | **MDC projection inventory** | `research/mdc-devex/mdc-projection-inventory-2026-08-11.md` | Which port MD stay MD vs get Cursor projections |
 | **Forced pointing + frontmatter / Spec Model Context Protocol** | `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md` | MDC mandates graph walk; shared FM schema with Spec tools |

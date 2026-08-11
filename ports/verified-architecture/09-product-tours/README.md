@@ -1,3 +1,5 @@
 # 09-product-tours
 
-**STUB** — tour dirs are placeholders (`.gitkeep` only). Not product SoT. See [PRECODE_MAP.md](../PRECODE_MAP.md).
+**Empty:** five tour dirs hold `.gitkeep` only (no scripts, no acceptance
+checklists). Do not cite tours as Implemented. MoSCoW labels wait on
+requirements Accept.

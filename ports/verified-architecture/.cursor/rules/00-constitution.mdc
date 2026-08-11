@@ -1,67 +1,56 @@
 ---
-description: Verified Architecture constitution — Spec corpus; FREEZE; forced pointing; no product code
+description: Verified Architecture constitution — gates, FREEZE, dual surfaces, predicate prose
 alwaysApply: true
 ---
 
 # Verified Architecture — constitution
 
-Planning + Retrieval-Augmented Generation **corpus** (not a shipped verify
-binary). **Forced pointing** via frontmatter (`look_first` / `related`) is
-product behavior — not optional soft preference.
+This tree designs a verify engine; it is **not** that engine. Text under
+`ports/verified-architecture/` must **predicate** (Skill `predicate-prose`) —
+synonym restatements of titles are rejectable noise.
 
-**Whole words** in prose — `GLOSSARY.md`. No bare short labels in new text.
+**Whole words** — `GLOSSARY.md`.
 
 ## Cold start
 
-No prior context → `AGENT_BOOTSTRAP.md` → `STATUS.md` → `AGENT_WALKTHROUGH.md`
-→ `STRUCTURE.md` → `GLOSSARY.md`. Skill `cold-start`. Obey each file’s
-`look_first` when present.
+No chat history → Skill `cold-start` (`AGENT_BOOTSTRAP.md` → `STATUS.md` → …).
+Obey each file’s `look_first` before inventing paths.
 
-## Dual surfaces (do not mix System of Record)
+## Dual surfaces (separate Systems of Record)
 
-| Surface | Job |
-| --- | --- |
-| Verify engine (future) | Graph + locks + receipts on a *target* repo |
-| Planning corpus (this tree) | How we design that engine |
+| Surface | Writer / host | May cite RAG text as witness? |
+| --- | --- | --- |
+| Product verify (future) | Rust engine; TS presents | **No** |
+| Spec corpus (this tree) | Rust Spike indexes frontmatter | N/A — planning only |
 
-Retrieval-Augmented Generation text is never a verify witness.
-Frontmatter routing keys are **Spec corpus** SoT; **Rust** Spec Model Context
-Protocol (Spike) serves them — not product receipt SoT. **Refuse Python**
-runtimes for this port (Architecture Decision Record ADR-0001 amended).
+**Refuse** Python runtimes for either surface on this port (ADR-0001).
 
-## FREEZE + deepen (read `STATUS.md`)
+## FREEZE
 
-Do **not** add Decision Matrices, Architecture Decision Records, Must entities,
-or math Spikes-as-Must. Deepen **at most three**: receipt β/ρ; claim withdrawal;
-Model Context Protocol **handle lifecycle** only.
+Only deepen: receipt β/ρ; claim withdrawal; Model Context Protocol handle
+lifecycle. New matrices / Architecture Decision Records / Must entities =
+forbidden unless human overrides. Honesty path:
+`research/gaps/shallow-decisions-honesty-2026-08-10.md`.
 
-Honesty: `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
+## Must spine (four legs — omit any → incomplete)
 
-## Identity
+Graph+locks **and** artifact-anchored claim memory **and** Stateful
+Tool-Enabled Agentic Deployment tool constraints **and** receipts —
+`08-verification/VERIFY_STACK.md`. Exact public engines for claim memory /
+equivariance = **0** → Pilot invent, not silent Adopt.
 
-- Working **draft form** under requirements engineering + Architecture Tradeoff
-  Analysis Method Quality Attribute Scenarios + Nygard Architecture Decision
-  Records + C4 — skipping the *form* is not allowed.
-- **Must spine:** graph + locks **and** artifact-anchored claim memory **and**
-  Stateful Tool-Enabled Agentic Deployment tool constraints **and** receipts —
-  `08-verification/VERIFY_STACK.md`.
-- Exact public engines for claim memory / Proof-or-Stop / equivariance = **0** →
-  **Pilot invent**, not silent industry Adopt.
-- Polyglot lives under `07-system-design/options/` and `nests/` — no tip scaffolds.
-- `research/` is evidence — retrieve via INDEX + frontmatter graph; never always-load.
+## Gates that change agent behavior
 
-## Gates
-
-- No product code until Definition of Ready + no-code-gate green (**0 PASS** now).
-- Must non-functional requirements → six-part Quality Attribute Scenario before Design.
-- `blocks_code` open questions block code generation.
-- Unknown / **unprovable** beats wrong; evidence ≠ freshness.
-- Typed tool identifiers only; no invented handles; no narrative “pass” as receipt.
-- **Refuse circular Why:** do not choose a stack because this agent already wrote it.
+- Definition of Ready **0 PASS** → no product code.  
+- Open `blocks_code` questions → no codegen.  
+- Unknown / unprovable beats wrong; evidence ≠ freshness.  
+- Typed tool ids only; no narrative “pass” as receipt.  
+- Circular Why refuse: tip accident ≠ product Why.  
 - Working hypothesis ≠ human Accept; score tables are sensors.
 
 ## Context budget
 
-Always-on ≤2 slim rules. Path scope = Cursor rule **globs**. Depth = **Skills**.
-Prefer `00/`–`12/` over legacy `docs/` when both exist.
-Schema: `07-system-design/schemas/va-doc-frontmatter.schema.json`.
+≤2 always-on rules. Path → globs. Depth → Skills. Prefer `00/`–`12/` for new
+artifacts; `docs/adr` + `docs/c4` + `docs/standards` stay active;
+`docs/requirements` are pointers. Schema:
+`07-system-design/schemas/va-doc-frontmatter.schema.json`.
