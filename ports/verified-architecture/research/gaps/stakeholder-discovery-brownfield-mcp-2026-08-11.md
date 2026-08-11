@@ -183,26 +183,83 @@ DeepWiki Ask / llms.txt on competitor FS-MCP servers: **not run this session**
 
 ---
 
-## 6. Ordered next (human + agent)
+## 6. Human gate — answer these (not A/B slogans)
 
-| Who | Action | Exit |
+Each question is closed-choice. Your answer changes **which Wave-1 tools we
+Spec**, **which 90-day metrics are Must**, and **what agents are forbidden to
+build**. Tautology check: if deleting the option label leaves no difference in
+allowed work, the question failed — these do not.
+
+### Q1 — What does a coworker or agent ask this product on day 90?
+
+Pick **one** primary job (secondary jobs can be Could later):
+
+| Choice | Example ask that must succeed | Example ask we may refuse or defer |
 | --- | --- | --- |
-| **Human** | Choose BOUNDARY: (A) verify spine primary, FS/wiki Could; or (B) brownfield grounded-doc MCP primary | Sign/amend OQ-01 in `SIGNOFF_LOG.md` |
-| **Human** | Resolve JIT-only vs derived-index (metrics need index) | One sentence in BOUNDARY or open question OQ-06 |
-| **Agent (FREEZE)** | Keep deepen β/ρ / withdrawal / handles — they serve grounding gap + stale fragments | Digests + Spikes already pointed |
-| **Agent** | Do **not** add Eyes/Hands/Wiki to `icd/mcp/*.schema.json` until OQ-01 Accept | FREEZE holds |
-| **Later Spike** | Allowlisted command runner with ρ receipt; wiki page schema with `content_digest` + secondary validate | Charter only after boundary Accept |
+| **Q1-LOCK** | “Will merging this PR break our layer locks / DI graph? Show the receipt.” | “Write me a wiki page summarizing the billing module.” |
+| **Q1-DOC** | “What does the billing module do, with citations to files that still exist at HEAD?” | “Is `controller → repository` allowed under lock set L?” |
+| **Q1-BOTH** | Both asks must succeed in the same MVP window | Neither may be “nice to have” |
+
+**If Q1-LOCK:** Eyes/Hands/Wiki stay out of Wave-1 ICD.  
+**If Q1-DOC:** graph/LockCheck is not the MVP headline; amend BOUNDARY one-liner.  
+**If Q1-BOTH:** say so explicitly — schedule cost rises (two Accept surfaces).
+
+### Q2 — When code changes, what must update before we call the answer “fresh”?
+
+Pick **one**:
+
+| Choice | What must be true after `git pull` / save | What we stop claiming |
+| --- | --- | --- |
+| **Q2-JIT** | Next `read_file` / `search_code` / `get_structure` sees disk; no background indexer required for MVP | Drop as Must: index lag, embedding freshness, event-queue throughput, symbol-coverage-of-generated-docs |
+| **Q2-INDEX** | A derived index/doc inventory updates; we measure lag (commit/save → index ready) and stale-fragment rate | Drop the slogan “no derived state / database is always a liability” |
+| **Q2-HYBRID** | Reads may be JIT, but **generated wiki/answers** only ship if bound to digests + a Fresh check (index or content-hash set) | “Wiki write without Fresh” and “pure OS wrapper with no rebuildable derived artifacts” |
+
+### Q3 — Who is allowed to mutate the repo through this Model Context Protocol server?
+
+Pick **one**:
+
+| Choice | Allowed mutations | Forbidden in MVP |
+| --- | --- | --- |
+| **Q3-READ** | None (answers + maybe write receipts/claims outside target tree, or only under a verify out-dir) | `apply_diff`, `execute_command`, `write_wiki_page` as agent tools |
+| **Q3-HASHED** | `apply_diff` only with matching `expected_hash`; wiki pages only with content digest + secondary validate | Open `execute_command`; free wiki rewrite of MAP as truth |
+| **Q3-SHELL** | Hash-guarded edits **and** an allowlisted command runner that records ρ (cmd/args/cwd/exit/output digest) | Unrestricted shell; commands without receipts |
+
+### Q4 — What is the create metric we will fail a release on?
+
+Pick **one primary** (others can be sensors):
+
+| Choice | Fail the 90-day review if… |
+| --- | --- |
+| **Q4-GAP** | Mean grounding gap (AI claims − verifiable code citations) is not near zero on a fixed question set |
+| **Q4-STALE** | Stale fragment rate on retrieved chunks exceeds an agreed threshold after pulls |
+| **Q4-LOCK** | LockCheck false-green / false-red on the plant suite exceeds threshold |
+| **Q4-LAG** | Index lag p95 after large pull exceeds agreed seconds |
+
+You already named **grounding gap** as the create metric — confirm **Q4-GAP** or override.
+
+### How to answer
+
+Reply with four tokens, e.g. `Q1-DOC Q2-HYBRID Q3-HASHED Q4-GAP`, plus any
+one-line amend to the BOUNDARY sentence. That is enough to close or redirect
+open question OQ-01 in `SIGNOFF_LOG.md`.
+
+### Agent after your answer
+
+| Your pattern | Agent may | Agent must not |
+| --- | --- | --- |
+| Q1-LOCK + Q2-* | Keep FREEZE deepen on β/ρ / claims / handles | Add Eyes/Hands/Wiki to Wave-1 schemas |
+| Q1-DOC + Q2-JIT | Draft a **Could** FS-MCP ICD separate from verify | Claim verify LockCheck is MVP; claim index-lag metrics |
+| Q1-DOC + Q2-INDEX/HYBRID | Amend BOUNDARY; Spike derived index + Fresh plants | Ship crates before Definition of Ready |
+| Q3-SHELL | Charter allowlist + ρ Spike only | Unrestricted `execute_command` as Adopt |
 
 ---
 
 ## 7. Bottom line
 
-Stakeholder pain and **grounding gap ≈ 0** are the strongest create signals yet —
-they **reinforce** Proof-or-Stop / claim-memory / Fresh, not a soft-pass to ship
-a seven-tool OS wrapper.
+Stakeholder pain and **grounding gap ≈ 0** reinforce Proof-or-Stop / claim
+memory / Fresh — they do **not** auto-Authorize a seven-tool OS wrapper as the
+verify product.
 
 **Stateless Model Context Protocol wire:** already Adopted.  
-**Stateless application = pure disk tools only:** Working hypothesis that
-**contradicts** the stakeholder’s own index/embedding/lag metrics unless a
-derived index is admitted.  
+**Application shape:** waiting on Q1–Q4 above.  
 **Implement:** still **Refuse**.
