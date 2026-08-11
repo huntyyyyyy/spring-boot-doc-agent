@@ -1,0 +1,16 @@
+---
+description: >-
+  Adversarial / architecture reviews under this port — if→then entailments, not
+  Support/Refuse scoreboards
+alwaysApply: false
+---
+
+# Projection: semantic adversarial review
+
+Skill: `.cursor/skills/semantic-adversarial-review/SKILL.md`  
+Theory: `research/gaps/anti-tautology-predicate-prose-2026-08-11.md`  
+Tip hooks (monorepo): repo `.cursor/hooks/inject_semantic_review.py` + audit +
+stop rewrite.
+
+When reviewing ADRs, nests, ICDs, or “Ready” packages: read the skill first.
+Hooks fire from the tip root even while editing files under this port.

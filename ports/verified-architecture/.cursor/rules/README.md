@@ -26,6 +26,7 @@ Budget: **≤2** `alwaysApply: true`. Depth → Skills. Path → `globs` (port-r
 | `11-mcp-surfaces.mdc` | agent-requested | Spec vs verify Model Context Protocol |
 | `projections/*.mdc` | globs / agent-requested | Thin pointers at MD SoTs — see inventory |
 | `projections/predicate-prose.mdc` | agent-requested | Anti-tautology rewrite skill |
+| `projections/semantic-adversarial-review.mdc` | agent-requested | if→then review skill (tip hooks still root `.cursor/hooks.json`) |
 
 Nests: `nests/*/.cursor/rules/nest.mdc` — thin, dual globs, one nest at a time.
 

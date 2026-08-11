@@ -70,10 +70,27 @@ uncertainty by ~0. How do we implement the user's three principles so files
 
 | Layer | Mechanism |
 | --- | --- |
-| Skill | `predicate-prose` — rewrite protocol + detection checklist |
+| Skill (Spec prose) | `predicate-prose` — rewrite protocol + detection checklist |
+| Skill (chat reviews) | `semantic-adversarial-review` (port + tip) — if→then spine |
+| Hooks (tip root) | `inject_semantic_review` → `audit_semantic_review_response` → `stop_semantic_review_rewrite` — regex density sensor for Support/Refuse stamps vs if→then; **not** a formal semantics engine |
 | Always-on | One constitution line: refuse synonym-only sentences |
 | Wave rewrite | STATUS, BOOTSTRAP, ADRs, nest READMEs, Spike — not all research digests at once |
 | Frontmatter | `look_first` already forces edges; body must add attributes those edges cannot carry |
+
+**Honesty on the hook:** the detector Embody’s *epistemological* test only as a
+cheap sensor (stamp count vs if→then count). It does not implement Montague /
+situation semantics. Theory lives in this memo + Skills; hooks refuse the
+obvious scoreboard failure mode.
+
+## 3b. Why indexes use backticks more than markdown links
+
+If a catalog’s job is Retrieval-Augmented Generation chunk routing and agent
+`Read` by path, then a backtick path is the operable handle. Markdown links
+help humans click; they are not required for `look_first` / `related` edges
+(those are YAML). Mixed docs (ADR index with `[0007](…)` vs `research/INDEX.md`
+with `` `path` ``) are a **progressive-disclosure / audience split**, not proof
+that missing links mean missing files. Fail-mode: treating an unlinked catalog
+row as “file absent.”
 
 ## 4. Forced sentence shape (Create)
 
