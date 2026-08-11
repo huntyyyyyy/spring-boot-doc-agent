@@ -30,6 +30,46 @@ Whole words — root `GLOSSARY.md`.
 
 ---
 
+## Plain-language summary (for humans — no jargon chips)
+
+You told us three things that matter:
+
+1. **Who hurts:** engineers on brownfield repos whose docs are stale and whose
+   original authors are gone. Agents burn money hunting context.
+2. **What “good” looks like in ~90 days:** answers and generated docs stay tied
+   to files that still exist; measure how long after a save/pull the search/index
+   is current; measure how often retrieved snippets cite dead code; measure
+   **grounding gap** (model claims minus citations you can open in the repo) and
+   drive that toward zero.
+3. **How you want the server built:** session-free Model Context Protocol; tools
+   that always answer from today’s disk; edits only if a content hash still
+   matches; optional wiki writers; no “memory” inside the server process.
+
+What we already agree with, in plain words:
+
+- The industry Model Context Protocol pin that drops transport sessions is the
+  right wire. We already chose that.
+- “Do not answer without a citation to current code” is the same intent as our
+  freshness-bound receipts and claim memory. That intent stays.
+- Hash-checked edits are a sound guard against overwriting someone else’s save.
+
+What we will not silently treat as the product yet:
+
+- Replacing the whole product with only “read file / ripgrep / tree / apply
+  diff / run shell / write wiki.” That is a thin filesystem agent adapter. It
+  does not by itself evaluate architecture locks or emit proof-carrying receipts.
+- Saying “never keep any derived index” while also requiring index-lag and
+  embedding-freshness metrics. Those metrics need a derived index (or an honest
+  drop of those metrics).
+- Shipping unrestricted shell execution or wiki writes that are not tied back to
+  current file digests — that recreates stale documentation.
+
+The decision questions in §6 ask you which day-90 job is primary, what “fresh”
+means after a pull, what the server may mutate, and which metric fails the
+review. Answer those; do not re-litigate slogans.
+
+---
+
 ## 1. Who `[Evidenced — stakeholder]`
 
 Primary users: **software engineers and other technical people with access to a

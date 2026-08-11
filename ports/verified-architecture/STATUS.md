@@ -32,8 +32,8 @@ related:
 | IDE presentation Model Context Protocol | **TypeScript** (ADR-0010) | Reject Spec corpus server in TS as default |
 | WebAssembly LockCheck guest | **Could / Wave-3** (ADR-0004) | Reject as Spec host or Wave-1 Must |
 
-Prose: whole words — `GLOSSARY.md` (expand-on-first-use preference, not CI reject).
-Skill when editing: `predicate-prose`.
+Prose: whole words — `GLOSSARY.md`. Skills when editing: `predicate-prose`,
+`whole-words-prose` (no bare acronyms in chat or new Markdown).
 
 **Tip search policy (monorepo SoT):** tip `CLAUDE.md` (2026-08-09+) allows
 `Grep`/`rg` for inventory; prefer `ast-grep` for structural citations. Stale

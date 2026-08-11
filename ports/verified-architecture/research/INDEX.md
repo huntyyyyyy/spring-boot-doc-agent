@@ -62,6 +62,7 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
 | **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Historical title→action table — **superseded on depth** by adoption audit |
 | **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |
+| **Whole-words skill** | `.cursor/skills/whole-words-prose/SKILL.md` (+ tip mirror) | No bare acronyms in chat / human gates |
 | **Jul–Aug adversarial** | `research/adversarial/july-august-2026-overturn-review.md` | Did new papers overturn us? |
 | **Leaders / GitHub adoption** | `research/leaders-adoption/` | Who leads vs who ships (★ ≠ fitness) |
 | **Pre-code BFS taxonomy** | `research/pre-code-bfs/` | Classify domains before AI codegen |
