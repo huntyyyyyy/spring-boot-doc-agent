@@ -59,7 +59,8 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Model Context Protocol Decision Matrix** | `07-system-design/decisions/mcp-decision-matrix.md` | Usage cases UC-Model Context Protocol-01…08, planned code loci, scored alternatives |
 | **Lock / receipt Decision Matrices** | `07-system-design/decisions/lock-ir-decision-matrix.md`, `receipt-decision-matrix.md` | Six-vector selection for G-L1 / G-R1 |
 | **C4 + confidence** | `07-system-design/c4/C4-BRIEF-CONFIDENCE.md` | Context/Container sketch with per-entity scores |
-| **Architecture visualization** | `07-system-design/c4/ARCHITECTURE_VISUALIZATION.md` | Mermaid context · containers · verify pipeline · dual surfaces · SoR |
+| **Architecture visualization** | `07-system-design/c4/ARCHITECTURE_VISUALIZATION.md` | Mermaid context · containers · verify pipeline · dual surfaces · SoR · feedback loops |
+| **Four dimensions / Agent OS spitball** | `research/gaps/four-dimensions-agent-os-spitball-2026-08-11.md` | Temporal · zoom · dynamic policy · post-write audit vs Spec Refuse lines |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
 | **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Historical title→action table — **superseded on depth** by adoption audit |
 | **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |

@@ -108,7 +108,8 @@ flowchart TB
 ## 3. Inside the engine — verify pipeline
 
 Corrected “Agent operating-system” flow: global map → local truth → **native**
-spine → atomic write. WebAssembly is not the spine.
+spine → atomic write. WebAssembly is not the spine. **Do not stop at a linear
+happy path** — stewardship is the back-edges in §3b.
 
 ```mermaid
 flowchart TB
@@ -134,6 +135,39 @@ flowchart TB
   Lock -.-> WasmOpt
 ```
 
+### 3b. Feedback loops and dimensions (Working hypothesis)
+
+Spitball adjudication: `research/gaps/four-dimensions-agent-os-spitball-2026-08-11.md`.
+
+```mermaid
+flowchart TB
+  Intent2["Intent"]
+  Zoom["Multi-resolution zoom<br/>global → module skeleton → fold → atomic"]
+  Check["Native LockCheck + claims + receipt"]
+  Write2["Write / derived update"]
+  Audit["Post-write audit<br/>re-LockCheck · contradiction plants"]
+  Fresh["Fresh / claim withdraw<br/>index lag · stale fragments"]
+  Hist["Git history corpus<br/>why — advisory evidence"]
+  Wiki["Wiki / answers<br/>advisory — not policy System of Record"]
+  Policy["Policy locks in git<br/>human Accept"]
+
+  Intent2 --> Zoom --> Check --> Write2 --> Audit
+  Audit -->|survived| Done["Accepted change"]
+  Audit -->|failed| Zoom
+  Write2 --> Fresh
+  Fresh -->|stale| Zoom
+  Hist --> Wiki
+  Wiki -.->|explains only| Policy
+  Policy --> Check
+```
+
+| Dimension | Keep as | Do not |
+| --- | --- | --- |
+| Temporal (git archaeology) | Answer evidence + claim anchors | Use commit prose as LockCheck witness |
+| Resolution (zoom levels) | Pilot query projections in Rust | Whole-file-only Model Context Protocol forever |
+| Dynamic spine | Versioned **git** lock manifests | DeepWiki auto-minting WebAssembly policy |
+| Adversarial | Deterministic post-write plants | Second model with free shell as Must |
+
 | Step | Job | Fail-mode if skipped or inverted |
 | --- | --- | --- |
 | Index map | Scale lookup | Structural search over the whole tree every turn |
@@ -142,6 +176,7 @@ flowchart TB
 | Claim memory | Survive upstream edits | Stale “green” docs/answers |
 | Receipt | Grounding gap toward zero | Model prose as proof |
 | Atomic write | Engine owns effects | Model writes oracles / free shell |
+| Post-write audit | Challenge interactions | “Hope it is right” after write |
 
 ---
 

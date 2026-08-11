@@ -49,7 +49,11 @@ does not restate a deny.
    (0 exact public engines for claim memory / equivariance wrappers).  
 4. Stakeholder brownfield / grounding-gap / Eyes-Hands-Wiki stack →
    `research/gaps/stakeholder-discovery-brownfield-mcp-2026-08-11.md` (OQ-01
-   pressure; **not** a new Wave-1 tool list under FREEZE).
+   pressure; **not** a new Wave-1 tool list under FREEZE).  
+5. Four-dimension / Agent OS spitball →
+   `research/gaps/four-dimensions-agent-os-spitball-2026-08-11.md` (feedback
+   loops yes; DeepWiki-as-policy / WebAssembly-as-Wave-1-spine / Clojure
+   orchestrator **demoted**).
 
 ## FREEZE — allowed edit set
 
