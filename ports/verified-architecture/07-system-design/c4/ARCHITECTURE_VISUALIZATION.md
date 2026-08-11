@@ -22,6 +22,7 @@ doc_role: architecture-diagram
 do not equal Implement readiness (~0.15).
 
 Whole words — root `GLOSSARY.md`. Companion ASCII: `C4-BRIEF-CONFIDENCE.md`.
+Poster: `verified-architecture-system-design-draft.png`.
 
 ---
 
