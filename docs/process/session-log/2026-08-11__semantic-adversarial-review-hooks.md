@@ -1,7 +1,7 @@
 # Session log — 2026-08-11
 
 ## 2026-08-11 — Semantic adversarial-review hooks (if→then, not scoreboards)
-Commit: 40f9f15b
+Commit: 9f1bec1a
 Tests: `pytest tests/ci/test_semantic_review_hooks.py` 6/6; `check_repo_claims.py` OK
 Assumptions affected:
 - Agent review discipline — "Skill/constitution text alone stops tautological Support/Refuse reviews" — [New info — Cursor hooks now inject + audit + stop follow-up; Skill `semantic-adversarial-review` is the written mandate]
