@@ -62,6 +62,7 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Architecture visualization** | `07-system-design/c4/ARCHITECTURE_VISUALIZATION.md` | Mermaid context · containers · verify pipeline · dual surfaces · SoR · feedback loops |
 | **Four dimensions / Agent OS spitball** | `research/gaps/four-dimensions-agent-os-spitball-2026-08-11.md` | Temporal · zoom · dynamic policy · post-write audit vs Spec Refuse lines |
 | **Review: three-track MVP roadmap** | `research/gaps/review-three-track-mvp-2026-08-11.md` | Interface-first OK as Spec; thin-thread / Clojure orchestrator / WASM-spine Refuse |
+| **Review: kernel wireframe** | `research/gaps/review-kernel-wireframe-2026-08-11.md` | Hash-guard/zoom seeds OK; toy receipt / Wasmer-first / Clojure atom SOT Refuse as start |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
 | **Port readiness (June–August 2026)** | `research/papers-2026-may-aug/june-august-2026-port-readiness.md` | Historical title→action table — **superseded on depth** by adoption audit |
 | **Whole-words glossary** | `GLOSSARY.md` (repo root) | Prefer full phrases over bare short labels |
