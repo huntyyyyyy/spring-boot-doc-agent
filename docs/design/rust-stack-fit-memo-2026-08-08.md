@@ -1,8 +1,11 @@
 ---
 category: Stack-fit research — Rust vs Python doc-engine / Stage-0 / gates
 status: research complete; recommendation = no in-tree Rust for 30 days
-research date: 2026-08-08
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-08'
+claim_tiers: Evidenced / Confirmed / Unknown
+title: 'Principal SE memo: Should Rust improve `spring-boot-doc-agent`?'
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Principal SE memo: Should Rust improve `spring-boot-doc-agent`?

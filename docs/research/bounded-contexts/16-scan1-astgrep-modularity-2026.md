@@ -1,19 +1,20 @@
 ---
 title: E-SCAN1 — AstGrepBackend modularity (scanning/astgrep)
 status: E-SCAN1 APPROVED (2026-08-09) — plan accept attached Spec
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — Stage-0 ast-grep scanner backend
 related:
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - weaken fail_under 98.7, complexipy ≤5, FILE_LOC_HARD 225
-  - land on E-MOD3 tip; wire import-linter dual-SoT; DI containers; utils/
-  - swap to ast-grep-py / in-tree Rust; ApprovalTests goldens; ChaCo as floor
-  - split all scanning offenders in one tip
+- weaken fail_under 98.7, complexipy ≤5, FILE_LOC_HARD 225
+- land on E-MOD3 tip; wire import-linter dual-SoT; DI containers; utils/
+- swap to ast-grep-py / in-tree Rust; ApprovalTests goldens; ChaCo as floor
+- split all scanning offenders in one tip
 spec_gate: APPROVED E-SCAN1 (2026-08-09) — SCAN1-A–J
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: E-SCAN1 AstGrepBackend split

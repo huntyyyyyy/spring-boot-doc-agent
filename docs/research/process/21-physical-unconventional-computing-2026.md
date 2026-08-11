@@ -1,20 +1,22 @@
 ---
 title: Physical / unconventional computing — Problem-FIRST transfer bar for doc-engine
 status: RESEARCH COMPLETE — informs process hygiene; no code impl
-research date: 2026-08-10
+date: '2026-08-10'
 wave: dynamics-physical
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/05-dynamics-neuromorphic.md
-  - docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
-  - docs/research/process/20-theory-domains-problem-first-gates-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-epic_ids: [E-DYN1]
+- docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/process/43-physical-info-dynamics-computing-2026-08-10.md
+- docs/research/process/20-theory-domains-problem-first-gates-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
+epic_ids:
+- E-DYN1
 do_not:
-  - promote physical/neuromorphic tip as coverage or gate SoT
-  - soft-replace fail_under with dissipative / reservoir / analog “green”
-  - schedule Loihi/BrainScaleS/DNA/BZ runtimes inside doc_engine
+- promote physical/neuromorphic tip as coverage or gate SoT
+- soft-replace fail_under with dissipative / reservoir / analog “green”
+- schedule Loihi/BrainScaleS/DNA/BZ runtimes inside doc_engine
+last_reviewed: '2026-08-10'
 ---
 
 # Segment 21: Physical & unconventional computing (domains A–I)

@@ -1,0 +1,21 @@
+---
+description: Architecture docs — C4, Architecture Decision Records, decisions, Interface Control Documents
+globs:
+  - docs/adr/**
+  - docs/c4/**
+  - 07-system-design/**
+  - ports/verified-architecture/docs/adr/**
+  - ports/verified-architecture/docs/c4/**
+  - ports/verified-architecture/07-system-design/**
+alwaysApply: false
+---
+
+# Architecture docs lens
+
+1. Architecture Decision Records decide; C4 illustrates — diagrams cite decision ids.
+2. Decision Matrices are **Working hypothesis (Draft)** until human Accept + research-depth gate.
+3. Interface Control Documents under `07-system-design/icd/` — schemas before code.
+4. No new containers / languages without an Architecture Decision Record (or mark Proposed).
+5. Read `STATUS.md` FREEZE before adding matrices or decisions.
+6. Architecture Decision Record index (stack-aligned): `docs/adr/README.md`.
+7. Cross-check `PRECODE_MAP.md` and options under `07-system-design/options/`.

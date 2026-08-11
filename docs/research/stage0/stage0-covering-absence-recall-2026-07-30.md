@@ -1,3 +1,12 @@
+---
+title: Stage-0 covering proof, callable absence, and recall writers
+status: "legacy \u2014 needs review"
+date: '2026-07-30'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
+freshness: tip-bound
+---
 # Stage-0 covering proof, callable absence, and recall writers
 
 Written 2026-07-30. Normative product design for hard stops that prior

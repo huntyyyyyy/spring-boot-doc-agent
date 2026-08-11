@@ -1,29 +1,31 @@
 ---
 title: E-SOL0 — Concern→solution map (DDIA labels → 2026 effective remedies)
 status: DRAFT Spec — pending Approve of SOL1–SOL12
-research date: 2026-08-09
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
-  - docs/design/ddia-north-star/INDEX.md
-  - docs/design/ddia-north-star/meta/effective-remedies.md
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
-  - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
-  - docs/research/quality-backlog.md
+- docs/design/ddia-north-star/INDEX.md
+- docs/design/ddia-north-star/meta/effective-remedies.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
+- docs/research/quality-backlog.md
 do_not:
-  - treat DDIA page ids as Accept criteria without a named remedy mechanism
-  - Embody new fitness/ETL from remedy labels alone — need E-CGQ0 depth rows (CGQ2/CGQ6)
-  - invent new SoT floors from LLM-judge or scoped Cover%
-  - dual-wire Sonar/Spec Kit/Nx as runtime SoT
-  - raise constitution ceilings to “make room”
-spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL11 pending Approve; catalog = vocabulary until E-CGQ0 depth Approve (CGQ6)
-gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue (HOT13/STACK)"
-critique: "Human 2026-08-09: north-star tables described problems without solution mechanisms research shows effective; follow-up: labels without depth → vague codegen"
+- treat DDIA page ids as Accept criteria without a named remedy mechanism
+- Embody new fitness/ETL from remedy labels alone — need E-CGQ0 depth rows (CGQ2/CGQ6)
+- invent new SoT floors from LLM-judge or scoped Cover%
+- dual-wire Sonar/Spec Kit/Nx as runtime SoT
+- raise constitution ceilings to “make room”
+spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL11 pending Approve; catalog = vocabulary
+  until E-CGQ0 depth Approve (CGQ6)
+gh_sor_bar: ≥10000★ for new external SoR; Confirmed pins Embody-continue (HOT13/STACK)
+critique: 'Human 2026-08-09: north-star tables described problems without solution
+  mechanisms research shows effective; follow-up: labels without depth → vague codegen'
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: from DDIA *concern labels* to *effective remedies*

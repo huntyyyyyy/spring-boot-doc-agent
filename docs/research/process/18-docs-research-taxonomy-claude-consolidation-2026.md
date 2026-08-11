@@ -1,22 +1,25 @@
 ---
-title: E-DOC0 — Research domain taxonomy + claude→docs consolidation + look-first hook
+title: E-DOC0 — Research domain taxonomy + claude→docs consolidation + look-first
+  hook
 status: E-DOC0 APPROVED (2026-08-09) — merge Approve of DOC1–DOC12
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
-product: Meta-repo process SoR (docs) + Cursor/Claude agent adapters — not doc-engine kernel
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
+product: Meta-repo process SoR (docs) + Cursor/Claude agent adapters — not doc-engine
+  kernel
 related:
-  - docs/product-architecture.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - .cursor/skills/principal-se-research-epic/SKILL.md
-  - docs/design/ci-workflow-modularity-design-2026-08-09.md
+- docs/product-architecture.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- .cursor/skills/principal-se-research-epic/SKILL.md
+- docs/design/ci-workflow-modularity-design-2026-08-09.md
 do_not:
-  - dump chat transcripts / raw session lore as research SoT
-  - deep-nest research like docs/design/ddia-north-star (64 files / 29 dirs)
-  - delete adapters/claude without a Cursor-equivalent adapter Spec
-  - treat .claude/settings deny lists as deletable without check F replacement
-  - mass-move claude/ without rewriting check_repo_claims OWN_PATH_PREFIXES + predicates
+- dump chat transcripts / raw session lore as research SoT
+- deep-nest research like docs/design/ddia-north-star (64 files / 29 dirs)
+- delete adapters/claude without a Cursor-equivalent adapter Spec
+- treat .claude/settings deny lists as deletable without check F replacement
+- mass-move claude/ without rewriting check_repo_claims OWN_PATH_PREFIXES + predicates
 spec_gate: APPROVED E-DOC0 (2026-08-09) — DOC1–DOC12
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: research domains, claude→docs, look-first hook

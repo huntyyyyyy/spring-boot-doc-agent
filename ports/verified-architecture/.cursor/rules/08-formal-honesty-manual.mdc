@@ -1,0 +1,15 @@
+---
+description: Formal honesty — @mention when claiming proof, verification, or WebAssembly/Rust trust
+alwaysApply: false
+---
+
+# Formal honesty (manual)
+
+Attach only when discussing proofs or verification claims.
+
+- Literature (RustBelt, Verus, Watt, Iris-MSWasm, Temporal Logic of Actions) supports
+  **bounded** trust stories — not “the system is proved.”
+- WebAssembly host config = engineering sandbox, not theorem.
+- Product Musts: graph + locks + claim memory + receipts (Pilot where engines = 0).
+- Prefer Unknown over false “proved.”
+- Pack: `research/atam-formal/` (one memo at a time).

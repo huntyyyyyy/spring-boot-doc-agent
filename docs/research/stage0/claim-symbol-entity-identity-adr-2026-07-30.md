@@ -1,3 +1,12 @@
+---
+title: "ADR \u2014 Claim-symbol / entity identity (L3)"
+status: "legacy \u2014 needs review"
+date: '2026-07-30'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
+freshness: tip-bound
+---
 # ADR — Claim-symbol / entity identity (L3)
 
 **Date:** 2026-07-30  

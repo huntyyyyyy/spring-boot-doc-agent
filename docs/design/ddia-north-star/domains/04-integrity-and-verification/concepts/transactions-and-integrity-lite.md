@@ -9,7 +9,6 @@ epub_anchors:
 related: [consistency-and-consensus-lite, trust-but-verify-and-auditability]
 last_refined: 2026-07-30
 path: domains/04-integrity-and-verification/concepts/transactions-and-integrity-lite.md
-
 ---
 
 # Transactions and integrity (lite)

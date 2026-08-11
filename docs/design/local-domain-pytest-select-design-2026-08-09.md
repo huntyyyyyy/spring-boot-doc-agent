@@ -1,17 +1,19 @@
 ---
 category: Local domain pytest selection / fine ABI shards
 status: APPROVED — SPEC GATE E-SEL0 (2026-08-09) — SEL1–SEL10
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/29-local-domain-pytest-select-2026.md
-  - docs/design/test-suite-parallel-domains-design-2026-08-08.md
-  - scripts/ci/pre_pr.py
+- docs/research/process/29-local-domain-pytest-select-2026.md
+- docs/design/test-suite-parallel-domains-design-2026-08-08.md
+- scripts/ci/pre_pr.py
 do_not:
-  - xdist on cov oracle cell
-  - skip oracle via testmon
-  - silent empty selection (must fail-closed to full suite)
+- xdist on cov oracle cell
+- skip oracle via testmon
+- silent empty selection (must fail-closed to full suite)
 spec_gate: APPROVED E-SEL0 (2026-08-09) — SEL1–SEL10
+title: 'Design memo: domain select + fine ABI paths'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: domain select + fine ABI paths

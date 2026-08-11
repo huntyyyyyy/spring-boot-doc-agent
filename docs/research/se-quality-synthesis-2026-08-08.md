@@ -1,24 +1,25 @@
 ---
 title: SE quality synthesis — dual-mode, taxonomy, metrics, frameworks, dynamics
 status: PRINCIPAL MEMO — merge of research segments 01–05
-research date: 2026-08-08
+date: '2026-08-08'
 base_sha: 5eaac2ac20fbe2c4aebd2652c64a58defbcc10a7
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 sources:
-  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
-  - docs/research/process/02-foundational-agentic-se-2026.md
-  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+- docs/research/process/02-foundational-agentic-se-2026.md
+- docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/process/05-dynamics-neuromorphic.md
 supersedes:
-  - docs/research/archive/_wip-coverage-design-audit.md
+- docs/research/archive/_wip-coverage-design-audit.md
 related:
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - weaken fail_under, complexipy ≤5, or size ≤225
-  - reopen policy 16-A or fuzzy/PID green after Spec gate
+- weaken fail_under, complexipy ≤5, or size ≤225
+- reopen policy 16-A or fuzzy/PID green after Spec gate
 spec_gate: APPROVED E-CM0 (2026-08-08) — decisions 1-31 + policy 16-A
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: SE quality synthesis (2026-08-08)

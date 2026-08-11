@@ -1,0 +1,19 @@
+---
+description: Nest context for TypeScript IDE — path-scoped; do not load other nests
+globs:
+  - nests/07-ide-typescript/**
+  - ports/verified-architecture/nests/07-ide-typescript/**
+alwaysApply: false
+---
+
+# Nest: TypeScript IDE
+
+When files under `nests/07-ide-typescript/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0010, ADR-0011.
+3. Owns: IDE / Model Context Protocol presentation — host language re-openable.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

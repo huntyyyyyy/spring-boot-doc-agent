@@ -1,22 +1,23 @@
 ---
 title: E-CERT0 — Certification fold honesty under phase runner (Spec seed)
 status: DRAFT Spec — pending Approve of C0-1–C0-8
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: pipeline certification derived view
 related:
-  - docs/research/cold-product-bc-research-map-2026-08-10.md
-  - docs/design/ddia-north-star/deviations/dev-certification-derived-view.md
-  - src/doc_engine/pipeline/certification_fold.py
-  - src/doc_engine/tools/certification.py
-  - src/doc_engine/pipeline/local_runner_phases/
+- docs/research/cold-product-bc-research-map-2026-08-10.md
+- docs/design/ddia-north-star/deviations/dev-certification-derived-view.md
+- src/doc_engine/pipeline/certification_fold.py
+- src/doc_engine/tools/certification.py
+- src/doc_engine/pipeline/local_runner_phases/
 do_not:
-  - hand-edit certification.json as SoR
-  - LWW-merge certification with facts
-  - Implement PIPE1 size cuts that break fold inputs before Approve
-  - treat LLM-judge or mock as certified without --allow-mock honesty
+- hand-edit certification.json as SoR
+- LWW-merge certification with facts
+- Implement PIPE1 size cuts that break fold inputs before Approve
+- treat LLM-judge or mock as certified without --allow-mock honesty
 spec_gate: DRAFT E-CERT0 (2026-08-10)
 human_review_floor: true
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: certification fold (E-CERT0)

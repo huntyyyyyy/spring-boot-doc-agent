@@ -1,0 +1,19 @@
+---
+description: Nest context for SQLite registry — path-scoped; do not load other nests
+globs:
+  - nests/02-registry-sqlite/**
+  - ports/verified-architecture/nests/02-registry-sqlite/**
+alwaysApply: false
+---
+
+# Nest: SQLite registry
+
+When files under `nests/02-registry-sqlite/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0002.
+3. Owns: Derived registry — not policy System of Record.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

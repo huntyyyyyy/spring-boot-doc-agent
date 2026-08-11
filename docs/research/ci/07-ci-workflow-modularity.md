@@ -1,9 +1,11 @@
 ---
 title: CI workflow modularity — why YAML god-files form
 status: APPROVED — feeds E-CI1 Implement (E-CI0 Spec locked 2026-08-09)
-date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # 07 — CI workflow modularity (GHA god-files)

@@ -1,18 +1,18 @@
 ---
-segment: 01
+segment: 1
 title: Coverage oracle vs climb — DDIA SoT, SOLID/DRY/OCP, complexipy, naming
 status: RESEARCH COMPLETE — informs design approval; dual-mode NOT implemented
-research date: 2026-08-08
+date: '2026-08-08'
 branch: wave1-gates-untrusted-tree-hygiene
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-  - docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
-  - docs/design/ddia-north-star/playbooks/choosing-sor-vs-view.md
-  - docs/agentic-foundational-se-taxonomy-2026-08-08.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
+- docs/design/ddia-north-star/domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
+- docs/design/ddia-north-star/playbooks/choosing-sor-vs-view.md
 do_not:
-  - implement dual-mode in this pass
-  - touch sibling research paths
+- implement dual-mode in this pass
+- touch sibling research paths
+last_reviewed: '2026-08-10'
 ---
 
 # Segment 01: Coverage oracle vs climb (SOLID / DDIA / gates)

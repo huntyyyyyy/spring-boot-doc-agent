@@ -1,0 +1,19 @@
+---
+description: Nest context for WebAssembly sandbox — path-scoped; do not load other nests
+globs:
+  - nests/06-sandbox-wasm/**
+  - ports/verified-architecture/nests/06-sandbox-wasm/**
+alwaysApply: false
+---
+
+# Nest: WebAssembly sandbox
+
+When files under `nests/06-sandbox-wasm/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0004.
+3. Owns: LockCheck guest Could; isolation ≠ proof; not Spec MCP host.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

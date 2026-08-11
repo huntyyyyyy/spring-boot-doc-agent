@@ -9,7 +9,6 @@ epub_anchors:
 related: [secondary-indexes-cross-partition, rel-partition-bounds-fanout, maintainability-operability-evolvability, ch07, effective-remedies]
 last_refined: 2026-08-09
 path: domains/07-partitioning-and-skew/concepts/partition-key-and-hotspots.md
-
 ---
 
 # Partition key and hotspots

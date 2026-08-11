@@ -1,0 +1,19 @@
+---
+description: Nest context for Go chassis — path-scoped; do not load other nests
+globs:
+  - nests/04-chassis-go/**
+  - ports/verified-architecture/nests/04-chassis-go/**
+alwaysApply: false
+---
+
+# Nest: Go chassis
+
+When files under `nests/04-chassis-go/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0009.
+3. Owns: Watch/reindex; optional wazero — not Spec MCP host.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

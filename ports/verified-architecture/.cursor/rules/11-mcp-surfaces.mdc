@@ -1,0 +1,25 @@
+---
+description: Model Context Protocol — pull when editing MCP ICD, schemas, Spec corpus MCP, or tool hosts
+alwaysApply: false
+---
+
+# Model Context Protocol topic
+
+**Split surfaces:**
+
+| Surface | Action |
+| --- | --- |
+| Product verify tools (`verify` / `resolve` / receipts) | Spec Draft only; **Refuse** Implement until deepen-3; **Rust engine** (Architecture Decision Record ADR-0007) |
+| Spec / corpus read-only MCP | Spike `SPIKE-SPEC-MCP-0` — **Rust host** only; stamps Draft/FREEZE/`accepted:false` |
+
+**Shared SoT with Cursor forced pointing:** document frontmatter
+(`doc_role`, `look_first`, `mcp_tools`, `freeze_class`, `accepted`) —
+`07-system-design/schemas/va-doc-frontmatter.schema.json`. Spec tools **must**
+filter on these keys.
+
+1. Wire pin `2026-07-28` is Evidenced; *our* tool semantics = Pilot invent.
+2. Read `07-system-design/icd/mcp-tools.md` + `decisions/mcp-decision-matrix.md`.
+3. **Refuse** any Python Spec / verify server for this port.
+4. WebAssembly = sandbox guest Could — **not** Spec MCP host; not proof.
+5. Research: `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md` and
+   `research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md`.

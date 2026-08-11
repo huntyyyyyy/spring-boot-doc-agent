@@ -6,7 +6,6 @@ tags: [relationship, sor, derived]
 related: [sor-vs-derived, materialized-views-and-caches, choosing-sor-vs-view, dev-certification-derived-view, effective-remedies]
 last_refined: 2026-08-09
 path: domains/01-data-flow-and-truth/relationships/sor-feeds-views.md
-
 ---
 
 # Relationship: SoR feeds views

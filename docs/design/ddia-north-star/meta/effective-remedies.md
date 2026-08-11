@@ -6,7 +6,6 @@ tags: [remedy, fitness, characterization, mutation, sensor, sot]
 related: [sor-vs-derived, rel-gate-needs-witness, maintainability-operability-evolvability, coverage-gates, refactor-sequencing]
 last_refined: 2026-08-09
 path: meta/effective-remedies.md
-
 ---
 
 # Effective remedies (north-star companion)

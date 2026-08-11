@@ -6,7 +6,6 @@ tags: [deviation, certification, derived, lww]
 related: [sor-vs-derived, materialized-views-and-caches, replication-lag-and-lww, choosing-sor-vs-view]
 last_refined: 2026-07-30
 path: deviations/dev-certification-derived-view.md
-
 ---
 
 # Deviation: certification.json is derived — never LWW-merged with pipeline facts

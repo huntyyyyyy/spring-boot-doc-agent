@@ -1,30 +1,32 @@
 ---
 title: Cold BC dimensional mental map — DDD · SOLID · patterns · CLI/a11y · RAG-later
 status: ACTIVE principal research — Spec lattice DRAFT; no Implement without Approve
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine → later RAG/agent surface (structure-first SoT)
 related:
-  - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
-  - docs/research/cold-product-bc-research-map-2026-08-10.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
-  - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
-  - docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md
-  - docs/research/quality-backlog.md
+- docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
+- docs/research/cold-product-bc-research-map-2026-08-10.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
+- docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
+- docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
+- docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md
+- docs/research/quality-backlog.md
 do_not:
-  - implement from this lattice without named Spec Approve
-  - treat landing-pad repos as product deps by default
-  - promote embeddings / rich / capacity / climb to merge or citation SoT
-  - unattended AI merge; skip human review floor
-  - invent utils/ grab-bags or single-letter mode flags
+- implement from this lattice without named Spec Approve
+- treat landing-pad repos as product deps by default
+- promote embeddings / rich / capacity / climb to merge or citation SoT
+- unattended AI merge; skip human review floor
+- invent utils/ grab-bags or single-letter mode flags
 human_review_floor: true
-invariants: fail_under 98.7 · complexipy ≤5 · LOC ≤225 · no utils/ · policy 16-A · cert never LWW
+invariants: fail_under 98.7 · complexipy ≤5 · LOC ≤225 · no utils/ · policy 16-A ·
+  cert never LWW
+last_reviewed: '2026-08-10'
 ---
 
 # Cold BC dimensional mental map (principal SE scope)

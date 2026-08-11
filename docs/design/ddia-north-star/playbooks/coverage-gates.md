@@ -6,7 +6,6 @@ tags: [coverage, semgrep, ratchet, fixtures]
 related: [materialized-views-and-caches, trust-but-verify-and-auditability, batch-vs-stream-derived-state, effective-remedies]
 last_refined: 2026-08-09
 path: playbooks/coverage-gates.md
-
 ---
 
 # Playbook: coverage gates (positive / negative / recall)

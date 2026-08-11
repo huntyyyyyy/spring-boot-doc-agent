@@ -1,12 +1,15 @@
 ---
 category: Test suite / bounded contexts / CI parallelization
 status: APPROVED — SPEC GATE E-TEST0 (2026-08-08)
-research date: 2026-08-08
+date: '2026-08-08'
 approved_decisions: T1-T18
 artifact_policy: T-A
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 research: docs/research/bounded-contexts/06-test-suite-bounded-contexts-parallel.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+title: 'Design memo: test-suite bounded contexts → CI shards'
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: test-suite bounded contexts → CI shards

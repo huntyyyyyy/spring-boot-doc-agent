@@ -1,30 +1,30 @@
 ---
 title: E-CPL0 — Control-plane closed-loop (evidence-gated quality gates)
 status: DRAFT Spec — pending Approve of CPL1–CPL12
-research date: 2026-08-09
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/23-concern-to-solution-remedies-2026.md
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/research/process/28-local-stalker-telemetry-etl-2026.md
-  - docs/research/process/30-local-oracle-push-parity-2026.md
-  - docs/research/process/31-stalker-path-parity-sensors-2026.md
-  - docs/design/ddia-north-star/meta/effective-remedies.md
-  - docs/research/quality-backlog.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/23-concern-to-solution-remedies-2026.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/research/process/28-local-stalker-telemetry-etl-2026.md
+- docs/research/process/30-local-oracle-push-parity-2026.md
+- docs/research/process/31-stalker-path-parity-sensors-2026.md
+- docs/design/ddia-north-star/meta/effective-remedies.md
+- docs/research/quality-backlog.md
 do_not:
-  - Embody Nix/TEE/Kettle/HermBuild/SLSA-L3 as tip merge SoT
-  - dual-wire Proof-or-Stop daemon or OTel/APM as SoT
-  - adopt ArchUnitPython / new <10k★ linter as external SoR
-  - treat Cover% or LLM-judge as proof the control plane is sealed
-  - weaken fail_under / complexipy / size
+- Embody Nix/TEE/Kettle/HermBuild/SLSA-L3 as tip merge SoT
+- dual-wire Proof-or-Stop daemon or OTel/APM as SoT
+- adopt ArchUnitPython / new <10k★ linter as external SoR
+- treat Cover% or LLM-judge as proof the control plane is sealed
+- weaken fail_under / complexipy / size
 spec_gate: DRAFT E-CPL0 (2026-08-09) — CPL1–CPL12 pending Approve
-gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue (pytest/tach/ast-grep)"
-critique: >
-  Human 2026-08-09: open-loop control of quality clones wherever a new gate
-  lands without hermeticity + observability; one-suite patches do not stop cloning.
+gh_sor_bar: ≥10000★ for new external SoR; Confirmed pins Embody-continue (pytest/tach/ast-grep)
+critique: 'Human 2026-08-09: open-loop control of quality clones wherever a new gate
+  lands without hermeticity + observability; one-suite patches do not stop cloning.'
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: control-plane closed-loop invariant

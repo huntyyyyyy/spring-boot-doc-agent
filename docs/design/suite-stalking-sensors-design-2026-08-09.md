@@ -1,12 +1,15 @@
 ---
 category: CI / suite stalking sensors / oracle telemetry
 status: APPROVED — SPEC GATE E-RUN0 (2026-08-09)
-research date: 2026-08-09
+date: '2026-08-09'
 approved_policies: R1-R8
 implement_now: D1 D2 D17
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 research: docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+title: 'Design memo: suite-stalking sensors (E-RUN v1)'
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: suite-stalking sensors (E-RUN v1)

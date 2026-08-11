@@ -1,3 +1,12 @@
+---
+title: "Rust (and Rust-core) quality toolscape \u2014 BFS then DFS (2026)"
+status: "legacy \u2014 needs review"
+date: '2026-08-10'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
+freshness: tip-bound
+---
 # Rust (and Rust-core) quality toolscape — BFS then DFS (2026)
 
 **Date:** 2026-08-09  

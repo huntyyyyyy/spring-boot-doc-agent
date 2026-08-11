@@ -1,0 +1,31 @@
+{
+  "plant_id": "FX-MCP-04",
+  "usage_case": "UC-MCP-04",
+  "prompt_fuzzy": "After an edit, withdraw claims for the current snapshot.",
+  "checkpoints": [
+    {
+      "id": "c1",
+      "kind": "tool_effect",
+      "equivalence_set": ["snapshot_open"],
+      "arg_constraint": { "required": ["target_root"] }
+    },
+    {
+      "id": "c2",
+      "kind": "tool_effect",
+      "equivalence_set": ["claim_withdraw"],
+      "arg_constraint": { "required": ["snapshot_id"] }
+    },
+    {
+      "id": "c3",
+      "kind": "value_produced",
+      "from_tool": "claim_withdraw",
+      "path": "$.dispositions[*].disposition",
+      "enum": ["unaffected", "affected", "unprovable"]
+    }
+  ],
+  "minefields": [
+    { "id": "m1", "kind": "delete_artifact_because_unprovable" },
+    { "id": "m2", "kind": "forbidden_field", "field": "llm_text" }
+  ],
+  "partial_order": [["c1", "c2"]]
+}

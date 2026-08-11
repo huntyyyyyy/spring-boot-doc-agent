@@ -1,0 +1,17 @@
+---
+description: When editing ports/verified-architecture — FREEZE, dual surfaces, cold-start port STATUS
+globs:
+  - ports/verified-architecture/**
+alwaysApply: false
+---
+
+# Parent tip → verified-architecture port
+
+You are touching the **Verified Architecture** planning port inside this monorepo.
+
+1. Treat `ports/verified-architecture/STATUS.md` as the port alarm (FREEZE + deepen-3).
+2. Port constitution lives in `ports/verified-architecture/.cursor/rules/` (also applies when the port is exported as its own root).
+3. **Refuse** product code / Cargo scaffolds / product verify Model Context Protocol Implement here.
+4. Whole words — `ports/verified-architecture/GLOSSARY.md`.
+5. Do not dump `ports/verified-architecture/research/` into context — use `research/INDEX.md` inside the port.
+6. Circular Why refuse: do not pick stacks because prior agent commits already used them.

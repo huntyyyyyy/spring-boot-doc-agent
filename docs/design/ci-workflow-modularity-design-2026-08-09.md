@@ -1,12 +1,15 @@
 ---
 category: CI / GitHub Actions / workflow modularity
 status: APPROVED — SPEC GATE E-CI0 (2026-08-09)
-research date: 2026-08-09
+date: '2026-08-09'
 approved_decisions: C1-C6
 artifact_policy: C-A
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 research: docs/research/ci/07-ci-workflow-modularity.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+title: 'Design memo: CI workflow modularity'
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: CI workflow modularity

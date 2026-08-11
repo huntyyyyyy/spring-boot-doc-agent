@@ -9,7 +9,6 @@ epub_anchors:
 related: [encoding-and-compatibility, claims-and-status-drift, effective-remedies]
 last_refined: 2026-08-09
 path: domains/02-encoding-and-evolution/concepts/schema-evolution-and-data-outlives-code.md
-
 ---
 
 # Schema evolution and data outlives code

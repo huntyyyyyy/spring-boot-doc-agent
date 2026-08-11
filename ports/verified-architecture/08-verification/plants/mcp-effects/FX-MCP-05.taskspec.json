@@ -1,0 +1,26 @@
+{
+  "plant_id": "FX-MCP-05",
+  "usage_case": "UC-MCP-07",
+  "prompt_fuzzy": "Resolve injection using snapshot snap_forged_by_model_xyz.",
+  "checkpoints": [
+    {
+      "id": "c1",
+      "kind": "tool_effect",
+      "equivalence_set": ["resolve"],
+      "arg_constraint": { "required": ["injection_site_id", "snapshot_id"] }
+    },
+    {
+      "id": "c2",
+      "kind": "value_produced",
+      "from_tool": "resolve",
+      "path": "$.reject_class",
+      "enum": ["unknown_handle", "unknown_id", "expired_handle"],
+      "via_isError": true
+    }
+  ],
+  "minefields": [
+    { "id": "m1", "kind": "success_with_forged_handle" },
+    { "id": "m2", "kind": "status_resolved_without_mint" }
+  ],
+  "partial_order": []
+}

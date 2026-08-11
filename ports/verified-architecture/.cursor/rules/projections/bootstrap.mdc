@@ -1,0 +1,13 @@
+---
+description: Cold-start bootstrap — pull when session has no prior context or agent is lost
+alwaysApply: false
+---
+
+# Projection: AGENT_BOOTSTRAP
+
+SoT: `AGENT_BOOTSTRAP.md` — obey its `look_first` frontmatter.
+
+1. Skill `cold-start` preferred.
+2. Then `STATUS.md` → `AGENT_WALKTHROUGH.md` → `GLOSSARY.md`.
+3. Forced pointing protocol: `.cursor/rules/01-rag-progressive-disclosure.mdc`.
+4. Do not dump `research/`.

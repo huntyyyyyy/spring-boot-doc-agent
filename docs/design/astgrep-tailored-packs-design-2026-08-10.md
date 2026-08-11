@@ -1,7 +1,10 @@
 ---
 title: Design stub — E-AST0 tailored ast-grep packs
 status: DRAFT (awaits Spec Approve of docs/research/stage0/astgrep-tailored-packs-fixture-ocs-2026.md)
-date: 2026-08-10
+date: '2026-08-10'
+claim_tiers: Unknown
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design stub: fixture Stage-0 + OCS overlay + Python vacuity

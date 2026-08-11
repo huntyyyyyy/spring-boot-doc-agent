@@ -1,25 +1,27 @@
 ---
-title: Problem-first — dynamical systems, information/thermo, physical & unconventional computing
+title: Problem-first — dynamical systems, information/thermo, physical & unconventional
+  computing
 status: RESEARCH — deepens process/05; Spec seed E-DYN1 (metaphor hygiene only)
-date: 2026-08-10
+date: '2026-08-10'
 epic_seed: E-DYN1
 claim_tiers: Evidenced / Confirmed / Unknown
 supersedes_partial: docs/research/process/05-dynamics-neuromorphic.md
 related:
-  - docs/research/process/05-dynamics-neuromorphic.md
-  - docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
-  - docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md
-  - docs/research/process/21-physical-unconventional-computing-2026.md
-  - docs/research/process/20-theory-domains-problem-first-gates-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
+- docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/process/44-formulas-concepts-dynamics-info-physical-2026-08-10.md
+- docs/research/process/45-cross-domain-isomorphisms-structure-vs-substrate-2026-08-10.md
+- docs/research/process/21-physical-unconventional-computing-2026.md
+- docs/research/process/20-theory-domains-problem-first-gates-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- docs/research/process/42-problem-first-rag-ds-cli-2026-08-10.md
 do_not:
-  - neuromorphic / molecular / ionic / RD / memristor tip runtime
-  - fuzzy / PID / free-energy as fail_under softener
-  - SoA/ECS/DOD rewrite of doc_engine
-  - treat physical RC accuracy as merge SoT
+- neuromorphic / molecular / ionic / RD / memristor tip runtime
+- fuzzy / PID / free-energy as fail_under softener
+- SoA/ECS/DOD rewrite of doc_engine
+- treat physical RC accuracy as merge SoT
 spec_gate: DRAFT E-DYN1 — research + metaphor hygiene; no Implement of physical substrates
+last_reviewed: '2026-08-10'
 ---
 
 # Problem-first: dynamics, information, thermo, and physical computing

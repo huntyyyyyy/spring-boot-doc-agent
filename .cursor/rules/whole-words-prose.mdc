@@ -1,0 +1,19 @@
+---
+description: >-
+  Always expand acronyms in chat and port prose — whole phrases from
+  ports/verified-architecture/GLOSSARY.md; no bare MCP/DoR/ADR/Spec stacks.
+alwaysApply: true
+---
+
+# Whole-words prose (always on)
+
+Before sending a user-facing reply or editing `ports/verified-architecture/**/*.md`:
+
+1. Expand acronyms to full phrases (`Model Context Protocol`, not bare `MCP`).
+2. Follow Skill `whole-words-prose` and `ports/verified-architecture/GLOSSARY.md`.
+3. Human decision questions must name concrete day-90 outcomes, not tautological
+   slogan pairs (“verify spine vs brownfield MCP”).
+4. Prefer Skill `predicate-prose` tests so bullets change allowed next actions.
+
+Exceptions: paths, fenced code, one short form after a full phrase, or typed
+choice tokens that are expanded in the same bullet.

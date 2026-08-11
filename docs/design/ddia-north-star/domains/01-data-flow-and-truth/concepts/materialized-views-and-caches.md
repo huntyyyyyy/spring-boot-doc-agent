@@ -9,7 +9,6 @@ epub_anchors:
 related: [sor-vs-derived, batch-vs-stream-derived-state, coverage-gates, effective-remedies]
 last_refined: 2026-08-09
 path: domains/01-data-flow-and-truth/concepts/materialized-views-and-caches.md
-
 ---
 
 # Materialized views and caches

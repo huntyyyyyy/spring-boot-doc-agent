@@ -1,31 +1,32 @@
 ---
 title: Polyglot CLI toolkit BFS — Rust · WASM · Go · TS · PyO3 (Bloom Create)
 status: ACTIVE research — Spec epic E-POLY0 DRAFT; amends E-RUST0; no Implement
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python 3.10+ CLI doc-engine (Stage-0 · MCP · later RAG)
 related:
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - docs/research/coverage-quality/32-realtime-architecture-assertion-agents-2026.md
-  - docs/design/rust-stack-fit-memo-2026-08-08.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- docs/research/coverage-quality/32-realtime-architecture-assertion-agents-2026.md
+- docs/design/rust-stack-fit-memo-2026-08-08.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
+- docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - treat polyglot / WASM / Rust rewrite as merge or Cover% SoT
-  - add in-tree Cargo / wasmtime-by-default without profiled Spec Approve
-  - replace Python oracle/claims with another language runtime
-  - unattended AI merge; embedding citation SoT
-  - Implement helpers from this BFS alone
+- treat polyglot / WASM / Rust rewrite as merge or Cover% SoT
+- add in-tree Cargo / wasmtime-by-default without profiled Spec Approve
+- replace Python oracle/claims with another language runtime
+- unattended AI merge; embedding citation SoT
+- Implement helpers from this BFS alone
 human_review_floor: true
 spec_gate: DRAFT E-POLY0 (2026-08-10) — POLY0-1–POLY0-10 pending Approve
 amends: E-RUST0
 stars_as_of: 2026-08-10 (GitHub API)
 arxiv_verified: 2026-08-10 (HTTP 200)
+last_reviewed: '2026-08-10'
 ---
 
 # Polyglot CLI toolkit BFS (2026-08-10)

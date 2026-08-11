@@ -1,10 +1,17 @@
 ---
 title: Quality backlog — Active tip + queues
 status: ACTIVE — one stream at a time
-date: 2026-08-10
+date: '2026-08-10'
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 ledger_archive: docs/research/archive/quality-backlog-ticket-ledger-2026-08-10.md
 rule: Spec → Implement → Verify → Archive; no parallel SoT thrash
+claim_tiers: Evidenced / Confirmed
+related:
+  - docs/research/process/49-markdown-frontmatter-metadata-schemas-2026-08-10.md
+  - docs/design/md-frontmatter-metadata-design-2026-08-10.md
+  - docs/design/concept-split-cohesion-design-2026-08-09.md
+  - docs/research/se-quality-synthesis-2026-08-08.md
+last_reviewed: '2026-08-10'
 ---
 
 # Quality backlog
@@ -28,17 +35,17 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 
 ## 1. Active tip (NOW)
 
-**Active:** land combined tip #119, then resume E-COH1
+**Active:** **E-COH1** cohesion (after E-MD0 green on this tip)
 
 | Field | Value |
 | --- | --- |
-| **Stream** | Land combined tip **#119**, then resume **E-COH1** |
-| **Branch / PR** | `cursor/repo-and-context-combined-83d2` → [`#119`](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/119) |
-| **Why** | Research stack is ahead of Implement; E-COH1 was paused until this tip lands |
-| **Already on tip (Done)** | **E-REPO1-A** (`semantic_eval` / `docs_site` nest + `-m` shims); folds of #113–#118; **E-MDC0** docs + `.cursor/rules` pack (`process/47`); **E-LOG0** session-log nest (≤225 LOC + `START__slug`) |
-| **Do not do in this stream** | New research epics; Approve-all Drafts; E-CTX1 / E-DYN1 Implement; parallel tips; E-MDC0 must not block E-COH1 code |
+| **Stream** | **E-COH1** reshape provisional residual bins / façades |
+| **Branch / PR** | `cursor/e-md0-frontmatter-metadata-61f3` → [#120](https://github.com/huntyyyyyy/spring-boot-doc-agent/pull/120) |
+| **Why** | E-MD0 closed FM landed; resume cohesion under COH2–COH4 |
+| **Already on tip** | **E-MD0** (`process/49`, `check_md_frontmatter`); COH1-2 `registry_hooks_basic` → `registry_hooks_rate_measures` |
+| **Do not do in this stream** | Approve-all Drafts; E-TOOL0 installs; LOC thrash without seam maps |
 
-**E-COH1 exit (when resumed):** CGQ3 Accept rows (Concern→Remedy→Depth→Witness) on reshape; `check_public_surface` hard; no mechanical LOC chops. Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md).
+**E-COH1 exit:** CGQ3 Accept rows; `check_public_surface` hard; no mechanical LOC chops. Design: [`docs/design/concept-split-cohesion-design-2026-08-09.md`](../design/concept-split-cohesion-design-2026-08-09.md).
 
 ---
 
@@ -46,7 +53,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 
 | Order | Epic | Action | Gate |
 | --- | --- | --- | --- |
-| A | **E-REPO1-B** | `pipeline`↔`scanning` cycle-break → further nests | After #119 merge; one-way edges + tach |
+| A | **E-REPO1-B** | `pipeline`↔`scanning` cycle-break → further nests | After E-COH1 green slice |
 | B | **E-LEG** remainder | Ordered size offenders: TOOL4 → PIPE1 → QUERY1 → STF1 | After E-COH1 green slice |
 | C | **E-OCS** operator | Live `run-plant.sh ocs` + OpenAPI join evidence | Operator checkout (not tip theater) |
 | D | **E-UX2** | Claims / code_quality headline + `<details>` | Optional |
@@ -72,6 +79,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
+| **E-LIE0** | Full polyglot verified agent + ATAM/ADR + **greenfield port** (`ports/verified-architecture`) | `process/50–56` · [`e-lie0-requirements`](../design/e-lie0-requirements-2026-08-10.md) · [`adr/`](../design/adr/README.md) · [port EXPORT](../../ports/verified-architecture/EXPORT.md) |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 
@@ -118,6 +126,7 @@ Compact ledger. Detail: [archived ticket tables](archive/quality-backlog-ticket-
 | **E-AST1** | Vacuity pack hard in `pre_pr` |
 | **E-REPO1-A** | First nest: `semantic_eval` + `docs_site` + shims |
 | **E-LOG0** | Session-log nest: ≤225 LOC packs + `START__slug` names; stub kept |
+| **E-MD0** | Closed markdown frontmatter schemas + `check_md_frontmatter` gate |
 | **P32 Harn/Nimbus/noprop** | Stance recorded — **Refuse** as product deps |
 
 ---

@@ -1,25 +1,27 @@
 ---
 category: Operator/agent surface (CLI grade + MCP + structured retrieval)
 status: DRAFT — SPEC GATE E-OAS0 pending Approve of OAS1–OAS16
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
-  - docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
-  - docs/research/process/25-tip-grounding-mcp-2026.md
-  - docs/process/local-grading-pack.md
-  - src/doc_engine/query/mcp_tools.py
-  - adapters/mcp/server.py
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/process/39-cli-operator-problem-classes-2026-08-10.md
+- docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
+- docs/research/process/25-tip-grounding-mcp-2026.md
+- docs/process/local-grading-pack.md
+- src/doc_engine/query/mcp_tools.py
+- adapters/mcp/server.py
 do_not:
-  - Implement before E-OAS0 Approve
-  - rich / OTel / embedding as CI or citation SoT
-  - MCP write/codegen tools
-  - rewrite all scripts/ci to Typer in one tip
-  - unattended AI merge / full AI adoption
-  - phone/device-farm or “universal OS emulator” as CLI SoT
+- Implement before E-OAS0 Approve
+- rich / OTel / embedding as CI or citation SoT
+- MCP write/codegen tools
+- rewrite all scripts/ci to Typer in one tip
+- unattended AI merge / full AI adoption
+- phone/device-farm or “universal OS emulator” as CLI SoT
 spec_gate: DRAFT E-OAS0 (2026-08-10) — OAS1–OAS16 pending Approve
+title: 'Design memo: E-OAS0 Spec gate'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: E-OAS0 Spec gate

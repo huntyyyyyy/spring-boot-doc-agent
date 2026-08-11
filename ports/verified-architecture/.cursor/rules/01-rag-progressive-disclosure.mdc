@@ -1,0 +1,31 @@
+---
+description: Forced pointing — frontmatter graph walk; never dump research
+alwaysApply: true
+---
+
+# Forced pointing (progressive disclosure + frontmatter)
+
+Markdown stores. Rules mandate. Spec Model Context Protocol (when present)
+serves the **same** frontmatter keys —
+`07-system-design/schemas/va-doc-frontmatter.schema.json`.
+
+## Must (≤5 opens / turn from the graph)
+
+1. Open the **active** file’s YAML frontmatter before using body claims.
+2. Open every existing path in `look_first` (order preserved).
+3. Then walk `related` until budget is spent.
+4. Prefer Spec tools when available — Rust filters on `doc_role` / `mcp_tools` /
+   `freeze_class` / `accepted`. **Refuse** Python Spec servers.
+5. **Refuse** inventing paths not in `research/INDEX.md`, frontmatter edges, or
+   tool results.
+6. Spec prose edits → Skill `predicate-prose` (no title-echo / synonym circles).
+
+## Still refuse
+
+- Mass `.md` → always-on `.mdc`
+- Dumping whole `research/` packs
+- Product verify Model Context Protocol as planning System of Record
+
+Pointers: `research/INDEX.md`; FREEZE honesty
+`research/gaps/shallow-decisions-honesty-2026-08-10.md`;
+`research/gaps/anti-tautology-predicate-prose-2026-08-11.md`.

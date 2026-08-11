@@ -1,24 +1,26 @@
 ---
-segment: 03
-title: Scientific dimensions — Structural/Cognitive, Computational/Environmental, Architectural/Operational, Agentic/Probabilistic
+segment: 3
+title: Scientific dimensions — Structural/Cognitive, Computational/Environmental,
+  Architectural/Operational, Agentic/Probabilistic
 branch: wave1-gates-untrusted-tree-hygiene
-status: RESEARCH COMPLETE — segment SoT for metric scorecards + gate mapping; no code impl
-research date: 2026-08-08
+status: RESEARCH COMPLETE — segment SoT for metric scorecards + gate mapping; no code
+  impl
+date: '2026-08-08'
 wave: wave1
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 siblings:
-  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
-  - docs/research/process/02-foundational-agentic-se-2026.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+- docs/research/process/02-foundational-agentic-se-2026.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/process/05-dynamics-neuromorphic.md
 related:
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-  - docs/agentic-foundational-se-taxonomy-2026-08-08.md
-  - CONTRIBUTING.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
+- CONTRIBUTING.md
 do_not:
-  - implement dual-mode / MeasureMode
-  - add new CI metric tools in this pass
-  - weaken fail_under, complexipy ≤5, or size ≤225
+- implement dual-mode / MeasureMode
+- add new CI metric tools in this pass
+- weaken fail_under, complexipy ≤5, or size ≤225
+last_reviewed: '2026-08-10'
 ---
 
 # Segment 03 — Scientific dimensions & metrics (gate mapping)

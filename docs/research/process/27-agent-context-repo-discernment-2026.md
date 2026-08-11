@@ -1,20 +1,22 @@
 ---
 title: E-CTX0 deepdive — models in depth + GH repo discernment (star inflation)
 status: DRAFT amend to E-CTX0 — CTX11–CTX18 pending Approve with CTX1–CTX10
-research date: 2026-08-10
+date: '2026-08-10'
 research_window: 2023-01-01 → 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 parent: docs/research/process/26-agent-context-markdown-bloat-2026.md
 related:
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/process/26-agent-context-markdown-bloat-2026.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/process/26-agent-context-markdown-bloat-2026.md
 do_not:
-  - treat ★≥1k as automatic Adopt (fake-star campaigns target AI/LLM repos)
-  - run StarScout as CI gate without Spec (heavy GHArchive)
-  - Adopt viral memory MCP stacks as merge SoT from ★ alone
-  - equate “low ★” with “low quality” when arXiv+institution backs the artifact
+- treat ★≥1k as automatic Adopt (fake-star campaigns target AI/LLM repos)
+- run StarScout as CI gate without Spec (heavy GHArchive)
+- Adopt viral memory MCP stacks as merge SoT from ★ alone
+- equate “low ★” with “low quality” when arXiv+institution backs the artifact
 spec_gate: DRAFT E-CTX0 deepdive (2026-08-10)
-gh_discernment: "★ floor is filter not proof; fork/watch/velocity/institution/paper required"
+gh_discernment: ★ floor is filter not proof; fork/watch/velocity/institution/paper
+  required
+last_reviewed: '2026-08-10'
 ---
 
 # Deepdive: models + repositories under star-inflation pressure

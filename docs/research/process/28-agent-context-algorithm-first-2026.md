@@ -1,20 +1,21 @@
 ---
 title: E-CTX0 — algorithm-first quality frameworks (build/orchestrate from theory)
 status: DRAFT amend — CTX19–CTX26 pending Approve with 26+27
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 parent:
-  - docs/research/process/26-agent-context-markdown-bloat-2026.md
-  - docs/research/process/27-agent-context-repo-discernment-2026.md
+- docs/research/process/26-agent-context-markdown-bloat-2026.md
+- docs/research/process/27-agent-context-repo-discernment-2026.md
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
 do_not:
-  - vendor opaque viral MCP memory as “quality”
-  - train CompactionRL / in-tree weight zoos as product SoT
-  - token-prune agent action grammar (LLMLingua-class on trajectories)
-  - replace claims/coverage oracles with compressed prose
+- vendor opaque viral MCP memory as “quality”
+- train CompactionRL / in-tree weight zoos as product SoT
+- token-prune agent action grammar (LLMLingua-class on trajectories)
+- replace claims/coverage oracles with compressed prose
 spec_gate: DRAFT E-CTX0 algorithm-first (2026-08-10)
+last_reviewed: '2026-08-10'
 ---
 
 # Algorithm-first: theory → our orchestration (not ★-products)

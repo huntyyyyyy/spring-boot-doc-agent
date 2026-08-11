@@ -1,20 +1,24 @@
 ---
 title: Façade poke-surface fitness + design-research hooks (2026)
-status: E-FAC0 / E-RES0 / E-CUR0 APPROVED (2026-08-09) — Cursor-native hooks this tip
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+status: E-FAC0 / E-RES0 / E-CUR0 APPROVED (2026-08-09) — Cursor-native hooks this
+  tip
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine — agent hooks + CI fitness functions
 related:
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md
-  - docs/process/steering-prompts/00-shared-research-standards.md
-  - .cursor/skills/principal-se-research-epic/SKILL.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/bounded-contexts/13-tools-wave2-modularity-2026.md
+- docs/process/steering-prompts/00-shared-research-standards.md
+- .cursor/skills/principal-se-research-epic/SKILL.md
 do_not:
-  - treat LLM-judge or Cover% climb as merge SoT for façade correctness
-  - adopt DI containers or microservice decomposition theater for this CLI
-  - replace tach (already Adopted) with a second conflicting architecture linter without Spec
-spec_gate: APPROVED E-FAC0 + E-RES0 + E-CUR0 (2026-08-09) — FAC1–FAC6 · RES1–RES6 · CUR1–CUR4
+- treat LLM-judge or Cover% climb as merge SoT for façade correctness
+- adopt DI containers or microservice decomposition theater for this CLI
+- replace tach (already Adopted) with a second conflicting architecture linter without
+  Spec
+spec_gate: APPROVED E-FAC0 + E-RES0 + E-CUR0 (2026-08-09) — FAC1–FAC6 · RES1–RES6
+  · CUR1–CUR4
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: why modularity splits leaked CI, and how to catch it in any tip

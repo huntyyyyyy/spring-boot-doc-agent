@@ -8,7 +8,6 @@ epub_anchors:
 related: [materialized-views-and-caches, trust-but-verify-and-auditability, choosing-sor-vs-view, rel-sor-feeds-views, dev-certification-derived-view, dev-coverage-denominator-codeql, effective-remedies]
 last_refined: 2026-08-09
 path: domains/01-data-flow-and-truth/concepts/system-of-record-vs-derived.md
-
 ---
 
 # System of record vs derived data

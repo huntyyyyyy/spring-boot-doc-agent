@@ -1,21 +1,22 @@
 ---
 title: E-REPO1 — first BC nest + future-facing prune (semantic_eval, docs_site)
 status: APPROVED Implement Spec (user-directed tip 2026-08-10)
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 parent:
-  - docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
-  - docs/research/bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md
-  - DOMAIN_MAP.md
+- docs/research/bounded-contexts/21-ddd-repository-structure-options-2026.md
+- docs/research/bounded-contexts/24-ddd-repo-structure-landing-gaps-2026.md
+- DOMAIN_MAP.md
 related:
-  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
-  - docs/design/tools_bc_inventory.json
+- docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
+- docs/design/tools_bc_inventory.json
 do_not:
-  - dissolve scanning/compliance tools before pipeline↔scanning cycle-break
-  - delete root skills/ without equality-gate rewrite (Cursor resolve path)
-  - big-bang tools/ git-mv
-  - weaken fail_under 98.7 / complexipy ≤5 / LOC ≤225
+- dissolve scanning/compliance tools before pipeline↔scanning cycle-break
+- delete root skills/ without equality-gate rewrite (Cursor resolve path)
+- big-bang tools/ git-mv
+- weaken fail_under 98.7 / complexipy ≤5 / LOC ≤225
 spec_gate: APPROVED E-REPO1-A (2026-08-10) — REPO1-A1–A6
+last_reviewed: '2026-08-10'
 ---
 
 # E-REPO1-A — aggressive first nest + prune

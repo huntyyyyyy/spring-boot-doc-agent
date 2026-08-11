@@ -1,0 +1,16 @@
+---
+description: Verification stack — locks, claims, receipts, Stateful Tool-Enabled Agentic Deployment
+globs:
+  - 08-verification/**
+  - ports/verified-architecture/08-verification/**
+alwaysApply: false
+---
+
+# Verification lens
+
+1. Must spine: `VERIFY_STACK.md` — do not shrink to graph+locks alone.
+2. Claim memory = **Pilot invent** (0 public engines) — Embody unprovable; no Adopt theater.
+3. Stateful Tool-Enabled Agentic Deployment constraints = **Embody** design warnings; equivariance wrap = Spike.
+4. Receipts: β/ρ fields Draft; Proof-or-Stop engine = 0 — deepen before Implement.
+5. Plants under `plants/` are Draft TaskSpecs until a Tier-1 scorer exists.
+6. Whole words — `GLOSSARY.md`.

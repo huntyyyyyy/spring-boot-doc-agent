@@ -1,28 +1,29 @@
 ---
 title: Cold BC domain/subdomain taxonomy — arXiv · GitHub · DeepWiki Bloom
-status: ACTIVE research synthesis — Spec seeds DRAFT; no Implement without per-epic Approve
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+status: ACTIVE research synthesis — Spec seeds DRAFT; no Implement without per-epic
+  Approve
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine
 related:
-  - docs/research/cold-product-bc-research-map-2026-08-10.md
-  - docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
-  - docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
-  - docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md
-  - docs/research/stage0/query-packet-bc-research-2026-08-10.md
-  - docs/research/modularity/certification-fold-phase-runner-2026-08-10.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
-  - docs/research/quality-backlog.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/cold-product-bc-research-map-2026-08-10.md
+- docs/research/stage0/d1-query-agent-retrieval-bc-research-2026-08-10.md
+- docs/research/stage0/d2-d3-certification-fact-stores-bc-research-2026-08-10.md
+- docs/research/stage0/d4-d5-d6-static-join-drift-cli-2026-08-10.md
+- docs/research/stage0/query-packet-bc-research-2026-08-10.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+- docs/research/quality-backlog.md
+- docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
-  - implement from this taxonomy without named Spec Approve
-  - treat DeepWiki / embeddings / star counts as merge SoR
-  - unattended AI merge; embedding citation SoT; rich/OTel as CI SoT
+- implement from this taxonomy without named Spec Approve
+- treat DeepWiki / embeddings / star counts as merge SoR
+- unattended AI merge; embedding citation SoT; rich/OTel as CI SoT
 human_review_floor: true
 stars_as_of: 2026-08-10 (GitHub API verified)
 arxiv_verified: 2026-08-10 (HTTP 200 sample of all cited IDs)
+last_reviewed: '2026-08-10'
 ---
 
 # Cold BC domain → subdomain taxonomy (2026-08-10)

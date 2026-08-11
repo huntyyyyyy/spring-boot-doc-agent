@@ -6,7 +6,6 @@ tags: [relationship, batch, serving, derived]
 related: [batch-vs-stream-derived-state, materialized-views-and-caches, rel-sor-feeds-views, ch11, effective-remedies]
 last_refined: 2026-08-09
 path: domains/09-derived-data-processing/relationships/batch-feeds-serving.md
-
 ---
 
 # Relationship: Batch feeds serving

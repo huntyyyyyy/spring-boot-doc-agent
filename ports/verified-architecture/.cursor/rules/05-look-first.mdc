@@ -1,0 +1,22 @@
+---
+description: Look-first map — pull when starting design, requirements, or exploration without a clear path
+alwaysApply: false
+---
+
+# Look-first
+
+0. No chat context? → `AGENT_BOOTSTRAP.md` + `STATUS.md` (Skill `cold-start`).
+   Obey their `look_first` frontmatter.
+1. Otherwise: **frontmatter first** on the active file → `look_first` → `related`
+   (≤5 opens). Schema:
+   `07-system-design/schemas/va-doc-frontmatter.schema.json`.
+2. Read `PRECODE_MAP.md` (`00/`–`12/`).
+3. Requirements → `03-requirements/`.
+4. Constraints / open questions → `04-constraints/`.
+5. Architecture → `07-system-design/` (+ `docs/adr/`).
+6. Verification → `08-verification/`.
+7. Languages → `07-system-design/options/` and `nests/` (not tip Cargo scaffolds).
+8. Research catalog → `research/INDEX.md` (**one** pack via graph, not dump).
+9. Obey FREEZE in `STATUS.md` — deepen-3 only unless human overrides.
+10. Whole words — `GLOSSARY.md`.
+11. Rationale: `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md`.

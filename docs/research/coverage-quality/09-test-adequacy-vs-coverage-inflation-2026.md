@@ -2,24 +2,25 @@
 title: Test adequacy vs coverage inflation — 2026 math, criteria, and this repo
 status: RESEARCH COMPLETE — Spec gate APPROVED E-QA0 (2026-08-09)
 spec_gate: APPROVED E-QA0
-date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
-prefer_sources: "2026 primary (arXiv / GitHub / DeepWiki); older only as contrast"
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
+prefer_sources: 2026 primary (arXiv / GitHub / DeepWiki); older only as contrast
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
 design: docs/design/test-adequacy-markers-design-2026-08-09.md
 siblings:
-  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
-  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
-  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+- docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+- docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+- docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
 related:
-  - docs/research/quality-backlog.md
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-  - docs/design/test-suite-parallel-domains-design-2026-08-08.md
+- docs/research/quality-backlog.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
+- docs/design/test-suite-parallel-domains-design-2026-08-08.md
 do_not:
-  - scrap fail_under=98.7 or replace Cover% with LLM-judge
-  - fold three mutation taxonomies into one PIT/mutmut zoo
-  - treat domain_* meeting-rate as Cover% proof (or the reverse)
-  - promote climb Cover% / gap-average as merge SoT
+- scrap fail_under=98.7 or replace Cover% with LLM-judge
+- fold three mutation taxonomies into one PIT/mutmut zoo
+- treat domain_* meeting-rate as Cover% proof (or the reverse)
+- promote climb Cover% / gap-average as merge SoT
+last_reviewed: '2026-08-10'
 ---
 
 # 09 — Test adequacy vs coverage inflation (2026)

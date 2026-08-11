@@ -1,0 +1,16 @@
+---
+description: >-
+  Adversarial / architecture reviews must use if→then entailments — pull when
+  reviewing Implement-Ready packages, ADR/DDL/ICD proposals, or FREEZE claims
+alwaysApply: false
+---
+
+# Rule: Semantic adversarial review
+
+Skill: `.cursor/skills/semantic-adversarial-review/SKILL.md`  
+Hooks: `inject_semantic_review` → `audit_semantic_review_response` →
+`stop_semantic_review_rewrite` in `.cursor/hooks.json`.
+
+If the user asks for an adversarial or principal-SE review, read the skill
+first. Prefer if→then over Support/Refuse scoreboards. Hooks may auto-follow-up
+once when the response looks tautological.

@@ -1,0 +1,56 @@
+---
+description: Verified Architecture constitution — gates, FREEZE, dual surfaces, predicate prose
+alwaysApply: true
+---
+
+# Verified Architecture — constitution
+
+This tree designs a verify engine; it is **not** that engine. Text under
+`ports/verified-architecture/` must **predicate** (Skill `predicate-prose`) —
+synonym restatements of titles are rejectable noise.
+
+**Whole words** — `GLOSSARY.md`.
+
+## Cold start
+
+No chat history → Skill `cold-start` (`AGENT_BOOTSTRAP.md` → `STATUS.md` → …).
+Obey each file’s `look_first` before inventing paths.
+
+## Dual surfaces (separate Systems of Record)
+
+| Surface | Writer / host | May cite RAG text as witness? |
+| --- | --- | --- |
+| Product verify (future) | Rust engine; TS presents | **No** |
+| Spec corpus (this tree) | Rust Spike indexes frontmatter | N/A — planning only |
+
+**Refuse** Python runtimes for either surface on this port (ADR-0001).
+
+## FREEZE
+
+Only deepen: receipt β/ρ; claim withdrawal; Model Context Protocol handle
+lifecycle. New matrices / Architecture Decision Records / Must entities =
+forbidden unless human overrides. Honesty path:
+`research/gaps/shallow-decisions-honesty-2026-08-10.md`.
+
+## Must spine (four legs — omit any → incomplete)
+
+Graph+locks **and** artifact-anchored claim memory **and** Stateful
+Tool-Enabled Agentic Deployment tool constraints **and** receipts —
+`08-verification/VERIFY_STACK.md`. Exact public engines for claim memory /
+equivariance = **0** → Pilot invent, not silent Adopt.
+
+## Gates that change agent behavior
+
+- Definition of Ready **0 PASS** → no product code.  
+- Open `blocks_code` questions → no codegen.  
+- Unknown / unprovable beats wrong; evidence ≠ freshness.  
+- Typed tool ids only; no narrative “pass” as receipt.  
+- Circular Why refuse: tip accident ≠ product Why.  
+- Working hypothesis ≠ human Accept; score tables are sensors.
+
+## Context budget
+
+≤2 always-on rules. Path → globs. Depth → Skills. Prefer `00/`–`12/` for new
+artifacts; `docs/adr` + `docs/c4` + `docs/standards` stay active;
+`docs/requirements` are pointers. Schema:
+`07-system-design/schemas/va-doc-frontmatter.schema.json`.

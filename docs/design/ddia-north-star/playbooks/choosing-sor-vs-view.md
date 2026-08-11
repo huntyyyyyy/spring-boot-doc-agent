@@ -6,7 +6,6 @@ tags: [sor, derived, decision]
 related: [sor-vs-derived, replication-lag-and-lww, materialized-views-and-caches, effective-remedies]
 last_refined: 2026-08-09
 path: playbooks/choosing-sor-vs-view.md
-
 ---
 
 # Playbook: choosing SoR vs view

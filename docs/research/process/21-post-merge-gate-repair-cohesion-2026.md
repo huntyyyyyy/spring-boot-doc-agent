@@ -1,31 +1,35 @@
 ---
 title: E-HOT0 — Post-merge CI red vs cohesion (gate repair Spec)
 status: APPROVED — SPEC GATE E-HOT0 (2026-08-09) — human Approve HOT1–HOT13
-research date: 2026-08-09
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
-product: Python CLI modular monolith (`doc_engine` + `stf`) — main red after #112 merge
+claim_tiers: Evidenced / Confirmed / Unknown
+product: Python CLI modular monolith (`doc_engine` + `stf`) — main red after
 related:
-  - docs/research/findings/2026-08-09-statement-split-cascade.md
-  - docs/design/concept-split-cohesion-design-2026-08-09.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
-  - docs/research/process/14-facade-poke-research-hooks-2026.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/quality-backlog.md
-  - scripts/ci/pre_pr.py
+- docs/research/findings/2026-08-09-statement-split-cascade.md
+- docs/design/concept-split-cohesion-design-2026-08-09.md
+- docs/research/process/14-facade-poke-research-hooks-2026.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/quality-backlog.md
+- scripts/ci/pre_pr.py
 do_not:
-  - resume mechanical LOC/statement thrash to “clear” red (fails E-COH0)
-  - weaken fail_under 98.7 / complexipy≤5 / LOC≤225 / statements≤20
-  - treat façade private-re-export warehouse as finished modularity
-  - Approve E-TACH0 depends_on in the same tip as gate hotfix
-  - start full E-STK1 Implement without Active switch (sensors Spec-ready only)
-  - push before local `pre_pr --full` / oracle cell green
+- resume mechanical LOC/statement thrash to “clear” red (fails E-COH0)
+- weaken fail_under 98.7 / complexipy≤5 / LOC≤225 / statements≤20
+- treat façade private-re-export warehouse as finished modularity
+- Approve E-TACH0 depends_on in the same tip as gate hotfix
+- start full E-STK1 Implement without Active switch (sensors Spec-ready only)
+- push before local `pre_pr --full` / oracle cell green
 spec_gate: APPROVED E-HOT0 (2026-08-09) — HOT1–HOT13
-gh_sor_bar: "≥10000★ and pushed_at within research_window (prefer Releases/CHANGELOG); in-repo Confirmed pins exempt from ★ for Embody-continue"
-bar_raise: "2026-08-09 human: raise from ≥1000★ to ≥10000★ (+10k) for external implement SoR on this stream"
-stack_rescope: "docs/research/process/22-stack-rescope-10k-star-bar-2026.md (E-STACK0 APPROVED)"
-approved_by: "human chat 2026-08-09 — approve all HOT+STACK incl. apprehensive Confirmed exemptions"
+gh_sor_bar: ≥10000★ and pushed_at within research_window (prefer Releases/CHANGELOG);
+  in-repo Confirmed pins exempt from ★ for Embody-continue
+bar_raise: '2026-08-09 human: raise from ≥1000★ to ≥10000★ (+10k) for external implement
+  SoR on this stream'
+stack_rescope: docs/research/process/22-stack-rescope-10k-star-bar-2026.md (E-STACK0
+  APPROVED)
+approved_by: human chat 2026-08-09 — approve all HOT+STACK incl. apprehensive Confirmed
+  exemptions
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: post-merge gate repair under cohesion + 2026 modularity

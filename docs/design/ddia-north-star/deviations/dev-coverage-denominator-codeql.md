@@ -6,7 +6,6 @@ tags: [deviation, coverage, codeql, sor]
 related: [coverage-gates, sor-vs-derived, claims-and-status-drift, schema-evolution-and-data-outlives-code]
 last_refined: 2026-07-30
 path: deviations/dev-coverage-denominator-codeql.md
-
 ---
 
 # Deviation: coverage denominator is CodeQL + spring_signals, not ast-grep YAML / rule_fixtures

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/verify-input-0.1.json",
+  "title": "verify.input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["target_root", "lock_set_id"],
+  "properties": {
+    "target_root": { "$ref": "common.schema.json#/$defs/absolutePath" },
+    "lock_set_id": { "$ref": "common.schema.json#/$defs/lockSetId" },
+    "snapshot_id": {
+      "$ref": "common.schema.json#/$defs/snapshotId",
+      "description": "Optional; when present, material digests must match snapshot"
+    }
+  }
+}

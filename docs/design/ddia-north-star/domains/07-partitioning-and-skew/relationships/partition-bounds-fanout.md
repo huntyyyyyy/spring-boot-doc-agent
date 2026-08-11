@@ -6,7 +6,6 @@ tags: [relationship, partition, fanout, capacity]
 related: [partition-key-and-hotspots, secondary-indexes-cross-partition, claims-and-status-drift, ch07, effective-remedies]
 last_refined: 2026-08-09
 path: domains/07-partitioning-and-skew/relationships/partition-bounds-fanout.md
-
 ---
 
 # Relationship: Partition bounds fan-out

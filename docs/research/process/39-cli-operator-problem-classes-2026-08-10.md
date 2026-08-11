@@ -1,23 +1,24 @@
 ---
 title: CLI / operator surfaces — problem-first inventory (A–J)
 status: RESEARCH memo — deepens E-OAS0; no Implement
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine (+ MCP adapter; Stage-0 retrieval)
 related:
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
-  - docs/design/operator-agent-surface-design-2026-08-10.md
-  - docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
-  - docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/process/38-cli-dx-a11y-dual-sinks-2026-08-10.md
+- docs/design/operator-agent-surface-design-2026-08-10.md
+- docs/research/ci/11-ci-output-ux-progressive-disclosure-2026.md
+- docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
+- docs/research/se-quality-synthesis-2026-08-08.md
 do_not:
-  - implement Typer grade / RunContext before E-OAS0 Approve
-  - treat Charm/Rich/Textual as CI or merge SoT
-  - treat framework catalogs as the research question
-  - unattended AI merge / universal OS×terminal emulator as CLI SoT
+- implement Typer grade / RunContext before E-OAS0 Approve
+- treat Charm/Rich/Textual as CI or merge SoT
+- treat framework catalogs as the research question
+- unattended AI merge / universal OS×terminal emulator as CLI SoT
 gh_api_stamp: 2026-08-10 (stars via GitHub REST)
 spec_feeds: E-OAS0 (OAS1–OAS16 DRAFT)
+last_reviewed: '2026-08-10'
 ---
 
 # Problem-first CLI / operator surfaces (deeper than Charm/Clap catalogs)

@@ -1,32 +1,37 @@
 ---
-description: Design-shaped work, Spec/epic, framework Adopt — Bloom Create + DeepWiki before Implement
+description: Design-shaped work, Spec/epic, framework Adopt — digests + Bloom Create before Implement
 alwaysApply: false
 ---
 
 # Principal research gate (agent-requested)
 
-Use when the task is design-shaped: new SoT, gates, measure modes, architecture,
-framework/tool adoption, Spec Draft, or epic planning.
+Use when the task is design-shaped: new System of Record, gates, measure modes,
+architecture, framework/tool adoption, Spec Draft, Must-spine science, or epic
+planning.
 
 1. Read skill **principal-se-research-epic** and follow Bloom **1→Create**.
-2. Gather deterministic evidence: primary `llms.txt` / docs + DeepWiki MCP
-   `ask_question` at `https://mcp.deepwiki.com/mcp`.
-3. Tag claims Evidenced / Confirmed / Unknown; map Embody / Adopt / Refuse.
-4. **Refuse Implement** until levels 1–6 are in a research/design memo.
-5. One Active tip only — see backlog.
+2. For every load-bearing paper: skill **paper-digest**
+   (`docs/research/method/paper-digest-framework.md`) — type key, section map,
+   references walk. arXiv categories are **not** paper-type keys.
+3. Per entity: ≥5 genuine GitHub **exact** algorithm adopters after anti-bogus
+   filter, **or** explicit Pilot/invent + Spike (adjacent ≠ exact).
+4. Frameworks: primary `llms.txt` / docs + DeepWiki MCP `ask_question`
+   (`https://mcp.deepwiki.com/mcp`).
+5. Tag Evidenced / Confirmed / Unknown; map Embody / Adopt / Refuse.
+6. **Refuse Implement** until levels 1–6 are in a research/design memo.
+7. One Active tip only — see backlog.
 
 ## Tooling
 
 - Activate `.venv/` if running repo CLIs while researching.
-- **rg** for existing memos / backlog rows; **ast-grep** when the Spec must cite live code structure.
-- Optional Stage-0: `doc-engine query context-packet` / evidence queries when a run-dir exists.
-- Complete download/pilot matrix (incl. Ruby/Go/Clojure lanes):
-  `@docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md`.
-- Do not use raw `curl`/`wget` for research egress when WebFetch / MCP / `llms.txt` suffice; hooks still deny raw clone/curl via Bash.
+- **ast-grep** when the Spec must cite live code structure; Glob+Read for prose.
+- Do not use raw `curl`/`wget` for research egress when WebFetch / MCP / `llms.txt`
+  suffice; hooks still deny raw clone/curl via Bash.
 
 @.cursor/skills/principal-se-research-epic/SKILL.md
+@.cursor/skills/paper-digest/SKILL.md
+@docs/research/method/paper-digest-framework.md
+@docs/research/method/paper-api-schemas.md
 @docs/research/se-quality-synthesis-2026-08-08.md
 @docs/research/quality-backlog.md
 @adapters/claude/SEARCH.md
-@docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md
-@docs/research/process/48-complete-toolscape-agent-repo-developer-2026-08-10.md

@@ -1,20 +1,21 @@
 ---
 title: E-OCS0 — Dual plant (fixture merge SoT + OCS campaign profile)
 status: APPROVED — SPEC GATE E-OCS0 (2026-08-10) — OCS1–OCS8
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine + spring-signals harness
 related:
-  - spring-signals/docs/CAMPAIGN.md
-  - tests/TESTING.md
-  - docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
-  - docs/research/process/35-control-plane-closed-loop-2026.md
+- spring-signals/docs/CAMPAIGN.md
+- tests/TESTING.md
+- docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
+- docs/research/process/35-control-plane-closed-loop-2026.md
 do_not:
-  - make Artifactory-required OCS DB the CI merge SoT
-  - dual-write a second assertion engine
-  - rewrite pytest domains / oracle Cover% for OCS
-  - pretend OCS green without checkout or credentials
+- make Artifactory-required OCS DB the CI merge SoT
+- dual-write a second assertion engine
+- rewrite pytest domains / oracle Cover% for OCS
+- pretend OCS green without checkout or credentials
 spec_gate: APPROVED E-OCS0 (2026-08-10) — OCS1–OCS8
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: OCS plant profile without Artifactory-as-CI

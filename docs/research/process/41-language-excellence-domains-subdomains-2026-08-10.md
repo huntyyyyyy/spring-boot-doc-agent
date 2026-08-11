@@ -1,27 +1,28 @@
 ---
 title: Language excellence domains → subdomains (Rust · Go · Ruby · Clojure · WASM)
 status: ACTIVE deep research — amends E-POLY0b; Spec E-LANG0 DRAFT; no Implement
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine (Stage-0 · MCP · later RAG)
 related:
-  - docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
+- docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- docs/research/cold-bc-dimensional-mental-map-2026-08-10.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - treat logo ★ as architecture proof
-  - replace Python Cover%/claims SoT with any language runtime
-  - Implement without Pilot keep/drop exits
-  - unattended AI merge; embedding citation SoT
-  - mesh/ECS/Backstage-as-product theater
+- treat logo ★ as architecture proof
+- replace Python Cover%/claims SoT with any language runtime
+- Implement without Pilot keep/drop exits
+- unattended AI merge; embedding citation SoT
+- mesh/ECS/Backstage-as-product theater
 human_review_floor: true
 doctrine: Pilot-before-Refuse (five buckets)
 spec_gate: DRAFT E-LANG0 (2026-08-10) — depth map; amends E-POLY0b
 stars_as_of: 2026-08-10 (GitHub API)
 arxiv_verified: 2026-08-10 (HTTP 200 sample)
+last_reviewed: '2026-08-10'
 ---
 
 # Language excellence: domains → subdomains → logo exemplars

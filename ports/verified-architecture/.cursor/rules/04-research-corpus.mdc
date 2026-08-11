@@ -1,0 +1,18 @@
+---
+description: Research corpus — claim tiers; one pack; honesty audit when promoting Adopt
+globs:
+  - research/**
+  - ports/verified-architecture/research/**
+alwaysApply: false
+---
+
+# Research corpus lens
+
+Files under `research/` are **evidence**, not law.
+
+1. Preserve claim tiers: Evidenced / Confirmed / Unknown.
+2. Do not silently promote Unknown → Confirmed or adjacent GitHub → Adopt of *our* algorithm.
+3. Prefer citing paths over paraphrasing long memos into always-on rules.
+4. Catalog: `research/INDEX.md`.
+5. Before “Adopt/Chosen”: read `research/gaps/shallow-decisions-honesty-2026-08-10.md`.
+6. To land a claim in product Source of Truth, Skill `promote-claim`.

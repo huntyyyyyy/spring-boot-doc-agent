@@ -1,29 +1,32 @@
 ---
 title: E-STACK0 — Stack rescope under ≥10k★ SoR bar (2026)
 status: APPROVED — SPEC GATE E-STACK0 (2026-08-09) — human Approve STACK1–STACK12
-research date: 2026-08-09
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
-  - docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/modularity/20-tach-dependency-blueprint-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - requirements.txt
-  - requirements-dev.txt
-  - tach.toml
+- docs/research/process/21-post-merge-gate-repair-cohesion-2026.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- requirements.txt
+- requirements-dev.txt
+- tach.toml
 do_not:
-  - swap tools mid-hotfix without Spec (E-HOT still first for red main)
-  - adopt Spec Kit WorkflowEngine as runtime because it clears ★ (constitution Refuse)
-  - dual-wire SonarQube as fail_under / complexipy replacement without Spec
-  - raise LOC/complexipy/fail_under ceilings
-  - cite &lt;10000★ GH as *new* implement SoR
-  - treat Backstage Refuse as a company IDP ban (Refuse = doc-engine runtime only — §3.8)
+- swap tools mid-hotfix without Spec (E-HOT still first for red main)
+- adopt Spec Kit WorkflowEngine as runtime because it clears ★ (constitution Refuse)
+- dual-wire SonarQube as fail_under / complexipy replacement without Spec
+- raise LOC/complexipy/fail_under ceilings
+- cite &lt;10000★ GH as *new* implement SoR
+- treat Backstage Refuse as a company IDP ban (Refuse = doc-engine runtime only —
+  §3.8)
 spec_gate: APPROVED E-STACK0 (2026-08-09) — STACK1–STACK12
-gh_sor_bar: "≥10000★ and pushed_at within research_window; Confirmed in-repo pins may Embody-continue"
-approved_by: "human chat 2026-08-09 — approve all STACK incl. Confirmed exemptions; Backstage scoped §3.8"
+gh_sor_bar: ≥10000★ and pushed_at within research_window; Confirmed in-repo pins may
+  Embody-continue
+approved_by: human chat 2026-08-09 — approve all STACK incl. Confirmed exemptions;
+  Backstage scoped §3.8
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: rescope stack choices under ≥10k★

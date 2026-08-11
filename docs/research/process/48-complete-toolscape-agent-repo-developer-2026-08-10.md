@@ -1,37 +1,38 @@
 ---
 title: E-TOOL0 — Complete toolscape for agents, repo gates, and developers (2026-08-10)
 status: RESEARCH COMPLETE — Spec Draft (no mass installs until Approve)
-date: 2026-08-10
+date: '2026-08-10'
 epic: E-TOOL0
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
-  - deepwiki_ask_question
-  - llms_txt
+- deepwiki_ask_question
+- llms_txt
 related:
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
-  - docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
-  - docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
-  - docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
-  - docs/research/process/46-lint-import-resolution-ruff-vs-ty-2026-08-10.md
-  - docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md
-  - adapters/claude/SEARCH.md
-  - .cursor/rules/
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/coverage-quality/33-rust-quality-toolscape-bfs-dfs-2026.md
+- docs/research/process/39-polyglot-cli-toolkit-bfs-2026-08-10.md
+- docs/research/process/40-polyglot-open-bfs-pilot-before-refuse-2026-08-10.md
+- docs/research/process/41-language-excellence-domains-subdomains-2026-08-10.md
+- docs/research/process/46-lint-import-resolution-ruff-vs-ty-2026-08-10.md
+- docs/research/process/47-cursor-mdc-rules-devex-ai-repos-2026-08-10.md
+- adapters/claude/SEARCH.md
+- .cursor/rules/
 sources:
   llms_txt:
-    - https://docs.astral.sh/ruff/llms.txt
-    - https://docs.astral.sh/ty/llms.txt
-    - https://docs.astral.sh/uv/llms.txt
-    - https://cursor.com/llms.txt
+  - https://docs.astral.sh/ruff/llms.txt
+  - https://docs.astral.sh/ty/llms.txt
+  - https://docs.astral.sh/uv/llms.txt
+  - https://cursor.com/llms.txt
   deepwiki_ask:
-    - astral-sh/ruff · astral-sh/uv · ast-grep/ast-grep · semgrep/semgrep
-    - charmbracelet/bubbletea · spf13/cobra · hashicorp/go-plugin
-    - ruby/ruby · babashka/babashka · clojure/clojure
-    - TNG/ArchUnit · gradle/gradle · elixir-lang/elixir · livebook-dev/livebook
-    - bytecodealliance/wasmtime · extism/extism
-    - modelcontextprotocol/typescript-sdk
+  - astral-sh/ruff · astral-sh/uv · ast-grep/ast-grep · semgrep/semgrep
+  - charmbracelet/bubbletea · spf13/cobra · hashicorp/go-plugin
+  - ruby/ruby · babashka/babashka · clojure/clojure
+  - TNG/ArchUnit · gradle/gradle · elixir-lang/elixir · livebook-dev/livebook
+  - bytecodealliance/wasmtime · extism/extism
+  - modelcontextprotocol/typescript-sdk
   mcp: https://mcp.deepwiki.com/mcp
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: who installs what — agent · repo · developer

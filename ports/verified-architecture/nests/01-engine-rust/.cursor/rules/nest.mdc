@@ -1,0 +1,19 @@
+---
+description: Nest context for Rust engine — path-scoped; do not load other nests
+globs:
+  - nests/01-engine-rust/**
+  - ports/verified-architecture/nests/01-engine-rust/**
+alwaysApply: false
+---
+
+# Nest: Rust engine
+
+When files under `nests/01-engine-rust/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0007, ADR-0004.
+3. Owns: Source Code Index Protocol decode, resolve, LockCheck, receipts, wasmtime host.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

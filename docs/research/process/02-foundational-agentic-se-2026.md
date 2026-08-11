@@ -1,21 +1,19 @@
 ---
-segment: 02
+segment: 2
 title: Foundational vs Agentic SE taxonomy (2026)
 branch: wave1-gates-untrusted-tree-hygiene
 status: RESEARCH COMPLETE — segment SoT for taxonomy / layers / Embody·Adopt·Refuse
-research date: 2026-08-08
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-08'
+claim_tiers: Evidenced / Confirmed / Unknown
 siblings:
-  - docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
-  - docs/research/coverage-quality/03-scientific-dimensions-metrics.md
-  - docs/research/process/04-implementation-frameworks.md
-  - docs/research/process/05-dynamics-neuromorphic.md
+- docs/research/coverage-quality/01-coverage-oracle-climb-solid.md
+- docs/research/coverage-quality/03-scientific-dimensions-metrics.md
+- docs/research/process/04-implementation-frameworks.md
+- docs/research/process/05-dynamics-neuromorphic.md
 related:
-  - docs/design/coverage-measure-modes-design-2026-08-08.md
-  - docs/agentic-foundational-se-taxonomy-2026-08-08.md
-  - claude/research/s-stf-a-spec-kit-runners-adr-2026-08-08.md
-  - claude/research/s-stf-b-openspec-deltas-adr-2026-08-08.md
+- docs/design/coverage-measure-modes-design-2026-08-08.md
 do_not: implement dual-mode; own segment-03 scorecards or segment-04 framework catalog
+last_reviewed: '2026-08-10'
 ---
 
 # Segment 02 — Foundational vs Agentic SE taxonomy (2026)

@@ -1,0 +1,29 @@
+{
+  "plant_id": "FX-MCP-06",
+  "usage_case": "index freshness",
+  "prompt_fuzzy": "Open a snapshot requiring a fresh index after sources changed without rebuild.",
+  "checkpoints": [
+    {
+      "id": "c1",
+      "kind": "tool_effect",
+      "equivalence_set": ["snapshot_open"],
+      "arg_constraint": {
+        "required": ["target_root"],
+        "properties": { "require_index": { "const": true } }
+      }
+    },
+    {
+      "id": "c2",
+      "kind": "value_produced",
+      "from_tool": "snapshot_open",
+      "path": "$.reject_class",
+      "enum": ["index_stale", "index_missing"],
+      "via_isError": true
+    }
+  ],
+  "minefields": [
+    { "id": "m1", "kind": "nearest_upload_soft_pass" },
+    { "id": "m2", "kind": "success_with_stale_index" }
+  ],
+  "partial_order": []
+}

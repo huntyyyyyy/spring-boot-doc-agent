@@ -1,0 +1,19 @@
+---
+description: Nest context for Ruby locks — path-scoped; do not load other nests
+globs:
+  - nests/03-locks-ruby/**
+  - ports/verified-architecture/nests/03-locks-ruby/**
+alwaysApply: false
+---
+
+# Nest: Ruby locks
+
+When files under `nests/03-locks-ruby/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0003.
+3. Owns: Packwerk-shaped lock DX; Intermediate Representation shared.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

@@ -1,21 +1,21 @@
 ---
 title: Cold product BC research map — beyond E-OAS0 (2026-08-10)
 status: ACTIVE portfolio — Spec seeds DRAFT; no Implement without per-epic Approve
-research date: 2026-08-10
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-10'
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI doc-engine + Stage-0 + thin MCP + certification
 related:
-  - docs/research/quality-backlog.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
-  - docs/research/process/15-legacy-remediation-spec-gate-2026.md
-  - docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
+- docs/research/quality-backlog.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
+- docs/research/cold-bc-domain-subdomain-taxonomy-2026-08-10.md
 do_not:
-  - implement from this map without a named Spec Approve
-  - add more process/ Specs for product BCs (process/ already overcrowded)
-  - unattended AI merge / embedding citation SoT / rich CI SoT
-  - invent universal OS/terminal emulator as merge SoT
+- implement from this map without a named Spec Approve
+- add more process/ Specs for product BCs (process/ already overcrowded)
+- unattended AI merge / embedding citation SoT / rich CI SoT
+- invent universal OS/terminal emulator as merge SoT
 human_review_floor: true
+last_reviewed: '2026-08-10'
 ---
 
 # Cold product BC research map (portfolio)

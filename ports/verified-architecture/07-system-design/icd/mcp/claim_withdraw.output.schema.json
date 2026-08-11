@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/claim-withdraw-output-0.1.json",
+  "title": "claim_withdraw.output",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dispositions"
+      ],
+      "properties": {
+        "dispositions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim_id",
+              "disposition",
+              "freshness"
+            ],
+            "properties": {
+              "claim_id": {
+                "$ref": "common.schema.json#/$defs/claimId"
+              },
+              "disposition": {
+                "enum": [
+                  "unaffected",
+                  "affected",
+                  "unprovable"
+                ]
+              },
+              "freshness": {
+                "enum": [
+                  "fresh",
+                  "stale",
+                  "unknown"
+                ]
+              },
+              "artifact_disposition": {
+                "enum": [
+                  "retain",
+                  "withdraw"
+                ],
+                "description": "Independent of claim disposition (Artifact-Anchored Verification Memory DISP)"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$ref": "common.schema.json#/$defs/toolError"
+    }
+  ]
+}

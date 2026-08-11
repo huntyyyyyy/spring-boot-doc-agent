@@ -1,28 +1,29 @@
 ---
 title: E-GND0 — Tip-grounding MCP (extend query isolation; refuse remote codegen)
 status: DRAFT Spec — pending Approve of GND1–GND10
-research date: 2026-08-09
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`) + Cursor tip agents
 related:
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/design/codegen-quality-dimensions-design-2026-08-09.md
-  - docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
-  - src/doc_engine/query/mcp_tools.py
-  - adapters/mcp/server.py
-  - docs/research/quality-backlog.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/design/codegen-quality-dimensions-design-2026-08-09.md
+- docs/research/archive/claude-lore/research/s-stf-e-mcp-isolation-adr-2026-08-08.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
+- src/doc_engine/query/mcp_tools.py
+- adapters/mcp/server.py
+- docs/research/quality-backlog.md
 do_not:
-  - add generate_code / apply_patch / write_file MCP tools
-  - accept caller-supplied root (confused deputy)
-  - replace Cursor tip writer with MCP host as default codegen brain
-  - Adopt Spec Kit WorkflowEngine runtime
-  - Implement tip-grounding tools before E-CGQ0 Approve + this Spec Approve
+- add generate_code / apply_patch / write_file MCP tools
+- accept caller-supplied root (confused deputy)
+- replace Cursor tip writer with MCP host as default codegen brain
+- Adopt Spec Kit WorkflowEngine runtime
+- Implement tip-grounding tools before E-CGQ0 Approve + this Spec Approve
 spec_gate: DRAFT E-GND0 (2026-08-09) — GND1–GND10 pending Approve
 depends_on: E-CGQ0 Approve (CGQ1–CGQ10) before E-GND1 Implement
-gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue"
+gh_sor_bar: ≥10000★ for new external SoR; Confirmed pins Embody-continue
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: tip-grounding MCP (long-term reach)

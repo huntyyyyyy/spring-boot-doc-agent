@@ -1,0 +1,24 @@
+# Docs-only CI — no product code builds
+name: docs
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  links-and-presence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Required planning paths exist
+        run: |
+          test -f docs/requirements/strs.md
+          test -f docs/requirements/srs.md
+          test -f docs/requirements/qas.md
+          test -f docs/constraints/constraints.md
+          test -f docs/c4/01-context.md
+          test -f docs/c4/02-containers.md
+          test -f docs/adr/README.md
+          test -f CONTRIBUTING.md
+          test ! -d crates
+          test ! -d src
+          echo "OK: planning tree present; no product code dirs"

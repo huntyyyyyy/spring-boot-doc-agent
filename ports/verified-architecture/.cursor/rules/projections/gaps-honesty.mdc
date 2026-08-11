@@ -1,0 +1,17 @@
+---
+description: Research gaps / honesty pack — pull when promoting Adopt or auditing shallow decisions
+alwaysApply: false
+---
+
+# Projection: research gaps
+
+Catalog: `research/INDEX.md`. Prefer **one** gap file.
+
+Priority opens:
+
+1. `research/gaps/shallow-decisions-honesty-2026-08-10.md`
+2. `research/gaps/port-mdc-projection-rust-wasm-2026-08-11.md`
+3. `research/gaps/frontmatter-forced-traversal-mcp-2026-08-10.md`
+4. `research/gaps/spec-corpus-mcp-polyglot-2026-08-10.md`
+
+Bodies stay Markdown. This rule only points.

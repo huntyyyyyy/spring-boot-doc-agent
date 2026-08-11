@@ -1,12 +1,15 @@
 ---
 category: CI / test adequacy markers / anti-padding Verify
 status: APPROVED — SPEC GATE E-QA0 (2026-08-09)
-research date: 2026-08-09
+date: '2026-08-09'
 approved_policies: Q1-Q8
 implement_now: E-QA1 E-QA2
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 research: docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
 synthesis: docs/research/se-quality-synthesis-2026-08-08.md
+title: 'Design memo: test adequacy markers (E-QA)'
+related: []
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: test adequacy markers (E-QA)

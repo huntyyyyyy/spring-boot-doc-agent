@@ -33,12 +33,16 @@ Hard invariants for every change. Details live in linked SoTs — do not weaken 
 ## Process (SDD)
 
 - **Spec → Implement → Verify → Archive**; one active tip writer; no force-push tip thrash
+- Design-shaped work: skill **principal-se-research-epic** Phase A (**paper-digest**
+  type+sections+refs + GitHub anti-bogus) before Bloom Create / Implement
 - Prefer strategies/ports (OCP) over if/elif gods; vertical/concept slices (DDD)
 - Refuse by default: in-tree Rust (unless profiled), PIT operator zoo, ECS/mesh/Backstage theater
 - Path/task scoping SoT = Project Rules **MDC globs** — do **not** add nested `AGENTS.md` as a second path SoT
 
 @docs/research/se-quality-synthesis-2026-08-08.md
 @docs/research/quality-backlog.md
+@docs/research/method/paper-digest-framework.md
 @adapters/claude/SEARCH.md
 @CLAUDE.md
 @.cursor/skills/principal-se-research-epic/SKILL.md
+@.cursor/skills/paper-digest/SKILL.md

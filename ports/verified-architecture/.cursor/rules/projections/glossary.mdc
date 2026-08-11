@@ -1,0 +1,20 @@
+---
+description: Whole-words glossary — auto when editing port prose Markdown
+globs:
+  - GLOSSARY.md
+  - ports/verified-architecture/GLOSSARY.md
+  - ports/verified-architecture/**/*.md
+  - AGENT_BOOTSTRAP.md
+  - AGENT_WALKTHROUGH.md
+  - STATUS.md
+  - STRUCTURE.md
+alwaysApply: false
+---
+
+# Projection: GLOSSARY
+
+SoT: `GLOSSARY.md`.
+
+1. Prefer whole words in new/edited prose.
+2. Expand short path labels on first mention.
+3. Do not invent bare short labels in Architecture Decision Records or research memos.

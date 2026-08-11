@@ -9,7 +9,6 @@ epub_anchors:
 related: [replication-lag-and-lww, transactions-and-integrity-lite, sor-vs-derived]
 last_refined: 2026-07-30
 path: domains/06-consistency-and-coordination/concepts/consistency-and-consensus-lite.md
-
 ---
 
 # Consistency and consensus (lite)

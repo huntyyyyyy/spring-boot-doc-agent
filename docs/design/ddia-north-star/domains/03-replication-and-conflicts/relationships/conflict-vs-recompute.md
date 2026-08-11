@@ -6,7 +6,6 @@ tags: [relationship, conflict, lww]
 related: [replication-lag-and-lww, sor-vs-derived, rel-sor-feeds-views, effective-remedies]
 last_refined: 2026-08-09
 path: domains/03-replication-and-conflicts/relationships/conflict-vs-recompute.md
-
 ---
 
 # Relationship: conflict vs recompute

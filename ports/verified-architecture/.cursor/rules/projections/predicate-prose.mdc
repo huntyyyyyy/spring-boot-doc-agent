@@ -1,0 +1,13 @@
+---
+description: Predicate prose — pull when Spec text only restates titles or synonyms
+alwaysApply: false
+---
+
+# Projection: predicate prose
+
+Skill: `.cursor/skills/predicate-prose/SKILL.md`  
+Research: `research/gaps/anti-tautology-predicate-prose-2026-08-11.md`
+
+Before shipping a Spec edit: Logical A→B, Semantic predication, Epistemological
+information-gain tests. Delete synonym circles; prefer
+`attribute — bound — fail-mode`.

@@ -1,22 +1,24 @@
 ---
 category: Concept-split cohesion / tach-aligned modularity
 status: APPROVED — SPEC GATE E-COH0 (2026-08-09) — merge Approve of COH1–COH12
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
-  - docs/research/process/15-legacy-size-remediation-2026-frameworks.md
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
-  - docs/research/quality-backlog.md
-  - tach.toml
+- docs/research/bounded-contexts/20-tach-dependency-blueprint-2026.md
+- docs/research/process/15-legacy-size-remediation-2026-frameworks.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
+- docs/research/quality-backlog.md
+- tach.toml
 do_not:
-  - resume LOC/statement thrash that fails the COH cohesion bar
-  - treat façade re-export of private `_` helpers as a finished interface
-  - name modules residual bins (basic, misc, part2, helpers, inventory_drift grab-bags)
-  - dual-wire import-linter + tach without LEG-S1
-  - raise LOC/statement/complexipy ceilings to clear debt
+- resume LOC/statement thrash that fails the COH cohesion bar
+- treat façade re-export of private `_` helpers as a finished interface
+- name modules residual bins (basic, misc, part2, helpers, inventory_drift grab-bags)
+- dual-wire import-linter + tach without LEG-S1
+- raise LOC/statement/complexipy ceilings to clear debt
 spec_gate: APPROVED E-COH0 (2026-08-09) — COH1–COH12
+title: 'Design memo: cohesion-first concept splits (post-MOD-S1 tip audit)'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: cohesion-first concept splits (post-MOD-S1 tip audit)
@@ -143,7 +145,7 @@ Research: [`modularity/21-coh1-public-surface-fitness-2026.md`](../research/modu
 | 1 | `local_runner_phases/support.py` | Private `__all__` warehouse + residual name | **Deleted**; callers → concept modules |
 | 2 | `tools/semantic_eval_helpers.py` | Residual `helpers` + private warehouse | Public shim; new `semantic_eval.py` façade |
 | 3 | `inventory_drift.py` | Residual bin (3 concepts) | Split → `runner_argv` / `artifact_inventory` / `drift_check_phase` |
-| 4 | `registry_hooks_basic.py` | Residual `basic` | **Deferred** (next COH1-2) |
+| 4 | `registry_hooks_basic.py` | Residual `basic` | **Renamed** → `registry_hooks_rate_measures.py` (E-MD0 tip / E-COH1) |
 | 5 | MOD tool façades (`run_manifest`, …) | Private `__all__` | Deferred; fitness list expandable |
 
 ### CGQ3 Accept (slice shipped)

@@ -1,18 +1,21 @@
 ---
 category: Local pre-push git hook / first-line quality
-status: APPROVED — SPEC GATE E-HOOK0 (2026-08-09) — merge Approve of HOOK1–HOOK12 (modern-landscape amendment)
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+status: APPROVED — SPEC GATE E-HOOK0 (2026-08-09) — merge Approve of HOOK1–HOOK12
+  (modern-landscape amendment)
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/27-local-pre-push-hook-2026.md
-  - scripts/ci/pre_pr.py
-  - .githooks/pre-push
-  - docs/design/quality-policy-setpoints-design-2026-08-09.md
+- docs/research/process/27-local-pre-push-hook-2026.md
+- scripts/ci/pre_pr.py
+- .githooks/pre-push
+- docs/design/quality-policy-setpoints-design-2026-08-09.md
 do_not:
-  - make Sonar fail_under / merge SoT
-  - require remote Actions to discover complexipy/size/jscpd/tach failures
-  - grow pre_pr into a god file — extract suite helpers
+- make Sonar fail_under / merge SoT
+- require remote Actions to discover complexipy/size/jscpd/tach failures
+- grow pre_pr into a god file — extract suite helpers
 spec_gate: APPROVED E-HOOK0 (2026-08-09) — HOOK1–HOOK12
+title: 'Design memo: local pre-push as first-line quality'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: local pre-push as first-line quality

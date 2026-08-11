@@ -6,7 +6,6 @@ tags: [deviation, semgrep, ratchet, fp]
 related: [coverage-gates, trust-but-verify-and-auditability, schema-evolution-and-data-outlives-code]
 last_refined: 2026-07-30
 path: deviations/dev-fp-ratchet-separate-from-recall.md
-
 ---
 
 # Deviation: FP ratchet is separate and inverted from recall — no invented recall baseline

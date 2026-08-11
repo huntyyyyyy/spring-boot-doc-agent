@@ -1,24 +1,29 @@
 ---
-title: E-STK0 — Watch/stalker agents (findings → research → refactor) without context bloat
+title: E-STK0 — Watch/stalker agents (findings → research → refactor) without context
+  bloat
 status: E-STK0 APPROVED (2026-08-09) — merge Approve of STK1–STK10
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
-product: Meta-repo process SoR + optional Cursor/CI watch agent — not doc-engine kernel SoT
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
+product: Meta-repo process SoR + optional Cursor/CI watch agent — not doc-engine kernel
+  SoT
 related:
-  - docs/design/suite-stalking-sensors-design-2026-08-09.md
-  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
-  - docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
+- docs/design/suite-stalking-sensors-design-2026-08-09.md
+- docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
+- docs/research/process/18-docs-research-taxonomy-claude-consolidation-2026.md
 do_not:
-  - replace deterministic oracle / suite sensors with an always-on LLM chat
-  - accumulate raw tool logs as research SoT (chat-dump refuse DOC12)
-  - treat commercial “mend” SaaS or GitHub repos under **1000★** as implement SoR
-  - schedule CompactionRL / weight training as a product dependency
-  - adopt `riponcm/projectmem` (≈579★) or `Acquarts/ai-repo-health-agent` (0★) as merge SoR
-  - adopt agentmemory / context-mode / prime-agent as product dependencies or default hosts
-  - treat ≥1k★ + recent push as automatic Adopt (discernment §5.1 required)
+- replace deterministic oracle / suite sensors with an always-on LLM chat
+- accumulate raw tool logs as research SoT (chat-dump refuse DOC12)
+- treat commercial “mend” SaaS or GitHub repos under **1000★** as implement SoR
+- schedule CompactionRL / weight training as a product dependency
+- adopt `riponcm/projectmem` (≈579★) or `Acquarts/ai-repo-health-agent` (0★) as merge
+  SoR
+- adopt agentmemory / context-mode / prime-agent as product dependencies or default
+  hosts
+- treat ≥1k★ + recent push as automatic Adopt (discernment §5.1 required)
 spec_gate: APPROVED E-STK0 (2026-08-09) — STK1–STK10
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: stalker-shaped watch agents (mid-2026)

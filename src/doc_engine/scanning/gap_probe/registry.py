@@ -5,7 +5,7 @@ and implementing the callable in its domain module — ``report.build_gap_report
 stays closed to unrelated churn. Schema keys (``R_sym``, …) remain the encoding
 SoR via ``RateKey``.
 
-Concept modules: ``registry_types``, ``registry_hooks_basic``,
+Concept modules: ``registry_types``, ``registry_hooks_rate_measures``,
 ``registry_hooks_absence_recall``, ``registry_assembly``. This façade keeps the
 stable ``gap_probe.registry`` import path.
 """

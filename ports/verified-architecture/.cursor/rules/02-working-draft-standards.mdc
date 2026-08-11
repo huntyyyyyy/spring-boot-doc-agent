@@ -1,0 +1,31 @@
+---
+description: Working draft standards when editing requirements, constraints, governance, or standards
+globs:
+  - docs/standards/**
+  - docs/requirements/**
+  - docs/constraints/**
+  - 00-governance/**
+  - 03-requirements/**
+  - 04-constraints/**
+  - ports/verified-architecture/docs/standards/**
+  - ports/verified-architecture/docs/requirements/**
+  - ports/verified-architecture/docs/constraints/**
+  - ports/verified-architecture/00-governance/**
+  - ports/verified-architecture/03-requirements/**
+  - ports/verified-architecture/04-constraints/**
+alwaysApply: false
+---
+
+# Working draft under industry standards
+
+Status may say Draft/Proposed (**content** maturity). Standards **form** is required.
+
+| Practice | Binding |
+| --- | --- |
+| ISO/IEC/IEEE 29148-shaped requirements engineering | Stakeholder / Software Requirements shape; implementation-free requirement text |
+| Architecture Tradeoff Analysis Method | Six-part Quality Attribute Scenario before Design influence |
+| Nygard Architecture Decision Record | Context / Decision / Status / Consequences |
+| Decision Framework | Six vectors + usage + locus + rejected alternatives; research-depth gate before Accept |
+| Whole words | `GLOSSARY.md` |
+
+Do not soft-pass Definition of Ready with schema file counts.

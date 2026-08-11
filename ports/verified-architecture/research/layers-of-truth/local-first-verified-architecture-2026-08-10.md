@@ -1,0 +1,242 @@
+---
+title: VA — Local-first verified architecture agent (Layers of Truth)
+status: DRAFT vision — Could / incomplete Create (not D0; not Implement)
+date: 2026-08-10
+epic: VA
+claim_tiers: Evidenced / Confirmed / Unknown
+bloom_gate: required-through-create
+bloom_mcp:
+  - deepwiki_ask_question
+  - llms_txt
+related:
+  - research/mdc-devex/
+  - research/polyglot/
+  - research/mdc-devex/
+  - research/adversarial/adversarial-ddia-solid-polyglot-2026-08-10.md
+  - research/adversarial/re-master-adversarial-critique-2026-08-10.md
+  - research/polyglot/pilot-mental-models-polyglot-lanes-2026-08-10.md
+  - research/atam-formal/atam-qas-adr-formal-boundaries-2026-08-10.md
+  - research/polyglot/full-polyglot-product-portfolio-2026-08-10.md
+  - docs/requirements/
+  - docs/adr/README.md
+  - docs/adr/adr-0001-polyglot-first-product.md
+
+  - .cursor/rules/00-constitution.mdc
+do_not:
+  - Dual-write coverage.xml from two writers without cutover Architecture Decision Record
+  - Claim Source Code Index Protocol alone resolves Spring @Primary/@Qualifier/profiles
+  - Equate WebAssembly with mathematical proof (Z3/Kani are proof; WebAssembly is sandbox)
+  - Water product down to Python-only — full polyglot is identity (Architecture Decision Record ADR-0001)
+  - Treat Duck.ai chat as Evidenced Source of Truth — inspiration only
+  - Treat this memo as Software Requirements Specification — cite docs/requirements/ for REQ-*
+
+sources:
+  github:
+    - https://github.com/sourcegraph/scip-java
+    - https://github.com/scip-code/scip
+    - https://github.com/tree-sitter/tree-sitter
+    - https://github.com/princeton-nlp/SWE-agent
+    - https://github.com/Z3Prover/z3
+    - https://github.com/model-checking/kani
+  deepwiki_ask:
+    - github/docs · quarto-dev/quarto-cli (prior sessions; FM/locks patterns)
+  web:
+    - duck.ai Gemma transcript 2026-08-10 (inspiration — Unknown tier)
+  mcp: https://mcp.deepwiki.com/mcp
+---
+
+# VA — Local-first verified architecture agent
+
+**Historical / evidence — not product SoT.** Tip-Python / ACI / “Pilot-before-Refuse”
+rows below predate Architecture Decision Record ADR-0001 amend. **Product locks:**
+**Rust** Spec / engine host; **Refuse Python**; WebAssembly **Could** (sandbox ≠ proof).
+
+**Product framing:** polyglot verified architecture + Retrieval-Augmented Generation/MDC
+progressive disclosure (planning corpus only).  
+**Ambition:** Source Code Index Protocol → local SCM → graph verify → (optional) SMT —
+more precise than chat-only agents, more flexible than a pure verifier. Engine DNA =
+**Rust** (ADR-0007), not Python ACI.
+
+**Method note.** Shape inspired by Duck.ai / Gemma (`[Unknown — chat]`); corrected
+against constitution + polyglot memos. Body “Keep Python tip” language = historical.
+
+---
+
+## 0. One-page verdict
+
+| Layer | Question | Tools | Merge Source of Truth? |
+| --- | --- | --- | --- |
+| **L1 Where** | Where is it? What shape? Who refs it? | ast-grep (fast) · tree-sitter · **Source Code Index Protocol** | Index System of Record (sensor) |
+| **L1b Wire** | Which bean binds here? | Annotation registry + Source Code Index Protocol types + **Spring resolve** | Graph System of Record (sensor→gate) |
+| **L2 How** | Is this change allowed? | `.mdc` / locks · claims · E-MD0 FM | **Policy Source of Truth** |
+| **L3 Proof** | Can we refute a property? | Z3 / Kani (Rust) · CodeQL queries | Optional proof System of Record |
+| **Sandbox** | Where does untrusted check run? | **WebAssembly** (validator harness) | Not a prover |
+
+**v1 Accept (pragmatic):** virtual Spring/dep **graph** + lock checks + proof-tour
+receipts. **Defer** full Z3 bean “proofs.” **Refuse Python** tip/ACI for this port
+(historical “Keep Python tip until cutover” rows below).
+
+**Requirements System of Record:**
+[`docs/requirements/`](../../design/docs/requirements-2026-08-10.md)
+(Stakeholder Requirements Specification / MoSCoW Software Requirements Specification / Requirements Traceability Matrix). Tours below are product sketches; **Must** capabilities
+are only those tagged Must in the RE package (`REQ-F-01…09`, `REQ-N-01…03/05/06`).
+
+---
+
+## 0b. Bloom ladder
+
+| Level | Evidence |
+| --- | --- |
+| **1 Remember** | scip-java, tree-sitter, SWE-agent ACI, Z3, Kani, LanceDB, Glean-as-pattern |
+| **2 Understand** | Spring Dependency Injection ≠ Java symbols; WebAssembly ≠ SMT; sg is fast path inside L1 |
+| **3 Apply** | Pilot: `scip-java index` on corpus/OCS → SQLite registry → cycle/layer gate |
+| **4 Analyze** | Embody wheels/sg; Pilot Rust analyzer + Source Code Index Protocol; Pattern SWE-agent loop; Defer Z3 |
+| **5 Evaluate** | §6 adversarial |
+| **6 Create** | VA tickets below — Implement blocked until Approve |
+
+---
+
+## 1. Layers of Truth (pyramid)
+
+### L1 — Where (navigation / retrieval)
+
+- **ast-grep:** high-speed filter, Stage-0 fire, lock patterns that are pure shape.  
+- **tree-sitter:** CST for large Java; prune to semantic summaries (methods + annotations).  
+- **Source Code Index Protocol:** defs/refs/impls across huge trees — “exactly where is this symbol?”
+
+**If removed:** agent is blind / keyword-Retrieval-Augmented Generation only.
+
+### L1b — Wire (virtual Spring graph) `[Confirmed gap today]`
+
+sg finds `@Service` / `@Autowired`; it does **not** answer “bean for
+`UserService` is `UserServiceImpl` under these qualifiers.”
+
+Static model (not a JVM):
+
+1. Annotation scan → bean registry (SQLite)  
+2. Injection sites → Source Code Index Protocol **requested type**  
+3. Resolve (Rust/Python): impls ∩ stereotypes ∩ `@Primary`/`@Qualifier`/`@Bean`  
+4. Edges → **virtual dependency graph** (Unknown when ambiguous)
+
+Source Code Index Protocol is **substrate**; Spring resolve is **extra**.
+
+### L2 — How (intent / policy)
+
+Locks / `.mdc`: e.g. controllers call services, not repositories. Same rules for
+**AI and humans** (Language Server Protocol red squiggle). Git is lock System of Record; engines sync locks, **not**
+the vector/Source Code Index Protocol blob.
+
+### L3 — Proof (optional)
+
+- **Z3:** counterexamples on **encoded** FOL (business invariants).  
+- **Kani:** model-check **Rust** engine code.  
+- **CodeQL:** query-as-existence proof for vuln/pattern classes.  
+
+WebAssembly runs the **translator/validator** in a sandbox; it does **not** prove beans.
+
+### Synergy loop
+
+`Discovery (sg/SCIP)` → `Reason (LLM)` → `Act (ACI/edit)` →  
+`Verify (graph + locks [+ SMT])` → `Correct` → **Proof tour** receipt.
+
+---
+
+## 2. Bells (product tours)
+
+| Tour | Intent |
+| --- | --- |
+| **Proof tour** | Clickable steps: lock → graph edge → snippet → formula |
+| **Ghost prefetch** | Cursor predicts files; preload AST/Source Code Index Protocol/locks; Cmd+K feels instant |
+| **Red squiggle** | Language Server Protocol runs same locks on human typing |
+| **Lock sync** | `.mdc` in git; teammates’ engines refresh rules only |
+| **Polyglot bell** | Cross-lang Source Code Index Protocol/bridges (Java API ↔ TS fetch); “what breaks FE?” |
+
+---
+
+## 3. Moats (pillar gap)
+
+| Pillar | Has | Lacks |
+| --- | --- | --- |
+| Sourcegraph/Source Code Index Protocol | Index | Local-first agent + locks loop |
+| SWE-agent / Devin-likes | Reason→act loop | Local SCM + formal/structural locks |
+| CodeQL / Kani / Z3 | Proof/query | Agent + Spring graph ACI |
+| Ollama / LanceDB | Local model/vectors | AST/Source Code Index Protocol truth |
+
+**Glue:** local Source Code Index Protocol/SCM + virtual Spring graph + living locks + explainable verify
+(+ optional SMT). Working name: **local-first verified architecture agent**.
+
+---
+
+## 4. Repo shape (target — not tip thrash)
+
+Inspired by local-intelligence-engine sketches; map onto **this** monorepo later:
+
+| Dir | Role | Language |
+| --- | --- | --- |
+| `core-engine/` / `java-analyzer` | Parse, registry, resolve, graph checks | Rust Pilot |
+| `wasm-runtime/` | Sandboxed validator | Rust→WebAssembly |
+| `ai-orchestrator/` | command-line interface/ACI/Model Context Protocol/Retrieval-Augmented Generation | **Python tip today** |
+| `specs/` / `.cursor/rules` | Locks | MDC + schemas |
+| `plugins/` | Optional Go daemon / Clojure graph | Pilot |
+
+Python remains `coverage.xml` / claims writer until **named cutover Approve**.
+
+---
+
+## 5. Embody / Pilot / Defer
+
+| Item | Stance |
+| --- | --- |
+| Keep Stage-0 ast-grep + Python tip | **Embody** |
+| scip-java → SQLite registry + resolve + cycle/layer gate | **Pilot now** |
+| Proof-tour JSON receipts | **Pilot now** |
+| PyO3 / Rust crate for hot parse | **Pilot** after hotspot measure |
+| WebAssembly validator harness | **Pilot** with graph checks (not SMT) |
+| Language Server Protocol red squiggles | **Pilot later** |
+| Ghost prefetch + LanceDB | **Pilot later** |
+| Z3 business FOL | **Defer** until locks are formulas |
+| Kani on Rust engine | **Defer** until Rust owns hot path |
+| Replace tip kernel with Rust daemon | **Approve-gated cutover only** |
+
+---
+
+## 6. Adversarial
+
+| Failure | Mitigation |
+| --- | --- |
+| Source Code Index Protocol sold as Spring Dependency Injection | L1b resolve + Unknown |
+| WebAssembly sold as proof | Docs + gate naming |
+| Dual Cover% | Constitution; one oracle path |
+| Hallucinated “verified” | Proof tour requires witness IDs or fail |
+| Index sync via git | Locks only; rebuild Source Code Index Protocol locally |
+
+---
+
+## 7. Create — tickets (Approve before Implement)
+
+Prereq: RE package Approve (`REQ-*`) + ADV-1…3 from process/51. Each ticket
+traces to Requirements Traceability Matrix rows in the RE file.
+
+| ID | Ticket | REQ trace | Acceptance |
+| --- | --- | --- | --- |
+| **VA-1** | Design Spec seam map (modules ≤225) | F-01…09, F-19 | Ports: Index, Registry, Resolve, LockCheck, Receipt |
+| **VA-2** | Spike: scip-java on corpus/OCS | F-10, N-04 | `index.scip` + symbol counts receipt |
+| **VA-3** | Bean registry + ctor/`@Autowired` resolve | F-01, F-02, F-07 | Query: bean for type X → impl or Unknown |
+| **VA-4** | Cycle + layer-lock check | F-03…05, F-11 | Catches controller→repo / A→B→A before merge |
+| **VA-5** | Proof-tour schema | F-06, F-13 | Steps clickable in markdown/JSON |
+| **VA-6** | Optional WebAssembly wrap of LockCheck | F-16 Could | Same Accept as in-process |
+| **VA-7** | Language Server Protocol squiggle Spike | F-12 Should | One lock live in editor |
+| **VA-8** | Polyglot bell Spike | F-15 Could | One Java↔TS bridge via OpenAPI or dual Source Code Index Protocol |
+
+---
+
+## 8. Status
+
+**Draft vision / Could only** — not research-complete for Must-spine, not Bloom
+Create PASS, not Definition of Ready green. Entity digests and exact adopters
+for load-bearing claims live under `research/papers-2026-may-aug/digests/` and
+the adoption audit; this memo does not substitute. Implement remains forbidden
+until Definition of Ready PASS + human Accept. Nest 08 Python peer is
+**REFUSED**; polyglot packaging below is historical pressure, not an Approved
+lane set.
+

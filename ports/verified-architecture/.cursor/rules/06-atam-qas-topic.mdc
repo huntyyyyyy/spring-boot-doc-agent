@@ -1,0 +1,12 @@
+---
+description: Architecture Tradeoff Analysis Method and Quality Attribute Scenarios — pull for non-functional requirements or latency talk
+alwaysApply: false
+---
+
+# Architecture Tradeoff / Quality Attribute Scenario topic
+
+1. Expand adjective non-functional requirements to **six-part** Quality Attribute Scenarios before Design.
+2. Open `docs/standards/quality-attribute-scenarios.md` and `03-requirements/qas/`.
+3. Retrieve **one** pack: `research/atam-formal/` (not the whole tree).
+4. Constraints stay in `04-constraints/` — not requirements.
+5. Math brainstorm Spikes stay **unscheduled** under FREEZE.

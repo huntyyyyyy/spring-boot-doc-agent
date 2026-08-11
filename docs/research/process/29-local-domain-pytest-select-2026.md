@@ -1,18 +1,19 @@
 ---
 title: Local domain pytest selection + fine ABI path shards (2026)
 status: APPROVED — SPEC GATE E-SEL0 (2026-08-09)
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-SEL0
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/local-domain-pytest-select-design-2026-08-09.md
-  - docs/design/test-suite-parallel-domains-design-2026-08-08.md
-  - docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/design/local-domain-pytest-select-design-2026-08-09.md
+- docs/design/test-suite-parallel-domains-design-2026-08-08.md
+- docs/research/coverage-quality/08-rust-test-runners-bottlenecks.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
 do_not:
-  - suite-wide xdist / -n on the 3.11 cov oracle cell
-  - pytest-testmon / RTS that skips merge oracle
-  - Adopt ★-wash selection plugins as SoT
+- suite-wide xdist / -n on the 3.11 cov oracle cell
+- pytest-testmon / RTS that skips merge oracle
+- Adopt ★-wash selection plugins as SoT
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: domain select + fine shards (E-SEL0)

@@ -1,30 +1,31 @@
 ---
 title: E-MDC0 — Cursor MDC rules DevEx (activation algebra, not MD rename)
-status: RESEARCH COMPLETE — Spec Approve (Implement on tip #119 docs/.cursor only)
-date: 2026-08-10
+status: RESEARCH COMPLETE — Spec Approve (Implement on tip
+date: '2026-08-10'
 epic: E-MDC0
 claim_tiers: Evidenced / Confirmed / Unknown
 bloom_gate: required-through-create
 bloom_mcp:
-  - deepwiki_ask_question
-  - llms_txt
+- deepwiki_ask_question
+- llms_txt
 related:
-  - docs/research/process/26-agent-context-markdown-bloat-2026.md
-  - docs/research/process/28-agent-context-algorithm-first-2026.md
-  - .cursor/skills/principal-se-research-epic/SKILL.md
-  - .cursor/skills/cross-domain-isomorphism/SKILL.md
-  - AGENTS.md
-  - DOMAIN_MAP.md
+- docs/research/process/26-agent-context-markdown-bloat-2026.md
+- docs/research/process/28-agent-context-algorithm-first-2026.md
+- .cursor/skills/principal-se-research-epic/SKILL.md
+- .cursor/skills/cross-domain-isomorphism/SKILL.md
+- AGENTS.md
+- DOMAIN_MAP.md
 sources:
   llms_txt:
-    - https://cursor.com/llms.txt
+  - https://cursor.com/llms.txt
   primary_docs:
-    - https://cursor.com/docs/context/rules
-    - https://cursor.com/docs/skills.md
-    - https://cursor.com/docs/hooks.md
+  - https://cursor.com/docs/context/rules
+  - https://cursor.com/docs/skills.md
+  - https://cursor.com/docs/hooks.md
   deepwiki_ask:
-    - https://deepwiki.com/search/how-do-cursor-project-rules-ac_b0a5e245-2e70-4548-81cc-92b94349dba3
+  - https://deepwiki.com/search/how-do-cursor-project-rules-ac_b0a5e245-2e70-4548-81cc-92b94349dba3
   mcp: https://mcp.deepwiki.com/mcp (ask_question)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: optimize MDC DevEx (conditional activation)

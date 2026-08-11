@@ -1,18 +1,20 @@
 ---
 category: Codegen-quality dimensions + remedy-mechanism depth
 status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/research/process/23-concern-to-solution-remedies-2026.md
-  - docs/design/ddia-north-star/meta/effective-remedies.md
-  - docs/research/quality-backlog.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/research/process/23-concern-to-solution-remedies-2026.md
+- docs/design/ddia-north-star/meta/effective-remedies.md
+- docs/research/quality-backlog.md
 do_not:
-  - Accept Specs that only cite DDIA page ids or bare remedy labels
-  - treat Cover% or LLM-judge as generation proof
-  - Implement E-GND1 before E-STK1 green cycle
+- Accept Specs that only cite DDIA page ids or bare remedy labels
+- treat Cover% or LLM-judge as generation proof
+- Implement E-GND1 before E-STK1 green cycle
 spec_gate: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
+title: 'Design memo: E-CGQ0 Spec gate'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: E-CGQ0 Spec gate

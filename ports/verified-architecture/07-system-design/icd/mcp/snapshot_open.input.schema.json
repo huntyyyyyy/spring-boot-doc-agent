@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verified-architecture.local/schemas/mcp/snapshot-open-input-0.1.json",
+  "title": "snapshot_open.input",
+  "description": "Mint a snapshot_id bound to tree + index digests. Required before resolve / claim_withdraw / scoped locks_list.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target_root"
+  ],
+  "properties": {
+    "target_root": {
+      "$ref": "common.schema.json#/$defs/absolutePath"
+    },
+    "require_index": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, reject when index.scip missing or stale vs tree"
+    },
+    "ttl_seconds": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 86400,
+      "default": 3600,
+      "description": "Handle idle TTL; default 1 hour local"
+    }
+  }
+}

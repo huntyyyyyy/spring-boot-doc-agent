@@ -73,9 +73,11 @@ re-reads is `session-log/.pack-order` (not `ls` alpha).
 | [`2026-07-30__un-dark-skip-drift-normalization-certification.md`](2026-07-30__un-dark-skip-drift-normalization-certification.md) | 2026-07-30 → 2026-07-30 | Un-dark-skip drift_normalization; certification Usage docstring | 8 | 215 |
 | [`2026-07-30__2026-08-08__post-merge-status-constraints-l2b-next-l4-still.md`](2026-07-30__2026-08-08__post-merge-status-constraints-l2b-next-l4-still.md) | 2026-07-30 → 2026-08-08 | Post-merge STATUS/CONSTRAINTS: L2b next; L4 still human | 15 | 221 |
 | [`2026-08-08__2026-08-10__size-ratchet-includes-tests-cohesive-test.md`](2026-08-08__2026-08-10__size-ratchet-includes-tests-cohesive-test.md) | 2026-08-08 → 2026-08-10 | Size ratchet includes tests/; cohesive test modularization ≤225 | 25 | 219 |
-| [`2026-08-10__e-ctx0-draft-agent-context-markdown-bloat.md`](2026-08-10__e-ctx0-draft-agent-context-markdown-bloat.md) | 2026-08-10 → 2026-08-10 | E-CTX0 draft: agent context / markdown bloat research | 18 | 155 |
+| [`2026-08-10__e-ctx0-draft-agent-context-markdown-bloat.md`](2026-08-10__e-ctx0-draft-agent-context-markdown-bloat.md) | 2026-08-10 → 2026-08-10 | E-CTX0 draft: agent context / markdown bloat research | 20 | 171 |
+| [`2026-08-10__principal-research-paper-digest-refactor.md`](2026-08-10__principal-research-paper-digest-refactor.md) | 2026-08-10 → 2026-08-10 | Refactor principal research skill for paper digests | 1 | 10 |
+| [`2026-08-11__semantic-adversarial-review-hooks.md`](2026-08-11__semantic-adversarial-review-hooks.md) | 2026-08-11 → 2026-08-11 | Semantic adversarial-review hooks (if→then, not scoreboards) | 1 | 10 |
 
-**Totals:** 150 entries → 27 shards; max 221 lines;
+**Totals:** 154 entries → 29 shards; max 221 lines;
 over-budget 0.
 
 ## How to append

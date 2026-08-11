@@ -1,26 +1,29 @@
 ---
 title: E-TACH0 — Dependency-map-as-blueprint (modern enforcement, Jun–Aug 2026)
 status: DRAFT Spec — pending Approve of TACH1–TACH10
-research date: 2026-08-09
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
-product: Python CLI modular monolith (`doc_engine` + `stf`) — tach already cycle-gates; finer map Spec-gated
+claim_tiers: Evidenced / Confirmed / Unknown
+product: Python CLI modular monolith (`doc_engine` + `stf`) — tach already cycle-gates;
+  finer map Spec-gated
 related:
-  - tach.toml
-  - docs/research/process/15-legacy-size-remediation-2026-frameworks.md
-  - docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
-  - docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - CONTRIBUTING.md
+- tach.toml
+- docs/research/process/15-legacy-size-remediation-2026-frameworks.md
+- docs/research/bounded-contexts/12-pipeline-stage0-modularity-ports-2026.md
+- docs/research/bounded-contexts/16-scan1-astgrep-modularity-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- CONTRIBUTING.md
 do_not:
-  - expand tach.toml with depends_on while pipeline↔scanning / tools crosstalk cycles remain
-  - treat `tach sync` output as Approved architecture without human Spec
-  - dual-wire import-linter + tach without an explicit dual-gate Spec (LEG-S1)
-  - adopt pytestarch / grimp as merge SoR under the ≥1k★ bar
-  - use grab-bag utils/ to “pass” size ceilings
-  - copy Spring Modulith / Nx / Packwerk runtimes into this Python CLI
+- expand tach.toml with depends_on while pipeline↔scanning / tools crosstalk cycles
+  remain
+- treat `tach sync` output as Approved architecture without human Spec
+- dual-wire import-linter + tach without an explicit dual-gate Spec (LEG-S1)
+- adopt pytestarch / grimp as merge SoR under the ≥1k★ bar
+- use grab-bag utils/ to “pass” size ceilings
+- copy Spring Modulith / Nx / Packwerk runtimes into this Python CLI
 spec_gate: DRAFT E-TACH0 (2026-08-09) — TACH1–TACH10 pending Approve
-gh_sor_bar: "≥1000★ and pushed_at within research_window (prefer Releases/CHANGELOG)"
+gh_sor_bar: ≥1000★ and pushed_at within research_window (prefer Releases/CHANGELOG)
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: dependencies as the repository blueprint (Jun–Aug 2026)

@@ -1,20 +1,21 @@
 ---
 title: Local pre-push gate as first-line quality (no remote required)
 status: APPROVED — SPEC GATE E-HOOK0 (2026-08-09) — amended modern-landscape pass
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-HOOK0
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/design/local-pre-push-hook-design-2026-08-09.md
-  - docs/research/process/22-stack-rescope-10k-star-bar-2026.md
-  - docs/research/quality-backlog.md
-  - scripts/ci/pre_pr.py
-  - .githooks/pre-push
+- docs/design/local-pre-push-hook-design-2026-08-09.md
+- docs/research/process/22-stack-rescope-10k-star-bar-2026.md
+- docs/research/quality-backlog.md
+- scripts/ci/pre_pr.py
+- .githooks/pre-push
 do_not:
-  - treat SonarCloud/SonarQube as fail_under / merge SoT
-  - rely on remote Actions as the first discovery of local quality debt
-  - Adopt ★-wash (&lt;10k) local-GHA runners as tip SoT
-  - replace pre_pr suite SoT with “run all of ci.yml via act on every push”
+- treat SonarCloud/SonarQube as fail_under / merge SoT
+- rely on remote Actions as the first discovery of local quality debt
+- Adopt ★-wash (&lt;10k) local-GHA runners as tip SoT
+- replace pre_pr suite SoT with “run all of ci.yml via act on every push”
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: local pre-push hook (E-HOOK0)

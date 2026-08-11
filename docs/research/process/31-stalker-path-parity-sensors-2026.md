@@ -1,18 +1,19 @@
 ---
 title: E-TEL2 — Path-parity stalker sensors (oracle / CodeQL / suite map)
 status: APPROVED — SPEC GATE E-TEL2 (2026-08-09)
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-TEL2
 claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/28-local-stalker-telemetry-etl-2026.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
-  - docs/research/process/30-local-oracle-push-parity-2026.md
+- docs/research/process/28-local-stalker-telemetry-etl-2026.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/ci/17-codeql-signals-skip-fingerprint-2026.md
+- docs/research/process/30-local-oracle-push-parity-2026.md
 do_not:
-  - LLM-as-judge / Bloom Evaluate as merge SoT
-  - OTel/APM as tip SoT
-  - sensors rewriting fail_under
+- LLM-as-judge / Bloom Evaluate as merge SoT
+- OTel/APM as tip SoT
+- sensors rewriting fail_under
+last_reviewed: '2026-08-10'
 ---
 
 # Process research: principal-SE path-parity sensors

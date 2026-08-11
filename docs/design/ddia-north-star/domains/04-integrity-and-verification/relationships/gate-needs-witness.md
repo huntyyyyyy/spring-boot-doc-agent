@@ -6,7 +6,6 @@ tags: [relationship, gate, audit]
 related: [trust-but-verify-and-auditability, coverage-gates, dev-fp-ratchet-separate-from-recall, effective-remedies]
 last_refined: 2026-08-09
 path: domains/04-integrity-and-verification/relationships/gate-needs-witness.md
-
 ---
 
 # Relationship: gate needs witness

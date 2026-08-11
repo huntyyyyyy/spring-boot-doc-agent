@@ -1,20 +1,22 @@
 ---
 category: Concern→solution remedies (DDIA vocabulary → effective mechanisms)
 status: DRAFT — SPEC GATE E-SOL0 pending Approve of SOL1–SOL12
-research date: 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+date: '2026-08-09'
+claim_tiers: Evidenced / Confirmed / Unknown
 related:
-  - docs/research/process/23-concern-to-solution-remedies-2026.md
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/design/codegen-quality-dimensions-design-2026-08-09.md
-  - docs/design/ddia-north-star/INDEX.md
-  - docs/design/ddia-north-star/meta/effective-remedies.md
-  - docs/research/quality-backlog.md
+- docs/research/process/23-concern-to-solution-remedies-2026.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/design/codegen-quality-dimensions-design-2026-08-09.md
+- docs/design/ddia-north-star/INDEX.md
+- docs/design/ddia-north-star/meta/effective-remedies.md
+- docs/research/quality-backlog.md
 do_not:
-  - Accept Specs that only cite DDIA page ids or bare remedy labels
-  - treat Cover% or LLM-judge as structural fitness
-  - Embody new fitness from catalog ids before E-CGQ0 depth Approve
+- Accept Specs that only cite DDIA page ids or bare remedy labels
+- treat Cover% or LLM-judge as structural fitness
+- Embody new fitness from catalog ids before E-CGQ0 depth Approve
 spec_gate: DRAFT E-SOL0 (2026-08-09) — SOL1–SOL12 pending Approve; depth via E-CGQ0
+title: 'Design memo: E-SOL0 Spec gate'
+last_reviewed: '2026-08-10'
 ---
 
 # Design memo: E-SOL0 Spec gate

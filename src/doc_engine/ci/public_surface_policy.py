@@ -22,11 +22,13 @@ FORBIDDEN_BASENAMES: frozenset[str] = frozenset(
     {
         "support.py",
         "inventory_drift.py",
+        "registry_hooks_basic.py",
     }
 )
 
 FORBIDDEN_PACKAGE_ROOTS: tuple[str, ...] = (
     "src/doc_engine/pipeline/local_runner_phases",
+    "src/doc_engine/scanning/gap_probe",
 )
 
 

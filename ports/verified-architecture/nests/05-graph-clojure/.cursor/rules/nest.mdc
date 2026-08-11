@@ -1,0 +1,19 @@
+---
+description: Nest context for Clojure graph — path-scoped; do not load other nests
+globs:
+  - nests/05-graph-clojure/**
+  - ports/verified-architecture/nests/05-graph-clojure/**
+alwaysApply: false
+---
+
+# Nest: Clojure graph
+
+When files under `nests/05-graph-clojure/` are in context:
+
+1. Read this nest `README.md` only.
+2. Open: Architecture Decision Record ADR-0005.
+3. Owns: bb/Datascript queries — not merge oracle.
+4. Obey constitution FREEZE — no product scaffolds; no unearned Adopt.
+5. Long evidence → Skill `rag-retrieve` + `research/INDEX.md` (**one** pack).
+6. Do **not** open every other nest unless integrating across bounded contexts.
+7. Whole words — root `GLOSSARY.md`.

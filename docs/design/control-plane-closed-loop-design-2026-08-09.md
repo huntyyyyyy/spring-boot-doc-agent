@@ -1,16 +1,18 @@
 ---
 title: Control-plane closed-loop — Spec (E-CPL0)
 status: DRAFT — pending Approve of CPL1–CPL12
-date: 2026-08-09
+date: '2026-08-09'
 epic: E-CPL0
 research: docs/research/process/35-control-plane-closed-loop-2026.md
 related:
-  - docs/design/ddia-north-star/meta/effective-remedies.md
-  - docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
-  - docs/research/process/28-local-stalker-telemetry-etl-2026.md
+- docs/design/ddia-north-star/meta/effective-remedies.md
+- docs/research/process/24-codegen-quality-dimensions-mechanism-depth-2026.md
+- docs/research/process/28-local-stalker-telemetry-etl-2026.md
 do_not:
-  - implement CPL1-2+ fitness package before this Spec is APPROVED
-  - Embody TEE/Nix/SLSA-L3 / Proof-or-Stop daemon as tip SoT
+- implement CPL1-2+ fitness package before this Spec is APPROVED
+- Embody TEE/Nix/SLSA-L3 / Proof-or-Stop daemon as tip SoT
+claim_tiers: Unknown
+last_reviewed: '2026-08-10'
 ---
 
 # Design Spec: control-plane closed-loop (E-CPL0)

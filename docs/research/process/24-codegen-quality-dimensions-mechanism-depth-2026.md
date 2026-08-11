@@ -1,31 +1,32 @@
 ---
 title: E-CGQ0 — Codegen-quality dimensions + remedy-mechanism depth
-status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10; tip-grounding MCP vehicle Explicit Defer (E-GND)
-research date: 2026-08-09
+status: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10; tip-grounding MCP vehicle Explicit
+  Defer (E-GND)
+date: '2026-08-09'
 research_window: 2026-06-01 → 2026-08-09
-claim tiers: Evidenced / Confirmed / Unknown
+claim_tiers: Evidenced / Confirmed / Unknown
 product: Python CLI modular monolith (`doc_engine` + `stf`)
 related:
-  - docs/research/process/23-concern-to-solution-remedies-2026.md
-  - docs/design/ddia-north-star/meta/effective-remedies.md
-  - docs/research/process/25-tip-grounding-mcp-2026.md
-  - docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
-  - docs/research/process/14-facade-poke-research-hooks-2026.md
-  - docs/research/process/19-watch-stalker-agents-context-lean-2026.md
-  - docs/research/se-quality-synthesis-2026-08-08.md
-  - docs/research/quality-backlog.md
+- docs/research/process/23-concern-to-solution-remedies-2026.md
+- docs/design/ddia-north-star/meta/effective-remedies.md
+- docs/research/process/25-tip-grounding-mcp-2026.md
+- docs/research/coverage-quality/09-test-adequacy-vs-coverage-inflation-2026.md
+- docs/research/process/14-facade-poke-research-hooks-2026.md
+- docs/research/process/19-watch-stalker-agents-context-lean-2026.md
+- docs/research/se-quality-synthesis-2026-08-08.md
+- docs/research/quality-backlog.md
 do_not:
-  - Embody new fitness / ETL / characterization nets from remedy *labels* alone
-  - treat Cover% or LLM-as-judge as generation or structural proof
-  - adopt Spec Kit WorkflowEngine / Sonar / dual arch linters as SoT
-  - raise fail_under / LOC / complexipy ceilings
-  - implement E-GND1 before E-STK1 green cycle
+- Embody new fitness / ETL / characterization nets from remedy *labels* alone
+- treat Cover% or LLM-as-judge as generation or structural proof
+- adopt Spec Kit WorkflowEngine / Sonar / dual arch linters as SoT
+- raise fail_under / LOC / complexipy ceilings
+- implement E-GND1 before E-STK1 green cycle
 spec_gate: APPROVED E-CGQ0 (2026-08-09) — CGQ1–CGQ10
-gh_sor_bar: "≥10000★ for new external SoR; Confirmed pins Embody-continue"
-critique: >
-  Human 2026-08-09: (1) remedy labels without theory/math/algo/DS/ETL → vague
-  codegen start; (2) post-hoc CI misses pre-generation dimensions that raise
-  agent code quality.
+gh_sor_bar: ≥10000★ for new external SoR; Confirmed pins Embody-continue
+critique: 'Human 2026-08-09: (1) remedy labels without theory/math/algo/DS/ETL → vague
+  codegen start; (2) post-hoc CI misses pre-generation dimensions that raise agent
+  code quality.'
+last_reviewed: '2026-08-10'
 ---
 
 # Principal memo: codegen quality controls + mechanism depth
