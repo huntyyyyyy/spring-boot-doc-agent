@@ -68,6 +68,7 @@ Stack locks: **Rust** Spec host; **Refuse Python**; WebAssembly **Could**.
 | **Review: cybernetic loop framing** | `research/gaps/review-cybernetic-loop-framing-2026-08-11.md` | Cage+feedback Embody as story; unmeasured control/info claims demote |
 | **Review: Agent OS MVP primitives** | `research/gaps/review-agent-os-mvp-primitives-2026-08-11.md` | Three primitives OK; write-before-gate bug; CAS/Clojure-SOT Refuse |
 | **Review: event-sourced runtime** | `research/gaps/review-event-sourced-runtime-2026-08-11.md` | Gate-before-execute + audit log Embody; log-as-only-SoT / crypto-token Refuse |
+| **Review: DE closing claims** | `research/gaps/review-de-closing-claims-2026-08-11.md` | Capability/gate discipline OK; unforgeable/flawless/provably-correct Refuse |
 | **Review: 2035 horizon vs DE principles** | `research/gaps/review-2035-horizon-vs-de-principles-2026-08-11.md` | Autopilot Could; schema/receipt/thin-thread Embody with SoR corrections |
 | **Review: kernel wireframe** | `research/gaps/review-kernel-wireframe-2026-08-11.md` | Hash-guard/zoom seeds OK; toy receipt / Wasmer-first / Clojure atom SOT Refuse as start |
 | **Port readiness audit (honesty)** | `research/gaps/entity-adoption-audit-2026-08-10.md` | Papers understood vs ≥5 genuine GitHub algorithm adopters — **D0 FAIL** |
