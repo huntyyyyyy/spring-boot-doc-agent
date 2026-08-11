@@ -194,11 +194,11 @@ host pattern; do not read “Adopt pattern” as Adopt of tool semantics.
 | ID | SPIKE-SPEC-Model Context Protocol-0 |
 | --- | --- |
 | Goal | Read-only Spec Model Context Protocol over `ports/verified-architecture` (+ honesty FREEZE) |
-| Host | Python stdio; pin protocol story (`2026-07-28` or explicit legacy Architecture Decision Record) |
+| Host | **Rust** stdio only (`SPIKE-SPEC-MCP-0`); pin `2026-07-28`; **Refuse** Python |
 | Exit keep | Tip agent answers FREEZE/deepen-3 via tools without opening >N files; FX-SPEC-01 forged handle rejects |
 | Exit drop | If tools just wrap `cat` with no size/deny discipline |
-| Out of scope | Rust engine, WebAssembly LockCheck, Go product watch, Ruby/Clojure |
-| Follow-ons (Could) | Rust schema crate; Go corpus watch; WebAssembly sandboxed reader |
+| Out of scope | Product verify tools; Python host/ACI; WebAssembly as Spec host |
+| Follow-ons (Could) | Thin TypeScript facade for Cursor wiring; Go corpus watch; WebAssembly sandboxed reader guest |
 
 Align with E-GND0: **Refuse** codegen / write tools on this server.
 
