@@ -97,9 +97,45 @@ Cursor/VS Code example:
 }
 ```
 
-`--context ide` drops duplicate read/grep/shell in IDEs that already have them.
-`[Evidenced — configuration.html]`. Do **not** attach this to
-`spring-boot-doc-agent` unless that window’s job is the Java plant.
+Neither Claude app has a form that adds a **local** Serena process the way
+Connectors adds Slack. Desktop edits a JSON file; Code uses the CLI, then
+`/mcp` inside the session.
+
+**Claude Desktop (chat app)** `[Evidenced — oraios clients.html; MCP local-servers]`:
+
+1. macOS: menu bar **Claude → Settings** (not the in-chat account gear).
+   Windows: gear → Settings.
+2. Left sidebar **Developer** → **Edit Config**
+   (Serena’s page: File → Settings → Developer → MCP Servers → Edit Config).
+3. That opens `claude_desktop_config.json`:
+   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+4. Put Serena under `mcpServers` with `"command"` = **absolute** path to
+   `serena`, `"args"`: `start-mcp-server`, `--context=desktop-app`,
+   `--project`, plant path, `--mode`, `planning`.
+5. Save. **File → Exit** (window close only minimizes). Reopen.
+6. Hammer icon in the chat = tools loaded.
+
+**Connectors** (Desktop **+** next to the prompt, or Settings → Connectors)
+is for catalog remote servers, not local `serena`.
+`[Evidenced — code.claude.com/docs/en/desktop]`
+
+**Claude Code** `[Evidenced — code.claude.com/docs/en/mcp-quickstart]`:
+
+There is no in-session “Add local server” wizard. In a **terminal**
+(not inside `claude`), from the Java plant:
+
+```bash
+cd /ABS/PATH/TO/ocs-api-service
+claude mcp add --scope user serena -- serena start-mcp-server --context claude-code --project "$(pwd)" --mode planning
+```
+
+Or `serena setup claude-code`. Then start `claude`, type **`/mcp`**, confirm
+`serena` is connected. Toggle/reconnect there; adding is CLI.
+
+Claude Code **desktop** Code tab: Connectors UI is the same catalog. Custom
+stdio still goes through `claude mcp add` / `~/.claude.json`.
+
 
 Smoke (before the 12 questions): “Using Serena `find_symbol`, name one class
 under `src/main/java` with `file:line`.” Empty → Java backend not up (§4), not
