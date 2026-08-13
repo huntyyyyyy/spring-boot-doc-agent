@@ -151,18 +151,36 @@ Serena’s Java backend is **eclipse.jdt.ls**, two modes
 | **Default vscode-java VSIX** | Laptop can reach GitHub + `services.gradle.org` | First Java query downloads JDTLS + bundled JRE 21 + Lombok + Gradle. No extra config. |
 | **Upstream JDTLS** | Corporate / Artifactory / no GitHub | Set **both** `jdtls_path` and `lombok_path`. JDK 21+. Gradle via `./gradlew`. |
 
-OCS is Gradle-shaped. If import fails, in `.serena/project.local.yml`:
+OCS is Java **17** (toolchain) even if your shell `JAVA_HOME` is 25. Serena
+does **not** read `sourceCompatibility` and then pick 17.
+`[Evidenced — configuration.html Java]`
+
+Two JVMs:
+
+| Process | Default (vscode-java VSIX) | Do not |
+| --- | --- | --- |
+| JDTLS itself | Bundled **JRE 21** | Point it at 25 via `use_system_java_home` for this plant |
+| Gradle import / project types | Bundled Gradle JRE, or `JAVA_HOME` if `use_system_java_home` | Let 25 pretend to be `--release 17` |
+
+Put this in **`ocs-api-service/.serena/project.local.yml`** (gitignored).
+Install a real JDK 17 if you do not have one (`java -version` on that path
+must print 17). Find it with `where.exe java` / `dir "C:\Program Files\Java"`
+/ Gradle’s `~/.gradle/jdks`.
 
 ```yaml
 ls_specific_settings:
   java:
     gradle_wrapper_enabled: true
-    use_system_java_home: true
+    gradle_java_home: "C:\\Program Files\\Java\\jdk-17"
+    runtimes:
+      - name: JavaSE-17
+        path: "C:\\Program Files\\Java\\jdk-17"
+        default: true
 ```
 
-`JAVA_HOME` must be JDK 21+ (upstream mode rejects older).
-If the plant targets a newer `--release` than 21, register `runtimes`
-(same page). Heap default `jdtls_xmx: 3G` — raise if index OOMs.
+Do **not** set `use_system_java_home: true` while `JAVA_HOME` is 25.
+Upstream JDTLS still needs a **21+** JVM to *launch* the language server;
+that is separate from the project 17 runtime. Heap default `jdtls_xmx: 3G`.
 
 JetBrains plugin is **optional**, not required for S0 (FR-S0-02).
 
