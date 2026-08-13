@@ -11,6 +11,7 @@ bloom_mcp:
   - llms_txt
 related:
   - docs/research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md
+  - docs/design/intent-kernel-cas-apply-design-2026-08-13.md
   - docs/research/quality-backlog.md
   - docs/research/process/35-control-plane-closed-loop-2026.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md

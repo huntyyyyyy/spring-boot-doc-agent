@@ -1,5 +1,7 @@
 # Review pointer: Intent Kernel (v3 parked)
 
+**C4 / SoS / repo tree:** [`docs/design/intent-kernel-cas-apply-design-2026-08-13.md`](../design/intent-kernel-cas-apply-design-2026-08-13.md)
+
 **Plan SoT:** [`docs/research/process/50-intent-kernel-v3-consolidated-2026-08-13.md`](../research/process/50-intent-kernel-v3-consolidated-2026-08-13.md)
 
 **Evidence record:** [`docs/research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md`](../research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md)

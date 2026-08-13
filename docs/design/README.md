@@ -13,5 +13,6 @@ Product and architecture design guidance that is **not** session chronology.
 | [test-adequacy-markers-design-2026-08-09.md](test-adequacy-markers-design-2026-08-09.md) | Test adequacy markers — **APPROVED** Spec gate E-QA0 (Q1–Q8; anti-padding) |
 | [ci-workflow-modularity-design-2026-08-09.md](ci-workflow-modularity-design-2026-08-09.md) | CI workflow modularity design |
 | [concept-split-cohesion-design-2026-08-09.md](concept-split-cohesion-design-2026-08-09.md) | Cohesion-first concept splits — **APPROVED** Spec gate E-COH0 (COH1–COH12) |
+| [intent-kernel-cas-apply-design-2026-08-13.md](intent-kernel-cas-apply-design-2026-08-13.md) | Intent Kernel C4 / SoS / repo tree — **DRAFT** E-IK0 (greenfield; no Implement here) |
 
 Dated research and design memos live under **`docs/design/`**, not under `claude/`. Cite north-star `id`s rather than restating them. Older notes may still exist under `claude/research/` until relocated.
