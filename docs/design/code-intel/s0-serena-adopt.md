@@ -27,7 +27,7 @@ sources:
 building an index. Kill criterion for S1 lives here.
 
 **How to add Serena:** [`s0-operator-runbook.md`](s0-operator-runbook.md)
-(Cursor MCP + Java jdtls). This file is the kill criterion, not the install.
+(any MCP client: Cursor, Claude Code, IntelliJ). Kill criterion, not install.
 
 ```text
 Iso: LSP symbol graph ≅ IDE go-to / find-refs | I3: does not preserve

@@ -1,5 +1,5 @@
 ---
-title: E-CX0-S0 — Operator runbook (add Serena in Cursor)
+title: E-CX0-S0 — Operator runbook (add Serena; any MCP client)
 status: DRAFT — how-to for S0; no product code
 parent: docs/design/code-intel/s0-serena-adopt.md
 bloom_gate: required-through-create
@@ -20,13 +20,12 @@ sources:
   deepwiki_ask: not in this cloud MCP catalog; run locally (see §6)
 ---
 
-# S0 — How to add Serena (Cursor + Java plant)
+# S0 — How to add Serena (Java plant; Cursor, Claude, or IntelliJ)
 
 The adopt spec (`s0-serena-adopt.md`) is the kill criterion. **This file is
-the install.** Nothing here is committed into `doc-engine`. Serena is an
-operator MCP server pointed at **`ocs-api-service`**, not this Python repo.
-
-Do **not** add Serena from an MCP marketplace.
+the install.** Serena is an MCP server pointed at **`ocs-api-service`**.
+The client can be Cursor, Claude Code, Claude Desktop, or IntelliJ — pick
+**one**. Do not install from an MCP marketplace.
 `[Evidenced — oraios/serena README IMPORTANT]`
 
 ## 1. Install once (your machine)
@@ -43,8 +42,11 @@ uv tool list
 `[Evidenced — installation.html]`: Python via uv; `serena init` = language-server
 backend (not JetBrains). Log the `uv tool list` line (version). That is FR-S0-01.
 
-If Cursor cannot find `serena`, use the **absolute path** from `command -v serena`.
+If the client cannot find `serena`, use the **absolute path** from `command -v serena`.
 `[Evidenced — clients.html Common Pitfalls]`
+
+For IntelliJ’s **JetBrains plugin backend** instead of jdtls: `serena init -b JetBrains`
+`[Evidenced — installation.html]`. Then skip default VSIX in §4.
 
 ## 2. Create the Serena project on the Java tree
 
@@ -62,15 +64,22 @@ JDK paths (gitignored by default).
 
 Optional health: `serena project health-check`.
 
-## 3. Wire Cursor MCP (this is “adding Serena”)
+## 3. Wire the MCP client (this is “adding Serena”)
 
-Cursor launches Serena as a **stdio subprocess**. You do not start it yourself.
-`[Evidenced — running.html Standard I/O]`
+The client launches Serena as a **stdio subprocess**. You do not start it
+yourself. `[Evidenced — running.html Standard I/O]` Always pass
+`--project /ABS/PATH/TO/ocs-api-service` (or `cd` there and `--project "$(pwd)"`).
+`--mode planning` for S0. Do not pass `editing`.
 
-**Where:** Cursor Settings → MCP → add server, **or** `~/.cursor/mcp.json`
-(user), **or** `.cursor/mcp.json` **inside the `ocs-api-service` workspace**.
-Do **not** put this in `spring-boot-doc-agent` unless that window’s job is
-the Java plant (wrong tree → Python symbols, S0 is invalid).
+| Client | What to run / paste | `--context` |
+| --- | --- | --- |
+| **Claude Code** | `serena setup claude-code` or `claude mcp add serena -- serena start-mcp-server --context claude-code --project /ABS/PATH/TO/ocs-api-service` | `claude-code` `[Evidenced — clients.html]` |
+| **Cursor / VS Code / Cline** | MCP json below (`~/.cursor/mcp.json` or the **Java** workspace `.cursor/mcp.json`) | `ide` |
+| **Claude Desktop** | Same launch command in `claude_desktop_config.json`; ask the agent to activate the plant (global config). | `desktop-app` |
+| **IntelliJ Copilot** | Settings → Tools → GitHub Copilot → MCP → `serena start-mcp-server --context jb-copilot-plugin --project …` | `jb-copilot-plugin` `[Evidenced — clients.html]` |
+| **IntelliJ Junie / AI Assistant** | `--context junie` or `jb-ai-assistant` (same `--project`) | see clients.html |
+
+Cursor/VS Code example:
 
 ```json
 {
@@ -88,17 +97,12 @@ the Java plant (wrong tree → Python symbols, S0 is invalid).
 }
 ```
 
-| Flag | Why |
-| --- | --- |
-| `--context ide` | Cursor already has read/grep/shell. `ide` drops duplicates. `[Evidenced — configuration.html; clients.html Cursor/Cline]` DeepWiki: `ide` is the Cursor context. |
-| `--project <abs>` | Single-project: plant is activated at start; `activate_project` is off. `[Evidenced — workflow.html; configuration.html]` |
-| `--mode planning` | S0 is navigation. Do not pass `editing`. Do not treat `replace_symbol_body` as DoD. |
-
-Restart MCP (or reload the window). In Agent mode, Serena tools should list
-`find_symbol`, `find_referencing_symbols`, `get_symbols_overview`.
+`--context ide` drops duplicate read/grep/shell in IDEs that already have them.
+`[Evidenced — configuration.html]`. Do **not** attach this to
+`spring-boot-doc-agent` unless that window’s job is the Java plant.
 
 Smoke (before the 12 questions): “Using Serena `find_symbol`, name one class
-under `src/main/java` with `file:line`.” Empty → Java LS not up (step 4), not
+under `src/main/java` with `file:line`.” Empty → Java backend not up (§4), not
 a Spring miss.
 
 ## 4. Java language server (jdtls)
@@ -136,13 +140,12 @@ Serena call (FR-S0-03). Ask only symbol tools; empty LSP → one grep, labeled
 
 This agent’s MCP catalog has **no** `deepwiki` / `ask_question` server.
 Pages fetched: DeepWiki install + client-integration (indexed 2026-08-04).
-Your Cursor DeepWiki MCP (`https://mcp.deepwiki.com/mcp`, no auth for public
-repos) `[Evidenced — docs.devin.ai DeepWiki MCP]`.
+Your local DeepWiki MCP (`https://mcp.deepwiki.com/mcp`) `[Evidenced — docs.devin.ai]`.
 
 Call **`ask_question`** with `repoName`: `oraios/serena`:
 
-1. How do I register Serena in Cursor with `--context ide` and `--project`?
+1. How do I register Serena for Claude Code vs Cursor (`ide`) vs IntelliJ Copilot?
 2. How is Java `eclipse.jdt.ls` installed (VSIX vs `jdtls_path` + `lombok_path`)?
-3. Which tools does context `ide` disable vs `desktop-app`?
+3. When should I use `serena init -b JetBrains` instead of jdtls?
 
 Paste the Ask URLs into the S0 log. Primary docs above still win on conflict.
