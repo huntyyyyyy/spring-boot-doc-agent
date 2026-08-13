@@ -66,13 +66,14 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-GND0** | Tip-grounding MCP (demoted) | `process/25` |
 | **E-AST0** | Tailored ast-grep packs Spec (vacuity Implement already Done) | `stage0/astgrep-tailored-packs-…` |
 | **E-OAS0** | Operator/agent surface CLI+MCP+retrieval | `process/37` |
-| **E-QUERY0 / E-CERT0 / E-FACT0** | Cold BC Spec seeds | cold-product + stage0 maps |
+| **E-QUERY0 / E-CERT0 / E-FACT0** | Cold BC Spec seeds. E-CX0-S1 is a **facts slice**, not E-FACT0 warehouse Approve. | cold-product + stage0 maps |
 | **E-CPL0** | Control-plane closed-loop | `process/35` |
 | **E-RT0 / E-RUST0 / E-POLY0 / E-LANG0** | RT assertion / Rust toolscape / polyglot | `process/32–33`, `39–41` |
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
-| **E-IK0** | Intent Kernel — parked. Plan `process/50`; C4/SoS design `docs/design/intent-kernel-cas-apply-design-2026-08-13.md`; evidence `process/49`. **No Implement** in this repo (D-00=B greenfield). | `process/50` + design |
+| **E-CX0** | Code intelligence stages (S0 Serena · S1 resolved facts · S2 verify-loop). **No Implement** until Approve; S1 also needs an S0 named miss. | `docs/design/code-intel/` |
+| **E-IK0** | Intent Kernel — parked **and deferred indefinitely** as the code-intel program (writes stay OpenRewrite+git until that path loses a named mutation class). Plan `process/50`; C4 remains historical. **No Implement**. | `process/50` + design |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 
@@ -137,5 +138,7 @@ Compact ledger. Detail: [archived ticket tables](archive/quality-backlog-ticket-
 - In-tree Rust/WASM-by-default without profiled Spec  
 - Unattended AI merge; MCP `generate_code` tip writer  
 - Chat-dump research SoT; DDIA-shaped nesting under `docs/research/`  
+- Custom semantic/temporal indices, SPO claim graph, or evidence planner as product (**E-CX0** cut list)  
+- Intent Kernel `cas-apply` Implement in this repo until OpenRewrite+git+deny lose a **named** mutation class (**E-IK0**)  
 
 Full historical Never-list: see archive ledger § “Suggested next” snapshot.

@@ -12,6 +12,7 @@ bloom_mcp:
 related:
   - docs/research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md
   - docs/design/intent-kernel-cas-apply-design-2026-08-13.md
+  - docs/design/code-intel/README.md
   - docs/research/quality-backlog.md
   - docs/research/process/35-control-plane-closed-loop-2026.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
@@ -37,6 +38,10 @@ sources:
 ---
 
 # Intent Kernel v3
+
+**Program successor (code intelligence):** [`docs/design/code-intel/`](../../design/code-intel/README.md)
+(**E-CX0** — S0 Serena, S1 resolved facts, S2 verify-loop). This file remains
+the **kernel spike** plan. Kernel writes are cut from E-CX0.
 
 ## 0. Verdict
 

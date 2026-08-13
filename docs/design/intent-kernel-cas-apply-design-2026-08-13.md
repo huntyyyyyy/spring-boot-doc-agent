@@ -1,8 +1,9 @@
 ---
 title: Intent Kernel — C4, SoS contracts, repo tree, quality gates
-status: DRAFT Spec — parked; not Approve; not Active tip; no Implement
+status: DRAFT Spec — parked; deferred indefinitely as program; see E-CX0
 research date: 2026-08-13
 product: greenfield `intent-kernel` (cas-apply + receipt); not a doc-engine nest
+superseded_as_program: docs/design/code-intel/README.md
 spec_gate: DRAFT E-IK0 design (2026-08-13)
 bloom_gate: required-through-create
 related:
@@ -24,6 +25,10 @@ locks:
 ---
 
 # Intent Kernel — system-of-systems spec (spike)
+
+**Program successor:** code intelligence is specified under
+[`docs/design/code-intel/`](code-intel/README.md) (**E-CX0**). This file stays
+the kernel spike design. It is **not** the implementation sequence.
 
 **System of interest:** a CLI/library that performs **one compare-and-swap
 apply** of **one** structural rewrite, under **one** fail-closed policy, and
