@@ -72,6 +72,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
+| **E-IK0** | Intent Kernel v2 spike-first plan — adversarial review; **no Implement** (product-category write kernel; OAS12; D-00/D-01 lock required) | `process/49` |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.
 
