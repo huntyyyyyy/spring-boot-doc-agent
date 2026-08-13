@@ -13,6 +13,8 @@ related:
   - docs/design/code-intel/s0-serena-adopt.md
   - docs/design/code-intel/s0-operator-runbook.md
   - docs/design/code-intel/s0-ocs-run-log-2026-08-13.md
+  - docs/design/code-intel/adopted-landscape-c4-2026-08-13.md
+  - docs/design/code-intel/adopted-entities-schema-2026-08-13.md
   - docs/design/code-intel/s1-resolved-facts.md
   - docs/design/code-intel/s2-verify-loop.md
   - docs/research/quality-backlog.md
@@ -38,9 +40,14 @@ sources:
 
 # E-CX0 — Code intelligence (implementation specs)
 
+**Lost?** Start here: [C4 landscape](adopted-landscape-c4-2026-08-13.md)
+then [entities + Fact schema](adopted-entities-schema-2026-08-13.md).
+Kernel write C4 is a **different** file
+(`intent-kernel-cas-apply-design-2026-08-13.md`) and is deferred.
+
 **Not Approve. Not Active.** These files are the implementable split of the
-code-intelligence verdict. Kernel C4 (`intent-kernel-cas-apply-design-2026-08-13.md`)
-is **historical / deferred**, not this program.
+code-intelligence verdict. Kernel C4 is **historical / deferred**, not this
+program.
 
 **Two product homes (do not collapse):**
 
