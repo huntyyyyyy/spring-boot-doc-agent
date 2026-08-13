@@ -84,9 +84,9 @@ S1 starts only when a **named recurring miss** remains (typical: 1, 2, 3).
 | ID | Title | Acceptance |
 | --- | --- | --- |
 | **CX0-S0-1** | Pin Serena + Java LS | Follow `s0-operator-runbook.md`. FR-S0-01, FR-S0-02, NFR-S0-01 |
-| **CX0-S0-2** | Freeze the twelve questions to a dated log file | FR-S0-03 |
-| **CX0-S0-3** | Run on `ocs-api-service`; fill the 12-row table | FR-S0-04, FR-S0-05, NFR-S0-02 |
-| **CX0-S0-4** | Go / no-go memo | Names the miss **or** “S1 not authorized”. FR-S0-06 |
+| **CX0-S0-2** | Freeze the twelve questions to a dated log file | FR-S0-03. Log: `s0-ocs-run-log-2026-08-13.md` (freeze after smoke `find_symbol`) |
+| **CX0-S0-3** | Run on `ocs-api-service`; fill the 12-row table | FR-S0-04, FR-S0-05, NFR-S0-02. Table in that log (**grep**, not LSP) |
+| **CX0-S0-4** | Go / no-go memo | **S1 not authorized** — same log. FR-S0-06 |
 
 ## False-green
 

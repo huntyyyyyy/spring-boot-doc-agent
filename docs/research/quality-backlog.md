@@ -72,7 +72,7 @@ Ticket-level history (old P0–P38 tables): [`archive/quality-backlog-ticket-led
 | **E-LINT0** | Import resolution: keep ruff; add ty for unresolved top-of-file imports | `process/46` |
 | **E-MDC0** | Optimized MDC DevEx (activation algebra; not mass `.md`→`.mdc`) — docs + `.cursor/rules` on #119 | `process/47` |
 | **E-TOOL0** | Complete toolscape (agent + repo + developer) — full polyglot lanes (Rust/Go/Ruby/Clojure/Elixir/JVM/.NET/PHP/TS/WASM/…) Pilot-before-Refuse | `process/48` |
-| **E-CX0** | Code intelligence stages (S0 Serena · S1 resolved facts · S2 verify-loop). **No Implement** until Approve; S1 also needs an S0 named miss. | `docs/design/code-intel/` |
+| **E-CX0** | Code intelligence stages (S0 Serena · S1 resolved facts · S2 verify-loop). **No Implement** until Approve. S0 operator grep log `s0-ocs-run-log-2026-08-13.md`: **S1 not authorized** (no named LSP miss on a fact in the plant). | `docs/design/code-intel/` |
 | **E-IK0** | Intent Kernel — D-00=**B** greenfield, D-01=**(b)** one match (locked 2026-08-13). Deferred as program; writes stay OpenRewrite+git until that path loses a named mutation class. **No Implement** here. | `process/50` + design |
 
 Human Approve one Spec → then one Implement tip. Do not open sibling Drafts as Active.

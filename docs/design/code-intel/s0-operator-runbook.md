@@ -188,7 +188,9 @@ JetBrains plugin is **optional**, not required for S0 (FR-S0-02).
 
 Copy the bank from `s0-serena-adopt.md` into a dated log **before** the next
 Serena call (FR-S0-03). Ask only symbol tools; empty LSP → one grep, labeled
-`grep`. Fill CX0-S0-3 / CX0-S0-4.
+`grep`. Fill CX0-S0-3 / CX0-S0-4. Operator record:
+[`s0-ocs-run-log-2026-08-13.md`](s0-ocs-run-log-2026-08-13.md) (grep table;
+**S1 not authorized**).
 
 ## 6. DeepWiki Ask (your local MCP — this cloud session does not have it)
 
