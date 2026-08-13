@@ -14,6 +14,7 @@ related:
   - docs/research/process/35-control-plane-closed-loop-2026.md
   - docs/research/process/37-operator-agent-surface-cli-mcp-rag-2026.md
   - docs/reviews/9bc7851_PR_94.md
+  - docs/research/process/50-intent-kernel-v3-consolidated-2026-08-13.md
   - DOMAIN_MAP.md
 do_not:
   - implement an intent kernel on this tip
@@ -22,7 +23,9 @@ do_not:
   - use ocs-api-service Artifactory plant as CI / spike DoD
   - add MCP write/codegen tools (OAS12) without human Spec Approve
   - adopt OPA/Rego or Moderne as tip runtime
-spec_gate: DRAFT E-IK0 (2026-08-13) — IK0-0–IK0-8 pending Approve
+  - install unpinned LiteLLM / treat gateway as spike dependency
+spec_gate: DRAFT E-IK0 (2026-08-13) — evidence record; plan SoT is process/50 (three-item unblock)
+plan_sot: docs/research/process/50-intent-kernel-v3-consolidated-2026-08-13.md
 sources:
   llms_txt:
     - https://ast-grep.github.io/llms.txt
@@ -39,6 +42,14 @@ sources:
 ---
 
 # Principal review: Intent Kernel v2 (measure first)
+
+**Disposition (2026-08-13).** Plan SoT is **v3** (`process/50`). This file stays
+the evidence record. **Conceded:** C1–C3, H1, H4–H6, M1–M2, harvest verb,
+homonym pin. **Overreach withdrawn:** IK0-4…IK0-8 as pre-spike Approve gates —
+three-item unblock (D-00, D-01, five failing tests). **Still in v3:** §8 is
+same *rule* (name the denominator), different *plant* (not a spike
+dependency); 5b pinned to `DRIFT`; routing 98%/100% left `[Unknown]` until
+cited; LiteLLM only via official image after GHSA-5mg7-485q-xm76.
 
 **Subject.** Spike-first plan v2 for an “Intent Kernel” (CAS + fail-closed policy +
 receipts around one Java `match_rewrite`). **Not** a PR of kernel code.
@@ -70,9 +81,9 @@ and `unknown-deferred`; receipts as provenance not “verified architecture”;
 bake-off **before** a spec pack; ~25 sources only on questions a spike cannot
 answer.
 
-**Block before any spike code:** D-00 (where the kernel lives), D-01 locked
-**before** Phase 0 (Phase 0 as written cannot answer it), bake-off rubric with
-a named denominator, hermetic fixture not OCS-as-DoD.
+**Block before any spike code (v3, three items):** D-00 (where tests live),
+D-01 locked before Phase 0, five behaviours as named failing tests on
+`fixture-repo`. Bake-off rubric / RQs / ISA are post-spike.
 
 ---
 
@@ -324,40 +335,35 @@ works that way).
 
 ---
 
-## 8. Create — parked epic (Bloom 6)
+## 8. Create — parked epic (three-item unblock)
 
-**Epic goal.** Decide whether an intent **join contract** (CAS + deny +
-receipt) is a product this org should build — by specifying a spike, not by
-writing an ISA pack or a research operating system.
+Plan SoT: [`process/50`](50-intent-kernel-v3-consolidated-2026-08-13.md).
+IK0-4…IK0-8 are **post-spike writing**, not Approve gates.
 
-**Exit.** Human Approve of D-00 + D-01 + spike Spec; then **one** Implement
-stream **after** current Active tip. Until then: no kernel code.
+**Epic goal.** Decide whether an intent join (CAS + deny + receipt) is worth
+building — by locking home and cardinality, then failing tests, not by
+writing an ISA pack.
+
+**Exit.** D-00 + D-01 + five named failing tests. Then one Implement stream
+**after** the current Active tip.
 
 | ID | Title | Acceptance |
 | --- | --- | --- |
-| **IK0-0** | D-00 product home | Written choice: (A) new BC in this repo after OAS12 retype, or (B) greenfield citing this tree. Names wheel/CI/MCP consequences. |
-| **IK0-1** | Lock D-01 | Default **(b)** single-node + planner above, or explicit (a) with a multi-file crash test in the spike Spec. Phase 0 scope matches the lock. |
-| **IK0-2** | Spike Spec (the five + witnesses) | pytest names for: apply; stale hash → `DRIFT` + byte-identical tree; policy deny + byte-identical; receipt fields; dirty-tree non-corruption **split** (unrelated dirty / post-success / crash). Witness = pre/post sha256. Fixture = `harness/fixture-repo`. |
-| **IK0-3** | D-02 / D-03 in spike Spec | D-03 rename to `intent-kernel` in code+docs. D-02: Embody temp+rename for single-file; crash test required before any journal/git-index bake-off. |
-| **IK0-4** | Bake-off rubric | 5×N matrix (behaviour × Moderne / pinned-hashline / OPA-shape / AgentBound-paper / AgentBoundary-spec). Kill switch = 5/5 vs ≤2/5 vs gap-is-join. No % of FR docs. Pin which hashline git SHA. |
-| **IK0-5** | Surviving RQs | RQ-REC-01, RQ-POL-01, RQ-H01, RQ-MCP-01, plus **RQ-MCP-WRITE-01** if D-00=A or MCP surface remains. No `unknown-deferred`. Blocking ⇒ named waiver. |
-| **IK0-6** | Measurement protocol | JSONL timers in tests; conditions recorded; values labeled **probe** not SLO. Boolean `C-*` ≠ p95. |
-| **IK0-7** | ISA from survivors | Only after IK0-2 green. `10_OPEN_QUESTIONS` = questions the spike **or Confirmed in-repo hazards** raised. No spec for unexercised stages. |
-| **IK0-8** | Targeted research | ~25 sources **after** IK0-4, only on IK0-5. Pre-register per RQ. No research-process CI scripts. |
+| **IK0-0** | D-00 product home | (A) this repo or (B) greenfield. Names where pytest files live (committing here implies A). |
+| **IK0-1** | Lock D-01 | Default **(b)**; one-match pin so `--update-all` does not fake multi-node. |
+| **IK0-2** | Five failing tests | Apply / Drift / Deny / Receipt / 5a–5c as in v3 §4. Witness = sha256. Fixture = `harness/fixture-repo`. JSONL probes in-test. 5b = `DRIFT`. 5c = kill between temp write and replace. |
+
+**After spike (not gates):** fill bake-off matrix; surviving RQs including
+RQ-MCP-WRITE-01 if D-00=A; ISA from survivors. Gateway/LiteLLM is a
+**different plant** — not this unblock.
 
 **Invariants:** fail_under 98.7 / complexipy ≤5 / size ≤225 if D-00=A;
-constitution SDD one-stream; no utils bag; policy 16-A untouched.
-
-**Spikes inside the epic (not a substitute for IK0-2):** whitespace ABA on
-sha256; ast-grep zero-match vs fail (already measured — do not re-litigate
-RC).
+one-stream; no utils bag; policy 16-A untouched.
 
 ---
 
 ## 9. Definition of done for *this* review
 
-- v2 is **not** Spec Approve.
-- E-IK0 is parked on the quality backlog.
-- No intent-kernel implementation on branch `#119` / this review branch.
-
-Phase 0 of the **kernel** remains unstarted until IK0-0–IK0-2 are Approved.
+- v2 is **not** Spec Approve. v3 is Draft, parked.
+- E-IK0 unblock is **three** items, not nine.
+- No kernel or LiteLLM implementation on this branch.

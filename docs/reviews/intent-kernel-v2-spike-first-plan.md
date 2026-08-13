@@ -1,15 +1,15 @@
-# Review pointer: Intent Kernel v2 (spike-first plan)
+# Review pointer: Intent Kernel (v3 parked)
 
-**Canonical memo:** [`docs/research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md`](../research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md)
+**Plan SoT:** [`docs/research/process/50-intent-kernel-v3-consolidated-2026-08-13.md`](../research/process/50-intent-kernel-v3-consolidated-2026-08-13.md)
 
-**Parked epic:** **E-IK0** (Draft Spec — no Implement). Active tip remains #119 / E-COH1.
+**Evidence record:** [`docs/research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md`](../research/process/49-intent-kernel-v2-spike-first-adversarial-review-2026-08-13.md)
+
+**Parked epic:** **E-IK0** (Draft — no Implement). Active tip remains #119 / E-COH1.
 
 | Question | Answer |
 | --- | --- |
-| Approve v2 as Spec and Implement? | **No.** |
-| Ordering correction vs v1 (measure before ISA pack)? | **Yes** — keep. |
-| Invert SDD to “spike then spec”? | **No.** Spec **the spike** (five tests + D-00/D-01), then implement, then spec the ISA. |
-| Harvest = CAS kernel? | **No.** Hash → admit/deny → provenance is structure; the modules are a read/certify pipeline. |
-| ≥90% unnamed FR bake-off? | **Reject** — climb-Cover% as a product gate. Score the five-behaviour join. |
-
-Blocking before any kernel code: **D-00** (this repo vs greenfield), **D-01** locked to match Phase 0 scope, hermetic `fixture-repo` not OCS-as-DoD, pin which hashline / which AgentBound.
+| Approve as Spec and Implement? | **No.** |
+| Unblock bar | **Three items:** D-00, D-01, five named failing tests. Not nine epic gates. |
+| Harvest = CAS kernel? | **No.** 12 `spring_drift_*`; 0 `expected_pre_hash` in `src/`. |
+| Bake-off | Named behavioural denominator (the five). Not ≥90% of an unnamed list. |
+| Model-access / LiteLLM | Same *rule* (measure the property), different *plant*. Not a spike dependency. Official image only if later Approved (GHSA-5mg7-485q-xm76). |
