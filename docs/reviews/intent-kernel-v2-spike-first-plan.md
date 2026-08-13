@@ -14,7 +14,8 @@
 | --- | --- |
 | Approve E-CX0 / E-IK0 and Implement? | **No.** Stage specs and kernel spike plan are Draft. |
 | Code-intel sequence | S0 (operator Serena) → S1 only on a named LSP miss → S2 verify-loop. Cuts: indices, SPO, cas-apply. |
-| Kernel unblock bar | **Three items:** D-00, D-01, five named failing tests. Not nine epic gates. |
+| Kernel D-00 / D-01 | **Locked 2026-08-13:** home = greenfield (**B**); single-node + one match **(b)**. Five tests live there, not here. |
+| Kernel unblock left | Five named failing tests in that repo (incl. 5c). Not nine epic gates. |
 | Harvest = CAS kernel? | **No.** 12 `spring_drift_*`; 0 `expected_pre_hash` in `src/`. |
 | Bake-off | Named behavioural denominator (the five). Not ≥90% of an unnamed list. |
 | Model-access / LiteLLM | Same *rule* (measure the property), different *plant*. Not a spike dependency. Official image only if later Approved (GHSA-5mg7-485q-xm76). |

@@ -22,7 +22,7 @@ do_not:
   - use ocs-api-service as spike DoD
   - install litellm from unpinned PyPI (GHSA-5mg7-485q-xm76)
   - add MCP write tools without Approve
-spec_gate: DRAFT E-IK0 (2026-08-13) — unblock = D-00 + D-01 + five failing tests
+spec_gate: DRAFT E-IK0 (2026-08-13) — D-00=B and D-01=b locked; remaining = five failing tests in greenfield
 sources:
   llms_txt:
     - https://ast-grep.github.io/llms.txt
@@ -45,16 +45,17 @@ the **kernel spike** plan. Kernel writes are cut from E-CX0.
 
 ## 0. Verdict
 
-**Not Approve. Not Reject. Blocked on two decisions plus the five tests.**
+**Not Approve. Not the program.** Org locks **D-00 = B** and **D-01 = (b)**
+(2026-08-13). Remaining kernel unblock is the **five failing tests in the
+greenfield repo** — not this tree, not this Active tip.
 
 v2 cannot be Implement. The review was wrong that **nine** epic items must
-land first. **Three** things block a spike: D-00, D-01, and the five-test spec
-as named failing tests. Bake-off rubric, surviving RQs, ISA, and targeted
-research are written **after** the spike. Writing them before specifies against
-a system nobody has run — the v1 shape at one-fifth scale.
+land first. Bake-off rubric, surviving RQs, ISA, and targeted research are
+written **after** the spike. Writing them before specifies against a system
+nobody has run — the v1 shape at one-fifth scale.
 
-Ordering: **lock D-00/D-01 → write the five tests → run them → then rubric,
-RQs, ISA.** No kernel code before the five tests exist as failing tests.
+Ordering: **locks recorded → five tests in greenfield → run them → then
+rubric, RQs, ISA.** No kernel code in `spring-boot-doc-agent`.
 
 The review remains the evidence record (`process/49`). This file is the plan
 that absorbed it. It does not tombstone the review.
@@ -114,39 +115,61 @@ licence to skip the spike's spec) is kept.
 
 ## 3. Blocking decisions
 
-### D-00 — Product home *(org question; no technical default)*
+### D-00 — Product home *(locked 2026-08-13: **B**)*
 
 **(A)** New bounded context inside `spring-boot-doc-agent` — inherits the
 wheel, CI floors, OAS12 refuse-on-MCP-write, one-Active-tip rule.
 **(B)** Greenfield repo citing this tree as prior art — harvest is citation,
 not copy.
 
-**Consequence:** the five failing tests have to live *somewhere*. Committing
-them here implies (A). (B) means they live in the other repo. That is why
-this is blocking, not ceremonial.
+**Lock: B** for the **write kernel only**. The five failing tests live in
+that other repo. Committing them here would silently pick A.
 
-### D-01 — Node cardinality *(lock before Phase 0)*
+This is **not** “put code intelligence in a new repo.” Serena adopt, the
+Spring-resolved extractor, and verification-in-the-loop are **E-CX0** —
+facts stay in this scanning BC (`docs/design/code-intel/`). Two homes,
+two products.
+
+### D-01 — Node cardinality *(locked 2026-08-13: **(b)** + one match)*
 
 - **(a)** ISA carries `expected_pre_hashes[]`; kernel is a transaction coordinator.
 - **(b)** Intents are single-node; a planner above owns cross-intent consistency.
 
-**Recommend (b).** Smaller, and it concedes the kernel alone does not deliver
-safe refactoring (weakens standalone RQ-H01, correctly).
+**Lock: (b).** The kernel does not deliver safe multi-file refactoring.
+That weakens standalone RQ-H01, correctly.
 
 Pin: `ast-grep --update-all` rewrites **every** match. Intra-file multi-site
-is not D-01 solved. Phase 0 constrains to **one match** in one file, or
-states multi-site behaviour and still calls D-01 open.
+is not D-01 solved. Phase 0 is **one match in one file**. Two matches →
+`FAULT` / `MULTI_MATCH`, no publish.
 
-### D-02 — Failure atomicity *(spec now; test is 5c)*
+### D-02 — Failure atomicity *(spec now; test is 5c — not a product-home debate)*
 
-Adopt `_write_json_atomic` (temp + `os.replace`) for single-file publish.
-Do not bake off journal vs git-index on one `match_rewrite`. Crash-mid-apply
-is a required test.
+**Decision:** publish with same-directory temp + `fsync` + `os.replace`.
+Witness is the target file’s sha256: crash leaves **pre** or **post**,
+never a truncated file.
 
-### D-03 — Naming *(decided)*
+This is **not** choosing among “use git,” “use a WAL,” or “copy
+`_write_json_atomic` as a library.” Those are different problems:
 
-`verified-architecture` → `intent-kernel`. CAS + policy + receipts is
-transactional integrity and provenance, not proof of refactor correctness.
+| Approach | What it actually guarantees | Why it is not the spike bake-off |
+| --- | --- | --- |
+| temp + `os.replace` | Readers see old inode or new inode. Process kill mid-write cannot leave a half-file. | This **is** the decision. Pattern already used for manifests (`run_manifest_io._write_json_atomic`); kernel adds `fsync` because the contract is Java byte-identity, not a JSON sidecar. |
+| Journal / WAL / 2PC | Recover a *multi-file* transaction after crash. | That is D-01 **(a)** — coordinator. You locked **(b)**. A journal for one file is ceremony. |
+| Git index / commit | A commit is an atomic *snapshot* after the working tree is already written. | Git does not prevent a torn working-tree file. Receipt may *bind* HEAD; it must not be the publish primitive. |
+
+Test **5c** is the decision made executable: kill between temp write and
+replace → pre-hash; kill after replace returns → post-hash.
+
+### D-03 — Naming *(locked: kernel name; not the tool program)*
+
+`verified-architecture` → **`intent-kernel`**, verb **`cas-apply`**.
+
+That name is for the **CAS + deny + receipt** primitive in the greenfield
+repo. It is **not** the name of Serena, CodeQL, OpenRewrite, a fact store,
+or “verified architecture” as a product. Those tools are mapped under
+E-CX0 (adopt / extract / verify) or the cut list — see
+`docs/design/code-intel/README.md`. Calling the whole program
+`intent-kernel` would re-smuggle proof-of-correctness through a new noun.
 
 ## 4. The five behaviours (this is the spec)
 
@@ -269,13 +292,13 @@ tip.
 
 **This document:** Draft, parked, not on the Active tip (#119 / E-COH1).
 
-**Unblocked when (three items):**
+**Unblocked when (kernel spike, greenfield only):**
 
-1. D-00 written (A or B), including where the pytest files live.
-2. D-01 locked (recommend b) with the one-match pin.
-3. The five behaviours exist as **named failing tests** against
-   `harness/fixture-repo`, including 5c, with sha256 witnesses and in-test
-   JSONL probes.
+1. ~~D-00~~ **B** — pytest files live in the other repo, not here.
+2. ~~D-01~~ **(b)** + one-match pin.
+3. The five behaviours exist as **named failing tests** in that repo
+   (fixture may cite this tree’s `harness/fixture-repo` as prior art),
+   including 5c, with sha256 witnesses and in-test JSONL probes.
 
 **Spike done when:** those tests pass, including 5c.
 

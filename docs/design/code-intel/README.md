@@ -40,9 +40,15 @@ sources:
 code-intelligence verdict. Kernel C4 (`intent-kernel-cas-apply-design-2026-08-13.md`)
 is **historical / deferred**, not this program.
 
-**D-00 (facts vs writes):** resolved Spring facts live in **this repo**
-(scanning BC). Attested writes do **not**. OpenRewrite + git + a small deny
-check stay outside until that path loses a **named** mutation class.
+**Two product homes (do not collapse):**
+
+| What | Home | Decision |
+| --- | --- | --- |
+| Serena, resolved Spring facts, verify-loop | **This repo** (E-CX0; scanning BC + operator) | Not a new repo. |
+| CAS + deny + receipt write kernel | **Greenfield** `intent-kernel` (E-IK0) | D-00 = **B**, D-01 = **(b)** locked 2026-08-13. Deferred as program. |
+
+OpenRewrite + git + a small deny check stay the write path until that path
+loses a **named** mutation class. Do not nest writes under `doc_engine`.
 
 ```text
 Iso: observe → act → remeasure ≅ agent invokes a checker | I3: units
@@ -75,7 +81,19 @@ tip, after those and after human Approve of this epic.
 | 5 | Custom index | **Cut** until 1–3 lose |
 | 6 | cas-apply Intent Kernel | **Defer indefinitely** (E-IK0) |
 
-## 2. Cut list (no spec, no tickets, no “later in this epic”)
+## 2. Where the chat tools actually landed
+
+| Proposed in other chats | Landing |
+| --- | --- |
+| Serena / jdtls / MCP navigation | **S0 Adopt** — not a repo we write |
+| Spring-resolved extractor, CodeQL pack, facts.jsonl | **S1** — this repo, after a named S0 miss |
+| Agent runs CodeQL / ArchUnit / `pipeline gates` | **S2** |
+| OpenRewrite + git | Rank 4 write path — **cut** from this epic |
+| Fact Store, SPO graph, semantic index, planner | **Cut** |
+| OPA, LiteLLM, `verified-architecture` | **Cut** / refuse that name. Kernel name is `intent-kernel` for CAS+receipt only |
+| cas-apply / Intent Kernel | **E-IK0** greenfield, deferred; D-00=B, D-01=b |
+
+## 3. Cut list (no spec, no tickets, no “later in this epic”)
 
 - Semantic + temporal indices; SPO claim graph; evidence planner
 - Entire Intent Kernel write path (E-IK0 Implement; LiteLLM; OPA runtime)
@@ -83,7 +101,7 @@ tip, after those and after human Approve of this epic.
 - Tags-as-product / Context Compiler without S2 ablation
 - E-FACT0 warehouse — S1 is a **slice** (new predicates on the existing ledger)
 
-## 3. Bloom (program)
+## 4. Bloom (program)
 
 | Level | Evidence |
 | --- | --- |
@@ -98,7 +116,7 @@ DeepWiki Ask was **not** in this session’s MCP catalog. Cartography:
 `https://deepwiki.com/oraios/serena` (indexed 2026-08-04). Primary docs used
 instead of uncited summary.
 
-## 4. Invariants (all stages)
+## 5. Invariants (all stages)
 
 `fail_under` **98.7** (cell 3.11 only) · complexipy ≤5 · LOC ≤225 · no `utils/` ·
 descriptive CLI flags · OAS12: no MCP write in this repo · one Active tip.

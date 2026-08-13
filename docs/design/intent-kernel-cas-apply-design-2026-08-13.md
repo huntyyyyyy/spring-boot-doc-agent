@@ -18,10 +18,10 @@ do_not:
   - name a utils/ helpers/ common/ grab-bag
   - treat coverage % as proof of the five behaviours
 locks:
-  D-00: B greenfield (technical default)
-  D-01: b single-node; one match
+  D-00: B greenfield (org lock 2026-08-13; kernel only — not E-CX0)
+  D-01: b single-node; one match (org lock 2026-08-13)
   D-02: staged temp + fsync + os.replace; test 5c
-  D-03: product name intent-kernel; capability cas-apply
+  D-03: product name intent-kernel; capability cas-apply (write primitive, not the tool program)
 ---
 
 # Intent Kernel — system-of-systems spec (spike)
@@ -48,10 +48,10 @@ I5: no merge-SoT in doc-engine
 
 | ID | Choice | Why |
 | --- | --- | --- |
-| D-00 | **B — greenfield repo** `intent-kernel` | Mutating join ≠ scan/certify wheel. This tree is citation, not home. |
-| D-01 | **(b) single-node** + **one match** | `--update-all` multi-hit is not a coordinator. Planner (out of spike) owns N intents. |
-| D-02 | temp file + `fsync` + `os.replace` | POSIX publish; 5c kills between write and replace. |
-| D-03 | product `intent-kernel`; verb `cas-apply` | Provenance, not “verified architecture.” |
+| D-00 | **B — greenfield repo** `intent-kernel` | Org lock 2026-08-13. Mutating join ≠ scan/certify wheel. E-CX0 facts stay here. |
+| D-01 | **(b) single-node** + **one match** | Org lock 2026-08-13. `--update-all` multi-hit is not a coordinator. |
+| D-02 | temp file + `fsync` + `os.replace` | POSIX publish; 5c kills between write and replace. Not git, not a WAL. |
+| D-03 | product `intent-kernel`; verb `cas-apply` | Write-primitive name. Serena/CodeQL/OpenRewrite are E-CX0 or cut. |
 
 Unblock for Implement (elsewhere): this spec + five failing tests in the
 greenfield tree. Not nine research gates. Not this repo’s Active tip.
