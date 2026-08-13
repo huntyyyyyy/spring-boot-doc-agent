@@ -11,6 +11,7 @@ claim tiers: Evidenced / Confirmed / Unknown
 product: operator adopt + scanning BC slice; not a write kernel
 related:
   - docs/design/code-intel/s0-serena-adopt.md
+  - docs/design/code-intel/s0-operator-runbook.md
   - docs/design/code-intel/s1-resolved-facts.md
   - docs/design/code-intel/s2-verify-loop.md
   - docs/research/quality-backlog.md
@@ -59,7 +60,7 @@ Iso: observe → act → remeasure ≅ agent invokes a checker | I3: units
 
 | Stage | Spec | Deliverable | Product code? |
 | --- | --- | --- | --- |
-| **S0** | [s0-serena-adopt.md](s0-serena-adopt.md) | Pin Serena + jdtls; freeze 12 questions; run on `ocs-api-service` | **No** |
+| **S0** | [s0-serena-adopt.md](s0-serena-adopt.md) + [s0-operator-runbook.md](s0-operator-runbook.md) | Pin Serena + jdtls; freeze 12 questions; run on `ocs-api-service` | **No** |
 | **S1** | [s1-resolved-facts.md](s1-resolved-facts.md) | CLI extractor: resolved annotations / mappings / wiring as `facts.jsonl` | Yes, after Approve **and** S0 miss |
 | **S2** | [s2-verify-loop.md](s2-verify-loop.md) | Agent **runs** existing verifiers; cite `file:line` | Skill/prompt; no new index |
 

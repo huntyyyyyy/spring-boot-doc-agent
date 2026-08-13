@@ -13,9 +13,10 @@ do_not:
 sources:
   primary:
     - https://github.com/oraios/serena
-    - https://oraios.github.io/serena/01-about/035_tools.html
-    - https://oraios.github.io/serena/01-about/020_programming-languages.html
+    - https://oraios.github.io/serena/02-usage/010_installation.html
     - https://oraios.github.io/serena/02-usage/030_clients.html
+    - https://oraios.github.io/serena/01-about/020_programming-languages.html
+    - https://oraios.github.io/serena/02-usage/050_configuration.html
   deepwiki:
     - https://deepwiki.com/oraios/serena
 ---
@@ -25,8 +26,8 @@ sources:
 **Goal:** Give the agent IDE-grade **navigation** on the Spring tree without
 building an index. Kill criterion for S1 lives here.
 
-**Product code in this repo: none.** Install is operator-local. Do not vendor
-Serena, do not add MCP write tools to `doc_engine`.
+**How to add Serena:** [`s0-operator-runbook.md`](s0-operator-runbook.md)
+(Cursor MCP + Java jdtls). This file is the kill criterion, not the install.
 
 ```text
 Iso: LSP symbol graph ≅ IDE go-to / find-refs | I3: does not preserve
@@ -39,7 +40,7 @@ Spring meta-annotations or inherited @Transactional | I5: no merge SoT
 | --- | --- |
 | Remember | Tools: `find_symbol`, `find_referencing_symbols`, `get_symbols_overview`; edits include `replace_symbol_body` `[Evidenced — tools.md]`. Install: `uv tool install -p 3.13 serena-agent` then `serena init` `[Evidenced — README]`. Java listed under language servers `[Evidenced — programming-languages.html]`. **Do not install via MCP marketplace** `[Evidenced — README IMPORTANT]`. |
 | Understand | Serena is an MCP façade over LSP (SolidLSP) or JetBrains. This product’s Stage-0 default is ast-grep (no classpath). S0 measures whether **jdtls** closes the precision gap in `CONSTRAINTS.md` Known precision tradeoffs §1. |
-| Apply | Pin a SHA or uv lockfile; point MCP at the `ocs-api-service` checkout (E-OCS plant, not CI fixture). Grep/`search_for_pattern` is the fallback when LSP returns empty. |
+| Apply | Operator runbook: `uv tool install` → `serena project create --index` on `ocs-api-service` → Cursor MCP `start-mcp-server --context ide --project <abs>`. See `s0-operator-runbook.md`. |
 | Analyze | **Adopt** Serena. **Refuse** rebuilding `find_symbol`. **Refuse** enabling Serena writes as *our* attested apply. Stars (~28k on 2026-08-13) ≠ pin/stewardship. |
 | Evaluate | § False-green |
 | Create | Tickets below |
@@ -82,7 +83,7 @@ S1 starts only when a **named recurring miss** remains (typical: 1, 2, 3).
 
 | ID | Title | Acceptance |
 | --- | --- | --- |
-| **CX0-S0-1** | Pin Serena + Java LS | FR-S0-01, FR-S0-02, NFR-S0-01 |
+| **CX0-S0-1** | Pin Serena + Java LS | Follow `s0-operator-runbook.md`. FR-S0-01, FR-S0-02, NFR-S0-01 |
 | **CX0-S0-2** | Freeze the twelve questions to a dated log file | FR-S0-03 |
 | **CX0-S0-3** | Run on `ocs-api-service`; fill the 12-row table | FR-S0-04, FR-S0-05, NFR-S0-02 |
 | **CX0-S0-4** | Go / no-go memo | Names the miss **or** “S1 not authorized”. FR-S0-06 |
